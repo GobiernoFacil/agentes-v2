@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SuAdminAdmin extends Controller
+class Applications extends Controller
 {
+
       /**
-       * Muestra lista de administradores
+       * Búsqueda de aplicación
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function search()
+      {
+          //
+      }
+
+      /**
+       * Muestra lista de aplicaciones
        *
        * @return \Illuminate\Http\Response
        */
@@ -17,7 +28,7 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Agregar usuario administrador
+       * Agregar aplicación
        *
        * @return \Illuminate\Http\Response
        */
@@ -27,7 +38,7 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Guarda nuevo usuario administrador
+       * Guarda nueva aplicación
        *
        * @param  \Illuminate\Http\Request  $request
        * @return \Illuminate\Http\Response
@@ -38,7 +49,7 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Muestra un usuario administrador
+       * Muestra aplicación
        *
        * @param  int  $id
        * @return \Illuminate\Http\Response
@@ -49,7 +60,7 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Muestra contenido para actualizar usuario administrador
+       * Muestra contenido para actualizar una aplicación
        *
        * @param  int  $id
        * @return \Illuminate\Http\Response
@@ -60,7 +71,7 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Actualiza usuario administrador
+       * Actualiza aplicación
        *
        * @param  \Illuminate\Http\Request  $request
        * @param  int  $id
@@ -72,12 +83,23 @@ class SuAdminAdmin extends Controller
       }
 
       /**
-       * Deshabilita usuario administrador
+       * Deshabilita aplicación
        *
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
       public function delete($id)
+      {
+          //
+      }
+
+      /**
+       * Muestra contenido para evaluar aplicación
+       *
+       * @param  int  $id
+       * @return \Illuminate\Http\Response
+       */
+      public function evaluate($id)
       {
           //
       }

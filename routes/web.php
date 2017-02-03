@@ -70,16 +70,33 @@ Route::group(['middleware' => ['auth']], function () {
     // Perfil super administrador
     Route::get('sa/dashboard/perfil', 'SuAdmin@profile');
     Route::get('sa/dashboard/perfil/editar', 'SuAdmin@editProfile');
-    /*@SuAdminAdmin Controller */
+    /*@Admin Controller */
     // Rutas CRUD admin
-    Route::get('sa/dashboard/administradores', 'SuAdminAdmin@index');
-    Route::get('sa/dashboard/administradores/agregar', 'SuAdminAdmin@add');
-    Route::post('sa/dashboard/administradores/crear', 'SuAdminAdmin@save');
-    Route::get('sa/dashboard/administradores/editar/{id}', 'SuAdminAdmin@edit');
-    Route::post('sa/dashboard/administradores/editar/{id}', 'SuAdminAdmin@update');
-    Route::get('sa/dashboard/administradores/deshabilitar/{id}', 'SuAdminAdmin@delete');
-    Route::get('sa/dashboard/administradores/ver/{id}', 'SuAdminAdmin@view');
+    Route::get('sa/dashboard/administradores', 'Admin@index');
+    Route::get('sa/dashboard/administradores/agregar', 'Admin@add');
+    Route::post('sa/dashboard/administradores/crear', 'Admin@save');
+    Route::get('sa/dashboard/administradores/editar/{id}', 'Admin@edit');
+    Route::post('sa/dashboard/administradores/editar/{id}', 'Admin@update');
+    Route::get('sa/dashboard/administradores/deshabilitar/{id}', 'Admin@delete');
+    Route::get('sa/dashboard/administradores/ver/{id}', 'Admin@view');
   });
+
+  /* R U T A S  UNICAS DEL A D M I N
+   --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:admin' ], function(){
+    /*@Admin Controller */
+    //Dashboard
+    Route::get('dashboard', 'Admin@dashboard');
+    // Perfil  administrador
+    Route::get('dashboard/perfil', 'Admin@profile');
+    Route::get('dashboard/perfil/editar', 'Admin@editProfile');
+    /*@Applications Controller */
+    Route::get('dashboard/aplicaciones', 'Applications@index');
+    Route::get('dashboard/aplicaciones/buscar', 'Applications@search');
+    Route::get('dashboard/aplicaciones/ver/{id}', 'Applications@view');
+    Route::get('dashboard/aplicaciones/evaluar/{id}', 'Applications@evaluate');
+  });
+
 
 
 });
