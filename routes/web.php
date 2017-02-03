@@ -47,10 +47,39 @@ Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
 
-/****************** DASHBOARD ***************/
+/****************** USUARIOS REGISTRADOS ***************/
 Route::group(['middleware' => ['auth']], function () {
   /*@Suscribe Controller */
   /* Redireccionar a dashboard correspondiente */
   Route::get('guide-me', 'Suscribe@redirectToDashboard');
+
+  /* R U T A S  UNICAS DEL  SUPER A D M I N
+   --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:superAdmin' ], function(){
+    /*@SuAdmin Controller */
+    //Dashboard
+    Route::get('sa/dashboard', 'SuAdmin@dashboard');
+    // Rutas CRUD super admin
+    Route::get('sa/dashboard/super-administradores', 'SuAdmin@index');
+    Route::get('sa/dashboard/super-administradores/agregar', 'SuAdmin@add');
+    Route::post('sa/dashboard/super-administradores/crear', 'SuAdmin@save');
+    Route::get('sa/dashboard/super-administradores/editar/{id}', 'SuAdmin@edit');
+    Route::post('sa/dashboard/super-administradores/editar/{id}', 'SuAdmin@update');
+    Route::get('sa/dashboard/super-administradores/deshabilitar/{id}', 'SuAdmin@delete');
+    Route::get('sa/dashboard/super-administradores/ver/{id}', 'SuAdmin@view');
+    // Perfil super administrador
+    Route::get('sa/dashboard/perfil', 'SuAdmin@profile');
+    Route::get('sa/dashboard/perfil/editar', 'SuAdmin@editProfile');
+    /*@SuAdminAdmin Controller */
+    // Rutas CRUD admin
+    Route::get('sa/dashboard/administradores', 'SuAdminAdmin@index');
+    Route::get('sa/dashboard/administradores/agregar', 'SuAdminAdmin@add');
+    Route::post('sa/dashboard/administradores/crear', 'SuAdminAdmin@save');
+    Route::get('sa/dashboard/administradores/editar/{id}', 'SuAdminAdmin@edit');
+    Route::post('sa/dashboard/administradores/editar/{id}', 'SuAdminAdmin@update');
+    Route::get('sa/dashboard/administradores/deshabilitar/{id}', 'SuAdminAdmin@delete');
+    Route::get('sa/dashboard/administradores/ver/{id}', 'SuAdminAdmin@view');
+  });
+
 
 });
