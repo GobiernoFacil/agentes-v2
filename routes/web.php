@@ -46,3 +46,11 @@ Route::get('gobierno-abierto/recursos', 'GovernmentFront@recursos');
 Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
+
+/****************** DASHBOARD ***************/
+Route::group(['middleware' => ['auth']], function () {
+  /*@Suscribe Controller */
+  /* Redireccionar a dashboard correspondiente */
+  Route::get('guide-me', 'Suscribe@redirectToDashboard');
+
+});
