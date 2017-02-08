@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Hash;
+
+// models
+use App\User;
+
 class SuAdmin extends Controller
 {
+    //Paginación
+    public $pageSize = 10;
 
     /**
      * Muestra panel de inicio para super administrador
@@ -14,7 +22,9 @@ class SuAdmin extends Controller
      */
     public function dashboard()
     {
-        //
+      $user = Auth::user();
+      return view('suAdmin.dashboard')->with([
+        "user"      => $user,]);
     }
 
     /**
@@ -25,6 +35,11 @@ class SuAdmin extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
+        $list = User::where("type", "suAdmin")->where("id", "!=", $user->id)->paginate($this->pageSize);
+        return view('suAdmin.suAdmin-list')->with([
+          "user"      => $user,
+          "SuAdmins"  => $list]);
     }
 
     /**
