@@ -34,12 +34,11 @@ class SuAdmin extends Controller
      */
     public function index()
     {
-        //
         $user = Auth::user();
         $list = User::where("type", "suAdmin")->where("id", "!=", $user->id)->paginate($this->pageSize);
-        return view('suAdmin.suAdmin-list')->with([
+        return view('suAdmin.users.suAdmin-list')->with([
           "user"      => $user,
-          "SuAdmins"  => $list]);
+          "suAdmins"  => $list]);
     }
 
     /**
@@ -49,7 +48,11 @@ class SuAdmin extends Controller
      */
     public function add()
     {
-        //
+      $user = Auth::user();
+      return view('suAdmin.users.add-suAdmin')->with([
+        "user"      => $user
+      ]);
+
     }
 
     /**
