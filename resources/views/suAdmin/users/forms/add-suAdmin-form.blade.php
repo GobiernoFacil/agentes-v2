@@ -24,6 +24,14 @@
   @endif
 </p>
 
+<p>
+  <label>Confirmar Contraseña</label>
+  {{Form::password('password-confirm', ['class' => 'form-control'])}}
+  @if($errors->has('password-confirm'))
+    <strong>{{$errors->first('password-confirm')}}</strong>
+  @endif
+</p>
+
 <p>{{Form::submit('Crear Super administrador', ['class' => 'btn'])}}</p>
 
 {!! Form::close() !!}

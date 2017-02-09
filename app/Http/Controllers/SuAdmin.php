@@ -10,6 +10,9 @@ use Hash;
 // models
 use App\User;
 
+// FormValidators
+use App\Http\Requests\SaveSuAdmin;
+
 class SuAdmin extends Controller
 {
     //Paginación
@@ -61,9 +64,16 @@ class SuAdmin extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function save(SaveSuAdmin $request)
     {
-        //
+      $suAdmin         = new User();
+      $suAdmin->type     = "suAdmin";
+      $suAdmin->name     = $request->name;
+      $suAdmin->email    = $request->email;
+      $suAdmin->password = Hash::make($request->password);
+      $suAdmin->save();
+
+      return redirect("sa/dashboard/super-administradores")->with('message','Usuario creado correctamente');
     }
 
     /**
