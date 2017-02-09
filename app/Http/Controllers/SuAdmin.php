@@ -12,6 +12,7 @@ use App\User;
 
 // FormValidators
 use App\Http\Requests\SaveSuAdmin;
+use App\Http\Requests\UpdateSuAdmin;
 
 class SuAdmin extends Controller
 {
@@ -38,7 +39,7 @@ class SuAdmin extends Controller
     public function index()
     {
         $user = Auth::user();
-        $list = User::where("type", "suAdmin")->where("id", "!=", $user->id)->paginate($this->pageSize);
+        $list = User::where("type", "superAdmin")->where("id", "!=", $user->id)->paginate($this->pageSize);
         return view('suAdmin.users.suAdmin-list')->with([
           "user"      => $user,
           "suAdmins"  => $list]);
@@ -52,7 +53,7 @@ class SuAdmin extends Controller
     public function add()
     {
       $user = Auth::user();
-      return view('suAdmin.users.add-suAdmin')->with([
+      return view('suAdmin.users.suAdmin-add')->with([
         "user"      => $user
       ]);
 
@@ -67,13 +68,13 @@ class SuAdmin extends Controller
     public function save(SaveSuAdmin $request)
     {
       $suAdmin         = new User();
-      $suAdmin->type     = "suAdmin";
+      $suAdmin->type     = "superAdmin";
       $suAdmin->name     = $request->name;
       $suAdmin->email    = $request->email;
       $suAdmin->password = Hash::make($request->password);
       $suAdmin->save();
 
-      return redirect("sa/dashboard/super-administradores")->with('message','Usuario creado correctamente');
+      return redirect("sa/dashboard/super-administradores/ver/$suAdmin->id")->with('message','Usuario creado correctamente');
     }
 
     /**
@@ -84,7 +85,13 @@ class SuAdmin extends Controller
      */
     public function view($id)
     {
-        //
+      $user  = Auth::user();
+      $suAdmin = User::find($id);
+
+      return view("suAdmin.users.suAdmin-profile")->with([
+        "user"  => $user,
+        "suAdmin" => $suAdmin
+      ]);
     }
 
     /**
@@ -95,7 +102,13 @@ class SuAdmin extends Controller
      */
     public function edit($id)
     {
-        //
+      $user  = Auth::user();
+      $suAdmin = User::find($id);
+
+      return view("suAdmin.users.suAdmin-update")->with([
+        "user"  => $user,
+        "suAdmin" => $suAdmin
+      ]);
     }
 
     /**
@@ -105,9 +118,18 @@ class SuAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSuAdmin $request, $id)
     {
-        //
+      $suAdmin        = User::find($id);
+      $suAdmin->name  = $request->name;
+      $suAdmin->email = $request->email;
+
+      if(!empty($request->password)){
+        $suAdmin->password = Hash::make($request->password);
+      }
+      $suAdmin->save();
+
+      return redirect("sa/dashboard/super-administradores/ver/$id")->with("message",'Usuario actualizado correctamente');
     }
 
     /**
