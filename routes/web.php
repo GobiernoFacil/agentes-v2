@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Perfil super administrador
     Route::get('sa/dashboard/perfil', 'SuAdmin@profile');
     Route::get('sa/dashboard/perfil/editar', 'SuAdmin@editProfile');
+    Route::post('sa/dashboard/perfil/save', 'SuAdmin@saveProfile');
     /*@Admin Controller */
     // Rutas CRUD admin
     Route::get('sa/dashboard/administradores', 'Admin@index');

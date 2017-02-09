@@ -13,7 +13,7 @@ use App\User;
 // FormValidators
 use App\Http\Requests\SaveSuAdmin;
 use App\Http\Requests\UpdateSuAdmin;
-
+use App\Http\Requests\UpdateSuAdminProfile;
 class SuAdmin extends Controller
 {
     //Paginación
@@ -71,6 +71,7 @@ class SuAdmin extends Controller
       $suAdmin->type     = "superAdmin";
       $suAdmin->name     = $request->name;
       $suAdmin->email    = $request->email;
+      $suAdmin->enabled  = 1;
       $suAdmin->password = Hash::make($request->password);
       $suAdmin->save();
 
@@ -140,7 +141,11 @@ class SuAdmin extends Controller
      */
     public function delete($id)
     {
-        //
+      $suAdmin        = User::find($id);
+      $suAdmin->enabled  = 0;
+      $suAdmin->save();
+
+      return redirect("sa/dashboard/super-administradores/ver/$id")->with("message",'Usuario deshabilitado');
     }
 
     /**
@@ -149,9 +154,13 @@ class SuAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function profile($id)
+    public function profile()
     {
         //
+        $user = Auth::user();
+        return view('suAdmin.profile.profile-view')->with([
+          "user"      => $user
+        ]);
     }
 
     /**
@@ -160,8 +169,31 @@ class SuAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editProfile($id)
+    public function editProfile()
     {
-        //
+      $user = Auth::user();
+      return view('suAdmin.profile.profile-update')->with([
+        "user"      => $user
+      ]);
+    }
+
+    /**
+     * salva perfil del usuario super administrador
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function saveProfile(UpdateSuAdminProfile $request)
+    {
+      $suAdmin = Auth::user();
+      $suAdmin->name  = $request->name;
+      $suAdmin->email = $request->email;
+
+      if(!empty($request->password)){
+        $suAdmin->password = Hash::make($request->password);
+      }
+      $suAdmin->save();
+
+      return redirect("sa/dashboard/perfil")->with("message",'Perfil actualizado correctamente');
     }
 }
