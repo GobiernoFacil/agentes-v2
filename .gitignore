@@ -6,3 +6,5 @@
 Homestead.json
 Homestead.yaml
 .env
+public/css/src_sass
+public/css/fonts
