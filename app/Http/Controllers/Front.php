@@ -8,7 +8,7 @@ class Front extends Controller
 {
     //página de inicio
     public function index(){
-      return view('welcome');
+      return view('frontend.home');
     }
 
     //descripcion
