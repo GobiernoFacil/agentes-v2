@@ -81,7 +81,7 @@ time, mark, audio, video {
 
 h1, h2, h3, h4, h5, .cta, blockquote.feature,
 #access, #insidenav, #pagination, .bloglist .more, blockquote {
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "overpass", Helvetica, sans-serif;
   font-weight: 500; }
 
 strong {
@@ -138,7 +138,7 @@ h6 {
 /* = TEXT */
 p, ul, ol, dl, table, form {
   /* 13px */
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "overpass", Helvetica, sans-serif;
   font-size: 15px;
   margin: 0 0 1.5em 0; }
 
@@ -147,7 +147,7 @@ a,
 a:link {
   color: #302d2e;
   background-color: transparent;
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "overpass", Helvetica, sans-serif;
   text-decoration: none; }
 
 .alt a, .alt a:link {
@@ -207,94 +207,118 @@ input[type="search"]::-webkit-search-decoration {
   padding: 0.2em 0; }
 
 @font-face {
-  font-family: 'soberana_sans';
-  src: url("fonts/soberanasans-italic1-webfont.woff2") format("woff2"), url("fonts/soberanasans-italic1-webfont.woff") format("woff");
-  font-weight: normal;
+  font-family: 'overpass';
+  src: url("fonts/overpass-thin.eot");
+  /* IE9 Compat Modes */
+  src: url("fonts/overpass-thin.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-thin.woff2") format("woff2"), url("fonts/overpass-thin.woff") format("woff"), url("fonts/overpass-thin.ttf") format("truetype");
+  /* Safari, Android, iOS */
+  font-weight: 200;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-thin-italic.eot");
+  src: url("fonts/overpass-thin-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-thin-italic.woff2") format("woff2"), url("fonts/overpass-thin-italic.woff") format("woff"), url("fonts/overpass-thin-italic.ttf") format("truetype");
+  font-weight: 200;
   font-style: italic; }
 
 @font-face {
-  font-family: 'soberana_sans';
-  src: url("fonts/soberanasans-light-webfont.woff2") format("woff2"), url("fonts/soberanasans-light-webfont.woff") format("woff");
+  font-family: 'overpass';
+  src: url("fonts/overpass-extralight.eot");
+  src: url("fonts/overpass-extralight.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-extralight.woff2") format("woff2"), url("fonts/overpass-extralight.woff") format("woff"), url("fonts/overpass-extralight.ttf") format("truetype");
   font-weight: 300;
   font-style: normal; }
 
 @font-face {
-  font-family: 'soberana_sans';
-  src: url("fonts/soberanasans-bold-webfont.woff2") format("woff2"), url("fonts/soberanasans-bold-webfont.woff") format("woff");
+  font-family: 'overpass';
+  src: url("fonts/overpass-extralight-italic.eot");
+  src: url("fonts/overpass-extralight-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-extralight-italic.woff2") format("woff2"), url("fonts/overpass-extralight-italic.woff") format("woff"), url("fonts/overpass-extralight-italic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-light.eot");
+  src: url("fonts/overpass-light.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-light.woff2") format("woff2"), url("fonts/overpass-light.woff") format("woff"), url("fonts/overpass-light.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-light-italic.eot");
+  src: url("fonts/overpass-light-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-light-italic.woff2") format("woff2"), url("fonts/overpass-light-italic.woff") format("woff"), url("fonts/overpass-light-italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-regular.eot");
+  src: url("fonts/overpass-regular.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-regular.woff2") format("woff2"), url("fonts/overpass-regular.woff") format("woff"), url("fonts/overpass-regular.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("overpass-italic.eot");
+  src: url("fonts/overpass-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-italic.woff2") format("woff2"), url("fonts/overpass-italic.woff") format("woff"), url("fonts/overpass-italic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-semibold.eot");
+  src: url("fonts/overpass-semibold.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-semibold.woff2") format("woff2"), url("fonts/overpass-semibold.woff") format("woff"), url("fonts/overpass-semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-semibold-italic.eot");
+  src: url("fonts/overpass-semibold-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-semibold-italic.woff2") format("woff2"), url("fonts/overpass-semibold-italic.woff") format("woff"), url("fonts/overpass-semibold-italic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-bold.eot");
+  src: url("fonts/overpass-bold.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-bold.woff2") format("woff2"), url("fonts/overpass-bold.woff") format("woff"), url("fonts/overpass-bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal; }
 
 @font-face {
-  font-family: 'soberana_titularregular';
-  src: url("fonts/soberanatitular-regular-webfont.woff2") format("woff2"), url("fonts/soberanatitular-regular-webfont.woff") format("woff");
-  font-weight: normal;
+  font-family: 'overpass';
+  src: url("fonts/overpass-bold-italic.eot");
+  src: url("fonts/overpass-bold-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-bold-italic.woff2") format("woff2"), url("fonts/overpass-bold-italic.woff") format("woff"), url("fonts/overpass-bold-italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-extrabold.eot");
+  src: url("fonts/overpass-extrabold.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-extrabold.woff2") format("woff2"), url("fonts/overpass-extrabold.woff") format("woff"), url("fonts/overpass-extrabold.ttf") format("truetype");
+  font-weight: 800;
   font-style: normal; }
 
 @font-face {
-  font-family: 'soberana_titularbold';
-  src: url("fonts/soberanatitular-bold-webfont.woff2") format("woff2"), url("fonts/soberanatitular-bold-webfont.woff") format("woff");
-  font-weight: normal;
+  font-family: 'overpass';
+  src: url("fonts/overpass-extrabold-italic.eot");
+  src: url("fonts/overpass-extrabold-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-extrabold-italic.woff2") format("woff2"), url("fonts/overpass-extrabold-italic.woff") format("woff"), url("fonts/overpass-extrabold-italic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'overpass';
+  src: url("fonts/overpass-heavy.eot");
+  src: url("fonts/overpass-heavy.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-heavy.woff2") format("woff2"), url("fonts/overpass-heavy.woff") format("woff"), url("fonts/overpass-heavy.ttf") format("truetype");
+  font-weight: 900;
   font-style: normal; }
 
 @font-face {
-  font-family: 'soberana_textoregular';
-  src: url("fonts/soberanatexto-regular-webfont.woff2") format("woff2"), url("fonts/soberanatexto-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_textoitalic';
-  src: url("fonts/soberanatexto-italic-webfont.woff2") format("woff2"), url("fonts/soberanatexto-italic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_textobold_italic';
-  src: url("fonts/soberanatexto-bolditalic-webfont.woff2") format("woff2"), url("fonts/soberanatexto-bolditalic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_textobold';
-  src: url("fonts/soberanatexto-bold-webfont.woff2") format("woff2"), url("fonts/soberanatexto-bold-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sansultra_italic';
-  src: url("fonts/soberanasans-ultraitalic-webfont.woff2") format("woff2"), url("fonts/soberanasans-ultraitalic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sansultra';
-  src: url("fonts/soberanasans-ultra-webfont.woff2") format("woff2"), url("fonts/soberanasans-ultra-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sansregular';
-  src: url("fonts/soberanasans-regular-webfont.woff2") format("woff2"), url("fonts/soberanasans-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sans_condensedRg';
-  src: url("fonts/soberanasanscondensed-regular-webfont.woff2") format("woff2"), url("fonts/soberanasanscondensed-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sans_condenseditalic';
-  src: url("fonts/soberanasanscondensed-italic-webfont.woff2") format("woff2"), url("fonts/soberanasanscondensed-italic-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'soberana_sans_condensedbold';
-  src: url("fonts/soberanasanscondensed-bold-webfont.woff2") format("woff2"), url("fonts/soberanasanscondensed-bold-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
+  font-family: 'overpass';
+  src: url("fonts/overpass-heavy-italic.eot");
+  src: url("fonts/overpass-heavy-italic.eot?#iefix") format("embedded-opentype"), url("fonts/overpass-heavy-italic.woff2") format("woff2"), url("fonts/overpass-heavy-italic.woff") format("woff"), url("fonts/overpass-heavy-italic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic; }
 
 select {
   background: rgba(244, 242, 242, 0.7);
