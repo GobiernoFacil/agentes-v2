@@ -19,7 +19,7 @@ class NoticeFront extends Controller
 
       //convocatoria/aplicar
       public function aplicar(){
-        return view('welcome');
+        return view('frontend.convocatoria.aplicar-1');
       }
 
       //convocatoria/resultados
