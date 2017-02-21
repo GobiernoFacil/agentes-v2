@@ -122,9 +122,6 @@ h6 {
   font-weight: bold;
   text-transform: none; }
 
-#principals h6, .representative h6 {
-  font-weight: normal; }
-
 /* end type options */
 .break {
   margin-bottom: 1.5em; }
@@ -135,8 +132,7 @@ h6 {
 /* = TEXT */
 p, ul, ol, dl, table, form {
   /* 13px */
-  font-family: "overpass", Helvetica, sans-serif;
-  font-size: 15px;
+  font: 500 16px/1.4 "overpass", Helvetica, sans-serif;
   margin: 0 0 1.5em 0; }
 
 /* = LINKS */
@@ -158,6 +154,29 @@ a:visited {
 a:hover,
 a:active,
 a:focus {
+  background-color: transparent;
+  text-decoration: none; }
+
+p a,
+p a:link, li a,
+li a:link {
+  color: #f15c44;
+  background-color: transparent;
+  font-family: "overpass", Helvetica, sans-serif;
+  text-decoration: none; }
+
+p a:visited, li a:visited {
+  color: #f58573;
+  background-color: transparent;
+  text-decoration: none; }
+
+p a:hover,
+p a:active,
+p a:focus, li a:hover,
+li a:active,
+li a:focus {
+  color: #ef472c;
+  border-bottom: 1px solid #f15c44;
   background-color: transparent;
   text-decoration: none; }
 
@@ -1040,21 +1059,28 @@ header {
   height: 73px;
   width: 148px; }
 
+.home .title {
+  color: #187fad;
+  font-weight: 300;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 40px; }
+
 .bgdimg {
   color: white;
-  margin-bottom: 62px;
+  margin-bottom: 70px;
   min-height: 628px;
   display: block;
   position: relative;
   text-align: center; }
   .bgdimg:hover figure:after {
-    background: rgba(0, 0, 0, 0.7); }
+    background: rgba(0, 0, 0, 0.8); }
   .bgdimg figure {
     position: absolute;
     z-index: 0; }
     .bgdimg figure:after {
       content: "";
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       border-bottom: 8px solid #187fad;
       position: absolute;
       height: 100%;
@@ -1063,19 +1089,23 @@ header {
       transition: background 500ms;
       width: 100%; }
   .bgdimg .cta {
-    padding-top: 180px; }
+    padding-top: 160px; }
     .bgdimg .cta h1,
     .bgdimg .cta h2,
     .bgdimg .cta h3 {
       font-weight: 300; }
     .bgdimg .cta h1 {
-      font-size: 40px;
+      font-size: 45px;
       border-bottom: 2px solid #187fad;
       margin-bottom: 15px; }
+    .bgdimg .cta h2 {
+      font-size: 29px; }
     .bgdimg .cta h2,
     .bgdimg .cta h3 {
       line-height: 1.2;
       padding-bottom: 20px; }
+    .bgdimg .cta h3 {
+      font-size: 24px; }
     .bgdimg .cta span {
       display: block; }
     .bgdimg .cta p {

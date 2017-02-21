@@ -25,9 +25,12 @@
 </div>
 
 <div class="row">
+	<div class="col-sm-8 col-sm-offset-2">
+		<h2 class="title">PROGRAMA DE FORTALECIMIENTO DE CAPACIDADES PARA <strong>AGENTES DE CAMBIO</strong> DE <strong>GOBIERNO ABIERTO</strong></h2>
+	</div>
 	<div class="col-sm-10 col-sm-offset-1">
-		<h2>PROGRAMA DE FORTALECIMIENTO DE CAPACIDADES PARA AGENTES DE CAMBIO DE GOBIERNO ABIERTO</h2>
-		<p>Lorem ipsum dolor sit amet, te semper detracto imperdiet has. Atqui utinam diceret mea ad, causae qualisque vis ne. In sea essent ponderum efficiendi, eu nisl phaedrum vis. Sumo wisi iisque ei has, tale facete deterruisset his an. Cu vix nisl choro menandri, euripidis necessitatibus cu mea, vix virtute albucius maluisset et. Duo quaeque veritus dissentias te, eu lorem ubique his.</p>
+		<p>El objetivo del Programa es contribuir al fortalecimiento de una buena gobernanza en México a partir de prácticas de <strong>Gobierno Abierto</strong>, participación ciudadana, transparencia y anticorrupción; con esquemas innovadores de desarrollo de capacidades y de vinculación social que permitan el empoderamiento de agentes de cambio, así como el impulso de espacios de diálogo y co creación a nivel subnacional.</p>
+		<p>Esta es una iniciativa del <a href="http://www.mx.undp.org/">Programa de las Naciones Unidas para el Desarrollo (PNUD)</a> y estará apoyado permanentemente por actores tanto del gobierno como de la sociedad civil: el <a href="http://inicio.ifai.org.mx">Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</a>, <a href="http://www.gesoc.org.mx/site/">Gestión Social y Cooperación (GESOC)</a>, <a href="https://gobiernofacil.com">Gobierno Fácil</a> y <a href="http://www.prosociedad.org/">ProSociedad Hacer el Bien</a>. Conoce más sobre el proyecto:</p>
 		<div class="row">
 			<div class="col-sm-4">
 				<h3>PROGRAMA</h3>
@@ -40,5 +43,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="map_container">
+  <!-- el mapa! -->
+  <div id="map"></div>
 </div>
 @endsection
