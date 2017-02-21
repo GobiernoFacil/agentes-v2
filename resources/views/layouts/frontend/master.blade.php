@@ -58,7 +58,6 @@
 
 	<!--css-custom-->
 	@yield('css-custom')
-	<link rel="stylesheet" href="{{url('css/normalize.css')}}">
 	<link rel="stylesheet" href="{{url('css/styles.css')}}">
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
