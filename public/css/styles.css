@@ -132,7 +132,7 @@ h6 {
 /* = TEXT */
 p, ul, ol, dl, table, form {
   /* 13px */
-  font: 500 16px/1.4 "overpass", Helvetica, sans-serif;
+  font: 500 17px/1.4 "overpass", Helvetica, sans-serif;
   margin: 0 0 1.5em 0; }
 
 /* = LINKS */
@@ -160,14 +160,16 @@ a:focus {
 p a,
 p a:link, li a,
 li a:link {
-  color: #f15c44;
+  color: #222;
+  border-bottom: 1px solid #f15c44;
   background-color: transparent;
   font-family: "overpass", Helvetica, sans-serif;
   text-decoration: none; }
 
 p a:visited, li a:visited {
-  color: #f58573;
+  color: gray;
   background-color: transparent;
+  border-bottom: 1px solid #fcd8d2;
   text-decoration: none; }
 
 p a:hover,
@@ -175,9 +177,9 @@ p a:active,
 p a:focus, li a:hover,
 li a:active,
 li a:focus {
-  color: #ef472c;
-  border-bottom: 1px solid #f15c44;
+  color: #151515;
   background-color: transparent;
+  border-bottom: 1px solid #ed3315;
   text-decoration: none; }
 
 /* = remove borders from links */
