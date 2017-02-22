@@ -29,6 +29,7 @@ class SaveAspirant extends FormRequest
         'surname'     => 'required',
         'lastname'     => 'required',
         'email'    => 'required|email|max:255|unique:aspirants',
+        'email-confirm'=> 'required|same:email',
         'city'     => 'required',
         'state'     => 'required',
         'degree'     => 'required',

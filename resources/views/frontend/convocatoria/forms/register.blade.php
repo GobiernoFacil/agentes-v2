@@ -1,4 +1,4 @@
-{!! Form::open(['url' => '', "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => 'convocatoria/aplicar', "class" => "form-horizontal"]) !!}
 
 <p>
   <label>Nombre</label>
@@ -21,7 +21,13 @@
     <strong>{{$errors->first('lastname')}}</strong>
   @endif
 </p>
-
+<p>
+  <label>Grado de estudios completados</label>
+  {{Form::text('degree', null, ["class" => "form-control"])}}
+  @if($errors->has('degree'))
+    <strong>{{$errors->first('degree')}}</strong>
+  @endif
+</p>
 <p>
   <label>Correo</label>
   {{Form::text('email', null, ["class" => "form-control"])}}

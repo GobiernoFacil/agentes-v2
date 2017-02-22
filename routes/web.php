@@ -30,6 +30,7 @@ Route::get('redes-sociales', 'Front@redes');
 Route::get('convocatoria', 'NoticeFront@convocatoria');
 Route::get('convocatoria/bases', 'NoticeFront@bases');
 Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
+Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 /*@RangeFront Controller */
 /*********  Enlaces convocatoria ******** */

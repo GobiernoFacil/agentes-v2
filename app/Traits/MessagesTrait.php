@@ -23,6 +23,8 @@ trait MessagesTrait{
         'city.required'  => 'La ciudad es requerida',
         'state.required'  => 'El estado es requerido',
         'degree.required'  => 'El grado de estudios es requerido',
+        'email-confirm.same'   => 'Los correos no coinciden',
+        'email-confirm.required'   => 'La confirmación es requerida',
       ];
     }
 }
