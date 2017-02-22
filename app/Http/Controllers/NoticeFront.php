@@ -40,9 +40,8 @@ class NoticeFront extends Controller
           'token'       => $link
         ]);
         $activation ->save();
-        $aspirant = $aspirant->toArray();
        //enviar correo para confirmar dirección de correo
-        Mail::send('emails.confirmation', $aspirant, function($message) use ($aspirant,$link) {
+        Mail::send('emails.confirmation', ['aspirant' => $aspirant,'link' =>$link], function($message) use ($aspirant,$link) {
                 $message->to($aspirant->email);
                 $message->subject('Confirma tu dirección de correo');
         });
