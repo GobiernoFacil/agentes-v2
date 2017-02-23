@@ -51,6 +51,25 @@ class NoticeFront extends Controller
       }
 
 
+      //activar aspirantes
+      public function aspirantActivation($token){
+        $code  = AspirantActivation::where('token',$token)->first();
+
+        if(!is_null($code)){
+          $aspirant = Aspirant::find($code->aspirant_id);
+            if($aspirant->is_activated == 1){
+                return redirect('convocatoria/aplicar')->with('success',"Ya se encuentra validado");
+            }
+            $aspirant->is_activated = 1;
+            $aspirant->save();
+            AspirantActivation::where('token',$token)->delete();
+            return redirect('convocatoria/aplicar/archivos')->with('success',"Se ha validado tu correo");
+        }
+            return redirect('convocatoria/aplicar')->with('error',"El código es incorrecto");
+      }
+
+
+
       //convocatoria/resultados
       public function resultados(){
         return view('welcome');

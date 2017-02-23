@@ -15,7 +15,7 @@ trait MessagesTrait{
         'email.required' => 'El correo es requerido',
         'email.email'    => 'El correo debe ser válido',
         'email.max'      => 'El correo debe tener menos de 255 caracteres',
-        'email.unique'   => 'El correo debe ser único en el sistema',
+        'email.unique'   => 'El correo ya ha sido registrado',
 
         //Aspirante
         'surname.required'  => 'El apellido paterno es requerido',
