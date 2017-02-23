@@ -59,6 +59,8 @@
 	<!--css-custom-->
 	@yield('css-custom')
 	<link rel="stylesheet" href="{{url('css/styles.css')}}">
+	
+	<script src="{{url('js/modernizr.js')}}"></script> <!-- Modernizr -->
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -87,10 +89,11 @@
 	@include('layouts.frontend.header')
 		</header>
 	<!--content-->
-	
+<main class="cd-main-content">	
     @yield('content')
 	</div>
      <!--footer-->
 	@include('layouts.frontend.footer')
+	</main>
 </body>
 </html>

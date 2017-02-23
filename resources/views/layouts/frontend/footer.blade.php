@@ -31,3 +31,6 @@
 		</div>
 	</div>
 </footer>
+
+<script src="{{url('js/app.js')}}"></script> 
+<script src="{{url('js/main.js')}}"></script> 
