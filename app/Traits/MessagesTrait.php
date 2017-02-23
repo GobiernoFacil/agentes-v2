@@ -17,6 +17,14 @@ trait MessagesTrait{
         'email.max'      => 'El correo debe tener menos de 255 caracteres',
         'email.unique'   => 'El correo debe ser único en el sistema',
 
+        //Aspirante
+        'surname.required'  => 'El apellido paterno es requerido',
+        'lastname.required'  => 'El apellido materno es requerido',
+        'city.required'  => 'La ciudad es requerida',
+        'state.required'  => 'El estado es requerido',
+        'degree.required'  => 'El grado de estudios es requerido',
+        'email-confirm.same'   => 'Los correos no coinciden',
+        'email-confirm.required'   => 'La confirmación es requerida',
       ];
     }
 }
