@@ -8,3 +8,4 @@ Homestead.yaml
 .env
 public/css/src_sass
 public/css/fonts
+public/files/*
