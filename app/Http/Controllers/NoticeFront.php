@@ -10,6 +10,7 @@ use App\Models\Aspirant;
 use App\Models\AspirantActivation;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
+use App\Http\Requests\SaveFiles;
 class NoticeFront extends Controller
 {
   /******************* funciones de convocatoria ************************/
@@ -69,8 +70,14 @@ class NoticeFront extends Controller
             return redirect('convocatoria/aplicar')->with('error',"El código de activación es incorrecto");
       }
 
-      //convocatoria/resultados
+      //view para agregar archivos
       public function aspirantFiles(){
+        session()->keep(['aspirant_id']);
+        return view('frontend.convocatoria.archivos');
+      }
+
+      //Guardar archivos
+      public function saveFiles(saveFiles $request){
         session()->keep(['aspirant_id']);
         return view('frontend.convocatoria.archivos');
       }
