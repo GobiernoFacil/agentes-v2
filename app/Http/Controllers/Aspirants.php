@@ -10,6 +10,9 @@ use App\Models\Aspirant;
 use App\Models\AspirantsFile;
 class Aspirants extends Controller
 {
+
+  //Paginación
+  public $pageSize = 10;
     /**
      * Lista de aspirantes
      *
@@ -18,33 +21,14 @@ class Aspirants extends Controller
     public function index()
     {
       $user = Auth::user();
-      $aspirants = Aspirant::where('is_activated',1)->get();
+      $aspirants = Aspirant::where('is_activated',1)->paginate($this->pageSize);
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -52,32 +36,31 @@ class Aspirants extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function view($id)
     {
         //
+        $user = Auth::user();
+        $aspirant = Aspirant::find($id);
+        return view('admin.aspirants.aspirant-view')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function download($name,$type){
+      $user = Auth::user();
+      $file = public_path(). "/files/".$name;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+      if($type =='CV'){
+        $filename = 'CV'.".".$ext;
+      }else{
+        $filename = 'Ensayo'.".".$ext;
+      }
+      return response()->download($file, $filename, $headers);
     }
 
     /**
@@ -86,7 +69,7 @@ class Aspirants extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
     }

@@ -101,7 +101,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aplicaciones/ver/{id}', 'Applications@view');
     Route::get('dashboard/aplicaciones/evaluar/{id}', 'Applications@evaluate');
     /*@Aspirants Controller */
-    Route::get('dashboard/aspirantes', 'ASpirants@index');
+    Route::get('dashboard/aspirantes', 'Aspirants@index');
+    Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
+    Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
+
+
   });
 
 

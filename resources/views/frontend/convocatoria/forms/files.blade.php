@@ -18,7 +18,7 @@
 </p>
 
 <p>
-  <label>Enlace a vídeo</label>
+  <label>Enlace a video</label>
   {{Form::text('video', null, ["class" => "form-control"])}}
   @if($errors->has('video'))
     <strong>{{$errors->first('video')}}</strong>
