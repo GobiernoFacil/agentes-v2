@@ -24,6 +24,6 @@
     <strong>{{$errors->first('video')}}</strong>
   @endif
 </p>
-<p>{{Form::submit('Enviar', ['class' => 'btn'])}}</p>
+<p>{{Form::submit('Guardar', ['class' => 'btn'])}}</p>
 
 {!! Form::close() !!}

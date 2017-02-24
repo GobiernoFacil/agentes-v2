@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AspirantsFile extends Model
 {
+
+  public $table = 'aspirantsFiles';
     //
     protected $fillable = [
         'aspirant_id', 'cv', 'essay','video'

@@ -8,6 +8,7 @@ use Mail;
 //Models
 use App\Models\Aspirant;
 use App\Models\AspirantActivation;
+use App\Models\AspirantsFile;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
 use App\Http\Requests\SaveFiles;
@@ -73,13 +74,31 @@ class NoticeFront extends Controller
       //view para agregar archivos
       public function aspirantFiles(){
         session()->keep(['aspirant_id']);
+        $aspirant_id  = session()->get('aspirant_id');
         return view('frontend.convocatoria.archivos');
       }
 
       //Guardar archivos
       public function saveFiles(saveFiles $request){
         session()->keep(['aspirant_id']);
-        return view('frontend.convocatoria.archivos');
+        $aspirant_id  = session()->get('aspirant_id');
+        $aspirantFile     = new AspirantsFile(['aspirant_id'=>$aspirant_id]);
+        if($request->file('cv')->isValid()){
+            $name = uniqid() . "." . $request->file("cv")->guessExtension();
+            $path = "/files/";
+            $request->file('cv')->move(public_path() . $path, $name);
+            $aspirantFile->cv = $name;
+        }
+        if($request->file('essay')->isValid()){
+            $name = uniqid() . "." . $request->file("essay")->guessExtension();
+            $path = "/files/";
+            $request->file('essay')->move(public_path() . $path, $name);
+            $aspirantFile->essay = $name;
+        }
+        $aspirantFile->video = $request->video;
+        $aspirantFile->save();
+        session()->keep(['aspirant_id']);
+        return redirect('convocatoria/aplicar')->with('success',"Tu registro se ha finalizado con éxito");
       }
 
       //convocatoria/resultados
