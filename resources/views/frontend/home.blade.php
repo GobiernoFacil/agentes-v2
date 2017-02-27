@@ -43,7 +43,7 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="{{url('alcance')}}" class="icon i_alcance">
+				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance">
 					<span>ALCANCE</span>
 				</a>
 			</div>
