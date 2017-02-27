@@ -1,7 +1,7 @@
 @extends('layouts.frontend.master')
 @section('title', 'Chihuahua, ejercicio local de Gobierno Abierto')
 @section('description', 'El 20 de junio de 2016, el estado de Chihuahua se integró formalmente a los Ejercicios Locales de Gobierno Abierto a través de la firma de la Declaración Conjunta para la Implementación de las Acciones para un Gobierno Abierto.')
-@section('body_class', 'convocatoria')
+@section('body_class', 'programa alcance')
 @section('canonical', url('programa-gobierno-abierto/alcance/chihuahua') )
 @section('content')
 <div class="row">
