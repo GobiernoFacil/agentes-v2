@@ -6,7 +6,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1>Oaxaca</h1>
+		<h1><strong>Oaxaca</strong>, ejercicio local de gobierno abierto</h1>
 		<h2>¿Quiénes conforman el ejercicio?</h2>
 		<p>El Secretariado Técnico Local (STL), está conformado por:</p>
 		<ul>
