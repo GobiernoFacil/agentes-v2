@@ -2,7 +2,7 @@
 @section('title', 'Proceso de selección de candidatos a Convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Proceso de selección de candidatos a Convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'convocatoria')
-@section('canonical', '' )
+@section('canonical', url('proceso-de-seleccion') )
 
 @section('content')
 <div class="row">
