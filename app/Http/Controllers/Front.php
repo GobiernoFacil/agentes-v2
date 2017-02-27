@@ -13,7 +13,7 @@ class Front extends Controller
 
     //descripcion
     public function descripcion(){
-      return view('welcome');
+      return view('frontend.programas.que-es');
     }
 
     //objetivos
