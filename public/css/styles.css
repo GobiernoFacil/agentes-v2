@@ -1554,11 +1554,13 @@ a.btn,
 
 /* =Convocatoria
 -------------------------------------------------------------- */
-.convocatoria h1 {
+.convocatoria h1,
+.programa h1 {
   padding: 0 0 30px;
   text-transform: uppercase; }
 
-.convocatoria h2 {
+.convocatoria h2,
+.programa h2 {
   border-top: 1px solid #ccc;
   margin: 20px 0 30px;
   padding-top: 20px;
