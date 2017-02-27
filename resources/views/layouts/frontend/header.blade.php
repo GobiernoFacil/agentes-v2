@@ -10,10 +10,10 @@
 	</a>
  
 	<ul>
-		<li><a href="#0" class="active"><span>Inicio</span></a></li>
-		<li><a href="#0"><span>Programa</span></a></li>
-		<li><a href="#0" class="btn_convocatoria"><span>Convocatoria</span></a></li>
-		<li><a href="#0" class="btn_alcance"><span>Alcance</span></a></li>
+		<li><a href="{{url('')}}" class="btn_home active"><span>Inicio</span></a></li>
+		<li><a href="{{url('programa-gobierno-abierto')}}"><span>Programa</span></a></li>
+		<li><a href="{{url('convocatoria')}}" class="btn_convocatoria"><span>Convocatoria</span></a></li>
+		<li><a href="{{url('alcance')}}" class="btn_alcance"><span>Alcance</span></a></li>
 	</ul>
  
 	<span aria-hidden="true" class="stretchy-nav-bg"></span>
