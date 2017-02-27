@@ -5,5 +5,7 @@
       {{ Session::get('success') }}
   </div>
 @endif
-@include('frontend.convocatoria.forms.register')
+
+@include('frontend.convocatoria.forms.files')
+
 @endsection

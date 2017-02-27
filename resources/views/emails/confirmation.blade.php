@@ -1,3 +1,3 @@
-Hola, {{ $aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname }}
+Hola, {{ $aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname }}<br>
 
-Por favor sigue el siguiente enlace para activar tu cuenta: {{ url('convocatoria/aplicar/confirmacion', $link)}}
+<p>Por favor sigue el siguiente enlace para activar tu cuenta: {{ url('convocatoria/aplicar/confirmacion', $link)}}</p>

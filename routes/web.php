@@ -31,6 +31,9 @@ Route::get('convocatoria', 'NoticeFront@convocatoria');
 Route::get('convocatoria/bases', 'NoticeFront@bases');
 Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
 Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
+Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
+Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
+Route::get('convocatoria/aplicar/confirmacion/{token}', 'NoticeFront@aspirantActivation');
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 /*@RangeFront Controller */
 /*********  Enlaces convocatoria ******** */
@@ -97,6 +100,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aplicaciones/buscar', 'Applications@search');
     Route::get('dashboard/aplicaciones/ver/{id}', 'Applications@view');
     Route::get('dashboard/aplicaciones/evaluar/{id}', 'Applications@evaluate');
+    /*@Aspirants Controller */
+    Route::get('dashboard/aspirantes', 'Aspirants@index');
+    Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
+    Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
+
+
   });
 
 
