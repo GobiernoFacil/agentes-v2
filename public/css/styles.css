@@ -1558,12 +1558,14 @@ a.btn,
 /* =Convocatoria
 -------------------------------------------------------------- */
 .convocatoria h1,
-.programa h1 {
+.programa h1,
+.abierto h1 {
   padding: 0 0 30px;
   text-transform: uppercase; }
 
 .convocatoria h2,
-.programa h2 {
+.programa h2,
+.abierto h2 {
   border-top: 1px solid #ccc;
   margin: 20px 0 30px;
   padding-top: 20px;
@@ -1577,6 +1579,34 @@ a.btn,
 
 .aliados h2 .col-sm-9 {
   padding-top: 20px; }
+
+/* =contacto
+-------------------------------------------------------------- */
+.box_contact {
+  background: #51be92;
+  color: white;
+  min-height: 50px;
+  margin-bottom: 70px;
+  padding: 80px 0;
+  text-align: center; }
+  .box_contact h1 {
+    text-transform: uppercase; }
+  .box_contact span.at {
+    background: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    color: #51be92;
+    display: block;
+    font: 700 80px "soberana_sans", Helvetica, Arial, sans-serif;
+    line-height: 150px;
+    margin: 0 auto 20px;
+    height: 150px;
+    width: 150px; }
+  .box_contact p a {
+    color: white;
+    border-color: white; }
 
 /* =Logos
 -------------------------------------------------------------- */
