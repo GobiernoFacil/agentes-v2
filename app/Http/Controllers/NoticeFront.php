@@ -15,7 +15,7 @@ class NoticeFront extends Controller
   /******************* funciones de convocatoria ************************/
       //convocatoria
       public function convocatoria(){
-        return view('welcome');
+        return view('frontend.convocatoria.info');
       }
 
       //convocatoria/bases
