@@ -28,7 +28,7 @@ class Front extends Controller
 
     //contacto
     public function contacto(){
-      return view('welcome');
+      return view('frontend.contacto');
     }
 
     //politicas-de-privacidad
