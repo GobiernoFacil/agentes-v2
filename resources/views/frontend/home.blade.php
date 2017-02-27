@@ -16,7 +16,7 @@
 				<h1>SÉ UN <strong>AGENTE DE CAMBIO</strong></h1>
 				<h2>Programa de Fortalecimiento de Capacidades para <strong>Agentes de Cambio</strong> de <strong>Gobierno Abierto</strong></h2>
 				<h3>Convocatoria abierta del <span><strong>3 al 31 de marzo de 2017</strong></span></h3>
-				<a href="#" class="btn">Participa</a>
+				<a href="{{url('convocatoria')}}" class="btn">Participa</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -33,17 +33,17 @@
 		<p>Es una iniciativa del <a href="http://www.mx.undp.org/">Programa de las Naciones Unidas para el Desarrollo (PNUD)</a>, posible gracias al apoyo de la <a href="https://www.usaid.gov/mexico">Agencia de los Estados Unidos para el Desarrollo Internacional</a> (USAID por sus siglas en inglés), desarrollada y acompañada por el trabajo conjunto de actores tanto del gobierno como de la sociedad civil: el <a href="http://inicio.ifai.org.mx">Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</a>, <a href="http://www.gesoc.org.mx/site/">Gestión Social y Cooperación (GESOC)</a>, <a href="https://gobiernofacil.com">Gobierno Fácil</a> y <a href="http://www.prosociedad.org/">ProSociedad Hacer el Bien</a>. Conoce más sobre el proyecto:</p>
 		<div class="row">
 			<div class="col-sm-4">
-				<a href="" class="icon i_programa">
+				<a href="{{url('programa-gobierno-abierto')}}" class="icon i_programa">
 					<span>PROGRAMA</span>
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="" class="icon i_convocatoria">
+				<a href="{{url('convocatoria')}}" class="icon i_convocatoria">
 					<span>CONVOCATORIA</span>
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="" class="icon i_alcance">
+				<a href="{{url('alcance')}}" class="icon i_alcance">
 					<span>ALCANCE</span>
 				</a>
 			</div>
