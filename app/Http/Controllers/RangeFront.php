@@ -14,8 +14,8 @@ class RangeFront extends Controller
       }
       //alcance por estado
       public function descripcion($state){
-        $view_name  = "alcance.".$state;
-        return view($view_name);
+        $view_name  = "alcance-".$state;
+        return view('frontend.programas.alcance.'.$view_name);
       }
 
       //conforman ejercicio por estado
