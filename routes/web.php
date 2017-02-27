@@ -20,8 +20,7 @@ Auth::routes();
 /*********  INICIO ******** */
 Route::get('/', 'Front@index');
 Route::get('programa-gobierno-abierto', 'Front@descripcion');
-Route::get('objetivos', 'Front@objetivos');
-Route::get('aliados', 'Front@aliados');
+Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('contacto', 'Front@contacto');
 Route::get('politicas-de-privacidad', 'Front@politicas');
 Route::get('redes-sociales', 'Front@redes');
