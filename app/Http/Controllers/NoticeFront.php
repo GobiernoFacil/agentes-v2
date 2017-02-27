@@ -22,7 +22,7 @@ class NoticeFront extends Controller
 
       //convocatoria/bases
       public function bases(){
-        return view('welcome');
+        return view('frontend.convocatoria.bases');
       }
 
       //convocatoria/aplicar
