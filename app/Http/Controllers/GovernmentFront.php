@@ -10,7 +10,7 @@ class GovernmentFront extends Controller
 
       //gobierno-abierto
       public function gobierno(){
-        return view('welcome');
+        return view('frontend.opengovernment.gobierno-abierto');
       }
       //contenido-teorico-del-modelo
       public function contenido(){
