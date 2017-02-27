@@ -19,7 +19,7 @@ Auth::routes();
 /*@front Controller */
 /*********  INICIO ******** */
 Route::get('/', 'Front@index');
-Route::get('que-es', 'Front@descripcion');
+Route::get('programa-gobierno-abierto', 'Front@descripcion');
 Route::get('objetivos', 'Front@objetivos');
 Route::get('aliados', 'Front@aliados');
 Route::get('contacto', 'Front@contacto');
