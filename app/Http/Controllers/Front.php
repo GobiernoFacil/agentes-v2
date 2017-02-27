@@ -23,7 +23,7 @@ class Front extends Controller
 
     //aliados
     public function aliados(){
-      return view('welcome');
+      return view('frontend.programas.allies');
     }
 
     //contacto
