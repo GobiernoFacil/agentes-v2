@@ -352,6 +352,21 @@ select {
     border-color: #F4F2F2 !important;
     color: white; }
 
+form {
+  margin-bottom: 40px; }
+
+input[type="text"] {
+  background: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  line-height: 35px;
+  display: block;
+  padding: 5px 10px;
+  width: 100%; }
+
+input.btn {
+  display: block;
+  width: 100%; }
+
 table {
   border-spacing: 0;
   border-collapse: collapse; }
@@ -1429,7 +1444,6 @@ header {
   width: 291px; }
 
 .home .title {
-  color: #187fad;
   font-weight: 300;
   line-height: 1.4;
   text-align: center;
@@ -1488,14 +1502,18 @@ header {
     padding: 15px 21px;
     text-transform: uppercase; }
 
-a.btn {
+a.btn,
+.btn {
   display: inline-block;
   background: #f15c44;
   padding: 10px;
   transition: background 500ms; }
-  a.btn:hover {
-    background: #ef472c; }
-  a.btn.gde {
+  a.btn:hover,
+  .btn:hover {
+    background: #ef472c;
+    cursor: pointer; }
+  a.btn.gde,
+  .btn.gde {
     background: #f15c44;
     border: 0;
     color: white;
@@ -1503,15 +1521,20 @@ a.btn {
     margin: 20px 0;
     padding: 15px;
     text-transform: uppercase; }
-    a.btn.gde:hover {
+    a.btn.gde:hover,
+    .btn.gde:hover {
       background: #ef472c; }
-    a.btn.gde.download {
+    a.btn.gde.download,
+    .btn.gde.download {
       background: #187fad; }
-      a.btn.gde.download:hover {
+      a.btn.gde.download:hover,
+      .btn.gde.download:hover {
         background: #156f97; }
-    a.btn.gde.process {
+    a.btn.gde.process,
+    .btn.gde.process {
       background: #51be92; }
-      a.btn.gde.process:hover {
+      a.btn.gde.process:hover,
+      .btn.gde.process:hover {
         background: #43b386; }
 
 .icon {
@@ -1616,15 +1639,17 @@ a.btn {
   padding: 50px 0 70px;
   text-align: center; }
   .allies h2 {
+    border: 0;
     font-weight: 300;
     margin-bottom: 20px;
+    margin-top: 0;
     text-transform: uppercase; }
   .allies a {
     margin: 0 35px;
     display: inline-block; }
 
 footer {
-  background-color: #333;
+  background-color: #1b4760;
   color: #e6e6e6;
   padding: 50px; }
   footer p {
