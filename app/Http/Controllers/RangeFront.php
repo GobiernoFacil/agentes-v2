@@ -10,7 +10,7 @@ class RangeFront extends Controller
 
       //alcance
       public function alcance(){
-        return view('welcome');
+        return view('frontend.programas.scope-list');
       }
       //alcance por estado
       public function descripcion($state){
