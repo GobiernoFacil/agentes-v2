@@ -37,11 +37,11 @@ Route::get('convocatoria/aplicar/confirmacion/{token}', 'NoticeFront@aspirantAct
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 /*@RangeFront Controller */
 /*********  Enlaces convocatoria ******** */
-Route::get('alcance', 'RangeFront@alcance');
-Route::get('alcance/{state}', 'RangeFront@descripcion');
-Route::get('alcance/{state}/quienes-conforman-el-ejercicio', 'RangeFront@conforman');
-Route::get('alcance/{state}/contexto', 'RangeFront@contexto');
-Route::get('alcance/{state}/estatus', 'RangeFront@estatus');
+Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');
+Route::get('programa-gobierno-abiertoalcance/{state}', 'RangeFront@descripcion');
+Route::get('programa-gobierno-abiertoalcance/{state}/quienes-conforman-el-ejercicio', 'RangeFront@conforman');
+Route::get('programa-gobierno-abiertoalcance/{state}/contexto', 'RangeFront@contexto');
+Route::get('programa-gobierno-abiertoalcance/{state}/estatus', 'RangeFront@estatus');
 /*@GovernmentFront Controller */
 /*********  Enlaces Gobierno Abierto ******** */
 Route::get('gobierno-abierto', 'GovernmentFront@gobierno');
