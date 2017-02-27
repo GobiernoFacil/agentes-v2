@@ -11,12 +11,12 @@
 		<p>El Grupo Promotor del ejercicio de gobierno abierto está conformado por:</p>
 		<ul>
 			<li>
-				<h3>1 representantes de la <strong>Sociedad Civil</strong></h3>				 
+				<h3>1 representante de la <strong>Sociedad Civil</strong></h3>				 
 				<ol>
 					<li>Promotora Social, Personas con Discapacidad, A.C.</li>
 				</ol>
 			</li>
-			<li><h3>1 representantes del Gobierno								 </h3>
+			<li><h3>1 representante del Gobierno								 </h3>
 				<ol>
 					<li>Tribunal Superior de Justicia de Chihuahua</li>
 				</ol>

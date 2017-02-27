@@ -11,7 +11,7 @@
 		<p>El Secretariado Técnico local (STL), está conformado por:</p>
 		<ul>
 			<li>
-				<h3>1 representantes de la <strong>Sociedad Civil</strong></h3>				 
+				<h3>1 representante de la <strong>Sociedad Civil</strong></h3>				 
 				<ol>
 					<li>COPARMEX Morelos</li>
 				</ol>
