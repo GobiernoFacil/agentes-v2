@@ -3,6 +3,8 @@
 @section('description', 'Gobierno Abierto')
 @section('body_class', 'abierto')
 @section('canonical', url('gobierno-abierto') )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_gobiernoabierto')
+
 
 @section('content')
 <div class="row">

@@ -92,8 +92,8 @@
 
 	</div>
 	@if ($__env->yieldContent('breadcrumb'))
-	<div class="breadcrumb">
-		<div class="container">
+	<div class="container">
+		<div class="breadcrumb">
 			<div class="row">
 		<div class="col-sm-12">
 		@include($__env->yieldContent('breadcrumb'))
