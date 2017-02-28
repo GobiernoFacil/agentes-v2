@@ -1,6 +1,10 @@
 <div class="row">
 	<div class="col-sm-6">
+		@if ( $__env->yieldContent('body_class') == 'home')
 		<h1 class="apertus">Gobierno Abierto desde lo local para el desarrollo sostenible</h1>
+		@else
+		<a class="apertus" href="{{url('')}}" title="Regresar a inicio">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
+		@endif
 	</div>
 </div>
 <nav class="cd-stretchy-nav">

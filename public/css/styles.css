@@ -1452,6 +1452,11 @@ header {
   height: 73px;
   width: 291px; }
 
+a.apertus:hover {
+  -webkit-opacity: 0.8;
+  -moz-opacity: 0.8;
+  opacity: 0.8; }
+
 .home .title {
   font-weight: 300;
   line-height: 1.4;
