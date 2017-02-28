@@ -1,8 +1,10 @@
 @extends('layouts.frontend.master')
 @section('title', 'Morelos, ejercicio local de Gobierno Abierto')
 @section('description', 'El 9 de marzo de 2015, el estado de Morelos se integró formalmente a los Ejercicios Locales de Gobierno Abierto a través de la firma de la Declaración Conjunta para la Implementación de Acciones para un Gobierno Abierto.')
-@section('body_class', 'programa alcance')
+@section('body_class', 'programa alcance morelos')
 @section('canonical', url('programa-gobierno-abierto/alcance/morelos') )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
+
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">

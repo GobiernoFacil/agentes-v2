@@ -1,8 +1,10 @@
 @extends('layouts.frontend.master')
 @section('title', 'Oaxaca, ejercicio local de Gobierno Abierto')
 @section('description', 'El 9 de marzo de 2015, el estado de Oaxaca se integró formalmente a los Ejercicios Locales de Gobierno Abierto a través de la firma de la Declaración Conjunta para la Implementación de las Acciones para un Gobierno Abierto.')
-@section('body_class', 'programa alcance')
+@section('body_class', 'programa alcance oaxaca')
 @section('canonical', url('programa-gobierno-abierto/alcance/oaxaca') )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
+
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">

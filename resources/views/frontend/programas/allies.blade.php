@@ -3,6 +3,7 @@
 @section('description', 'Equipo del Programa de fortalecimiento de capacidades para agentes de cambio de Gobierno Abierto')
 @section('body_class', 'programa aliados')
 @section('canonical', url('programa-gobierno-abierto/equipo'))
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
 <div class="row">

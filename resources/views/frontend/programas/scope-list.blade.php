@@ -1,8 +1,10 @@
 @extends('layouts.frontend.master')
 @section('title', 'Alcance del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Alcance del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', 'convocatoria')
+@section('body_class', 'programa alcance')
 @section('canonical', url('programa-gobierno-abierto/alcance') )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
+
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
