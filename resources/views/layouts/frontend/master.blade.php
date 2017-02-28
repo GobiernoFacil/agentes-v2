@@ -38,7 +38,7 @@
     	<link rel="canonical" href="{{url('')}}">
     	@endif
     @endif
-	
+	<link rel="icon" type="image/png" href="{{url('img/icon_ga.png')}}" />
 	<!-- FB-->
 	<meta property="og:title" content="{{$title}}"/>
 	<meta property="og:site_name" content="Gobierno Abierto"/>
