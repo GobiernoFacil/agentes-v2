@@ -26,7 +26,7 @@
 			<ul class="toggle-view">
 				<li>
 					<h3>Actividad 1.1 Diseño de contenidos, temas y actividades del programa de fortalecimiento de capacidades</h3>
-					 <span>+</span>
+					 <span></span>
 					 <div class="panel">
 					<p>Tomando como referencia otros programas de fellowship en temas de gobierno abierto y emprendimiento social, promovidos por organizaciones internacionales como la OEA y Ashoka, se pretende que cada generación de fellows reciba durante 8 meses formación presencial y a distancia, así como acompañamiento por parte de un coach o mentor; Dichos servicios estarán  orientados a incrementar sus conocimientos y competencias individuales, para impulsar su capacidad de agencia para promover uno o varios proyecto de incidencia en los espacios de interacción entre autoridades y ciudadanos creados por la iniciativa de Gobierno Co-creación desde lo Local.</p>
 					
@@ -54,7 +54,7 @@
 				</li>
 				<li>
 					<h3>Actividad 1.2 Identificación de agentes de cambio</h3>
-					 <span>+</span>
+					 <span></span>
 					 <div class="panel">
 					<p>Se prevé la identificación (exhaustiva y por medio de una convocatoria abierta) y la participación de líderes sociales (organizaciones, académico/as, periodistas, entre otros) y de funcionarios/as gubernamentales clave que serán formados y que potencialmente pueden fungir como promotores/as y replicadores/as de los principios y prácticas de gobierno abierto, desarrollo sostenible e intervención territorial transmitidas durante el programa de formación. Un público clave al que se orienta este fellowship – aunque no el único – son las organizaciones y funcionarios/as que forman parte de los Secretariados Técnicos Locales (STL) de los ejercicios de gobierno abierto locales promovidos por el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI). </p>
 
@@ -73,7 +73,7 @@
 				
 				<li>
 					<h3>Actividad 1.3 Puesta en marcha progresiva del programa de fortalecimiento de capacidades </h3>
-					<span>+</span>
+					<span></span>
 					<div class="panel">
 					<p>Durante los tres años de duración de la intervención se prevé la puesta en marcha progresiva del programa de fortalecimiento de capacidades. En el primer año de implementación se proyecta el piloteo de programa hasta en cinco entidades federativas, y en los dos años subsecuentes se prevé su ampliación y difusión a 15 estados del país. La formación se impartirá de forma presencial, aunque con apoyos tecnológicos y materiales en línea que permitan la réplica y sustentabilidad del proyecto. La estructura del programa será la misma para todos los grupos: seminarios presenciales, sesiones y tutoría online, y presentación de proyectos de gobierno abierto con una perspectiva de desarrollo sostenible.</p>
 					</div>
@@ -83,21 +83,21 @@
 			<ul class="toggle-view">
 					<li>
 						<h3>Actividad 2.1 Diseño y programación de la plataforma electrónica de vinculación </h3>
-						 <span>+</span>
+						 <span></span>
 						 <div class="panel">
 						<p>De la mano con el desarrollo del programa de fortalecimiento de capacidades se prevé el diseño y programación de un sitio en línea que – combinando características de una red social, de una plataforma de aprendizaje y de un tablero público y abierto de seguimiento de actividades– permita vincular a las y los agentes de cambio capacitados para el intercambio de experiencias locales, así como para el trabajo conjunto en proyectos puntuales de intervención territorial en el país.</p>
 						 </div>
 					</li>
 					<li>
 						<h3>Actividad 2.2. Puesta en marcha de la plataforma de agentes de cambio en gobierno abierto y desarrollo sostenible</h3>
-						 <span>+</span>
+						 <span></span>
 						 <div class="panel">
 						<p>Al concluirse con las actividades de fortalecimiento de capacidades de la primera cohorte de agentes de cambio local se prevé el lanzamiento de esta plataforma en línea que favorezca la vinculación dinámica y colaborativa, así como el aprendizaje continuo de los actores sociales y gubernamentales participantes en el fellowship. Las características de interfaz de aprendizaje estarán disponibles para los participantes al momento del comienzo de la primera generación del programa de fortalecimiento de capacidades. El resto de las características estarán funcionando al final de la primera generación (8 meses).</p>
 						 </div>
 					</li>
 					<li>
 						<h3>Actividad 2.3. Identificación participativa e innovadora de retos nacionales por medio de la plataforma. </h3> 
-						 <span>+</span>
+						 <span></span>
 						 <div class="panel">
 						<p>Además de vincular y permitir el intercambio de experiencias, se espera que a través de la plataforma las y los agentes de cambio local participen en ejercicios de identificación de retos y/o problemáticas de alcance nacional o regional que puedan ser atendidos bajo los esquemas de co creación y territorialidad impulsados desde el programa de fortalecimiento de capacidades. De tal suerte, los márgenes de actuación de las y los agentes de cambio trascenderían la escala de sus propias entidades federativas, para promover iniciativas innovadoras de mayor alcance. Desde el inicio hasta el fin del proyecto, se considera el acompañamiento permanente de PNUD, INAI, GESOC, Gobierno Fácil, Pro Sociedad así como del equipo que será contratado para el mismo para la identificación, selección y puesta en marcha de acciones que den respuesta a los retos nacionales.</p>
 						 </div>
@@ -109,7 +109,7 @@
 			<ul class="toggle-view">
 					<li>
 						<h3>Actividad 3.1. Integración y fortalecimiento de los espacios de diálogo y co-creación local </h3>
-						 <span>+</span>
+						 <span></span>
 						 <div class="panel">
 						<p>Derivado de la experiencia del proyecto de gobierno abierto local promovido por el INAI, se prevé el fortalecimiento de los Secretariados Técnicos Locales por medio de la incorporación en estos espacios de las y los agentes de cambio local formados a través del programa de fortalecimiento de capacidades descrito previamente. En aquellas entidades federativas en las que aún no existe un ejercicio de gobierno abierto se promovería la conformación de un Secretariado Técnico Local en el que participen, aunque no exclusivamente, las y los agentes de cambio formados durante el fellowship, observando que la integración sea sensible a criterios de procedencia, género y vulnerabilidad social.</p>
 
@@ -125,7 +125,7 @@
 			<ul class="toggle-view">
 					<li>
 						<h3>Actividad 4.2. Desarrollo de indicadores y de esquemas de evaluación local en materia de gobierno abierto y desarrollo sostenible </h3>
-						 <span>+</span>
+						 <span></span>
 						<div class="panel">
 						<p>En paralelo al trabajo realizado por los Secretariados Técnicos Locales de gobierno abierto fortalecidos, una actividad clave para esta dimensión del proyecto es el diseño de sistemas de indicadores de alcance local que – retomando la experiencia internacional y nacional – se orienten a la medición, monitoreo y evaluación constante de los resultados alcanzados en materia de desarrollo sostenible y combate a la corrupción, así como en la construcción de una nueva cultura de diálogo gobierno-sociedad en cada una de las entidades federativas incorporadas al proyecto. GESOC, se encargará del desarrollo del esquema de seguimiento y evaluación para el proyecto en apego  a  estándares  de  buenas prácticas internacionales en la materia.</p>
 						</div>
