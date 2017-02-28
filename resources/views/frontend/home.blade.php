@@ -15,7 +15,7 @@
 				<div class="col-sm-8 col-sm-offset-2">
 				<h1>SÉ UN <strong>AGENTE DE CAMBIO</strong></h1>
 				<h2>Programa de Fortalecimiento de Capacidades para <strong>Agentes de Cambio</strong> de <strong>Gobierno Abierto</strong></h2>
-				<h3>Convocatoria abierta del <span><strong>3 al 31 de marzo de 2017</strong></span></h3>
+				<h3>Convocatoria abierta del <span><strong>1° de marzo hasta el 10 de abril de 2017</strong></span></h3>
 				<a href="{{url('convocatoria')}}" class="btn">Participa</a>
 				</div>
 				<div class="clearfix"></div>
