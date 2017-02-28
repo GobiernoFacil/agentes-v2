@@ -8,6 +8,7 @@ use Mail;
 //Models
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
+use App\Models\City;
 class Aspirants extends Controller
 {
 
@@ -73,4 +74,16 @@ class Aspirants extends Controller
     {
         //
     }
+
+    /**
+     * Get cities
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cities(Request $request){
+      $cities = City::where('state', 'like', $request->input('state') . '%')->orderBy('city', 'asc')->get();
+      return response()->json($cities);
+    }
+
 }

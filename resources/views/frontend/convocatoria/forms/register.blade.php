@@ -46,7 +46,7 @@
 		</p>
 	</div>
 	<!--confirmar correo-->
-	<div class="col-sm-6">	
+	<div class="col-sm-6">
 		<p>
 		  <label>Confirmar correo</label>
 		  {{Form::text('email-confirm', null, ['class' => 'form-control'])}}
@@ -59,7 +59,7 @@
 	<div class="col-sm-6">
 		<p>
 		  <label>Estado</label>
-		  {{Form::text('state',null, ['class' => 'form-control'])}}
+		  {{Form::select('state',[null => "Selecciona una opción",'Coahuila'=> 'Coahuila', 'Chihuahua' =>'Chihuahua', 'Morelos'=>'Morelos', 'Nuevo León'=>'Nuevo León', 'Oaxaca'=>'Oaxaca'],null, ['class' => 'form-control','id'=>'state'])}}
 		  @if($errors->has('state'))
 		    <strong>{{$errors->first('state')}}</strong>
 		  @endif
@@ -69,7 +69,7 @@
 	<div class="col-sm-6">
 		<p>
 		  <label>Ciudad</label>
-		  {{Form::text('city',null, ['class' => 'form-control'])}}
+		  {{Form::select('city',[null => "Selecciona una opción"], null,['class' => 'form-control','id'=>'city'])}}
 		  @if($errors->has('city'))
 		    <strong>{{$errors->first('city')}}</strong>
 		  @endif
@@ -79,7 +79,7 @@
 		<p>Acepto	<a href="{{url('politica-privacidad')}}">Política de Privacidad</a></p>
 	</div>
 	<div class="col-sm-6 col-sm-offset-3">
-		
+
 		<p>{{Form::submit('Aplicar', ['class' => 'btn gde'])}}</p>
 	</div>
 </div>

@@ -9,24 +9,24 @@
     @else
     	@if ($__env->yieldContent('title'))
     	<?php $title = $__env->yieldContent('title');?>
-    	@else 
+    	@else
     	<?php $title = "";?>
     	@endif
     @endif
     <title>{{$title}}</title>
-    
+
     @if(!empty($description))
      <?php $description = $description;?>
     @else
     	@if ($__env->yieldContent('description'))
     	<?php $description = $__env->yieldContent('description');?>
-    	@else 
+    	@else
     	<?php $description = "";?>
     	@endif
     @endif
     <meta name="description" content="{{$description}}">
-    
-    
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@if(!empty($canonical))
     <link rel="canonical" href="{{url($canonical)}}">
@@ -34,7 +34,7 @@
     	@if ($__env->yieldContent('canonical'))
     	<?php $canonical = $__env->yieldContent('canonical');?>
     	<link rel="canonical" href="{{url($canonical)}}">
-    	@else 
+    	@else
     	<link rel="canonical" href="{{url('')}}">
     	@endif
     @endif
@@ -43,7 +43,7 @@
 	<meta property="og:title" content="{{$title}}"/>
 	<meta property="og:site_name" content="Gobierno Abierto"/>
 	<meta property="og:description" content="{{ $description}}"/>
-	
+
 	@if(!empty($og_image))
 		<?php $og_image = $og_image;?>
 	@else
@@ -53,13 +53,13 @@
     	<?php $og_image = 'og_image.png';?>
     	@endif
 	@endif
-	
+
 	<meta property="og:image" content='{{url("img/{$og_image}")}}'/>
 
 	<!--css-custom-->
 	@yield('css-custom')
 	<link rel="stylesheet" href="{{url('css/styles.css')}}">
-	
+
 	<script src="{{url('js/modernizr.js')}}"></script> <!-- Modernizr -->
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -83,13 +83,13 @@
 @endif
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
-	
+
 	<div class="container">
 		<header>
 		<!--header-->
 		@include('layouts.frontend.header')
 		</header>
-		
+
 	</div>
 	@if ($__env->yieldContent('breadcrumb'))
 	<div class="breadcrumb">
@@ -102,14 +102,17 @@
 		</div>
 	</div>
 	@endif
-	<main class="main-content">	
+	<main class="main-content">
 		<!--content-->
 		<div class="container">
 		@yield('content')
 		</div>
-	
+
 		<!--footer-->
 		@include('layouts.frontend.footer')
+
+		<!--js content -->
+		@yield('js-content')
 	</main>
 </body>
 </html>

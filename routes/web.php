@@ -34,6 +34,7 @@ Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
 Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
 Route::get('convocatoria/aplicar/confirmacion/{token}', 'NoticeFront@aspirantActivation');
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
+Route::get('cities', 'NoticeFront@cities');
 /*@RangeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');

@@ -9,6 +9,7 @@ use Mail;
 use App\Models\Aspirant;
 use App\Models\AspirantActivation;
 use App\Models\AspirantsFile;
+use App\Models\City;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
 use App\Http\Requests\SaveFiles;
@@ -104,6 +105,17 @@ class NoticeFront extends Controller
       //convocatoria/resultados
       public function resultados(){
         return view('welcome');
+      }
+
+      /**
+       * Get cities
+       *
+       * @param  int  $id
+       * @return \Illuminate\Http\Response
+       */
+      public function cities(Request $request){
+        $cities = City::where('state', 'like', $request->input('state') . '%')->orderBy('city', 'asc')->get();
+        return response()->json($cities);
       }
 
 }
