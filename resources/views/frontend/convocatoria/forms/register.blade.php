@@ -5,16 +5,18 @@
 		  <label>Nombre(s)</label>
 		  {{Form::text('name', null, ["class" => "form-control"])}}
 		  @if($errors->has('name'))
-		    <strong>{{$errors->first('name')}}</strong>
+		    <strong class="error">{{$errors->first('name')}}</strong>
 		  @endif
 		</p>
 	</div>
+</div>
+<div class="row">
 	<div class="col-sm-6">
 		<p>
 		  <label>Apellido Paterno</label>
 		  {{Form::text('surname', null, ["class" => "form-control"])}}
 		  @if($errors->has('surname'))
-		    <strong>{{$errors->first('surname')}}</strong>
+		    <strong class="error">{{$errors->first('surname')}}</strong>
 		  @endif
 		</p>
 	</div>
@@ -23,25 +25,29 @@
 		  <label>Apellido Materno</label>
 		  {{Form::text('lastname', null, ["class" => "form-control"])}}
 		  @if($errors->has('lastname'))
-		    <strong>{{$errors->first('lastname')}}</strong>
+		    <strong class="error">{{$errors->first('lastname')}}</strong>
 		  @endif
 		</p>
 	</div>
+</div>
+<div class="row">
 	<div class="col-sm-12">
 		<p>
 		  <label>Grado de estudios completados</label>
 		  {{Form::text('degree', null, ["class" => "form-control"])}}
 		  @if($errors->has('degree'))
-		    <strong>{{$errors->first('degree')}}</strong>
+		    <strong class="error">{{$errors->first('degree')}}</strong>
 		  @endif
 		</p>
 	</div>
+</div>
+<div class="row">
 	<div class="col-sm-6">
 		<p>
 		  <label>Correo</label>
 		  {{Form::text('email', null, ["class" => "form-control"])}}
 		  @if($errors->has('email'))
-		    <strong>{{$errors->first('email')}}</strong>
+		    <strong class="error">{{$errors->first('email')}}</strong>
 		  @endif
 		</p>
 	</div>
@@ -51,17 +57,19 @@
 		  <label>Confirmar correo</label>
 		  {{Form::text('email-confirm', null, ['class' => 'form-control'])}}
 		  @if($errors->has('email-confirm'))
-		    <strong>{{$errors->first('email-confirm')}}</strong>
+		    <strong class="error">{{$errors->first('email-confirm')}}</strong>
 		  @endif
 		</p>
 	</div>
+</div>
+<div class="row">
 	<!--estado-->
 	<div class="col-sm-6">
 		<p>
 		  <label>Estado</label>
 		  {{Form::select('state',[null => "Selecciona una opción",'Coahuila'=> 'Coahuila', 'Chihuahua' =>'Chihuahua', 'Morelos'=>'Morelos', 'Nuevo León'=>'Nuevo León', 'Oaxaca'=>'Oaxaca'],null, ['class' => 'form-control','id'=>'state'])}}
 		  @if($errors->has('state'))
-		    <strong>{{$errors->first('state')}}</strong>
+		    <strong class="error">{{$errors->first('state')}}</strong>
 		  @endif
 		</p>
 	</div>
@@ -71,10 +79,12 @@
 		  <label>Ciudad</label>
 		  {{Form::select('city',[null => "Selecciona una opción"], null,['class' => 'form-control','id'=>'city'])}}
 		  @if($errors->has('city'))
-		    <strong>{{$errors->first('city')}}</strong>
+		    <strong class="error">{{$errors->first('city')}}</strong>
 		  @endif
 		</p>
 	</div>
+</div>
+<div class="row">
 	<div class="col-sm-12">
 		<p>Acepto	<a href="{{url('politica-privacidad')}}">Política de Privacidad</a></p>
 	</div>
