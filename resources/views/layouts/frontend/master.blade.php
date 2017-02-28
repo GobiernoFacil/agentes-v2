@@ -83,17 +83,33 @@
 @endif
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
+	
 	<div class="container">
 		<header>
-	<!--header-->
-	@include('layouts.frontend.header')
+		<!--header-->
+		@include('layouts.frontend.header')
 		</header>
-	<!--content-->
-<main class="cd-main-content">	
-    @yield('content')
+		
 	</div>
-     <!--footer-->
-	@include('layouts.frontend.footer')
+	@if ($__env->yieldContent('breadcrumb'))
+	<div class="breadcrumb">
+		<div class="container">
+			<div class="row">
+		<div class="col-sm-12">
+		@include($__env->yieldContent('breadcrumb'))
+		</div>
+		</div>
+		</div>
+	</div>
+	@endif
+	<main class="main-content">	
+		<!--content-->
+		<div class="container">
+		@yield('content')
+		</div>
+	
+		<!--footer-->
+		@include('layouts.frontend.footer')
 	</main>
 </body>
 </html>
