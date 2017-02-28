@@ -1,8 +1,9 @@
 @extends('layouts.frontend.master')
 @section('title', 'Proceso de selección de candidatos a Convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Proceso de selección de candidatos a Convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', 'convocatoria')
+@section('body_class', 'convocatoria proceso')
 @section('canonical', url('proceso-de-seleccion') )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_convocatoria')
 
 @section('content')
 <div class="row">

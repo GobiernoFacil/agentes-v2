@@ -3,7 +3,7 @@
 @section('description', 'Aplica a la Convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'convocatoria aplicar')
 @section('canonical', url('convocatoria/aplicar') )
-@section('breadcrumb', 'layouts.frontend.breadcrumb.convocatoria')
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_convocatoria')
 
 @section('content')
 <div class="row">
