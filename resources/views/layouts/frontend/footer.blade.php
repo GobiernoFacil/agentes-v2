@@ -2,7 +2,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2>Aliados</h2>
+			<h2><a href="{{url('programa-gobierno-abierto/aliados')}}">Aliados</a></h2>
 			<div class="row">
 				<a href="#" class="usaid">USAID</a>				
 				<a href="#" class="pnud">PNUD</a>				

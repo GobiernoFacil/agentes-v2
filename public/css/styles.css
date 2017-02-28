@@ -1553,10 +1553,10 @@ a.btn,
         background: #156f97; }
     a.btn.gde.process,
     .btn.gde.process {
-      background: #51be92; }
+      background: #f9ad48; }
       a.btn.gde.process:hover,
       .btn.gde.process:hover {
-        background: #43b386; }
+        background: #f8a22f; }
   a.btn.block,
   .btn.block {
     display: block; }
@@ -1777,6 +1777,10 @@ a.btn,
     margin-bottom: 20px;
     margin-top: 0;
     text-transform: uppercase; }
+    .allies h2 a {
+      color: #555; }
+      .allies h2 a:hover {
+        color: #f15c44; }
   .allies a {
     margin: 0 35px;
     display: inline-block; }
