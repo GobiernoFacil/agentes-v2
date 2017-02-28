@@ -1654,13 +1654,15 @@ a.btn,
   margin: 5px 0;
   display: none; }
 
+.toggle-view .active:hover {
+  background: rgba(242, 242, 242, 0.2); }
+
 .toggle-view .active span:after {
   content: "-";
   font-size: 20px; }
 
 .toggle-view .active .panel {
-  display: block;
-  background: rgba(242, 242, 242, 0.01); }
+  display: block; }
 
 /* =contacto
 -------------------------------------------------------------- */

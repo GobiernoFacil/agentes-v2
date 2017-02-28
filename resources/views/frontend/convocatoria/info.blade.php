@@ -133,6 +133,7 @@
 				</div>
 		</li>
 		</ol>
+		<p class="center"><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Consulta el Proceso de Selección</a></p>
 	</div>
 
 </div>

@@ -23,9 +23,11 @@
 		<p>La selección de aspirantes se llevará a cabo exclusivamente con base en las postulaciones recibidas a través de la plataforma en línea creada para tal efecto, y se conformará por las siguientes etapas:</p>
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
-		<ol>
+		<ol class="toggle-view">
 			<li>
 				<h3>Fase de revisión documental:</h3>
+				<span></span>
+				<div class="panel">
 				<p>El Comité Dictaminador verificará – con apoyo del Coordinador del Proyecto – el	cumplimiento de los requisitos de la convocatoria. Durante esta etapa se revisará si:</p>
 				<ul>
 					<li>El aspirante proviene de alguna de las cinco entidades federativas objetivo (validado con la copia de comprobante de domicilio y la carta de identificación laboral). En caso de que el aspirante compruebe residencia en otra entidad federativa, deberá descartarse su postulación.</li>
@@ -34,10 +36,13 @@
 				</ul>
 				<p>Una vez concluida la revisión, se esperaría contar con, al menos, 9-10 aspirantes de cada una de las 5 entidades federativas objetivo (al menos 45-50 perfiles).</p>
 				<p><strong>Duración estimada de esta etapa: del 10 al 12 de abril. </strong></p>
+				</div>
 			</li>
 
 			<li>
 				<h3>Etapa de análisis de experiencia previa y propuesta de proyecto de los aspirantes:</h3>
+				<span></span>
+				<div class="panel">
 				<p>En una segunda etapa, el Comité Dictaminador evaluará la experiencia previa de los candidatos preseleccionados en proyectos/actividades relacionados con temas de gobierno abierto y/o desarrollo sostenible, así como las propuestas de proyecto presentadas en el ensayo y el video. Cada uno de los componentes de esta fase se ponderará de la siguiente manera:</p>
 				<ul>
 					<li>Experiencia previa probada en proyectos de GA y/o DS: 30 por ciento.</li>
@@ -51,10 +56,13 @@
 				<p>Como parte de la evaluación de esta fase, el Comité Dictaminador deberá ponderar el equilibrio entre hombres y mujeres, así como entre candidatos provenientes de los sectores gubernamental y social.</p>
 
 				<p><strong>Duración estimada de esta fase: Del 13 al 20 de abril.</strong></p>
+				</div>
 			</li>
 
 			<li>
 				<h3>Etapa de entrevista:</h3>
+				<span></span>
+				<div class="panel">
 				<p>A más tardar el 20 de abril, el Comité Dictaminador deberá informar a los 30 aspirantes preseleccionados sobre la fecha y la hora en la que se realizará la entrevista final para participar en el programa de fortalecimiento de capacidades. Cada entrevista tendrá una duración no mayor a 30 minutos, en donde se cuestionará al aspirante sobre temas clave de la agenda de gobierno abierto y desarrollo sostenible en lo Local en México. Para tal efecto, y como guía, se podrán utilizar las preguntas empleadas en las entrevistas para la contratación del coordinador de proyecto. Las fechas y horarios que se proponen para la realización de entrevistas es la siguiente:</p>
 				<ul>
 					<li>Martes 25 de abril: entrevista a 15 aspirantes (4 horas por la mañana y 3 por la tarde)	  </li>
@@ -70,6 +78,7 @@
 				<p>Una vez concluidas las entrevistas, se integrarán los puntajes dados por todos los integrantes del Comité Dictaminador en esta fase, y se sumarán a los alcanzados por cada aspirante en la fase 2 (experiencia previa y propuesta de proyecto). En un primer momento, el Comité Dictaminador seleccionará respectivamente al hombre y a la mujer que obtengan el mayor puntaje agregado de cada entidad federativa objetivo. Se procurará que exista un balance entre perfiles gubernamentales y sociales.</p>
 				<p>En adición a los 20 candidatos seleccionados, se hará una segunda lista de hasta 5 aspirantes (uno por entidad federativa) que hayan obtenido los puntajes más elevados pero que no hayan sido seleccionados a participar en el programa. Ésta será la lista de espera que podrá utilizarse en caso de que algún aspirante seleccionado rechace participar en el proyecto.</p>
 				<p><strong>Publicación de resultados: 28 de abril</strong></p>
+				</div>
 			</li>
 		
 		</ol>
