@@ -1624,6 +1624,36 @@ a.btn,
 .aliados h2 .col-sm-9 {
   padding-top: 20px; }
 
+ul.toggle-view li {
+  border-top: 1px solid #ccc;
+  padding: 5px 10px 20px;
+  position: relative; }
+  ul.toggle-view li h3 {
+    font-weight: 500; }
+  ul.toggle-view li:hover {
+    cursor: pointer;
+    background: rgba(242, 242, 242, 0.5); }
+    ul.toggle-view li:hover h3 {
+      color: #ed3315; }
+    ul.toggle-view li:hover span {
+      background: #ed3315; }
+
+ul.toggle-view span {
+  background: #f15c44;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 700; }
+
+ul.toggle-view .panel {
+  margin: 5px 0;
+  display: none; }
+
+ul.toggle-view .active .panel {
+  display: block; }
+
 /* =contacto
 -------------------------------------------------------------- */
 .box_contact {
