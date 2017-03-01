@@ -1,6 +1,6 @@
 @extends('layouts.frontend.master')
-@section('title', 'Equipo del Programa de fortalecimiento de capacidades para agentes de cambio de Gobierno Abierto')
-@section('description', 'Equipo del Programa de fortalecimiento de capacidades para agentes de cambio de Gobierno Abierto')
+@section('title', 'Equipo del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
+@section('description', 'Equipo del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'programa aliados')
 @section('canonical', url('programa-gobierno-abierto/equipo'))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1><strong>Alianzas</strong> del PROGRAMA DE FORTALECIMIENTO DE CAPACIDADES PARA <strong>AGENTES DE CAMBIO</strong> DE <strong>GOBIERNO ABIERTO</strong></h1>
+		<h1><strong>Alianzas</strong> del PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</h1>
 		<p>El componente estará apoyado por actores tanto del gobierno como de la sociedad civil, lo cual contribuirá a alcanzar los objetivos planteados.</p>
 		
 		<div class="row">

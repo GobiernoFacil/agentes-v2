@@ -1,6 +1,6 @@
 @extends('layouts.frontend.master')
-@section('title', 'Programa de fortalecimiento de capacidades para agentes de cambio de Gobierno Abierto')
-@section('description', 'Programa de fortalecimiento de capacidades para agentes de cambio de Gobierno Abierto')
+@section('title', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
+@section('description', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'programa')
 @section('canonical', url('programa-gobierno-abierto'))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1>PROGRAMA DE FORTALECIMIENTO DE CAPACIDADES PARA <strong>AGENTES DE CAMBIO</strong> DE <strong>GOBIERNO ABIERTO</strong></h1>
+		<h1>PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</h1>
 		<p>El objetivo del proyecto es contribuir al fortalecimiento de una buena gobernanza en México a partir de prácticas de gobierno abierto, participación ciudadana, transparencia y anticorrupción. Durante los tres años de implementación de las estrategias, se buscará contribuir al cumplimiento de la agenda de prevención de la corrupción del Estado mexicano, así como de los Objetivos de Desarrollo Sostenible (ODS). </p>
 		
 		<p>Para alcanzar el objetivo, el componente se implementará en apoyo a las estrategias de gobierno abierto del INAI, con la colaboración de tres organizaciones de la sociedad civil (Gesoc, Gobierno Fácil, y ProSociedad Hacer Bien el Bien, A.C), que cuentan con experiencia en la implementación de prácticas de gobierno abierto y rendición de cuentas.</p>

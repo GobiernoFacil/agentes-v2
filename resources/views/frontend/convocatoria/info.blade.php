@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-	<h1><strong>Convocatoria</strong> Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>
+	<h1><strong>Convocatoria</strong> PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</strong>
 	</h1>
 		<p>El Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), la Oficina para México del Programa de Naciones Unidas para el Desarrollo (PNUD-México), GESOC, Agencia para el Desarrollo, A.C., ProSociedad Hacer Bien el Bien, A.C., y Gobierno Fácil – con el apoyo de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID) – convocan a los sectores gubernamental, social, empresarial y académico de los estados de Coahuila, Chihuahua, Morelos, Nuevo León y Oaxaca y, en general, a cualquier persona interesada de las entidades federativas antes señaladas a participar en la edición 2017 del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, a realizarse entre los meses de mayo y noviembre de 2017.</p>
 	
