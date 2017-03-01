@@ -146,14 +146,16 @@
 		</div>
 		<div class="col-sm-8 col-sm-offset-2">
 		<div class="notes">
-		<p> <sup name="note1">1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
-			<sup name="note2">2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>
-			 
-			 <sup name="note3">3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el <a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a> de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en <a href="{{url('aviso-privacidad')}}">{{url('aviso-privacidad')}}</a> .<br> 
-			  
-			  <sup name="note4">4</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
-			  
-			     <sup name="note5">5</sup>El video puede realizarse con cualquier dispositivo (teléfono móvil, tableta o cámara digital), y deberá ser subido a la plataforma en línea http://www.youtube.com 
+		<p> <a id="note1"></a>
+			<sup>1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
+			<a id="note2"></a>
+			<sup>2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>
+			 <a id="note3"></a>
+			 <sup>3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el <a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a> de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en <a href="{{url('aviso-privacidad')}}">{{url('aviso-privacidad')}}</a> .<br> 
+			  <a id="note4"></a>
+			  <sup>4</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
+			  <a id="note5"></a>
+			  <sup>5</sup>El video puede realizarse con cualquier dispositivo (teléfono móvil, tableta o cámara digital), y deberá ser subido a la plataforma en línea http://www.youtube.com 
 			
 			
 		</p>
