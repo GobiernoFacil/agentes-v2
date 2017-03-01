@@ -26,7 +26,7 @@ class GovernmentFront extends Controller
       }
       //lecturas
       public function lecturas(){
-        return view('welcome');
+        return view('frontend.opengovernment.recursos');
       }
       //ejercicios
       public function ejercicios(){
