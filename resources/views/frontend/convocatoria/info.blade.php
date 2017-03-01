@@ -14,14 +14,14 @@
 	
 		<div class="row">
 				<div class="col-sm-4">
-					<p class="right"><a href="{{url('convocatoria/aplicar')}}" class="btn gde">Aplica a la Convocatoria</a></p>
+					<p class="center"><a href="{{url('convocatoria/aplicar')}}" class="btn gde">Aplica a la Convocatoria</a></p>
 				</div>
 				<div class="col-sm-4">
-					<p class="center"><a href="#" class="btn gde download">Descarga la convocatoria</a></p>
+					<p><a href="#" class="btn gde download i_download">Descarga la convocatoria</a></p>
 				</div>
 				
 				<div class="col-sm-4">
-					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Descargar Aviso de Privacidad</a></p>
+					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde download i_download">Descarga Aviso de Privacidad</a></p>
 
 					<?php /*
 					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Proceso de Selección</a></p>
