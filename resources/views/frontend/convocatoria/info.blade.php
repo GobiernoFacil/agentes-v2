@@ -39,11 +39,11 @@
 				<h3>Modalidad y resultados esperados</h3>
 				<span></span>
 				<div class="panel">
-				<p>Durante los siete meses de duración del programa, los contenidos y actividades se realizarán fundamentalmente en una plataforma en línea. Además, se tiene prevista la realización de dos rondas de seminarios y talleres presenciales – conducidos por expertos reconocidos en temas de Gobierno Abierto y Desarrollo Sostenible –a finales del mes de mayo y durante el mes de agosto en sedes por definir en la Ciudad de México y en algún estado de la República Mexicana. Los costos de traslado, hospedaje y alimentación de los Agentes Locales de Cambio para participar en estos seminarios presenciales correrán a cargo de las organizaciones convocantes.</p>
-				<p>Además de adquirir capacidades y de vincularse a la red de Agentes Locales de Cambio, se espera que los participantes elaboren y presenten al final de los siete meses un proyecto en equipo, concreto y factible que, a través del uso de las herramientas adquiridas durante el programa, enfrente un reto local de desarrollo por medio de la realización acciones que promuevan la transparencia, la participación, la rendición de cuentas, y la innovación cívica y tecnológica. Aquellos participantes que cumplan satisfactoriamente con todos los requisitos académicos al concluir el programa, recibirán una constancia de participación.</p>
+				<p>Durante los siete meses de duración del programa, los contenidos y actividades se realizarán fundamentalmente en una plataforma en línea. Además, se tiene prevista la realización de dos rondas de seminarios y talleres presenciales – conducidos por expertos reconocidos en temas de Gobierno Abierto y Desarrollo Sostenible –a finales del mes de mayo y durante el mes de agosto en sedes por definir en la Ciudad de México y/o en algún estado de la República Mexicana. Los costos de traslado, hospedaje y alimentación de los Agentes Locales de Cambio para participar en estos seminarios presenciales correrán a cargo de las organizaciones convocantes.<a href="#note1"><sup>1</sup></a></p>
+				<p>Además de adquirir capacidades y de vincularse a la red de Agentes Locales de Cambio, se espera que los participantes elaboren y presenten al final de los siete meses un proyecto en equipo, concreto y factible que, a través del uso de las herramientas adquiridas durante el programa, enfrente un reto local de desarrollo por medio de la realización de acciones que promuevan la transparencia, la participación, la rendición de cuentas, y la innovación cívica y tecnológica. Aquellos participantes que cumplan satisfactoriamente con todos los requisitos académicos al concluir el programa, recibirán una constancia de participación.</p>
 				</div>
 			</li>
-
+			<!--perfil de egreso-->
 			<li>
 				<h3>Perfil de egreso</h3>
 				<span></span>
@@ -63,34 +63,36 @@
 				<h3>Perfil y elegibilidad de los participantes</h3>
 				<span></span>
 				<div class="panel">
-				<p>Para la edición 2017 de este programa de formación se seleccionarán hasta 20 participantes, mismos que serán elegidos a través de un proceso abierto y transparente por un Comité Dictaminador integrado por un representante de cada una de las organizaciones convocantes. En esta primera edición sólo se aceptarán solicitudes de candidatos provenientes de los estados de Coahuila, Chihuahua, Morelos, Nuevo León y Oaxaca. En futuras ediciones, la convocatoria se ampliará a solicitantes de un mayor número de estados. El Comité Dictaminador garantizará el equilibrio de género en la selección de los participantes en el programa de formación, así como el sector de procedencia.</p>
+				<p>Para la edición 2017 de este programa de formación se seleccionarán hasta 20 participantes, mismos que serán elegidos a través de un proceso abierto y transparente por un Comité Dictaminador integrado por un representante de cada una de las organizaciones convocantes. Dado el cupo de participantes, en esta primera edición, se considerarán exclusivamente solicitudes de candidatos provenientes de los estados de Sonora, Chihuahua, Morelos, Nuevo León y Oaxaca, que forman parte del proyecto de Gobierno Abierto: Cocreación desde lo Local impulsado por el SNT y el INAI; atendiendo al estatus y a las condiciones de avance de los ejercicios en cada una de estas entidades federativas, que hace más viable coordinar la operación del programa.<a href="#note2"><sup>2</sup></a> Hay que señalar que en futuras ediciones, la convocatoria se ampliará a solicitantes de un mayor número de estados. El Comité Dictaminador garantizará el equilibrio de género en la selección de los participantes en el programa de formación, así como en el sector de procedencia.</p>
 
 				<p>Los interesados en participar en el programa deberán:</p>
 				<ol>
-					<li>Ser jóvenes líderes de entre 25 y 40 años que formen parte de los sectores gubernamental, social, empresarial o académico; que radiquen en los estados de Coahuila, Chihuahua, Morelos, Nuevo León y Oaxaca. Excepcionalmente se recibirán postulaciones provenientes de otras entidades federativas. </li>
+					<li>Ser jóvenes líderes de entre 25 y 40 años que formen parte de los sectores gubernamental, social, empresarial o académico; que radiquen en los estados de Sonora, Chihuahua, Morelos, Nuevo León y Oaxaca.</li>
 					<li>Contar con conocimiento previo y experiencia probada en el desarrollo de investigaciones o de proyectos de incidencia de alcance local relacionados con Gobierno Abierto o Desarrollo Sostenible. Es deseable la experiencia en redes o trabajo colaborativo. </li>
-					<li>Tener un sólido entendimiento y sensibilidad sobre los principales problemas y retos de desarrollo que se enfrentan en la entidad federativa de residencia.	  </li>
+					<li>Tener un sólido entendimiento y sensibilidad sobre los principales problemas y retos de desarrollo que se enfrentan en la entidad federativa de residencia.</li>
 					<li>Ser innovadores y estar comprometidos para formar parte de una red de líderes para el intercambio de experiencias y el desarrollo de proyectos de gobierno abierto con alcance local y regional.</li>
 				</ol>
 
-				<p>Como parte del proceso de postulación, los interesados deberán:</p>
+				<p>Como parte del proceso de postulación, los interesados deberán<a href="#note3"><sup>3</sup></a>:</p>
 				<ol>
-					<li>Llenar el formato de registro, disponible en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</li>
-					<li>Elaborar un ensayo – no mayor a cinco cuartillas – en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
-					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.</li>
-					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).	</li>
-					<li>Presentar una carta membretada o copia de identificación laboral que muestre el sector de procedencia del aspirante (sociedad civil, gobierno, académica, iniciativa privada).</li>
+					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('')}}">{{url('')}}</a>.</li>
+					<li>Elaborar un ensayo – no mayor a cinco cuartillas –<a href="#note4"><sup>4</sup></a> en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
+					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.<a href="#note5"><sup>5</sup></a></li>
+					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).</li>
+					<li>Presentar una carta membretada que muestre el sector de procedencia del aspirante (sociedad civil, gobierno, académica, iniciativa privada).</li>
 					<li>Presentar una copia de comprobante de domicilio que acredite la residencia del candidato.</li>
+					<li>Descargar, leer, firmar (en caso de aceptar) y enviar el Aviso de Privacidad por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('')}}">{{url('')}}</a>.</li>
 				</ol>
 				
 				<p>De los participantes en el programa de formación de Agentes Locales de Cambio en gobierno abierto y desarrollo sostenible se espera:</p>
 				<ul>
 					<li>Una participación activa durante la duración de todo el programa. En caso de que un participante decida abandonar el programa, dicho espacio será ocupado por el aspirante rechazado con la calificación más alta en el proceso de selección.</li>
 					<li>Que realicen todas las actividades en línea y presenciales de aprendizaje previstas durante el programa. Se tiene prevista una carga semanal de alrededor de ocho horas dedicadas a las actividades del curso.</li>
-					<li>Disponibilidad para viajar y asistir a las dos rondas de seminarios y talleres que se realizarán en sedes por definir en la Ciudad de México y en algún estado de la República Mexicana. Cada ronda de seminarios tendrá una duración de tres días.													 </li>
+					<li>Disponibilidad para viajar y asistir a las dos rondas de seminarios y talleres que se realizarán en sedes por definir en la Ciudad de México y/o en algún estado de la República Mexicana. Cada ronda de seminarios tendrá una duración de tres días.</li>
 					<li>Que desarrollen un proyecto final en equipo – uno por cada entidad federativa – en el que apliquen los conocimientos adquiridos durante el curso para enfrentar un reto local de desarrollo empleando las herramientas de gobierno abierto; y que sea factible de ser implementado en el corto plazo.</li>
 					<li>Que muestren disposición para mantener el vínculo con la red de Agentes Locales de Cambio, y para desarrollar proyectos de alcance local y regional una vez concluida la duración del proyecto.												 	   													 </li>
 					<li>Que se comprometan a integrarse y a participar activamente en los Secretariados Técnicos Locales y en los trabajos que se realizan en su entidad federativa en el marco de la iniciativa Gobierno Abierto: Cocreación desde lo Local del INAI.	   													 </li>
+					<li>Que realicen todas las actividades previstas en la convocatoria y acreditar de manera satisfactoria todos los módulos del Programa.</li>
 				</ul>
 				</div>
 			</li>
@@ -99,9 +101,9 @@
 			<h3>Plazos y proceso de postulación</h3>
 			<span></span>
 			<div class="panel">
-			<p>La presente convocatoria estará abierta del 1° de marzo hasta el 10 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</p>
+			<p>La presente convocatoria estará abierta del 3 de marzo hasta el 13 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</p>
 			
-			<p>Una vez cerrado el plazo de postulaciones, un Comité Dictaminador integrado por un representante de las organizaciones convocantes revisará la documentación entregada por los postulantes, y preseleccionará a un grupo de candidatos que serán invitados a una ronda de entrevistas en línea, que permitirán evaluar con mayor detalle la idoneidad del perfil. Posteriormente, el Comité Dictaminador seleccionará por consenso un máximo de 20 participantes que cumplan satisfactoriamente con los requisitos establecidos en esta convocatoria y que hayan destacado en la ronda de entrevistas. El Comité Dictaminador estará integrado por:</p>
+			<p>Una vez cerrado el plazo de postulaciones, el Comité Dictaminador integrado por un representante de las organizaciones convocantes revisará la documentación entregada por los postulantes, y preseleccionará a un grupo de candidatos que serán invitados a una ronda de entrevistas en línea, que permitirán evaluar con mayor detalle la idoneidad del perfil. Posteriormente, el Comité Dictaminador seleccionará por consenso un máximo de 20 participantes que cumplan satisfactoriamente con los requisitos establecidos en esta convocatoria y que hayan destacado en la ronda de entrevistas. El Comité Dictaminador estará integrado por:</p>
 			<ul>
 				<li>Un representante de la oficina para México del Programa de Naciones Unidas para el Desarrollo.</li>
 				<li>Un representante del Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales.</li>
@@ -111,9 +113,9 @@
 				<li>Un representante de la oficina para México de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID).</li>
 				<li>Un académico especialista en temas de gobierno abierto y/o desarrollo sostenible, quien fungirá como testigo del proceso de selección.</li>
 			</ul>
-			<p>Los candidatos seleccionados serán notificadas por vía electrónica y los resultados serán publicados en el sitio <a href="{{url('')}}">{{url('')}}</a>, a más tardar el 28 de abril de 2017.</p>
+			<p>Los candidatos seleccionados serán notificadas por vía electrónica y los resultados serán publicados en el sitio <a href="{{url('')}}">{{url('')}}</a>, a más tardar el 02 de mayo de 2017.</p>
 			
-			<p>Los trabajos de la primera edición del programa de formación de Agentes Locales de Cambio iniciarán en mayo de 2017, en el marco de la I Cumbre de Gobierno Abierto en lo Local. En este marco, se llevará a cabo la primera ronda de seminarios presenciales.</p>
+			<p>Los trabajos de la primera edición del programa de formación de Agentes Locales de Cambio iniciarán en mayo de 2017, preferentemente, en el marco de la I Cumbre de Gobierno Abierto en lo Local. En este marco, se llevará a cabo la primera ronda de seminarios presenciales. En todo caso, el Comité Dictaminador decidirá sobre la fecha de inicio de los trabajos.</p>
 			</div>
 		</li>
 		
@@ -128,12 +130,29 @@
 		<li>
 			<h3>Contacto</h3>
 			<span></span>
-				<div class="panel">
-			<p>Para mayor información con respecto a la presente convocatoria y al programa de formación de capacidades, favor de contactar a</p>
-				</div>
+			<div class="panel">
+				<p>Para mayor información con respecto a la presente convocatoria y al programa de formación de capacidades, favor de contactar a <strong>Mariana García</strong>, coordinadora del proyecto en los teléfonos (55) 4000-9819 o (55) 1079-3994, o al correo electrónico <a href="{{url('mailto:mariana.garcia@undp.org')}}">mariana.garcia@undp.org</a>. 
+</p>
+			</div>
 		</li>
 		</ol>
 		<p class="center"><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Consulta el Proceso de Selección</a></p>
+		
+		</div>
+		<div class="col-sm-10 col-sm-offset-1">
+		<div class="notes">
+		<p> <sup name="note1">1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
+			<sup name="note2">2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>
+			 
+			 <sup name="note3">3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el Aviso de Privacidad de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en www.apertus.org.mx.<br> 
+			  
+			  <sup name="note4">4</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
+			  
+			     <sup name="note5">5</sup>El video puede realizarse con cualquier dispositivo (teléfono móvil, tableta o cámara digital), y deberá ser subido a la plataforma en línea http://www.youtube.com 
+			
+			
+		</p>
+		</div>
 	</div>
 
 </div>

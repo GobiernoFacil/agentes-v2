@@ -1620,6 +1620,17 @@ a.btn,
   padding-top: 20px;
   text-transform: uppercase; }
 
+.notes p {
+  font-size: 13px; }
+  .notes p a {
+    border: 0; }
+
+sup {
+  color: #f15c44;
+  font-size: 10px;
+  margin: 0 5px 0 0;
+  vertical-align: top; }
+
 /* =aliados
 -------------------------------------------------------------- */
 .aliados h2 a {
