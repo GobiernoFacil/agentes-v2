@@ -4,12 +4,12 @@
 		<div class="col-sm-12">
 			<h2><a href="{{url('programa-gobierno-abierto/aliados')}}">Aliados</a></h2>
 			<div class="row">
-				<a href="#" class="usaid">USAID</a>				
-				<a href="#" class="pnud">PNUD</a>				
-				<a href="#" class="inai">INAI</a>				
-				<a href="#" class="gesoc">GESOC</a>				
-				<a href="#" class="gf">Gobierno Fácil</a>
-				<a href="#" class="prosociedad">Prosociedad</a>
+				<a href="https://www.usaid.gov/mexico" class="usaid">USAID</a>				
+				<a href="http://www.mx.undp.org/" class="pnud">PNUD</a>				
+				<a href="http://inicio.ifai.org.mx/SitePages/ifai.aspx" class="inai">INAI</a>				
+				<a href="http://www.gesoc.org.mx/site/" class="gesoc">GESOC</a>				
+				<a href="https://gobiernofacil.com/" class="gf">Gobierno Fácil</a>
+				<a href="http://www.prosociedad.org/" class="prosociedad">Prosociedad</a>
 			</div>
 		</div>
 	</div>
