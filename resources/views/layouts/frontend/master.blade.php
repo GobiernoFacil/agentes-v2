@@ -38,7 +38,7 @@
     	<link rel="canonical" href="{{url('')}}">
     	@endif
     @endif
-	<link rel="icon" type="image/png" href="{{url('img/icon_ga.png')}}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{url('img/icon_ga.png')}}" />
 	<!-- FB-->
 	<meta property="og:title" content="{{$title}}"/>
 	<meta property="og:site_name" content="Gobierno Abierto"/>
@@ -93,7 +93,7 @@
 	</div>
 	@if ($__env->yieldContent('breadcrumb'))
 	<div class="container">
-		<div class="breadcrumb">
+			<div class="breadcrumb">
 			<div class="row">
 		<div class="col-sm-12">
 		@include($__env->yieldContent('breadcrumb'))
