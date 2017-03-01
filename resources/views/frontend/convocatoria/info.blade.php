@@ -19,9 +19,15 @@
 				<div class="col-sm-4">
 					<p class="center"><a href="#" class="btn gde download">Descarga la convocatoria</a></p>
 				</div>
+				
 				<div class="col-sm-4">
+					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Descargar Aviso de Privacidad</a></p>
+
+					<?php /*
 					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Proceso de Selección</a></p>
+					*/ ?>
 				</div>
+				
 			</div>
 		</div>
 	<div class="col-sm-8 col-sm-offset-2">
@@ -136,10 +142,9 @@
 			</div>
 		</li>
 		</ol>
-		<p class="center"><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Consulta el Proceso de Selección</a></p>
 		
 		</div>
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-8 col-sm-offset-2">
 		<div class="notes">
 		<p> <sup name="note1">1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
 			<sup name="note2">2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>

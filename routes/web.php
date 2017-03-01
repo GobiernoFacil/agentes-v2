@@ -27,7 +27,7 @@ Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
-Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases');
+//Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
 Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
 Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
@@ -39,9 +39,10 @@ Route::get('cities', 'NoticeFront@cities');
 /*********  Enlaces convocatoria ******** */
 Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');
 Route::get('programa-gobierno-abierto/alcance/{state}', 'RangeFront@descripcion');
+/*
 Route::get('programa-gobierno-abierto/alcance/{state}/quienes-conforman-el-ejercicio', 'RangeFront@conforman');
 Route::get('programa-gobierno-abierto/alcance/{state}/contexto', 'RangeFront@contexto');
-Route::get('programa-gobierno-abierto/alcance/{state}/estatus', 'RangeFront@estatus');
+Route::get('programa-gobierno-abierto/alcance/{state}/estatus', 'RangeFront@estatus');*/
 /*@GovernmentFront Controller */
 /*********  Enlaces Gobierno Abierto ******** */
 Route::get('gobierno-abierto', 'GovernmentFront@gobierno');
