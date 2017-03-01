@@ -4,7 +4,7 @@
 	@if ($__env->yieldContent('body_class') =="programa")
 	<li>Programa de Gobierno Abierto</li>
 	@endif
-	@if ($__env->yieldContent('body_class') =="programa aliados" || $__env->yieldContent('body_class') =="programa alcance" || $__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance coahuila"
+	@if ($__env->yieldContent('body_class') =="programa aliados" || $__env->yieldContent('body_class') =="programa alcance" || $__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance sonora"
 	|| $__env->yieldContent('body_class') =="programa alcance leon" || $__env->yieldContent('body_class') =="programa alcance oaxaca" || $__env->yieldContent('body_class') =="programa alcance morelos")
 	<li><a href="{{url('programa-gobierno-abierto')}}">Programa de Gobierno Abierto</a></li>
 	@endif
@@ -14,15 +14,15 @@
 	@if ($__env->yieldContent('body_class') =="programa alcance")
 	<li>Alcance</li>
 	@endif
-	@if ($__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance coahuila"
+	@if ($__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance sonora"
 	|| $__env->yieldContent('body_class') =="programa alcance leon" || $__env->yieldContent('body_class') =="programa alcance oaxaca" || $__env->yieldContent('body_class') =="programa alcance morelos")
 	<li><a href="{{url('programa-gobierno-abierto/alcance')}}">Alcance</a></li>
 	@endif
 	@if ($__env->yieldContent('body_class') =="programa alcance chihuahua")
 	<li>Chihuahua</li>
 	@endif
-	@if ($__env->yieldContent('body_class') =="programa alcance coahuila")
-	<li>Coahuila</li>
+	@if ($__env->yieldContent('body_class') =="programa alcance sonora")
+	<li>Sonora</li>
 	@endif
 	@if ($__env->yieldContent('body_class') =="programa alcance leon")
 	<li>Nuevo León</li>
