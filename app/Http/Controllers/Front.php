@@ -33,7 +33,7 @@ class Front extends Controller
 
     //politicas-de-privacidad
     public function politicas(){
-      return view('welcome');
+      return view('frontend.privacidad');
     }
 
     //redes-sociales

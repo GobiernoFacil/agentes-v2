@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<p>® 2017-2020 Gobierno Abierto desde lo local para el Desarrollo Sostenible.<br>
-					<a href="{{url('politica')}}">Política de Privacidad</a></p>
+					<a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a></p>
 				</div>
 				<div class="col-sm-6 right">
 					<p>Forjado Artesanalmente por:<br>

@@ -85,9 +85,6 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-12">
-		<p>Acepto	<a href="{{url('politica-privacidad')}}">Política de Privacidad</a></p>
-	</div>
 	<div class="col-sm-6 col-sm-offset-3">
 
 		<p>{{Form::submit('Aplicar', ['class' => 'btn gde'])}}</p>

@@ -22,7 +22,7 @@ Route::get('/', 'Front@index');
 Route::get('programa-gobierno-abierto', 'Front@descripcion');
 Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('contacto', 'Front@contacto');
-Route::get('politica-privacidad', 'Front@politicas');
+Route::get('aviso-privacidad', 'Front@politicas');
 Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */

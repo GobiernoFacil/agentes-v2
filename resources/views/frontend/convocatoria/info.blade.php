@@ -87,7 +87,7 @@
 					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).</li>
 					<li>Presentar una carta membretada que muestre el sector de procedencia del aspirante (sociedad civil, gobierno, académica, iniciativa privada).</li>
 					<li>Presentar una copia de comprobante de domicilio que acredite la residencia del candidato.</li>
-					<li>Descargar, leer, firmar (en caso de aceptar) y enviar el Aviso de Privacidad por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('')}}">{{url('')}}</a>.</li>
+					<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/ConsentimientoDatosPersonales.docx')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</li>
 				</ol>
 				
 				<p>De los participantes en el programa de formación de Agentes Locales de Cambio en gobierno abierto y desarrollo sostenible se espera:</p>
@@ -149,7 +149,7 @@
 		<p> <sup name="note1">1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
 			<sup name="note2">2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>
 			 
-			 <sup name="note3">3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el Aviso de Privacidad de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en www.apertus.org.mx.<br> 
+			 <sup name="note3">3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el <a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a> de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en <a href="{{url('aviso-privacidad')}}">{{url('aviso-privacidad')}}</a> .<br> 
 			  
 			  <sup name="note4">4</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
 			  
