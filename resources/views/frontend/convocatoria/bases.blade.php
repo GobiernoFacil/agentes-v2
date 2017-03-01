@@ -10,7 +10,7 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1><strong>Proceso de selección de candidatos</strong> a convocatoria Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>
 		</h1>
-		<p>Este procedimiento tiene por objeto brindar pautas generales para la elección de hasta 20 participantes para el <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, edición 2017. La convocatoria para participar en este programa estará abierta desde el 1° de marzo y hasta las 15:00 horas del 10 de abril de 2017 (tiempo de la Ciudad de México). Una vez cerrada la convocatoria, el proceso de selección de candidatos será realizado por el Comité Dictaminador, integrado por:</p>
+		<p>Este procedimiento tiene por objeto brindar pautas generales para la elección de hasta 20 participantes para el <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, edición 2017. La convocatoria para participar en este programa estará abierta desde el 3 de marzo y hasta las 15:00 horas del 13 de abril de 2017 (tiempo de la Ciudad de México). Una vez cerrada la convocatoria, el proceso de selección de candidatos será realizado por el Comité Dictaminador, integrado por:</p>
 		<ol>
 			<li>Un representante de la oficina para México del Programa de Naciones Unidas para el Desarrollo.										  </li>
 			<li>Un representante del Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales.					  </li>
