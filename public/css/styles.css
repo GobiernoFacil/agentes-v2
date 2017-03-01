@@ -123,6 +123,9 @@ h6 {
   font-weight: bold;
   text-transform: none; }
 
+em {
+  font-style: italic; }
+
 /* end type options */
 .break {
   margin-bottom: 1.5em; }
@@ -1434,6 +1437,15 @@ p strong {
 ul,
 ol {
   margin-left: 30px; }
+
+blockquote {
+  border-left: 10px solid #51be92;
+  color: #666;
+  display: block;
+  font: 500 16px/1.5 Georgia, serif;
+  padding: 15px 20px 15px 45px;
+  margin: 0 30px 20px;
+  position: relative; }
 
 header {
   margin: 42px 0 53px; }
