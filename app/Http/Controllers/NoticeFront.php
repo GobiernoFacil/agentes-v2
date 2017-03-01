@@ -43,10 +43,13 @@ class NoticeFront extends Controller
           'token'       => $link
         ]);
         $activation ->save();
+        $from    = "info@apertus.org.mx";
+        $subject = "Confirma tu dirección correo | Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
        //enviar correo para confirmar dirección de correo
-        Mail::send('emails.confirmation', ['aspirant' => $aspirant,'link' =>$link], function($message) use ($aspirant,$link) {
+        Mail::send('emails.confirmation', ['aspirant' => $aspirant,'link' =>$link], function($message) use ($aspirant,$link,$from, $subject) {
+                $message->from($from, 'no-reply');
                 $message->to($aspirant->email);
-                $message->subject('Confirma tu dirección de correo');
+                $message->subject($from);
         });
 
         return view('frontend.convocatoria.aplicar-message');
