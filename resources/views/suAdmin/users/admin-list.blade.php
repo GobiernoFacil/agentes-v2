@@ -1,4 +1,20 @@
-
-@foreach($admins as $user)
-<p>{{$user->name}}</p>
-@endforeach
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($admins as $user)
+      <tr>
+        <td>{{$user->name}}</td>
+        <td>{{$user->email}}</td>
+        <td>
+          <a href="{{ url('sa/dashboard/administradores/ver/' . $user->id) }}" class="btn xs view">Ver</a>
+          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $user->id) }}"  id ="{{$user->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
