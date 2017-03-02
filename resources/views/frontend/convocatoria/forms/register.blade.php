@@ -87,7 +87,7 @@
 <div class="row">
 	<div class="col-sm-6 col-sm-offset-3">
 
-		<p>{{Form::submit('Aplicar', ['class' => 'btn gde'])}}</p>
+		<p>{{Form::submit('Aplicar', ['class' => 'btn gde i_convoca_w'])}}</p>
 	</div>
 </div>
 {!! Form::close() !!}

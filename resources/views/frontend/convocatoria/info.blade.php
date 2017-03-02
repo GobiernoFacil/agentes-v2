@@ -14,7 +14,7 @@
 	
 		<div class="row">
 				<div class="col-sm-4">
-					<p class="center"><a href="{{url('convocatoria/aplicar')}}" class="btn gde">Aplica a la Convocatoria</a></p>
+					<p class="center"><a href="{{url('convocatoria/aplicar')}}" class="btn gde i_convoca_w">Aplica a la Convocatoria</a></p>
 				</div>
 				<div class="col-sm-4">
 					<p><a href="#" class="btn gde download i_download">Descarga la convocatoria</a></p>
