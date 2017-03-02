@@ -1857,10 +1857,21 @@ footer {
 /* =Media queries
 -------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
+  h1 {
+    font-size: 23px; }
   h2 {
     font-size: 17px; }
-  p {
+  h3 {
+    font-size: 16px; }
+  p,
+  li {
     font-size: 14px; }
+  blockquote {
+    border-left-width: 7px;
+    font-size: 13px;
+    padding: 15px 0 15px 11px; }
+  .breadcrumb li {
+    font-size: 11px; }
   .apertus {
     background-size: 212px auto;
     height: 51px;
