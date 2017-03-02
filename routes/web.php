@@ -47,7 +47,7 @@ Route::get('programa-gobierno-abierto/alcance/{state}/estatus', 'RangeFront@esta
 /*********  Enlaces Gobierno Abierto ******** */
 Route::get('gobierno-abierto', 'GovernmentFront@gobierno');
 Route::get('gobierno-abierto/contenido-teorico-del-modelo', 'GovernmentFront@contenido');
-Route::get('gobierno-abierto/recursos', 'GovernmentFront@recursos');
+//Route::get('gobierno-abierto/recursos', 'GovernmentFront@recursos');
 Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
