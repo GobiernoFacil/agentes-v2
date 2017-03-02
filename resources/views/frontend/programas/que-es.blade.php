@@ -135,16 +135,9 @@
 			</div>
 			<div class="col-sm-3">
 				<h2></h2>
-				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance">
-					<span>ALCANCE DEL PROGRAMA</span>
-				</a>
-				<a href="{{url('convocatoria')}}" class="icon i_convocatoria">
-					<span>CONVOCATORIA</span>
-				</a>
-				<p>
-				<a href="{{url('programa-gobierno-abierto/aliados')}}" class="btn gde download block">Conoce a los aliados</a>
-				</p>
-
+				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
+				<a href="{{url('programa-gobierno-abierto/aliados')}}" class="icon i_aliados">CONOCE A LOS ALIADOS</a>
+				<a href="{{url('convocatoria')}}" class="icon i_convocatoria"><span>CONVOCATORIA</span></a>
 			</div>
 
 		</div>

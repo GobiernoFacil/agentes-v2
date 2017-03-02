@@ -101,11 +101,10 @@ Establecer Convenios de Colaboración con el Asociado en la Implementación con 
 
 			</div>
 			<div class="col-sm-3">
-				<p><a href="{{url('programa-gobierno-abierto/alcance')}}" class="btn gde block">Alcance del programa</a> 
-				<a href="{{url('programa-gobierno-abierto')}}" class="btn gde download block">Objetivos del programa</a>
-				<a href="{{url('convocatoria')}}" class="btn gde process block">Ver la Convocatoria</a>
-				</p>
-
+				<h2></h2>
+				<a href="{{url('programa-gobierno-abierto')}}" class="icon i_programa">PROGRAMA</a>
+				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
+				<a href="{{url('convocatoria')}}" class="icon i_convocatoria"><span>CONVOCATORIA</span></a>
 			</div>
 
 		</div>
