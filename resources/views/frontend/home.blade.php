@@ -3,6 +3,8 @@
 @section('description', 'Plataforma en línea de vinculación, aprendizaje continuo, intercambio de experiencias y acción coordinada de los agentes de cambio formados en el fellowship')
 @section('body_class', 'home')
 @section('canonical', '' )
+@section('css-custom','js/bower_components/leaflet/dist/leaflet.css')
+
 
 @section('content')
 <div class="row">
@@ -49,9 +51,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div class="map_container">
-  <!-- el mapa! -->
-  <div id="map"></div>
 </div>
 @endsection

@@ -4,6 +4,7 @@
 @section('body_class', 'programa alcance')
 @section('canonical', url('programa-gobierno-abierto/alcance') )
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
+@section('css-custom','js/bower_components/leaflet/dist/leaflet.css')
 
 @section('content')
 <div class="row">

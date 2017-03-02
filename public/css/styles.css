@@ -1799,6 +1799,17 @@ sup {
   background-size: auto 27px;
   width: 163px; }
 
+.map_container {
+  width: 100%;
+  height: 600px;
+  display: block;
+  overflow: hidden; }
+  .map_container #map {
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    z-index: 0; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
@@ -1819,6 +1830,10 @@ sup {
 
 /* =Footer
 -------------------------------------------------------------- */
+.home .allies,
+.home .programa.alcance {
+  margin-top: 0; }
+
 .allies {
   border-top: 1px solid #f2f2f2;
   margin-top: 60px;

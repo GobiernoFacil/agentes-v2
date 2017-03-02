@@ -1,3 +1,9 @@
+@if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
+<div class="map_container">
+  <!-- el mapa! -->
+  <div id="map"></div>
+</div>
+@endif
 <div class="allies">
 	<div class="container">
 	<div class="row">
@@ -41,3 +47,10 @@
 </script>
 <script src="{{url('js/app.js')}}"></script> 
 <script src="{{url('js/main.js')}}"></script> 
+@if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
+<script src="{{url('js/bower_components/d3/d3.js')}}"></script>
+<script src="{{url('js/bower_components/leaflet/dist/leaflet.js')}}"></script>
+<script src="{{url('js/libs/classybrew/build/classybrew.min.js')}}"></script>
+<script src="{{url('js/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{url('js/main_mapa.js')}}"></script>
+@endif

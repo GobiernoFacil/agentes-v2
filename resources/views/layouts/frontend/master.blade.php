@@ -57,7 +57,8 @@
 	<meta property="og:image" content='{{url("img/{$og_image}")}}'/>
 
 	<!--css-custom-->
-	@yield('css-custom')
+	
+	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
 	<link rel="stylesheet" href="{{url('css/styles.css')}}">
 
 	<script src="{{url('js/modernizr.js')}}"></script> <!-- Modernizr -->
