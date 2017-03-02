@@ -10,8 +10,12 @@
 		<div class="box_contact">
 			<span class="at">@</span>
 			<h1>Contacto</h1>
-			<p>En caso de tener algún comentario o duda, envía un correo electrónico a info@apertus.org.mx</p>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+				<p>En caso de tener algún comentario o duda, envía un correo electrónico a Mariana García, coordinadora del proyecto en los teléfonos (55) 4000-9819 o (55) 1079-3994, o al correo electrónico <a href="{{url('mailto:mariana.garcia@undp.org')}}">mariana.garcia@undp.org</a>.</p>
 			<p>Consulta la<a href="{{url('politica-privacidad')}}"> política de privacidad</a></p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
