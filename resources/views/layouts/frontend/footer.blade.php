@@ -17,7 +17,6 @@
 </div>
 <footer>
 	<div class="container">
-		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
 					<p>® 2017-2020 Gobierno Abierto desde lo local para el Desarrollo Sostenible.<br>
@@ -28,7 +27,6 @@
 					<a href="https://www.gobiernofacil.com" class="gobiernofacil">Gobierno Fácil</a></p>
 				</div>
 			</div>
-		</div>
 	</div>
 </footer>
 <script>

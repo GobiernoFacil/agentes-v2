@@ -1841,7 +1841,7 @@ sup {
 footer {
   background-color: #1b4760;
   color: #e6e6e6;
-  padding: 50px; }
+  padding: 50px 0; }
   footer p {
     font-size: 12px; }
   footer a,
@@ -1934,7 +1934,32 @@ footer {
 
 @media screen and (min-width: 481px) and (max-width: 767px) {
   .mobile {
-    display: none; } }
+    display: none; }
+  .bgdimg {
+    min-height: 300px; }
+    .bgdimg .cta {
+      padding-top: 28px; }
+      .bgdimg .cta h1 {
+        font-size: 29px; }
+      .bgdimg .cta h2 {
+        font-size: 24px; }
+      .bgdimg .cta h3 {
+        font-size: 20px; }
+      .bgdimg .cta h2,
+      .bgdimg .cta h3 {
+        padding-bottom: 14px; } }
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .bgdimg {
+    min-height: 300px; }
+    .bgdimg .cta {
+      padding-top: 28px; }
+      .bgdimg .cta h1 {
+        font-size: 29px; }
+      .bgdimg .cta h2 {
+        font-size: 24px; }
+      .bgdimg .cta h3 {
+        font-size: 20px; } }
 
 /* =Print
 ----------------------------------------------- */
