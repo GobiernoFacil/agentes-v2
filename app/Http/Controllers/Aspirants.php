@@ -88,4 +88,19 @@ class Aspirants extends Controller
       return response()->json($cities);
     }
 
+    /**
+     * Get evaluation view
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function evaluation($id){
+      $user = Auth::user();
+      $aspirant = Aspirant::find($id);
+      return view('admin.aspirants.aspirant-evaluation')->with([
+        'user' => $user,
+        'aspirant' =>$aspirant
+      ]);
+    }
+
 }

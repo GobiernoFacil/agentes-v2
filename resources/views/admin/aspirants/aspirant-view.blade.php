@@ -3,7 +3,10 @@
 <li><span>Email:</span> {{$aspirant->email}}</li>
 <li><span>Ciudad:</span> {{$aspirant->city}}</li>
 <li><span>Estado:</span> {{$aspirant->state}}</li>
+@if($aspirant->AspirantsFile)
+@if($aspirant->AspirantsFile->video)
 <li><span>Video:</span> {{$aspirant->AspirantsFile->video}}</li>
+@endif
 @if($aspirant->AspirantsFile->cv)
 <li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->cv}/CV")}}'  class="btn view xs"> Descargar CV</a></li>
 @endif
@@ -12,5 +15,6 @@
 @endif
 @if($aspirant->AspirantsFile->letter)
 <li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->letter}/carta")}}'  class="btn view xs"> Descargar Carta de Privacidad</a></li>
+@endif
 @endif
 </ul>
