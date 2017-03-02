@@ -12,5 +12,5 @@
 @endif
 @if($aspirant->AspirantsFile->letter)
 <li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->letter}/carta")}}'  class="btn view xs"> Descargar Carta de Privacidad</a></li>
-endif
+@endif
 </ul>
