@@ -58,6 +58,8 @@ class Aspirants extends Controller
       );
       if($type =='CV'){
         $filename = 'CV'.".".$ext;
+      }else if($type =='carta'){
+          $filename = 'carta'.".".$ext;
       }else{
         $filename = 'Ensayo'.".".$ext;
       }
