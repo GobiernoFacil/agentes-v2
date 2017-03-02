@@ -67,7 +67,7 @@
 	<div class="col-sm-6">
 		<p>
 		  <label>Estado</label>
-		  {{Form::select('state',[null => "Selecciona una opción",'Coahuila'=> 'Coahuila', 'Chihuahua' =>'Chihuahua', 'Morelos'=>'Morelos', 'Nuevo León'=>'Nuevo León', 'Oaxaca'=>'Oaxaca'],null, ['class' => 'form-control','id'=>'state'])}}
+		  {{Form::select('state',[null => "Selecciona una opción", 'Chihuahua' =>'Chihuahua', 'Morelos'=>'Morelos', 'Nuevo León'=>'Nuevo León', 'Oaxaca'=>'Oaxaca','Sonora'=>'Sonora'],null, ['class' => 'form-control','id'=>'state'])}}
 		  @if($errors->has('state'))
 		    <strong class="error">{{$errors->first('state')}}</strong>
 		  @endif
