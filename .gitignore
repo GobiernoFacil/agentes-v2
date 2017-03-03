@@ -10,3 +10,4 @@ public/css/src_sass
 public/css/fonts
 *.DS_Store
 public/files/*
+public/js/bower_components/

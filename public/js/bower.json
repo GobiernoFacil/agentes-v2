@@ -1,0 +1,33 @@
+{
+  "name": "pnud",
+  "version": "1.0.0",
+  "authors": [
+    "el coruco <el.coruco@gmail.com>"
+  ],
+  "description": "Mapa de Alcance del Programa de Formación de Agentes Locales de Cambio en Gobienro Abierto",
+  "main": "main.js",
+  "moduleType": [],
+  "keywords": [
+    "pnud",
+    "inai"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.10",
+    "backbone": "~1.2.3",
+    "jquery": "~2.1.4",
+    "text": "requirejs-text#~2.0.14",
+    "requirejs": "~2.1.22",
+    "jquery-ui": "~1.11.4",
+    "nouislider": "leongersen/noUiSlider#~8.2.1",
+    "leaflet" : "~1.0.3"
+  }
+}
