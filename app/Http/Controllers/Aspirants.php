@@ -60,6 +60,10 @@ class Aspirants extends Controller
         $filename = 'CV'.".".$ext;
       }else if($type =='carta'){
           $filename = 'carta'.".".$ext;
+      }else if($type =='comprobante'){
+          $filename = 'comprobante'.".".$ext;
+      }else if($type =='privacidad'){
+          $filename = 'privacidad'.".".$ext;
       }else{
         $filename = 'Ensayo'.".".$ext;
       }
