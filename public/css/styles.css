@@ -1676,6 +1676,20 @@ sup {
 .aliados h2 .col-sm-9 {
   padding-top: 20px; }
 
+.list-view li {
+  border-top: 1px solid #ccc;
+  padding: 10px 15px 20px;
+  position: relative; }
+  .list-view li h3 {
+    font-weight: 500; }
+  .list-view li:hover {
+    cursor: pointer;
+    background: rgba(242, 242, 242, 0.5); }
+    .list-view li:hover h3 {
+      color: #ed3315; }
+    .list-view li:hover span {
+      background: #ed3315; }
+
 .toggle-view li {
   border-top: 1px solid #ccc;
   padding: 10px 15px 20px;
