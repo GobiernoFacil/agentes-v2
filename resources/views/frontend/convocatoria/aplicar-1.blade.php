@@ -21,7 +21,7 @@
 			<li>Ensayo (no mayor a cinco cuartillas).</li>
 			<li>Video breve (enlace).</li>
 			<li>Perfil curricular actualizado.</li>
-			<li>Carta membretada o copia de identificación laboral.</li>
+			<li>Carta membretada.</li>
 			<li>Copia de comprobante de domicilio.</li>
 			<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/ConsentimientoDatosPersonales.docx')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</li>
 		</ol>
