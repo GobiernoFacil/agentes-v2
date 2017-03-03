@@ -1,5 +1,5 @@
 {!! Form::open(['url' => 'convocatoria/aplicar/registro', "class" => "form-horizontal",'files'=>true]) !!}
-
+{{Form::hidden('aId', $aId, ["class" => "form-control"])}}
   <h2><label>Agregar Ensayo </label></h2>
 <p>  {{Form::file('essay', null, ["class" => "form-control"])}} (no mayor a 5 cuartillas, documento no mayor a 2.5 Mb, formato .docx, .doc o pdf)
   @if($errors->has('essay'))
@@ -24,24 +24,24 @@
 </p>
 
 <h2> <label>Agregar carta membretada </label></h2>
-<p>  {{Form::file('cv', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
-  @if($errors->has('cv'))
-    <strong>{{$errors->first('cv')}}</strong>
+<p>  {{Form::file('letter', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
+  @if($errors->has('letter'))
+    <strong>{{$errors->first('letter')}}</strong>
   @endif
 </p>
 
 <h2> <label>Agregar copia de comprobante de domicilio </label></h2>
-<p>  
-	{{Form::file('cv', null, ["class" => "form-control"])}}(documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
-  @if($errors->has('cv'))
-    <strong>{{$errors->first('cv')}}</strong>
+<p>
+	{{Form::file('proof', null, ["class" => "form-control"])}}(documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
+  @if($errors->has('proof'))
+    <strong>{{$errors->first('proof')}}</strong>
   @endif
 </p>
 
 <h2> <label>Agregar consentimiento relativo al tratamiento de sus datos personales</label></h2>
-<p>  {{Form::file('cv', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
-  @if($errors->has('cv'))
-    <strong>{{$errors->first('cv')}}</strong>
+<p>  {{Form::file('privacy', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
+  @if($errors->has('privacy'))
+    <strong>{{$errors->first('privacy')}}</strong>
   @endif
 </p>
 

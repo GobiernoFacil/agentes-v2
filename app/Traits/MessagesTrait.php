@@ -27,7 +27,7 @@ trait MessagesTrait{
         'email-confirm.required'   => 'La confirmación es requerida',
 
         //Archivos
-        'cv.required' => 'El CV es requerido',
+        'cv.required' => 'El Perfil Curricular es requerido',
         'cv.file'     => 'El archivo debe ser válido',
         'cv.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
         'cv.max'      => 'El archivo no puede ser mayor a 2MB',
@@ -35,7 +35,19 @@ trait MessagesTrait{
         'essay.file'     => 'El archivo debe ser válido',
         'essay.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
         'essay.max'      => 'El archivo no puede ser mayor a 2MB',
-        'video.required' => 'El enlace es requerido'
+        'letter.required' => 'La carta membretada es requerida',
+        'letter.file'     => 'El archivo debe ser válido',
+        'letter.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
+        'letter.max'      => 'El archivo no puede ser mayor a 2MB',
+        'proof.required' => 'El comprobante de domicilio es requerido',
+        'proof.file'     => 'El archivo debe ser válido',
+        'proof.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
+        'proof.max'      => 'El archivo no puede ser mayor a 2MB',
+        'privacy.required' => 'El comprobante de domicilio es requerido',
+        'privacy.file'     => 'El archivo debe ser válido',
+        'privacy.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
+        'privacy.max'      => 'El archivo no puede ser mayor a 2MB',
+        'video.required' => 'El enlace a video es requerido'
       ];
     }
 }

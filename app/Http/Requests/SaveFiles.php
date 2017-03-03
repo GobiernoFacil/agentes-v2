@@ -28,6 +28,9 @@ class SaveFiles extends FormRequest
       return [
         'cv' => 'required|file|mimes:doc,docx,pdf|max:2000',
         'essay' => 'required|file|mimes:doc,docx,pdf|max:2000',
+        'letter' => 'required|file|mimes:doc,docx,pdf|max:2000',
+        'proof' => 'required|file|mimes:doc,docx,pdf|max:2000',
+        'privacy' => 'required|file|mimes:doc,docx,pdf|max:2000',
         'video' => 'required',
       ];
     }
