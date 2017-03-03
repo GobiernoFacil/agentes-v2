@@ -47,7 +47,26 @@ trait MessagesTrait{
         'privacy.file'     => 'El archivo debe ser válido',
         'privacy.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
         'privacy.max'      => 'El archivo no puede ser mayor a 2MB',
-        'video.required' => 'El enlace a video es requerido'
+        'video.required' => 'El enlace a video es requerido',
+        //evaluation
+        'experience.required'=> 'Esta pregunta es obligatoria',
+        'experience1.required'=> 'Esta pregunta es obligatoria',
+        'experience2.required'=> 'Esta pregunta es obligatoria',
+        'experience3.required'=> 'Esta pregunta es obligatoria',
+        'experienceJ1.required'=> 'Esta pregunta es obligatoria',
+        'experienceJ2.required'=> 'Esta pregunta es obligatoria',
+        'institution.required'=> 'Esta pregunta es obligatoria',
+        'evaluator.required'=> 'Esta pregunta es obligatoria',
+        'essay.required'=> 'Esta pregunta es obligatoria',
+        'essay1.required'=> 'Esta pregunta es obligatoria',
+        'essay2.required'=> 'Esta pregunta es obligatoria',
+        'essay3.required'=> 'Esta pregunta es obligatoria',
+        'essay4.required'=> 'Esta pregunta es obligatoria',
+        'video.required'=> 'Esta pregunta es obligatoria',
+        'video1.required'=> 'Esta pregunta es obligatoria',
+        'video2.required'=> 'Esta pregunta es obligatoria',
+        'video3.required'=> 'Esta pregunta es obligatoria',
+        'video4.required'=> 'Esta pregunta es obligatoria',
       ];
     }
 }

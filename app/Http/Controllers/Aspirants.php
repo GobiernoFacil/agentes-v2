@@ -9,6 +9,9 @@ use Mail;
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
 use App\Models\City;
+use App\Models\AspirantEvaluation;
+// FormValidators
+use App\Http\Requests\SaveEvaluation;
 class Aspirants extends Controller
 {
 
@@ -105,6 +108,21 @@ class Aspirants extends Controller
         'user' => $user,
         'aspirant' =>$aspirant
       ]);
+    }
+
+    /**
+     * Save evaluation answers
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function saveEvaluation(Request $request, $id){
+      $user = Auth::user();
+      $aspirant = Aspirant::find($id);
+      $evaluation = new AspirantEvaluation($request->except('_token'));
+      var_dump($request->toArray());
+
+
     }
 
 }
