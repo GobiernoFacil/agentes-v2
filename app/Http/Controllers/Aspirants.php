@@ -116,11 +116,28 @@ class Aspirants extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveEvaluation(Request $request, $id){
+    public function saveEvaluation(SaveEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
       $evaluation = new AspirantEvaluation($request->except('_token'));
-      var_dump($request->toArray());
+      $evaluation->user_id   = $user->id;
+      $evaluation->experience = current(array_slice($request->experience, 0, 1));
+      $evaluation->experience1 = current(array_slice($request->experience1, 0, 1));
+      $evaluation->experience2 = current(array_slice($request->experience2, 0, 1));
+      $evaluation->experience3 = current(array_slice($request->experience3, 0, 1));
+      $evaluation->essay = current(array_slice($request->essay, 0, 1));
+      $evaluation->essay1 = current(array_slice($request->essay1, 0, 1));
+      $evaluation->essay2 = current(array_slice($request->essay2, 0, 1));
+      $evaluation->essay3 = current(array_slice($request->essay3, 0, 1));
+      $evaluation->essay4 = current(array_slice($request->essay4, 0, 1));
+      $evaluation->video = current(array_slice($request->video, 0, 1));
+      $evaluation->video1 = current(array_slice($request->video1, 0, 1));
+      $evaluation->video2 = current(array_slice($request->video2, 0, 1));
+      $evaluation->video3 = current(array_slice($request->video3, 0, 1));
+      $evaluation->video4 = current(array_slice($request->video4, 0, 1));
+      $evaluation->aspirant_id = $aspirant->id;
+      $evaluation->save();
+      return redirect('dashboard/aspirantes/ver/'.$aspirant->id)->with('success','Evaluación guardada');
 
 
     }
