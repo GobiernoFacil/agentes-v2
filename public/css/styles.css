@@ -1908,6 +1908,9 @@ footer {
   .bgdimg {
     margin-bottom: 60px;
     min-height: 100px; }
+    .bgdimg figure {
+      height: 207px;
+      overflow: hidden; }
     .bgdimg .cta {
       padding-top: 10px; }
       .bgdimg .cta h1 {
