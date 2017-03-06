@@ -23,7 +23,7 @@
 			<li>Perfil curricular actualizado.</li>
 			<li>Carta membretada.</li>
 			<li>Copia de comprobante de domicilio.</li>
-			<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/ConsentimientoDatosPersonales.docx')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</li>
+			<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/ConsentimientoDatosPersonales.pdf')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</li>
 		</ol>
 		<h2>Paso 1 de 2</h2>
 		<p>Todos los campos son obligatorios.</p>
