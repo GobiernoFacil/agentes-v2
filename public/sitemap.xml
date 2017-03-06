@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://apertus.org.mx/</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/convocatoria</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/gobierno-abierto</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/contacto</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/aliados</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/antecedentes</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/aviso-privacidad</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/convocatoria/aplicar</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/archivos/ConvocatoriaFellowship.pdf</loc>
+  <lastmod>2017-03-03T18:32:57+00:00</lastmod>
+</url>
+<url>
+  <loc>http://apertus.org.mx/archivos/ConsentimientoDatosPersonales.pdf</loc>
+  <lastmod>2017-03-02T23:12:51+00:00</lastmod>
+</url>
+<url>
+  <loc>http://apertus.org.mx/gobierno-abierto/recursos/lecturas</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance/chihuahua</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance/morelos</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance/nuevo-leon</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance/oaxaca</loc>
+</url>
+<url>
+  <loc>http://apertus.org.mx/programa-gobierno-abierto/alcance/sonora</loc>
+</url>
+</urlset>
