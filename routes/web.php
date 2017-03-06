@@ -20,7 +20,6 @@ Auth::routes();
 /*********  INICIO ******** */
 Route::get('/', 'Front@index');
 Route::get('programa-gobierno-abierto', 'Front@descripcion');
-Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('contacto', 'Front@contacto');
 Route::get('aviso-privacidad', 'Front@politicas');
 Route::get('redes-sociales', 'Front@redes');
@@ -36,7 +35,9 @@ Route::get('convocatoria/aplicar/confirmacion/{token}', 'NoticeFront@aspirantAct
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 Route::get('cities', 'NoticeFront@cities');
 /*@RangeFront Controller */
-/*********  Enlaces convocatoria ******** */
+/*********  Enlaces programa ******** */
+Route::get('programa-gobierno-abierto/antecedentes', 'Front@antecedentes');
+Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');
 Route::get('programa-gobierno-abierto/alcance/{state}', 'RangeFront@descripcion');
 /*

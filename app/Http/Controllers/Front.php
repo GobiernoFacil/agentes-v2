@@ -17,8 +17,8 @@ class Front extends Controller
     }
 
     //objetivos
-    public function objetivos(){
-      return view('welcome');
+    public function antecedentes(){
+      return view('frontend.programas.antecedentes');
     }
 
     //aliados
