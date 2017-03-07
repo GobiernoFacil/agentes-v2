@@ -56,7 +56,7 @@
 							<tbody>
 								<!-- seminario 1-->
 								<tr>
-									<td><h4>1. LECTURAS PREVIAS - PROPEDÉUTICO</h4></td>
+									<td><h4>1. PROPEDÉUTICO</h4></td>
 									<td>
 										<table class="table">
 											<tr><td>1.1 Introducción a la política y gestión pública.</td>
@@ -112,11 +112,11 @@
 												<td>En línea</td>
 											</tr>
 											<tr>
-												<td>3.3 El estado del Gobierno Abierto en México </td>
+												<td>3.3 Los ODS en la Agenda Nacional de Gobierno Abierto</td>
 												<td>En línea</td>
 											</tr>
 											<tr>
-												<td>3.4 Debates principales en Gobierno Abierto</td>
+												<td>3.4 Debates principales en Gobierno Abierto y el ODS 16: Paz, Justicia e Instituciones Fuertes</td>
 												<td>En línea</td>
 											</tr>
 											<tr>
@@ -156,7 +156,7 @@
 								</tr>
 								<!-- seminario 2-->
 								<tr>
-									<td><h4>5.SEMINARIO 2<br> Construcción de la agenda de incidencia en política pública</h4></td>
+									<td><h4>5. SEMINARIO 2<br> Construcción de la agenda de incidencia en política pública</h4></td>
 									<td>
 										<table class="table">
 											<tr>
@@ -213,6 +213,20 @@
 								</tr>
 							</tbody>
 						</table>
+						
+						<table class="table">
+							<thead>
+								<tr><th><h3>TEMAS TRANSVERSALES</h3></th></tr>
+							</thead>
+							<tbody>
+								<tr><td><h4>Enfoque de género</h4></td></tr>
+								<tr><td><h4>Enfoque territorial</h4></td></tr>
+								<tr><td><h4>Enfoque de derechos</h4></td></tr>
+								<tr><td><h4><em>Leave no one behind</em> – No dejar a nadie atrás</h4></td></tr>
+								<tr><td><h4>Desarrollo de Capacidad Local</h4></td></tr>
+							</tbody>
+						</table>
+						
 						</div>
 					</li>
 					<!-- coordinandores-->
@@ -236,11 +250,11 @@
 							</li>
 							<li>
 							<h3>Ana Magdalena Rodríguez Romero</h3>
-							<p>Magdalena Rodríguez es Ingeniera Industrial y de Sistemas por el ITESM Campus Guadalajara y maestra en Gestión de Desarrollo por la London School of Economics and Political Science (LSE), graduada con mérito académico. Es socia fundadora de ProSociedad. Su experiencia profesional se centra en el diseño, gestión estratégica y evaluación de programas y proyectos con impacto social; así́ como el fortalecimiento de Organizaciones de la Sociedad Civil, con énfasis en el desarrollo institucional y la sustentabilidad financiera. En 2015 fue acreedora al segundo lugar del Premio a la Investigación sobre Sociedad Civil 2015 promovido por Centro Mexicano para la Filantropía (CEMEFI). Como docente ha colaborado con la Universidad Panamericana, Tec de Monterrey y el ITESO, en donde ha impartido materias en temas de Gestión de Proyectos de Cooperación Internacional para el Desarrollo, Economía Social, Responsabilidad Social Empresarial e Innovación Social.</p>
+							<p>Magdalena Rodríguez es Ingeniera Industrial y de Sistemas por el ITESM Campus Guadalajara y maestra en Gestión de Desarrollo por la London School of Economics and Political Science (LSE), graduada con mérito académico. Es socia fundadora de ProSociedad. Su experiencia profesional se centra en el diseño, gestión estratégica y evaluación de programas y proyectos con impacto social; así́ como el fortalecimiento de Organizaciones de la Sociedad Civil, con énfasis en el desarrollo institucional y la sustentabilidad financiera. En 2015 fue acreedora al segundo lugar del Premio a la Investigación sobre Sociedad Civil 2015 promovido por Centro Mexicano para la Filantropía (CEMEFI). Como docente ha colaborado con la Universidad Panamericana, Tec de Monterrey y el ITESO, en donde ha impartido materias en temas de Gestión de Proyectos de Cooperación Internacional para el Desarrollo, Economía Social, Responsabilidad Social Empresarial e Innovación Social.</p>
 							</li>
 							<li>
 							<h3>María Elena Valencia González </h3>
-							<p>Elena es licenciada en Administración y Negocios Internacionales  y cuenta con maestría en Desarrollo Social ambas por la Universidad Panamericana sede Guadalajara. Fue becada por la Comisión Europea para realizar estudios de maestría en Gestión Estratégica de Proyectos por la Universidad Heriot-Watt de Escocia, el Politecnico di Milano y la Universidad de Umea en Suecia, graduándose con honores con la tesis de investigación "Development of wind farm projects through partnership as a strategic decision. An empirical study of different partners’ perspective". </p>
+							<p>Elena es licenciada en Administración y Negocios Internacionales  y cuenta con maestría en Desarrollo Social ambas por la Universidad Panamericana sede Guadalajara. Fue becada por la Comisión Europea para realizar estudios de maestría en Gestión Estratégica de Proyectos por la Universidad Heriot-Watt de Escocia, el Politécnico di Milano y la Universidad de Umea en Suecia, graduándose con honores con la tesis de investigación <em>"Development of wind farm projects through partnership as a strategic decision. An empirical study of different partners’ perspective"</em>. </p>
 							</li>
 						</ul>
 						</div>
@@ -250,11 +264,7 @@
 						<h3>Ponentes invitados</h3>
 						<span></span>
 						<div class="panel">
-						<ul>
-							<li>Alejandro González Arreola (Gesoc)</li>
-							<li>Ana Cristina Ruelas (ARTICLE 19, México)</li>
-							<li>Francisco Álvarez (INAI)</li>
-						</ul>
+							<p>Como parte del programa contaremos con la participación de ponentes expertos en las materias y temáticas a abordar. En Seminarios, Charlas y Webinars contaremos con la participación de ponentes de miembros de organizaciones de referencia: INAI, PNUD y el Sistema de Naciones Unidas, UNAM, CIDE, Tec de Monterrey, el COLMEX, entre otros.</p>
 						</div>
 					</li>
 					<!--Evaluación-->
