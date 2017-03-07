@@ -4,6 +4,7 @@
       <th>Nombre</th>
       <th>Email</th>
       <th>Ciudad, Estado</th>
+      <th>Puntaje</th>
       <th>Acciones</th>
     </tr>
   </thead>
@@ -13,6 +14,11 @@
         <td>{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</td>
         <td>{{$aspirant->email}}</td>
         <td>{{$aspirant->city}}, {{$aspirant->state}}</td>
+        @if($aspirant->aspirantEvaluation)
+        <td>{{($aspirant->aspirantEvaluation->grade*10).'%'}}</td>
+        @else
+        <td>Sin calificación</td>
+        @endif
         <td>
           <a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}" class="btn xs view">Ver</a>
           <a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view">Evaluar</a>

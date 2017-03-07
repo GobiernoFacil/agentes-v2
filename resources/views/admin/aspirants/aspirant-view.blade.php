@@ -23,4 +23,12 @@
 <li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->privacy}/privacidad")}}'  class="btn view xs"> Descargar Consentimiento Relativo Al Tratamiento de sus Datos Personales</a></li>
 @endif
 @endif
+@if($aspirant->aspirantEvaluation)
+<li><span>Experiencia previa:</span> {{($aspirant->aspirantEvaluation->experienceGrade*10).'%'}}</li>
+<li><span>Valoración ensayo:</span> {{($aspirant->aspirantEvaluation->essayGrade*10).'%'}}</li>
+<li><span>Valoración video:</span> {{($aspirant->aspirantEvaluation->videoGrade*10).'%'}}</li>
+<li><span>Evaluación:</span> {{($aspirant->aspirantEvaluation->grade*10).'%'}}</li>
+@else
+<li><a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
+@endif
 </ul>
