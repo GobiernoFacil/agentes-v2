@@ -39,6 +39,7 @@
 						<div class="panel">
 						<p>Durante los siete meses de duración del programa, los contenidos y actividades se realizarán fundamentalmente en una plataforma en línea. Además, se tiene prevista la realización de dos rondas de seminarios y talleres presenciales – conducidos por expertos reconocidos en temas de Gobierno Abierto y Desarrollo Sostenible –a finales del mes de mayo y durante el mes de agosto en sedes por definir en la Ciudad de México y/o en algún estado de la República Mexicana. Para complementar su formación y desarrollar competencias blandas las y los participantes contarán con el acompañamiento de un mentor que contribuirá a la potencialización de los conocimientos y habilidades adquiridas a través de los demás mecanismos de formación del programa.</p>
 						<p>Además de adquirir capacidades y de vincularse a la red de Agentes Locales de Cambio, se espera que los participantes elaboren y presenten al final de los siete meses un proyecto en equipo, concreto y factible que, a través del uso de las herramientas adquiridas durante el programa, enfrente un reto local de desarrollo por medio de la realización de acciones que promuevan la transparencia, la participación, la rendición de cuentas, y la innovación cívica y tecnológica. Aquellos participantes que cumplan satisfactoriamente con todos los requisitos académicos al concluir el programa, recibirán una constancia de participación.</p>
+						<p><img src="{{url('img/metodologia.png')}}" alt="Gráfico de metodología"></p>
 						</div>
 					</li>
 					<!--Contenido Temático-->
