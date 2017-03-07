@@ -4,12 +4,15 @@
 	@if ($__env->yieldContent('body_class') =="programa")
 	<li>Programa de Gobierno Abierto</li>
 	@endif
-	@if ($__env->yieldContent('body_class') =="programa aliados" || $__env->yieldContent('body_class') =="programa alcance" || $__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance sonora"
+	@if ($__env->yieldContent('body_class') =="programa aliados" || $__env->yieldContent('body_class') =="programa antecedentes" || $__env->yieldContent('body_class') =="programa alcance" || $__env->yieldContent('body_class') =="programa alcance chihuahua" || $__env->yieldContent('body_class') =="programa alcance sonora"
 	|| $__env->yieldContent('body_class') =="programa alcance leon" || $__env->yieldContent('body_class') =="programa alcance oaxaca" || $__env->yieldContent('body_class') =="programa alcance morelos")
 	<li><a href="{{url('programa-gobierno-abierto')}}">Programa de Gobierno Abierto</a></li>
 	@endif
 	@if ($__env->yieldContent('body_class') =="programa aliados")
 	<li>Aliados</li>
+	@endif
+	@if ($__env->yieldContent('body_class') =="programa antecedentes")
+	<li>Antecedentes</li>
 	@endif
 	@if ($__env->yieldContent('body_class') =="programa alcance")
 	<li>Alcance</li>
