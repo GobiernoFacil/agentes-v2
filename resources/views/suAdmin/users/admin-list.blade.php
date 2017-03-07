@@ -18,3 +18,5 @@
     @endforeach
   </tbody>
 </table>
+
+{{ $admins->links() }}

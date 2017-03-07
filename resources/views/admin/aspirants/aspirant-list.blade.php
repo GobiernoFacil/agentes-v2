@@ -27,3 +27,5 @@
     @endforeach
   </tbody>
 </table>
+
+  {{ $aspirants->links() }}

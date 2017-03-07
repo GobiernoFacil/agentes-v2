@@ -25,7 +25,7 @@ class Aspirants extends Controller
     public function index()
     {
       $user = Auth::user();
-      $aspirants = Aspirant::where('is_activated',1)->paginate($this->pageSize);
+      $aspirants = Aspirant::where('is_activated',1)->orderBy('surname','asc')->paginate($this->pageSize);
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants

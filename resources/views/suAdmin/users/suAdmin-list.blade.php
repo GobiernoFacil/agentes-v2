@@ -18,3 +18,6 @@
     @endforeach
   </tbody>
 </table>
+
+
+{{ $suAdmins->links() }}
