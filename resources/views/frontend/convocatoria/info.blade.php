@@ -69,8 +69,25 @@
 				<h3>Perfil y elegibilidad de los participantes</h3>
 				<span></span>
 				<div class="panel">
-				<p>Para la edición 2017 de este programa de formación se seleccionarán hasta 20 participantes, mismos que serán elegidos a través de un proceso abierto y transparente por un Comité Dictaminador integrado por un representante de cada una de las organizaciones convocantes. Dado el cupo de participantes, en esta primera edición, se considerarán exclusivamente solicitudes de candidatos provenientes de los estados de Sonora, Chihuahua, Morelos, Nuevo León y Oaxaca, que forman parte del proyecto de Gobierno Abierto: Cocreación desde lo Local impulsado por el SNT y el INAI; atendiendo al estatus y a las condiciones de avance de los ejercicios en cada una de estas entidades federativas, que hace más viable coordinar la operación del programa.<a href="#note2"><sup>2</sup></a> Hay que señalar que en futuras ediciones, la convocatoria se ampliará a solicitantes de un mayor número de estados. El Comité Dictaminador garantizará el equilibrio de género en la selección de los participantes en el programa de formación, así como en el sector de procedencia.</p>
-
+				<p>Para la edición 2017 de este programa de formación se seleccionarán hasta 20 participantes, mismos que serán elegidos a través de un proceso abierto y transparente por un Comité Dictaminador integrado por un representante de cada una de las organizaciones convocantes. Dado el cupo de participantes, en esta primera edición, y considerando que es un ejercicio piloto de fortalecimiento de capacidades, se recibirán exclusivamente postulaciones de candidatos provenientes de los estados de Sonora, Chihuahua, Morelos, Nuevo León y Oaxaca, que forman parte del proyecto de <strong>Gobierno Abierto: Cocreación desde lo Local impulsado por el Sistema Nacional de Transparencia y el INAI</strong>. Entre los criterios que la Junta del Proyecto utilizó para seleccionar a estas entidades fueron:</p>
+				<div class="row">
+					<div class="col-sm-6">
+					<h4>Generales</h4>
+					<ol>
+						<li>Que ninguna entidad atravesara por procesos electorales en 2017</li>
+						<li>Que a criterio de la Secretaría Técnica de la Comisión Permanente de Gobierno Abierto del INAI, los ejercicios muestren condiciones propicias para su desarrollo pero que requieran el fortalecimiento de capacidades para su sostenibilidad en el mediano plazo.</li>
+					</ol>
+						</div>
+						<div class="col-sm-6">				
+					<h4>Particulares</h4>
+					<ol>
+						<li>Dos entidades que hayan lanzado su Plan de Acción Local (PAL) a más tardar al cierre de 2016; una que haya concluido con su implementación y otra que se encuentre en el proceso de conclusión</li>
+						<li>Tres entidades que se hayan incorporado a la iniciativa en 2016</li>
+					</ol>
+					</div>
+				</div>
+				<p>Hay que señalar que en futuras ediciones, la convocatoria se ampliará a 10 entidades federativas más. El Comité Dictaminador garantizará el equilibrio de género en la selección de los participantes en el programa de formación, así como en el sector de procedencia (sector social, académico, privado o gubernamental). Igualmente, en el proceso de selección se procurará tener una representación equitativa de cada entidad federativa participante en función de las postulaciones recibidas.</p>
+				
 				<p>Los interesados en participar en el programa deberán:</p>
 				<ol>
 					<li>Ser jóvenes líderes de entre 25 y 40 años que formen parte de los sectores gubernamental, social, empresarial o académico; que radiquen en los estados de Sonora, Chihuahua, Morelos, Nuevo León y Oaxaca.</li>
@@ -79,11 +96,11 @@
 					<li>Ser innovadores y estar comprometidos para formar parte de una red de líderes para el intercambio de experiencias y el desarrollo de proyectos de gobierno abierto con alcance local y regional.</li>
 				</ol>
 
-				<p>Como parte del proceso de postulación, los interesados deberán<a href="#note3"><sup>3</sup></a>:</p>
+				<p>Como parte del proceso de postulación, los interesados deberán<a href="#note2"><sup>2</sup></a>:</p>
 				<ol>
 					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('')}}">{{url('')}}</a>.</li>
-					<li>Elaborar un ensayo – no mayor a cinco cuartillas –<a href="#note4"><sup>4</sup></a> en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
-					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.<a href="#note5"><sup>5</sup></a></li>
+					<li>Elaborar un ensayo – no mayor a cinco cuartillas –<a href="#note3"><sup>3</sup></a> en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
+					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.<a href="#note4"><sup>4</sup></a></li>
 					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).</li>
 					<li>Presentar una carta membretada que muestre el sector de procedencia del aspirante (sociedad civil, gobierno, académica, iniciativa privada).</li>
 					<li>Presentar una copia de comprobante de domicilio que acredite la residencia del candidato.</li>
@@ -148,14 +165,12 @@
 		<div class="notes">
 		<p> <a id="note1"></a>
 			<sup>1</sup> La realización de este programa es posible gracias al apoyo y financiamiento otorgado por USAID en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”<br>
-			<a id="note2"></a>
-			<sup>2</sup> En ediciones posteriores del Programa de Fortalecimiento de Capacidades se ampliará la convocatoria, en función de la disponibilidad de recursos, a aspirantes de una mayor cantidad de entidades federativas.<br>
-			 <a id="note3"></a>
-			 <sup>3</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el <a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a> de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en <a href="{{url('aviso-privacidad')}}">{{url('aviso-privacidad')}}</a> .<br> 
+			 <a id="note2"></a>
+			 <sup>2</sup> Los datos personales recabados, serán protegidos de acuerdo a lo establecido en el <a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a> de la Convocatoria al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible Edición 2017, disponible en <a href="{{url('aviso-privacidad')}}">{{url('aviso-privacidad')}}</a> .<br> 
+			  <a id="note3"></a>
+			  <sup>3</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
 			  <a id="note4"></a>
-			  <sup>4</sup> Letra Arial 12, interlineado doble, márgenes de 3 centímetros en todos los lados.<br>
-			  <a id="note5"></a>
-			  <sup>5</sup>El video puede realizarse con cualquier dispositivo (teléfono móvil, tableta o cámara digital), y deberá ser subido a la plataforma en línea http://www.youtube.com 
+			  <sup>4</sup>El video puede realizarse con cualquier dispositivo (teléfono móvil, tableta o cámara digital), y deberá ser subido a la plataforma en línea http://www.youtube.com 
 			
 			
 		</p>
