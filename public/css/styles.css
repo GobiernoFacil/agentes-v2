@@ -1504,6 +1504,9 @@ a.apertus:hover {
     background: rgba(0, 0, 0, 0.8); }
   .bgdimg figure {
     position: absolute;
+    height: 628px;
+    width: 100%;
+    overflow: hidden;
     z-index: 0; }
     .bgdimg figure:after {
       content: "";
@@ -1515,6 +1518,9 @@ a.apertus:hover {
       top: 0;
       transition: background 500ms;
       width: 100%; }
+    .bgdimg figure img {
+      width: 945px;
+      height: auto; }
   .bgdimg .cta {
     padding-top: 160px; }
     .bgdimg .cta h1,
@@ -1993,6 +1999,8 @@ footer {
     display: none; }
   .bgdimg {
     min-height: 300px; }
+    .bgdimg figure {
+      height: 330px; }
     .bgdimg .cta {
       padding-top: 28px; }
       .bgdimg .cta h1 {
@@ -2008,6 +2016,8 @@ footer {
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .bgdimg {
     min-height: 300px; }
+    .bgdimg figure {
+      height: 390px; }
     .bgdimg .cta {
       padding-top: 28px; }
       .bgdimg .cta h1 {
@@ -2016,6 +2026,16 @@ footer {
         font-size: 24px; }
       .bgdimg .cta h3 {
         font-size: 20px; } }
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .bgdimg figure {
+    height: 600px; }
+    .bgdimg figure img {
+      width: 948px;
+      height: auto;
+      max-width: 1200px; }
+  .bgdimg .cta {
+    padding-top: 97px; } }
 
 /* =Print
 ----------------------------------------------- */
