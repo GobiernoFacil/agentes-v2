@@ -2,7 +2,7 @@
 @section('title', 'Antecedentes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Antecedentes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'programa antecedentes')
-@section('canonical', url('programa-gobierno-abierto'))
+@section('canonical', url('programa-gobierno-abierto/antecedentes'))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
