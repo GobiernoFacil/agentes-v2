@@ -10,6 +10,7 @@ class AspirantEvaluation extends Model
     public $table = 'aspirantEvaluation';
     protected $fillable = [
     'aspirant_id',
+    'user_id',
     'experience',
     'experience1',
     'experience2',
@@ -27,7 +28,11 @@ class AspirantEvaluation extends Model
     'video1',
     'video2',
     'video3',
-    'video4'
+    'video4',
+    'essayGrade',
+    'videoGrade',
+    'experienceGrade',
+    'grade'
   ];
 
   //modelos relacionados

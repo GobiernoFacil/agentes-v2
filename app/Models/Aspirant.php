@@ -16,7 +16,8 @@ class Aspirant extends Model
     return $this->hasOne("App\Models\AspirantsFile");
   }
 
-  function AspirantsEvaluation(){
-    return $this->hasOne("App\Models\AspirantsEvaluation");
+  function AspirantEvaluation(){
+    return $this->hasOne("App\Models\AspirantEvaluation");
   }
+
 }

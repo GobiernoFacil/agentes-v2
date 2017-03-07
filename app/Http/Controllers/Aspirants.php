@@ -25,7 +25,7 @@ class Aspirants extends Controller
     public function index()
     {
       $user = Auth::user();
-      $aspirants = Aspirant::where('is_activated',1)->paginate($this->pageSize);
+      $aspirants = Aspirant::where('is_activated',1)->orderBy('surname','asc')->paginate($this->pageSize);
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants
@@ -125,20 +125,63 @@ class Aspirants extends Controller
       $evaluation->experience1 = current(array_slice($request->experience1, 0, 1));
       $evaluation->experience2 = current(array_slice($request->experience2, 0, 1));
       $evaluation->experience3 = current(array_slice($request->experience3, 0, 1));
+      $evaluation->experienceGrade = $this->experienceGrade($evaluation);
       $evaluation->essay = current(array_slice($request->essay, 0, 1));
       $evaluation->essay1 = current(array_slice($request->essay1, 0, 1));
       $evaluation->essay2 = current(array_slice($request->essay2, 0, 1));
       $evaluation->essay3 = current(array_slice($request->essay3, 0, 1));
       $evaluation->essay4 = current(array_slice($request->essay4, 0, 1));
+      $evaluation->essayGrade = $this->essayGrade($evaluation);
       $evaluation->video = current(array_slice($request->video, 0, 1));
       $evaluation->video1 = current(array_slice($request->video1, 0, 1));
       $evaluation->video2 = current(array_slice($request->video2, 0, 1));
       $evaluation->video3 = current(array_slice($request->video3, 0, 1));
       $evaluation->video4 = current(array_slice($request->video4, 0, 1));
+      $evaluation->videoGrade = $this->videoGrade($evaluation);
       $evaluation->aspirant_id = $aspirant->id;
+      $evaluation->grade    =   $evaluation->experienceGrade + $evaluation->videoGrade +$evaluation->essayGrade;
       $evaluation->save();
       return redirect('dashboard/aspirantes/ver/'.$aspirant->id)->with('success','Evaluación guardada');
 
+
+    }
+
+    protected function experienceGrade($data){
+      $total = 0;
+      if($data->experience){
+        $total = $total + .75;
+      }
+      $total = $total + (($data->experience1*.75)/10);
+      if($data->experience2){
+        $total = $total + .75;
+      }
+      $total = $total + (($data->experience3*.75)/10);
+
+      return $total;
+
+    }
+
+    protected function essayGrade($data){
+      $total = 0;
+      $total = $total + (($data->essay*.7)/10);
+      $total = $total + (($data->essay1*.7)/10);
+      $total = $total + (($data->essay2*.7)/10);
+      $total = $total + (($data->essay3*.7)/10);
+      $total = $total + (($data->essay4*.7)/10);
+
+      return $total;
+
+    }
+
+    protected function videoGrade($data){
+      $total = 0;
+      $total = $total + (($data->video*.7)/10);
+      $total = $total + (($data->video1*.7)/10);
+      $total = $total + (($data->video2*.7)/10);
+      $total = $total + (($data->video3*.7)/10);
+      $total = $total + (($data->video4*.7)/10);
+
+      return $total;
 
     }
 
