@@ -6,8 +6,7 @@
 @section('content')
 
 <h1>Tablero de control</h1>
-<p>En este tablero podrás consultar de manera inmediata si existe alguna aplicación de los aspirantes en el <strong>Programa 
-de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>. Así como los usuarios
-que tienen acceso. </p>
+<p>En este tablero podrás consultar de si existen aspirantes a la convocatoria del <strong>Programa 
+de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.  </p>
 
 @endsection
