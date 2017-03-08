@@ -59,36 +59,34 @@
 @endif
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
+	<header>
+	<!--header-->
+	@include('layouts.admin.a_header')
+	</header>
 
-	<div class="container">
-		<header>
-		<!--header-->
-		@include('layouts.admin.a_header')
-		</header>
-
-	</div>
 	@if ($__env->yieldContent('breadcrumb'))
 	<div class="container">
-			<div class="breadcrumb">
+		<div class="breadcrumb">
 			<div class="row">
-		<div class="col-sm-12">
-		@include($__env->yieldContent('breadcrumb'))
-		</div>
-		</div>
+				<div class="col-sm-12">
+					@include($__env->yieldContent('breadcrumb'))
+				</div>
+			</div>
 		</div>
 	</div>
 	@endif
-	<main class="main-content">
+	
+	<section>
 		<!--content-->
 		<div class="container">
 		@yield('content')
 		</div>
+	</section>
+	
+	<!--footer-->
+	@include('layouts.admin.a_footer')
 
-		<!--footer-->
-		@include('layouts.admin.a_footer')
-
-		<!--js content -->
-		@yield('js-content')
-	</main>
+	<!--js content -->
+	@yield('js-content')	
 </body>
 </html>
