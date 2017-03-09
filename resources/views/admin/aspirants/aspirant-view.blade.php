@@ -1,3 +1,9 @@
+@extends('layouts.admin.a_master')
+@section('title', 'Lista de Aspirantes')
+@section('description', 'Lista de Aspirantes')
+@section('body_class', 'aspirantes')
+
+@section('content')
 <ul>
 <li><span>Nombre:</span> {{$aspirant->name." ".$aspirant->surname." ".$aspirant->lastname}}</li>
 <li><span>Email:</span> {{$aspirant->email}}</li>
@@ -32,3 +38,4 @@
 <li><a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
 @endif
 </ul>
+@endsection
