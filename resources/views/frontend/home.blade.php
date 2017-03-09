@@ -17,7 +17,7 @@
 				<div class="col-sm-8 col-sm-offset-2">
 				<h1>SÉ UN <strong>AGENTE DE CAMBIO</strong></h1>
 				<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
-				<h3>Convocatoria abierta del <span><strong>13 de marzo hasta el 13 de abril de 2017</strong></span></h3>
+				<h3>Convocatoria abierta del <span><strong>13 de marzo hasta el 20 de abril de 2017</strong></span></h3>
 				<a href="{{url('convocatoria')}}" class="btn i_convoca_w">Participa</a>
 				</div>
 				<div class="clearfix"></div>

@@ -124,7 +124,7 @@
 			<h3>Plazos y proceso de postulación</h3>
 			<span></span>
 			<div class="panel">
-			<p>La presente convocatoria estará abierta del 13 de marzo hasta el 13 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</p>
+			<p>La presente convocatoria estará abierta del 13 de marzo hasta el 20 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</p>
 			
 			<p>Una vez cerrado el plazo de postulaciones, el Comité Dictaminador integrado por un representante de las organizaciones convocantes revisará la documentación entregada por los postulantes, y preseleccionará a un grupo de candidatos que serán invitados a una ronda de entrevistas en línea, que permitirán evaluar con mayor detalle la idoneidad del perfil. Posteriormente, el Comité Dictaminador seleccionará por consenso un máximo de 20 participantes que cumplan satisfactoriamente con los requisitos establecidos en esta convocatoria y que hayan destacado en la ronda de entrevistas. El Comité Dictaminador estará integrado por:</p>
 			<ul>
