@@ -97,12 +97,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@profile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
-    /*@Applications Controller */
-    Route::get('dashboard/aplicaciones', 'Applications@index');
-    Route::get('dashboard/aplicaciones/buscar', 'Applications@search');
-    Route::get('dashboard/aplicaciones/ver/{id}', 'Applications@view');
-    Route::get('dashboard/aplicaciones/evaluar/{id}', 'Applications@evaluate');
-    /*@Aspirants Controller */
+    // @Aspirants Controller */
     Route::get('dashboard/aspirantes', 'Aspirants@index');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
     Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
