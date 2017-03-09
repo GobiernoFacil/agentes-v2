@@ -1119,6 +1119,9 @@ header {
         header li a:link:hover b,
         header li a:visited:hover b {
           background-color: rgba(0, 0, 0, 0.6); }
+    header li.active b,
+    header li.active a:hover b {
+      background-color: #51be92; }
   header .logout {
     background: red;
     color: white;
