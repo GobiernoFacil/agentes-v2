@@ -5,7 +5,7 @@
 	<div class="col-sm-7">
 		<nav>
 			<ul>
-				<li><a href="{{url('dashboard')}}"><b class="icon i_tablero"></b> Tablero</a></li>
+				<li class="active"><a href="{{url('dashboard')}}"><b class="icon i_tablero"></b> Tablero</a></li>
 				<li><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
 				<!---
 				<li><a href="{{url('dashboard')}}">USUARIOS</a></li> ---->
