@@ -1,3 +1,9 @@
+@extends('layouts.admin.a_master')
+@section('title', 'Lista de Aspirantes')
+@section('description', 'Lista de Aspirantes')
+@section('body_class', 'aspirantes ver')
+
+@section('content')
 <table class="table">
   <thead>
     <tr>
@@ -29,3 +35,4 @@
 </table>
 
   {{ $aspirants->links() }}
+@endsection
