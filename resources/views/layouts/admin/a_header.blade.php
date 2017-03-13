@@ -14,7 +14,15 @@
 		</nav>
 	</div>
 	<div class="col-sm-2 right">
-		<a class="logout">Cerrar sesión</a> 
+		<a class ="logout" href="{{ url('/logout') }}"
+				onclick="event.preventDefault();
+								 document.getElementById('logout-form').submit();">
+				Cerrar sesión
+		</a>
+
+		<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+				{{ csrf_field() }}
+		</form>
 		<p>Hola, <strong>{{$user->name}}</strong>.<br> <a href="{{url('dashboard/perfil')}}" class="edit_profile">Ver Perfil</a></p>
 	</div>
 	<div class="clearfix"></div>

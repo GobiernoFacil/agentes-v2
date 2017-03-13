@@ -155,7 +155,7 @@ class Admin extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function profile($id)
+      public function viewProfile()
       {
         $user = Auth::user();
         return view('admin.profile.profile-view')->with([

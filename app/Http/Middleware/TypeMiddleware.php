@@ -15,11 +15,13 @@ class TypeMiddleware
      */
      public function handle($request, Closure $next, $type,$orType= NULL)
      {
-       if($request->user()->type == $type){
+
+       if($request->user()->type === $type){
          return $next($request);
        }else{
             return redirect("guide-me");
        }
+
 
      }
 }
