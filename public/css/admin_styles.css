@@ -1267,25 +1267,25 @@ a.btn,
       background: #3ca078; }
 
 .breadcrumb {
-  background: #51be92;
+  background: rgba(0, 0, 0, 0.1);
   padding: 0;
-  margin: 0 0 50px;
+  margin: 0;
   display: block;
   width: 100%; }
   .breadcrumb ul {
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
     padding: 7px 10px; }
   .breadcrumb li {
-    color: white;
+    color: #777;
     display: inline-block;
     margin-right: 5px; }
     .breadcrumb li a {
-      color: white;
+      color: #777;
       border: 0;
       font-weight: 700; }
       .breadcrumb li a:hover {
-        border-bottom: 1px solid white; }
+        border-bottom: 1px solid #777; }
     .breadcrumb li:after {
       content: " / "; }
     .breadcrumb li:first-child:after,
@@ -1293,6 +1293,12 @@ a.btn,
       content: ""; }
     .breadcrumb li:first-child {
       color: rgba(0, 0, 0, 0.5); }
+
+/********     box        *****/
+.box {
+  background: white;
+  margin: 30px 0;
+  padding: 30px 15px 50px; }
 
 .notes p {
   font-size: 13px; }
