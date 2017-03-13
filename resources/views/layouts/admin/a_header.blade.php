@@ -6,7 +6,7 @@
 		<nav>
 			<ul>
 				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url('dashboard')}}"><b class="icon i_tablero"></b> Tablero</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes ver' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
 				<!---
 				<li><a href="{{url('dashboard')}}">USUARIOS</a></li> ---->
 
