@@ -1197,6 +1197,29 @@ a.btn,
   .btn:hover {
     background: #ef472c;
     cursor: pointer; }
+  a.btn.xs,
+  .btn.xs {
+    padding: 5px; }
+  a.btn.view,
+  .btn.view {
+    color: white;
+    background-color: #51be92; }
+    a.btn.view:hover,
+    .btn.view:hover {
+      background-color: #358e6a; }
+  a.btn.ev,
+  .btn.ev {
+    background-color: #187fad; }
+    a.btn.ev:hover,
+    .btn.ev:hover {
+      background-color: #0f4e6a; }
+  a.btn.danger,
+  .btn.danger {
+    color: white;
+    background-color: red; }
+    a.btn.danger:hover,
+    .btn.danger:hover {
+      background-color: #b30000; }
   a.btn.gde,
   .btn.gde {
     background-color: #f15c44;

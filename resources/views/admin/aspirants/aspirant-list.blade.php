@@ -17,7 +17,7 @@
   <tbody>
     @foreach ($aspirants as $aspirant)
       <tr>
-        <td>{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</td>
+        <td><h4><a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4></td>
         <td>{{$aspirant->email}}</td>
         <td>{{$aspirant->city}}, {{$aspirant->state}}</td>
         @if($aspirant->aspirantEvaluation)
@@ -27,7 +27,7 @@
         @endif
         <td>
           <a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-          <a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view">Evaluar</a>
+          <a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
           <a href ="{{ url('dashboard/aspirantes/eliminar' . $aspirant->id) }}"  id ="{{$aspirant->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
     </tr>
     @endforeach
