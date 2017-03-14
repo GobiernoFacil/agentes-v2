@@ -1,4 +1,23 @@
-@include('admin.aspirants.form.evaluation-form')
+@extends('layouts.admin.a_master')
+@section('title', 'Lista de Aspirantes')
+@section('description', 'Lista de Aspirantes')
+@section('body_class', 'aspirantes')
+@section('breadcrumb_type', 'aspirantes evaluar')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
+
+@section('content')
+
+@if($evaluation)
+	@include('admin.aspirants.form.evaluation-form')
+@else
+	<h1>El aspirante no cuenta con archivos</h1>
+	<div class="box">
+		<p>El aspirante no adjunto archivos, por lo que no puede ser evaluado.</p>
+	</div>
+@endif
+
+
+
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function() {
@@ -59,3 +78,4 @@ $(document).ready(function() {
        $(this).attr('checked', true); });
      });
 </script>
+@endsection

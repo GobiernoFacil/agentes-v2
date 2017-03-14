@@ -1,4 +1,3 @@
-@if($evaluation)
 {!! Form::model($evaluation,['url' => url('dashboard/aspirantes/evaluar').'/'.$aspirant->id, "class" => "form-horizontal"]) !!}
 
 <div class="row">
@@ -365,6 +364,3 @@
   </div>
 </div>
 {!! Form::close() !!}
-@else
-<h1>El aspirante no cuenta con archivos</h1>
-@endif
