@@ -2,7 +2,7 @@
 @section('title', 'Lista de Aspirantes')
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirantes ver')
+@section('breadcrumb_type', 'aspirantes list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
 
 @section('content')
