@@ -197,7 +197,7 @@
 								</tr>
 								<!-- mentoría-->
 								<tr>
-									<td><h4>6. MENTORÍA <br>Integración de los Agentes de Cambio a su Secretariado Técnico Local</h4></td>
+									<td><h4>7. MENTORÍA <br>Integración de los Agentes de Cambio a su Secretariado Técnico Local</h4></td>
 									<td>
 										<table class="table">
 											<tr>
