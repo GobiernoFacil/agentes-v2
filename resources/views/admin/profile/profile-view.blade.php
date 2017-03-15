@@ -2,6 +2,8 @@
 @section('title', 'Perfil')
 @section('description', 'Ver perfil')
 @section('body_class', 'profile')
+@section('breadcrumb_type', 'profile view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_profile')
 
 @section('content')
 <div class="row">
