@@ -169,7 +169,7 @@ class Admin extends Controller
        * @param  int  $id
        * @return \Illuminate\Http\Response
        */
-      public function editProfile($id)
+      public function editProfile()
       {
         $user = Auth::user();
         return view('admin.profile.profile-update')->with([
