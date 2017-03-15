@@ -31,6 +31,7 @@ class UpdateAdmin extends FormRequest
       return [
       'name'     => 'required',
       'email'    => 'required|email|max:255' . ($user->email != $this->email ? '|unique:users' : ''),
+      'institution' => 'required',
       'password' => 'min:8|nullable',
       'password-confirm'=>'same:password'
       ];

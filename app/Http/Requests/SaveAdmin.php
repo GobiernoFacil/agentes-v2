@@ -27,6 +27,7 @@ class SaveAdmin extends FormRequest
       return [
         'name'     => 'required',
         'email'    => 'required|email|max:255|unique:users',
+        'institution' => 'required',
         'password' => 'required|min:8',
         'password-confirm'=> 'required|same:password'
       ];
