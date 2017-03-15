@@ -6,10 +6,12 @@
 		<nav>
 			<ul>
 				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url('dashboard')}}"><b class="icon i_tablero"></b> Tablero</a></li>
+				@if($user->type == "admin")
 				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
-				<!---
-				<li><a href="{{url('dashboard')}}">USUARIOS</a></li> ---->
-
+				@endif
+				@if($user->type == "superAdmin")
+				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url('sa/dashboard/administradores')}}"><b class="icon i_usuarios"></b> USUARIOS</a></li>
+				@endif
 			</ul>
 		</nav>
 	</div>
