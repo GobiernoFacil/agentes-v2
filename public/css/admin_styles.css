@@ -369,7 +369,8 @@ form {
     padding: 5px;
     width: 100%; }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background: #f2f2f2;
   border: 1px solid #f2f2f2;
   line-height: 35px;
@@ -379,7 +380,9 @@ input[type="text"] {
   width: 100%; }
 
 input.btn {
+  color: white;
   display: block;
+  border: 0;
   width: 100%; }
 
 table {
