@@ -6,8 +6,11 @@
 @section('breadcrumb', 'layouts.suAdmin.breadcrumbs.b_users')
 @section('content')
 <div class="row">
-	<div class="col-sm-12">
-		<h1>Lista de usuarios</h1>
+	<div class="col-sm-9">
+		<h1>Lista de usuarios administradores</h1>
+	</div>
+	<div class="col-sm-3 center">
+		<a href="{{ url('sa/dashboard/administradores/agregar') }}" class="btn gde"><strong>+</strong> Agregar usuario</a>
 	</div>
 </div>
 <div class="box">
