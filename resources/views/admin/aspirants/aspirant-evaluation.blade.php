@@ -13,6 +13,7 @@
 	<h1>El aspirante no cuenta con archivos</h1>
 	<div class="box">
 		<p>El aspirante no adjunto archivos, por lo que no puede ser evaluado.</p>
+		<p><a href="{{ url('dashboard/aspirantes') }}" class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
 	</div>
 @endif
 
