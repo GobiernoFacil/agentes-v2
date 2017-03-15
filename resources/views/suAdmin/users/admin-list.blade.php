@@ -25,7 +25,7 @@
 			  <tbody>
 			    @foreach ($admins as $admin)
 			      <tr>
-			        <td><h4>{{$admin->name}}</h4></td>
+			        <td><h4> <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}">{{$admin->name}}</a></h4></td>
 			        <td>{{$admin->email}}</td>
 			        <td></td>
 			        <td>
