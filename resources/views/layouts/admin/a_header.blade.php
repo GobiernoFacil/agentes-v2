@@ -1,3 +1,13 @@
+<?php 
+	if($user->type == "admin") {
+		$linkDash = "dashboard";
+	}
+	else {
+		$linkDash = "sa/dashboard";
+	}
+	
+?>
+
 <header>
 	<div class="col-sm-3 logo">
 		<a class="apertus" href="{{url('')}}" title="Regresar a inicio">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
@@ -5,12 +15,12 @@
 	<div class="col-sm-7">
 		<nav>
 			<ul>
-				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url('dashboard')}}"><b class="icon i_tablero"></b> Tablero</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url($linkDash)}}"><b class="icon i_tablero"></b> Tablero</a></li>
 				@if($user->type == "admin")
 				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
 				@endif
 				@if($user->type == "superAdmin")
-				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url('sa/dashboard/administradores')}}"><b class="icon i_usuarios"></b> USUARIOS</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}"><b class="icon i_usuarios"></b> USUARIOS</a></li>
 				@endif
 			</ul>
 		</nav>
@@ -25,7 +35,7 @@
 		<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
 				{{ csrf_field() }}
 		</form>
-		<p>Hola, <strong>{{$user->name}}</strong>.<br> <a href="{{url('dashboard/perfil')}}" class="edit_profile">Ver Perfil</a></p>
+		<p>Hola, <strong>{{$user->name}}</strong>.<br> <a href="{{url( $linkDash . '/perfil' )}}" class="edit_profile">Ver Perfil</a></p>
 	</div>
 	<div class="clearfix"></div>
 </header>
