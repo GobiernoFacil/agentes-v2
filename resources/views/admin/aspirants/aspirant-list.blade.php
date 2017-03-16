@@ -13,9 +13,8 @@
 	<div class="col-sm-3">
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
 			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
-		<p id ="noResults" style="display:none;">No existen resultados</p>
+			<p id ="nR" style="display:none;">No existen resultados</p>
 		</form>
-
 	</div>
 </div>
 <?php /*
@@ -94,8 +93,11 @@ var CONFIG = {
 };
 appSearch.initialize(CONFIG);
 document.getElementById("search-aspirant").onblur = function() {
-	document.getElementById("boxResults").style.display ="none";
-	document.getElementById("aspirants").style.display ="block";
+	if(this.value==''){
+		document.getElementById("boxResults").style.display ="none";
+		document.getElementById("aspirants").style.display ="block";
+		document.getElementById("nR").style.display ="none";
+	}
 
 };
 </script>

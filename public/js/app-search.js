@@ -88,6 +88,7 @@ var appSearch = {
     var _query   = this.searchBox.value;
     if(_query.length > 1){
       var type = this.searchBox.id;
+      document.getElementById("nR").style.display ="none";
       var url = this.searchUrl;
       var request = new this._makeRequest(url),
       that    = this,
@@ -97,16 +98,11 @@ var appSearch = {
         if (request.status >= 200 && request.status < 400) {
           var d = JSON.parse(request.responseText);
           if(d[0]==='false'){
-            document.getElementById("boxResults").style.display ="block";
-            document.getElementById("aspirants").style.display ="none";
+            document.getElementById("nR").style.display ="block";
+            document.getElementById("aspirants").style.display ="block";
+            document.getElementById("boxResults").style.display ="none";
             var resu = document.getElementById("List");
             resu.innerHTML = '';
-            var tr  = document.createElement("tr");
-            var not = document.createElement("td");
-            var notText = document.createTextNode("No hay resultados");
-            not.appendChild(notText);
-            tr.appendChild(not);
-            resu.appendChild(tr);
           }else{
             that._renderOptions(d);
           }
