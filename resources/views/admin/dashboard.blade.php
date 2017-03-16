@@ -15,7 +15,7 @@
 		<div class="box blue">
 			<h3 class="sa_title">Aspirantes totales</h3>
 			<a class="count_link"  href="{{ url('dashboard/aspirantes') }}">{{$aspirants}}</a>
-			<a href="{{ url('sa/dashboard/super-administradores/agregar') }}" class="btn gde">Lista de Aspirantes</a>
+			<a href="{{ url('dashboard/aspirantes') }}" class="btn gde">Lista de Aspirantes</a>
 		</div>
 		<div class="box">
 			<p>En este tablero podrás consultar si existen aspirantes a la convocatoria del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
