@@ -2,17 +2,6 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>
-      <label>Institución</label>
-      {{Form::text('institution', null, ["class" => "form-control"])}}
-      @if($errors->has('institution'))
-      <strong>{{$errors->first('institution')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-12">
     <h1>Experiencia previa en Gobierno Abierto y Desarrollo Sostenible</h1>
   </div>
 </div>

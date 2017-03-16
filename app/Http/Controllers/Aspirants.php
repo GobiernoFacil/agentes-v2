@@ -26,9 +26,19 @@ class Aspirants extends Controller
     {
       $user = Auth::user();
       $aspirants = Aspirant::where('is_activated',1)->orderBy('surname','asc')->paginate($this->pageSize);
+      $chihuahua_number = Aspirant::where('state','Chihuahua')->count();
+      $morelos_number   = Aspirant::where('state','Morelos')->count();
+      $leon_number = Aspirant::where('state','Nuevo Léon')->count();
+      $oaxaca_number = Aspirant::where('state','Oaxaca')->count();
+      $sonora_number = Aspirant::where('state','Sonora')->count();
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
-        'aspirants' =>$aspirants
+        'aspirants' =>$aspirants,
+        'chihuahua_number' => $chihuahua_number,
+        'morelos_number' =>$morelos_number,
+        'leon_number' =>$leon_number,
+        'oaxaca_number' => $oaxaca_number,
+        'sonora_number' => $sonora_number
       ]);
     }
 
@@ -141,6 +151,7 @@ class Aspirants extends Controller
       $evaluation->video4 = current(array_slice($request->video4, 0, 1));
       $evaluation->videoGrade = $this->videoGrade($evaluation);
       $evaluation->aspirant_id = $aspirant->id;
+      $evaluation->institution = $user->institution;
       $evaluation->grade    =   $evaluation->experienceGrade + $evaluation->videoGrade +$evaluation->essayGrade;
       $evaluation->save();
       return redirect('dashboard/aspirantes/ver/'.$aspirant->id)->with('success','Evaluación guardada');
