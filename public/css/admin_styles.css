@@ -1307,7 +1307,8 @@ a:visited.btn {
     a:visited.btn.btn-login:hover {
       background: #3ca078; }
 
-a.count_link {
+a.count_link,
+.count_link {
   background: #187fad;
   color: white;
   -webkit-border-radius: 50%;
@@ -1321,9 +1322,10 @@ a.count_link {
   width: 150px;
   text-align: center;
   transition: background 500ms; }
-  a.count_link:hover {
-    background: #0c3d53;
-    color: #51be92; }
+
+a.count_link:hover {
+  background: #0c3d53;
+  color: #51be92; }
 
 .breadcrumb {
   background: rgba(0, 0, 0, 0.1);
