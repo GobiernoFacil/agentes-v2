@@ -42,6 +42,7 @@
 			        <td>Gobierno Fácil</td>
 			        <td>
 			          <a href="{{ url('sa/dashboard/super-administradores/ver/' . $user_a->id) }}" class="btn xs view">Ver</a>
+			          <a href="{{ url('sa/dashboard/super-administradores/editar/' . $user_a->id) }}" class="btn xs ev">Editar</a>
 			          <a href ="{{ url('sa/dashboard/super-administradores/eliminar' . $user_a->id) }}"  id ="{{$user_a->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 			    </tr>
 			    @endforeach
