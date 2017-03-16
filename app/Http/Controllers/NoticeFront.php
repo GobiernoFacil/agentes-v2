@@ -119,6 +119,7 @@ class NoticeFront extends Controller
         $aspirantFile->video = $request->video;
         $aspirantFile->save();
         session()->keep(['aspirant_id']);
+        //Eliminar token al terminar registro
         AspirantActivation::where('aspirant_id',$aspirant_id)->delete();
         return redirect('convocatoria/aplicar')->with('success',"Tu registro se ha finalizado con éxito");
       }
