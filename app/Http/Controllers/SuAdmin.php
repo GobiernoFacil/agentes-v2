@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Hash;
+use Mail;
 
 // models
 use App\User;
@@ -33,7 +34,7 @@ class SuAdmin extends Controller
         "user"      	=> $user,
         "sum_suAdmin"   => $sum_suAdmin,
         "sum_Admin"     => $sum_Admin,
-      
+
       ]);
     }
 
@@ -80,6 +81,15 @@ class SuAdmin extends Controller
       $suAdmin->enabled  = 1;
       $suAdmin->password = Hash::make($request->password);
       $suAdmin->save();
+      //envía correo
+      $from    = "info@apertus.org.mx";
+      $subject = "Bienvenido al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
+     //enviar correo para confirmar dirección de correo
+      Mail::send('emails.new_user', ['user' => $suAdmin,'request'=>$request], function($message) use ($suAdmin,$from, $subject) {
+              $message->from($from, 'no-reply');
+              $message->to($suAdmin->email);
+              $message->subject($from);
+      });
 
       return redirect("sa/dashboard/super-administradores/ver/$suAdmin->id")->with('message','Usuario creado correctamente');
     }

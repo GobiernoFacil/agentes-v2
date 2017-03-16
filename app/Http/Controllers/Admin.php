@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 
+use Mail;
+
 // models
 use App\User;
 use App\Models\Aspirant;
@@ -90,6 +92,16 @@ class Admin extends Controller
         $admin->enabled  = 1;
         $admin->password = Hash::make($request->password);
         $admin->save();
+        //envía correo
+        $from    = "info@apertus.org.mx";
+        $subject = "Bienvenido al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
+       //enviar correo para confirmar dirección de correo
+        Mail::send('emails.new_user', ['user' => $admin,'request'=>$request], function($message) use ($admin,$from, $subject) {
+                $message->from($from, 'no-reply');
+                $message->to($admin->email);
+                $message->subject($from);
+        });
+
 
         return redirect("sa/dashboard/administradores/ver/$admin->id")->with('message','Usuario creado correctamente');
       }

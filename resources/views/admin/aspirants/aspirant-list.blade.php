@@ -20,7 +20,14 @@
 		<span>Sonora: {{$sonora_number}}</span>
 	</div>
 </div>
-<div class="row">
+<div class="col-sm-3">
+		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
+			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar " value="{{request('searchBox', '')}}">
+		<p id ="noResults" style="display:none;">No existen resultados</p>
+		</form>
+
+</div>
+<div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
 		<table class="table">
@@ -57,4 +64,36 @@
 		</div>
 	</div>
 </div>
+
+<div id = "boxResults" style="display:none;">
+	<table class="table" id = "resultList">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Email</th>
+				<th>Ciudad, Estado</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody id ="List">
+		</tbody>
+</table>
+</div>
+@endsection
+
+@section('js-content')
+<script src="{{url('js/app-search.js')}}"></script>
+<script>
+var CONFIG = {
+	search_url:    "{{url('dashboard/aspirantes/buscar')}}",
+	general_aspirant_url :    "{{url('dashboard/aspirantes/ver')}}",
+	token      : document.querySelector('input[name="_token"]').value
+};
+appSearch.initialize(CONFIG);
+document.getElementById("search-aspirant").onblur = function() {
+	document.getElementById("boxResults").style.display ="none";
+	document.getElementById("aspirants").style.display ="block";
+
+};
+</script>
 @endsection
