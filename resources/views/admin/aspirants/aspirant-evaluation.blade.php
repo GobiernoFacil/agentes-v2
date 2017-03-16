@@ -8,11 +8,27 @@
 @section('content')
 
 @if($evaluation)
-	@include('admin.aspirants.form.evaluation-form')
+	<div class="row">
+		<div class="col-sm-9">
+			<h1>Evaluar a: <strong>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }}</strong></h1>
+		</div>
+		<div class="col-sm-3">
+			<h4 class="right">{{ $aspirant->city }}, {{ $aspirant->state }} </h4>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="box">
+			<div class="col-sm-10 col-sm-offset-1">
+			@include('admin.aspirants.form.evaluation-form')
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 @else
 	<h1>El aspirante no cuenta con archivos</h1>
 	<div class="box">
-		<p>El aspirante no adjunto archivos, por lo que no puede ser evaluado.</p>
+		<p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} no adjunto archivos, por lo que no puede ser evaluado.</p>
 		<p><a href="{{ url('dashboard/aspirantes') }}" class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
 	</div>
 @endif
