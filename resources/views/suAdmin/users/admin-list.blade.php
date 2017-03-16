@@ -33,6 +33,7 @@
 			        <td></td>
 			        <td>
 			          <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}" class="btn xs view">Ver</a>
+			          <a href="{{ url('sa/dashboard/administradores/editar/' . $admin->id) }}" class="btn xs ev">Editar</a>
 			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $admin->id) }}"  id ="{{$admin->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 			    </tr>
 			    @endforeach
