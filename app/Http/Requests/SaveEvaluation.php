@@ -32,7 +32,6 @@ class SaveEvaluation extends FormRequest
             'experience3'=> 'required',
             'experienceJ1'=> 'required',
             'experienceJ2'=> 'required',
-            'institution'=> 'required',
             'essay'=> 'required',
             'essay1'=> 'required',
             'essay2'=> 'required',

@@ -141,6 +141,7 @@ class Aspirants extends Controller
       $evaluation->video4 = current(array_slice($request->video4, 0, 1));
       $evaluation->videoGrade = $this->videoGrade($evaluation);
       $evaluation->aspirant_id = $aspirant->id;
+      $evaluation->institution = $user->institution;
       $evaluation->grade    =   $evaluation->experienceGrade + $evaluation->videoGrade +$evaluation->essayGrade;
       $evaluation->save();
       return redirect('dashboard/aspirantes/ver/'.$aspirant->id)->with('success','Evaluación guardada');
