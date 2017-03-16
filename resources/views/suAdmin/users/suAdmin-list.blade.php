@@ -7,11 +7,11 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-8">
 		<h1>Lista de super adminsitradores</h1>
 	</div>
-	<div class="col-sm-3 center">
-		<a href="{{ url('sa/dashboard/super-administradores/agregar') }}" class="btn gde"><strong>+</strong> Agregar usuario</a>
+	<div class="col-sm-4 center">
+		<a href="{{ url('sa/dashboard/super-administradores/agregar') }}" class="btn gde"><strong>+</strong> Agregar super administrador</a>
 	</div>
 </div>
 <div class="box">
