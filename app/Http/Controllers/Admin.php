@@ -9,6 +9,7 @@ use Hash;
 
 // models
 use App\User;
+use App\Models\Aspirant;
 
 // FormValidators
 use App\Http\Requests\SaveAdmin;
@@ -27,9 +28,23 @@ class Admin extends Controller
        */
       public function dashboard()
       {
-        $user = Auth::user();
+        $user 			  = Auth::user();
+        $aspirants 		  = Aspirant::where('is_activated',1)->count();
+		$chihuahua_number = Aspirant::where('is_activated',1)->where('state','Chihuahua')->count();
+		$morelos_number   = Aspirant::where('is_activated',1)->where('state','Morelos')->count();
+		$leon_number 	  = Aspirant::where('is_activated',1)->where('state','Nuevo Léon')->count();
+		$oaxaca_number 	  = Aspirant::where('is_activated',1)->where('state','Oaxaca')->count();
+		$sonora_number 	  = Aspirant::where('is_activated',1)->where('state','Sonora')->count();
+      
         return view('admin.dashboard')->with([
-          "user"      => $user,]);
+          "user"      		=> $user,
+          "aspirants"		=> $aspirants,
+		  'chihuahua_number'=> $chihuahua_number,
+		  'morelos_number' 	=> $morelos_number,
+		  'leon_number' 	=> $leon_number,
+		  'oaxaca_number' 	=> $oaxaca_number,
+		  'sonora_number' 	=> $sonora_number
+        ]);
       }
 
       /**
