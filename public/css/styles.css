@@ -1854,6 +1854,12 @@ sup {
     margin: 0 auto;
     z-index: 0; }
 
+.message.success {
+  background: #51be92;
+  padding: 20px;
+  color: white;
+  margin: 20px 0 35px; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
