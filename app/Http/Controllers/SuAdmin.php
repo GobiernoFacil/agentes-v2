@@ -26,9 +26,15 @@ class SuAdmin extends Controller
      */
     public function dashboard()
     {
-      $user = Auth::user();
+      $user 		= Auth::user();
+      $sum_suAdmin  = User::where("type", "superAdmin")->count();
+      $sum_Admin	= User::where("type", "Admin")->where("id", "!=", $user->id)->count();
       return view('suAdmin.dashboard')->with([
-        "user"      => $user,]);
+        "user"      	=> $user,
+        "sum_suAdmin"   => $sum_suAdmin,
+        "sum_Admin"     => $sum_Admin,
+      
+      ]);
     }
 
     /**
