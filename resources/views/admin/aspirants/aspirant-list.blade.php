@@ -90,5 +90,10 @@ var CONFIG = {
 	token      : document.querySelector('input[name="_token"]').value
 };
 appSearch.initialize(CONFIG);
+document.getElementById("search-aspirant").onblur = function() {
+	document.getElementById("boxResults").style.display ="none";
+	document.getElementById("aspirants").style.display ="block";
+
+};
 </script>
 @endsection
