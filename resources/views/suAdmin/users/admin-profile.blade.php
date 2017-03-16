@@ -17,7 +17,7 @@
 			<ul class="profile list">
 				<li><h2>{{$admin->name}}</h2></li>
 				<li><span>email</span>{{$admin->email}}</li>
-				<li><span>Asociación</span> Gobierno Fácil</li>
+				<li><span>Asociación</span> {{$admin->institution}}</li>
 				<li><span>Tipo de usuario</span>{{$admin->type == "admin" ? "Administrador" : ''}}</li>
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($admin->created_at)) }} hrs.</li>
 				<li><span>Última actualización</span>{{ date("d-m-Y, H:i", strtotime($admin->updated_at)) }} hrs.</li>

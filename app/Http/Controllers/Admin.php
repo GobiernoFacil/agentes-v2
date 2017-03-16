@@ -71,6 +71,7 @@ class Admin extends Controller
         $admin->type     = "admin";
         $admin->name     = $request->name;
         $admin->email    = $request->email;
+        $admin->institution    = $request->institution;
         $admin->enabled  = 1;
         $admin->password = Hash::make($request->password);
         $admin->save();
@@ -125,6 +126,7 @@ class Admin extends Controller
         $admin        = User::find($id);
         $admin->name  = $request->name;
         $admin->email = $request->email;
+        $admin->institution    = $request->institution;
 
         if(!empty($request->password)){
           $admin->password = Hash::make($request->password);
