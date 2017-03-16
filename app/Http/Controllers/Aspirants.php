@@ -26,11 +26,11 @@ class Aspirants extends Controller
     {
       $user = Auth::user();
       $aspirants = Aspirant::where('is_activated',1)->orderBy('surname','asc')->paginate($this->pageSize);
-      $chihuahua_number = Aspirant::where('state','Chihuahua')->count();
-      $morelos_number   = Aspirant::where('state','Morelos')->count();
-      $leon_number = Aspirant::where('state','Nuevo Léon')->count();
-      $oaxaca_number = Aspirant::where('state','Oaxaca')->count();
-      $sonora_number = Aspirant::where('state','Sonora')->count();
+      $chihuahua_number = Aspirant::where('state','Chihuahua')->where('is_activated',1)->count();
+      $morelos_number   = Aspirant::where('state','Morelos')->where('is_activated',1)->count();
+      $leon_number = Aspirant::where('state','Nuevo Léon')->where('is_activated',1)->count();
+      $oaxaca_number = Aspirant::where('state','Oaxaca')->where('is_activated',1)->count();
+      $sonora_number = Aspirant::where('state','Sonora')->where('is_activated',1)->count();
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants,
@@ -197,5 +197,29 @@ class Aspirants extends Controller
       return $total;
 
     }
+
+    /**
+     * Search aspirant
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function search(Request $request){
+         $member = $request->match;
+        $results = Aspirant::where('name', 'like', "$member%")
+                    ->orwhere('surname','like',"$member%")
+                    ->orwhere('lastname','like',"$member%")
+                    ->orwhere('email','like',"$member%")
+                    ->orwhere('state','like',"$member%")
+                    ->orwhere('city','like',"$member%")
+                    ->get();
+         if($results->isempty()){
+          return response()->json(['false'])->header('Access-Control-Allow-Origin', '*');;
+         }else{
+           return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+         }
+
+
+     }
 
 }

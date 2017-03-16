@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
     Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
     Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
+    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
