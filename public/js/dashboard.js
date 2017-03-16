@@ -3,6 +3,8 @@ var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 700 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+
+
 // set the ranges
 var x = d3.scaleBand()
           .range([0, width])
@@ -47,4 +49,5 @@ var svg = d3.select("#bar").append("svg")
 
   // add the y Axis
   svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y)
+      .ticks(5));
