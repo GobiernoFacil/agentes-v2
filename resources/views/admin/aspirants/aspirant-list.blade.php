@@ -13,6 +13,15 @@
 </div>
 <div class="row">
 	<div class="col-sm-12">
+		<span>Chihuahua: {{$chihuahua_number}}</span>
+		<span>Morelos: {{$morelos_number}}</span>
+		<span>Nuevo León: {{$leon_number}}</span>
+		<span>Oaxaca: {{$oaxaca_number}}</span>
+		<span>Sonora: {{$sonora_number}}</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
 		<div class="box">
 		<table class="table">
 		  <thead>
