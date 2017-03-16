@@ -7,10 +7,18 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-9">
 		<h1>Lista de Aspirantes</h1>
 	</div>
+	<div class="col-sm-3">
+		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
+			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
+		<p id ="noResults" style="display:none;">No existen resultados</p>
+		</form>
+
+	</div>
 </div>
+<?php /*
 <div class="row">
 	<div class="col-sm-12">
 		<span>Chihuahua: {{$chihuahua_number}}</span>
@@ -19,14 +27,9 @@
 		<span>Oaxaca: {{$oaxaca_number}}</span>
 		<span>Sonora: {{$sonora_number}}</span>
 	</div>
-</div>
-<div class="col-sm-3">
-		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
-			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar " value="{{request('searchBox', '')}}">
-		<p id ="noResults" style="display:none;">No existen resultados</p>
-		</form>
+</div>*/
+?>
 
-</div>
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
