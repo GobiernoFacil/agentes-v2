@@ -11,7 +11,7 @@
 				<label>No {{Form::radio('experience[1]','0', $evaluation->experience== 0 ? true : false,['class' => 'form-control experience'])}}
 			</p>
 			@if($errors->has('experience'))</label>
-				<strong>{{$errors->first('experience')}}</strong>
+				<strong class="danger">{{$errors->first('experience')}}</strong>
 			@endif
 		</li>
 		<li>
@@ -32,7 +32,7 @@
 						<li><label><span>10</span>{{Form::radio('experience1[10]','10', $evaluation->experience1 == 10 ? true : false,['class' => 'form-control experience1'])}}</label></li>
 					</ul>
 					@if($errors->has('experience1'))
-		  				<strong>{{$errors->first('experience1')}}</strong>
+		  				<strong class="danger">{{$errors->first('experience1')}}</strong>
 		  			@endif
 				</div>
 				<div class="col-sm-6">
@@ -40,7 +40,7 @@
 					  <label><strong>Justifique su respuesta:</strong> <br>
 					  {{Form::textarea('experienceJ1', null, ["class" => "form-control"])}} </label>
 					  @if($errors->has('experienceJ1'))
-					  <strong>{{$errors->first('experienceJ1')}}</strong>
+					  <strong class="danger">{{$errors->first('experienceJ1')}}</strong>
 					  @endif
 					</p>
 		  		</div>
@@ -51,7 +51,7 @@
 			<p><label>Sí  {{Form::radio('experience2[0]','1', $evaluation->experience2 == 1 ? true : false,['class' => 'form-control experience2'])}}</label>
 				<label>No {{Form::radio('experience2[1]','0', $evaluation->experience2 == 0 ? true : false,['class' => 'form-control experience2'])}}</label>
 				@if($errors->has('experience2'))
-				<strong>{{$errors->first('experience2')}}</strong>
+				<strong class="danger">{{$errors->first('experience2')}}</strong>
 				@endif
     		</p>
 		</li>
@@ -73,7 +73,7 @@
 						<li><label><span>10</span>{{Form::radio('experience3[10]','10', $evaluation->experience3 == 10 ? true : false,['class' => 'form-control experience3'])}}</label></li>
       				</ul>
       				@if($errors->has('experience3'))
-	  					<strong>{{$errors->first('experience3')}}</strong>
+	  					<strong class="danger">{{$errors->first('experience3')}}</strong>
 	  				@endif
 				</div>
 			
@@ -82,7 +82,7 @@
     				  <strong>Justifique su respuesta</strong>
     				  {{Form::textarea('experienceJ2', null, ["class" => "form-control"])}}
     				  @if($errors->has('experienceJ2'))
-    				  <strong>{{$errors->first('experienceJ2')}}</strong>
+    				  <strong class="danger">{{$errors->first('experienceJ2')}}</strong>
     				  @endif
     				</p>
 				</div>
@@ -119,7 +119,7 @@
       		</ul>
       				
 	  		@if($errors->has('essay'))
-	  		<strong>{{$errors->first('essay')}}</strong>
+	  		<strong class="danger">{{$errors->first('essay')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -138,7 +138,7 @@
 	  			<li><label><span>10</span>{{Form::radio('essay1[10]','10', $evaluation->essay1 == 10 ? true : false,['class' => 'form-control essay1'])}}</label></li>
       		</ul>
 	  		@if($errors->has('essay1'))
-	  		<strong>{{$errors->first('essay1')}}</strong>
+	  		<strong class="danger">{{$errors->first('essay1')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -157,7 +157,7 @@
 				<li><label><span>10</span>{{Form::radio('essay2[10]','10', $evaluation->essay2 == 10 ? true : false,['class' => 'form-control essay2'])}}</label></li>
       		</ul>
 			@if($errors->has('essay2'))
-			<strong>{{$errors->first('essay2')}}</strong>
+			<strong class="danger">{{$errors->first('essay2')}}</strong>
 			@endif
 		</li>
 		<li>
@@ -176,7 +176,7 @@
 	  			<li><label><span>10</span>{{Form::radio('essay3[10]','10', $evaluation->essay3 == 10 ? true : false,['class' => 'form-control essay3'])}}</label></li>
       		</ul>
 	  		@if($errors->has('essay3'))
-	  			<strong>{{$errors->first('essay3')}}</strong>
+	  			<strong class="danger">{{$errors->first('essay3')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -195,7 +195,7 @@
 	  			<li><label><span>10</span>{{Form::radio('essay4[10]','10', $evaluation->essay4 == 10 ? true : false,['class' => 'form-control essay4'])}}</label></li>
       		</ul>
       @if($errors->has('essay4'))
-      <strong>{{$errors->first('essay4')}}</strong>
+      <strong class="danger">{{$errors->first('essay4')}}</strong>
       @endif
 		</li>
 	</ol>
@@ -225,7 +225,7 @@
 	  			<li><label><span>10</span>{{Form::radio('video[10]','10', $evaluation->video == 10 ? true : false,['class' => 'form-control video'])}}</label></li>
       		</ul>
 	  		@if($errors->has('video'))
-	  			<strong>{{$errors->first('video')}}</strong>
+	  			<strong class="danger">{{$errors->first('video')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -244,7 +244,7 @@
 	  			<li><label><span>10</span>{{Form::radio('video1[10]','10', $evaluation->video1 == 10 ? true : false,['class' => 'form-control video1'])}}</label></li>
       		</ul>
 	  		@if($errors->has('video1'))
-	  		<strong>{{$errors->first('video1')}}</strong>
+	  		<strong class="danger">{{$errors->first('video1')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -263,7 +263,7 @@
 	  			<li><label><span>10</span>{!!Form::radio('video2[11]','10', $evaluation->video2 == 10 ? true : false,['class' => 'form-control video2'])!!}</label></li>
       		</ul>
 	  		@if($errors->has('video2'))
-	  		<strong>{{$errors->first('video2')}}</strong>
+	  		<strong class="danger">{{$errors->first('video2')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -282,7 +282,7 @@
 	  			<li><label><span>10</span>{{Form::radio('video3[10]','10', $evaluation->video3 == 10 ? true : false,['class' => 'form-control video3'])}}</label></li>
       		</ul>
 	  		@if($errors->has('video3'))
-	  		<strong>{{$errors->first('video3')}}</strong>
+	  		<strong class="danger">{{$errors->first('video3')}}</strong>
 	  		@endif
 		</li>
 		<li>
@@ -301,7 +301,7 @@
 	  			<li><label><span>10</span>{{Form::radio('video4[10]','10', $evaluation->video4 == 10 ? true : false,['class' => 'form-control video4'])}}</label></li>
       		</ul>
 	  		@if($errors->has('video4'))
-	  			<strong>{{$errors->first('video4')}}</strong>
+	  			<strong class="danger">{{$errors->first('video4')}}</strong>
 	  		@endif
 		</li>
     </div>
