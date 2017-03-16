@@ -114,7 +114,7 @@ class Aspirants extends Controller
     public function evaluation($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $evaluation  = $aspirant->aspirantEvaluation;
+      $evaluation  = $aspirant->aspirantsFile;
       return view('admin.aspirants.aspirant-evaluation')->with([
         'user' => $user,
         'aspirant' =>$aspirant,
