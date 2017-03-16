@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible',
 
     /*
     |--------------------------------------------------------------------------

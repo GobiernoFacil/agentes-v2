@@ -16,7 +16,6 @@ trait MessagesTrait{
         'email.email'    => 'El correo debe ser válido',
         'email.max'      => 'El correo debe tener menos de 255 caracteres',
         'email.unique'   => 'El correo ya ha sido registrado',
-        'institution.required' =>"El campo institución es requerido",
 
         //Aspirante
         'surname.required'  => 'El apellido paterno es requerido',
@@ -56,7 +55,7 @@ trait MessagesTrait{
         'experience3.required'=> 'Esta pregunta es obligatoria',
         'experienceJ1.required'=> 'Esta pregunta es obligatoria',
         'experienceJ2.required'=> 'Esta pregunta es obligatoria',
-        'institution.required'=> 'Esta pregunta es obligatoria',
+        'institution.required'=> 'Este campo es obligatorio',
         'evaluator.required'=> 'Esta pregunta es obligatoria',
         'essay.required'=> 'Esta pregunta es obligatoria',
         'essay1.required'=> 'Esta pregunta es obligatoria',

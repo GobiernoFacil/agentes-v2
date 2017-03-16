@@ -43,6 +43,18 @@
     </p>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label>Institución</label>
+      {{Form::select('institution',[null => "Selecciona una opción", 'Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales' =>'Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales', 'Gestión Social Y Cooperación'=>'Gestión Social Y Cooperación', 'Gobierno Fácil'=>'Gobierno Fácil', 'Programa de las Naciones Unidas para el Desarrollo'=>'Programa de las Naciones Unidas para el Desarrollo','PROSOCIEDAD'=>'PROSOCIEDAD'],null, ['class' => 'form-control','id'=>'state'])}}
+      @if($errors->has('institution'))
+      <strong>{{$errors->first('institution')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Actualizar administrador', ['class' => 'btn'])}}</p>
