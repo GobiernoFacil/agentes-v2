@@ -370,7 +370,8 @@ form {
     width: 100%; }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="search"] {
   background: #f2f2f2;
   border: 1px solid #f2f2f2;
   line-height: 35px;
@@ -378,6 +379,9 @@ input[type="password"] {
   font-size: 15px;
   padding: 5px 10px;
   width: 100%; }
+
+input[type="search"] {
+  background: white; }
 
 input.btn {
   color: white;
