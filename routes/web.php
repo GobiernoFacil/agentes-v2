@@ -104,6 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
+    Route::post('dashboard/perfil/save', 'Admin@saveProfile');
 
 
   });
