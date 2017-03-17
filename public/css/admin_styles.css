@@ -1170,6 +1170,9 @@ header {
       font-size: 12px;
       text-transform: uppercase; }
 
+/*
+	////////////////////////////////// lists 
+*/
 .inline {
   margin: 10px 0; }
   .inline li {
@@ -1197,6 +1200,20 @@ header {
   .list.line li:last-child {
     border: 0; }
 
+.pagination li {
+  list-style: none;
+  display: inline-block; }
+  .pagination li.active {
+    background: #187fad;
+    color: white; }
+  .pagination li a {
+    background: #51be92;
+    color: white;
+    display: block; }
+
+/*
+	////////////////////////////////// barras 
+*/
 #bar .bar {
   fill: #187fad; }
 
