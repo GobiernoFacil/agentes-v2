@@ -7,7 +7,7 @@
 
 @section('content')
 
-@if($evaluation)
+@if($files)
 	<div class="row">
 		<div class="col-sm-9">
 			<h1>Evaluar a: <strong>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }}</strong></h1>
@@ -16,7 +16,7 @@
 			<h4 class="right">{{ $aspirant->city }}, {{ $aspirant->state }} </h4>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="box">
 			<div class="col-sm-10 col-sm-offset-1">

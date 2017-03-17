@@ -8,7 +8,7 @@
     		<p>El aspirante acredita experiencia en proyectos, investigaciones o intervenciones relacionadas con los componentes de Gobierno Abierto (transparencia y participación)?</p>
 			<p>
 				<label>Sí {{Form::radio('experience[0]','1', $evaluation->experience== 1 ? true : false,['class' => 'form-control experience'])}}</label>
-				<label>No {{Form::radio('experience[1]','0', $evaluation->experience== 0 ? true : false,['class' => 'form-control experience'])}}
+				<label>No {{Form::radio('experience[1]','0', ($evaluation->experience == 0 && $evaluation->experience != null) ? true : false,['class' => 'form-control experience'])}}
 			</p>
 			@if($errors->has('experience'))</label>
 				<strong class="danger">{{$errors->first('experience')}}</strong>
@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<ul class="inline">
-						<li><label><span>0</span> {{Form::radio('experience1[0]','0', $evaluation->experience1 == 0 ? true : false,['class' => 'form-control experience1'])}}</label></li>
+						<li><label><span>0</span> {{Form::radio('experience1[0]','0', ($evaluation->experience1 == 0 && $evaluation->experience1 != null) ? true : false,['class' => 'form-control experience1'])}}</label></li>
 						<li><label><span>1</span>{{Form::radio('experience1[1]','1', $evaluation->experience1 == 1 ? true : false,['class' => 'form-control experience1'])}}</label>	</li>
 						<li><label><span>2</span>{{Form::radio('experience1[2]','2', $evaluation->experience1 == 2 ? true : false,['class' => 'form-control experience1'])}}</label>	</li>
 						<li><label><span>3</span>{{Form::radio('experience1[3]','3', $evaluation->experience1 == 3 ? true : false,['class' => 'form-control experience1'])}}</label>	</li>
@@ -49,7 +49,7 @@
 		<li>
 			<p>¿El aspirante acredita experiencia en proyectos, investigaciones o intervenciones relacionadas con temas relacionados con el desarrollo sostenible?</p>
 			<p><label>Sí  {{Form::radio('experience2[0]','1', $evaluation->experience2 == 1 ? true : false,['class' => 'form-control experience2'])}}</label>
-				<label>No {{Form::radio('experience2[1]','0', $evaluation->experience2 == 0 ? true : false,['class' => 'form-control experience2'])}}</label>
+				<label>No {{Form::radio('experience2[1]','0', ($evaluation->experience2 == 0 && $evaluation->experience2 != null) ? true : false,['class' => 'form-control experience2'])}}</label>
 				@if($errors->has('experience2'))
 				<strong class="danger">{{$errors->first('experience2')}}</strong>
 				@endif
@@ -60,7 +60,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<ul class="inline">
-						<li><label><span>0</span>{{Form::radio('experience3[0]','0', $evaluation->experience3 == 0 ? true : false,['class' => 'form-control experience3'])}}	</label></li>
+						<li><label><span>0</span>{{Form::radio('experience3[0]','0', ($evaluation->experience3 == 0 && $evaluation->experience3 != null) ? true : false,['class' => 'form-control experience3'])}}	</label></li>
 						<li><label><span>1</span>{{Form::radio('experience3[1]','1', $evaluation->experience3 == 1 ? true : false,['class' => 'form-control experience3'])}}	</label></li>
 						<li><label><span>2</span>{{Form::radio('experience3[2]','2', $evaluation->experience3 == 2 ? true : false,['class' => 'form-control experience3'])}}	</label></li>
 						<li><label><span>3</span>{{Form::radio('experience3[3]','3', $evaluation->experience3 == 3 ? true : false,['class' => 'form-control experience3'])}}	</label></li>
@@ -76,7 +76,7 @@
 	  					<strong class="danger">{{$errors->first('experience3')}}</strong>
 	  				@endif
 				</div>
-			
+
 				<div class="col-sm-6">
 					<p>
     				  <strong>Justifique su respuesta</strong>
@@ -87,7 +87,7 @@
     				</p>
 				</div>
       		</div>
-	  		
+
 		</li>
 	</ol>
   </div>
@@ -95,17 +95,17 @@
 
 
 <div class="divider"></div>
-	
+
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">Valoración de ensayo</h2>
 	<p>En una escala de 0 a 10, donde 0 es nada de acuerdo y 10 es muy de acuerdo, evalúe las siguientes afirmaciones con base en el análisis del ensayo y el video enviado por el aspirante</p>
-	
+
 	<ol class="list line">
 		<li>
 			<p>El aspirante expresa con claridad las razones para participar en el programa</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('essay[0]','0', $evaluation->essay == 0 ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
+	  			<li><label><span>0</span>{{Form::radio('essay[0]','0', ($evaluation->essay == 0 && $evaluation->essay != null) ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
 	  			<li><label><span>1</span>{{Form::radio('essay[1]','1', $evaluation->essay == 1 ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
 	  			<li><label><span>2</span>{{Form::radio('essay[2]','2', $evaluation->essay == 2 ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
 	  			<li><label><span>3</span>{{Form::radio('essay[3]','3', $evaluation->essay == 3 ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
@@ -117,7 +117,7 @@
 	  			<li><label><span>9</span>{{Form::radio('essay[9]','9', $evaluation->essay == 9 ? true : false,['class' => 'form-control essay'])}}   </label>	  </li>
 	  			<li><label><span>10</span>{{Form::radio('essay[10]','10', $evaluation->essay == 10 ? true : false,['class' => 'form-control essay'])}}</label></li>
       		</ul>
-      				
+
 	  		@if($errors->has('essay'))
 	  		<strong class="danger">{{$errors->first('essay')}}</strong>
 	  		@endif
@@ -125,7 +125,7 @@
 		<li>
 			<p>El aspirante expresa con claridad las aportaciones que puede brindar a la agenda de gobierno abierto y desarrollo sostenible en su entidad</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('essay1[0]','0', $evaluation->essay1 == 0 ? true : false,['class' => 'form-control essay1'])}}	  </label></li>
+	  			<li><label><span>0</span>{{Form::radio('essay1[0]','0', ($evaluation->essay1 == 0 && $evaluation->essay1 != null) ? true : false,['class' => 'form-control essay1'])}}	  </label></li>
 	  			<li><label><span>1</span>{{Form::radio('essay1[1]','1', $evaluation->essay1 == 1 ? true : false,['class' => 'form-control essay1'])}}	  </label></li>
 	  			<li><label><span>2</span>{{Form::radio('essay1[2]','2', $evaluation->essay1 == 2 ? true : false,['class' => 'form-control essay1'])}}	  </label></li>
 	  			<li><label><span>3</span>{{Form::radio('essay1[3]','3', $evaluation->essay1 == 3 ? true : false,['class' => 'form-control essay1'])}}	  </label></li>
@@ -144,7 +144,7 @@
 		<li>
 			<p>El aspirante es capaz de presentar ideas y argumentos escritos de forma eficaz</p>
       		<ul class="inline">
-				<li><label><span>0</span>{{Form::radio('essay2[0]','0', $evaluation->essay2 == 0 ? true : false,['class' => 'form-control essay2'])}}	</label></li>
+				<li><label><span>0</span>{{Form::radio('essay2[0]','0', ($evaluation->essay2 == 0 && $evaluation->essay2 != null) ? true : false,['class' => 'form-control essay2'])}}	</label></li>
 				<li><label><span>1</span>{{Form::radio('essay2[1]','1', $evaluation->essay2 == 1 ? true : false,['class' => 'form-control essay2'])}}	</label></li>
 				<li><label><span>2</span>{{Form::radio('essay2[2]','2', $evaluation->essay2 == 2 ? true : false,['class' => 'form-control essay2'])}}	</label></li>
 				<li><label><span>3</span>{{Form::radio('essay2[3]','3', $evaluation->essay2 == 3 ? true : false,['class' => 'form-control essay2'])}}	</label></li>
@@ -163,7 +163,7 @@
 		<li>
 			<p>El aspirante muestra un conocimiento amplio de los debates actuales sobre gobierno abierto y desarrollo sostenible</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('essay3[0]','0', $evaluation->essay3 == 0 ? true : false,['class' => 'form-control essay3'])}}	  </label></li>
+	  			<li><label><span>0</span>{{Form::radio('essay3[0]','0', ($evaluation->essay3 == 0 && $evaluation->essay3 != null) ? true : false,['class' => 'form-control essay3'])}}	  </label></li>
 	  			<li><label><span>1</span>{{Form::radio('essay3[1]','1', $evaluation->essay3 == 1 ? true : false,['class' => 'form-control essay3'])}}	  </label></li>
 	  			<li><label><span>2</span>{{Form::radio('essay3[2]','2', $evaluation->essay3 == 2 ? true : false,['class' => 'form-control essay3'])}}	  </label></li>
 	  			<li><label><span>3</span>{{Form::radio('essay3[3]','3', $evaluation->essay3 == 3 ? true : false,['class' => 'form-control essay3'])}}	  </label></li>
@@ -182,7 +182,7 @@
 		<li>
 			<p>El aspirante muestra conocimiento y sensibilidad sobre los principales desafíos de desarrollo que enfrenta su entidad federativa</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('essay4[0]','0', $evaluation->essay4 == 0 ? true : false,['class' => 'form-control essay4'])}}	</label></li>
+	  			<li><label><span>0</span>{{Form::radio('essay4[0]','0', ($evaluation->essay4 == 0 && $evaluation->essay4 != null) ? true : false,['class' => 'form-control essay4'])}}	</label></li>
 	  			<li><label><span>1</span>{{Form::radio('essay4[1]','1', $evaluation->essay4 == 1 ? true : false,['class' => 'form-control essay4'])}}	</label></li>
 	  			<li><label><span>2</span>{{Form::radio('essay4[2]','2', $evaluation->essay4 == 2 ? true : false,['class' => 'form-control essay4'])}}	</label></li>
 	  			<li><label><span>3</span>{{Form::radio('essay4[3]','3', $evaluation->essay4 == 3 ? true : false,['class' => 'form-control essay4'])}}	</label></li>
@@ -212,7 +212,7 @@
 		<li>
 			<p>El aspirante presenta una idea de proyecto que integra adecuadamente las perspectivas de gobierno abierto y desarrollo sostenible</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('video[0]','0', $evaluation->video == 0 ? true : false,['class' => 'form-control video'])}}   </label></li>
+	  			<li><label><span>0</span>{{Form::radio('video[0]','0', ($evaluation->video == 0 && $evaluation->video != null) ? true : false,['class' => 'form-control video'])}}   </label></li>
 	  			<li><label><span>1</span>{{Form::radio('video[1]','1', $evaluation->video == 1 ? true : false,['class' => 'form-control video'])}}   </label></li>
 	  			<li><label><span>2</span>{{Form::radio('video[2]','2', $evaluation->video == 2 ? true : false,['class' => 'form-control video'])}}   </label></li>
 	  			<li><label><span>3</span>{{Form::radio('video[3]','3', $evaluation->video == 3 ? true : false,['class' => 'form-control video'])}}   </label></li>
@@ -231,7 +231,7 @@
 		<li>
 			<p>La idea desarrollada por el aspirante cuenta con el potencial de transformar una problemática relevante de su entidad federativa</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('video1[0]','0', $evaluation->video1 == 0 ? true : false,['class' => 'form-control video1'])}}	</label></li>
+	  			<li><label><span>0</span>{{Form::radio('video1[0]','0', ($evaluation->video1 == 0 && $evaluation->video1 != null) ? true : false,['class' => 'form-control video1'])}}	</label></li>
 	  			<li><label><span>1</span>{{Form::radio('video1[1]','1', $evaluation->video1 == 1 ? true : false,['class' => 'form-control video1'])}}	</label></li>
 	  			<li><label><span>2</span>{{Form::radio('video1[2]','2', $evaluation->video1 == 2 ? true : false,['class' => 'form-control video1'])}}	</label></li>
 	  			<li><label><span>3</span>{{Form::radio('video1[3]','3', $evaluation->video1 == 3 ? true : false,['class' => 'form-control video1'])}}	</label></li>
@@ -250,7 +250,7 @@
 		<li>
 			<p>La idea desarrollada por el aspirante es factible de ser implementada en el mediano plazo en el marco de los ejercicios locales de gobierno abierto</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{!!Form::radio('video2[1]','0', $evaluation->video2 == 0 ? true : false,['class' => 'form-control video2'])!!}	</label></li>
+	  			<li><label><span>0</span>{!!Form::radio('video2[1]','0', ($evaluation->video2 == 0 && $evaluation->video2 != null) ? true : false,['class' => 'form-control video2'])!!}	</label></li>
 	  			<li><label><span>1</span>{!!Form::radio('video2[2]','1', $evaluation->video2 == 1 ? true : false,['class' => 'form-control video2'])!!}	</label></li>
 	  			<li><label><span>2</span>{!!Form::radio('video2[3]','2', $evaluation->video2 == 2 ? true : false,['class' => 'form-control video2'])!!}	</label></li>
 	  			<li><label><span>3</span>{!!Form::radio('video2[4]','3', $evaluation->video2 == 3 ? true : false,['class' => 'form-control video2'])!!}	</label></li>
@@ -269,7 +269,7 @@
 		<li>
 			<p>El aspirante explica de forma clara y con soltura su idea frente a la cámara</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('video3[0]','0', $evaluation->video3 == 0 ? true : false,['class' => 'form-control video3'])}}	</label></li>
+	  			<li><label><span>0</span>{{Form::radio('video3[0]','0', ($evaluation->video3 == 0 && $evaluation->video3 != null) ? true : false,['class' => 'form-control video3'])}}	</label></li>
 	  			<li><label><span>1</span>{{Form::radio('video3[1]','1', $evaluation->video3 == 1 ? true : false,['class' => 'form-control video3'])}}	</label></li>
 	  			<li><label><span>2</span>{{Form::radio('video3[2]','2', $evaluation->video3 == 2 ? true : false,['class' => 'form-control video3'])}}	</label></li>
 	  			<li><label><span>3</span>{{Form::radio('video3[3]','3', $evaluation->video3 == 3 ? true : false,['class' => 'form-control video3'])}}	</label></li>
@@ -288,7 +288,7 @@
 		<li>
 			<p>El aspirante logra persuadir con respecto a la importancia y relevancia de su idea</p>
       		<ul class="inline">
-	  			<li><label><span>0</span>{{Form::radio('video4[0]','0', $evaluation->video4 == 0 ? true : false,['class' => 'form-control video4'])}}	  </label></li>
+	  			<li><label><span>0</span>{{Form::radio('video4[0]','0', ($evaluation->video4 == 0 && $evaluation->video4 != null) ? true : false,['class' => 'form-control video4'])}}	  </label></li>
 	  			<li><label><span>1</span>{{Form::radio('video4[1]','1', $evaluation->video4 == 1 ? true : false,['class' => 'form-control video4'])}}	  </label></li>
 	  			<li><label><span>2</span>{{Form::radio('video4[2]','2', $evaluation->video4 == 2 ? true : false,['class' => 'form-control video4'])}}	  </label></li>
 	  			<li><label><span>3</span>{{Form::radio('video4[3]','3', $evaluation->video4 == 3 ? true : false,['class' => 'form-control video4'])}}	  </label></li>

@@ -114,11 +114,13 @@ class Aspirants extends Controller
     public function evaluation($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $evaluation  = $aspirant->aspirantsFile;
+      $files    = $aspirant->aspirantsFile;
+      $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
       return view('admin.aspirants.aspirant-evaluation')->with([
         'user' => $user,
         'aspirant' =>$aspirant,
-        'evaluation' => $evaluation
+        'evaluation' => $evaluation,
+        'files'=>$files
       ]);
     }
 
@@ -137,6 +139,8 @@ class Aspirants extends Controller
       $evaluation->experience1 = current(array_slice($request->experience1, 0, 1));
       $evaluation->experience2 = current(array_slice($request->experience2, 0, 1));
       $evaluation->experience3 = current(array_slice($request->experience3, 0, 1));
+      $evaluation->experienceJ1 = $request->experienceJ1;
+      $evaluation->experienceJ2 = $request->experienceJ2;
       $evaluation->experienceGrade = $this->experienceGrade($evaluation);
       $evaluation->essay = current(array_slice($request->essay, 0, 1));
       $evaluation->essay1 = current(array_slice($request->essay1, 0, 1));
