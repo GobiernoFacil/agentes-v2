@@ -1200,20 +1200,24 @@ header {
   .list.line li:last-child {
     border: 0; }
 
-.pagination li {
-  list-style: none;
-  display: inline-block; }
-  .pagination li.active {
-    background: #187fad;
-    color: white;
-    padding: 2px 5px; }
-  .pagination li.disabled {
-    color: #999; }
-  .pagination li a {
-    background: #51be92;
-    color: white;
-    display: block;
-    padding: 2px 5px; }
+.pagination {
+  margin-left: 0; }
+  .pagination li {
+    list-style: none;
+    display: inline-block; }
+    .pagination li.active {
+      background: black;
+      color: white;
+      padding: 2px 5px; }
+    .pagination li.disabled {
+      color: #999; }
+    .pagination li a {
+      background: #51be92;
+      color: white;
+      display: block;
+      padding: 2px 5px; }
+      .pagination li a:hover {
+        background: #3ca078; }
 
 /*
 	////////////////////////////////// barras 
