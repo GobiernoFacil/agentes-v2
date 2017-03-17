@@ -1205,11 +1205,15 @@ header {
   display: inline-block; }
   .pagination li.active {
     background: #187fad;
-    color: white; }
+    color: white;
+    padding: 2px 5px; }
+  .pagination li.disabled {
+    color: #999; }
   .pagination li a {
     background: #51be92;
     color: white;
-    display: block; }
+    display: block;
+    padding: 2px 5px; }
 
 /*
 	////////////////////////////////// barras 
