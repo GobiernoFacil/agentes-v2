@@ -19,6 +19,8 @@
 				<li><span>Email:</span> {{$aspirant->email}}</li>
 				<li><span>Ciudad:</span> {{$aspirant->city}}</li>
 				<li><span>Estado:</span> {{$aspirant->state}}</li>
+				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
+				
 				@if($aspirant->AspirantsFile)
 				@if($aspirant->AspirantsFile->video)
 				<li><span>Video:</span> {{$aspirant->AspirantsFile->video}}</li>
