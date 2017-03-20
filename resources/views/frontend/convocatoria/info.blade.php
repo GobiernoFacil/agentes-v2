@@ -136,7 +136,7 @@
 				<li>Un representante de la oficina para México de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID).</li>
 				<li>Un académico especialista en temas de gobierno abierto y/o desarrollo sostenible, quien fungirá como testigo del proceso de selección.</li>
 			</ul>
-			<p>Los candidatos seleccionados serán notificadas por vía electrónica y los resultados serán publicados en el sitio <a href="{{url('')}}">{{url('')}}</a>, a más tardar el 02 de mayo de 2017.</p>
+			<p>Los candidatos seleccionados serán notificadas por vía electrónica y los resultados serán publicados en el sitio <a href="{{url('')}}">{{url('')}}</a>, a más tardar el 19 de mayo de 2017.</p>
 			
 			<p>Los trabajos de la primera edición del programa de formación de Agentes Locales de Cambio iniciarán en mayo de 2017, preferentemente, en el marco de la I Cumbre de Gobierno Abierto en lo Local. En este marco, se llevará a cabo la primera ronda de seminarios presenciales. En todo caso, el Comité Dictaminador decidirá sobre la fecha de inicio de los trabajos.</p>
 			</div>
