@@ -604,8 +604,11 @@ Stretchy Nav style - common to:
 
 .cd-stretchy-nav ul span {
   /* navigation item labels */
+  background: rgba(255, 255, 255, 0.5);
   display: block;
+  height: 94%;
   opacity: 0;
+  padding: 0 5px;
   -webkit-transform: translateX(-25px);
   -moz-transform: translateX(-25px);
   -ms-transform: translateX(-25px);
