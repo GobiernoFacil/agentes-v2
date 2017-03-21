@@ -8,6 +8,7 @@
 @section('content')
 
 @if($files)
+	@if($files->hasCV && $files->hasVideo &&$files->hasEssay &&$files->hasProof &&$files->hasPrivacy &&$files->hasLetter)
 	<div class="row">
 		<div class="col-sm-9">
 			<h1>Evaluar a: <strong>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }}</strong></h1>
@@ -25,6 +26,33 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	@else
+	<h1>El aspirante no cumple con los requisitos para ser evaluado</h1>
+	<div class="box">
+		<p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} , no puede ser evaluado ya que su documentación no es válida.</p>
+		<ul>
+			@if(!$files->hasCV)
+			<li>El <strong>Perfil Curricular</strong> no es válido</li>
+			@endif
+			@if(!$files->hasEssay)
+			<li>El <strong>Ensayo</strong> no es válido</li>
+			@endif
+			@if(!$files->hasVideo)
+			<li>El <strong>video</strong> no es válido</li>
+			@endif
+			@if(!$files->hasPrivacy)
+			<li>El <strong>Consentimiento Relativo Al Tratamiento de sus Datos Personales</strong> no es válido</li>
+			@endif
+			@if(!$files->hasProof)
+			<li>El <strong>Comprobante de Domicilio</strong> no es válido</li>
+			@endif
+			@if(!$files->hasLetter)
+			<li>La <strong>Carta de Membretada</strong> no es válida</li>
+			@endif
+		</ul>
+		<p><a href="{{ url('dashboard/aspirantes') }}" class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
+	</div>
+	@endif
 @else
 	<h1>El aspirante no cuenta con archivos</h1>
 	<div class="box">
