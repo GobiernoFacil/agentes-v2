@@ -49,7 +49,14 @@
 		        <td>{{$aspirant->email}}</td>
 		        <td>{{$aspirant->city}}, {{$aspirant->state}}</td>
 		        @if($aspirant->aspirantEvaluation)
-		        <td>{{($aspirant->aspirantEvaluation->grade*10).'%'}}</td>
+						<?php $aspirantCount = $aspirant->aspirantEvaluation->where('user_id',$user->id)->where('aspirant_id',$aspirant->id)->count();?>
+							@if($aspirantCount)
+							<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->where('aspirant_id',$aspirant->id)->get();?>
+
+			        <td>{{($aspirantE[0]->grade*10).'%'}}</td>
+							@else
+							 <td>Sin calificación</td>
+							@endif
 		        @else
 		        <td>Sin calificación</td>
 		        @endif

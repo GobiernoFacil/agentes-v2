@@ -46,11 +46,11 @@
 		</div>
 		<div class="col-sm-6">
 			<ul class="profile list">
-				@if($aspirant->aspirantEvaluation)
-				<li><span>Experiencia previa:</span> {{($aspirant->aspirantEvaluation->experienceGrade*10).'%'}}</li>
-				<li><span>Valoración ensayo:</span> {{($aspirant->aspirantEvaluation->essayGrade*10).'%'}}</li>
-				<li><span>Valoración video:</span> {{($aspirant->aspirantEvaluation->videoGrade*10).'%'}}</li>
-				<li><span>Evaluación:</span> {{($aspirant->aspirantEvaluation->grade*10).'%'}}</li>
+				@if($aspirantEvaluation)
+				<li><span>Experiencia previa:</span> {{($aspirantEvaluation->experienceGrade*10).'%'}}</li>
+				<li><span>Valoración ensayo:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
+				<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>
+				<li><span>Evaluación:</span> {{($aspirantEvaluation->grade*10).'%'}}</li>
 				@else
 				<li class="right"><span>Sin evaluar</span>
 				<a href="{{ url('dashboard/aspirantes/evaluar-archivos/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>

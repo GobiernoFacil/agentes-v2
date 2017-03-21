@@ -8,7 +8,7 @@
 @section('content')
 
 @if($files)
-	@if($files->hasCV && $files->hasVideo &&$files->hasEssay &&$files->hasProof &&$files->hasPrivacy &&$files->hasLetter)
+	@if($files->hasCv && $files->hasVideo &&$files->hasEssay &&$files->hasProof &&$files->hasPrivacy &&$files->hasLetter)
 	<div class="row">
 		<div class="col-sm-9">
 			<h1>Evaluar a: <strong>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }}</strong></h1>
@@ -31,7 +31,7 @@
 	<div class="box">
 		<p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} , no puede ser evaluado ya que su documentación no es válida.</p>
 		<ul>
-			@if(!$files->hasCV)
+			@if(!$files->hasCv)
 			<li>El <strong>Perfil Curricular</strong> no es válido</li>
 			@endif
 			@if(!$files->hasEssay)

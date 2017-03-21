@@ -56,9 +56,11 @@ class Aspirants extends Controller
         //
         $user = Auth::user();
         $aspirant = Aspirant::find($id);
+        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('user_id',$user->id)->first();
         return view('admin.aspirants.aspirant-view')->with([
           'user' => $user,
-          'aspirant' =>$aspirant
+          'aspirant' =>$aspirant,
+          'aspirantEvaluation'=>$aspirantEvaluation
         ]);
     }
 
@@ -115,7 +117,7 @@ class Aspirants extends Controller
     public function evaluation($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = $aspirant->aspirantsFile;
+      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
       $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
       return view('admin.aspirants.aspirant-evaluation')->with([
         'user' => $user,
@@ -135,7 +137,7 @@ class Aspirants extends Controller
     public function evaluateFiles($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = $aspirant->aspirantsFile;
+      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
       $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
       return view('admin.aspirants.aspirant-files-evaluation')->with([
         'user' => $user,
