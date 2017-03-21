@@ -56,6 +56,11 @@ class NoticeFront extends Controller
 
       }
 
+      //convocatoria/aplicar/fin
+      public function end(){
+        return view('frontend.convocatoria.convocatoria-end');
+      }
+
 
       //activar aspirantes
       public function aspirantActivation($token){
@@ -121,7 +126,7 @@ class NoticeFront extends Controller
         session()->keep(['aspirant_id']);
         //Eliminar token al terminar registro
         AspirantActivation::where('aspirant_id',$aspirant_id)->delete();
-        return redirect('convocatoria/aplicar')->with('success',"Tu registro se ha finalizado con éxito");
+        return redirect('convocatoria/aplicar/fin')->with('success',"Tu registro se ha finalizado con éxito");
       }
 
       //convocatoria/resultados
