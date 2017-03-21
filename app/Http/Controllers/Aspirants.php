@@ -12,6 +12,7 @@ use App\Models\City;
 use App\Models\AspirantEvaluation;
 // FormValidators
 use App\Http\Requests\SaveEvaluation;
+use App\Http\Requests\SaveFilesEvaluation;
 class Aspirants extends Controller
 {
 
@@ -124,6 +125,47 @@ class Aspirants extends Controller
       ]);
     }
 
+
+    /**
+     * Get files evaluation view
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function evaluateFiles($id){
+      $user = Auth::user();
+      $aspirant = Aspirant::find($id);
+      $files    = $aspirant->aspirantsFile;
+      $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+      return view('admin.aspirants.aspirant-files-evaluation')->with([
+        'user' => $user,
+        'aspirant' =>$aspirant,
+        'evaluation' => $evaluation,
+        'files'=>$files
+      ]);
+    }
+
+    /**
+     * Save file evaluation answers
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function SaveEvaluationFiles(SaveFilesEvaluation $request, $id){
+      $user = Auth::user();
+      $aspirant = Aspirant::find($id);
+      $evaluation = AspirantsFile::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
+      $evaluation->hasVideo = current(array_slice($request->hasVideo, 0, 1));
+      $evaluation->hasCv = current(array_slice($request->hasCv, 0, 1));
+      $evaluation->hasEssay = current(array_slice($request->hasEssay, 0, 1));
+      $evaluation->hasProof = current(array_slice($request->hasProof, 0, 1));
+      $evaluation->hasPrivacy = current(array_slice($request->hasPrivacy, 0, 1));
+      $evaluation->hasLetter = current(array_slice($request->hasLetter, 0, 1));
+      $evaluation->save();
+      return redirect('dashboard/aspirantes/evaluar/'.$aspirant->id)->with('success','Evaluación guardada');
+    }
+
+
     /**
      * Save evaluation answers
      *
@@ -133,7 +175,7 @@ class Aspirants extends Controller
     public function saveEvaluation(SaveEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
+      $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
       $evaluation->user_id   = $user->id;
       $evaluation->experience = current(array_slice($request->experience, 0, 1));
       $evaluation->experience1 = current(array_slice($request->experience1, 0, 1));

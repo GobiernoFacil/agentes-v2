@@ -10,7 +10,7 @@ class AspirantsFile extends Model
   public $table = 'aspirantsFiles';
     //
     protected $fillable = [
-        'aspirant_id', 'cv', 'essay','video'
+        'aspirant_id', 'cv', 'essay','video','user_id','hasVideo','hasCv','hasLetter','hasEssay','hasProof','hasPrivacy'
     ];
 
     //modelos relacionados

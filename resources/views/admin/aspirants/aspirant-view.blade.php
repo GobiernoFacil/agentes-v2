@@ -20,7 +20,7 @@
 				<li><span>Ciudad:</span> {{$aspirant->city}}</li>
 				<li><span>Estado:</span> {{$aspirant->state}}</li>
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
-				
+
 				@if($aspirant->AspirantsFile)
 				@if($aspirant->AspirantsFile->video)
 				<li><span>Video:</span> {{$aspirant->AspirantsFile->video}}</li>
@@ -41,7 +41,7 @@
 				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->privacy}/privacidad")}}'  class="btn view xs"> Descargar Consentimiento Relativo Al Tratamiento de sus Datos Personales</a></li>
 				@endif
 				@endif
-				
+
 			</ul>
 		</div>
 		<div class="col-sm-6">
@@ -53,7 +53,7 @@
 				<li><span>Evaluación:</span> {{($aspirant->aspirantEvaluation->grade*10).'%'}}</li>
 				@else
 				<li class="right"><span>Sin evaluar</span>
-				<a href="{{ url('dashboard/aspirantes/evaluar/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
+				<a href="{{ url('dashboard/aspirantes/evaluar-archivos/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
 				@endif
 			</ul>
 		</div>

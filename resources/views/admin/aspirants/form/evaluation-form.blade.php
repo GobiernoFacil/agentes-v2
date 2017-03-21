@@ -5,7 +5,7 @@
     <h2 class="sa_title">Experiencia previa en Gobierno Abierto y Desarrollo Sostenible</h2>
 	<ol class="list line">
 		<li>
-    		<p>El aspirante acredita experiencia en proyectos, investigaciones o intervenciones relacionadas con los componentes de Gobierno Abierto (transparencia y participación)?</p>
+    		<p>¿El aspirante acredita experiencia en proyectos, investigaciones o intervenciones relacionadas con los componentes de Gobierno Abierto (transparencia y participación)?</p>
 			<p>
 				<label>Sí {{Form::radio('experience[0]','1', $evaluation->experience== 1 ? true : false,['class' => 'form-control experience'])}}</label>
 				<label>No {{Form::radio('experience[1]','0', ($evaluation->experience == 0 && $evaluation->experience != null) ? true : false,['class' => 'form-control experience'])}}

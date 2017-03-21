@@ -67,6 +67,13 @@ trait MessagesTrait{
         'video2.required'=> 'Esta pregunta es obligatoria',
         'video3.required'=> 'Esta pregunta es obligatoria',
         'video4.required'=> 'Esta pregunta es obligatoria',
+        //files evaluation
+        'hasVideo.required'=> 'Esta pregunta es obligatoria',
+        'hasEssay.required'=> 'Esta pregunta es obligatoria',
+        'hasLetter.required'=> 'Esta pregunta es obligatoria',
+        'hasPrivacy.required'=> 'Esta pregunta es obligatoria',
+        'hasProof.required'=> 'Esta pregunta es obligatoria',
+        'hasCv.required'=> 'Esta pregunta es obligatoria',
       ];
     }
 }
