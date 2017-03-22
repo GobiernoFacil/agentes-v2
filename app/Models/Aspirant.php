@@ -17,7 +17,7 @@ class Aspirant extends Model
   }
 
   function AspirantEvaluation(){
-    return $this->hasOne("App\Models\AspirantEvaluation");
+    return $this->hasMany("App\Models\AspirantEvaluation");
   }
 
 }

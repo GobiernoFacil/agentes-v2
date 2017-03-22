@@ -59,4 +59,29 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Evaluación General: {{$generalGrade.'%'}}</h1>
+	</div>
+</div>
+@if($allEva->count() > 0)
+<div class="box">
+	<div class="row">
+		@foreach($allEva as $eva)
+		<div class="col-sm-6">
+			<ul class="profile list">
+				@if($eva->grade)
+				<li><span>Institución:</span> {{($eva->institution)}}</li>
+				<li><span>Evaluación:</span> {{($eva->grade*10).'%'}}</li>
+				@endif
+			</ul>
+		</div>
+		@endforeach
+	</div>
+</div>
+@else
+<li class="right"><span>Sin evaluar</span>
+<a href="{{ url('dashboard/aspirantes/evaluar-archivos/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
+@endif
 @endsection

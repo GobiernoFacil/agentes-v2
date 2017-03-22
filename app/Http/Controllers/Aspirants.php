@@ -57,10 +57,20 @@ class Aspirants extends Controller
         $user = Auth::user();
         $aspirant = Aspirant::find($id);
         $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('user_id',$user->id)->first();
+        $allEva             = $aspirant->aspirantEvaluation;
+        if($allEva->count()>0){
+          $generalGrade = 0;
+          foreach ($allEva as $eva) {
+            $generalGrade = $eva->grade + $generalGrade;
+          }
+          $generalGrade = ($generalGrade/5)*10;
+        }
         return view('admin.aspirants.aspirant-view')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
-          'aspirantEvaluation'=>$aspirantEvaluation
+          'aspirantEvaluation'=>$aspirantEvaluation,
+          'allEva' => $allEva,
+          'generalGrade' => $generalGrade
         ]);
     }
 
