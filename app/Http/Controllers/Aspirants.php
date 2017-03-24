@@ -10,6 +10,7 @@ use App\Models\Aspirant;
 use App\Models\AspirantsFile;
 use App\Models\City;
 use App\Models\AspirantEvaluation;
+use App\Models\Institution;
 // FormValidators
 use App\Http\Requests\SaveEvaluation;
 use App\Http\Requests\SaveFilesEvaluation;
@@ -57,10 +58,20 @@ class Aspirants extends Controller
         $user = Auth::user();
         $aspirant = Aspirant::find($id);
         $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('user_id',$user->id)->first();
+        $allEva             = $aspirant->aspirantEvaluation;
+        if($allEva->count()>0){
+          $generalGrade = 0;
+          foreach ($allEva as $eva) {
+            $generalGrade = $eva->grade + $generalGrade;
+          }
+          $generalGrade = ($generalGrade/5)*10;
+        }
         return view('admin.aspirants.aspirant-view')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
-          'aspirantEvaluation'=>$aspirantEvaluation
+          'aspirantEvaluation'=>$aspirantEvaluation,
+          'allEva' => $allEva,
+          'generalGrade' => $generalGrade
         ]);
     }
 
@@ -138,13 +149,24 @@ class Aspirants extends Controller
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
       $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
-      return view('admin.aspirants.aspirant-files-evaluation')->with([
-        'user' => $user,
-        'aspirant' =>$aspirant,
-        'evaluation' => $evaluation,
-        'files'=>$files
-      ]);
+      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->count();
+      if($check > 0){
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
+        return view('admin.aspirants.aspirant-error')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }else{
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+        return view('admin.aspirants.aspirant-files-evaluation')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }
     }
 
     /**
