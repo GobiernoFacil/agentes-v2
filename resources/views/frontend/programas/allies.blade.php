@@ -43,7 +43,7 @@
 				<h2>
 					<a class="row" href="">
 					<span class="col-sm-3"><b class="prosociedad"></b> </span> 
-					<span class="col-sm-9">ProSociedad Hacer el Bien.</span></a></h2>
+					<span class="col-sm-9">ProSociedad.</span></a></h2>
 				
 
 			</div>
