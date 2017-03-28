@@ -8,6 +8,7 @@ use Mail;
 //Models
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
+use App\Models\FileEvaluation;
 use App\Models\City;
 use App\Models\AspirantEvaluation;
 use App\Models\Institution;
@@ -162,19 +163,22 @@ class Aspirants extends Controller
       $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->first();
       $check    = $this->checkFiles($aspirant);
       if(!$check){
-        $files  = AspirantsFile::where(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution])->first();
+        $filesEva  = FileEvaluation::where(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution])->first();
         return view('admin.aspirants.aspirant-files-error')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
-          'files'=>$files
+          'files'=>$files,
+          'filesEva' => $filesEva
         ]);
       }else{
         $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+        $filesEva    = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
         return view('admin.aspirants.aspirant-files-evaluation')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
           'evaluation' => $evaluation,
-          'files'=>$files
+          'files'=>$files,
+          'filesEva' =>$filesEva
         ]);
       }
     }
@@ -188,7 +192,7 @@ class Aspirants extends Controller
     public function SaveEvaluationFiles(SaveFilesEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $evaluation = AspirantsFile::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
+      $evaluation = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
       $evaluation->hasVideo = current(array_slice($request->hasVideo, 0, 1));
       $evaluation->hasCv = current(array_slice($request->hasCv, 0, 1));
       $evaluation->hasEssay = current(array_slice($request->hasEssay, 0, 1));
@@ -340,7 +344,7 @@ class Aspirants extends Controller
       */
      protected function checkFiles($aspirant){
        $user     = Auth::user();
-       $check    = AspirantsFile::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+       $check    = FileEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->first();
        if(!$check){return true;}
        if($check->count()>0){
          //empty evaluation allows to evaluate
