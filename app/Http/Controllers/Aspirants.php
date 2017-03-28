@@ -57,7 +57,7 @@ class Aspirants extends Controller
         //
         $user = Auth::user();
         $aspirant = Aspirant::find($id);
-        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('user_id',$user->id)->first();
+        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->first();
         $allEva             = $aspirant->aspirantEvaluation;
         if($allEva->count()>0){
           $generalGrade = 0;
@@ -129,13 +129,24 @@ class Aspirants extends Controller
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
       $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
-      return view('admin.aspirants.aspirant-evaluation')->with([
-        'user' => $user,
-        'aspirant' =>$aspirant,
-        'evaluation' => $evaluation,
-        'files'=>$files
-      ]);
+      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->count();
+      if($check > 0){
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
+        return view('admin.aspirants.aspirant-error')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }else{
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+        return view('admin.aspirants.aspirant-evaluation')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }
     }
 
 
