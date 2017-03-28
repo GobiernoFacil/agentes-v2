@@ -47,6 +47,7 @@
 		<div class="col-sm-6">
 			<ul class="profile list">
 				@if($aspirantEvaluation)
+				<h3>Evaluación de {{$user->institution}}</h3>
 				<li><span>Experiencia previa:</span> {{($aspirantEvaluation->experienceGrade*10).'%'}}</li>
 				<li><span>Valoración ensayo:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
 				<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>

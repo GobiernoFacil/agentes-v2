@@ -129,8 +129,8 @@ class Aspirants extends Controller
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
       $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->count();
-      if($check > 0){
+      $check    = $this->check($aspirant);
+      if(!$check){
         $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
         return view('admin.aspirants.aspirant-error')->with([
           'user' => $user,
@@ -159,14 +159,13 @@ class Aspirants extends Controller
     public function evaluateFiles($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->count();
-      if($check > 0){
-        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
-        return view('admin.aspirants.aspirant-error')->with([
+      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->first();
+      $check    = $this->checkFiles($aspirant);
+      if(!$check){
+        $files  = AspirantsFile::where(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution])->first();
+        return view('admin.aspirants.aspirant-files-error')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
-          'evaluation' => $evaluation,
           'files'=>$files
         ]);
       }else{
@@ -196,6 +195,7 @@ class Aspirants extends Controller
       $evaluation->hasProof = current(array_slice($request->hasProof, 0, 1));
       $evaluation->hasPrivacy = current(array_slice($request->hasPrivacy, 0, 1));
       $evaluation->hasLetter = current(array_slice($request->hasLetter, 0, 1));
+      $evaluation->institution = $user->institution;
       $evaluation->save();
       return redirect('dashboard/aspirantes/evaluar/'.$aspirant->id)->with('success','Evaluación guardada');
     }
@@ -210,6 +210,11 @@ class Aspirants extends Controller
     public function saveEvaluation(SaveEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
+      //deletes null evaluation
+      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+      if(!$check->grade){
+        $check->delete();
+      }
       $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
       $evaluation->user_id   = $user->id;
       $evaluation->experience = current(array_slice($request->experience, 0, 1));
@@ -300,6 +305,54 @@ class Aspirants extends Controller
            return response()->json($results)->header('Access-Control-Allow-Origin', '*');
          }
 
+
+     }
+
+     /**
+      * check empty evaluation
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     protected function check($aspirant){
+       $user     = Auth::user();
+       $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+       if(!$check){return true;}
+       if($check->count()>0){
+         //empty evaluation allows to evaluate
+         if(!$check->grade){
+           return true;
+         }else{
+           return false;
+         }
+       }else{
+         return true;
+
+       }
+
+     }
+
+     /**
+      * check empty files evaluation
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     protected function checkFiles($aspirant){
+       $user     = Auth::user();
+       $check    = AspirantsFile::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+       if(!$check){return true;}
+       if($check->count()>0){
+         //empty evaluation allows to evaluate
+         if(!$check->hasVideo){
+           return true;
+         }else{
+           return false;
+         }
+       }else{
+         return true;
+
+       }
 
      }
 
