@@ -129,7 +129,7 @@ class Aspirants extends Controller
     public function evaluation($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
+      $files    = FileEvaluation::where('aspirant_id',$aspirant->id)->first();
       $check    = $this->check($aspirant);
       if(!$check){
         $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);

@@ -10,8 +10,8 @@
 <div class="box">
   <p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} ya cuenta con una evaluación previa de documentos.</p>
 
-  @if($files)
-  	@if($files->hasCv && $files->hasVideo &&$files->hasEssay &&$files->hasProof &&$files->hasPrivacy &&$files->hasLetter)
+  @if($filesEva)
+  	@if($filesEva->hasCv && $filesEva->hasVideo &&$filesEva->hasEssay &&$filesEva->hasProof &&$filesEva->hasPrivacy &&$filesEva->hasLetter)
       <ul>
         <li>Todos los archivos son válidos</li>
       </ul>
@@ -21,22 +21,22 @@
   	<div class="box">
   		<p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} , no puede ser evaluado ya que su documentación no es válida.</p>
   		<ul>
-  			@if(!$files->hasCv)
+  			@if(!$filesEva->hasCv)
   			<li>El <strong>Perfil Curricular</strong> no es válido</li>
   			@endif
-  			@if(!$files->hasEssay)
+  			@if(!$filesEva->hasEssay)
   			<li>El <strong>Ensayo</strong> no es válido</li>
   			@endif
-  			@if(!$files->hasVideo)
+  			@if(!$filesEva->hasVideo)
   			<li>El <strong>video</strong> no es válido</li>
   			@endif
-  			@if(!$files->hasPrivacy)
+  			@if(!$filesEva->hasPrivacy)
   			<li>El <strong>Consentimiento Relativo Al Tratamiento de sus Datos Personales</strong> no es válido</li>
   			@endif
-  			@if(!$files->hasProof)
+  			@if(!$filesEva->hasProof)
   			<li>El <strong>Comprobante de Domicilio</strong> no es válido</li>
   			@endif
-  			@if(!$files->hasLetter)
+  			@if(!$filesEva->hasLetter)
   			<li>La <strong>Carta de Membretada</strong> no es válida</li>
   			@endif
   		</ul>
