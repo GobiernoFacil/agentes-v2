@@ -192,6 +192,12 @@ class Aspirants extends Controller
     public function SaveEvaluationFiles(SaveFilesEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
+      //deletes null evaluation
+      $check    = $this->checkFiles($aspirant);
+      if(!$check){
+        $check    = FileEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+        $check->delete();
+      }
       $evaluation = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
       $evaluation->hasVideo = current(array_slice($request->hasVideo, 0, 1));
       $evaluation->hasCv = current(array_slice($request->hasCv, 0, 1));
@@ -215,8 +221,9 @@ class Aspirants extends Controller
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
       //deletes null evaluation
-      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
-      if(!$check->grade){
+      $check    = $this->check($aspirant);
+      if(!$check){
+        $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
         $check->delete();
       }
       $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
