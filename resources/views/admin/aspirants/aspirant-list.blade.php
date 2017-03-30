@@ -53,7 +53,12 @@
 							@if($aspirantE)
 			        <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
 							@else
-							 <td>Sin calificación</td>
+								<?php $aspirantE = $aspirant->aspirantEvaluation->where('institution',$user->institution)->first();?>
+								@if($aspirantE)
+							  <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
+								@else
+								<td>Sin calificación</td>
+								@endif
 							@endif
 		        @else
 		        <td>Sin calificación</td>

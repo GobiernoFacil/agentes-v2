@@ -69,7 +69,8 @@ class NoticeFront extends Controller
         if($code->aspirant_id){
           $aspirant = Aspirant::find($code->aspirant_id);
             if($aspirant->is_activated == 1){
-                return redirect('convocatoria/aplicar')->with('success',"Ya se encuentra validado");
+                session()->flash('aspirant_id', $aspirant->id);
+                return redirect('convocatoria/aplicar/registro')->with('success',"Ya se encuentra validado");
             }
             $aspirant->is_activated = 1;
             $aspirant->save();
@@ -90,7 +91,7 @@ class NoticeFront extends Controller
       public function saveFiles(saveFiles $request){
         session()->keep(['aspirant_id']);
         $aspirant_id  = $request->aId;
-        $aspirantFile     = new AspirantsFile(['aspirant_id'=>$aspirant_id]);
+        $aspirantFile     = AspirantsFile::firstOrCreate(['aspirant_id'=>$aspirant_id]);
         if($request->file('cv')->isValid()){
             $name = uniqid() . "." . $request->file("cv")->guessExtension();
             $path = "/files/";

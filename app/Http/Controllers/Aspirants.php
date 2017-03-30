@@ -8,6 +8,7 @@ use Mail;
 //Models
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
+use App\Models\FileEvaluation;
 use App\Models\City;
 use App\Models\AspirantEvaluation;
 use App\Models\Institution;
@@ -57,7 +58,7 @@ class Aspirants extends Controller
         //
         $user = Auth::user();
         $aspirant = Aspirant::find($id);
-        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('user_id',$user->id)->first();
+        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->first();
         $allEva             = $aspirant->aspirantEvaluation;
         if($allEva->count()>0){
           $generalGrade = 0;
@@ -128,14 +129,25 @@ class Aspirants extends Controller
     public function evaluation($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
-      return view('admin.aspirants.aspirant-evaluation')->with([
-        'user' => $user,
-        'aspirant' =>$aspirant,
-        'evaluation' => $evaluation,
-        'files'=>$files
-      ]);
+      $files    = FileEvaluation::where('aspirant_id',$aspirant->id)->first();
+      $check    = $this->check($aspirant);
+      if(!$check){
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
+        return view('admin.aspirants.aspirant-error')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }else{
+        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+        return view('admin.aspirants.aspirant-evaluation')->with([
+          'user' => $user,
+          'aspirant' =>$aspirant,
+          'evaluation' => $evaluation,
+          'files'=>$files
+        ]);
+      }
     }
 
 
@@ -148,23 +160,25 @@ class Aspirants extends Controller
     public function evaluateFiles($id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->where("user_id",$user->id)->first();
-      $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->count();
-      if($check > 0){
-        $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id]);
-        return view('admin.aspirants.aspirant-error')->with([
+      $files    = AspirantsFile::where('aspirant_id',$aspirant->id)->first();
+      $check    = $this->checkFiles($aspirant);
+      if(!$check){
+        $filesEva  = FileEvaluation::where(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution])->first();
+        return view('admin.aspirants.aspirant-files-error')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
-          'evaluation' => $evaluation,
-          'files'=>$files
+          'files'=>$files,
+          'filesEva' => $filesEva
         ]);
       }else{
         $evaluation  = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"user_id"=>$user->id]);
+        $filesEva    = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
         return view('admin.aspirants.aspirant-files-evaluation')->with([
           'user' => $user,
           'aspirant' =>$aspirant,
           'evaluation' => $evaluation,
-          'files'=>$files
+          'files'=>$files,
+          'filesEva' =>$filesEva
         ]);
       }
     }
@@ -178,13 +192,20 @@ class Aspirants extends Controller
     public function SaveEvaluationFiles(SaveFilesEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
-      $evaluation = AspirantsFile::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
+      //deletes null evaluation
+      $check    = $this->checkFiles($aspirant);
+      if(!$check){
+        $check    = FileEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+        $check->delete();
+      }
+      $evaluation = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
       $evaluation->hasVideo = current(array_slice($request->hasVideo, 0, 1));
       $evaluation->hasCv = current(array_slice($request->hasCv, 0, 1));
       $evaluation->hasEssay = current(array_slice($request->hasEssay, 0, 1));
       $evaluation->hasProof = current(array_slice($request->hasProof, 0, 1));
       $evaluation->hasPrivacy = current(array_slice($request->hasPrivacy, 0, 1));
       $evaluation->hasLetter = current(array_slice($request->hasLetter, 0, 1));
+      $evaluation->institution = $user->institution;
       $evaluation->save();
       return redirect('dashboard/aspirantes/evaluar/'.$aspirant->id)->with('success','Evaluación guardada');
     }
@@ -199,6 +220,12 @@ class Aspirants extends Controller
     public function saveEvaluation(SaveEvaluation $request, $id){
       $user = Auth::user();
       $aspirant = Aspirant::find($id);
+      //deletes null evaluation
+      $check    = $this->check($aspirant);
+      if(!$check){
+        $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+        $check->delete();
+      }
       $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
       $evaluation->user_id   = $user->id;
       $evaluation->experience = current(array_slice($request->experience, 0, 1));
@@ -289,6 +316,54 @@ class Aspirants extends Controller
            return response()->json($results)->header('Access-Control-Allow-Origin', '*');
          }
 
+
+     }
+
+     /**
+      * check empty evaluation
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     protected function check($aspirant){
+       $user     = Auth::user();
+       $check    = AspirantEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->where('user_id','!=',$user->id)->first();
+       if(!$check){return true;}
+       if($check->count()>0){
+         //empty evaluation allows to evaluate
+         if(!$check->grade){
+           return true;
+         }else{
+           return false;
+         }
+       }else{
+         return true;
+
+       }
+
+     }
+
+     /**
+      * check empty files evaluation
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     protected function checkFiles($aspirant){
+       $user     = Auth::user();
+       $check    = FileEvaluation::where("aspirant_id", $aspirant->id)->where('institution',$user->institution)->first();
+       if(!$check){return true;}
+       if($check->count()>0){
+         //empty evaluation allows to evaluate
+         if(!$check->hasVideo){
+           return true;
+         }else{
+           return false;
+         }
+       }else{
+         return true;
+
+       }
 
      }
 
