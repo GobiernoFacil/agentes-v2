@@ -154,7 +154,7 @@
 			<h3>Contacto</h3>
 			<span></span>
 			<div class="panel">
-				<p>Para mayor información con respecto a la presente convocatoria y al programa de formación de capacidades, favor de contactar a <strong>Mariana García</strong>, coordinadora del proyecto en los teléfonos (55) 4000-9819 o (55) 1079-3994, o al correo electrónico <a href="{{url('mailto:mariana.garcia@undp.org')}}">mariana.garcia@undp.org</a>. 
+				<p>Para mayor información con respecto a la presente convocatoria y al programa de formación de capacidades, favor de contactar a <strong>Mariana García</strong>, coordinadora del proyecto en los teléfonos (55) 4000-9819, o al correo electrónico <a href="{{url('mailto:mariana.garcia@undp.org')}}">mariana.garcia@undp.org</a>. 
 </p>
 			</div>
 		</li>
