@@ -17,6 +17,7 @@
 			<ul class="profile list">
 				<li><span>Nombre:</span> <h2>{{$aspirant->name." ".$aspirant->surname." ".$aspirant->lastname}}</h2></li>
 				<li><span>Email:</span> {{$aspirant->email}}</li>
+				<li><span>Procedencia:</span> {{$aspirant->origin ? $aspirant->origin : "Sin información"}}</li>
 				<li><span>Ciudad:</span> {{$aspirant->city}}</li>
 				<li><span>Estado:</span> {{$aspirant->state}}</li>
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
