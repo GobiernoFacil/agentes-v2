@@ -37,6 +37,7 @@
 		    <tr>
 		      <th>Nombre / email</th>
 		      <th>Ciudad / Estado</th>
+		      <th>Procedencia</th>
 		      <th>Registro</th>
 		      <th>Puntaje</th>
 		      <th>Acciones</th>
@@ -49,8 +50,8 @@
 		        {{$aspirant->email}}
 		        </td>
 		        
-		        
 		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
+				<td>{{$aspirant->origin}}</td>
 		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 		        @if($aspirant->aspirantEvaluation)
 						<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
