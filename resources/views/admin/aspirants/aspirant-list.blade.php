@@ -39,6 +39,7 @@
 		      <th>Ciudad / Estado</th>
 		      <th>Procedencia</th>
 		      <th>Registro</th>
+		      <th>Archivos</th>
 		      <th>Puntaje</th>
 		      <th>Acciones</th>
 		    </tr>
@@ -49,10 +50,10 @@
 		        <td><h4><a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
 		        {{$aspirant->email}}
 		        </td>
-		        
 		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
 				<td>{{$aspirant->origin}}</td>
 		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+		        <td>{{$aspirant->AspirantsFile ? "Sí" : "No" }}</td>
 		        @if($aspirant->aspirantEvaluation)
 						<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
 							@if($aspirantE)
