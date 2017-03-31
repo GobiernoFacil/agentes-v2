@@ -31,12 +31,21 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<p>
 		  <label>Grado de estudios completados</label>
 		  {{Form::text('degree', null, ["class" => "form-control"])}}
 		  @if($errors->has('degree'))
 		    <strong class="error">{{$errors->first('degree')}}</strong>
+		  @endif
+		</p>
+	</div>
+	<div class="col-sm-6">
+		<p>
+		  <label>Sector de procedencia</label>
+			{{Form::select('origin',[null => "Selecciona una opción", 'Gobierno' =>'Gobierno', 'Sociedad Civil'=>'Sociedad Civil', 'Sector Privado'=>'Sector Privado', 'Sector Académico'=>'Sector Académico'],null, ['class' => 'form-control'])}}
+		  @if($errors->has('origin'))
+		    <strong class="error">{{$errors->first('origin')}}</strong>
 		  @endif
 		</p>
 	</div>

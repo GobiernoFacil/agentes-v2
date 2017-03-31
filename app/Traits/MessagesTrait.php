@@ -25,6 +25,7 @@ trait MessagesTrait{
         'degree.required'  => 'El grado de estudios es requerido',
         'email-confirm.same'   => 'Los correos no coinciden',
         'email-confirm.required'   => 'La confirmación es requerida',
+        'origin.required' => 'El sector de procedencia es requerido',
 
         //Archivos
         'cv.required' => 'El Perfil Curricular es requerido',

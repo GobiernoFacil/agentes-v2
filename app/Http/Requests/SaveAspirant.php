@@ -33,6 +33,7 @@ class SaveAspirant extends FormRequest
         'city'     => 'required',
         'state'     => 'required',
         'degree'     => 'required',
+        'origin'    =>'required'
       ];
     }
 }

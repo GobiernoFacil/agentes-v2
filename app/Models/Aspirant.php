@@ -8,7 +8,7 @@ class Aspirant extends Model
 {
     //
     protected $fillable = [
-        'name', 'surname', 'lastname','email','city','state','degree'
+        'name', 'surname', 'lastname','email','city','state','degree','origin'
     ];
 
     //modelos relacionados
