@@ -62,7 +62,6 @@ class Aspirants extends Controller
         $allEva             = $aspirant->aspirantEvaluation;
         $generalGrade = 0;
         if($allEva->count()>0){
-          $generalGrade = 0;
           foreach ($allEva as $eva) {
             $generalGrade = $eva->grade + $generalGrade;
           }
