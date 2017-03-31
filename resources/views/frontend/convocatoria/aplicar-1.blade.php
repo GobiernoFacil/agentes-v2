@@ -14,6 +14,11 @@
 	      {{ Session::get('success') }}
 	  	</div>
 	  	@endif
+			@if(Session::has('error'))
+			<div class="message error">
+		      {{ Session::get('error') }}
+		  	</div>
+		  	@endif
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 		<p>El plazo de aplicación se inicia el día <strong>21 de marzo y termina el 28 de abril de 2017 a las 15:00 horas</strong> (tiempo de la Ciudad de México). Para poder aplicar es necesario que radiques en alguna de las 5 entidades federativas participantes (<strong>Chihuahua, Morelos, Nuevo León, Oaxaca y Sonora.</strong>). Antes de aplicar, ten preparados los requisitos mencionados en las <a href="{{url('convocatoria')}}">bases de la convocatoria</a>:</p>

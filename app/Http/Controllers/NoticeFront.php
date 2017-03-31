@@ -64,7 +64,7 @@ class NoticeFront extends Controller
 
       //activar aspirantes
       public function aspirantActivation($token){
-        $code  = AspirantActivation::where('token',$token)->findOrFail();
+        $code  = AspirantActivation::where('token',$token)->first();
 
         if($code){
           $aspirant = Aspirant::find($code->aspirant_id);
@@ -76,8 +76,9 @@ class NoticeFront extends Controller
             $aspirant->save();
             session()->flash('aspirant_id', $aspirant->id);
             return redirect('convocatoria/aplicar/registro')->with('success',"Se ha validado tu correo");
+        }else{
+          return redirect('convocatoria/aplicar')->with('error',"El código de activación es incorrecto");
         }
-            return redirect('convocatoria/aplicar')->with('error',"El código de activación es incorrecto");
       }
 
       //view para agregar archivos
