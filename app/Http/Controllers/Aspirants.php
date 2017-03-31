@@ -60,6 +60,7 @@ class Aspirants extends Controller
         $aspirant = Aspirant::find($id);
         $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->first();
         $allEva             = $aspirant->aspirantEvaluation;
+        $generalGrade = 0;
         if($allEva->count()>0){
           $generalGrade = 0;
           foreach ($allEva as $eva) {
