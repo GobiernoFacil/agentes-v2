@@ -64,9 +64,9 @@ class NoticeFront extends Controller
 
       //activar aspirantes
       public function aspirantActivation($token){
-        $code  = AspirantActivation::where('token',$token)->first();
+        $code  = AspirantActivation::where('token',$token)->findOrFail();
 
-        if($code->aspirant_id){
+        if($code){
           $aspirant = Aspirant::find($code->aspirant_id);
             if($aspirant->is_activated == 1){
                 session()->flash('aspirant_id', $aspirant->id);
