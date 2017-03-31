@@ -36,8 +36,8 @@
 		  <thead>
 		    <tr>
 		      <th>Nombre / email</th>
-		      <th>Ciudad, Estado</th>
-		      <th>Creado</th>
+		      <th>Ciudad / Estado</th>
+		      <th>Registro</th>
 		      <th>Puntaje</th>
 		      <th>Acciones</th>
 		    </tr>
@@ -50,8 +50,8 @@
 		        </td>
 		        
 		        
-		        <td>{{$aspirant->city}}, {{$aspirant->state}}</td>
-		        <td>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
+		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 		        @if($aspirant->aspirantEvaluation)
 						<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
 							@if($aspirantE)
