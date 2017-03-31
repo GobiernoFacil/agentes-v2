@@ -28,7 +28,7 @@ class Aspirants extends Controller
     public function index()
     {
       $user = Auth::user();
-      $aspirants = Aspirant::where('is_activated',1)->orderBy('surname','asc')->paginate($this->pageSize);
+      $aspirants = Aspirant::where('is_activated',1)->orderBy('created_at','asc')->paginate($this->pageSize);
       $chihuahua_number = Aspirant::where('state','Chihuahua')->where('is_activated',1)->count();
       $morelos_number   = Aspirant::where('state','Morelos')->where('is_activated',1)->count();
       $leon_number = Aspirant::where('state','Nuevo Léon')->where('is_activated',1)->count();
