@@ -35,9 +35,9 @@
 		<table class="table">
 		  <thead>
 		    <tr>
-		      <th>Nombre</th>
-		      <th>Email</th>
-		      <th>Ciudad, Estado</th>
+		      <th>Nombre / email</th>
+		      <th>Ciudad / Estado</th>
+		      <th>Registro</th>
 		      <th>Puntaje</th>
 		      <th>Acciones</th>
 		    </tr>
@@ -45,9 +45,13 @@
 		  <tbody>
 		    @foreach ($aspirants as $aspirant)
 		      <tr>
-		        <td><h4><a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4></td>
-		        <td>{{$aspirant->email}}</td>
-		        <td>{{$aspirant->city}}, {{$aspirant->state}}</td>
+		        <td><h4><a href="{{ url('dashboard/aspirantes/ver/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
+		        {{$aspirant->email}}
+		        </td>
+		        
+		        
+		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
+		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 		        @if($aspirant->aspirantEvaluation)
 						<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
 							@if($aspirantE)
