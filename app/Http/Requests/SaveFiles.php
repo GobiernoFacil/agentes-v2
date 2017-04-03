@@ -26,11 +26,11 @@ class SaveFiles extends FormRequest
     public function rules()
     {
       return [
-        'cv' => 'required|file|mimes:doc,docx,pdf|max:2000',
-        'essay' => 'required|file|mimes:doc,docx,pdf|max:2000',
-        'letter' => 'required|file|mimes:doc,docx,pdf|max:2000',
-        'proof' => 'required|file|mimes:doc,docx,pdf|max:2000',
-        'privacy' => 'required|file|mimes:doc,docx,pdf|max:2000',
+        'cv' => 'required|file|mimes:doc,docx,pdf|max:2500',
+        'essay' => 'required|file|mimes:doc,docx,pdf|max:25000',
+        'letter' => 'required|file|mimes:doc,docx,pdf|max:2500',
+        'proof' => 'required|file|mimes:doc,docx,pdf|max:2500',
+        'privacy' => 'required|file|mimes:doc,docx,pdf|max:2500',
         'video' => 'required',
       ];
     }
