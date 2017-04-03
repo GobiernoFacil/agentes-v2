@@ -44,7 +44,7 @@ trait MessagesTrait{
         'proof.file'     => 'El archivo debe ser válido',
         'proof.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
         'proof.max'      => 'El archivo no puede ser mayor a 2.5MB',
-        'privacy.required' => 'El comprobante de domicilio es requerido',
+        'privacy.required' => 'El consentimiento es requerido',
         'privacy.file'     => 'El archivo debe ser válido',
         'privacy.mimes'    => 'El archivo debe ser del tipo requerido (Archivo Word o PDF)',
         'privacy.max'      => 'El archivo no puede ser mayor a 2.5MB',
