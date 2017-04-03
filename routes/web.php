@@ -104,15 +104,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
     Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
     Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');
-    /*@Module Controller */
+    /*@Modules Controller */
     //CRUD Modules
-    Route::get('dashboard/modulos', 'Module@index');
-    Route::get('dashboard/modulos/agregar', 'Module@add');
-    Route::post('dashboard/modulos/crear', 'Module@save');
-    Route::get('dashboard/modulos/editar/{id}', 'Module@edit');
-    Route::post('dashboard/modulos/editar/{id}', 'Module@update');
-    Route::get('dashboard/modulos/deshabilitar/{id}', 'Module@delete');
-    Route::get('dashboard/modulos/ver/{id}', 'Module@view');
+    Route::get('dashboard/modulos', 'Modules@index');
+    Route::get('dashboard/modulos/agregar', 'Modules@add');
+    Route::get('dashboard/modulos/editar', 'Modules@edit');
+    Route::post('dashboard/modulos/guardar', 'Modules@save');
+    Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
+    Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
