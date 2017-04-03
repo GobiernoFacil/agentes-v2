@@ -104,6 +104,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
     Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
     Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');
+    /*@Module Controller */
+    //CRUD Modules
+    Route::get('dashboard/modulos', 'Module@index');
+    Route::get('dashboard/modulos/agregar', 'Module@add');
+    Route::post('dashboard/modulos/crear', 'Module@save');
+    Route::get('dashboard/modulos/editar/{id}', 'Module@edit');
+    Route::post('dashboard/modulos/editar/{id}', 'Module@update');
+    Route::get('dashboard/modulos/deshabilitar/{id}', 'Module@delete');
+    Route::get('dashboard/modulos/ver/{id}', 'Module@view');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
