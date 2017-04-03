@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
-
+// FormValidators
+use App\Http\Requests\SaveModule;
 class Modules extends Controller
 {
   //
@@ -52,9 +53,15 @@ class Modules extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
-  public function save(Request $request)
+  public function save(SaveModule $request)
   {
     //
+    $user   = Auth::user();
+    $data   = $request->except('_token');
+    $data['user_id'] = $user->id;
+    $data['slug']    = str_slug($request->title);
+    Module::where('id',$request->id)->update($data);
+    var_dump($data);
   }
 
   /**

@@ -75,6 +75,19 @@ trait MessagesTrait{
         'hasPrivacy.required'=> 'Esta pregunta es obligatoria',
         'hasProof.required'=> 'Esta pregunta es obligatoria',
         'hasCv.required'=> 'Esta pregunta es obligatoria',
+
+         //Modules
+         'title.required' => 'El nombre es requerido',
+         'title.unique' => 'El nombre debe de ser único',
+         'number_sessions.required'=> 'El número de sesiones es requerido',
+         'number_hours.required'=> 'El total de horas es requerido',
+         'modality.required'=> 'La modalidad es requerida',
+         'teaching_situation.required'=> 'La situación académica es requerida',
+         'objective.required'=> 'El objetivo es requerido',
+         'product_developed.required'=> 'El producto a desarrollar es requerido',
+         'start.required'=> 'La fecha inicio es requerida',
+         'end.required'=> 'La fecha final es requerida',
+         'public.required'=> 'Este campo es requerido',
       ];
     }
 }

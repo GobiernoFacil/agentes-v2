@@ -18,6 +18,8 @@ class Module extends Model
         'slug',
         'start',
         'end',
+        'public',
+        'user_id'
     ];
 
 
