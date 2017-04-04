@@ -8,9 +8,12 @@ use Auth;
 use App\Models\Module;
 // FormValidators
 use App\Http\Requests\SaveModule;
+use App\Http\Requests\UpdateModule;
 class Modules extends Controller
 {
   //
+  //Paginación
+  public $pageSize = 10;
 
   /**
   * Búsqueda de módulo
@@ -30,6 +33,13 @@ class Modules extends Controller
   public function index()
   {
     //
+    $user = Auth::user();
+    $modules = Module::orderBy('start','desc')->paginate($this->pageSize);
+    return view('admin.modules.module-list')->with([
+      'user' => $user,
+      'modules' =>$modules,
+    ]);
+
   }
 
   /**
@@ -40,10 +50,8 @@ class Modules extends Controller
   public function add()
   {
     $user   = Auth::user();
-    $module = Module::firstOrCreate([]);
     return view('admin.modules.module-add')->with([
       "user"      => $user,
-      "module"    => $module
     ]);
   }
 
@@ -60,8 +68,9 @@ class Modules extends Controller
     $data   = $request->except('_token');
     $data['user_id'] = $user->id;
     $data['slug']    = str_slug($request->title);
-    Module::where('id',$request->id)->update($data);
-    var_dump($data);
+    $module = new Module($data);
+    $module->save();
+    return redirect("dashboard/modulos/ver/$module->id")->with('success',"Se ha guardado correctamente");
   }
 
   /**
@@ -73,6 +82,12 @@ class Modules extends Controller
   public function view($id)
   {
     //
+    $user   = Auth::user();
+    $module = Module::find($id);
+    return view('admin.modules.module-view')->with([
+      "user"      => $user,
+      "module"    => $module
+    ]);
   }
 
   /**
@@ -84,6 +99,12 @@ class Modules extends Controller
   public function edit($id)
   {
     //
+    $user = Auth::user();
+    $module = Module::find($id);
+    return view('admin.modules.module-update')->with([
+      'user' => $user,
+      'module' =>$module,
+    ]);
   }
 
   /**
@@ -93,9 +114,13 @@ class Modules extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function update(Request $request, $id)
+  public function update(UpdateModule $request)
   {
     //
+    $data   = $request->except('_token');
+    $data['slug']    = str_slug($request->title);
+    Module::where('id',$request->id)->update($data);
+    return redirect("dashboard/modulos/ver/$request->id")->with('success',"Se ha actualizado correctamente");
   }
 
   /**

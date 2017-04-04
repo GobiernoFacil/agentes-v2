@@ -108,8 +108,9 @@ Route::group(['middleware' => ['auth']], function () {
     //CRUD Modules
     Route::get('dashboard/modulos', 'Modules@index');
     Route::get('dashboard/modulos/agregar', 'Modules@add');
-    Route::post('dashboard/modulos/save/{id}', 'Modules@save');
-    Route::get('dashboard/modulos/editar', 'Modules@edit');
+    Route::post('dashboard/modulos/save', 'Modules@save');
+    Route::get('dashboard/modulos/editar/{id}', 'Modules@edit');
+    Route::post('dashboard/modulos/update/{id}', 'Modules@update');
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
     // Perfil  administrador

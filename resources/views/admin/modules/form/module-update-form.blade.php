@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/modulos/save"), "class" => "form-horizontal"]) !!}
+{!! Form::model($module,['url' => url("dashboard/modulos/update/$module->id"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -10,7 +10,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Nombre</strong> <br>
-      {{Form::text('title',null, ["class" => "form-control"])}} </label>
+      {{Form::text('title',$module->title, ["class" => "form-control"])}} </label>
       @if($errors->has('title'))
       <strong class="danger">{{$errors->first('title')}}</strong>
       @endif
@@ -22,7 +22,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha inicio</strong> <br>
-      {{Form::text('start',null, ["class" => "form-control", 'id'=>'startD'])}} </label>
+      {{Form::text('start',$module->start, ["class" => "form-control", 'id'=>'startD'])}} </label>
       @if($errors->has('start'))
       <strong class="danger">{{$errors->first('start')}}</strong>
       @endif
@@ -31,7 +31,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',null, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('end',$module->end, ["class" => "form-control",'id'=>'startE'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
       @endif
@@ -43,7 +43,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Número de sesiones</strong> <br>
-      {{Form::text('number_sessions',null, ["class" => "form-control"])}} </label>
+      {{Form::text('number_sessions',$module->number_sessions, ["class" => "form-control"])}} </label>
       @if($errors->has('number_sessions'))
       <strong class="danger">{{$errors->first('number_sessions')}}</strong>
       @endif
@@ -52,7 +52,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Total de horas</strong> <br>
-      {{Form::text('number_hours', null, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('number_hours', $module->number_hour, ["class" => "form-control",'id'=>'startE'])}} </label>
       @if($errors->has('number_hours'))
       <strong class="danger">{{$errors->first('number_hours')}}</strong>
       @endif
@@ -79,7 +79,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Situación Didáctica</strong> <br>
-      {{Form::textarea('teaching_situation',null, ["class" => "form-control"])}} </label>
+      {{Form::textarea('teaching_situation',$module->teaching_situation, ["class" => "form-control"])}} </label>
       @if($errors->has('teaching_situation'))
       <strong class="danger">{{$errors->first('teaching_situation')}}</strong>
       @endif
@@ -92,7 +92,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Objetivo</strong> <br>
-      {{Form::textarea('objective',null, ["class" => "form-control"])}} </label>
+      {{Form::textarea('objective',$module->objective, ["class" => "form-control"])}} </label>
       @if($errors->has('objective'))
       <strong class="danger">{{$errors->first('objective')}}</strong>
       @endif
@@ -104,7 +104,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Productos a desarrollar</strong> <br>
-      {{Form::textarea('product_developed',null, ["class" => "form-control"])}} </label>
+      {{Form::textarea('product_developed',$module->product_developed, ["class" => "form-control"])}} </label>
       @if($errors->has('product_developed'))
       <strong class="danger">{{$errors->first('product_developed')}}</strong>
       @endif
@@ -128,7 +128,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Guardar módulo', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Actualizar módulo', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
