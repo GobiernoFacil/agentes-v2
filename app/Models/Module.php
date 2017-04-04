@@ -22,6 +22,9 @@ class Module extends Model
         'user_id'
     ];
 
+    function sessions(){
+      return $this->hasMany("App\Models\ModuleSession");
+    }
 
 
 }
