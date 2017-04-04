@@ -29,8 +29,8 @@ class UpdateModule extends FormRequest
         return [
             //
             'title'=> 'required'.($module->title != $this->title ? '|unique:modules' : ''),
-            'number_sessions'=> 'required',
-            'number_hours'=> 'required',
+            'number_sessions'=> 'required|numeric',
+            'number_hours'=> 'required|numeric',
             'modality'=> 'required',
             'teaching_situation'=> 'required',
             'objective'=> 'required',

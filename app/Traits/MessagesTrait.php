@@ -80,6 +80,8 @@ trait MessagesTrait{
          'title.required' => 'El nombre es requerido',
          'title.unique' => 'El nombre debe de ser único',
          'number_sessions.required'=> 'El número de sesiones es requerido',
+         'number_sessions.numeric' => 'Escribe un número',
+         'number_hours.numeric' => 'Escribe un número',
          'number_hours.required'=> 'El total de horas es requerido',
          'modality.required'=> 'La modalidad es requerida',
          'teaching_situation.required'=> 'La situación académica es requerida',
