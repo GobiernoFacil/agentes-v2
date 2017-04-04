@@ -118,15 +118,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/modulos/update/{id}', 'Modules@update');
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
-    /*@ModuleSession Controller */
+    /*@ModuleSessions Controller */
     //CRUD sessions
-    Route::get('dashboard/sesiones/{id}', 'ModuleSession@index');
-    Route::get('dashboard/sesiones/agregar', 'ModuleSession@add');
-    Route::post('dashboard/sesiones/save', 'ModuleSession@save');
-    Route::get('dashboard/sesiones/editar/{id}', 'ModuleSession@edit');
-    Route::post('dashboard/sesiones/update/{id}', 'ModuleSession@update');
-    Route::get('dashboard/sesiones/deshabilitar/{id}', 'ModuleSession@delete');
-    Route::get('dashboard/sesiones/ver/{id}', 'ModuleSession@view');
+    Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
+    Route::get('dashboard/sesiones/agregar/{id}', 'ModuleSessions@add');
+    Route::post('dashboard/sesiones/save/{id}', 'ModuleSessions@save');
+    Route::get('dashboard/sesiones/editar/{id}/{session_id}', 'ModuleSessions@edit');
+    Route::post('dashboard/sesiones/update/{id}/{session_id}', 'ModuleSessions@update');
+    Route::get('dashboard/sesiones/deshabilitar/{id}', 'ModuleSessions@delete');
+    Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
   });
 
 

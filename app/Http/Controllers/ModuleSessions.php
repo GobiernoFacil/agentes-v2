@@ -10,7 +10,7 @@ use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveSession;
 use App\Http\Requests\UpdateSession;
-class ModuleSession extends Controller
+class ModuleSessions extends Controller
 {
     //
     //
