@@ -36,4 +36,50 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Sesiones</h1>
+	</div>
+</div>
+@if($module->sessions)
+<div class="box">
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Fecha Inicio / Fecha Final</th>
+					<th>Número de sesión</th>
+					<th>Horas</th>
+					<th>Modalidad</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($module->sessions as $session)
+					<tr>
+						<td><h4><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a></h4></td>
+						<td>{{date("d-m-Y", strtotime($session->start))}} <br> <strong>{{date('d-m-Y', strtotime($session->end))}}</strong></td>
+						<td>{{$session->order}}</td>
+						<td>{{$session->hours}} hrs.</td>
+						<td>{{$session->modality}}</td>
+						<td>
+							<a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}" class="btn xs view">Ver</a>
+							<a href="{{ url('dashboard/sesiones/editar/' . $session->id) }}" class="btn xs view">Actualizar</a>
+						 <!-- <a href ="{{ url('dashboard/modulos/eliminar' . $module->id) }}"  id ="{{$module->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>-->
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+</div>
+@else
+<div class="box">
+	<div class="row">
+				<span>Sin sesiones</span></br>
+				<a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs view">Agregar</a>
+		</ul>
+	</div>
+</div>
+@endif
 @endsection
