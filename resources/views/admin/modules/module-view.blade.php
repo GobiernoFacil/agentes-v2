@@ -30,7 +30,7 @@
 		<div class="col-sm-6">
 			<ul class="profile list">
 				<li class="right"><span>Agregar sesión</span>
-				<a href='{{ url("dashboard/sesiones/agregar/$module->id") }}'' class="btn xs view">Agregar</a></li>
+				<a href='{{ url("dashboard/sesiones/agregar/$module->id") }}' class="btn xs view">Agregar</a></li>
 			</ul>
 		</div>
 	</div>
