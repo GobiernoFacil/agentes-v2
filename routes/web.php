@@ -122,9 +122,9 @@ Route::group(['middleware' => ['auth']], function () {
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
     Route::get('dashboard/sesiones/agregar/{id}', 'ModuleSessions@add');
-    Route::post('dashboard/sesiones/save/{id}', 'ModuleSessions@save');
-    Route::get('dashboard/sesiones/editar/{id}/{session_id}', 'ModuleSessions@edit');
-    Route::post('dashboard/sesiones/update/{id}/{session_id}', 'ModuleSessions@update');
+    Route::post('dashboard/sesiones/save/{module_id}', 'ModuleSessions@save');
+    Route::get('dashboard/sesiones/editar/{session_id}', 'ModuleSessions@edit');
+    Route::post('dashboard/sesiones/update/{session_id}', 'ModuleSessions@update');
     Route::get('dashboard/sesiones/deshabilitar/{id}', 'ModuleSessions@delete');
     Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
   });

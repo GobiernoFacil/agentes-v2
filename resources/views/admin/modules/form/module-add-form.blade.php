@@ -5,7 +5,7 @@
     <h2 class="sa_title">Información de Módulo</h2>
   </div>
 </div>
-<!-- nombre -->
+<!-- title -->
 <div class="row">
   <div class="col-sm-12">
     <p>

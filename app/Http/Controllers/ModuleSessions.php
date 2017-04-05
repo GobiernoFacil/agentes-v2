@@ -49,11 +49,12 @@ class ModuleSessions extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function add()
+    public function add($module_id)
     {
       $user   = Auth::user();
       return view('admin.modules.sessions.session-add')->with([
         "user"      => $user,
+        "module_id" => $module_id
       ]);
     }
 
@@ -97,11 +98,11 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function edit($id)
+    public function edit($session_id)
     {
       //
       $user = Auth::user();
-      $session = ModuleSession::find($id);
+      $session = ModuleSession::find($session_id);
       return view('admin.modules.sessions.session-update')->with([
         'user' => $user,
         'session' =>$session,
@@ -115,12 +116,12 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(UpdateModule $request)
+    public function update(UpdateSession $request)
     {
       //
       $data   = $request->except('_token');
-      ModuleSession::where('id',$request->id)->update($data);
-      return redirect("dashboard/sesiones/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+      ModuleSession::where('id',$request->session_id)->update($data);
+      return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
     }
 
     /**

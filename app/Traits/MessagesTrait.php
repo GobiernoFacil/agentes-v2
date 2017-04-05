@@ -90,6 +90,12 @@ trait MessagesTrait{
          'start.required'=> 'La fecha inicio es requerida',
          'end.required'=> 'La fecha final es requerida',
          'public.required'=> 'Este campo es requerido',
+         //sesiones
+         'name.unique' => 'El nombre debe de ser único',
+         'order.required' => 'Este campo es requerido',
+         'order.numeric' => 'Escribe un número',
+         'hours.numeric' => 'Escribe un número',
+         'hours.required'=> 'El total de horas es requerido',
       ];
     }
 }
