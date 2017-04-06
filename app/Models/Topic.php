@@ -15,6 +15,7 @@ class Topic extends Model
       'knowledge',
       'abilities',
       'products',
+      'order'
     ];
 
   //modelos relacionados

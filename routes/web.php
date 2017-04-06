@@ -145,6 +145,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/requerimientos/update/{id}', 'ActivityRequirements@update');
     Route::get('dashboard/sesiones/actividades/requerimientos/deshabilitar/{id}', 'ActivityRequirements@delete');
     Route::get('dashboard/sesiones/actividades/requerimientos/ver/{id}', 'ActivityRequirements@view');
+    /*@Topics Controller */
+    //CRUD Topics
+    Route::get('dashboard/sesiones/tematicas/{id}', 'Topics@index');
+    Route::get('dashboard/sesiones/tematicas/agregar/{session_id}', 'Topics@add');
+    Route::post('dashboard/sesiones/tematicas/save/{session_id}', 'Topics@save');
+    Route::get('dashboard/sesiones/tematicas/editar/{id}', 'Topics@edit');
+    Route::post('dashboard/sesiones/tematicas/update/{id}', 'Topics@update');
+    Route::get('dashboard/sesiones/tematicas/deshabilitar/{id}', 'Topics@delete');
+    Route::get('dashboard/sesiones/tematicas/ver/{id}', 'Topics@view');
   });
 
 

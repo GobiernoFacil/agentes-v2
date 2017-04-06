@@ -43,6 +43,9 @@
   		<h1>Temáticas</h1>
   	</div>
   </div>
+	@if($session->topics->count() > 0)
+					@include('admin.modules.sessions.sessions-topics-list')
+	@else
   <div class="box">
   	<div class="row">
           <span>Sin temáticas</span></br>
@@ -50,6 +53,7 @@
       </ul>
     </div>
   </div>
+	@endif
 
   <div class="row">
   	<div class="col-sm-12">
