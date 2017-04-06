@@ -37,7 +37,7 @@
   </div>
 </div>
 @if($activity->activityRequirements->count() > 0)
-        @include('admin.modules.sessions.sessions-activities-list')
+        @include('admin.modules.activities.activities-requirements-list')
 @else
 <div class="box">
   <div class="row">
