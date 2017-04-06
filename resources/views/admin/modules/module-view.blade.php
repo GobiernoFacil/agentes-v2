@@ -41,7 +41,7 @@
 		<h1>Sesiones</h1>
 	</div>
 </div>
-@if($module->sessions)
+@if($module->sessions->count() > 0)
 <div class="box">
 	<div class="row">
 		<table class="table">

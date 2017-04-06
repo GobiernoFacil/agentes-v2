@@ -26,7 +26,7 @@ protected $fillable = [
   }
 
   function activities(){
-    return $this->hasMany("App\Models\Activity");
+    return $this->hasMany("App\Models\Activity",'session_id');
   }
 
 

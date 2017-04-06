@@ -96,6 +96,12 @@ trait MessagesTrait{
          'order.numeric' => 'Escribe un número',
          'hours.numeric' => 'Escribe un número',
          'hours.required'=> 'El total de horas es requerido',
+         //Actividades
+         'duration.required' => 'Este campo es requerido',
+         'duration.numeric' => 'Escribe un número',
+         'description.required' => 'La descripción es requerida',
+         'facilitator_role.required' => 'Este campo es requerido',
+         'competitor_role.required' => 'Este campo es requerido',
       ];
     }
 }

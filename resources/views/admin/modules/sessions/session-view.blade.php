@@ -56,6 +56,9 @@
   		<h1>Actividades</h1>
   	</div>
   </div>
+	@if($session->activities->count() > 0)
+					@include('admin.modules.sessions.sessions-activities-list')
+	@else
   <div class="box">
   	<div class="row">
           <span>Sin actividades</span></br>
@@ -63,6 +66,7 @@
       </ul>
     </div>
   </div>
+	@endif
   <div class="row">
   	<div class="col-sm-12">
   		<h1>Requisitos Previos</h1>
