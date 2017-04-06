@@ -29,5 +29,9 @@ protected $fillable = [
     return $this->hasMany("App\Models\Activity",'session_id');
   }
 
+  function topics(){
+    return $this->hasMany("App\Models\Topic",'session_id');
+  }
+
 
 }
