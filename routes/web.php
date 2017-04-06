@@ -136,6 +136,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/update/{id}', 'Activities@update');
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
+    /*@ActivityRequirements Controller */
+    //CRUD activitiesRequirements
+    Route::get('dashboard/sesiones/actividades/requerimientos/{id}', 'ActivityRequirements@index');
+    Route::get('dashboard/sesiones/actividades/requerimientos/agregar/{activity_id}', 'ActivityRequirements@add');
+    Route::post('dashboard/sesiones/actividades/requerimientos/save/{activity_id}', 'ActivityRequirements@save');
+    Route::get('dashboard/sesiones/actividades/requerimientos/editar/{id}', 'ActivityRequirements@edit');
+    Route::post('dashboard/sesiones/actividades/requerimientos/update/{id}', 'ActivityRequirements@update');
+    Route::get('dashboard/sesiones/actividades/requerimientos/deshabilitar/{id}', 'ActivityRequirements@delete');
+    Route::get('dashboard/sesiones/actividades/requerimientos/ver/{id}', 'ActivityRequirements@view');
   });
 
 

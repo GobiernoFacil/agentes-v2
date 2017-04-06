@@ -102,6 +102,7 @@ trait MessagesTrait{
          'description.required' => 'La descripción es requerida',
          'facilitator_role.required' => 'Este campo es requerido',
          'competitor_role.required' => 'Este campo es requerido',
+         'material_link.url' =>"Escribe un URL válido",
       ];
     }
 }

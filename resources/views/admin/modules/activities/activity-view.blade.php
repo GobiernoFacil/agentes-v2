@@ -25,10 +25,26 @@
 		</div>
 		<div class="col-sm-6">
 			<ul class="profile list">
-				<li class="right"><span>Requerimientos</span>
+				<li class="right"><span>Recursos y requerimientos técnicos</span>
 				<a href='{{ url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id") }}' class="btn xs view">Agregar</a></li>
 			</ul>
 		</div>
 	</div>
 </div>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Recursos y requerimientos técnicos</h1>
+  </div>
+</div>
+@if($activity->activityRequirements->count() > 0)
+        @include('admin.modules.sessions.sessions-activities-list')
+@else
+<div class="box">
+  <div class="row">
+        <span>Sin requerimientos</span></br>
+        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar</a>
+    </ul>
+  </div>
+</div>
+@endif
 @endsection
