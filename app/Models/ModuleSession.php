@@ -33,5 +33,9 @@ protected $fillable = [
     return $this->hasMany("App\Models\Topic",'session_id');
   }
 
+  function requirements(){
+    return $this->hasMany("App\Models\SessionRequirement",'session_id');
+  }
+
 
 }
