@@ -154,6 +154,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/tematicas/update/{id}', 'Topics@update');
     Route::get('dashboard/sesiones/tematicas/deshabilitar/{id}', 'Topics@delete');
     Route::get('dashboard/sesiones/tematicas/ver/{id}', 'Topics@view');
+    /*@Monitorings Controller */
+    //CRUD Monitoring
+    Route::get('dashboard/sesiones/mecanismos-monitoreo/{id}', 'Monitorings@index');
+    Route::get('dashboard/sesiones/mecanismos-monitoreo/agregar/{session_id}', 'Monitorings@add');
+    Route::post('dashboard/sesiones/mecanismos-monitoreo/save/{session_id}', 'Monitorings@save');
+    Route::get('dashboard/sesiones/mecanismos-monitoreo/editar/{id}', 'Monitorings@edit');
+    Route::post('dashboard/sesiones/mecanismos-monitoreo/update/{id}', 'Monitorings@update');
+    Route::get('dashboard/sesiones/mecanismos-monitoreo/deshabilitar/{id}', 'Monitorings@delete');
+    Route::get('dashboard/sesiones/mecanismos-monitoreo/ver/{id}', 'Monitorings@view');
   });
 
 

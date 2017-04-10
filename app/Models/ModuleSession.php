@@ -37,5 +37,9 @@ protected $fillable = [
     return $this->hasMany("App\Models\SessionRequirement",'session_id');
   }
 
+  function evaluations(){
+    return $this->hasMany("App\Models\Monitoring",'session_id');
+  }
+
 
 }

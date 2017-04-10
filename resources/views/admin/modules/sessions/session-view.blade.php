@@ -89,14 +89,18 @@
 	@endif
   <div class="row">
   	<div class="col-sm-12">
-  		<h1>Evaluación</h1>
+  		<h1>Mecanismos de Monitoreo y Evaluación</h1>
   	</div>
   </div>
+	@if($session->evaluations->count() > 0)
+			@include('admin.modules.sessions.sessions-monitoring-list')
+	@else
   <div class="box">
   	<div class="row">
-          <span>Sin evaluación</span></br>
-          <a href='{{url("dashboard/sesiones/evaluacion/agregar/$session->id")}}' class="btn xs view">Agregar</a>
+          <span>Sin información</span></br>
+          <a href='{{url("dashboard/sesiones/mecanismos-monitoreo/agregar/$session->id")}}' class="btn xs view">Agregar</a>
       </ul>
     </div>
   </div>
+ @endif
 @endsection
