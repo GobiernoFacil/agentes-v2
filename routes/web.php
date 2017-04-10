@@ -163,6 +163,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/mecanismos-monitoreo/update/{id}', 'Monitorings@update');
     Route::get('dashboard/sesiones/mecanismos-monitoreo/deshabilitar/{id}', 'Monitorings@delete');
     Route::get('dashboard/sesiones/mecanismos-monitoreo/ver/{id}', 'Monitorings@view');
+    /*@SessionRequirements Controller */
+    //CRUD SessionRequirements
+    Route::get('dashboard/sesiones/requisitos/{id}', 'SessionRequirements@index');
+    Route::get('dashboard/sesiones/requisitos/agregar/{session_id}', 'SessionRequirements@add');
+    Route::post('dashboard/sesiones/requisitoso/save/{session_id}', 'SessionRequirements@save');
+    Route::get('dashboard/sesiones/requisitos/editar/{id}', 'SessionRequirements@edit');
+    Route::post('dashboard/sesiones/requisitos/update/{id}', 'SessionRequirements@update');
+    Route::get('dashboard/sesiones/requisitos/deshabilitar/{id}', 'SessionRequirements@delete');
+    Route::get('dashboard/sesiones/requisitos/ver/{id}', 'SessionRequirements@view');
   });
 
 
