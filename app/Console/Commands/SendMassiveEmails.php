@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Aspirant;
+use App\Models\AspirantActivation;
 use App\Notifications\MassiveEmail;
 class SendMassiveEmails extends Command
 {
@@ -45,9 +46,8 @@ class SendMassiveEmails extends Command
 
     public function sendEmails()
     {
-
-      //  $aspirants = Aspirant::where('is_activated',0)->get();
-      $aspirants = Aspirant::where('email','co.maceda@gmail.com')->get();
+        $aspirants_id = AspirantActivation::all()->pluck('aspirant_id');
+        $aspirants = Aspirant::whereIn('id',$aspirants_id->toArray())->get();
         foreach ($aspirants as $aspirant) {
           # code...
           $aspirant->sendEmail($aspirant->code->token);
