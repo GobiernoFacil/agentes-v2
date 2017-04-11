@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        Commands\DeleteExpiredCodes::class
+        Commands\DeleteExpiredCodes::class,
+        Commands\SendMassiveEmails::class
     ];
 
     /**

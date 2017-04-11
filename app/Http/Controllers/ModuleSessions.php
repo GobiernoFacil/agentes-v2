@@ -64,15 +64,18 @@ class ModuleSessions extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function save(SaveSession $request)
+    public function save(Request $request)
     {
       //
-      $user   = Auth::user();
+    /*  $user   = Auth::user();
       $data   = $request->except('_token');
       $data['module_id']    = $request->module_id;
       $session = new ModuleSession($data);
       $session->save();
-      return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
+      return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");*/
+      $order   = $request->order;
+      $numbers = ModuleSession::all()->pluck('id','order')->toArray();
+      var_dump($numbers[$order]);
     }
 
     /**
