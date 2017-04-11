@@ -122,6 +122,8 @@ class ModuleSessions extends Controller
     {
       //
       $data   = $request->except('_token');
+      $order   = $request->order;
+      $this->orderSession($order);
       ModuleSession::where('id',$request->session_id)->update($data);
       return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
     }
@@ -138,27 +140,38 @@ class ModuleSessions extends Controller
     }
 
     protected function orderSession($order){
-      $numbers = ModuleSession::all()->pluck('order','id')->toArray();
-      $index   = ModuleSession::all()->pluck('id','order')->toArray();
+      $order   =  (int)$order;
+      $numbers = ModuleSession::orderBy('order','asc')->pluck('id','order')->toArray();
+      $index    = ModuleSession::orderBy('order','asc')->pluck('order','id')->toArray();
       if(isset($numbers[$order])){
-        $flag = 0;
+      $flag = 0;
         $temp_ids = [];
         $temp2 = [];
-        foreach ($numbers as $number) {
+        foreach ($index as $number) {
           if($order==$number){
             $flag =1;
           }
           if($flag){
-            $idsr    = $index[$number];
+            $idsr    = $numbers[$number];
             array_push($temp_ids,$idsr);
 
           }
         }
+        $flag = 0;
         foreach ($temp_ids as $id) {
           # code...
           $session = ModuleSession::find($id);
-          $session->order = $session->order+1;
+          if($flag>0){
+            if(($session->order - $temp_s)< 2){
+              $temp_s  = $session->order;
+              $session->order = $session->order+1;
+            }
+          }else{
+            $temp_s  = $session->order;
+            $session->order = $session->order+1;
+          }
           $session->save();
+          $flag++;
         }
         return true;
       }else{
