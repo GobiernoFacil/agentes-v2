@@ -41,7 +41,7 @@ class MassiveEmail extends Notification
      */
     public function toMail($notifiable)
     {
-      $url = url("convocatoria/aplicar/confirmacion", $this->token);
+      $url = url("/convocatoria/aplicar/confirmacion", $this->token);
       return (new MailMessage)
                   ->from('info@apertus.org.mx')
                   ->subject('no-reply')
