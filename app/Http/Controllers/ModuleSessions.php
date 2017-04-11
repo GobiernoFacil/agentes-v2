@@ -75,7 +75,11 @@ class ModuleSessions extends Controller
       return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");*/
       $order   = $request->order;
       $numbers = ModuleSession::all()->pluck('id','order')->toArray();
-      var_dump($numbers[$order]);
+      if(isset($numbers[$order])){
+        var_dump($numbers[$order]);
+      }else{
+
+      }
     }
 
     /**

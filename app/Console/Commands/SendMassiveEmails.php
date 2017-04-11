@@ -46,7 +46,8 @@ class SendMassiveEmails extends Command
     public function sendEmails()
     {
 
-        $aspirants = Aspirant::where('is_activated',0)->get();
+      //  $aspirants = Aspirant::where('is_activated',0)->get();
+      $aspirants = Aspirant::where('email','co.maceda@gmail.com')->get();
         foreach ($aspirants as $aspirant) {
           # code...
           $aspirant->sendEmail($aspirant->code->token);
