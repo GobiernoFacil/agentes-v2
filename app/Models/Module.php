@@ -23,7 +23,7 @@ class Module extends Model
     ];
 
     function sessions(){
-      return $this->hasMany("App\Models\ModuleSession");
+      return $this->hasMany("App\Models\ModuleSession")->orderBy('order','asc');
     }
 
 

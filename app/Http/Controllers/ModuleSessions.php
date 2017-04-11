@@ -64,22 +64,17 @@ class ModuleSessions extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function save(Request $request)
+    public function save(SaveSession $request)
     {
-      //
-    /*  $user   = Auth::user();
+      $order   = $request->order;
+      $this->orderSession($order);
+      $user   = Auth::user();
       $data   = $request->except('_token');
       $data['module_id']    = $request->module_id;
       $session = new ModuleSession($data);
       $session->save();
-      return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");*/
-      $order   = $request->order;
-      $numbers = ModuleSession::all()->pluck('id','order')->toArray();
-      if(isset($numbers[$order])){
-        var_dump($numbers[$order]);
-      }else{
+      return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
-      }
     }
 
     /**
@@ -140,6 +135,35 @@ class ModuleSessions extends Controller
     public function delete($id)
     {
       //
+    }
+
+    protected function orderSession($order){
+      $numbers = ModuleSession::all()->pluck('order','id')->toArray();
+      $index   = ModuleSession::all()->pluck('id','order')->toArray();
+      if(isset($numbers[$order])){
+        $flag = 0;
+        $temp_ids = [];
+        $temp2 = [];
+        foreach ($numbers as $number) {
+          if($order==$number){
+            $flag =1;
+          }
+          if($flag){
+            $idsr    = $index[$number];
+            array_push($temp_ids,$idsr);
+
+          }
+        }
+        foreach ($temp_ids as $id) {
+          # code...
+          $session = ModuleSession::find($id);
+          $session->order = $session->order+1;
+          $session->save();
+        }
+        return true;
+      }else{
+          return true;
+      }
     }
 
 

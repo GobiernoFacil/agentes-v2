@@ -47,9 +47,10 @@
 		<table class="table">
 			<thead>
 				<tr>
+
+					<th>Número de sesión</th>
 					<th>Nombre</th>
 					<th>Fecha Inicio / Fecha Final</th>
-					<th>Número de sesión</th>
 					<th>Horas</th>
 					<th>Modalidad</th>
 					<th>Acciones</th>
@@ -58,9 +59,9 @@
 			<tbody>
 				@foreach ($module->sessions as $session)
 					<tr>
+						<td>{{$session->order}}</td>
 						<td><h4><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a></h4></td>
 						<td>{{date("d-m-Y", strtotime($session->start))}} <br> <strong>{{date('d-m-Y', strtotime($session->end))}}</strong></td>
-						<td>{{$session->order}}</td>
 						<td>{{$session->hours}} hrs.</td>
 						<td>{{$session->modality}}</td>
 						<td>
