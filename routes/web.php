@@ -172,6 +172,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/requisitos/update/{id}', 'SessionRequirements@update');
     Route::get('dashboard/sesiones/requisitos/deshabilitar/{id}', 'SessionRequirements@delete');
     Route::get('dashboard/sesiones/requisitos/ver/{id}', 'SessionRequirements@view');
+    /*@Facilitator Controller */
+    // Rutas CRUD Facilitator
+    Route::get('dashboard/facilitadores', 'Facilitator@index');
+    Route::get('dashboard/facilitadores/agregar', 'Facilitator@add');
+    Route::post('dashboard/facilitadores/crear', 'Facilitator@save');
+    Route::get('dashboard/facilitadores/editar/{id}', 'Facilitator@edit');
+    Route::post('dashboard/facilitadores/editar/{id}', 'Facilitator@update');
+    Route::get('dashboard/facilitadores/deshabilitar/{id}', 'Facilitator@delete');
+    Route::get('dashboard/facilitadores/ver/{id}', 'Facilitator@view');
   });
 
 

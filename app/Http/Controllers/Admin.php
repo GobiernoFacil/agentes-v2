@@ -37,7 +37,7 @@ class Admin extends Controller
 		$leon_number 	  = Aspirant::where('is_activated',1)->where('state','Nuevo Léon')->count();
 		$oaxaca_number 	  = Aspirant::where('is_activated',1)->where('state','Oaxaca')->count();
 		$sonora_number 	  = Aspirant::where('is_activated',1)->where('state','Sonora')->count();
-      
+
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
