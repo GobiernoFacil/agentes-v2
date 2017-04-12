@@ -31,8 +31,12 @@
 				<a href='{{ url("dashboard/sesiones/actividades/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
         <li class="right"><span>Agregar temática</span>
 				<a href='{{ url("dashboard/sesiones/tematicas/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
+				<li class="right"><span>Agregar Mecanismos de Monitoreo y Evaluación</span>
+				<a href='{{url("dashboard/sesiones/mecanismos-monitoreo/agregar/$session->id")}}' class="btn xs view">Agregar</a></li>
+				<!--
         <li class="right"><span>Agregar requisitos previos</span>
 				<a href='{{ url("dashboard/sesiones/requisitos/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
+			  -->
 			</ul>
 		</div>
 	</div>
@@ -71,6 +75,7 @@
     </div>
   </div>
 	@endif
+	<!--
   <div class="row">
   	<div class="col-sm-12">
   		<h1>Requisitos Previos</h1>
@@ -87,6 +92,8 @@
     </div>
   </div>
 	@endif
+-->
+
   <div class="row">
   	<div class="col-sm-12">
   		<h1>Mecanismos de Monitoreo y Evaluación</h1>

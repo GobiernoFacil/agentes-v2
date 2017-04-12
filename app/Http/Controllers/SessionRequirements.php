@@ -47,9 +47,11 @@ class SessionRequirements extends Controller
       //
       $user      = Auth::user();
       $session   = ModuleSession::where('id',$session_id)->firstOrFail();
+      $preSession = ModuleSession::where('order',(($session->order)-1))->first();
       return view('admin.modules.requirements.requirement-add')->with([
         "user"      => $user,
-        "session" => $session
+        "session" => $session,
+        'preSession' => $preSession
       ]);
     }
 
