@@ -18,6 +18,14 @@
   </div>
 </div>
 <div class="div"></div>
+
+<!-- success message  -->
+<div class="row">
+  <div class="col-sm-9">
+    <span class = "success" id ="successMessage" style="display:none;">Se ha seleccionado correctamente</span>
+</div>
+</div>
+<!-- box results -->
 <div id = "boxResults" style="display:none;">
 	<table class="table" id = "resultList">
 		<thead>
@@ -31,6 +39,7 @@
 		</tbody>
 </table>
 </div>
+<!--form -->
 <div class="box">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">

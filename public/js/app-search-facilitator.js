@@ -34,8 +34,7 @@ var appSearch = {
     for (var i = 0; i < d.length; i++) {
       var tr = document.createElement("tr");
       //Aspirant name
-      var a = document.createElement("A");
-      a.href = this.generalAspirantUrl+"/"+d[i].id;
+      var a = document.createElement("span");
       var text = document.createTextNode(d[i].name);
       a.appendChild(text);
       var aspirant = document.createElement("td");
@@ -57,9 +56,10 @@ var appSearch = {
       email.appendChild(emailText);
       //Action
       var ac = document.createElement("A");
-      ac.className ="btn xs view";
-      ac.href = this.generalAspirantUrl+"/"+d[i].id;
-      var text = document.createTextNode('Ver');
+      ac.className ="btn xs view optionFac";
+      ac.href = "";
+      ac.id   = d[i].id;
+      var text = document.createTextNode('Seleccionar');
       ac.appendChild(text);
       tr.appendChild(row);
       tr.appendChild(email);
@@ -68,6 +68,29 @@ var appSearch = {
     }
     document.getElementById("boxResults").style.display ="block";
     //document.getElementById("facilitators").style.display ="none";
+    var classname = document.getElementsByClassName("btn xs view optionFac");
+    for (var i = 0; i < classname.length; i++) {
+    classname[i].addEventListener('click', function(e){
+      e.preventDefault();
+      element = document.querySelector("input[value='"+e.target.id+"']");
+      element.checked = true;
+      document.getElementById("nR").style.display ="none";
+      document.getElementById("boxResults").style.display ="none";
+      var resu = document.getElementById("List");
+      resu.innerHTML = '';
+      document.getElementById("successMessage").style.display ="block";
+      var op = 1;
+      var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            document.getElementById("successMessage").style.display = 'none';
+        }
+        document.getElementById("successMessage").style.opacity = op;
+        document.getElementById("successMessage").style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 150);
+    });
+    }
   },
 
   _makeRequest : function(url){
@@ -110,5 +133,10 @@ var appSearch = {
       request.send(data);
     }
   },
+
+  _checkOption: function(e){
+    e.preventDefault();
+    alert('hi');
+  }
 
 };
