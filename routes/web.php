@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/modulos/update/{id}', 'Modules@update');
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
+    Route::get('dashboard/modulos/facilitadores/asignar/{id_module}', 'Modules@assign');
     /*@ModuleSessions Controller */
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');

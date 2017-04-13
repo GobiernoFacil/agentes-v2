@@ -139,7 +139,7 @@ class Facilitator extends Controller
   }
 
   /**
-  * Deshabilita usuario
+  * Deshabilit usuario
   *
   * @param  int  $id
   * @return \Illuminate\Http\Response
@@ -148,4 +148,5 @@ class Facilitator extends Controller
   {
     //
   }
+
 }

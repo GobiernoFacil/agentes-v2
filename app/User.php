@@ -32,4 +32,8 @@ class User extends Authenticatable
     {
         $this->notify(new MyResetPassword($token));
     }
+
+    function modules(){
+      return $this->hasMany("App\Models\FacilitatorModule")->orderBy('order','asc');
+    }
 }

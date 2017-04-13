@@ -31,6 +31,8 @@
 			<ul class="profile list">
 				<li class="right"><span>Agregar sesión</span>
 				<a href='{{ url("dashboard/sesiones/agregar/$module->id") }}' class="btn xs view">Agregar</a></li>
+				<li class="right"><span>Asignar Facilitador</span>
+				<a href='{{ url("dashboard/modulos/facilitadores/asignar/$module->id") }}' class="btn xs view">Asignar</a></li>
 			</ul>
 		</div>
 	</div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveModule;
 use App\Http\Requests\UpdateModule;
@@ -134,5 +135,21 @@ class Modules extends Controller
     //
   }
 
+  /**
+  * asignar facilitador a módulo
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function assign($module_id)
+  {
+    //
+    $user = Auth::user();
+    $facilitators = User::where('type','facilitator')->where('enabled',1)->orderBy('name','desc')->get();
+    return view('admin.modules.facilitator-assign')->with([
+      'user' => $user,
+      'facilitators' =>$facilitators,
+    ]);
 
+  }
 }
