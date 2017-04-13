@@ -6,8 +6,8 @@
   @foreach($facilitators as $user)
   <li>
     <label class="control-label">
-      <input type="checkbox" name="signed[]" value="{{$user->id}}">
-      {{$user->name}}
+      <input type="checkbox" name="signed[]" value="{{$user->id}}"
+      {{$module->facilitators->contains("user_id", $user->id) ? "checked" : ""}}>{{$user->name}}
     </label>
   </li>
   @endforeach

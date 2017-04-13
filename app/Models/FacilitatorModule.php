@@ -15,4 +15,9 @@ class FacilitatorModule extends Model
     function user(){
       return $this->belongsTo("App\User");
     }
+
+    //modelos relacionados
+    function module(){
+      return $this->belongsTo("App\Models\Module");
+    }
 }

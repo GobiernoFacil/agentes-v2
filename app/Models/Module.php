@@ -26,5 +26,9 @@ class Module extends Model
       return $this->hasMany("App\Models\ModuleSession")->orderBy('order','asc');
     }
 
+    function facilitators(){
+      return $this->hasMany("App\Models\FacilitatorModule");
+    }
+
 
 }

@@ -156,6 +156,28 @@ class Modules extends Controller
   }
 
   /**
+  * guardar asignacion de facilitadores a módulo
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function saveAssign(Request $request)
+  {
+    //
+    $user = Auth::user();
+    $module       = Module::where('id',$request->module_id)->firstOrFail();
+    $module->facilitators()->delete();
+    if(!empty($request->signed)){
+      foreach($request->signed as $g){
+        $facilitator = $module->facilitators()->firstOrCreate([
+          "user_id" => $g
+        ]);
+      }
+    }
+    return redirect("dashboard/modulos/ver/$request->module_id")->with('success',"Se ha guardado correctamente");
+  }
+
+  /**
    * busca facilitador
    *
    * @param  int  $id

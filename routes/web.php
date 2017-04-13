@@ -120,6 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
     Route::get('dashboard/modulos/facilitadores/asignar/{id_module}', 'Modules@assign');
     Route::post('dashboard/modulos/facilitadores/buscar', 'Modules@searchFacilitator');
+    Route::post('dashboard/modulos/facilitadores/save/{module_id}', 'Modules@saveAssign');
     /*@ModuleSessions Controller */
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');

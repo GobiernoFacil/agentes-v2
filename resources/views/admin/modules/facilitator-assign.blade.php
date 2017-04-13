@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-9">
-    <h1>Asignar facilitador</h1>
+    <h1>Asignar facilitadores</h1>
   </div>
   <div class="col-sm-3">
     <form  role="form" method="GET" action="{{ url('dashboard/modulos/facilitador/buscar') }}" id="search-input">
