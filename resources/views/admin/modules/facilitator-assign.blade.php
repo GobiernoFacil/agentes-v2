@@ -17,14 +17,7 @@
     </form>
   </div>
 </div>
-<div class="box">
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      @include('admin.modules.form.facilitator-assign-form')
-    </div>
-  </div>
-</div>
-
+<div class="div"></div>
 <div id = "boxResults" style="display:none;">
 	<table class="table" id = "resultList">
 		<thead>
@@ -38,24 +31,38 @@
 		</tbody>
 </table>
 </div>
+<div class="box">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      @include('admin.modules.form.facilitator-assign-form')
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('js-content')
 <script src="{{url('js/app-search-facilitator.js')}}"></script>
 <script>
 var CONFIG = {
-	search_url:    "{{url('dashboard/modulos/facilitador/buscar')}}",
-	general_aspirant_url :    "{{url('dashboard/facilitador/ver')}}",
+	search_url:    "{{url('dashboard/modulos/facilitadores/buscar')}}",
+	general_aspirant_url :    "{{url('dashboard/facilitadores/ver')}}",
 	token      : document.querySelector('input[name="_token"]').value
 };
 appSearch.initialize(CONFIG);
-document.getElementById("search-facilitator").onblur = function() {
+document.getElementById("search-fac").onblur = function() {
 	if(this.value==''){
 		document.getElementById("boxResults").style.display ="none";
-		document.getElementById("facilitators").style.display ="block";
+		//document.getElementById("facilitators").style.display ="block";
 		document.getElementById("nR").style.display ="none";
 	}
 
 };
+
+document.getElementById("search-fac").addEventListener("change", function() {
+      if(document.getElementById("search-fac").value.trim()==''){
+        document.getElementById("nR").style.display ="none";
+      }
+    });
 </script>
 @endsection

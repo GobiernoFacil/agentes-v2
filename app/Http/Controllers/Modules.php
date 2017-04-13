@@ -146,10 +146,41 @@ class Modules extends Controller
     //
     $user = Auth::user();
     $facilitators = User::where('type','facilitator')->where('enabled',1)->orderBy('name','desc')->get();
+    $module       = Module::where('id',$module_id)->firstOrFail();
     return view('admin.modules.facilitator-assign')->with([
       'user' => $user,
       'facilitators' =>$facilitators,
+      'module'=>$module
     ]);
 
   }
+
+  /**
+   * busca facilitador
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+   public function searchFacilitator(Request $request){
+      $member = $request->match;
+      $results = User::where('type', 'facilitator')
+                  ->where('enabled', 1)
+                  ->where('name', 'like', "$member%")
+                  ->get();
+       if($results->isempty()){
+         $results = User::where('type', 'facilitator')
+                     ->where('enabled', 1)
+                     ->where('email', 'like', "$member%")
+                     ->get();
+        if($results->isempty()){
+          return response()->json(['false'])->header('Access-Control-Allow-Origin', '*');
+        }else{
+          return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+        }
+       }else{
+         return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+       }
+
+
+   }
 }

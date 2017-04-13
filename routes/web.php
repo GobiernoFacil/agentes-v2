@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
     Route::get('dashboard/modulos/facilitadores/asignar/{id_module}', 'Modules@assign');
+    Route::post('dashboard/modulos/facilitadores/buscar', 'Modules@searchFacilitator');
     /*@ModuleSessions Controller */
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
