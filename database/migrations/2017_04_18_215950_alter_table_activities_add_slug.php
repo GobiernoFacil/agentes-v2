@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableSessionAddSlug extends Migration
+class AlterTableActivitiesAddSlug extends Migration
 {
   /**
   * Run the migrations.
@@ -14,7 +14,7 @@ class AlterTableSessionAddSlug extends Migration
   public function up()
   {
     //
-    Schema::table('module_sessions', function (Blueprint $table) {
+    Schema::table('activities', function (Blueprint $table) {
       $table->string('slug')->nullable();
     });
   }
@@ -27,6 +27,6 @@ class AlterTableSessionAddSlug extends Migration
   public function down()
   {
     //
-    Schema::dropIfExists('module_sessions');
+    Schema::dropIfExists('activities');
   }
 }

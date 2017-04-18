@@ -63,6 +63,7 @@ class Activities extends Controller
             $user      = Auth::user();
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
             $activity  = new Activity($request->except('_token'));
+            $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
             $activity->save();
             return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha guardado correctamente");
@@ -113,6 +114,7 @@ class Activities extends Controller
         {
             //
             $data   = $request->except('_token');
+            $data['slug']    = str_slug($request->name);
             Activity::where('id',$request->id)->update($data);
             return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
         }

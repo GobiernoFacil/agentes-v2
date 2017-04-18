@@ -71,6 +71,7 @@ class ModuleSessions extends Controller
       $user   = Auth::user();
       $data   = $request->except('_token');
       $data['module_id']    = $request->module_id;
+      $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
       $session->save();
       return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
@@ -124,6 +125,7 @@ class ModuleSessions extends Controller
       $data   = $request->except('_token');
       $order   = $request->order;
       $this->orderSession($order);
+      $data['slug']    = str_slug($request->name);
       ModuleSession::where('id',$request->session_id)->update($data);
       return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
     }
