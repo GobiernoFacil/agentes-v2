@@ -5,7 +5,7 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
@@ -14,7 +14,7 @@
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="module view")
-	<li>Ver módulo</li>
+	<li>{{ $module->title }}</li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="module edit")
 	<li><a href="{{url('dashboard/modulo')}}">Ver módulo</a></li>
