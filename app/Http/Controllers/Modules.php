@@ -9,7 +9,8 @@ use App\Models\Module;
 // FormValidators
 use App\Http\Requests\SaveModule;
 use App\Http\Requests\UpdateModule;
-class Modules extends Controller
+class Modules 
+extends Controller
 {
   //
   //Paginación
