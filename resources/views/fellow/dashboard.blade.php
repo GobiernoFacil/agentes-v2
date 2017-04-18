@@ -17,8 +17,8 @@
 			<div class="col-sm-9 center">
 				<div class="box ">
 					<h3 class="sa_title">Módulos</h3>
-					<a href="{{ url('tablero/modulos') }}" class="count_link">{{$modules_count}}</a>
-					<a href="{{ url('tablero/modulos') }}" class="btn gde">Ver módulos</a>
+					<a href="{{ url('tablero/aprendizaje') }}" class="count_link">{{$modules_count}}</a>
+					<a href="{{ url('tablero/aprendizaje') }}" class="btn gde">Ver módulos</a>
 				</div>
 			</div>
 		</div>

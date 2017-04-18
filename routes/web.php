@@ -196,6 +196,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/perfil', 'Fellows@viewProfile');
     Route::get('tablero/perfil/editar', 'Fellows@editProfile');
     Route::post('tablero/perfil/save', 'Fellows@saveProfile');
+    /*@ModulesFellow Controller */
+    // Rutas módulos
+    Route::get('tablero/aprendizaje', 'ModulesFellow@index');
   });
 
 });

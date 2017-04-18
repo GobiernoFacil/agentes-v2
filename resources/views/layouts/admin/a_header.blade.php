@@ -26,6 +26,9 @@
 				<li class="{{ $__env->yieldContent('body_class') == 'suAdmin' ? "active" : ''}}"><a href="{{url( $linkDash . '/super-administradores')}}"><b class="icon i_usuarios"></b> Super Admin</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}"><b class="icon i_usuarios"></b> Administradores</a></li>
 				@endif
+				@if($user->type == "fellow")
+				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_usuarios"></b> Aprendizaje</a></li>
+				@endif
 			</ul>
 		</nav>
 	</div>
