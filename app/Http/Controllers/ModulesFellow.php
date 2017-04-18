@@ -26,4 +26,21 @@ class ModulesFellow extends Controller
         "user"      => $user,
         "modules"  => $list]);
     }
+
+    /**
+    * Muestra módulo
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function view($slug)
+    {
+      //
+      $user    = Auth::user();
+      $module  = Module::where('slug',$slug)->first();
+      return view('fellow.modules.module-view')->with([
+        "user"      => $user,
+        "module"    => $module
+      ]);
+    }
 }

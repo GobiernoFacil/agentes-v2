@@ -199,6 +199,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@ModulesFellow Controller */
     // Rutas módulos
     Route::get('tablero/aprendizaje', 'ModulesFellow@index');
+    Route::get('tablero/aprendizaje/{slug}', 'ModulesFellow@view');
   });
 
 });

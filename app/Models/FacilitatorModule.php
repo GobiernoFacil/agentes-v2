@@ -17,7 +17,7 @@ class FacilitatorModule extends Model
     }
 
     //modelos relacionados
-    function module(){
-      return $this->belongsTo("App\Models\Module");
+    function session(){
+      return $this->belongsTo("App\Models\ModuleSession");
     }
 }
