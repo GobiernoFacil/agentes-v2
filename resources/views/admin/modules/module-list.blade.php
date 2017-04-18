@@ -1,12 +1,28 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar módulo')
 @section('description', 'Agregar nuevo módulo')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'modulos')
+@section('breadcrumb_type', 'module list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
+
+@if(!empty($modules))
 <div class="row">
+	<div class="col-sm-12">
+		<h1>Módulos</h1>
+		<div class="box center">
+			<h2>Aún no existen módulos</h2>
+			<p><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
+		</div>
+	</div>
+</div>
+
+@else
+	
+<div class="row">
+	
+	
 	<div class="col-sm-9">
 		<h1>Lista de módulos</h1>
 	</div>
@@ -69,6 +85,7 @@
 		</tbody>
 </table>
 </div>
+@endif
 @endsection
 
 @section('js-content')
