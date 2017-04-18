@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveModule;
 use App\Http\Requests\UpdateModule;
@@ -135,5 +136,74 @@ extends Controller
     //
   }
 
+  /**
+  * asignar facilitador a módulo
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function assign($module_id)
+  {
+    //
+    $user = Auth::user();
+    $facilitators = User::where('type','facilitator')->where('enabled',1)->orderBy('name','desc')->get();
+    $module       = Module::where('id',$module_id)->firstOrFail();
+    return view('admin.modules.facilitator-assign')->with([
+      'user' => $user,
+      'facilitators' =>$facilitators,
+      'module'=>$module
+    ]);
 
+  }
+
+  /**
+  * guardar asignacion de facilitadores a módulo
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function saveAssign(Request $request)
+  {
+    //
+    $user = Auth::user();
+    $module       = Module::where('id',$request->module_id)->firstOrFail();
+    $module->facilitators()->delete();
+    if(!empty($request->signed)){
+      foreach($request->signed as $g){
+        $facilitator = $module->facilitators()->firstOrCreate([
+          "user_id" => $g
+        ]);
+      }
+    }
+    return redirect("dashboard/modulos/ver/$request->module_id")->with('success',"Se ha guardado correctamente");
+  }
+
+  /**
+   * busca facilitador
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+   public function searchFacilitator(Request $request){
+      $member = $request->match;
+      $results = User::where('type', 'facilitator')
+                  ->where('enabled', 1)
+                  ->where('name', 'like', "$member%")
+                  ->get();
+       if($results->isempty()){
+         $results = User::where('type', 'facilitator')
+                     ->where('enabled', 1)
+                     ->where('email', 'like', "$member%")
+                     ->get();
+        if($results->isempty()){
+          return response()->json(['false'])->header('Access-Control-Allow-Origin', '*');
+        }else{
+          return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+        }
+       }else{
+         return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+       }
+
+
+   }
 }
