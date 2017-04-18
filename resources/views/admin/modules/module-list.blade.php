@@ -7,7 +7,8 @@
 
 @section('content')
 
-@if(!empty($modules))
+
+@if(!$modules)
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Módulos</h1>
