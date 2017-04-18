@@ -186,6 +186,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/facilitadores/ver/{id}', 'Facilitator@view');
   });
 
-
+  /* R U T A S  UNICAS DEL Fellow
+  --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:fellow' ], function(){
+    /*@Fellows Controller */
+    //Dashboard
+    Route::get('tablero', 'Fellows@dashboard');
+    // Perfil fellow
+    Route::get('tablero/perfil', 'Fellows@viewProfile');
+    Route::get('tablero/perfil/editar', 'Fellows@editProfile');
+    Route::post('tablero/perfil/save', 'Fellows@saveProfile');
+  });
 
 });
