@@ -30,7 +30,7 @@
 			      <tr>
 			        <td><h4> <a href="{{ url('dashboard/facilitadores/ver/' . $user->id) }}">{{$user->name}}</a></h4></td>
 			        <td>{{$user->email}}</td>
-			        <td></td>
+			        <td>{{$user->institution}}</td>
 			        <td>
 			          <a href="{{ url('dashboard/facilitadores/ver/' . $user->id) }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('dashboard/facilitadores/editar/' . $user->id) }}" class="btn xs ev">Editar</a>
