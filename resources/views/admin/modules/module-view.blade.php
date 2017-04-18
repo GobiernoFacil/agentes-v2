@@ -1,14 +1,13 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar módulo')
-@section('description', 'Agregar nuevo módulo')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
-
+@section('title', 'Ver módulo '. $module->title)
+@section('description', 'Ver módulo')
+@section('body_class', 'modulos')
+@section('breadcrumb_type', 'module view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Información de módulo</h1>
+		<h1 class="center">{{$module->title}}</h1>
 	</div>
 </div>
 <div class="box">
@@ -23,8 +22,8 @@
 				<li><span>Modalidad:</span>{{$module->modality}}</li>
         <li><span>Objetivo:</span>{{$module->objective}}</li>
         <li><span>Situación didáctica:</span>{{$module->teaching_situation}}</li>
-        <li><span>Situación didáctica:</span>{{$module->product_developed}}</li>
-        <li><span>Publicado:</span>{{$module->public ? 'Si' : 'No'}}</li>
+        <li><span>Productos a desarrollar:</span>{{$module->product_developed}}</li>
+        <li><span>Publicado:</span>{{$module->public ? 'Sí' : 'No'}}</li>
 			</ul>
 		</div>
 		<div class="col-sm-6">
