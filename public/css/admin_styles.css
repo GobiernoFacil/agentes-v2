@@ -1324,6 +1324,16 @@ a:visited.btn {
     .btn.danger:hover,
     a:visited.btn.danger:hover {
       background-color: #b30000; }
+  a.btn.add,
+  .btn.add,
+  a:visited.btn.add {
+    background-color: #51be92;
+    color: white;
+    display: inline-block; }
+    a.btn.add:hover,
+    .btn.add:hover,
+    a:visited.btn.add:hover {
+      background-color: #43b386; }
   a.btn.gde,
   .btn.gde,
   a:visited.btn.gde {
