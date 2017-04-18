@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
+use App\User;
 use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveSession;
@@ -180,6 +181,79 @@ class ModuleSessions extends Controller
           return true;
       }
     }
+
+    /**
+    * asignar facilitador a sesión
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function assign($session_id)
+    {
+      //
+      $user = Auth::user();
+      $facilitators = User::where('type','facilitator')->where('enabled',1)->orderBy('name','desc')->get();
+      $session       = ModuleSession::where('id',$session_id)->firstOrFail();
+      return view('admin.modules.facilitator-assign')->with([
+        'user' => $user,
+        'facilitators' =>$facilitators,
+        'session'=>$session
+      ]);
+
+    }
+
+    /**
+    * guardar asignacion de facilitadores a módulo
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function saveAssign(Request $request)
+    {
+      //
+      $user = Auth::user();
+      $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
+      $session->facilitators()->delete();
+      if(!empty($request->signed)){
+        foreach($request->signed as $g){
+          $facilitator = $session->facilitators()->firstOrCreate([
+            "user_id" => $g,
+            "module_id" => $session->module->id,
+            "session_id" => $session->id
+          ]);
+        }
+      }
+      return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha guardado correctamente");
+    }
+
+    /**
+     * busca facilitador
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function searchFacilitator(Request $request){
+        $member = $request->match;
+        $results = User::where('type', 'facilitator')
+                    ->where('enabled', 1)
+                    ->where('name', 'like', "$member%")
+                    ->get();
+         if($results->isempty()){
+           $results = User::where('type', 'facilitator')
+                       ->where('enabled', 1)
+                       ->where('email', 'like', "$member%")
+                       ->get();
+          if($results->isempty()){
+            return response()->json(['false'])->header('Access-Control-Allow-Origin', '*');
+          }else{
+            return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+          }
+         }else{
+           return response()->json($results)->header('Access-Control-Allow-Origin', '*');
+         }
+
+
+     }
 
 
 }

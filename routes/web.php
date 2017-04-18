@@ -118,9 +118,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/modulos/update/{id}', 'Modules@update');
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
-    Route::get('dashboard/modulos/facilitadores/asignar/{id_module}', 'Modules@assign');
-    Route::post('dashboard/modulos/facilitadores/buscar', 'Modules@searchFacilitator');
-    Route::post('dashboard/modulos/facilitadores/save/{module_id}', 'Modules@saveAssign');
     /*@ModuleSessions Controller */
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
@@ -130,6 +127,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/update/{session_id}', 'ModuleSessions@update');
     Route::get('dashboard/sesiones/deshabilitar/{id}', 'ModuleSessions@delete');
     Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
+    Route::get('dashboard/sesiones/facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
+    Route::post('dashboard/sesiones/facilitadores/buscar', 'ModuleSessions@searchFacilitator');
+    Route::post('dashboard/sesiones/facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
     /*@Activities Controller */
     //CRUD activities
     Route::get('dashboard/sesiones/actividades/{id}', 'Activities@index');

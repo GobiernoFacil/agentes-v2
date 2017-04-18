@@ -49,7 +49,13 @@
     <div class="row">
       <div class = "col-sm-12">
         <span>{{$session->hours}}</span>
-        <span>{{$session->facilitator}}</span>
+        @if($session->facilitators->count() > 0 )
+            @foreach($session->facilitators as $facilitator)
+            <span>{{$facilitator->user->name}}</span>
+            @endforeach
+        @else
+        <span>{{'Sin facilitador'}}</span>
+        @endif
         <span>{{$session->activities->count()}}</span>
       </div>
     </div>

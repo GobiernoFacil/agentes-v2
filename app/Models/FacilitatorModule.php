@@ -20,4 +20,5 @@ class FacilitatorModule extends Model
     function session(){
       return $this->belongsTo("App\Models\ModuleSession");
     }
+
 }

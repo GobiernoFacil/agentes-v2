@@ -43,7 +43,7 @@ protected $fillable = [
   }
 
   function facilitators(){
-    return $this->hasMany("App\Models\FacilitatorModule");
+    return $this->hasMany("App\Models\FacilitatorModule",'session_id');
   }
 
 
