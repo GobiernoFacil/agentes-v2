@@ -71,7 +71,7 @@ var svg = d3.select("#bar2").append("svg")
 
   // Scale the range of the data in the domains
   x.domain(dataorigin.map(function(d) { return d.origin; }));
-  y.domain([0, d3.max(data, function(d) { return d.total; })]);
+  y.domain([0, d3.max(dataorigin, function(d) { return d.total; })]);
 
   // append the rectangles for the bar chart
   svg.selectAll(".bar")
