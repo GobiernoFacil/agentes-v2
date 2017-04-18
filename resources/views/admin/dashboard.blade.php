@@ -35,6 +35,16 @@
 					</ul>
 					<div id="bar"></div>					
 				</div>
+				<div class="box">
+					<h2>Aspirantes por Sector</h2>
+					<ul class="inline">
+						<li>Gobierno: <strong>{{$gobierno_number}}</strong></li>
+						<li>Sociedad Civil: <strong>{{$civil_number}}</strong></li>
+						<li>Sector Privado: <strong>{{$privado_number}}</strong></li>
+						<li>Sector Académico: <strong>{{$academico_number}}</strong></li>
+					</ul>
+					<div id="bar2"></div>					
+				</div>
 			</div>
 			<?php /*
 			<div class="col-sm-4 center">
@@ -98,6 +108,24 @@
 	{
 		"estado": "Sonora",
 		"total" : {{$sonora_number}}
+	}
+	];
+	var dataorigin = [
+	{
+		"origin": "Gobierno",
+		"total" : {{$gobierno_number}}
+	},
+	{
+		"origin": "Sociedad Civil",
+		"total" : {{$civil_number}}
+	},
+	{
+		"origin": "Sector Privado",
+		"total" : {{$privado_number}}
+	},
+	{
+		"origin": "Sector Académico",
+		"total" : {{$academico_number}}
 	}
 	];
 </script>
