@@ -1222,15 +1222,19 @@ header {
 /*
 	////////////////////////////////// barras 
 */
-#bar .bar {
+#bar .bar, #bar2 .bar {
   fill: #187fad; }
 
-#bar text {
+#bar text, #bar2 text {
   fill: #777; }
 
 #bar .tick line,
-#bar .domain {
+#bar .domain, #bar2 .tick line,
+#bar2 .domain {
   stroke: #ccc; }
+
+#bar2 .bar {
+  fill: #51be92; }
 
 .divider {
   border-top: 1px solid #999;
@@ -1450,7 +1454,8 @@ a.count_link:hover {
 .aspirantes h2 {
   margin-bottom: 30px; }
 
-#bar svg {
+#bar svg,
+#bar2 svg {
   margin: 30px auto;
   display: block; }
 
