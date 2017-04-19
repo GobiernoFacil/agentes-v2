@@ -31,7 +31,6 @@ class saveModule extends FormRequest
             'number_hours'=> 'required|numeric',
             'modality'=> 'required',
             'teaching_situation'=> 'required',
-            'objective'=> 'required',
             'product_developed'=> 'required',
             'start'=> 'required',
             'end'=> 'required',
