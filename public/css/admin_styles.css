@@ -1174,17 +1174,23 @@ header {
   margin-bottom: 0; }
 
 .modulos.view h1 {
-  border-bottom: 1px solid #ccc;
   font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px; }
+  padding-bottom: 10px; }
 
 .modulos .line {
+  padding: 25px 0;
+  margin-bottom: 20px;
   border-bottom: 1px solid #999; }
-  .modulos .line.top {
-    border-top: 5px solid #ddd;
-    border-bottom: 0;
-    padding-top: 20px; }
+
+.modulos .divider.top {
+  border-top: 1px solid #999;
+  border-bottom: 5px solid #ddd;
+  margin: 0 0 20px;
+  padding: 0; }
+
+.modulos .date {
+  color: #999;
+  font-size: 12px; }
 
 /*
 	////////////////////////////////// lists 
