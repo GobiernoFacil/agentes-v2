@@ -1170,6 +1170,22 @@ header {
       font-size: 12px;
       text-transform: uppercase; }
 
+.modulos .center {
+  margin-bottom: 0; }
+
+.modulos.view h1 {
+  border-bottom: 1px solid #ccc;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px; }
+
+.modulos .line {
+  border-bottom: 1px solid #999; }
+  .modulos .line.top {
+    border-top: 5px solid #ddd;
+    border-bottom: 0;
+    padding-top: 20px; }
+
 /*
 	////////////////////////////////// lists 
 */
