@@ -28,6 +28,7 @@
 				@endif
 				@if($user->type == "fellow")
 				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_usuarios"></b> Aprendizaje</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_usuarios"></b> Mensajes</a></li>
 				@endif
 			</ul>
 		</nav>

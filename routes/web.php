@@ -200,6 +200,11 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas módulos
     Route::get('tablero/aprendizaje', 'ModulesFellow@index');
     Route::get('tablero/aprendizaje/{slug}', 'ModulesFellow@view');
+    /*@Messages Controller */
+    // Rutas mensajes
+    Route::get('tablero/mensajes', 'Messages@index');
+    Route::get('tablero/mensajes/agregar', 'Messages@add');
+    Route::post('tablero/mensajes/save', 'Messages@save');
   });
 
 });
