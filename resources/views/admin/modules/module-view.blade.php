@@ -8,6 +8,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1 class="center">{{$module->title}}</h1>
+		<p class="center date">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
+		<div class="divider"></div>
 	</div>
 </div>
 <div class="row">
@@ -27,15 +29,26 @@
 		<h4>Publicado</h4>
 		<p>{{$module->public ? 'Sí' : 'No'}}</p>
 	</div>
-	<div class="col-sm-12 line"></div>
 </div>
 <div class="row">
-	<div class="col-sm-12 line top">
-		<h4 class="center">Fecha inicio - Fecha final</h4>
-		<p class="center">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
-		
+	<div class="col-sm-12">
+		<div class="divider top"></div>
+	</div>
+	<div class="col-sm-12">
+		<h3>Objetivo</h3>
+		<p>{{$module->objective}}</p>
+	</div>
+	<div class="col-sm-6">
+		<h3>Situación didáctica</h3>
+		<p>{{$module->teaching_situation}}</p>
+	</div>
+	<div class="col-sm-6">
+		<h3>Productos a desarrollar</h3>
+		<p>{{$module->product_developed}}</p>
 	</div>
 </div>
+
+<?php /* DELETE ASAP 
 <div class="box">
 	<div class="row">
 		<div class="col-sm-6">
@@ -43,8 +56,8 @@
 				<li><span>Fecha inicio:</span> {{date("d-m-Y", strtotime($module->start))}}</li>
 				<li><span>Fecha final:</span> {{date('d-m-Y', strtotime($module->end))}}</li>
         <li><span>Objetivo:</span>{{$module->objective}}</li>
-        <li><span>Situación didáctica:</span>{{$module->teaching_situation}}</li>
-        <li><span>Productos a desarrollar:</span>{{$module->product_developed}}</li>
+        <li><span>Situación didáctica:</span></li>
+        <li><span>Productos a desarrollar:</span></li>
 			</ul>
 		</div>
 		<div class="col-sm-6">
@@ -57,12 +70,15 @@
 		</div>
 	</div>
 </div>
-
+*/?>
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Sesiones</h1>
+		<div class="divider"></div>
+		<h2 class="center">Sesiones del módulo</h2>
 	</div>
 </div>
+
+
 @if($module->sessions->count() > 0)
 <div class="box">
 	<div class="row">
