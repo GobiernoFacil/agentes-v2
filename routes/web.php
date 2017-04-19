@@ -205,6 +205,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/mensajes', 'Messages@index');
     Route::get('tablero/mensajes/agregar', 'Messages@add');
     Route::post('tablero/mensajes/save', 'Messages@save');
+    Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
   });
 
 });

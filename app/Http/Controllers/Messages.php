@@ -71,4 +71,22 @@ class Messages extends Controller
       $message->save();
       return redirect("tablero/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
+
+    /**
+    * Muestra conversación
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function view($conversation_id)
+    {
+      //
+      $user   = Auth::user();
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      return view('fellow.messages.messages-conversation')->with([
+        "user"      => $user,
+        "conversation"    => $conversation
+      ]);
+    }
+
 }
