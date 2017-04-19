@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Ver módulo '. $module->title)
 @section('description', 'Ver módulo')
-@section('body_class', 'modulos')
+@section('body_class', 'modulos view')
 @section('breadcrumb_type', 'module view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')
@@ -10,20 +10,41 @@
 		<h1 class="center">{{$module->title}}</h1>
 	</div>
 </div>
+<div class="row">
+	<div class="col-sm-3 center">
+		<h4>Duración</h4>
+		<p>{{$module->number_hours}} horas</p>
+	</div>
+	<div class="col-sm-3 center">
+		<h4># Sesiones</h4>
+		<p>{{$module->number_sessions}}</p>
+	</div>
+	<div class="col-sm-3 center">
+		<h4>Modalidad</h4>
+		<p>{{$module->modality}}</p>
+	</div>
+	<div class="col-sm-3 center">
+		<h4>Publicado</h4>
+		<p>{{$module->public ? 'Sí' : 'No'}}</p>
+	</div>
+	<div class="col-sm-12 line"></div>
+</div>
+<div class="row">
+	<div class="col-sm-12 line top">
+		<h4 class="center">Fecha inicio - Fecha final</h4>
+		<p class="center">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
+		
+	</div>
+</div>
 <div class="box">
 	<div class="row">
 		<div class="col-sm-6">
 			<ul class="profile list">
-				<li><span>Nombre:</span> <h2>{{$module->title}}</h2></li>
 				<li><span>Fecha inicio:</span> {{date("d-m-Y", strtotime($module->start))}}</li>
 				<li><span>Fecha final:</span> {{date('d-m-Y', strtotime($module->end))}}</li>
-				<li><span>Número de sesiones:</span> {{$module->number_sessions}}</li>
-				<li><span>Total de horas:</span> {{$module->number_hours}}</li>
-				<li><span>Modalidad:</span>{{$module->modality}}</li>
         <li><span>Objetivo:</span>{{$module->objective}}</li>
         <li><span>Situación didáctica:</span>{{$module->teaching_situation}}</li>
         <li><span>Productos a desarrollar:</span>{{$module->product_developed}}</li>
-        <li><span>Publicado:</span>{{$module->public ? 'Sí' : 'No'}}</li>
 			</ul>
 		</div>
 		<div class="col-sm-6">
