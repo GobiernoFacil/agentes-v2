@@ -15,9 +15,9 @@
 			<li>
 				<h3>3 representantes de la <strong>Sociedad Civil</strong></h3>				 
 				<ol>
-					<li>Centro de Integración Ciudadana (CIC)</li>
 					<li>Cómo Vamos Nuevo León</li>
 					<li>Redes Quinto Poder IDEA</li>
+					<li>*OSC por definir</li>
 				</ol>
 			</li>
 			<li>
@@ -31,12 +31,12 @@
 			</li>
 			<li><h3>1 representante del Órgano Garante de Acceso a la Información</h3>
 				<ol>
-					<li>Instituto Morelense de Información Pública y Estadística</li>
+					<li>Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León (CTAINL)</li>
 				</ol>
 			</li>
 		</ul>
-		
-		
+		<h3>Facilitador</h3>
+		<p>Dr. Carmelo Cattafi, ITESM</p>
 		
 		<!---contexto-->
 		<h2>Contexto</h2>
@@ -45,14 +45,14 @@
 		<p>Los días 12 y 13 de septiembre de 2016 se llevó a cabo el <a href="http://revistacontraportada.com/archivos/805">Seminario de Gobierno y Parlamento Abierto</a> que sirvió como primera herramienta para sensibilizar sobre el tema a autoridades, miembros de la sociedad civil, académicos, público en general y otros sectores interesados.</p>
 		<p>Aunado a ello, se han realizado una serie de talleres de sensibilización dirigidos a sociedad civil, autoridades y periodistas; el 14 de septiembre tuvo lugar el <a href="http://revista-equidad.com/?p=42306">Taller de Sensibilización para Conocer el Ejercicio Local de Gobierno Abierto en Nuevo León</a> en los municipios de la zona sur del estado; el 14 de octubre el taller se dirigió a periodistas de la entidad, mientras que el 20 de octubre el taller se enfocó en los municipios de la zona norte.</p>
 		<p>El 4 de noviembre de 2016 tuvo lugar una Reunión de Trabajo entre los integrantes del grupo promotor del Ejercicio Local de Gobierno Abierto y personal de la Dirección de Gobierno Abierto del Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) en la que se presentaron los avances de la entidad en materia de sensibilización del ejercicio y se precisaron algunas características de la iniciativa y del proceso a seguir.</p>
-		<p>El 18 de noviembre de 2016 se formalizará la <a href="http://www.gobiernoabiertonl.org.mx/convocatoria.pdf">instalación del Secretariado Técnico Local</a> en un evento al que acudirán miembros de la sociedad civil, autoridades, academia y otros sectores interesados.</p>
-		<p>Posteriormente, el estado definirá su Plan de Trabajo para avanzar en los siguientes pasos del proceso que contempla el Ejercicio Local de Gobierno Abierto. </p>
+		<p>Posterior al proceso de sensibilización y a la <a href="http://www.gobiernoabiertonl.org.mx/convocatoria.pdf">convocatoria pública</a>, el día 18 de noviembre de 2016 <a href="http://noticiasnuevoleon.com.mx/nota.cgi?id=484547">se instaló formalmente el Secretariado Técnico Local</s> en un evento al que acudieron miembros de la sociedad civil, autoridades, academia y otros sectores interesados.</p>
+		
 
 
 		
 		<!-- estatus-->
 		<h2>Estatus</h2>
-		<p>En proceso de instalación del Secretariado Técnico Local.</p>
+		<p>Reuniones preparatorias del Secretariado Técnico Local para la construcción del Plan de Acción Local.</p>
 
 	</div>
 </div>
