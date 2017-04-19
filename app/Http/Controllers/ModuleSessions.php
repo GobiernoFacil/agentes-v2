@@ -68,7 +68,7 @@ class ModuleSessions extends Controller
     public function save(SaveSession $request)
     {
       $order   = $request->order;
-      $this->orderSession($order);
+      $this->orderSession($order,$request->module_id,false);
       $user   = Auth::user();
       $data   = $request->except('_token');
       $data['module_id']    = $request->module_id;
@@ -125,7 +125,7 @@ class ModuleSessions extends Controller
       //
       $data   = $request->except('_token');
       $order   = $request->order;
-      $this->orderSession($order);
+      $this->orderSession($order,$request->session_id,true);
       $data['slug']    = str_slug($request->name);
       ModuleSession::where('id',$request->session_id)->update($data);
       return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
@@ -141,11 +141,24 @@ class ModuleSessions extends Controller
     {
       //
     }
-
-    protected function orderSession($order){
+    /**
+    * Actualiza orden de sesiones
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $order el orden nuevo
+    * @param  int  $id el id del módulo o sesión
+    * @param  boolean  $type true sesión, false módulo
+    */
+    protected function orderSession($order,$id,$type){
       $order   =  (int)$order;
-      $numbers = ModuleSession::orderBy('order','asc')->pluck('id','order')->toArray();
-      $index    = ModuleSession::orderBy('order','asc')->pluck('order','id')->toArray();
+      if($type){
+        $session =  ModuleSession::find($id);
+        $id_c    =  $session->module_id;
+      }else{
+        $id_c    = $id;
+      }
+      $numbers = ModuleSession::where('module_id',$id_c)->orderBy('order','asc')->pluck('id','order')->toArray();
+      $index    = ModuleSession::where('module_id',$id_c)->orderBy('order','asc')->pluck('order','id')->toArray();
       if(isset($numbers[$order])){
       $flag = 0;
         $temp_ids = [];
