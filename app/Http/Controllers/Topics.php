@@ -98,9 +98,11 @@ class Topics extends Controller
     //
     $user      = Auth::user();
     $topic   = Topic::where('id',$id)->firstOrFail();
+    $session = ModuleSession::where('id',$topic->session_id)->firstOrFail();
     return view('admin.modules.topics.topic-update')->with([
-      "user"      => $user,
-      "topic" => $topic
+      "user"    => $user,
+      "topic" 	=> $topic,
+      "session" => $session
     ]);
   }
 
