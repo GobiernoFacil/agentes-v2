@@ -19,4 +19,8 @@ class Conversation extends Model
       return $this->belongsTo("App\User",'to_id');
     }
 
+    function messages(){
+      return $this->hasMany("App\Models\Message");
+    }
+
 }
