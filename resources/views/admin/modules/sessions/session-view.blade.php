@@ -48,7 +48,7 @@
 		<div class="col-sm-12">
 			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->module->id ) }}" class="btn view">Editar objetivo</a></span></h2>
 			<p>{{$session->objective}}</p>
-			<h2 class="title">Objetivos particulares {!! $session->topics->count() == 0 ? '' : '<span class="le_link right"><a href="' .  url('dashboard/sesiones/editar/'. $session->module->id ) .'" class="btn view">Editar objetivos psarticulares</a></span>' !!}</h2>
+			<h2 class="title">Objetivos particulares {!! $session->topics->count() == 0 ? '' : '<span class="le_link right"><a href="' .  url('dashboard/sesiones/editar/'. $session->module->id ) .'" class="btn view">Editar objetivos particulares</a></span>' !!}</h2>
 				@if($session->topics->count() > 0)
 					@include('admin.modules.sessions.sessions-topics-list')
 				@else
