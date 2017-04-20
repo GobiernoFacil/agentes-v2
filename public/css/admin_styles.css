@@ -1194,6 +1194,11 @@ header {
   margin-bottom: 20px;
   border-bottom: 1px solid #999; }
 
+.modulos .box .line {
+  border-color: #eee;
+  margin: 0 0 5px;
+  padding: 0; }
+
 .modulos .divider.top {
   border-top: 1px solid #999;
   border-bottom: 5px solid #ddd;
@@ -1208,6 +1213,12 @@ header {
   color: #51be92;
   font-size: 12px;
   text-transform: uppercase; }
+
+.modulos .h_tag.list h4 {
+  margin-top: 5px; }
+
+.modulos .h_tag.list p {
+  margin-bottom: 10px; }
 
 .divider.b {
   border-color: #ddd; }
