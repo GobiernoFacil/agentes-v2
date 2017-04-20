@@ -107,6 +107,8 @@ trait MessagesTrait{
          'knowledge.required' => 'Este campo es requerido',
          'attitude.required' => 'Este campo es requerido',
          'competitions.required' => 'Este campo es requerido',
+         //Monitoreo
+         'message.required' => 'Este campo es requerido',
       ];
     }
 }
