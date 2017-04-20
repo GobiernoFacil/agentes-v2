@@ -1,5 +1,60 @@
-<div class="box">
-	<div class="row">
+@foreach ($session->topics as $topic)
+<div class="row h_tag list">
+	<!--- temática--->
+	<div class="col-sm-3 right">
+		<h4>Temática</h4>
+	</div>
+	<div class="col-sm-7">
+		<p>{{ $topic->order}}. <strong>{{$topic->name}}</strong></p>
+	</div>
+	<div class="col-sm-2">
+		<p><span class="le_link right"><a href="{{ url('dashboard/sesiones/tematicas/editar/'. $topic->id ) }}" class="btn view">Editar objetivo particular</a></span></p>
+	</div>
+	<div class="col-sm-12">
+		<div class="line"></div>
+	</div>
+	<div class="col-sm-3 right">
+		<h4>Conocimientos (Saber)</h4>
+	</div>
+	<div class="col-sm-9">
+		<p>{{$topic->knowledge}}</p>
+	</div>
+	<div class="col-sm-12">
+		<div class="line"></div>
+	</div>
+	<!-- saber ser-->
+	<div class="col-sm-3 right">
+		<h4>Valores (Saber ser)</h4>
+	</div>
+	<div class="col-sm-9">
+		<p>{{$topic->values}}</p>
+	</div>
+	<div class="col-sm-12">
+		<div class="line"></div>
+	</div>
+	<!-- saber hacer-->
+	<div class="col-sm-3 right">
+		<h4>Habilidades (Saber hacer)</h4>
+	</div>
+	<div class="col-sm-9">
+		<p>{{$topic->abilities}}</p>
+	</div>
+	<div class="col-sm-12">
+		<div class="line"></div>
+	</div>
+	<!-- productos-->
+	<div class="col-sm-3 right">
+		<h4>Productos</h4>
+	</div>
+	<div class="col-sm-9">
+		<p>{{$topic->products}}</p>
+	</div>
+	<div class="col-sm-12">
+		<div class="line"></div>
+	</div>
+</div>
+@endforeach
+<?php /*
 		<table class="table">
 			<thead>
 				<tr>
@@ -25,5 +80,4 @@
 				@endforeach
 			</tbody>
 		</table>
-	</div>
-</div>
+*/?>
