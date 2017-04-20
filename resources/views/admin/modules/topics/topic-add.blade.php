@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar temática')
-@section('description', 'Agregar nueva temática')
+@section('title', 'Agregar objetivos particulares de la sesión')
+@section('description', 'Agregar objetivos particulares de la sesión')
 @section('body_class', 'modulos session topic')
 @section('breadcrumb_type', 'module session topic add')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
