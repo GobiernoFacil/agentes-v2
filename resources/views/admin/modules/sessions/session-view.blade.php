@@ -48,10 +48,11 @@
 		<div class="col-sm-12">
 			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->module->id ) }}" class="btn view">Editar objetivo</a></span></h2>
 			<p>{{$session->objective}}</p>
-			<h2 class="title">Objetivos particulares {!! $session->topics->count() == 0 ? '' : '<span class="le_link right"><a href="' .  url('dashboard/sesiones/editar/'. $session->module->id ) .'" class="btn view">Editar objetivos particulares</a></span>' !!}</h2>
+			<h2 class="title">Objetivos particulares</h2>
 				@if($session->topics->count() > 0)
 					@include('admin.modules.sessions.sessions-topics-list')
-					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar otro objetivo particular de la sesión</a>
+					<?php /*
+					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar otro objetivo particular de la sesión</a>*/?>
 				@else
 					<p>Sin objetivos particulares</p>
 					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar objetivos particulares de la sesión</a>
@@ -78,23 +79,21 @@
 </div>
 
 
-	<!---actividades-->
-  <div class="row">
-  	<div class="col-sm-12">
-  		<h1>Actividades</h1>
-  	</div>
-  </div>
-	@if($session->activities->count() > 0)
-					@include('admin.modules.sessions.sessions-activities-list')
-	@else
+<!---actividades-->
   <div class="box">
   	<div class="row">
-          <span>Sin actividades</span></br>
-          <a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs view">Agregar</a>
-      </ul>
-    </div>
+  		<div class="col-sm-12">
+  			<h2 class="title">Actividades</h1>
+	  		@if($session->activities->count() > 0)
+	  			@include('admin.modules.sessions.sessions-activities-list')
+			@else
+			<p><span>Sin actividades</span></p>
+			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar actividades</a>
+			@endif
+		</div>
+	</div>
   </div>
-	@endif
+
 	<!--
   <div class="row">
   	<div class="col-sm-12">
