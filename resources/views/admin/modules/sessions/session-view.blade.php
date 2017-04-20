@@ -78,12 +78,26 @@
 	</div>
 </div>
 
-
+ <!--- facilitadores---> 
+ <div class="box">
+ 	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="title">Facilitadores de la sesión</h2>
+			@if($session->facilitators->count() > 0)
+				@include('admin.modules.sessions.sessions-facilitators-list')
+			@else
+				<p>Sin facilitadores asignados</p>
+				<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
+			@endif
+		</div>
+ 	</div>
+ </div>
+ 
 <!---actividades-->
   <div class="box">
   	<div class="row">
   		<div class="col-sm-12">
-  			<h2 class="title">Actividades</h1>
+  			<h2 class="title">Actividades</h2>
 	  		@if($session->activities->count() > 0)
 	  			@include('admin.modules.sessions.sessions-activities-list')
 			@else
@@ -113,36 +127,19 @@
 	@endif
 -->
 
-  <div class="row">
-  	<div class="col-sm-12">
-  		<h1>Mecanismos de Monitoreo y Evaluación</h1>
-  	</div>
-  </div>
-	@if($session->evaluations->count() > 0)
-			@include('admin.modules.sessions.sessions-monitoring-list')
-	@else
+<!--- mecanismos--->
   <div class="box">
   	<div class="row">
-          <span>Sin información</span></br>
-          <a href='{{url("dashboard/sesiones/mecanismos-monitoreo/agregar/$session->id")}}' class="btn xs view">Agregar</a>
-      </ul>
-    </div>
+  		<div class="col-sm-12">
+  			<h2 class="title">Mecanismos de Monitoreo y Evaluación</h2>
+  			@if($session->evaluations->count() > 0)
+				@include('admin.modules.sessions.sessions-monitoring-list')
+			@else
+			<p><span>Sin mecanismos</span></p>
+          <a href='{{url("dashboard/sesiones/mecanismos-monitoreo/agregar/$session->id")}}' class="btn xs ev">Agregar mecanismos de monitoreo y evaluación</a>
+		  	@endif
+  		</div>
+  	</div>
   </div>
- @endif
- <div class="row">
-	<div class="col-sm-12">
-		<h1>Facilitadores de la sesión</h1>
-	</div>
- </div>
- @if($session->facilitators->count() > 0)
-		 @include('admin.modules.sessions.sessions-facilitators-list')
- @else
-	<div class="box">
-	 <div class="row">
-					<span>Sin información</span></br>
-					<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs view">Asignar</a>
-			</ul>
-		</div>
-	</div>
- @endif
+ 
 @endsection
