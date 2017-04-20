@@ -5,6 +5,8 @@
 @section('breadcrumb_type', 'module view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')
+
+<!-- title -->
 <div class="row">
 	<div class="col-sm-12">
 		<h1 class="center">{{$module->title}}</h1>
@@ -12,7 +14,8 @@
 		<div class="divider"></div>
 	</div>
 </div>
-<div class="row">
+<!-- header -->
+<div class="row h_tag">
 	<div class="col-sm-3 center">
 		<h4>Duración</h4>
 		<p>{{$module->number_hours}} horas</p>
@@ -34,9 +37,12 @@
 	<div class="col-sm-12">
 		<div class="divider top"></div>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-10">
 		<h3>Objetivo</h3>
 		<p>{{$module->objective}}</p>
+	</div>
+	<div class="col-sm-2">
+		<a href="{{url('dashboard/modulos/editar/' . $module->id)}}" class="btn view">Editar Módulo</a>
 	</div>
 	<div class="col-sm-6">
 		<h3>Situación didáctica</h3>
@@ -114,10 +120,9 @@
 </div>
 @else
 <div class="box">
-	<div class="row">
-				<span>Sin sesiones</span></br>
-				<a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs view">Agregar</a>
-		</ul>
+	<div class="row center">
+		<h2>Sin sesiones</h2>
+		<p><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs view">Agregar sesión</a></p>
 	</div>
 </div>
 @endif
