@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FacilitatorData extends Model
 {
     //
-
+    public $table = 'facilitator_data';
     protected $fillable = [
     'user_id',
     'degree',

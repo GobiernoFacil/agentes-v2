@@ -33,7 +33,7 @@ class UpdateFacilitator extends FormRequest
       'institution' => 'required',
       'password' => 'min:8|nullable',
       'password-confirm'=>'same:password',
-      'image'    => 'file|mimes:jpg,png|max:2500'
+      'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
       ];
     }
 }

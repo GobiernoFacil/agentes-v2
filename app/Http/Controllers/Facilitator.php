@@ -10,6 +10,8 @@ use Mail;
 // models
 use App\User;
 use App\Models\ModuleSession;
+use App\Models\FacilitatorData;
+use App\Models\Image;
 // FormValidators
 use App\Http\Requests\SaveFacilitator;
 use App\Http\Requests\UpdateFacilitator;
@@ -68,10 +70,7 @@ class Facilitator extends Controller
   public function save(SaveFacilitator $request)
   {
     //
-    $facilitator           = new User();
-    $faciltator->name      = $request->name;
-    $facilitator->email    = $request->email;
-    $facilitator->institution = $request->institution;
+    $facilitator           = new User($request->only(['name','email','institution']));
     $facilitator->type     = "facilitator";
     $facilitator->enabled  = 1;
     $request->password     = str_random(12);
@@ -82,9 +81,17 @@ class Facilitator extends Controller
     if($request->hasFile('image') && $request->file('image')->isValid()){
       $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
       $request->file('image')->move($path, $name);
-      $company->logo = $name;
-      $company->save();
+      $image         = new Image();
+      $image->name = $name;
+      $image->user_id = $facilitator->id;
+      $image->path = $path;
+      $image->type = 'full';
+      $image->save();
     }
+    //save the facilitator data
+    $data            = new FacilitatorData($request->except(['_token','name','email','institution','image']));
+    $data->user_id   = $facilitator->id;
+    $data->save();
 
     //envía correo
     $from    = "info@apertus.org.mx";
