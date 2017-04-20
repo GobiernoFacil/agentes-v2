@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Agregar usuario facilitador</h1>
+		<h1>Agregar facilitador</h1>
 	</div>
 </div>
 <div class="box">
