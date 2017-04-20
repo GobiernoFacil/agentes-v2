@@ -1,5 +1,5 @@
 
-{!! Form::open(['url' => url('dashboard/modulos/facilitadores/save').'/'.$module->id, "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url('dashboard/sesiones/facilitadores/save').'/'.$session->id, "class" => "form-horizontal"]) !!}
 
 @if($facilitators->count()>0)
 <ol>
@@ -7,7 +7,7 @@
   <li>
     <label class="control-label">
       <input type="checkbox" name="signed[]" value="{{$user->id}}"
-      {{$module->facilitators->contains("user_id", $user->id) ? "checked" : ""}}>{{$user->name}}
+      {{$session->facilitators->contains("user_id", $user->id) ? "checked" : ""}}>{{$user->name}}
     </label>
   </li>
   @endforeach

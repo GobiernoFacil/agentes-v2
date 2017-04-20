@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class saveModule extends FormRequest
+class SaveMessage extends FormRequest
 {
+
   use MessagesTrait;
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +27,9 @@ class saveModule extends FormRequest
     {
         return [
             //
-            'title'=> 'required|unique:modules',
-            'number_sessions'=> 'required|numeric',
-            'number_hours'=> 'required|numeric',
-            'modality'=> 'required',
-            'teaching_situation'=> 'required',
-            'product_developed'=> 'required',
-            'start'=> 'required',
-            'end'=> 'required',
-            'public'=> 'required',
+            'title'     => 'required',
+            'message' => 'required',
+            'to_id' => 'required',
         ];
     }
 }

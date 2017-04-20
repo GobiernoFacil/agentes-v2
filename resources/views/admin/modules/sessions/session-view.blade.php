@@ -29,6 +29,8 @@
 			<ul class="profile list">
 				<li class="right"><span>Agregar actividad</span>
 				<a href='{{ url("dashboard/sesiones/actividades/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
+				<li class="right"><span>Asignar Facilitador</span>
+				<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs view">Asignar</a></li>
         <li class="right"><span>Agregar temática</span>
 				<a href='{{ url("dashboard/sesiones/tematicas/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
 				<li class="right"><span>Agregar Mecanismos de Monitoreo y Evaluación</span>
@@ -109,5 +111,21 @@
       </ul>
     </div>
   </div>
+ @endif
+ <div class="row">
+	<div class="col-sm-12">
+		<h1>Facilitadores de la sesión</h1>
+	</div>
+ </div>
+ @if($session->facilitators->count() > 0)
+		 @include('admin.modules.sessions.sessions-facilitators-list')
+ @else
+	<div class="box">
+	 <div class="row">
+					<span>Sin información</span></br>
+					<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs view">Asignar</a>
+			</ul>
+		</div>
+	</div>
  @endif
 @endsection

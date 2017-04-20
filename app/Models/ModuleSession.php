@@ -18,6 +18,7 @@ protected $fillable = [
     'comments',
     'start',
     'end',
+    'slug'
   ];
 
     //modelos relacionados
@@ -39,6 +40,10 @@ protected $fillable = [
 
   function evaluations(){
     return $this->hasMany("App\Models\Monitoring",'session_id');
+  }
+
+  function facilitators(){
+    return $this->hasMany("App\Models\FacilitatorModule",'session_id');
   }
 
 
