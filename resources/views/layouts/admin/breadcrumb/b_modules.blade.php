@@ -5,7 +5,7 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
@@ -23,9 +23,18 @@
 	<li>Editar módulo</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module session view")
+	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add")
 	<!-- sesión --->
 	<li><a href="{{ url('dashboard/modulos/ver/'.$session->module->id)}}">{{$session->module->title}}</a></li>	
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="module session view")
+	<!-- sesión --->
 	<li>Ver sesión {{$session->order}}</li>
 	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add")
+	<!-- objetivos particulares --->
+	<li><a href="{{ url('dashboard/sesiones/ver/'. $session->id) }}">Sesión {{$session->order}}</a></li>
+	<li>Agregar objetivos particulares</li>
+	@endif
+	
 </ul>
