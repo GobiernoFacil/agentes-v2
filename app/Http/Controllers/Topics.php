@@ -116,9 +116,13 @@ class Topics extends Controller
   public function update(UpdateTopic $request)
   {
     //
-    $data   = $request->except('_token');
+    $data   	= $request->except('_token');
+    $topic   = Topic::where('id',$request->id)->firstOrFail();
+    $session 	= ModuleSession::where('id',$topic->session_id)->firstOrFail();
+    
     Topic::where('id',$request->id)->update($data);
-    return redirect("dashboard/sesiones/tematicas/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+    
+    return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha actualizado correctamente");
   }
 
   /**
