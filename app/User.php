@@ -38,6 +38,9 @@ class User extends Authenticatable
     }
 
     function facilitator(){
-      return $this->hasMany("App\Models\FacilitatorModule")->orderBy('order','asc');
+      return $this->hasMany("App\Models\FacilitatorModule");
+    }
+    function conversation(){
+      return $this->hasMany("App\Models\Conversation");
     }
 }

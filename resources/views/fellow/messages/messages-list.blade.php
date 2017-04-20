@@ -21,28 +21,31 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Institución</th>
+			      <th>Asunto</th>
+			      <th>Destinatario</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    @foreach ($admins as $admin)
+			    @foreach ($conversations as $conversation)
 			      <tr>
-			        <td><h4> <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}">{{$admin->name}}</a></h4></td>
-			        <td>{{$admin->email}}</td>
-			        <td></td>
+			        <td><h4> <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a></h4></td>
+							@if($conversation->to_id != $user->id)
+			        <td>{{$conversation->user_to->name}}</td>
+							@else
+							<td>{{$conversation->user->user_id}}</td>
+							@endif
 			        <td>
-			          <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}" class="btn xs view">Ver</a>
-			          <a href="{{ url('sa/dashboard/administradores/editar/' . $admin->id) }}" class="btn xs ev">Editar</a>
-			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $admin->id) }}"  id ="{{$admin->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
-			    </tr>
+			          <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver</a>
+								<!--
+			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $conversation->id) }}"  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
+								!-->
+					</tr>
 			    @endforeach
 			  </tbody>
 			</table>
 
-			{{ $admins->links() }}
+			{{ $conversations->links() }}
 		</div>
 	</div>
 </div>
