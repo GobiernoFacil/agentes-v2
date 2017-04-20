@@ -5,7 +5,7 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
@@ -24,6 +24,7 @@
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add")
+	
 	<!-- sesión --->
 	<li><a href="{{ url('dashboard/modulos/ver/'.$session->module->id)}}">{{$session->module->title}}</a></li>	
 	@endif
@@ -31,10 +32,17 @@
 	<!-- sesión --->
 	<li>Ver sesión {{$session->order}}</li>
 	@endif
-	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add")
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session topic edit")
 	<!-- objetivos particulares --->
 	<li><a href="{{ url('dashboard/sesiones/ver/'. $session->id) }}">Sesión {{$session->order}}</a></li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add")
 	<li>Agregar objetivos particulares</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') == "module session topic edit")
+	<!-- objetivos particulares --->
+	<li>Actualizar objetivos particulares</li>
 	@endif
 	
 </ul>
