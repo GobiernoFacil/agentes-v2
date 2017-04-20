@@ -103,6 +103,8 @@ trait MessagesTrait{
          'facilitator_role.required' => 'Este campo es requerido',
          'competitor_role.required' => 'Este campo es requerido',
          'material_link.url' =>"Escribe un URL válido",
+         'files.required' => 'Este campo es requerido',
+         'evaluation.required' => 'Este campo es requerido',
          //Monitoreo
          'knowledge.required' => 'Este campo es requerido',
          'attitude.required' => 'Este campo es requerido',

@@ -16,7 +16,10 @@ class Activity extends Model
       'facilitator_role',
       'competitor_role',
       'duration',
-      'slug'
+      'slug',
+      'type',
+      'files',
+      'evaluation'
     ];
 
     //modelos relacionados

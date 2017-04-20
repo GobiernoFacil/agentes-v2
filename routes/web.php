@@ -148,6 +148,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/requerimientos/update/{id}', 'ActivityRequirements@update');
     Route::get('dashboard/sesiones/actividades/requerimientos/deshabilitar/{id}', 'ActivityRequirements@delete');
     Route::get('dashboard/sesiones/actividades/requerimientos/ver/{id}', 'ActivityRequirements@view');
+    /*@Quiz Controller */
+    //CRUD Quiz
+    Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}', 'Quiz@add');
     /*@Topics Controller */
     //CRUD Topics
     Route::get('dashboard/sesiones/tematicas/{id}', 'Topics@index');
