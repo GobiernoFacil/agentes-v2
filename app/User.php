@@ -43,4 +43,10 @@ class User extends Authenticatable
     function conversation(){
       return $this->hasMany("App\Models\Conversation");
     }
+    function facilitatorData(){
+      return $this->hasOne("App\Models\FacilitatorData");
+    }
+    function image(){
+      return $this->hasOne("App\Models\Image");
+    }
 }
