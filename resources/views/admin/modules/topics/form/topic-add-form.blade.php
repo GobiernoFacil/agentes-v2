@@ -2,14 +2,14 @@
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información de la temática</h2>
+    <h2 class="sa_title">Información de los objetivos particulares</h2>
   </div>
 </div>
 <!-- name -->
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Nombre</strong> <br>
+      <label><strong>Nombre de temática</strong> <br>
       {{Form::text('name',null, ["class" => "form-control"])}} </label>
       @if($errors->has('name'))
       <strong class="danger">{{$errors->first('name')}}</strong>
@@ -80,7 +80,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Guardar temática', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Guardar objetivos particulares', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
