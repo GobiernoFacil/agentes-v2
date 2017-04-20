@@ -67,7 +67,7 @@ class Topics extends Controller
     $topic  = new Topic($request->except('_token'));
     $topic->session_id    = $session->id;
     $topic->save();
-    return redirect("dashboard/sesiones/tematicas/ver/$topic->id")->with('success',"Se ha guardado correctamente");
+    return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha guardado correctamente");
   }
 
   /**
