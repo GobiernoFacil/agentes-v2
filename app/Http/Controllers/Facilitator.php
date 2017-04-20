@@ -17,6 +17,8 @@ class Facilitator extends Controller
 {
   //Paginación
   public $pageSize = 10;
+  // En esta carpeta se guardan las imágenes de los usuarios
+  const UPLOADS = "img/users";
 
   /**
   * Búsqueda de usuario
@@ -66,12 +68,24 @@ class Facilitator extends Controller
   public function save(SaveFacilitator $request)
   {
     //
-    $facilitator           = new User($request->except('_token'));
+    $facilitator           = new User();
+    $faciltator->name      = $request->name;
+    $facilitator->email    = $request->email;
+    $facilitator->institution = $request->institution;
     $facilitator->type     = "facilitator";
     $facilitator->enabled  = 1;
     $request->password     = str_random(12);
     $facilitator->password = Hash::make($request->password);
     $facilitator->save();
+    $path  = public_path(self::UPLOADS);
+    // [ SAVE THE IMAGE ]
+    if($request->hasFile('image') && $request->file('image')->isValid()){
+      $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+      $request->file('image')->move($path, $name);
+      $company->logo = $name;
+      $company->save();
+    }
+
     //envía correo
     $from    = "info@apertus.org.mx";
     $subject = "Bienvenido al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
