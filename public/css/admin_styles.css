@@ -1192,6 +1192,11 @@ header {
   color: #999;
   font-size: 12px; }
 
+.modulos .h_tag h4 {
+  color: #51be92;
+  font-size: 12px;
+  text-transform: uppercase; }
+
 /*
 	////////////////////////////////// lists 
 */
