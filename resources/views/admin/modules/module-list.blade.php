@@ -37,6 +37,8 @@
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
+			 			<p class="right"><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
+
 		<table class="table">
 		  <thead>
 		    <tr>
