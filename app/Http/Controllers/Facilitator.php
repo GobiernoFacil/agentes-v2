@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use File;
 
 use Mail;
 // models
@@ -115,7 +116,7 @@ class Facilitator extends Controller
   {
     //
     $user    = Auth::user();
-    $facilitator = User::find($id);
+    $facilitator = User::find($id)->with('FacilitatorData');
     return view('admin.users.facilitator-view')->with([
       "user"      => $user,
       "facilitator"    => $facilitator
@@ -132,8 +133,8 @@ class Facilitator extends Controller
   {
     //
     $user      = Auth::user();
-    $facilitator   = User::where('id',$id)->firstOrFail();
-    return view('admin.users.facilitator-update')->with([
+    $facilitator   = User::where('id',$id)->with('FacilitatorData')->firstOrFail();
+   return view('admin.users.facilitator-update')->with([
       "user"      => $user,
       "facilitator" => $facilitator
     ]);
@@ -148,14 +149,31 @@ class Facilitator extends Controller
   */
   public function update(UpdateFacilitator $request)
   {
-    //
+    //update user data
     if(!empty($request->password)){
       $request->password = Hash::make($request->password);
-      $data   = $request->except(['_token','password-confirm']);
+      $data   = $request->only(['name','institution','email','password']);
     }else {
-      $data   = $request->except(['_token','password-confirm','password']);
+      $data   = $request->only(['name','institution','email']);
     }
     User::where('id',$request->id)->update($data);
+    //update facilitator data
+    FacilitatorData::where('user_id',$request->id)->update($request->except(['_token','name','email','institution','image','password','password-confirm']));
+    // [ SAVE THE IMAGE ]
+    if($request->hasFile('image') && $request->file('image')->isValid()){
+      $path  = public_path(self::UPLOADS);
+      $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+      $request->file('image')->move($path, $name);
+      $facilitator = User::find($request->id);
+      if($facilitator->image->count()>0){
+        File::delete($facilitator->image->path."/".$facilitator->image->name);
+      }
+      $image   = Image::firstorCreate(['user_id'=>$request->id,]);
+      $image->name = $name;
+      $image->path = $path;
+      $image->type = 'full';
+      $image->save();
+    }
     return redirect("dashboard/facilitadores/ver/$request->id")->with('success',"Se ha actualizado correctamente");
   }
 
