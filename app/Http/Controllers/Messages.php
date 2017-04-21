@@ -10,6 +10,7 @@ use App\Models\Conversation;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveMessage;
+use App\Http\Requests\SaveSingleMessage;
 class Messages extends Controller
 {
   //Paginación
@@ -88,5 +89,41 @@ class Messages extends Controller
         "conversation"    => $conversation
       ]);
     }
+
+    /**
+    * Agregar mensaje a convesacion
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function addSingle($conversation_id)
+    {
+      $user   = Auth::user();
+      $conversation = Conversation::find($conversation_id);
+      return view('fellow.messages.messages-single-add')->with([
+        "user"      => $user,
+        'conversation' => $conversation
+      ]);
+    }
+
+    /**
+    * Guarda nuevo mensaje en conversacion
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function saveSingle(SaveSingleMessage $request)
+    {
+      //
+      $user   = Auth::user();
+      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      $message = new Message();
+      $message->conversation_id = $conversation->id;
+      $message->user_id = $conversation->user_id;
+      $message->to_id   = $conversation->to_id;
+      $message->message = $request->message;
+      $message->save();
+      return redirect("tablero/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+    }
+
 
 }

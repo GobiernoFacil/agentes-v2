@@ -207,6 +207,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
     Route::get('tablero/mensajes/agregar', 'Messages@add');
+    Route::get('tablero/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
+    Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
     Route::post('tablero/mensajes/save', 'Messages@save');
     Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
   });
