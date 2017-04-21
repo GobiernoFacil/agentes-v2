@@ -116,6 +116,17 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
+      <label><strong>Semblanza</strong> <br>
+      {{Form::textarea('semblance',null, ["class" => "form-control"])}} </label>
+      @if($errors->has('semblance'))
+      <strong class="danger">{{$errors->first('semblance')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <p>
       <label><strong>Foto</strong></label><br>
       @if($facilitator->image)
       <img src='{{url("img/users/{$facilitator->image->name}")}}'>
@@ -129,7 +140,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Crear facilitador', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Actualizar facilitador', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}

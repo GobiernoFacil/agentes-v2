@@ -116,7 +116,7 @@ class Facilitator extends Controller
   {
     //
     $user    = Auth::user();
-    $facilitator = User::find($id)->with('FacilitatorData');
+    $facilitator = User::find($id);
     return view('admin.users.facilitator-view')->with([
       "user"      => $user,
       "facilitator"    => $facilitator
