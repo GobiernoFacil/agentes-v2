@@ -203,6 +203,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas módulos
     Route::get('tablero/aprendizaje', 'ModulesFellow@index');
     Route::get('tablero/aprendizaje/{slug}', 'ModulesFellow@view');
+    /*@SessionFellow Controller */
+    // Rutas módulos
+    Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
