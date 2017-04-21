@@ -8,19 +8,7 @@
 @section('content')
 
 
-@if(!$modules)
-<div class="row">
-	<div class="col-sm-12">
-		<h1>Módulos</h1>
-		<div class="box center">
-			<h2>Aún no existen módulos</h2>
-			<p><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
-		</div>
-	</div>
-</div>
-
-@else
-	
+@if(!empty($modules))
 <div class="row">
 	
 	
@@ -88,6 +76,18 @@
 		</tbody>
 </table>
 </div>
+
+@else
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Módulos</h1>
+		<div class="box center">
+			<h2>Aún no existen módulos</h2>
+			<p><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
+		</div>
+	</div>
+</div>	
+
 @endif
 @endsection
 
