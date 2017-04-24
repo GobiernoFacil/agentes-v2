@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Ver sesión')
-@section('description', 'Ver sesión')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('title', 'Ver actividad: ' . $activity->name)
+@section('description', 'Ver actividad')
+@section('body_class', 'modulos session activity')
+@section('breadcrumb_type', 'module session view activity')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">
