@@ -31,4 +31,8 @@ class Activity extends Model
     return $this->hasMany("App\Models\ActivityRequirement");
   }
 
+  function files(){
+    return $this->hasMany("App\Models\ActivitiesFile");
+  }
+
 }

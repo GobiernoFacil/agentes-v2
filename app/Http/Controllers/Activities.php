@@ -74,9 +74,11 @@ class Activities extends Controller
             $activity->session_id    = $session->id;
             $activity->save();
             if($activity->type==='evaluation'){
+              //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
             }else{
-              return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha guardado correctamente");
+              //Agregar archivos
+              return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
            }
         }
 
