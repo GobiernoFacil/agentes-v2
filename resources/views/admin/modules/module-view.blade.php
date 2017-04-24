@@ -17,11 +17,11 @@
 <!-- header -->
 <div class="row h_tag">
 	<div class="col-sm-3 center">
-		<h4>Duración</h4>
+		<h4><b class="icon_h time"></b> Duración</h4>
 		<p>{{$module->number_hours}} horas</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4># Sesiones</h4>
+		<h4><b class="icon_h session"></b> # Sesiones</h4>
 		<p>{{$module->number_sessions}}</p>
 	</div>
 	<div class="col-sm-3 center">
