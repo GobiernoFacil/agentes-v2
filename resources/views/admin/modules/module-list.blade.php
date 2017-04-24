@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar módulo')
-@section('description', 'Agregar nuevo módulo')
+@section('title', 'Lista de módulos')
+@section('description', 'Lista de módulos')
 @section('body_class', 'modulos')
 @section('breadcrumb_type', 'module list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
