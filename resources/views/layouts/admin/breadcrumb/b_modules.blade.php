@@ -5,7 +5,7 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit" || $__env->yieldContent('breadcrumb_type') =="module session expert add")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
@@ -23,17 +23,20 @@
 	<li>Editar módulo</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add")
-	
-	<!-- sesión --->
+	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session expert add")	
+	<!-- módulo --->
 	<li><a href="{{ url('dashboard/modulos/ver/'.$session->module->id)}}">{{$session->module->title}}</a></li>	
 	@endif
+	
 	@if ($__env->yieldContent('breadcrumb_type') =="module session view")
 	<!-- sesión --->
 	<li>Ver sesión {{$session->order}}</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session topic edit")
+	<?php /*  
+	////////////// Objetivos particulares	 
+	*/?>
+	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session topic edit" || $__env->yieldContent('breadcrumb_type') == "module session expert add" )
 	<!-- objetivos particulares --->
 	<li><a href="{{ url('dashboard/sesiones/ver/'. $session->id) }}">Sesión {{$session->order}}</a></li>
 	@endif
@@ -45,4 +48,11 @@
 	<li>Actualizar objetivos particulares</li>
 	@endif
 	
+	<?php /*  
+	////////////// facilitadores	 
+	*/?>
+	@if ( $__env->yieldContent('breadcrumb_type') == "module session expert add" )	
+	<!-- facilitadot --->
+	<li>Asignar facilitadores</li>
+	@endif
 </ul>
