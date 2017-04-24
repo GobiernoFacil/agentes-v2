@@ -49,7 +49,7 @@
 			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->module->id ) }}" class="btn view">Editar objetivo</a></span></h2>
 			<p>{{$session->objective}}</p>
 			<h2 class="title">Objetivos particulares</h2>
-				@if($session->topics)
+				@if($session->topics->count() > 0)
 					@include('admin.modules.sessions.sessions-topics-list')
 					<?php /*
 					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar otro objetivo particular de la sesión</a>*/?>
@@ -83,7 +83,7 @@
  	<div class="row">
 		<div class="col-sm-12">
 			<h2 class="title">Facilitadores de la sesión</h2>
-			@if($session->facilitators)
+			@if($session->facilitators->count() > 0)
 				@include('admin.modules.sessions.sessions-facilitators-list')
 			@else
 				<p>Sin facilitadores asignados</p>
@@ -98,7 +98,7 @@
   	<div class="row">
   		<div class="col-sm-12">
   			<h2 class="title">Actividades</h2>
-	  		@if($session->activities)
+	  		@if($session->activities->count() > 0)
 	  			@include('admin.modules.sessions.sessions-activities-list')
 			@else
 			<p><span>Sin actividades</span></p>
@@ -132,7 +132,7 @@
   	<div class="row">
   		<div class="col-sm-12">
   			<h2 class="title">Mecanismos de Monitoreo y Evaluación</h2>
-  			@if($session->evaluations)
+  			@if($session->evaluations->count() > 0)
 				@include('admin.modules.sessions.sessions-monitoring-list')
 			@else
 			<p><span>Sin mecanismos</span></p>
