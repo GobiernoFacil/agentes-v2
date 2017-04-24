@@ -1,16 +1,19 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de facilitadores')
 @section('description', 'Lista de facilitadores de la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('body_class', 'facilitadores')
+@section('breadcrumb_type', 'facilitadores')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_facilitadores')
 
 @section('content')
+
+@if($facilitators->count() > 0)
 <div class="row">
 	<div class="col-sm-9">
 		<h1>Lista de usuarios facilitadores</h1>
 	</div>
 	<div class="col-sm-3 center">
-		<a href="{{ url('dashboard/facilitadores/agregar') }}" class="btn gde"><strong>+</strong> Agregar usuario</a>
+		<a href="{{ url('dashboard/facilitadores/agregar') }}" class="btn gde"><strong>+</strong> Agregar facilitador</a>
 	</div>
 </div>
 <div class="box">
@@ -44,4 +47,19 @@
 		</div>
 	</div>
 </div>
+@else
+<div class="row">
+	<div class="col-sm-9">
+		<h1>Lista de usuarios facilitadores</h1>
+	</div>
+</div>
+<div class="box">
+	<div class="row center">
+		<div class="col-sm-10 col-sm-offset-1">
+		<h2>Sin facilitadores</h2>
+		<a href="{{ url('dashboard/facilitadores/agregar') }}" class="btn gde"><strong>+</strong> Agregar facilitador</a>
+		</div>
+	</div>
+</div>
+@endif
 @endsection
