@@ -26,7 +26,7 @@
 				<li><span>Semblanza</span>{{$facilitator->FacilitatorData->semblance ? $facilitator->FacilitatorData->semblance : "Sin información" }}</li>
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($facilitator->created_at)) }} hrs.</li>
 				<li><span>Última actualización</span>{{ date("d-m-Y, H:i", strtotime($facilitator->updated_at)) }} hrs.</li>
-				@if($facilitator->image->count()>0)
+				@if($facilitator->image)
 				<li><span>Foto</span><img src='{{url("img/users/{$facilitator->image->name}")}}'></li>
 				@else
 				<li><span>Foto</span> Sin imagen </li>
