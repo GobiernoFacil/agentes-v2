@@ -39,7 +39,7 @@ protected $fillable = [
   }
 
   function evaluations(){
-    return $this->hasMany("App\Models\Monitoring",'session_id');
+    return $this->hasOne("App\Models\Monitoring",'session_id');
   }
 
   function facilitators(){
