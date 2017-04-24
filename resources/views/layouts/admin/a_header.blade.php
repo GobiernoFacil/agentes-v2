@@ -19,8 +19,8 @@
 				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url($linkDash)}}"><b class="icon i_tablero"></b> Tablero</a></li>
 				@if($user->type == "admin")
 				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url('dashboard/modulos')}}"><b class="icon i_aspirantes"></b> MÓDULOS</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}"><b class="icon i_usuarios"></b> FACILITADORES</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'modulos' ? "active" : ''}}"><a href="{{url('dashboard/modulos')}}"><b class="icon i_modulos"></b> MÓDULOS</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}"><b class="icon i_facilitador"></b> FACILITADORES</a></li>
 				
 				@endif
 				@if($user->type == "superAdmin")
