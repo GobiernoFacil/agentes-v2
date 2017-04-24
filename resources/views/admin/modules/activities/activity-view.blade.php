@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Ver sesión')
-@section('description', 'Ver sesión')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('title', 'Ver actividad: ' . $activity->name)
+@section('description', 'Ver actividad')
+@section('body_class', 'modulos session activity')
+@section('breadcrumb_type', 'module session view activity')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">
@@ -41,9 +41,10 @@
 @else
 <div class="box">
   <div class="row">
-        <span>Sin requerimientos</span></br>
-        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar</a>
-    </ul>
+	  <div class="col-sm-12">
+        <p>Sin requerimientos</p>
+        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
+	  </div>
   </div>
 </div>
 @endif

@@ -91,9 +91,11 @@ class Activities extends Controller
             //
             $user    = Auth::user();
             $activity = activity::find($id);
+			$session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             return view('admin.modules.activities.activity-view')->with([
-              "user"      => $user,
-              "activity"    => $activity
+              "user"      	=> $user,
+              "activity"    => $activity,
+              "session"		=> $session
             ]);
         }
 

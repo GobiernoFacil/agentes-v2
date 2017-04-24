@@ -66,7 +66,7 @@ class Monitorings extends Controller
     $monitoring  = new Monitoring($request->except('_token'));
     $monitoring->session_id    = $session->id;
     $monitoring->save();
-    return redirect("dashboard/sesiones/mecanismos-monitoreo/ver/$monitoring->id")->with('success',"Se ha guardado correctamente");
+    return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha guardado correctamente");
   }
 
   /**

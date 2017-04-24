@@ -8,23 +8,7 @@
 @section('content')
 
 
-<<<<<<< HEAD
 @if($modules->count() > 0)
-=======
-@if(!$modules)
-<div class="row">
-	<div class="col-sm-12">
-		<h1>Módulos</h1>
-		<div class="box center">
-			<h2>Aún no existen módulos</h2>
-			<p><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
-		</div>
-	</div>
-</div>
-
-@else
-
->>>>>>> new_users
 <div class="row">
 
 
@@ -60,7 +44,7 @@
 		      <tr>
 		        <td><h4><a href="{{ url('dashboard/modulos/ver/' . $module->id) }}">{{$module->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($module->start))}} <br> <strong>{{date('d-m-Y', strtotime($module->end))}}</strong></td>
-				    <td>{{$module->sessions->count()}}</td>
+				    <td>{{$module->number_sessions}}</td>
 		        <td>{{$module->number_hours}} hrs.</td>
             <td>{{$module->modality}}</td>
 		        <td>{{$module->public ? "Sí" : "No" }}</td>
@@ -122,7 +106,6 @@ document.getElementById("search-module").onblur = function() {
 		document.getElementById("modules").style.display ="block";
 		document.getElementById("nR").style.display ="none";
 	}
-
 };
 </script>
 @endsection

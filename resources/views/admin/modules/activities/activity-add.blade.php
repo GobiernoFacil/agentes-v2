@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar actividad')
 @section('description', 'Agregar nueva actividad')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'modulos session activity')
+@section('breadcrumb_type', 'module session add activity')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">

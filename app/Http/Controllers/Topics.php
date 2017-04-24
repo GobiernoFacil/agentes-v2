@@ -67,7 +67,7 @@ class Topics extends Controller
     $topic  = new Topic($request->except('_token'));
     $topic->session_id    = $session->id;
     $topic->save();
-    return redirect("dashboard/sesiones/tematicas/ver/$topic->id")->with('success',"Se ha guardado correctamente");
+    return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha guardado correctamente");
   }
 
   /**
@@ -98,9 +98,11 @@ class Topics extends Controller
     //
     $user      = Auth::user();
     $topic   = Topic::where('id',$id)->firstOrFail();
+    $session = ModuleSession::where('id',$topic->session_id)->firstOrFail();
     return view('admin.modules.topics.topic-update')->with([
-      "user"      => $user,
-      "topic" => $topic
+      "user"    => $user,
+      "topic" 	=> $topic,
+      "session" => $session
     ]);
   }
 
@@ -114,9 +116,13 @@ class Topics extends Controller
   public function update(UpdateTopic $request)
   {
     //
-    $data   = $request->except('_token');
+    $data   	= $request->except('_token');
+    $topic   = Topic::where('id',$request->id)->firstOrFail();
+    $session 	= ModuleSession::where('id',$topic->session_id)->firstOrFail();
+    
     Topic::where('id',$request->id)->update($data);
-    return redirect("dashboard/sesiones/tematicas/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+    
+    return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha actualizado correctamente");
   }
 
   /**

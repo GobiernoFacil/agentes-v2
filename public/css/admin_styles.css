@@ -1177,10 +1177,27 @@ header {
   font-weight: 700;
   padding-bottom: 10px; }
 
+.modulos.view.session h1.center {
+  margin-bottom: 0; }
+
+.modulos.view.session h2 {
+  font-weight: 300; }
+
+.modulos.view.session .title {
+  border-bottom: 1px solid #ccc;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 10px; }
+
 .modulos .line {
   padding: 25px 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #999; }
+
+.modulos .box .line {
+  border-color: #eee;
+  margin: 0 0 5px;
+  padding: 0; }
 
 .modulos .divider.top {
   border-top: 1px solid #999;
@@ -1191,6 +1208,28 @@ header {
 .modulos .date {
   color: #999;
   font-size: 12px; }
+
+.modulos .h_tag h4 {
+  color: #51be92;
+  font-size: 12px;
+  text-transform: uppercase; }
+
+.modulos .h_tag.list h4 {
+  margin-top: 5px; }
+
+.modulos .h_tag.list p {
+  margin-bottom: 10px; }
+
+.divider.b {
+  border-color: #ddd; }
+
+span.le_link {
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle; }
+  span.le_link.right {
+    float: right; }
 
 /*
 	////////////////////////////////// lists 
@@ -1435,6 +1474,9 @@ a.count_link,
 a.count_link:hover {
   background: #0c3d53;
   color: #51be92; }
+
+a.link {
+  border-bottom: 1px solid #51be92; }
 
 .breadcrumb {
   background: rgba(0, 0, 0, 0.1);

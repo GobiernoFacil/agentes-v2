@@ -1,14 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar temática')
-@section('description', 'Agregar nueva temática')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('title', 'Agregar objetivos particulares de la sesión')
+@section('description', 'Agregar objetivos particulares de la sesión')
+@section('body_class', 'modulos session topic')
+@section('breadcrumb_type', 'module session topic add')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar Temática</h1>
+    <h1>Agregar Objetivos Particulares de la Sesión {{$session->order}}</h1>
   </div>
 </div>
 <div class="box">
