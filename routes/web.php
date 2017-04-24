@@ -216,4 +216,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
   });
 
+  /* R U T A S  UNICAS DEL Facilitador
+  --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:facilitator' ], function(){
+    /*@Facilitator Controller */
+    //Dashboard
+    Route::get('tablero-facilitador', 'Facilitator@dashboard');
+  });
 });

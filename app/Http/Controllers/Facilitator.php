@@ -28,6 +28,19 @@ class Facilitator extends Controller
   *
   * @return \Illuminate\Http\Response
   */
+  public function dashboard()
+  {
+    $user 			  = Auth::user();
+    return view('facilitator.dashboard')->with([
+      "user"      		=> $user,
+    ]);
+  }
+
+  /**
+  * Búsqueda de usuario
+  *
+  * @return \Illuminate\Http\Response
+  */
   public function search()
   {
     //
