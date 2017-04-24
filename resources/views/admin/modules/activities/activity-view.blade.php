@@ -41,9 +41,10 @@
 @else
 <div class="box">
   <div class="row">
-        <span>Sin requerimientos</span></br>
-        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar</a>
-    </ul>
+	  <div class="col-sm-12">
+        <p>Sin requerimientos</p>
+        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
+	  </div>
   </div>
 </div>
 @endif
