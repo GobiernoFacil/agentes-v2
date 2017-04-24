@@ -36,7 +36,7 @@
     <h1>Recursos y requerimientos técnicos</h1>
   </div>
 </div>
-@if($activity->activityRequirements)
+@if($activity->activityRequirements->count() > 0)
         @include('admin.modules.activities.activities-requirements-list')
 @else
 <div class="box">
