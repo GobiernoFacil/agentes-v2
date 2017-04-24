@@ -148,6 +148,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/requerimientos/update/{id}', 'ActivityRequirements@update');
     Route::get('dashboard/sesiones/actividades/requerimientos/deshabilitar/{id}', 'ActivityRequirements@delete');
     Route::get('dashboard/sesiones/actividades/requerimientos/ver/{id}', 'ActivityRequirements@view');
+    /*@Quiz Controller */
+    //CRUD Quiz
+    Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}', 'Quiz@add');
     /*@Topics Controller */
     //CRUD Topics
     Route::get('dashboard/sesiones/tematicas/{id}', 'Topics@index');
@@ -200,12 +203,24 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas módulos
     Route::get('tablero/aprendizaje', 'ModulesFellow@index');
     Route::get('tablero/aprendizaje/{slug}', 'ModulesFellow@view');
+    /*@SessionFellow Controller */
+    // Rutas módulos
+    Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
     Route::get('tablero/mensajes/agregar', 'Messages@add');
+    Route::get('tablero/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
+    Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
     Route::post('tablero/mensajes/save', 'Messages@save');
     Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
   });
 
+  /* R U T A S  UNICAS DEL Facilitador
+  --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:facilitator' ], function(){
+    /*@Facilitator Controller */
+    //Dashboard
+    Route::get('tablero-facilitador', 'Facilitator@dashboard');
+  });
 });

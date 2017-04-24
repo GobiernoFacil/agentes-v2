@@ -10,8 +10,8 @@
 
 @if($modules->count() > 0)
 <div class="row">
-	
-	
+
+
 	<div class="col-sm-9">
 		<h1>Lista de módulos</h1>
 	</div>
@@ -86,7 +86,7 @@
 			<p><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
 		</div>
 	</div>
-</div>	
+</div>
 
 @endif
 @endsection
@@ -106,7 +106,6 @@ document.getElementById("search-module").onblur = function() {
 		document.getElementById("modules").style.display ="block";
 		document.getElementById("nR").style.display ="none";
 	}
-
 };
 </script>
 @endsection

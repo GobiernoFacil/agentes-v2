@@ -52,6 +52,9 @@
         @if($session->facilitators->count() > 0 )
             @foreach($session->facilitators as $facilitator)
             <span>{{$facilitator->user->name}}</span>
+            @if($facilitator->user->image)
+            <img src='{{url("img/users/{$facilitator->user->image->name}")}}'>
+            @endif
             @endforeach
         @else
         <span>{{'Sin facilitador'}}</span>

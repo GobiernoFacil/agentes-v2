@@ -15,7 +15,7 @@ class Suscribe extends Controller
     }elseif($usuario->type ==='admin'){
       return redirect('dashboard');
     }elseif($usuario->type ==='facilitator'){
-      return redirect('dash');
+      return redirect('tablero-facilitador');
     }elseif($usuario->type ==='fellow'){
       return redirect('tablero');
     }else{

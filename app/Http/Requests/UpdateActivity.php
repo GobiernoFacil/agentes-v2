@@ -35,6 +35,8 @@ use MessagesTrait;
             'facilitator_role'=> 'required',
             'description'=> 'required',
             'competitor_role'=> 'required',
+            'evaluation'=>'required',
+            'files'=>'required'
         ];
     }
 }

@@ -17,11 +17,36 @@
     </p>
   </div>
 </div>
+<!-- evaluation -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Actividad para evaluar?</strong></label>
+      {{Form::select('evaluation',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('evaluation'))
+      <strong class="danger">{{$errors->first('evaluation')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
+<!-- files -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Carga de archivos?</strong></label>
+      {{Form::select('files',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('files'))
+      <strong class="danger">{{$errors->first('files')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <!-- horas y # sesión -->
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <label><strong>Número de activdad</strong> <br>
+      <label><strong>Número de actividad</strong> <br>
       {{Form::text('order',null, ["class" => "form-control"])}} </label>
       @if($errors->has('order'))
       <strong class="danger">{{$errors->first('order')}}</strong>

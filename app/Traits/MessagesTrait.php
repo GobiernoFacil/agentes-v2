@@ -103,12 +103,17 @@ trait MessagesTrait{
          'facilitator_role.required' => 'Este campo es requerido',
          'competitor_role.required' => 'Este campo es requerido',
          'material_link.url' =>"Escribe un URL válido",
+         'files.required' => 'Este campo es requerido',
+         'evaluation.required' => 'Este campo es requerido',
          //Monitoreo
          'knowledge.required' => 'Este campo es requerido',
          'attitude.required' => 'Este campo es requerido',
          'competitions.required' => 'Este campo es requerido',
          //Monitoreo
          'message.required' => 'Este campo es requerido',
+         //images
+         'image.mimes' => 'El archivo debe ser del tipo requerido (Archivo JPG o PNG)',
+         'image.max' =>'El archivo no puede ser mayor a 2.5MB'
       ];
     }
 }
