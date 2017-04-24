@@ -22,7 +22,7 @@
 <!-- header -->
 <div class="row h_tag">
 	<div class="col-sm-3 center">
-		<h4>Duración</h4>
+		<h4><b class="icon_h time"></b>Duración</h4>
 		<p>{{$session->hours}} horas</p>
 	</div>
 	<div class="col-sm-3 center">
