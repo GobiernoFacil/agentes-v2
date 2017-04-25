@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar usuario facilitador')
 @section('description', 'Agregar usuario a la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'facilitadores')
+@section('breadcrumb_type', 'facilitadores add')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_facilitadores')
 
 @section('content')
 <div class="row">
