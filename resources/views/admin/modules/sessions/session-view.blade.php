@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Ver sesión')
 @section('description', 'Ver sesión')
-@section('body_class', 'modulos view session')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
@@ -81,30 +81,46 @@
  <!--- facilitadores--->
  <div class="box">
  	<div class="row">
-		<div class="col-sm-12">
+		@if($session->facilitators->count() > 0)
+		<div class="col-sm-9">
 			<h2 class="title">Facilitadores de la sesión</h2>
-			@if($session->facilitators->count() > 0)
-				@include('admin.modules.sessions.sessions-facilitators-list')
-			@else
-				<p>Sin facilitadores asignados</p>
-				<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
-			@endif
+		</div>	
+		<div class="col-sm-3">
+			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar más facilitadores</a>
 		</div>
+		<div class="col-sm-12">		
+				@include('admin.modules.sessions.sessions-facilitators-list')
+		</div>
+		@else
+		<div class="col-sm-12">		
+			<h2 class="title">Facilitadores de la sesión</h2>
+			<p>Sin facilitadores asignados</p>
+			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
+		</div>
+		@endif
  	</div>
  </div>
 
 <!---actividades-->
   <div class="box">
   	<div class="row">
-  		<div class="col-sm-12">
+	  	@if($session->activities->count() > 0)
+  		<div class="col-sm-9">
   			<h2 class="title">Actividades</h2>
-	  		@if($session->activities->count() > 0)
-	  			@include('admin.modules.sessions.sessions-activities-list')
-			@else
+  		</div>
+		<div class="col-sm-3">
+			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar más actividades</a>
+		</div>
+  		<div class="col-sm-12">
+	  		@include('admin.modules.sessions.sessions-activities-list')
+	  	</div>
+		@else
+		<div class="col-sm-12">
+  			<h2 class="title">Actividades</h2>
 			<p><span>Sin actividades</span></p>
 			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar actividades</a>
-			@endif
 		</div>
+		@endif
 	</div>
   </div>
 

@@ -8,7 +8,7 @@
 @section('content')
 
 
-@if($modules)
+@if($modules->count() > 0)
 <div class="row">
 
 

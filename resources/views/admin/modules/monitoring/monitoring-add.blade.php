@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar mecanismo de evaluación')
 @section('description', 'Agregar nuevo mecanismo de evaluación')
-@section('body_class', 'modulos session monitoring')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session add monitoring')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
