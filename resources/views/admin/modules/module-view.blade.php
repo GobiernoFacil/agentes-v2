@@ -29,8 +29,8 @@
 		<p>{{$module->modality}}</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4>Publicado</h4>
-		<p>{{$module->public ? 'Sí' : 'No'}}</p>
+		<h4><b class="icon_h {{$module->public ? 'publicado' : 'no_p'}} "></b>Publicado</h4>
+		<p> <span class="btn {{$module->public ? 'view' : ''}}">{{$module->public ? 'Sí' : 'No'}}</span></p>
 	</div>
 </div>
 <div class="row">
