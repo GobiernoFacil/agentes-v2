@@ -81,15 +81,23 @@
  <!--- facilitadores--->
  <div class="box">
  	<div class="row">
-		<div class="col-sm-12">
+		@if($session->facilitators->count() > 0)
+		<div class="col-sm-9">
 			<h2 class="title">Facilitadores de la sesión</h2>
-			@if($session->facilitators->count() > 0)
-				@include('admin.modules.sessions.sessions-facilitators-list')
-			@else
-				<p>Sin facilitadores asignados</p>
-				<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
-			@endif
+		</div>	
+		<div class="col-sm-3">
+			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar más facilitadores</a>
 		</div>
+		<div class="col-sm-12">		
+				@include('admin.modules.sessions.sessions-facilitators-list')
+		</div>
+		@else
+		<div class="col-sm-12">		
+			<h2 class="title">Facilitadores de la sesión</h2>
+			<p>Sin facilitadores asignados</p>
+			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
+		</div>
+		@endif
  	</div>
  </div>
 
