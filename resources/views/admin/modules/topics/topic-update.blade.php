@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Actualizar objetivos particulares de la sesión')
 @section('description', 'Actualizar  objetivos particulares de la sesión')
-@section('body_class', 'modulos session topic')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session topic edit')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
