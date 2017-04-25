@@ -34,10 +34,22 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>¿Carga de archivos?</strong></label>
+      <label><strong>¿El usuario contará con carga de archivos?</strong></label>
       {{Form::select('files',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('files'))
       <strong class="danger">{{$errors->first('files')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+<!-- upload -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Esta actividad cuenta con archivos?</strong></label>
+      {{Form::select('hasfiles',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('hasfiles'))
+      <strong class="danger">{{$errors->first('hasfiles')}}</strong>
       @endif
     </p>
   </div>

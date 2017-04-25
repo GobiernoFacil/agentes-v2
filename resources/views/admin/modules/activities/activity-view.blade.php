@@ -27,6 +27,8 @@
 			<ul class="profile list">
 				<li class="right"><span>Recursos y requerimientos técnicos</span>
 				<a href='{{ url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id") }}' class="btn xs view">Agregar</a></li>
+				<li class="right"><span>Agregar Archivo</span>
+				<a href='{{ url("dashboard/sesiones/actividades/archivos/agregar/$activity->id") }}' class="btn xs view">Agregar</a></li>
 			</ul>
 		</div>
 	</div>
@@ -44,6 +46,24 @@
 	  <div class="col-sm-12">
         <p>Sin requerimientos</p>
         <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
+	  </div>
+  </div>
+</div>
+@endif
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Archivos</h1>
+  </div>
+</div>
+@if($activity->activityFiles->count() > 0)
+        @include('admin.modules.activities.activities-files-list')
+@else
+<div class="box">
+  <div class="row">
+	  <div class="col-sm-12">
+        <p>Sin archivos</p>
+        <a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
 	  </div>
   </div>
 </div>

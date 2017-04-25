@@ -73,12 +73,14 @@ class Activities extends Controller
             $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
             $activity->save();
-            if($activity->type==='evaluation'){
-              //Agregar evaluacion
-              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
-            }else{
+            if($activity->hasfiles==='Sí'){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
+            }elseif($activity->type==='evaluation'){
+              //Agregar evaluacion
+              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
+           }else{
+              return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
            }
         }
 
@@ -93,7 +95,7 @@ class Activities extends Controller
             //
             $user    = Auth::user();
             $activity = activity::find($id);
-			$session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+			      $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             return view('admin.modules.activities.activity-view')->with([
               "user"      	=> $user,
               "activity"    => $activity,
@@ -137,8 +139,17 @@ class Activities extends Controller
             }else{
               $data['type'] = 'activity';
             }
+            $last    = Activity::find($request->id);
             Activity::where('id',$request->id)->update($data);
-            return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+            if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
+              //Agregar archivos
+              return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
+            }elseif($data['type']==='evaluation' && $last->type!=$data['type']){
+              //Agregar evaluacion
+              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->id")->with('success',"Se ha guardado correctamente");
+           }else{
+              return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+           }
         }
 
         /**

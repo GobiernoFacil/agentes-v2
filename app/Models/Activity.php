@@ -19,7 +19,8 @@ class Activity extends Model
       'slug',
       'type',
       'files',
-      'evaluation'
+      'evaluation',
+      'hasfiles'
     ];
 
     //modelos relacionados
@@ -31,7 +32,7 @@ class Activity extends Model
     return $this->hasMany("App\Models\ActivityRequirement");
   }
 
-  function files(){
+  function activityFiles(){
     return $this->hasMany("App\Models\ActivitiesFile");
   }
 

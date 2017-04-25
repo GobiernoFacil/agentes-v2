@@ -143,8 +143,10 @@ Route::group(['middleware' => ['auth']], function () {
     //CRUD files in activity
     Route::get('dashboard/sesiones/actividades/archivos/agregar/{activity_id}', 'ActivitiesFiles@add');
     Route::post('dashboard/sesiones/actividades/archivos/crear/{activity_id}', 'ActivitiesFiles@save');
-
-
+    Route::get('dashboard/sesiones/actividades/archivos/ver/{id}', 'ActivitiesFiles@view');
+    Route::get('dashboard/sesiones/actividades/archivos/editar/{file_id}', 'ActivitiesFiles@edit');
+    Route::get('dashboard/sesiones/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
+    Route::post('dashboard/sesiones/actividades/archivos/update/{file_id}', 'ActivitiesFiles@update');
     /*@ActivityRequirements Controller */
     //CRUD activitiesRequirements
     Route::get('dashboard/sesiones/actividades/requerimientos/{id}', 'ActivityRequirements@index');
