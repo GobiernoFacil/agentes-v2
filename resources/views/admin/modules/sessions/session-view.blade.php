@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Ver sesión')
 @section('description', 'Ver sesión')
-@section('body_class', 'modulos view session')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
