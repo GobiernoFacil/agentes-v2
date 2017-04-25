@@ -76,8 +76,7 @@
 	<div class="col-sm-12">
 		<div class="divider"></div>
 		<h2 class="center">Sesiones del módulo</h2>
-				<p class="right"><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs ev">+ Agregar sesión</a></p>
-
+		<p class="center"><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs ev">+ Agregar sesión</a></p>
 	</div>
 </div>
 
