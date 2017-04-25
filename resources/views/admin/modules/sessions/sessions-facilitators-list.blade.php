@@ -6,7 +6,6 @@
 				@if($facilitator->user->image)
 				<img src='{{url("img/users/{$facilitator->user->image->name}")}}'>
 				@else
-				Sin imagen
 				@endif
 			</div>
 			<div class="col-sm-9">

@@ -120,11 +120,11 @@
 					@if($session->facilitators->count() > 0)
 					<p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
 					@foreach ($session->facilitators as $facilitator)
-						@if($facilitator->image)
-						<img src='{{url("img/users/{$facilitator->image->name}")}}'>
+						@if($facilitator->user->image)
+						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
 						@else
 						@endif
-						 {{$facilitator->user->name}}
+						 {{$facilitator->user->name}} -  {{$facilitator->user->institution}} <br>
 					@endforeach
 					</p>
 					@endif
