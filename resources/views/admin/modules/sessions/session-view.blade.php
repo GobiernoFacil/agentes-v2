@@ -88,6 +88,9 @@
 		<div class="col-sm-3">
 			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar más facilitadores</a>
 		</div>
+		<div class="col-sm-12">
+			<div class="divider"></div>
+		</div>
 		<div class="col-sm-12">		
 				@include('admin.modules.sessions.sessions-facilitators-list')
 		</div>
