@@ -9,7 +9,7 @@
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-		<h1 class="center">{{$module->title}}</h1>
+		<h1 class="center">{{$module->title}} <span class="le_link"><a href="{{url('dashboard/modulos/editar/' . $module->id)}}" class="btn view">Editar Módulo</a></span></h1>
 		<p class="center date">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
 		<div class="divider"></div>
 	</div>
@@ -40,9 +40,6 @@
 	<div class="col-sm-10">
 		<h3>Objetivo</h3>
 		<p>{{$module->objective}}</p>
-	</div>
-	<div class="col-sm-2">
-		<a href="{{url('dashboard/modulos/editar/' . $module->id)}}" class="btn view">Editar Módulo</a>
 	</div>
 	<div class="col-sm-6">
 		<h3>Situación didáctica</h3>
