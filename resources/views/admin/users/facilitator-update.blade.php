@@ -1,14 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Actualizar usuario facilitador')
-@section('description', 'Actualizar usuario a la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('title', 'Actualizar facilitador: ' . $facilitator->name)
+@section('description', 'Actualizar facilitador en la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
+@section('body_class', 'facilitadores')
+@section('breadcrumb_type', 'facilitadores edit')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_facilitadores')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Actualizar usuario facilitador</h1>
+		<h1>Actualizar usuario facilitador: <strong>{{$facilitator->name}}</strong></h1>
 	</div>
 </div>
 <div class="box">
