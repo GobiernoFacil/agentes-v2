@@ -113,7 +113,9 @@ trait MessagesTrait{
          'message.required' => 'Este campo es requerido',
          //images
          'image.mimes' => 'El archivo debe ser del tipo requerido (Archivo JPG o PNG)',
-         'image.max' =>'El archivo no puede ser mayor a 2.5MB'
+         'image.max' =>'El archivo no puede ser mayor a 2.5MB',
+         //activity file
+         'file.required' => 'Este campo es requerido',
       ];
     }
 }
