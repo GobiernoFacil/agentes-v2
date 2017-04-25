@@ -3,11 +3,11 @@
 
 @if($facilitators->count()>0)
 <ol>
-  @foreach($facilitators as $user)
+  @foreach($facilitators as $userf)
   <li>
     <label class="control-label">
-      <input type="checkbox" name="signed[]" value="{{$user->id}}"
-      {{$session->facilitators->contains("user_id", $user->id) ? "checked" : ""}}>{{$user->name}}
+      <input type="checkbox" name="signed[]" value="{{$userf->id}}"
+      {{$session->facilitators->contains("user_id", $userf->id) ? "checked" : ""}}> <strong>{{$userf->name}}</strong> - {{$userf->institution}}
     </label>
   </li>
   @endforeach

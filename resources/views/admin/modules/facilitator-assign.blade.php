@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Asignar facilitador')
 @section('description', 'Asignar facilitador')
-@section('body_class', 'modulos session expert')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session expert add')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
