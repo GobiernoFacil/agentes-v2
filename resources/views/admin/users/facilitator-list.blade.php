@@ -29,15 +29,15 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    @foreach ($facilitators as $user)
+			    @foreach ($facilitators as $userf)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/facilitadores/ver/' . $user->id) }}">{{$user->name}}</a></h4></td>
-			        <td>{{$user->email}}</td>
-			        <td>{{$user->institution}}</td>
+			        <td><h4> <a href="{{ url('dashboard/facilitadores/ver/' . $userf->id) }}">{{$userf->name}}</a></h4></td>
+			        <td>{{$userf->email}}</td>
+			        <td>{{$userf->institution}}</td>
 			        <td>
-			          <a href="{{ url('dashboard/facilitadores/ver/' . $user->id) }}" class="btn xs view">Ver</a>
-			          <a href="{{ url('dashboard/facilitadores/editar/' . $user->id) }}" class="btn xs ev">Editar</a>
-			          <a href ="{{ url('dashboard/facilitadores/eliminar' . $user->id) }}"  id ="{{$user->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
+			          <a href="{{ url('dashboard/facilitadores/ver/' . $userf->id) }}" class="btn xs view">Ver</a>
+			          <a href="{{ url('dashboard/facilitadores/editar/' . $userf->id) }}" class="btn xs ev">Editar</a>
+			          <a href ="{{ url('dashboard/facilitadores/eliminar' . $userf->id) }}"  id ="{{$userf->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
