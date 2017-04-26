@@ -53,9 +53,12 @@ class ModuleSessions extends Controller
     public function add($module_id)
     {
       $user   = Auth::user();
+      $list   =  ModuleSession::where('id',$module_id)->orderBy('order','desc')->pluck('name','id')->toArray();
+      $list['0'] = 'Sin sesión predecesora';
       return view('admin.modules.sessions.session-add')->with([
         "user"      => $user,
-        "module_id" => $module_id
+        "module_id" => $module_id,
+        "list"      => $list
       ]);
     }
 
