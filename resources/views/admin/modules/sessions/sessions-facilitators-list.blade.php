@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-sm-3">
 				@if($facilitator->user->image)
-				<img src='{{url("img/users/{$facilitator->user->image->name}")}}'>
+				<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="112px">
 				@else
 				@endif
 			</div>
