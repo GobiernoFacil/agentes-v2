@@ -1763,6 +1763,11 @@ sup {
 .toggle-view .active .panel {
   display: block; }
 
+h2.danger {
+  background: #f15c44;
+  color: white;
+  padding: 10px; }
+
 .lecturas li h2 {
   text-transform: none; }
   .lecturas li h2 span {
