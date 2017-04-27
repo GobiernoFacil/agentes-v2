@@ -216,8 +216,7 @@ class ModuleSessions extends Controller
     {
       //
       $data   = $request->except('_token');
-      $order   = $request->order;
-      $this->orderSession($order,$request->session_id,true);
+      //$this->orderSession($order,$request->session_id,true);
       $data['slug']    = str_slug($request->name);
       ModuleSession::where('id',$request->session_id)->update($data);
       return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
