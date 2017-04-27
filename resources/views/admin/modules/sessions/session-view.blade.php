@@ -114,6 +114,9 @@
 		<div class="col-sm-3">
 			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar más actividades</a>
 		</div>
+		<div class="col-sm-12">
+			<div class="divider"></div>
+		</div>
   		<div class="col-sm-12">
 	  		@include('admin.modules.sessions.sessions-activities-list')
 	  	</div>
