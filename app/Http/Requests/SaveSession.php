@@ -27,7 +27,7 @@ class SaveSession extends FormRequest
         return [
             //
             'name'=> 'required|unique:module_sessions',
-            'order'=> 'required|numeric',
+            'parent_id'=> 'required',
             'hours'=> 'required|numeric',
             'modality'=> 'required',
             'objective'=> 'required',

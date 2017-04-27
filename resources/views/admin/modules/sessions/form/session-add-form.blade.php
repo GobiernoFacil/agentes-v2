@@ -77,9 +77,9 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Sesión predecesora</strong></label>
-      {{Form::select('modality',$list,0, ['class' => 'form-control'])}}
-      @if($errors->has('modality'))
-      <strong class="danger">{{$errors->first('modality')}}</strong>
+      {{Form::select('parent_id',$list,0, ['class' => 'form-control'])}}
+      @if($errors->has('parent_id'))
+      <strong class="danger">{{$errors->first('parent_id')}}</strong>
       @endif
     </p>
   </div>
