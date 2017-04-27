@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('command:delete-expired-codes')
-                 ->cron('30 12 01 */3 *');
+                 ->cron('30 12 01 */5 *');
     }
 
     /**
