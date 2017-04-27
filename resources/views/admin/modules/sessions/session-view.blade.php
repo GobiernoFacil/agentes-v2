@@ -26,11 +26,11 @@
 		<p>{{$session->hours}} horas</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4><b class="icon_h i_dates"></b> Fecha inicio</h4>
+		<h4><b class="icon_h i_dates_green"></b> Fecha inicio</h4>
 		<p>{{date("d-m-Y", strtotime($session->start))}}</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4><b class="icon_h i_dates"></b> Fecha final</h4>
+		<h4><b class="icon_h i_dates_green"></b> Fecha final</h4>
 		<p>{{date('d-m-Y', strtotime($session->end))}}</p>
 	</div>
 	<div class="col-sm-3 center">
@@ -113,6 +113,9 @@
   		</div>
 		<div class="col-sm-3">
 			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar más actividades</a>
+		</div>
+		<div class="col-sm-12">
+			<div class="divider"></div>
 		</div>
   		<div class="col-sm-12">
 	  		@include('admin.modules.sessions.sessions-activities-list')
