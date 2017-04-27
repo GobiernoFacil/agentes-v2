@@ -18,7 +18,8 @@ protected $fillable = [
     'comments',
     'start',
     'end',
-    'slug'
+    'slug',
+    'parent_id'
   ];
 
     //modelos relacionados

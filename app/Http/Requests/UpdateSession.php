@@ -28,7 +28,7 @@ class UpdateSession extends FormRequest
         $session = ModuleSession::find($this->route("session_id"));
         return [
           'name'=> 'required'.($session->name != $this->name ? '|unique:module_sessions' : ''),
-          'order'=> 'required|numeric',
+          'parent_id'=> 'required',
           'hours'=> 'required|numeric',
           'modality'=> 'required',
           'objective'=> 'required',

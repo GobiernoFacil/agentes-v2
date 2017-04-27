@@ -116,6 +116,7 @@ trait MessagesTrait{
          'image.max' =>'El archivo no puede ser mayor a 2.5MB',
          //activity file
          'file.required' => 'Este campo es requerido',
+         'parent_id.required' => 'Este campo es requerido',
       ];
     }
 }

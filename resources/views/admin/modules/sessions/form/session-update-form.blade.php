@@ -40,6 +40,7 @@
 </div>
 <!-- horas y # sesión -->
 <div class="row">
+<!--
   <div class="col-sm-6">
     <p>
       <label><strong>Número de sesión</strong> <br>
@@ -49,6 +50,17 @@
       @endif
     </p>
   </div>
+-->
+
+<div class="col-sm-6">
+  <p>
+    <label><strong>Modalidad</strong></label>
+    {{Form::select('modality',[null => "Selecciona una opción", 'En línea' =>'En línea', 'Presencial'=>'Presencial'],null, ['class' => 'form-control'])}}
+    @if($errors->has('modality'))
+    <strong class="danger">{{$errors->first('modality')}}</strong>
+    @endif
+  </p>
+</div>
   <div class="col-sm-6">
     <p>
       <label><strong>Total de horas</strong> <br>
