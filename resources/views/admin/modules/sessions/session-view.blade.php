@@ -26,15 +26,15 @@
 		<p>{{$session->hours}} horas</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4>Fecha inicio</h4>
+		<h4><b class="icon_h i_dates"></b> Fecha inicio</h4>
 		<p>{{date("d-m-Y", strtotime($session->start))}}</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4>Fecha final</h4>
+		<h4><b class="icon_h i_dates"></b> Fecha final</h4>
 		<p>{{date('d-m-Y', strtotime($session->end))}}</p>
 	</div>
 	<div class="col-sm-3 center">
-		<h4>Modalidad</h4>
+		<h4><b class="icon_h modalidad"></b> Modalidad</h4>
 		<p>{{$session->modality}}</p>
 	</div>
 	<div class="col-sm-12">

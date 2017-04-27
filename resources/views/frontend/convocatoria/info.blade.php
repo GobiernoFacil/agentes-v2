@@ -98,7 +98,7 @@
 
 				<p>Como parte del proceso de postulación, los interesados deberán<a href="#note2"><sup>2</sup></a>:</p>
 				<ol>
-					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('')}}">{{url('')}}</a>.</li>
+					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</li>
 					<li>Elaborar un ensayo – no mayor a cinco cuartillas –<a href="#note3"><sup>3</sup></a> en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
 					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.<a href="#note4"><sup>4</sup></a></li>
 					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).</li>
