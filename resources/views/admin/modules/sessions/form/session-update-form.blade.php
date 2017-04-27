@@ -71,15 +71,14 @@
     </p>
   </div>
 </div>
-<!-- modalidad -->
-
+<!-- Sesión predecesora -->
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Modalidad</strong></label>
-      {{Form::select('modality',[null => "Selecciona una opción", 'En línea' =>'En línea', 'Presencial'=>'Presencial'],null, ['class' => 'form-control'])}}
-      @if($errors->has('modality'))
-      <strong class="danger">{{$errors->first('modality')}}</strong>
+      <label><strong>Sesión predecesora</strong></label>
+      {{Form::select('parent_id',$list,null, ['class' => 'form-control'])}}
+      @if($errors->has('parent_id'))
+      <strong class="danger">{{$errors->first('parent_id')}}</strong>
       @endif
     </p>
   </div>
