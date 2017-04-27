@@ -89,45 +89,26 @@ class ModuleSessions extends Controller
     * @param  boolean $type  true add false update
     */
 
-    protected function checkOrder($data,$type,$session_id=null){
+    protected function checkOrder($data){
       //primera sesión
       if($data->parent_id==='0'){
          $order        =  1;
          $data->order  =  $order;
          $data->parent_id = null;
          $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-         $this->reOrder($order,$data->module_id,$data,$type,$session_id);
-         if($type){
-           $data->save();
-         }else{
-           ModuleSession::where('id',$session_id)->update($data->toArray());
-         }
+         $this->reOrder($order,$data->module_id,$data);
+         $data->save();
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
            $last_parent_null->save();
          }
          return $data;
       }else{
-        if($type){
         //new session
         $parent  = ModuleSession::find($data->parent_id);
         $order   = $parent->order+1;
         $data->order = $order;
-        $this->reOrder($order,$data->module_id,$data,$type,$session_id);
-      }else{
-        //update session
-        $lastData = ModuleSession::find($session_id);
-        if($lastData->parent_id!=$data->parent_id){
-          var_dump($data->parent_id);
-          $parent  = ModuleSession::find($data->parent_id);
-          var_dump($parent->order);
-          $order   = $parent->order+1;
-          $data->order = $order;
-          $this->reOrder($order,$data->module_id,$data,$type,$session_id);
-        }else{
-          ModuleSession::where('id',$session_id)->update($data->toArray());
-        }
-      }
+        $this->reOrder($order,$data->module_id,$data);
         return $data;
       }
     }
@@ -139,24 +120,14 @@ class ModuleSessions extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    protected function reOrder($order,$module_id,$data,$type,$session_id=null){
+    protected function reOrder($order,$module_id,$data){
       $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
       $index   = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
       if(isset($numbers[$order])){
-        if($type){
           $data->save();
           $session_with_same_order = ModuleSession::where('module_id',$module_id)->where('order',$order)->first();
           $session_with_same_order->parent_id = $data->id;
           $session_with_same_order->save();
-        }else{
-          $session_with_same_order = ModuleSession::where('module_id',$module_id)->where('order',$order)->first();
-          $session_with_same_order->parent_id = $session_id;
-          $session_with_same_order->save();
-          var_dump($data->toArray());
-          var_dump($data->$session_id);
-          ModuleSession::where('id',$session_id)->update($data->toArray());
-        }
-
         $flag = 0;
         $temp_ids = [];
         $temp2 = [];
@@ -192,12 +163,7 @@ class ModuleSessions extends Controller
         }
         return true;
       }else{
-        if($type){
           $data->save();
-        }else{
-          var_dump($data->toArray());
-          ModuleSession::where('id',$session_id)->update($data->toArray());
-        }
         //ultima de la lista no se hace nada
           return true;
       }
@@ -258,7 +224,7 @@ class ModuleSessions extends Controller
       $session = new ModuleSession($data);
       var_dump($session->toArray());
       var_dump($session->parent_id);
-      $this->checkOrder($session,false,$sess->id);
+      $this->checkOrder($session,false,$request->session_id);
       //return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
     }
 
