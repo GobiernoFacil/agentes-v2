@@ -75,7 +75,7 @@ class ModuleSessions extends Controller
       $data['module_id']    = $request->module_id;
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
-      $session = $this->checkOrder($session,true);
+      $session = $this->checkOrder($session);
       return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
     }
@@ -222,10 +222,66 @@ class ModuleSessions extends Controller
       $data['module_id']    = $sess->module_id;
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
-      var_dump($session->toArray());
-      var_dump($session->parent_id);
-      $this->checkOrder($session,false,$request->session_id);
-      //return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
+      $this->checkUpdateOrder($session,$request->session_id);
+      return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
+    }
+
+
+    /**
+    * check order session
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  object  $data request data
+    * @param  object  $data  data to save
+    * @param  boolean $type  true add false update
+    */
+
+    protected function checkUpdateOrder($data,$session_id){
+      //first session
+      if($data->parent_id==='0'){
+        $order        =  1;
+        $data->order  =  $order;
+        $data->parent_id = null;
+        $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
+        $numbers = ModuleSession::where('module_id',$data->module_id)->whereNotIn('id',[$session_id])->orderBy('order','asc')->get();
+        $new_order = 2;
+        foreach ($numbers as $number) {
+          if($new_order>3){
+            $number->order =$new_order;
+            $number->parent_id = $last_session->id;
+            $number->save();
+            $last_session = $number;
+          }else{
+            $number->order =$new_order;
+            $number->save();
+            $last_session = $number;
+          }
+          $new_order++;
+        }
+        ModuleSession::where('id',$session_id)->update($data->toArray());
+        if($last_parent_null){
+          $last_parent_null->parent_id = $session_id;
+          $last_parent_null->save();
+        }
+      }else{
+
+      }
+    }
+
+    /**
+    * check order session
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  object  $data request data
+    * @param  object  $data  data to save
+    * @param  boolean $type  true add false update
+    */
+
+    protected function reUpdateOrder($order,$module_id,$data,$session_id){
+      $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
+      $index    = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
+      var_dump($numbers);
+      var_dump($index);
     }
 
     /**
