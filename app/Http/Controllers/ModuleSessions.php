@@ -237,39 +237,44 @@ class ModuleSessions extends Controller
     */
 
     protected function checkUpdateOrder($data,$session_id){
-      //first session
-      if($data->parent_id==='0'){
-        $order        =  1;
-        $data->order  =  $order;
-        $data->parent_id = null;
-        $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-        $numbers = ModuleSession::where('module_id',$data->module_id)->whereNotIn('id',[$session_id])->orderBy('order','asc')->get();
-        $new_order = 2;
-        foreach ($numbers as $number) {
-          if($new_order>3){
-            $number->order =$new_order;
-            $number->parent_id = $last_session->id;
-            $number->save();
-            $last_session = $number;
-          }else{
-            $number->order =$new_order;
-            $number->save();
-            $last_session = $number;
-          }
-          $new_order++;
-        }
-        ModuleSession::where('id',$session_id)->update($data->toArray());
-        if($last_parent_null){
-          $last_parent_null->parent_id = $session_id;
-          $last_parent_null->save();
-        }
-      }else{
-        $parent    = ModuleSession::find($data->parent_id);
-        $new_order = $parent->order+1;
-        $data->order  =  $new_order;
-        $this->reUpdateOrder($new_order,$data->module_id,$data,$session_id);
+      $sess = ModuleSession::find($session_id);
+      if($data->parent_id!=$sess->parent_id){
+            //first session
+            if($data->parent_id==='0'){
+              $order        =  1;
+              $data->order  =  $order;
+              $data->parent_id = null;
+              $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
+              $numbers = ModuleSession::where('module_id',$data->module_id)->whereNotIn('id',[$session_id])->orderBy('order','asc')->get();
+              $new_order = 2;
+              foreach ($numbers as $number) {
+                if($new_order>3){
+                  $number->order =$new_order;
+                  $number->parent_id = $last_session->id;
+                  $number->save();
+                  $last_session = $number;
+                }else{
+                  $number->order =$new_order;
+                  $number->save();
+                  $last_session = $number;
+                }
+                $new_order++;
+              }
+              ModuleSession::where('id',$session_id)->update($data->toArray());
+              if($last_parent_null){
+                $last_parent_null->parent_id = $session_id;
+                $last_parent_null->save();
+              }
+            }else{
+              $parent    = ModuleSession::find($data->parent_id);
+              $new_order = $parent->order+1;
+              $data->order  =  $new_order;
+              $this->reUpdateOrder($new_order,$data->module_id,$data,$session_id);
 
-      }
+            }
+          }else{
+            ModuleSession::where('id',$session_id)->update($data->toArray());
+          }
     }
 
     /**
