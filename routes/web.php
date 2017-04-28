@@ -27,8 +27,11 @@ Route::get('redes-sociales', 'Front@redes');
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
-Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
-Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
+
+/** se acabó la convocatoria 
+//Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
+//Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
+***/
 Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
 Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
 Route::get('convocatoria/aplicar/fin', 'NoticeFront@end');

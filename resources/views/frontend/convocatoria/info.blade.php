@@ -8,14 +8,12 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
+		<h2 class="danger">Convocatoria 2017 Cerrada</h2>
 	<h1><strong>Convocatoria</strong> PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</strong>
 	</h1>
 		<p>El Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), la Oficina para México del Programa de Naciones Unidas para el Desarrollo (PNUD-México), GESOC, Agencia para el Desarrollo, A.C., ProSociedad Hacer Bien el Bien, A.C., y Gobierno Fácil – con el apoyo de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID) – convocan a los sectores gubernamental, social, empresarial y académico de los estados de Chihuahua, Morelos, Nuevo León, Oaxaca y Sonora y, en general, a cualquier persona interesada de las entidades federativas antes señaladas a participar en la edición 2017 del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, a realizarse entre los meses de mayo y noviembre de 2017.</p>
 	
 		<div class="row">
-				<div class="col-sm-4">
-					<p class="center"><a href="{{url('convocatoria/aplicar')}}" class="btn gde i_convoca_w">Participa</a></p>
-				</div>
 				<div class="col-sm-4">
 					<p><a href="{{url('archivos/ConvocatoriaFellowship.pdf')}}" class="btn gde download i_download" download>Convocatoria</a></p>
 				</div>
@@ -124,7 +122,7 @@
 			<h3>Plazos y proceso de postulación</h3>
 			<span></span>
 			<div class="panel">
-			<p>La presente convocatoria estará abierta del 21 de marzo hasta el 28 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</p>
+			<p>La presente convocatoria estará abierta del 21 de marzo hasta el 28 de abril de 2017 a las 15:00 horas (tiempo de la Ciudad de México). No se recibirá ninguna postulación extemporánea. El proceso de postulación se realizará exclusivamente en línea en el sitio: <a href="{{url('convocatoria')}}">{{url('convocatoria')}}</a>.</p>
 			
 			<p>Una vez cerrado el plazo de postulaciones, el Comité Dictaminador integrado por un representante de las organizaciones convocantes revisará la documentación entregada por los postulantes, y preseleccionará a un grupo de candidatos que serán invitados a una ronda de entrevistas en línea, que permitirán evaluar con mayor detalle la idoneidad del perfil. Posteriormente, el Comité Dictaminador seleccionará por consenso un máximo de 20 participantes que cumplan satisfactoriamente con los requisitos establecidos en esta convocatoria y que hayan destacado en la ronda de entrevistas. El Comité Dictaminador estará integrado por:</p>
 			<ul>
