@@ -105,6 +105,7 @@ trait MessagesTrait{
          'material_link.url' =>"Escribe un URL válido",
          'files.required' => 'Este campo es requerido',
          'evaluation.required' => 'Este campo es requerido',
+         'type.required' => 'Este campo es requerido',
          //Monitoreo
          'knowledge.required' => 'Este campo es requerido',
          'attitude.required' => 'Este campo es requerido',

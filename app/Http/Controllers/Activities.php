@@ -65,10 +65,6 @@ class Activities extends Controller
             $activity  = new Activity($request->except('_token'));
             if($request->files ==='Sí'){
               $activity->type = 'files';
-            }elseif($request->evaluation ==='Sí'){
-              $activity->type = 'evaluation';
-            }else{
-              $activity->type = 'activity';
             }
             $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
@@ -134,10 +130,6 @@ class Activities extends Controller
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
               $data['type'] = 'files';
-            }elseif($request->evaluation ==='Sí'){
-              $data['type'] = 'evaluation';
-            }else{
-              $data['type'] = 'activity';
             }
             $last    = Activity::find($request->id);
             Activity::where('id',$request->id)->update($data);
