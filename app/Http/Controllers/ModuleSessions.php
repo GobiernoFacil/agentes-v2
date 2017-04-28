@@ -264,6 +264,10 @@ class ModuleSessions extends Controller
           $last_parent_null->save();
         }
       }else{
+        $parent    = ModuleSession::find($data->parent_id);
+        $new_order = $parent->order+1;
+        $data->order  =  $new_order;
+        $this->reUpdateOrder($new_order,$data->module_id,$data,$session_id);
 
       }
     }
@@ -278,10 +282,30 @@ class ModuleSessions extends Controller
     */
 
     protected function reUpdateOrder($order,$module_id,$data,$session_id){
-      $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
-      $index    = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
-      var_dump($numbers);
-      var_dump($index);
+      $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->whereNotIn('id',[$session_id])->get();
+      foreach ($numbers as $number) {
+        if($number->order>=$order){
+          $number->order = $number->order+1;
+          $number->save();
+        }
+      }
+     ModuleSession::where('id',$session_id)->update($data->toArray());
+     $numbers = ModuleSession::where('module_id',$data->module_id)->orderBy('order','asc')->get();
+      $new_order = 1;
+      foreach ($numbers as $number) {
+        if($new_order>1){
+          $number->order =$new_order;
+          $number->parent_id = $last_session->id;
+          $number->save();
+          $last_session = $number;
+        }else{
+          $number->order =$new_order;
+          $number->save();
+          $last_session = $number;
+        }
+        $new_order++;
+      }
+      return true;
     }
 
     /**
