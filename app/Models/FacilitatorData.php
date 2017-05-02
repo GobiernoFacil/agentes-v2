@@ -17,6 +17,7 @@ class FacilitatorData extends Model
     'linkedin',
     'other',
     'semblance',
+    'expert'
     ];
     function user(){
       return $this->belongsTo("App\User");

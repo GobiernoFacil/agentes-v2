@@ -31,6 +31,19 @@
   </div>
 </div>
 
+<!-- expert -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Experto en el área?</strong></label>
+      {{Form::select('expert',[null => "Selecciona una opción", '1' =>'Sí', '0'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('expert'))
+      <strong class="danger">{{$errors->first('expert')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-sm-6">
     <p>
