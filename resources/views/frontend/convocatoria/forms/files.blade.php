@@ -1,3 +1,10 @@
+
+<p>
+  @if($errors->has('aspirant_id'))
+    <strong class ="error">El token no es válido, por favor revisa tu correo.</strong>
+  @endif
+</p>
+
 {!! Form::open(['url' => 'convocatoria/aplicar/registro', "class" => "form-horizontal",'files'=>true]) !!}
 {{Form::hidden('aId', $aId, ["class" => "form-control"])}}
   <h2><label>Agregar Ensayo </label></h2>
