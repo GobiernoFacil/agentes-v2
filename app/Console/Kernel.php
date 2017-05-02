@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         Commands\DeleteExpiredCodes::class,
-        Commands\SendMassiveEmails::class
+        Commands\SendMassiveEmails::class,
+        Commands\SendAspirantsCount::class
     ];
 
     /**
@@ -28,8 +29,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('command:delete-expired-codes')
-                 ->cron('30 12 01 */5 *');
+      //  $schedule->command('command:delete-expired-codes')
+      //           ->cron('30 12 01 */5 *');
+                 $schedule->command('command:aspirant-count')
+                          ->dailyAt('16:30');
     }
 
     /**

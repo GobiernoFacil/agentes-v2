@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class saveFilesEvaluation extends FormRequest
+class SaveFilesEvaluation extends FormRequest
 {
   use MessagesTrait;
     /**
