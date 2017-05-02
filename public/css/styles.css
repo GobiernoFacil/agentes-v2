@@ -1496,6 +1496,11 @@ a.apertus:hover {
   display: block;
   padding: 5px; }
 
+h2.danger {
+  background: #f15c44;
+  color: white;
+  padding: 10px; }
+
 .bgdimg {
   color: white;
   margin-bottom: 70px;
@@ -1762,11 +1767,6 @@ sup {
 
 .toggle-view .active .panel {
   display: block; }
-
-h2.danger {
-  background: #f15c44;
-  color: white;
-  padding: 10px; }
 
 .lecturas li h2 {
   text-transform: none; }
