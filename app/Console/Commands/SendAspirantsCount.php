@@ -66,7 +66,7 @@ class SendAspirantsCount extends Command
             foreach ($states as $state) {
               $data  = Aspirant::where('state',$state->state)->whereIn('id',$aspirantsFile_id)->get();
               $countC = $countC + $data->count();
-              $dataNot  = Aspirant::where('state',$state->state)->whereNotIn('id',$aspirantsFile_id)->get();
+              $dataNot  = Aspirant::where('state',$state->state)->where('is_activated',1)->whereNotIn('id',$aspirantsFile_id)->get();
               $countS = $countS + $dataNot->count();
               $countT = $countT + ($data->count()+$dataNot->count());
               $arr = [$state->state,$data->count(),$dataNot->count(),($data->count()+$dataNot->count())];
