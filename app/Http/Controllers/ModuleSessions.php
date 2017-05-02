@@ -387,7 +387,7 @@ class ModuleSessions extends Controller
     {
       //
       $user = Auth::user();
-      $facilitators = User::where('type','facilitator')->where('enabled',1)->orderBy('name','desc')->get();
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','desc')->get();
       $session       = ModuleSession::where('id',$session_id)->firstOrFail();
       return view('admin.modules.facilitator-assign')->with([
         'user' => $user,
@@ -430,11 +430,13 @@ class ModuleSessions extends Controller
      public function searchFacilitator(Request $request){
         $member = $request->match;
         $results = User::where('type', 'facilitator')
+                    ->orWhere('type','admin')
                     ->where('enabled', 1)
                     ->where('name', 'like', "$member%")
                     ->get();
          if($results->isempty()){
            $results = User::where('type', 'facilitator')
+                       ->orWhere('type','admin')
                        ->where('enabled', 1)
                        ->where('email', 'like', "$member%")
                        ->get();
