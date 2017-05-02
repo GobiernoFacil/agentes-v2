@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
       //  $schedule->command('command:delete-expired-codes')
       //           ->cron('30 12 01 */5 *');
                  $schedule->command('command:aspirant-count')
-                          ->dailyAt('15:30');
+                          ->dailyAt('16:00');
     }
 
     /**
