@@ -19,3 +19,17 @@
   </div>
 </div>
 @endsection
+@section('js-content')
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+$( document ).ready(function() {
+    $('#type').change(function(){
+      if(this.value==='evaluation'){
+        $('#user-file').show();
+      }else{
+        $('#user-file').hide();
+      }
+    });
+});
+</script>
+@endsection
