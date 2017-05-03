@@ -1,5 +1,4 @@
-<div class="box">
-	<div class="row">
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -21,5 +20,3 @@
 				@endforeach
 			</tbody>
 		</table>
-	</div>
-</div>
