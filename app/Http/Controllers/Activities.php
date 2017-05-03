@@ -133,13 +133,24 @@ class Activities extends Controller
         public function update(UpdateActivity $request)
         {
             //
-            $data   = $request->except('_token');
+            $data   = $request->except(['_token','start','end','time','link']);
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);
             Activity::where('id',$request->id)->update($data);
+            //activity video data
+            if($request->type==='video'){
+              $video  = ActivityVideo::firstOrCreate(['activity_id'=>$request->id]);
+              $video->start = $request->start;
+              $video->end = $request->end;
+              $video->link = $request->link;
+              $video->time = $request->time;
+              $video->save();
+            }
+
+
             if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");

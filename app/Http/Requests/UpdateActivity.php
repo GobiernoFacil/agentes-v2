@@ -27,6 +27,23 @@ use MessagesTrait;
     {
 
         $activity = Activity::find($this->route("id"));
+        if($this->type==='video'){
+          return [
+              //
+              'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'order'=> 'required|numeric',
+              'duration'=> 'required|numeric',
+              'facilitator_role'=> 'required',
+              'description'=> 'required',
+              'competitor_role'=> 'required',
+              'type'=>'required',
+              'start'=>'required',
+              'end'=>'required',
+              'time'=>'required',
+              'link'=>'required',
+          ];
+        }else{
+
         return [
             //
             'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
@@ -37,5 +54,6 @@ use MessagesTrait;
             'competitor_role'=> 'required',
             'type'=>'required',
         ];
+      }
     }
 }

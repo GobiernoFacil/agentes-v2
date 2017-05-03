@@ -79,7 +79,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Duración</strong> <br>
-      {{Form::text('duration', null, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('duration', null, ["class" => "form-control"])}} </label>
       @if($errors->has('duration'))
       <strong class="danger">{{$errors->first('duration')}}</strong>
       @endif
@@ -122,6 +122,59 @@
       @endif
     </p>
   </div>
+</div>
+
+
+<div id="video" style="{{old('type') ==='video' || $activity->type==='video'  ? '' : 'display:none;'}}">
+<div class="divider"></div>
+<div class="row">
+  <div class="col-sm-12">
+    <h2 class="sa_title">Información del Video o Webinar </h2>
+  </div>
+</div>
+
+<!-- Fechas -->
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <label><strong>Fecha inicio</strong> <br>
+      {{Form::text('start',$activity->videos->start, ["class" => "form-control", 'id'=>'startD'])}} </label>
+      @if($errors->has('start'))
+      <strong class="danger">{{$errors->first('start')}}</strong>
+      @endif
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>
+      <label><strong>Fecha final</strong> <br>
+      {{Form::text('end',$activity->videos->end, ["class" => "form-control",'id'=>'startE'])}} </label>
+      @if($errors->has('end'))
+      <strong class="danger">{{$errors->first('end')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
+<div class="row" >
+  <div class="col-sm-6">
+    <p>
+      <label><strong>Link</strong> <br>
+      {{Form::text('link',$activity->videos->link, ["class" => "form-control"])}} </label>
+      @if($errors->has('link'))
+      <strong class="danger">{{$errors->first('link')}}</strong>
+      @endif
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>
+      <label><strong>Hora</strong> <br>
+      {{Form::text('time',$activity->videos->time, ["class" => "form-control"])}} </label>
+      @if($errors->has('time'))
+      <strong class="danger">{{$errors->first('time')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 </div>
 <div class="row">
   <div class="col-sm-12">
