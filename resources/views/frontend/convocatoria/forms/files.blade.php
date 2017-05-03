@@ -1,7 +1,7 @@
 
 <p>
   @if($errors->has('aspirant_id'))
-    <strong class ="error">El <em>token</em> no es válido o recargaste la página, por favor revisa tu correo y da click al enlace para subir tus archivos.</strong>
+    <strong class="error">El <em>token</em> no es válido o recargaste la página, por favor revisa tu correo y da click al enlace para subir tus archivos.</strong>
   @endif
 </p>
 
@@ -10,7 +10,7 @@
   <h2><label>Agregar Ensayo </label></h2>
 <p>  {{Form::file('essay', null, ["class" => "form-control"])}} (no mayor a 5 cuartillas, documento no mayor a 2.5 Mb, formato .docx, .doc o pdf)
   @if($errors->has('essay'))
-    <strong>{{$errors->first('essay')}}</strong>
+    <strong  class="error">{{$errors->first('essay')}}</strong>
   @endif
 </p>
 
@@ -18,7 +18,7 @@
 <h2><label>Agregar enlace a video (YouTube)</label></h2>
  <p> {{Form::text('video', null, ["class" => "form-control"])}}
   @if($errors->has('video'))
-    <strong>{{$errors->first('video')}}</strong>
+    <strong  class="error">{{$errors->first('video')}}</strong>
   @endif
 </p>
 
@@ -26,14 +26,14 @@
  <h2> <label>Agregar perfil curricular</label></h2>
 <p>  {{Form::file('cv', null, ["class" => "form-control"])}}  (documento no mayor a 2.5 Mb, formato .docx, .doc o pdf)
   @if($errors->has('cv'))
-    <strong>{{$errors->first('cv')}}</strong>
+    <strong  class="error">{{$errors->first('cv')}}</strong>
   @endif
 </p>
 
 <h2> <label>Agregar carta membretada </label></h2>
 <p>  {{Form::file('letter', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
   @if($errors->has('letter'))
-    <strong>{{$errors->first('letter')}}</strong>
+    <strong  class="error">{{$errors->first('letter')}}</strong>
   @endif
 </p>
 
@@ -41,14 +41,14 @@
 <p>
 	{{Form::file('proof', null, ["class" => "form-control"])}}(documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
   @if($errors->has('proof'))
-    <strong>{{$errors->first('proof')}}</strong>
+    <strong  class="error">{{$errors->first('proof')}}</strong>
   @endif
 </p>
 
 <h2> <label>Agregar consentimiento relativo al tratamiento de sus datos personales</label></h2>
 <p>  {{Form::file('privacy', null, ["class" => "form-control"])}} (documento no mayor a 2.5 Mb, formato .jpg, .png o pdf)
   @if($errors->has('privacy'))
-    <strong>{{$errors->first('privacy')}}</strong>
+    <strong  class ="error">{{$errors->first('privacy')}}</strong>
   @endif
 </p>
 
