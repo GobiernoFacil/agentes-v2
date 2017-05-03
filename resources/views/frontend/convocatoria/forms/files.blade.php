@@ -1,6 +1,6 @@
 
 <p>
-  @if($errors->has('aspirant_id'))
+  @if($errors->has('aId'))
     <strong class ="error">El <em>token</em> no es válido o recargaste la página, por favor revisa tu correo y da click al enlace para subir tus archivos.</strong>
   @endif
 </p>
