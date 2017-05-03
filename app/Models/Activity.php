@@ -36,4 +36,8 @@ class Activity extends Model
     return $this->hasMany("App\Models\ActivitiesFile");
   }
 
+  function videos(){
+    return $this->hasOne("App\Models\ActivityVideo");
+  }
+
 }

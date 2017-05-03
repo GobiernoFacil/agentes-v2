@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Activity;
+use App\Models\ActivityVideo;
 use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveActivity;
@@ -62,13 +63,19 @@ class Activities extends Controller
             //
             $user      = Auth::user();
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
-            $activity  = new Activity($request->except('_token'));
+            $activity  = new Activity($request->except(['_token','time','start','end','link']));
             if($request->files ==='Sí'){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
             $activity->save();
+            //activity video data
+            if($activity->type==='video'){
+              $video  = new ActivityVideo($request->only(['time','start','end','link']));
+              $video->activity_id = $activity->id;
+              $video->save();
+            }
             if($activity->hasfiles==='Sí'){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");

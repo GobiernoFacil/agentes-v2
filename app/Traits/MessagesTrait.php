@@ -106,6 +106,8 @@ trait MessagesTrait{
          'files.required' => 'Este campo es requerido',
          'evaluation.required' => 'Este campo es requerido',
          'type.required' => 'Este campo es requerido',
+         'link.required' => 'Este campo es requerido',
+         'time.required' => 'Este campo es requerido',
          //Monitoreo
          'knowledge.required' => 'Este campo es requerido',
          'attitude.required' => 'Este campo es requerido',
