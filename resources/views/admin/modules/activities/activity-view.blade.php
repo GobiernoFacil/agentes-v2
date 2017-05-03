@@ -8,64 +8,61 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Información de actividad</h1>
+		<?php switch($activity->type) {
+			case "lecture":
+				$type = "Lectura";
+				break;
+			case "video":
+				$type = "Video";
+				break;
+			case "Evaluation":
+				$type = "Evaluación";
+				break;
+		}
+		?>
+		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('/dashboard/sesiones/ver/'. $session->id) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('dashboard/modulos/ver/'.$session->module->id) }}" class="link">módulo: {{$session->module->title}}</a></h4>
+		<div class="divider b"></div>		
+		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span> <span class="le_link right"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span></h1>
 	</div>
 </div>
 <div class="box">
 	<div class="row">
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li><span>Nombre:</span> <h2>{{$activity->name}}</h2></li>
-				<li><span>Número de actividad:</span> {{$activity->order}}</li>
-				<li><span>Duración:</span> {{$activity->duration}}</li>
-				<li><span>Descripción:</span>{{$activity->description}}</li>
-        <li><span>Rol Facilitador:</span>{{$activity->facilitator_role}}</li>
-        <li><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
+		<div class="col-sm-10 col-sm-offset-1">
+			<ul class="profile list row">
+				<li class="col-sm-12"><span>Descripción:</span>{{$activity->description}}</li>
+				<li class="col-sm-6"><span>Rol Facilitador:</span>{{$activity->facilitator_role}}</li>
+				<li class="col-sm-6"><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
 			</ul>
 		</div>
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li class="right"><span>Recursos y requerimientos técnicos</span>
-				<a href='{{ url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id") }}' class="btn xs view">Agregar</a></li>
-				<li class="right"><span>Agregar Archivo</span>
-				<a href='{{ url("dashboard/sesiones/actividades/archivos/agregar/$activity->id") }}' class="btn xs view">Agregar</a></li>
-			</ul>
+		
+	</div>
+</div>
+<div class="box">
+  <div class="row">
+  	<div class="col-sm-12">
+  	  <h2 class="title">Recursos y requerimientos técnicos</h2>
+  		@if($activity->activityRequirements->count() > 0)
+  	      @include('admin.modules.activities.activities-requirements-list')
+  		@else
+  		    <p>Sin requerimientos</p>
+  	      <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
+  		@endif
+  	</div>
+  </div>
+</div>
+
+<!--archivos-->
+<div class="box">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="title">Archivos</h2>
+			@if($activity->activityFiles->count() > 0)
+			    @include('admin.modules.activities.activities-files-list')
+			@else
+				<p>Sin archivos</p>
+				<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
+			@endif
 		</div>
 	</div>
 </div>
-<div class="row">
-  <div class="col-sm-12">
-    <h1>Recursos y requerimientos técnicos</h1>
-  </div>
-</div>
-@if($activity->activityRequirements->count() > 0)
-        @include('admin.modules.activities.activities-requirements-list')
-@else
-<div class="box">
-  <div class="row">
-	  <div class="col-sm-12">
-        <p>Sin requerimientos</p>
-        <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
-	  </div>
-  </div>
-</div>
-@endif
-
-<div class="row">
-  <div class="col-sm-12">
-    <h1>Archivos</h1>
-  </div>
-</div>
-@if($activity->activityFiles->count() > 0)
-        @include('admin.modules.activities.activities-files-list')
-@else
-<div class="box">
-  <div class="row">
-	  <div class="col-sm-12">
-        <p>Sin archivos</p>
-        <a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
-	  </div>
-  </div>
-</div>
-@endif
 @endsection

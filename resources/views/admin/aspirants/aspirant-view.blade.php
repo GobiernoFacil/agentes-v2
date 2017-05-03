@@ -17,6 +17,7 @@
 			<ul class="profile list">
 				<li><span>Nombre:</span> <h2>{{$aspirant->name." ".$aspirant->surname." ".$aspirant->lastname}}</h2></li>
 				<li><span>Email:</span> {{$aspirant->email}}</li>
+				<li><span>Nivel de estudios:</span> {{$aspirant->degree}}</li>
 				<li><span>Procedencia:</span> {{$aspirant->origin ? $aspirant->origin : "Sin información"}}</li>
 				<li><span>Ciudad:</span> {{$aspirant->city}}</li>
 				<li><span>Estado:</span> {{$aspirant->state}}</li>
@@ -33,7 +34,7 @@
 				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->essay}/ensayo")}}'  class="btn view xs"> Descargar Ensayo</a></li>
 				@endif
 				@if($aspirant->AspirantsFile->letter)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->letter}/carta")}}'  class="btn view xs"> Descargar Carta de Membretada</a></li>
+				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->letter}/carta")}}'  class="btn view xs"> Descargar Carta Membretada</a></li>
 				@endif
 				@if($aspirant->AspirantsFile->proof)
 				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->proof}/comprobante")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
