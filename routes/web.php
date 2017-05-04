@@ -233,5 +233,9 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Facilitator Controller */
     //Dashboard
     Route::get('tablero-facilitador', 'Facilitator@dashboard');
+    // Perfil  Facilitador
+    Route::get('tablero-facilitador/perfil', 'Facilitator@viewProfile');
+    Route::get('tablero-facilitador/perfil/editar', 'Facilitator@editProfile');
+    Route::post('tablero-facilitador/perfil/save', 'Facilitator@saveProfile');
   });
 });
