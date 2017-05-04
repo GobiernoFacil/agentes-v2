@@ -138,7 +138,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha inicio</strong> <br>
-      {{Form::text('start',$activity->videos->start, ["class" => "form-control", 'id'=>'startD'])}} </label>
+      {{Form::text('start', $activity->videos ? $activity->videos->start : null, ["class" => "form-control", 'id'=>'startD'])}} </label>
       @if($errors->has('start'))
       <strong class="danger">{{$errors->first('start')}}</strong>
       @endif
@@ -147,7 +147,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',$activity->videos->end, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('end',$activity->videos ? $activity->videos->end : null, ["class" => "form-control",'id'=>'startE'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
       @endif
@@ -159,7 +159,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Link</strong> <br>
-      {{Form::text('link',$activity->videos->link, ["class" => "form-control"])}} </label>
+      {{Form::text('link',$activity->videos ? $activity->videos->link : null, ["class" => "form-control"])}} </label>
       @if($errors->has('link'))
       <strong class="danger">{{$errors->first('link')}}</strong>
       @endif
@@ -168,7 +168,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Hora</strong> <br>
-      {{Form::text('time',$activity->videos->time, ["class" => "form-control"])}} </label>
+      {{Form::text('time',$activity->videos ? $activity->videos->time : null, ["class" => "form-control"])}} </label>
       @if($errors->has('time'))
       <strong class="danger">{{$errors->first('time')}}</strong>
       @endif
