@@ -16,6 +16,8 @@ use App\Models\Image;
 // FormValidators
 use App\Http\Requests\SaveFacilitator;
 use App\Http\Requests\UpdateFacilitator;
+use App\Http\Requests\UpdateAdminProfile;
+
 class Facilitator extends Controller
 {
   //Paginación
@@ -51,6 +53,62 @@ class Facilitator extends Controller
     return view('facilitator.profile.profile-view')->with([
       "user"      		=> $user,
     ]);
+  }
+  
+  /**
+  * edita perfil del usuario facilitador @ facilitador
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function editProfile()
+  {
+    	$user = Auth::user();
+        return view('facilitator.profile.profile-update')->with([
+          "user"      => $user
+        ]);
+  }
+  
+  
+  /**
+  * Actualiza perfil del usuario facilitador @ facilitador
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function saveProfile(UpdateAdminProfile $request)
+  {
+	$facilitator = Auth::user();
+    $facilitator->name  = $request->name;
+    $facilitator->email = $request->email;  
+	
+    //update user data
+    if(!empty($request->password)){
+      var_dump($request->toArray());
+      $data   = $request->only(['name','institution','email','password']);
+      $data['password'] = Hash::make($request->password);
+    }else {
+      $data   = $request->only(['name','institution','email']);
+    }
+	
+	$facilitator->update($data);
+    //update facilitator data
+    FacilitatorData::where('user_id',$facilitator->id)->update($request->except(['_token','name','email','institution','image','password','password-confirm']));
+    // [ SAVE THE IMAGE ]
+    if($request->hasFile('image') && $request->file('image')->isValid()){
+      $path  = public_path(self::UPLOADS);
+      $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+      $request->file('image')->move($path, $name);
+      if($facilitator->image){
+        File::delete($facilitator->image->path."/".$facilitator->image->name);
+      }
+      $image   = Image::firstorCreate(['user_id'=>$facilitator->id,]);
+      $image->name = $name;
+      $image->path = $path;
+      $image->type = 'full';
+      $image->save();
+    }
+    return redirect("tablero-facilitador/perfil")->with('success',"Se ha actualizado correctamente");
   }
   
 /////////////////////////////////////////// Termina Dashboard Usuario facilitador

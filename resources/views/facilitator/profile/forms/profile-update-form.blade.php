@@ -1,4 +1,4 @@
-{!! Form::model($facilitator,['url' => "dashboard/facilitadores/editar/$facilitator->id", "class" => "form-horizontal", 'files'=>true]) !!}
+{!! Form::model($user,['url' => "tablero-facilitador/perfil/save", "class" => "form-horizontal", 'files'=>true]) !!}
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -36,7 +36,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿Experto en el área?</strong></label>
-      {{Form::select('expert',[null => "Selecciona una opción", '1' =>'Sí', '0'=> 'No'],$facilitator->FacilitatorData->expert, ['class' => 'form-control'])}}
+      {{Form::select('expert',[null => "Selecciona una opción", '1' =>'Sí', '0'=> 'No'],$user->FacilitatorData->expert, ['class' => 'form-control'])}}
       @if($errors->has('expert'))
       <strong class="danger">{{$errors->first('expert')}}</strong>
       @endif
@@ -68,7 +68,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Grado de estudios</strong></label>
-      {{Form::text('degree', $facilitator->FacilitatorData->degree, ["class" => "form-control"])}}
+      {{Form::text('degree', $user->FacilitatorData->degree, ["class" => "form-control"])}}
       @if($errors->has('degree'))
       <strong class="error">{{$errors->first('degree')}}</strong>
       @endif
@@ -77,7 +77,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Sitio Web</strong></label>
-      {{Form::text('web', $facilitator->FacilitatorData->web, ["class" => "form-control"])}}
+      {{Form::text('web', $user->FacilitatorData->web, ["class" => "form-control"])}}
       @if($errors->has('web'))
       <strong class="error">{{$errors->first('web')}}</strong>
       @endif
@@ -89,7 +89,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Twitter</strong></label>
-      {{Form::text('twitter', $facilitator->FacilitatorData->twitter, ["class" => "form-control"])}}
+      {{Form::text('twitter', $user->FacilitatorData->twitter, ["class" => "form-control"])}}
       @if($errors->has('twitter'))
       <strong class="error">{{$errors->first('twitter')}}</strong>
       @endif
@@ -98,7 +98,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Facebook</strong></label>
-      {{Form::text('facebook', $facilitator->FacilitatorData->facebook, ["class" => "form-control"])}}
+      {{Form::text('facebook', $user->FacilitatorData->facebook, ["class" => "form-control"])}}
       @if($errors->has('facebook'))
       <strong class="error">{{$errors->first('facebook')}}</strong>
       @endif
@@ -110,7 +110,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Linkedin</strong></label>
-      {{Form::text('linkedin', $facilitator->FacilitatorData->linkedin, ["class" => "form-control"])}}
+      {{Form::text('linkedin', $user->FacilitatorData->linkedin, ["class" => "form-control"])}}
       @if($errors->has('linkedin'))
       <strong class="error">{{$errors->first('linkedin')}}</strong>
       @endif
@@ -119,7 +119,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Otra</strong></label>
-      {{Form::text('other', $facilitator->FacilitatorData->other, ["class" => "form-control"])}}
+      {{Form::text('other', $user->FacilitatorData->other, ["class" => "form-control"])}}
       @if($errors->has('other'))
       <strong class="error">{{$errors->first('other')}}</strong>
       @endif
@@ -130,7 +130,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Semblanza</strong> <br>
-      {{Form::textarea('semblance',$facilitator->FacilitatorData->semblance, ["class" => "form-control"])}} </label>
+      {{Form::textarea('semblance',$user->FacilitatorData->semblance, ["class" => "form-control"])}} </label>
       @if($errors->has('semblance'))
       <strong class="danger">{{$errors->first('semblance')}}</strong>
       @endif
@@ -141,8 +141,8 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Foto</strong></label><br>
-      @if($facilitator->image)
-      <img src='{{url("img/users/{$facilitator->image->name}")}}'>
+      @if($user->image)
+      <img src='{{url("img/users/{$user->image->name}")}}'>
       @endif
       {{Form::file('image', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato .jpg, .png)
       @if($errors->has('image'))
