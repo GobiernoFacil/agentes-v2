@@ -20,7 +20,7 @@
 		</div>
 		<div class="col-sm-9">
 			<h3>Sesión {{$session->session->order}}</h3>
-			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->session->id) }}">{{$session->session->name}}</a>  <span class="le_link"><a href="{{ url('dashboard/sesiones/editar/' . $session->session->id) }}" class="btn xs view">Actualizar sesión</a></span></h2>
+			<h2>{{$session->session->name}} </h2>
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col-sm-9">
