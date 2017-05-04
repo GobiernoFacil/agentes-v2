@@ -37,9 +37,9 @@
 				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}"><b class="icon i_usuarios"></b> Administradores</a></li>
 				@endif
 				@if($user->type == "facilitator")
-				<!--fellow-->
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/actividades')}}"><b class="icon i_facilitador"></b> Actividades</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_usuarios"></b> Mensajes</a></li>
+				<!--facilitador-->
+				<li class="{{ $__env->yieldContent('body_class') == 'actividades' ? "active" : ''}}"><a href="{{url( $linkDash . '/actividades')}}"><b class="icon i_facilitador"></b> Actividades</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 				@endif
 				@if($user->type == "fellow")
 				<!--fellow-->
