@@ -208,7 +208,7 @@ class Admin extends Controller
         $admin->enabled  = 0;
         $admin->save();
 
-        return redirect("sa/dashboard/administradores/ver/$id")->with("message",'Usuario deshabilitado');
+        return redirect("sa/dashboard/administradores")->with("message",'Usuario deshabilitado');
       }
 
       /**
