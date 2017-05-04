@@ -15,9 +15,7 @@
 	{
 		$linkDash = "sa/dashboard";
 	}
-
 ?>
-
 <header>
 	<div class="col-sm-3 logo">
 		<a class="apertus" href="{{url('')}}" title="Regresar a inicio">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
@@ -25,18 +23,26 @@
 	<div class="col-sm-7">
 		<nav>
 			<ul>
+				<!--dashboard-->
 				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url($linkDash)}}"><b class="icon i_tablero"></b> Tablero</a></li>
 				@if($user->type == "admin")
+				<!--admin-->
 				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'modulos' || $__env->yieldContent('body_class') == 'modulos view' ? "active" : ''}}"><a href="{{url('dashboard/modulos')}}"><b class="icon i_modulos"></b> MÓDULOS</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}"><b class="icon i_facilitador"></b> FACILITADORES</a></li>
-				
 				@endif
 				@if($user->type == "superAdmin")
+				<!--superadmin-->
 				<li class="{{ $__env->yieldContent('body_class') == 'suAdmin' ? "active" : ''}}"><a href="{{url( $linkDash . '/super-administradores')}}"><b class="icon i_usuarios"></b> Super Admin</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}"><b class="icon i_usuarios"></b> Administradores</a></li>
 				@endif
+				@if($user->type == "facilitator")
+				<!--fellow-->
+				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/actividades')}}"><b class="icon i_facilitador"></b> Actividades</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_usuarios"></b> Mensajes</a></li>
+				@endif
 				@if($user->type == "fellow")
+				<!--fellow-->
 				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_usuarios"></b> Aprendizaje</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_usuarios"></b> Mensajes</a></li>
 				@endif
