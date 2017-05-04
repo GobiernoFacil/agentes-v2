@@ -16,7 +16,7 @@
 			<p>En este tablero podrás consultar las actividades que se te han asignado del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
 		</div>
 		<div class="box">
-			<p><a href="{{ url('tablero-facilitador/perfil') }}" class="btn view">Editar información de tu perfil</a></p>
+			<p><a href="{{ url('tablero-facilitador/perfil/editar') }}" class="btn view">Editar información de tu perfil</a></p>
 		</div>
 	</div>
 	<div class="col-sm-9">
