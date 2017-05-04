@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Hash;
-
+use File;
 use Mail;
 
 // models
 use App\User;
 use App\Models\Aspirant;
-
+use App\Models\Image;
 // FormValidators
 use App\Http\Requests\SaveAdmin;
 use App\Http\Requests\UpdateAdmin;
@@ -22,7 +22,8 @@ class Admin extends Controller
 
   //Paginación
   public $pageSize = 10;
-
+  // En esta carpeta se guardan las imágenes de los usuarios
+  const UPLOADS = "img/users";
       /**
        * Muestra panel de inicio para administrador
        *
@@ -99,6 +100,18 @@ class Admin extends Controller
         $admin->enabled  = 1;
         $admin->password = Hash::make($request->password);
         $admin->save();
+        $path  = public_path(self::UPLOADS);
+        // [ SAVE THE IMAGE ]
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+          $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+          $request->file('image')->move($path, $name);
+          $image         = new Image();
+          $image->name = $name;
+          $image->user_id = $admin->id;
+          $image->path = $path;
+          $image->type = 'full';
+          $image->save();
+        }
         //envía correo
         $from    = "info@apertus.org.mx";
         $subject = "Bienvenido al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
@@ -166,7 +179,20 @@ class Admin extends Controller
           $admin->password = Hash::make($request->password);
         }
         $admin->save();
-
+        // [ SAVE THE IMAGE ]
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+          $path  = public_path(self::UPLOADS);
+          $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+          $request->file('image')->move($path, $name);
+          if($admin->image){
+            File::delete($admin->image->path."/".$admin->image->name);
+          }
+          $image   = Image::firstorCreate(['user_id'=>$request->id,]);
+          $image->name = $name;
+          $image->path = $path;
+          $image->type = 'full';
+          $image->save();
+        }
         return redirect("sa/dashboard/administradores/ver/$id")->with("message",'Usuario actualizado correctamente');
       }
 

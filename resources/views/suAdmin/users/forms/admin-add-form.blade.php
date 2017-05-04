@@ -1,8 +1,8 @@
-{!! Form::open(['url' => 'sa/dashboard/administradores/crear', "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => 'sa/dashboard/administradores/crear', "class" => "form-horizontal",'files'=>true]) !!}
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label>Nombre</label>
+      <label><strong>Nombre</strong></label>
       {{Form::text('name', null, ["class" => "form-control"])}}
       @if($errors->has('name'))
       <strong>{{$errors->first('name')}}</strong>
@@ -13,7 +13,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label>Correo</label>
+      <label><strong>Correo</strong></label>
       {{Form::text('email', null, ["class" => "form-control"])}}
       @if($errors->has('email'))
       <strong>{{$errors->first('email')}}</strong>
@@ -24,7 +24,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label>Contraseña</label>
+      <label><strong>Contraseña</strong></label>
       {{Form::password('password', ['class' => 'form-control'])}}
       @if($errors->has('password'))
       <strong>{{$errors->first('password')}}</strong>
@@ -35,7 +35,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label>Confirmar Contraseña</label>
+      <label><strong>Confirmar Contraseña</strong></label>
       {{Form::password('password-confirm', ['class' => 'form-control'])}}
       @if($errors->has('password-confirm'))
       <strong>{{$errors->first('password-confirm')}}</strong>
@@ -47,7 +47,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label>Institución</label>
+      <label><strong>Institución</strong></label>
       {{Form::select('institution',[null => "Selecciona una opción", 'Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales' =>'Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales', 'Gestión Social Y Cooperación'=>'Gestión Social Y Cooperación', 'Gobierno Fácil'=>'Gobierno Fácil', 'Programa de las Naciones Unidas para el Desarrollo'=>'Programa de las Naciones Unidas para el Desarrollo','PROSOCIEDAD'=>'PROSOCIEDAD'],null, ['class' => 'form-control','id'=>'state'])}}
       @if($errors->has('institution'))
       <strong>{{$errors->first('institution')}}</strong>
@@ -55,7 +55,17 @@
     </p>
   </div>
 </div>
-
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Foto</strong></label><br>
+      {{Form::file('image', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato .jpg, .png)
+      @if($errors->has('image'))
+      <strong class="error">{{$errors->first('image')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Crear administrador', ['class' => 'btn'])}}</p>
