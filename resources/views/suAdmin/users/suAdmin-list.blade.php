@@ -39,7 +39,7 @@
 			      <tr>
 			        <td><h3>{{$user_a->name}}</h3></td>
 			        <td>{{$user_a->email}}</td>
-			        <td>Gobierno Fácil</td>
+			        <td>{{$user_a->institution}}</td>
 			        <td>
 			          <a href="{{ url('sa/dashboard/super-administradores/ver/' . $user_a->id) }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('sa/dashboard/super-administradores/editar/' . $user_a->id) }}" class="btn xs ev">Editar</a>

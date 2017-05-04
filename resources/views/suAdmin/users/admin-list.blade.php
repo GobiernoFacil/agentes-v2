@@ -19,20 +19,20 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Institución</th>
-						<th>Estado</th>
-			      <th>Acciones</th>
+			    	<th>Nombre</th>
+			    	<th>Email</th>
+			    	<th>Institución</th>
+					<th>Estado</th>
+			    	<th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    @foreach ($admins as $admin)
 			      <tr>
-			        <td><h4> <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}">{{$admin->name}}</a></h4></td>
-			        <td>{{$admin->email}}</td>
-			        <td>{{$admin->institution}}</td>
-							<td>{{$admin->enabled ? 'Activo' : 'Deshabilitado'}}</td>
+			      	<td><h4> <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}">{{$admin->name}}</a></h4></td>
+			      	<td>{{$admin->email}}</td>
+			      	<td>{{$admin->institution}}</td>
+				  	<td>{{$admin->enabled ? 'Activo' : 'Deshabilitado'}}</td>
 			        <td>
 			          <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('sa/dashboard/administradores/editar/' . $admin->id) }}" class="btn xs ev">Editar</a>
