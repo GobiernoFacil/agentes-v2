@@ -239,5 +239,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero-facilitador/perfil/save', 'Facilitator@saveProfile');
     // Actividades Facilitador
     Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
+    // Mensajes Facilitador
+    Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
   });
 });
