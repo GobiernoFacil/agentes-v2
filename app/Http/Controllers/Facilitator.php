@@ -53,6 +53,19 @@ class Facilitator extends Controller
     ]);
   }
   
+  /**
+  * edita perfil del usuario facilitador @ facilitador
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function editProfile()
+  {
+    	$user = Auth::user();
+        return view('facilitator.profile.profile-update')->with([
+          "user"      => $user
+        ]);
+  }
+  
 /////////////////////////////////////////// Termina Dashboard Usuario facilitador
   
 
