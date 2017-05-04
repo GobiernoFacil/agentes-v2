@@ -22,6 +22,7 @@
 			      <th>Nombre</th>
 			      <th>Email</th>
 			      <th>Institución</th>
+						<th>Estado</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
@@ -30,16 +31,17 @@
 			      <tr>
 			        <td><h4> <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}">{{$admin->name}}</a></h4></td>
 			        <td>{{$admin->email}}</td>
-			        <td></td>
+			        <td>{{$admin->institution}}</td>
+							<td>{{$admin->enabled ? 'Activo' : 'Deshabilitado'}}</td>
 			        <td>
 			          <a href="{{ url('sa/dashboard/administradores/ver/' . $admin->id) }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('sa/dashboard/administradores/editar/' . $admin->id) }}" class="btn xs ev">Editar</a>
-			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $admin->id) }}"  id ="{{$admin->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
+			          <a href ="{{ url('sa/dashboard/administradores/deshabilitar/' . $admin->id) }}"  id ="{{$admin->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
 			</table>
-			
+
 			{{ $admins->links() }}
 		</div>
 	</div>
