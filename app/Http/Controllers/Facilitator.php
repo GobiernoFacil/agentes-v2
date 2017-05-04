@@ -23,8 +23,12 @@ class Facilitator extends Controller
   // En esta carpeta se guardan las imágenes de los usuarios
   const UPLOADS = "img/users";
 
+
+
+/////////////////////////////////////////// Dashboard Usuario facilitador
+
   /**
-  * Búsqueda de usuario
+  * Dashboard de usuario facilitador
   *
   * @return \Illuminate\Http\Response
   */
@@ -35,6 +39,22 @@ class Facilitator extends Controller
       "user"      		=> $user,
     ]);
   }
+  
+  /**
+  * Ver usuario facilitador @ facilitador
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function viewProfile()
+  {
+    $user 			  = Auth::user();
+    return view('facilitator.profile.profile-view')->with([
+      "user"      		=> $user,
+    ]);
+  }
+  
+/////////////////////////////////////////// Termina Dashboard Usuario facilitador
+  
 
   /**
   * Búsqueda de usuario
