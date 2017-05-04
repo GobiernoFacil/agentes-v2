@@ -1,7 +1,7 @@
 {!! Form::model($user,['url' => "sa/dashboard/perfil/save", "class" => "form-horizontal"]) !!}
 
 <p>
-  <label>Nombre</label>
+  <label><strong>Nombre</strong></label>
   {{Form::text('name', null, ["class" => "form-control"])}}
   @if($errors->has('name'))
     <strong>{{$errors->first('name')}}</strong>
@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  <label>Correo</label>
+  <label><strong>Correo</strong></label>
   {{Form::text('email', null, ["class" => "form-control"])}}
   @if($errors->has('email'))
     <strong>{{$errors->first('email')}}</strong>
@@ -17,7 +17,7 @@
 </p>
 
 <p>
-  <label>Contraseña</label>
+  <label><strong>Contraseña</strong></label>
   {{Form::password('password', ['class' => 'form-control'])}}
   @if($errors->has('password'))
     <strong>{{$errors->first('password')}}</strong>
@@ -25,7 +25,7 @@
 </p>
 
 <p>
-  <label>Confirmar Contraseña</label>
+  <label><strong>Confirmar Contraseña</strong></label>
   {{Form::password('password-confirm', ['class' => 'form-control'])}}
   @if($errors->has('password-confirm'))
     <strong>{{$errors->first('password-confirm')}}</strong>

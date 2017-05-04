@@ -31,7 +31,8 @@ class UpdateAdminProfile extends FormRequest
       'name'     => 'required',
       'email'    => 'required|email|max:255' . ($user->email != $this->email ? '|unique:users' : ''),
       'password' => 'min:8|nullable',
-      'password-confirm'=>'same:password'
+      'password-confirm'=>'same:password',
+      'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
       ];
     }
 }

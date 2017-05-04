@@ -255,7 +255,20 @@ class Admin extends Controller
           $admin->password = Hash::make($request->password);
         }
         $admin->save();
-
+        // [ SAVE THE IMAGE ]
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+          $path  = public_path(self::UPLOADS);
+          $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+          $request->file('image')->move($path, $name);
+          if($admin->image){
+            File::delete($admin->image->path."/".$admin->image->name);
+          }
+          $image   = Image::firstorCreate(['user_id'=>$admin->id,]);
+          $image->name = $name;
+          $image->path = $path;
+          $image->type = 'full';
+          $image->save();
+        }
         return redirect("dashboard/perfil")->with("message",'Perfil actualizado correctamente');
       }
 }
