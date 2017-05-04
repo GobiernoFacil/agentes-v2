@@ -22,9 +22,9 @@
 		<div class="col-sm-10 col-sm-offset-1 center">
 			<p class="">
 				@if($user->image)
-				<img src='{{url("img/users/{$user->image->name}")}}'>
+				<img src='{{url("img/users/{$user->image->name}")}}' height="150px">
 				@else
-				Sin imagen
+				<img src='{{url("img/users/default.png")}}' height="150px">
 				@endif
 			</p>
 			<h2 >{{$user->name}}</h2>
