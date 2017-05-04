@@ -1,9 +1,18 @@
 <?php
-	if($user->type == "admin") {
+	if($user->type == "admin") 
+	{
 		$linkDash = "dashboard";
-	}else if($user->type == "fellow"){
+	}
+	else if($user->type == "fellow")
+	{
 		$linkDash = "tablero";
-	}else {
+	}
+	else if($user->type == "facilitator")
+	{
+		$linkDash = "tablero-facilitador";
+	}
+	else 
+	{
 		$linkDash = "sa/dashboard";
 	}
 
