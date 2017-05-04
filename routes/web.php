@@ -237,5 +237,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/perfil', 'Facilitator@viewProfile');
     Route::get('tablero-facilitador/perfil/editar', 'Facilitator@editProfile');
     Route::post('tablero-facilitador/perfil/save', 'Facilitator@saveProfile');
+    // Actividades Facilitador
+    Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
   });
 });
