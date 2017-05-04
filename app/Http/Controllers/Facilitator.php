@@ -164,12 +164,13 @@ class Facilitator extends Controller
   {
     //update user data
     if(!empty($request->password)){
-      $request->password = Hash::make($request->password);
+      var_dump($request->toArray());
       $data   = $request->only(['name','institution','email','password']);
+      $data['password'] = Hash::make($request->password);
     }else {
       $data   = $request->only(['name','institution','email']);
     }
-    User::where('id',$request->id)->update($data);
+   User::where('id',$request->id)->update($data);
     //update facilitator data
     FacilitatorData::where('user_id',$request->id)->update($request->except(['_token','name','email','institution','image','password','password-confirm']));
     // [ SAVE THE IMAGE ]
