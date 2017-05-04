@@ -24,18 +24,17 @@
 			<div class="col-sm-6 center">
 				<div class="box">
 					<h3 class="sa_title">Actividades</h3>
-					<a href="{{ url('tablero-facilitador/actividades') }}" class="count_link">0</a>					
-				</div>			
+					<a href="{{ url('tablero-facilitador/actividades') }}" class="count_link">{{$user->facilitatorSessions ? $user->facilitatorSessions->count() : '0'}}</a>
+				</div>
 			</div>
 			<div class="col-sm-6 center">
 				<div class="box">
 					<h3 class="sa_title">Mensajes</h3>
-					<a href="{{ url('tablero-facilitador/mensajes') }}" class="count_link">0</a>					
-				</div>			
+					<a href="{{ url('tablero-facilitador/mensajes') }}" class="count_link">{{$user->conversation ? $user->conversation->count() : '0'}}</a>
+				</div>
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 @endsection
-
