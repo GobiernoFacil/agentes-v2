@@ -130,7 +130,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Semblanza</strong> <br>
-      {{Form::textarea('semblance',null, ["class" => "form-control"])}} </label>
+      {{Form::textarea('semblance',$user->FacilitatorData->semblance, ["class" => "form-control"])}} </label>
       @if($errors->has('semblance'))
       <strong class="danger">{{$errors->first('semblance')}}</strong>
       @endif
