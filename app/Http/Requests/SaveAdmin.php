@@ -29,7 +29,8 @@ class SaveAdmin extends FormRequest
         'email'    => 'required|email|max:255|unique:users',
         'institution' => 'required',
         'password' => 'required|min:8',
-        'password-confirm'=> 'required|same:password'
+        'password-confirm'=> 'required|same:password',
+        'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
       ];
     }
 }

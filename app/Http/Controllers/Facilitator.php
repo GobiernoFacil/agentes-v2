@@ -179,7 +179,7 @@ class Facilitator extends Controller
       $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
       $request->file('image')->move($path, $name);
       $facilitator = User::find($request->id);
-      if($facilitator->image->count()>0){
+      if($facilitator->image){
         File::delete($facilitator->image->path."/".$facilitator->image->name);
       }
       $image   = Image::firstorCreate(['user_id'=>$request->id,]);

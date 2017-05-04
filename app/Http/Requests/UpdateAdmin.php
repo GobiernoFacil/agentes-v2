@@ -33,7 +33,8 @@ class UpdateAdmin extends FormRequest
       'email'    => 'required|email|max:255' . ($user->email != $this->email ? '|unique:users' : ''),
       'institution' => 'required',
       'password' => 'min:8|nullable',
-      'password-confirm'=>'same:password'
+      'password-confirm'=>'same:password',
+      'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
       ];
     }
 }
