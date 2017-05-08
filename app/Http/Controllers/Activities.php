@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use File;
 // models
 use App\Models\Activity;
 use App\Models\ActivityVideo;
@@ -15,6 +16,8 @@ class Activities extends Controller
 {
   //Paginación
   public $pageSize = 10;
+  // En esta carpeta se guardan las imágenes de los usuarios
+  const UPLOADS = "archivos/actividades";
 
         /**
          * Búsqueda de actividad
@@ -171,5 +174,20 @@ class Activities extends Controller
         public function delete($id)
         {
             //
+            $activity = Activity::where('id',$id)->firstOrFail();
+            $session_id = $activity->session_id;
+            foreach ($activity->activityFiles as $file) {
+              File::delete($file->path."/".$file->identifier);
+              $file->delete();
+            }
+
+            foreach ($activity->activityRequirements as $requirement) {
+              $requirement->delete();
+            }
+            if($activity->videos){
+              $activity->videos->delete();
+            }
+            $activity->delete();
+            return redirect("dashboard/sesiones/ver/$session_id")->with('success',"Se ha eliminado correctamente");
         }
 }
