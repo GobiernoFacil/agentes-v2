@@ -2,7 +2,9 @@
 @section('title', '' )
 @section('description', '')
 @section('body_class', 'fellow aprendizaje')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'module list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">
