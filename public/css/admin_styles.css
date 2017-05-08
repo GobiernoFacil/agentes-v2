@@ -1168,6 +1168,37 @@ header {
 .fellow footer {
   background: #37383a; }
 
+.module {
+  border: 1px solid #b9b9ba;
+  padding: 0; }
+  .module h3 {
+    font-size: 16px;
+    padding: 15px 0 0 10px; }
+  .module p.description {
+    color: rgba(55, 56, 58, 0.6);
+    font-size: 13px;
+    min-height: 80px;
+    padding: 0 10px 15px; }
+  .module .hours {
+    background: #f2f2f2;
+    padding: 5px; }
+    .module .hours p {
+      color: #606060;
+      font-size: 11px;
+      margin: 0;
+      text-align: right; }
+  .module .footer {
+    background: #f2f2f2; }
+    .module .footer p {
+      color: #606060;
+      font-size: 12px;
+      font-weight: 300;
+      padding: 9px 10px 5px;
+      margin: 0; }
+  .module .btn {
+    display: block;
+    text-align: center; }
+
 .profile.list {
   margin: 0; }
   .profile.list li {
