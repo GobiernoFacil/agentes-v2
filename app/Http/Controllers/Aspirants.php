@@ -297,7 +297,8 @@ class Aspirants extends Controller
      */
      public function search(Request $request){
          $member = $request->match;
-        $results = Aspirant::where('name', 'like', "$member%")
+         $results = Aspirant::where('name', 'like', "$member%")
+                    ->where('is_activated',1)
                     ->orwhere('surname','like',"$member%")
                     ->orwhere('lastname','like',"$member%")
                     ->orwhere('email','like',"$member%")
