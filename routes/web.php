@@ -128,7 +128,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/save/{module_id}', 'ModuleSessions@save');
     Route::get('dashboard/sesiones/editar/{session_id}', 'ModuleSessions@edit');
     Route::post('dashboard/sesiones/update/{session_id}', 'ModuleSessions@update');
-    Route::get('dashboard/sesiones/deshabilitar/{id}', 'ModuleSessions@delete');
+    Route::get('dashboard/sesiones/eliminar/{id}', 'ModuleSessions@delete');
     Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
     Route::get('dashboard/sesiones/facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
     Route::post('dashboard/sesiones/facilitadores/buscar', 'ModuleSessions@searchFacilitator');

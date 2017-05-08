@@ -322,6 +322,47 @@ class ModuleSessions extends Controller
     public function delete($id)
     {
       //
+      $session = ModuleSession::where('id',$id)->firstOrFail();
+      $module_id = $session->module_id;
+      foreach ($session->topics as $topic) {
+        # code...
+        $topic->delete();
+      }
+      foreach ($session->activities as $activity) {
+        foreach ($activity->activityFiles as $file) {
+          File::delete($file->path."/".$file->identifier);
+          $file->delete();
+        }
+
+        foreach ($activity->activityRequirements as $requirement) {
+          $requirement->delete();
+        }
+        if($activity->videos){
+          $activity->videos->delete();
+        }
+        $activity->delete();
+      }
+      if($session->monitoring){
+        $session->monitoring->delete();
+      }
+      $session->facilitators()->delete();
+      $session->delete();
+      $numbers = ModuleSession::where('module_id',$session->module_id)->orderBy('order','asc')->get();
+      $new_order = 1;
+       foreach ($numbers as $number) {
+         if($new_order>1){
+           $number->order =$new_order;
+           $number->parent_id = $last_session->id;
+           $number->save();
+           $last_session = $number;
+         }else{
+           $number->order =$new_order;
+           $number->save();
+           $last_session = $number;
+         }
+         $new_order++;
+       }
+       return redirect("dashboard/modulos/ver/$module_id")->with('success',"Se ha eliminado correctamente");
     }
     /**
     * Actualiza orden de sesiones
