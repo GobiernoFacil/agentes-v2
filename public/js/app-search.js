@@ -71,6 +71,8 @@ var appSearch = {
       tr.appendChild(ac);
       document.getElementById("List").appendChild(tr);
     }
+
+    document.getElementById("Noaspirants").style.display ="none";
     document.getElementById("boxResults").style.display ="block";
     document.getElementById("aspirants").style.display ="none";
   },
@@ -100,10 +102,14 @@ var appSearch = {
           if(d[0]==='false'){
             document.getElementById("nR").style.display ="block";
             document.getElementById("aspirants").style.display ="block";
+            document.getElementById("Noaspirants").style.display ="none";
+            document.getElementById("typeAspirantText").innerHTML = "sin";
+        		document.getElementById("typeAspirantTextTitle").innerHTML = "con ";
             document.getElementById("boxResults").style.display ="none";
             var resu = document.getElementById("List");
             resu.innerHTML = '';
           }else{
+            document.getElementById("Noaspirants").style.display ="none";
             that._renderOptions(d);
           }
         } else {
