@@ -1159,6 +1159,15 @@ header {
     color: white;
     font-size: 14px; }
 
+.fellow header {
+  background: #51be92; }
+  .fellow header li.active b,
+  .fellow header li.active a:hover b {
+    background-color: #187fad; }
+
+.fellow footer {
+  background: #37383a; }
+
 .profile.list {
   margin: 0; }
   .profile.list li {
