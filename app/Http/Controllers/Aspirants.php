@@ -28,20 +28,14 @@ class Aspirants extends Controller
     public function index()
     {
       $user = Auth::user();
-      $aspirants = Aspirant::where('is_activated',1)->orderBy('created_at','asc')->paginate($this->pageSize);
-      $chihuahua_number = Aspirant::where('state','Chihuahua')->where('is_activated',1)->count();
-      $morelos_number   = Aspirant::where('state','Morelos')->where('is_activated',1)->count();
-      $leon_number = Aspirant::where('state','Nuevo Léon')->where('is_activated',1)->count();
-      $oaxaca_number = Aspirant::where('state','Oaxaca')->where('is_activated',1)->count();
-      $sonora_number = Aspirant::where('state','Sonora')->where('is_activated',1)->count();
+      $aspirants_filesId  = AspirantsFile::all()->pluck('aspirant_id');
+      $aspirants   = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
+      $aspirantsNo = Aspirant::where('is_activated',1)->whereNotIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
+
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants,
-        'chihuahua_number' => $chihuahua_number,
-        'morelos_number' =>$morelos_number,
-        'leon_number' =>$leon_number,
-        'oaxaca_number' => $oaxaca_number,
-        'sonora_number' => $sonora_number
+        'aspirantsNo' =>$aspirantsNo
       ]);
     }
 
@@ -303,7 +297,8 @@ class Aspirants extends Controller
      */
      public function search(Request $request){
          $member = $request->match;
-        $results = Aspirant::where('name', 'like', "$member%")
+         $results = Aspirant::where('name', 'like', "$member%")
+                    ->where('is_activated',1)
                     ->orwhere('surname','like',"$member%")
                     ->orwhere('lastname','like',"$member%")
                     ->orwhere('email','like',"$member%")

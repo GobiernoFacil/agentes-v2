@@ -15,13 +15,15 @@
 			case "video":
 				$type = "Video";
 				break;
-			case "Evaluation":
+			case "evaluation":
 				$type = "Evaluación";
 				break;
+			default:
+			 $type = "Lectura";
 		}
 		?>
 		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('/dashboard/sesiones/ver/'. $session->id) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('dashboard/modulos/ver/'.$session->module->id) }}" class="link">módulo: {{$session->module->title}}</a></h4>
-		<div class="divider b"></div>		
+		<div class="divider b"></div>
 		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span> <span class="le_link right"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span></h1>
 	</div>
 </div>
@@ -34,7 +36,7 @@
 				<li class="col-sm-6"><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
 			</ul>
 		</div>
-		
+
 	</div>
 </div>
 <div class="box">

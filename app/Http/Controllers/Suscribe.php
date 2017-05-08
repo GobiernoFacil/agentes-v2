@@ -10,7 +10,6 @@ class Suscribe extends Controller
   // Redireccionar al dashboard correspondiente después de acceder correctamente
   public function redirectToDashboard(){
     $usuario = Auth::user();
-    if($usuario->enabled){
       if($usuario->type ==='superAdmin'){
         return redirect('sa/dashboard');
       }elseif($usuario->type ==='admin'){
@@ -22,9 +21,6 @@ class Suscribe extends Controller
       }else{
         abort(403, 'Unauthorized action.');
       }
-    }else{
-        Auth::logout();
-        redirect('login')->with('errorD',"Se ha restringido su acceso a la plataforma, por favor contacta con un administrador");
-    }
+
   }
 }

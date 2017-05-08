@@ -8,7 +8,7 @@ class FacilitatorModule extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'module_id'
+        'user_id', 'module_id','session_id'
     ];
 
     //modelos relacionados
@@ -18,7 +18,7 @@ class FacilitatorModule extends Model
 
     //modelos relacionados
     function session(){
-      return $this->belongsTo("App\Models\ModuleSession");
+      return $this->belongsTo("App\Models\ModuleSession",'session_id');
     }
 
 }

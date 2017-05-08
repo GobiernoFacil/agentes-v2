@@ -12,6 +12,7 @@ use Mail;
 use App\User;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
+use App\Models\FacilitatorModule;
 use App\Models\Image;
 
 
@@ -28,11 +29,13 @@ class FacilitatorActivities extends Controller
   public function activities()
   {
     $user 			  = Auth::user();
+    $sessions     = FacilitatorModule::where('user_id',$user->id)->paginate($this->pageSize);
     return view('facilitator.activities.list_activities')->with([
       "user"      		=> $user,
+      "sessions"          => $sessions
     ]);
   }
-  
+
   /**
   * Ver actividad asignada a facilitador @ facilitador
   *
@@ -45,7 +48,7 @@ class FacilitatorActivities extends Controller
       "user"      		=> $user,
     ]);
   }
-  
- 
+
+
 
 }
