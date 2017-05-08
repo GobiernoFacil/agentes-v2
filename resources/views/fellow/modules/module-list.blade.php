@@ -7,29 +7,59 @@
 
 @section('content')
 <div class="row">
-  <div class="col-sm-12">
-    <h1>Módulos de aprendizaje</h1>
-  </div>
+	<div class="col-sm-12">
+    	<h1>Módulos de aprendizaje</h1>
+	</div>
 </div>
+
 <div class="row">
-  <div class = "col-sm-12">
+	<div class = "col-sm-12">
     @foreach($modules as $module)
     <span>{{$module->title}}</span>
     @endforeach
-  </div>
+  	</div>
 </div>
 
-<div class="row">
-  @foreach($modules as $module)
-  <div class = "col-sm-3">
-    <p>{{$module->title}}</br>
-    {{$module->objective}}</br>
-    @if($module->public)
-    <a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn xs view">Ir al Módulo</a></li>
-    @endif
-    {{$module->public ? 'Activo' : 'Candado'}}</p>
-
-  </div>
-  @endforeach
+<div class="box">
+	<div class="row">
+		@foreach($modules as $module)
+		<div class = "col-sm-4">
+			<div class="module">
+				<div class="row">
+					<div class="col-sm-9">
+						<h3>{{$module->title}}</h3>
+					</div>
+					<div class="col-sm-3">
+						<div class="hours">
+						<p><b></b> {{$module->number_hours}} h</p>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<p class="description">{{$module->objective}}</p>
+					</div>
+				</div>
+				<div class="footer">
+					<div class="row">
+						<div class="col-sm-3">
+							<p>{{$module->number_sessions}}					</p>
+						</div>
+						<div class="col-sm-6">
+							<p class="center">{{$module->modality}}</p>
+						</div>
+						<div class="col-sm-3">
+							<p class="right">{{$module->public ? 'Activo' : 'Candado'}}	</p>
+						</div>
+					</div>
+				</div>
+				@if($module->public)
+				<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn view">Ir al Módulo</a></li>
+				@endif
+			</div>
+			
+			
+				
+		</div>
+		@endforeach
+	</div>
 </div>
 @endsection
