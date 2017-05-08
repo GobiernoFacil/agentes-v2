@@ -46,7 +46,7 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->module->id ) }}" class="btn view">Editar objetivo</a></span></h2>
+			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->id ) }}" class="btn view">Editar objetivo</a></span></h2>
 			<p>{{$session->objective}}</p>
 			<h2 class="title">Objetivos particulares</h2>
 				@if($session->topics->count() > 0)
