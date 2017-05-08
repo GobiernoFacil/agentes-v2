@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', '' )
-@section('description', '')
+@section('title', 'Módulos de aprendizaje' )
+@section('description', 'Módulos de aprendizaje')
 @section('body_class', 'fellow aprendizaje')
 @section('breadcrumb_type', 'module list')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
@@ -14,9 +14,11 @@
 
 <div class="row">
 	<div class = "col-sm-12">
-    @foreach($modules as $module)
-    <span>{{$module->title}}</span>
-    @endforeach
+		<ul class="timeline">
+		@foreach($modules as $module)
+			<li class="active">{{$module->title}}</li>
+		@endforeach
+		</ul>
   	</div>
 </div>
 
