@@ -28,7 +28,7 @@ Route::get('redes-sociales', 'Front@redes');
 Route::get('convocatoria', 'NoticeFront@convocatoria');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
-/** se acabó la convocatoria 
+/** se acabó la convocatoria
 //Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
 //Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
 ***/
@@ -142,6 +142,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/update/{id}', 'Activities@update');
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
+    Route::get('dashboard/sesiones/actividades/eliminar/{id}', 'Activities@delete');
     /*@ActivitiesFiles Controller */
     //CRUD files in activity
     Route::get('dashboard/sesiones/actividades/archivos/agregar/{activity_id}', 'ActivitiesFiles@add');
