@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Perfil')
-@section('description', 'Ver perfil')
-@section('body_class', 'profile')
+@section('title', 'Mensajes')
+@section('description', 'Lista de mensajes')
+@section('body_class', 'fellow mensajes')
 @section('breadcrumb_type', 'profile view')
 
 @section('content')
