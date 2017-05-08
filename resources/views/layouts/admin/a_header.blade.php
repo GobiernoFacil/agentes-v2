@@ -24,7 +24,7 @@
 		<nav>
 			<ul>
 				<!--dashboard-->
-				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url($linkDash)}}"><b class="icon i_tablero"></b> Tablero</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'dashboard' || $__env->yieldContent('body_class') == 'dashboard fellow' ? "active" : ''}}"><a href="{{url($linkDash)}}"><b class="icon i_tablero"></b> Tablero</a></li>
 				@if($user->type == "admin")
 				<!--admin-->
 				<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}"><b class="icon i_aspirantes"></b> ASPIRANTES</a></li>
@@ -43,8 +43,8 @@
 				@endif
 				@if($user->type == "fellow")
 				<!--fellow-->
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_usuarios"></b> Aprendizaje</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == '' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_usuarios"></b> Mensajes</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'fellow aprendizaje' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_modulos"></b> Aprendizaje</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 				@endif
 			</ul>
 		</nav>
