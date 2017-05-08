@@ -43,7 +43,7 @@
 				@endif
 				@if($user->type == "fellow")
 				<!--fellow-->
-				<li class="{{ $__env->yieldContent('body_class') == 'fellow aprendizaje' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_modulos"></b> Aprendizaje</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'fellow aprendizaje' || $__env->yieldContent('body_class') ==  'fellow aprendizaje modulos' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_modulos"></b> Aprendizaje</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 				@endif
 			</ul>
