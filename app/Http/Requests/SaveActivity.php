@@ -25,7 +25,7 @@ class SaveActivity extends FormRequest
     public function rules()
     {
 
-        if($this->type==='video'){
+        if($this->type==='webinar'){
           return [
               //
               'name'=> 'required|unique:activities',
@@ -36,10 +36,22 @@ class SaveActivity extends FormRequest
               'competitor_role'=> 'required',
               'type'=>'required',
               'start'=>'required',
-              'end'=>'required',
               'time'=>'required',
               'link'=>'required',
           ];
+        }elseif($this->type==='video'){
+          return [
+              //
+              'name'=> 'required|unique:activities',
+              'order'=> 'required|numeric',
+              'duration'=> 'required|numeric',
+              'facilitator_role'=> 'required',
+              'description'=> 'required',
+              'competitor_role'=> 'required',
+              'type'=>'required',
+              'link_video'=>'required',
+          ];
+
         }else{
 
         return [

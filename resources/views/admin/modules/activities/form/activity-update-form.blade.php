@@ -123,8 +123,6 @@
     </p>
   </div>
 </div>
-
-
 <div id="webinar" style="{{old('type') ==='webinar' || $activity->type==='webinar'  ? '' : 'display:none;'}}">
 <div class="divider"></div>
 <div class="row">

@@ -26,18 +26,26 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $( document ).ready(function() {
-    $('#type').change(function(){
-      if(this.value==='evaluation'){
-        $('#user-file').show();
-        $('#video').hide();
-      }else if(this.value==='video'){
-        $('#user-file').hide();
-        $('#video').show();
-      }else{
-        $('#user-file').hide();
-        $('#video').hide();
-      }
-    });
+  $('#type').change(function(){
+    if(this.value==='evaluation'){
+      $('#user-file').show();
+      $('#video').hide();
+      $('#webinar').hide();
+    }else if(this.value==='video'){
+      $('#user-file').hide();
+      $('#video').show();
+      $('#webinar').hide();
+    }else if(this.value==='webinar'){
+      $('#user-file').hide();
+      $('#video').hide();
+      $('#user-file').hide();
+      $('#webinar').show();
+    }else{
+      $('#webinar').hide();
+      $('#user-file').hide();
+      $('#video').hide();
+    }
+  });
 });
 
 $.datepicker.regional['es'] = {

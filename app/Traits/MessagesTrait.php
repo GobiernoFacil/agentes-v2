@@ -107,6 +107,7 @@ trait MessagesTrait{
          'evaluation.required' => 'Este campo es requerido',
          'type.required' => 'Este campo es requerido',
          'link.required' => 'Este campo es requerido',
+         'link_video.required' => 'Este campo es requerido',
          'time.required' => 'Este campo es requerido',
          //Monitoreo
          'knowledge.required' => 'Este campo es requerido',

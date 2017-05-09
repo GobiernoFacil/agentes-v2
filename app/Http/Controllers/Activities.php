@@ -75,10 +75,19 @@ class Activities extends Controller
             $activity->save();
             //activity video data
             if($activity->type==='video'){
-              $video  = new ActivityVideo($request->only(['time','start','end','link']));
+              $video  = new ActivityVideo();
+              $video->link = $request->link_video;
               $video->activity_id = $activity->id;
               $video->save();
             }
+
+            if($activity->type==='webinar'){
+              $video  = new ActivityVideo($request->only(['start','link','time']));
+              $video->activity_id = $activity->id;
+              $video->save();
+            }
+
+
             if($activity->hasfiles==='Sí'){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");

@@ -126,11 +126,14 @@
   </div>
 </div>
 
-<div id="video" style="{{old('type') ==='video' ? '' : 'display:none;'}}">
+
+
+
+<div id="webinar" style="{{old('type') ==='webinar' ? '' : 'display:none;'}}">
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información del Video o Webinar </h2>
+    <h2 class="sa_title">Información del Webinar </h2>
   </div>
 </div>
 
@@ -147,27 +150,6 @@
   </div>
   <div class="col-sm-6">
     <p>
-      <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',null, ["class" => "form-control",'id'=>'startE'])}} </label>
-      @if($errors->has('end'))
-      <strong class="danger">{{$errors->first('end')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-
-<div class="row" >
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Link</strong> <br>
-      {{Form::text('link',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('link'))
-      <strong class="danger">{{$errors->first('link')}}</strong>
-      @endif
-    </p>
-  </div>
-  <div class="col-sm-6">
-    <p>
       <label><strong>Hora</strong> <br>
       {{Form::text('time',null, ["class" => "form-control"])}} </label>
       @if($errors->has('time'))
@@ -176,10 +158,52 @@
     </p>
   </div>
 </div>
+
+<div class="row" >
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Link</strong> <br>
+      {{Form::text('link',null, ["class" => "form-control"])}} </label>
+      @if($errors->has('link'))
+      <strong class="danger">{{$errors->first('link')}}</strong>
+      @endif
+    </p>
+  </div>
 </div>
+</div>
+
+
+
+
+<div id="video" style="{{old('type') ==='video' ? '' : 'display:none;'}}">
+<div class="divider"></div>
+<div class="row">
+  <div class="col-sm-12">
+    <h2 class="sa_title">Información del Video </h2>
+  </div>
+</div>
+
+<div class="row" >
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Link</strong> <br>
+      {{Form::text('link_video',null, ["class" => "form-control"])}} </label>
+      @if($errors->has('link_video'))
+      <strong class="danger">{{$errors->first('link_video')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+</div>
+
+
+
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Guardar actividad', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
+
+
+
 {!! Form::close() !!}
