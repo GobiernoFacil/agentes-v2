@@ -146,9 +146,13 @@ class Activities extends Controller
             //activity video data
             if($request->type==='video'){
               $video  = ActivityVideo::firstOrCreate(['activity_id'=>$request->id]);
-              $video->start = $request->start;
-              $video->end = $request->end;
+              $video->link = $request->link_video;
+              $video->save();
+            }
+            if($request->type==='webinar'){
+              $video  = ActivityVideo::firstOrCreate(['activity_id'=>$request->id]);
               $video->link = $request->link;
+              $video->start = $request->start;
               $video->time = $request->time;
               $video->save();
             }

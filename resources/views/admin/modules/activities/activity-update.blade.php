@@ -29,10 +29,18 @@ $( document ).ready(function() {
     if(this.value==='evaluation'){
       $('#user-file').show();
       $('#video').hide();
+      $('#webinar').hide();
     }else if(this.value==='video'){
       $('#user-file').hide();
       $('#video').show();
+      $('#webinar').hide();
+    }else if(this.value==='webinar'){
+      $('#user-file').hide();
+      $('#video').hide();
+      $('#user-file').hide();
+      $('#webinar').show();
     }else{
+      $('#webinar').hide();
       $('#user-file').hide();
       $('#video').hide();
     }

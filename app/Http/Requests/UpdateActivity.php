@@ -25,9 +25,10 @@ use MessagesTrait;
      */
     public function rules()
     {
+      var_dump($this->toArray());
 
         $activity = Activity::find($this->route("id"));
-        if($this->type==='video'){
+        if($this->type==='webinar'){
           return [
               //
               'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
@@ -38,9 +39,20 @@ use MessagesTrait;
               'competitor_role'=> 'required',
               'type'=>'required',
               'start'=>'required',
-              'end'=>'required',
               'time'=>'required',
               'link'=>'required',
+          ];
+        }elseif($this->type==='video'){
+          return [
+              //
+              'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'order'=> 'required|numeric',
+              'duration'=> 'required|numeric',
+              'facilitator_role'=> 'required',
+              'description'=> 'required',
+              'competitor_role'=> 'required',
+              'type'=>'required',
+              'link_video'=>'required',
           ];
         }else{
 

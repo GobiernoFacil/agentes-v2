@@ -34,7 +34,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo de Actividad</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video o Webinar','evaluation'=>'Evaluación','face'=>'Presencial'],null, ['class' => 'form-control','id'=>'type'])}}
+      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video','webinar'=>'Webinar','evaluation'=>'Evaluación','face'=>'Presencial'],null, ['class' => 'form-control','id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
@@ -125,11 +125,11 @@
 </div>
 
 
-<div id="video" style="{{old('type') ==='video' || $activity->type==='video'  ? '' : 'display:none;'}}">
+<div id="webinar" style="{{old('type') ==='webinar' || $activity->type==='webinar'  ? '' : 'display:none;'}}">
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información del Video o Webinar </h2>
+    <h2 class="sa_title">Información del Webinar </h2>
   </div>
 </div>
 
@@ -137,31 +137,10 @@
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <label><strong>Fecha inicio</strong> <br>
+      <label><strong>Fecha</strong> <br>
       {{Form::text('start', $activity->videos ? $activity->videos->start : null, ["class" => "form-control", 'id'=>'startD'])}} </label>
       @if($errors->has('start'))
       <strong class="danger">{{$errors->first('start')}}</strong>
-      @endif
-    </p>
-  </div>
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',$activity->videos ? $activity->videos->end : null, ["class" => "form-control",'id'=>'startE'])}} </label>
-      @if($errors->has('end'))
-      <strong class="danger">{{$errors->first('end')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-
-<div class="row" >
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Link</strong> <br>
-      {{Form::text('link',$activity->videos ? $activity->videos->link : null, ["class" => "form-control"])}} </label>
-      @if($errors->has('link'))
-      <strong class="danger">{{$errors->first('link')}}</strong>
       @endif
     </p>
   </div>
@@ -175,7 +154,45 @@
     </p>
   </div>
 </div>
+
+<div class="row" >
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Link</strong> <br>
+      {{Form::text('link',$activity->videos ? $activity->videos->link : null, ["class" => "form-control"])}} </label>
+      @if($errors->has('link'))
+      <strong class="danger">{{$errors->first('link')}}</strong>
+      @endif
+    </p>
+  </div>
 </div>
+</div>
+
+
+
+<div id="video" style="{{old('type') ==='video' || $activity->type==='video'  ? '' : 'display:none;'}}">
+<div class="divider"></div>
+<div class="row">
+  <div class="col-sm-12">
+    <h2 class="sa_title">Información del Video</h2>
+  </div>
+</div>
+
+<div class="row" >
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Link</strong> <br>
+      {{Form::text('link_video',$activity->videos ? $activity->videos->link : null, ["class" => "form-control"])}} </label>
+      @if($errors->has('link_video'))
+      <strong class="danger">{{$errors->first('link_video')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+</div>
+
+
+
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Actualizar actividad', ['class' => 'btn gde'])}}</p>
