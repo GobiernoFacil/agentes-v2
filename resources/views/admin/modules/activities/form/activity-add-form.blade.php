@@ -35,7 +35,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo de Actividad</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video o Webinar','evaluation'=>'Evaluación'],null, ['class' => 'form-control', 'id'=>'type'])}}
+      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video o Webinar','evaluation'=>'Evaluación','face'=>'Presencial'],null, ['class' => 'form-control', 'id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif

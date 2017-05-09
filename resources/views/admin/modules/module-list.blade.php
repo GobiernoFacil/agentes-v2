@@ -44,7 +44,7 @@
 		      <tr>
 		        <td><h4><a href="{{ url('dashboard/modulos/ver/' . $module->id) }}">{{$module->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($module->start))}} <br> <strong>{{date('d-m-Y', strtotime($module->end))}}</strong></td>
-				    <td>{{$module->number_sessions}}</td>
+				    <td>{{$module->sessions->count()}}</td>
 		        <td>{{$module->number_hours}} hrs.</td>
             <td>{{$module->modality}}</td>
 		        <td>{{$module->public ? "Sí" : "No" }}</td>
