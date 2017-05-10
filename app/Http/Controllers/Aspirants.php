@@ -235,12 +235,24 @@ class Aspirants extends Controller
         $check->delete();
       }
       $evaluation = FileEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,"institution"=>$user->institution,'user_id'=>$user->id]);
+      if($request->hasVideo){
       $evaluation->hasVideo = current(array_slice($request->hasVideo, 0, 1));
+      }
+      if($request->hasCv){
       $evaluation->hasCv = current(array_slice($request->hasCv, 0, 1));
+      }
+      if($request->hasEssay){
       $evaluation->hasEssay = current(array_slice($request->hasEssay, 0, 1));
+      }
+      if($request->hasProof){
       $evaluation->hasProof = current(array_slice($request->hasProof, 0, 1));
+      }
+      if($request->hasPrivacy){
       $evaluation->hasPrivacy = current(array_slice($request->hasPrivacy, 0, 1));
+      }
+      if($request->hasLetter){
       $evaluation->hasLetter = current(array_slice($request->hasLetter, 0, 1));
+      }
       $evaluation->institution = $user->institution;
       $evaluation->save();
       return redirect('dashboard/aspirantes/evaluar/'.$aspirant->id)->with('success','Evaluación guardada');
@@ -264,6 +276,7 @@ class Aspirants extends Controller
       }
       $evaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'user_id'=>$user->id]);
       $evaluation->user_id   = $user->id;
+      if($request->experience){
       $evaluation->experience = current(array_slice($request->experience, 0, 1));
       $evaluation->experience1 = current(array_slice($request->experience1, 0, 1));
       $evaluation->experience2 = current(array_slice($request->experience2, 0, 1));
@@ -271,18 +284,23 @@ class Aspirants extends Controller
       $evaluation->experienceJ1 = $request->experienceJ1;
       $evaluation->experienceJ2 = $request->experienceJ2;
       $evaluation->experienceGrade = $this->experienceGrade($evaluation);
+      }
+      if($request->essay){
       $evaluation->essay = current(array_slice($request->essay, 0, 1));
       $evaluation->essay1 = current(array_slice($request->essay1, 0, 1));
       $evaluation->essay2 = current(array_slice($request->essay2, 0, 1));
       $evaluation->essay3 = current(array_slice($request->essay3, 0, 1));
       $evaluation->essay4 = current(array_slice($request->essay4, 0, 1));
       $evaluation->essayGrade = $this->essayGrade($evaluation);
+      }
+      if($request->video){
       $evaluation->video = current(array_slice($request->video, 0, 1));
       $evaluation->video1 = current(array_slice($request->video1, 0, 1));
       $evaluation->video2 = current(array_slice($request->video2, 0, 1));
       $evaluation->video3 = current(array_slice($request->video3, 0, 1));
       $evaluation->video4 = current(array_slice($request->video4, 0, 1));
       $evaluation->videoGrade = $this->videoGrade($evaluation);
+      }
       $evaluation->aspirant_id = $aspirant->id;
       $evaluation->institution = $user->institution;
       $evaluation->grade    =   $evaluation->experienceGrade + $evaluation->videoGrade +$evaluation->essayGrade;
