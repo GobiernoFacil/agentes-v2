@@ -25,7 +25,7 @@ class SaveEvaluation extends FormRequest
     public function rules()
     {
         return [
-            //
+            /*
             'experience'=> 'required',
             'experience1'=> 'required',
             'experience2'=> 'required',
@@ -42,6 +42,7 @@ class SaveEvaluation extends FormRequest
             'video2'=> 'required',
             'video3'=> 'required',
             'video4' => 'required'
+            */
         ];
     }
 }
