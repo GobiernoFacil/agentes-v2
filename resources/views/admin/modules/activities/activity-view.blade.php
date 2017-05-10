@@ -45,14 +45,14 @@
   	  <h2 class="title">Recursos</h2>
   	</div>
   	<div class="col-sm-3">
-  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">Agregar requerimiento</a></p>
+  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar recurso</a></p>
   	</div>
   	<div class="col-sm-12">  
   		@if($activity->activityRequirements->count() > 0)
   	      @include('admin.modules.activities.activities-requirements-list')
   		@else
-  		    <p>Sin requerimientos</p>
-  	      <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar requerimiento</a>
+  		    <p>Sin recurso</p>
+  	      <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar recurso</a>
   		@endif
   	</div>
   </div>
