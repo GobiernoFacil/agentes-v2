@@ -28,7 +28,7 @@ class UpdateTopic extends FormRequest
       $topic = Topic::find($this->route("id"));
         return [
             //
-            'name'=> 'required'.($topic->name != $this->name ? '|unique:topics' : ''),
+            'name'=> 'required|max:256'.($topic->name != $this->name ? '|unique:topics' : ''),
             'order'=> 'required|numeric',
         ];
     }

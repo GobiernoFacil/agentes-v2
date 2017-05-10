@@ -28,7 +28,7 @@ class SaveActivity extends FormRequest
         if($this->type==='webinar'){
           return [
               //
-              'name'=> 'required|unique:activities',
+              'name'=> 'required|max:256|unique:activities',
               'order'=> 'required|numeric',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
@@ -42,7 +42,7 @@ class SaveActivity extends FormRequest
         }elseif($this->type==='video'){
           return [
               //
-              'name'=> 'required|unique:activities',
+              'name'=> 'required|max:256|unique:activities',
               'order'=> 'required|numeric',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
@@ -56,7 +56,7 @@ class SaveActivity extends FormRequest
 
         return [
             //
-            'name'=> 'required|unique:activities',
+            'name'=> 'required|max:256|unique:activities',
             'order'=> 'required|numeric',
             'duration'=> 'required|numeric',
             'facilitator_role'=> 'required',

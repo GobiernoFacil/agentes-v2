@@ -31,7 +31,7 @@ use MessagesTrait;
         if($this->type==='webinar'){
           return [
               //
-              'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
               'order'=> 'required|numeric',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
@@ -45,7 +45,7 @@ use MessagesTrait;
         }elseif($this->type==='video'){
           return [
               //
-              'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
               'order'=> 'required|numeric',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
@@ -58,7 +58,7 @@ use MessagesTrait;
 
         return [
             //
-            'name'=> 'required'.($activity->name != $this->name ? '|unique:activities' : ''),
+            'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
             'order'=> 'required|numeric',
             'duration'=> 'required|numeric',
             'facilitator_role'=> 'required',

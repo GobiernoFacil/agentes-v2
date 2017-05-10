@@ -26,7 +26,7 @@ class SaveTopic extends FormRequest
     {
         return [
             //
-            'name'=> 'required|unique:topics',
+            'name'=> 'required|max:256|unique:topics',
             'order'=> 'required|numeric',
         ];
     }

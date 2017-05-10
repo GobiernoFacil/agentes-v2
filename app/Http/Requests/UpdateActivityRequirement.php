@@ -28,9 +28,9 @@ class UpdateActivityRequirement extends FormRequest
       $requirement = ActivityRequirement::find($this->route("id"));
         return [
             //
-            'name'=> 'required'.($requirement->name != $this->name ? '|unique:activity_requirements' : ''),
+            'name'=> 'required|max:256'.($requirement->name != $this->name ? '|unique:activity_requirements' : ''),
             'order'=> 'required|numeric',
-            'material_link'=> 'url|nullable',
+            'material_link'=> 'nullable',
             'description'=> 'required',
         ];
     }

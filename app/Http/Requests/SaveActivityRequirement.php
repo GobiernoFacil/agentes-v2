@@ -26,9 +26,9 @@ class SaveActivityRequirement extends FormRequest
     {
         return [
             //
-            'name'=> 'required|unique:activity_requirements',
+            'name'=> 'required|max:256|unique:activity_requirements',
             'order'=> 'required|numeric',
-            'material_link'=> 'url|nullable',
+            'material_link'=> 'nullable',
             'description'=> 'required',
         ];
     }

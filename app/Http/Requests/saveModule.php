@@ -26,7 +26,7 @@ class SaveModule extends FormRequest
     {
         return [
             //
-            'title'=> 'required|unique:modules',
+            'title'=> 'required|max:256|unique:modules',
             'number_sessions'=> 'required|numeric',
             'number_hours'=> 'required|numeric',
             'modality'=> 'required',

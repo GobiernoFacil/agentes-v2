@@ -28,7 +28,7 @@ class UpdateModule extends FormRequest
         $module = Module::find($this->route("id"));
         return [
             //
-            'title'=> 'required'.($module->title != $this->title ? '|unique:modules' : ''),
+            'title'=> 'required|max:256'.($module->title != $this->title ? '|unique:modules' : ''),
             'number_sessions'=> 'required|numeric',
             'number_hours'=> 'required|numeric',
             'modality'=> 'required',
