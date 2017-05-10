@@ -73,7 +73,7 @@ class Aspirants extends Controller
     public function noVerify()
     {
       $user = Auth::user();
-      $aspirants_validated = FileEvaluation::distinct('aspirant_id')->pluck('aspirant_id');
+      $aspirants_validated = FileEvaluation::where('hasVideo','!=',null)->distinct('aspirant_id')->pluck('aspirant_id');
       $aspirants_filesId  = AspirantsFile::whereNotIn('aspirant_id',$aspirants_validated->toArray())->pluck('aspirant_id');
       $list_no_validated_count  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->get()->count();
       $list_validated_count = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->get()->count();
