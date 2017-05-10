@@ -95,10 +95,16 @@ class ActivitiesFiles extends Controller
     {
         //
         $user      = Auth::user();
-        $file   = ActivitiesFile::where('id',$file_id)->firstOrFail();
+        $file      = ActivitiesFile::where('id',$file_id)->firstOrFail();
+        
+        $activity  = Activity::where('id',$file->activity_id)->firstOrFail();
+        $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+
         return view('admin.modules.activities.activity-files-update')->with([
-          "user"      => $user,
-          "file" => $file
+          "user"    => $user,
+          "file" 	=> $file,
+          "activity"=> $activity,
+          "session" => $session
         ]);
     }
 
