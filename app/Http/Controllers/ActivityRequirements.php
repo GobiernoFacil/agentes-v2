@@ -98,9 +98,11 @@ class ActivityRequirements extends Controller
         {
             //
             $user      = Auth::user();
-            $activityR   = ActivityRequirement::where('id',$id)->firstOrFail();
+            $activityR  = ActivityRequirement::where('id',$id)->firstOrFail();
+            $activity   = Activity::where('id',$activityR->activity_id)->firstOrFail();
             return view('admin.modules.activities.activity-requirement-update')->with([
               "user"      => $user,
+              "activity"  => $activity,
               "activityR" => $activityR
             ]);
         }
