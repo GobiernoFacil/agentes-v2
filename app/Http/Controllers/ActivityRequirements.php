@@ -120,8 +120,10 @@ class ActivityRequirements extends Controller
         {
             //
             $data   = $request->except('_token');
+            $activityR  = ActivityRequirement::where('id',$request->id)->firstOrFail();
+            $activity   = Activity::where('id',$activityR->activity_id)->firstOrFail();
             ActivityRequirement::where('id',$request->id)->update($data);
-            return redirect("dashboard/sesiones/actividades/requerimientos/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+            return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
         }
 
         /**
