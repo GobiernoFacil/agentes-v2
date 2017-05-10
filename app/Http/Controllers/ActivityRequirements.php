@@ -7,6 +7,7 @@ use Auth;
 // models
 use App\Models\Activity;
 use App\Models\ActivityRequirement;
+use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveActivityRequirement;
 use App\Http\Requests\UpdateActivityRequirement;
@@ -45,9 +46,11 @@ class ActivityRequirements extends Controller
             //
             $user      = Auth::user();
             $activity   = Activity::where('id',$activity_id)->firstOrFail();
+            $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             return view('admin.modules.activities.activity-requirement-add')->with([
-              "user"      => $user,
-              "activity" => $activity
+              "user"      	=> $user,
+              "activity" 	=> $activity,
+              "session" 	=> $session
             ]);
         }
 
