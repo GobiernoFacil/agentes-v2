@@ -31,14 +31,33 @@ class Aspirants extends Controller
       $aspirants_filesId  = AspirantsFile::all()->pluck('aspirant_id');
       $aspirants   = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
       $aspirantsNo = Aspirant::where('is_activated',1)->whereNotIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
-
+      $aspirants_validated = FileEvaluation::distinct('aspirant_id')->pluck('aspirant_id');
+      $list_validated = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants,
-        'aspirantsNo' =>$aspirantsNo
+        'aspirantsNo' =>$aspirantsNo,
+        'listA'      =>$list_validated
       ]);
     }
 
+
+
+    /**
+     * Lista de aspirantes
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function verify()
+    {
+      $user = Auth::user();
+      $aspirants_validated = FileEvaluation::distinct('aspirant_id')->pluck('aspirant_id');
+      $list_validated = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
+      return view('admin.aspirants.aspirant-verified-list')->with([
+        'user' => $user,
+        'listA'      =>$list_validated
+      ]);
+    }
 
 
     /**
