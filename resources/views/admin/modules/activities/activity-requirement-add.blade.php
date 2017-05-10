@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar recurso y requerimiento técnico</h1>
+    <h1><strong>Agregar recurso</strong> a la actividad "{{$activity->name}}"</h1>
   </div>
 </div>
 <div class="box">
