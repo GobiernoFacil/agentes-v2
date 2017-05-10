@@ -88,9 +88,7 @@
   		<div class="col-sm-9">
   			<h2 class="title">Actividades</h2>
   		</div>
-		<div class="col-sm-3">
-			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar más actividades</a>
-		</div>
+		
 		<div class="col-sm-12">
 			<div class="divider"></div>
 		</div>
