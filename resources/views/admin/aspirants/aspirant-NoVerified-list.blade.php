@@ -2,13 +2,13 @@
 @section('title', 'Lista de Aspirantes')
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirantes list')
+@section('breadcrumb_type', 'aspirantes list non')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de Aspirantes <span id ="typeAspirantTextTitle"> verificados </span></h1>
+		<h1>Lista de Aspirantes sin verificar ({{$listB->count()}})</h1>
 	</div>
 	<?php /*
 	<div class="col-sm-3">
@@ -19,24 +19,21 @@
 	</div>
 	*/?>
 </div>
-<?php /*
+<div class="divider"></div>
 <div class="row">
-	<div class="col-sm-12">
-		<span>Chihuahua: {{$chihuahua_number}}</span>
-		<span>Morelos: {{$morelos_number}}</span>
-		<span>Nuevo León: {{$leon_number}}</span>
-		<span>Oaxaca: {{$oaxaca_number}}</span>
-		<span>Sonora: {{$sonora_number}}</span>
+	<div class="col-sm-4">
+		<?php $z = 89;?>
+		<a class ="btn  view gde" href ="{{url('dashboard/aspirantes/verificados')}}">Aspirantes con archivos verificados ({{$z - $listB->count()}})</a>
+	</div>
+	<div class="col-sm-4">
+		
+		<a class ="btn download gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$listB->count()}})</a>
+	</div>
+	<div class="col-sm-4">
+		<a class ="btn view gde" href ="{{url('dashboard/aspirantes')}}">Aspirantes  con archivos</a>
 	</div>
 </div>
-<div class="row">
-	<div class="col-sm-3 col-sm-offset-9">
-		<a class ="btn view" id="typeAspirant" href ="">Aspirantes <span class= "strong" id="typeAspirantText">verificados</span></a>
-	</div>
-</div>
-*/
 
-?>
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
