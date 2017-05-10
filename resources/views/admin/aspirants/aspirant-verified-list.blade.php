@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de Aspirantes verificados ({{$listA->count()}})</h1>
+		<h1>Lista de Aspirantes verificados ({{$list_validated_count}})</h1>
 	</div>
 	<?php /*
 	<div class="col-sm-3">
@@ -22,11 +22,11 @@
 <div class="divider"></div>
 <div class="row">
 	<div class="col-sm-4">
-		<a class ="btn download gde" href ="{{url('dashboard/aspirantes/verificados')}}">Aspirantes con archivos verificados ({{$listA->count()}})</a>
+		<a class ="btn download gde" href ="{{url('dashboard/aspirantes/verificados')}}">Aspirantes con archivos verificados ({{$list_validated_count}})</a>
 	</div>
 	<div class="col-sm-4">
 		<?php $z = 89;?>
-		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$z - $listA->count()}})</a>
+		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$z - $list_validated_count}})</a>
 	</div>
 	<div class="col-sm-4">
 		<a class ="btn view gde" href ="{{url('dashboard/aspirantes')}}">Aspirantes  con archivos</a>
