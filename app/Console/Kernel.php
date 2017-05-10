@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         //
         Commands\DeleteExpiredCodes::class,
         Commands\SendMassiveEmails::class,
-        Commands\SendAspirantsCount::class
+        Commands\SendAspirantsCount::class,
+        Commands\AddAspirants::class
     ];
 
     /**
