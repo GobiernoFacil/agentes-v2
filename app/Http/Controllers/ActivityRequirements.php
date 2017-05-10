@@ -68,7 +68,7 @@ class ActivityRequirements extends Controller
             $activityR  = new ActivityRequirement($request->except('_token'));
             $activityR->activity_id    = $activity->id;
             $activityR->save();
-            return redirect("dashboard/sesiones/actividades/requerimientos/ver/$activityR->id")->with('success',"Se ha guardado correctamente");
+            return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha guardado correctamente");
         }
 
         /**
