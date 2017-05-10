@@ -25,7 +25,7 @@
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
-			 			<p class="right"><a href="{{ url('dashboard/modulos/agregar') }}" class="btn add">+ Agregar módulo</a></p>
+			 			<p class="right"><a href="{{ url('dashboard/modulos/agregar') }}" class="btn ev">[+] Agregar módulo</a></p>
 
 		<table class="table">
 		  <thead>
@@ -49,7 +49,7 @@
             <td>{{$module->modality}}</td>
 		        <td>{{$module->public ? "Sí" : "No" }}</td>
 		        <td>
-		          <a href="{{ url('dashboard/modulos/ver/' . $module->id) }}" class="btn xs view">Ver</a>
+		          <a href="{{ url('dashboard/modulos/ver/' . $module->id) }}" class="btn xs ev">Ver</a>
               <a href="{{ url('dashboard/modulos/editar/' . $module->id) }}" class="btn xs view">Actualizar</a>
 		         <!-- <a href ="{{ url('dashboard/modulos/eliminar' . $module->id) }}"  id ="{{$module->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>-->
 		    </tr>
