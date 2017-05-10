@@ -8,6 +8,7 @@ use File;
 // models
 use App\Models\Activity;
 use App\Models\ActivitiesFile;
+use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveActivityFiles;
 use App\Http\Requests\UpdateActivityFiles;
@@ -44,10 +45,12 @@ class ActivitiesFiles extends Controller
     {
         //
         $user      = Auth::user();
-        $activity   = Activity::where('id',$activity_id)->firstOrFail();
+        $activity  = Activity::where('id',$activity_id)->firstOrFail();
+        $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
         return view('admin.modules.activities.activity-files-add')->with([
-          "user"      => $user,
-          "activity" => $activity
+          "user"      	=> $user,
+          "activity" 	=> $activity,
+          "session"		=> $session
         ]);
     }
 

@@ -8,7 +8,9 @@
 		<p>{{ $topic->order}}. <strong>{{$topic->name}}</strong></p>
 	</div>
 	<div class="col-sm-2">
+		@if($user->type == "admin")
 		<p><span class="le_link right"><a href="{{ url('dashboard/sesiones/tematicas/editar/'. $topic->id ) }}" class="btn view">Editar objetivo particular</a></span></p>
+		@endif
 	</div>
 	<div class="col-sm-12">
 		<div class="line"></div>

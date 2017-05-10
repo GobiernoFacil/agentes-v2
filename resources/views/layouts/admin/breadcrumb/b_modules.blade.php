@@ -5,7 +5,7 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit" || $__env->yieldContent('breadcrumb_type') =="module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit" || $__env->yieldContent('breadcrumb_type') =="module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring" || $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
@@ -23,7 +23,7 @@
 	<li>Editar módulo</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring")	
+	@if ($__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring" || $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files")	
 	<!-- módulo --->
 	<li><a href="{{ url('dashboard/modulos/ver/'.$session->module->id)}}">{{$session->module->title}}</a></li>	
 	@endif
@@ -36,7 +36,7 @@
 	<?php /*  
 	////////////// Objetivos particulares	 
 	*/?>
-	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session topic edit" || $__env->yieldContent('breadcrumb_type') == "module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring")
+	@if ($__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') == "module session topic edit" || $__env->yieldContent('breadcrumb_type') == "module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring" || $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files")
 	<!-- objetivos particulares --->
 	<li><a href="{{ url('dashboard/sesiones/ver/'. $session->id) }}">Sesión {{$session->order}}</a></li>
 	@endif
@@ -67,4 +67,26 @@
 	@if ( $__env->yieldContent('breadcrumb_type') == "module session add monitoring")	
 	<li>Agregar mecanismo de monitoreo</li>
 	@endif
+	
+	<?php /*////////////// requerimiento */?>
+	@if ( $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files")	
+	<!-- ver actividad --->
+	<li><a href="{{ url('dashboard/sesiones/actividades/ver/' . $activity->id ) }}">{{$activity->name}}</a></li>
+	@endif
+	
+	@if ( $__env->yieldContent('breadcrumb_type') == "module session add requirement" )	
+	<!-- agregar requerimiento o recurso-->
+	<li>Agregar requerimiento</li>
+	@endif
+	@if ( $__env->yieldContent('breadcrumb_type') == "module session update requirement")	
+	<!--actualizar requerimiento o recurso-->
+	<li>Actualizar requerimiento</li>
+	@endif
+	
+	@if ( $__env->yieldContent('breadcrumb_type') == "module session add files" )	
+	<!-- agregar archivo-->
+	<li>Agregar archivo</li>
+	@endif
+	
+	
 </ul>

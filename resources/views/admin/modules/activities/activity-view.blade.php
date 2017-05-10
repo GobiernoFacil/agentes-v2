@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Ver actividad: ' . $activity->name)
 @section('description', 'Ver actividad')
-@section('body_class', 'modulos session activity')
+@section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session view activity')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
@@ -41,8 +41,13 @@
 </div>
 <div class="box">
   <div class="row">
-  	<div class="col-sm-12">
-  	  <h2 class="title">Recursos y requerimientos técnicos</h2>
+  	<div class="col-sm-9">
+  	  <h2 class="title">Recursos</h2>
+  	</div>
+  	<div class="col-sm-3">
+  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">Agregar requerimiento</a></p>
+  	</div>
+  	<div class="col-sm-12">  
   		@if($activity->activityRequirements->count() > 0)
   	      @include('admin.modules.activities.activities-requirements-list')
   		@else

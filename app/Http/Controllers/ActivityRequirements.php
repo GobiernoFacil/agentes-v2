@@ -7,6 +7,7 @@ use Auth;
 // models
 use App\Models\Activity;
 use App\Models\ActivityRequirement;
+use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveActivityRequirement;
 use App\Http\Requests\UpdateActivityRequirement;
@@ -45,9 +46,11 @@ class ActivityRequirements extends Controller
             //
             $user      = Auth::user();
             $activity   = Activity::where('id',$activity_id)->firstOrFail();
+            $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             return view('admin.modules.activities.activity-requirement-add')->with([
-              "user"      => $user,
-              "activity" => $activity
+              "user"      	=> $user,
+              "activity" 	=> $activity,
+              "session" 	=> $session
             ]);
         }
 
@@ -65,7 +68,7 @@ class ActivityRequirements extends Controller
             $activityR  = new ActivityRequirement($request->except('_token'));
             $activityR->activity_id    = $activity->id;
             $activityR->save();
-            return redirect("dashboard/sesiones/actividades/requerimientos/ver/$activityR->id")->with('success',"Se ha guardado correctamente");
+            return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha guardado correctamente");
         }
 
         /**
@@ -95,10 +98,14 @@ class ActivityRequirements extends Controller
         {
             //
             $user      = Auth::user();
-            $activityR   = ActivityRequirement::where('id',$id)->firstOrFail();
+            $activityR  = ActivityRequirement::where('id',$id)->firstOrFail();
+            $activity   = Activity::where('id',$activityR->activity_id)->firstOrFail();
+            $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             return view('admin.modules.activities.activity-requirement-update')->with([
               "user"      => $user,
-              "activityR" => $activityR
+              "activity"  => $activity,
+              "activityR" => $activityR,
+              "session"	  => $session,
             ]);
         }
 
@@ -113,8 +120,10 @@ class ActivityRequirements extends Controller
         {
             //
             $data   = $request->except('_token');
+            $activityR  = ActivityRequirement::where('id',$request->id)->firstOrFail();
+            $activity   = Activity::where('id',$activityR->activity_id)->firstOrFail();
             ActivityRequirement::where('id',$request->id)->update($data);
-            return redirect("dashboard/sesiones/actividades/requerimientos/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+            return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
         }
 
         /**
