@@ -101,6 +101,7 @@ Route::group(['middleware' => ['auth']], function () {
     // @Aspirants Controller
     Route::get('dashboard/aspirantes', 'Aspirants@index');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
+    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
     Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
     Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
