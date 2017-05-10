@@ -2,13 +2,13 @@
 @section('title', 'Lista de Aspirantes')
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirantes list')
+@section('breadcrumb_type', 'aspirantes list verified')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de Aspirantes <span id ="typeAspirantTextTitle"> verificados </span></h1>
+		<h1>Lista de Aspirantes verificados ({{$listA->count()}})</h1>
 	</div>
 	<?php /*
 	<div class="col-sm-3">
