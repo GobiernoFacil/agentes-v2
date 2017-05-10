@@ -15,7 +15,7 @@
       <ul>
         <li>Todos los archivos son válidos</li>
       </ul>
-      <p><a href="{{ url('dashboard/aspirantes/evaluar/'.$aspirant->id) }}" class="btn">&gt;&gt; Continuar.</a></p>
+      <p><a href="{{ url('dashboard/aspirantes/evaluar/'.$aspirant->id) }}" class="btn">&gt;&gt; Continuar evaluación.</a></p>
     @else
     <h1>El aspirante no cumple con los requisitos para ser evaluado</h1>
   	<div class="box">
