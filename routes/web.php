@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'Admin@dashboard');
     // @Aspirants Controller
     Route::get('dashboard/aspirantes', 'Aspirants@index');
+    Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
     Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
     Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
