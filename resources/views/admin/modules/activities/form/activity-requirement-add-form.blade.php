@@ -2,7 +2,7 @@
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información del requerimiento</h2>
+    <h2 class="sa_title">Información del recurso</h2>
   </div>
 </div>
 <!-- name -->
@@ -52,7 +52,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Guardar requerimiento', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Guardar recurso', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
