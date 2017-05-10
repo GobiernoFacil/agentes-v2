@@ -26,7 +26,7 @@
 	</div>
 	<div class="col-sm-4">
 		<?php $z = 89;?>
-		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$z - $list_validated_count}})</a>
+		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$list_no_validated_count}})</a>
 	</div>
 	<div class="col-sm-4">
 		<a class ="btn view gde" href ="{{url('dashboard/aspirantes')}}">Aspirantes  con archivos</a>
