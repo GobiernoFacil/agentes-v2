@@ -2,7 +2,7 @@
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información del requerimiento</h2>
+    <h2 class="sa_title">Información del recurso</h2>
   </div>
 </div>
 <!-- name -->
@@ -21,7 +21,7 @@
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <label><strong>Número de requerimiento</strong> <br>
+      <label><strong>Número de recurso</strong> <br>
       {{Form::text('order',null, ["class" => "form-control"])}} </label>
       @if($errors->has('order'))
       <strong class="danger">{{$errors->first('order')}}</strong>
@@ -52,7 +52,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Actualizar requerimiento', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Actualizar recurso', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
