@@ -19,14 +19,15 @@
 </div>
 
 <div class="row">
+	<!---
 	<div class="col-sm-4">
 		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/verificados')}}">Aspirantes con archivos verificados ({{$listA->count()}})</a>
 	</div>
 	<div class="col-sm-4">
-		<?php $z = 89;?>
-		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar ({{$z - $listA->count()}})</a>
+		<a class ="btn view gde" href ="{{url('dashboard/aspirantes/sin-verificar')}}">Aspirantes con archivos sin verificar</a>
 	</div>
-	<div class="col-sm-4">
+	-->
+	<div class="col-sm-4 col-sm-offset-8">
 		<a class ="btn view gde" id="typeAspirant" href ="">Aspirantes <span class= "strong" id="typeAspirantText">sin</span> archivos</a>
 	</div>
 </div>
