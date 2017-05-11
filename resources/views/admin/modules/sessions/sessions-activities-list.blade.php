@@ -8,7 +8,7 @@
 			<p>@if($user->type == "admin")
 				<a href="{{ url('dashboard/sesiones/actividades/ver/' . $activity->id) }}">{{$activity->name}}</a> 
 				 @else
-				 <a href="{{ url('tablero/aprendizaje/actividades/ver/' . $activity->id) }}">{{$activity->name}}</a>
+				 <a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
 				 @endif
 				<span class="notes">({{$activity->duration}})</span></p>		
 		</div>
@@ -19,7 +19,7 @@
 			<a href="{{ url('dashboard/sesiones/actividades/editar/' . $activity->id) }}" class="btn xs view">Actualizar</a>
 			 <!-- <a href ="{{ url('dashboard/modulos/eliminar' . $activity->id) }}"  id ="{{$activity->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 			 @else
-			 <a href="{{ url('tablero/aprendizaje/actividades/ver/' . $activity->id) }}" class="btn xs ev">Ver</a>
+			 <a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}" class="btn xs ev">Ver</a>
 			 @endif
 			 </p>
 		</div>
