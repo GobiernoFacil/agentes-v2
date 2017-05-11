@@ -105,7 +105,7 @@ class Aspirants extends Controller
           foreach ($allEva as $eva) {
             $generalGrade = $eva->grade + $generalGrade;
           }
-          $generalGrade = ($generalGrade)*10;
+          $generalGrade = ($generalGrade/2)*10;
         }
         return view('admin.aspirants.aspirant-view')->with([
           'user' => $user,
