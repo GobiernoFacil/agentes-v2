@@ -21,10 +21,13 @@ class ModulesFellow extends Controller
     public function index()
     {
       $user = Auth::user();
-      $list = Module::orderBy('order')->paginate($this->pageSize);
+      $list = Module::where('public',1)->orderBy('start','asc')->paginate($this->pageSize);
+      $today = date("Y-m-d");
       return view('fellow.modules.module-list')->with([
         "user"      => $user,
-        "modules"  => $list]);
+        "modules"  => $list,
+        "today" =>$today
+      ]);
     }
 
     /**
