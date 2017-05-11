@@ -40,10 +40,12 @@ class ModulesFellow extends Controller
     {
       //
       $user    = Auth::user();
-      $module  = Module::where('slug',$slug)->first();
+      $module  = Module::where('slug',$slug)->firstOrFail();
+      $today = date("Y-m-d");
       return view('fellow.modules.module-view')->with([
         "user"      => $user,
-        "module"    => $module
+        "module"    => $module,
+        "today" =>$today
       ]);
     }
 }

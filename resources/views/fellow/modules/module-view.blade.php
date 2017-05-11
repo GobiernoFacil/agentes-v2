@@ -68,7 +68,7 @@
     @foreach($module->sessions as $session)
     <div class="box session_list">
 	  	<div class="row">
-			<!--icono-->	
+			<!--icono-->
 			<div class="col-sm-1 right">
 				<b class="icon_h session list_s"></b>
 			</div>
@@ -86,9 +86,15 @@
 					</div>
 				</div>
 				<!-- ver sesión-->
+				@if($today >= $session->start)
 				<div class="col-sm-2">
 					<a class="btn view block sessions_l"  href='{{ url("tablero/aprendizaje/{$module->slug}/{$session->slug}") }}'>Ver sesión</a>
 				</div>
+				@else
+				<div class="col-sm-2">
+					<span>Candado</span>
+				</div>
+				@endif
 				<!-- footnote-->
 				<div class="footnote">
 					<div class="row">
