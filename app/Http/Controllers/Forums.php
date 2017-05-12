@@ -25,7 +25,7 @@ class Forums extends Controller
     {
       $user     = Auth::user();
       $session  = ModuleSession::where('slug',$session_slug)->firstOrFail();
-      $forums   = Forum::where('id',$session->id)->orderBy('created_at','desc')->get();
+      $forums   = Forum::where('session_id',$session->id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-list')->with([
         "user"      => $user,
         "forums" => $forums,

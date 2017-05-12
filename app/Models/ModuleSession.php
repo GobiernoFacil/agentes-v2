@@ -47,6 +47,10 @@ protected $fillable = [
     return $this->hasMany("App\Models\FacilitatorModule",'session_id');
    }
 
+   function forums(){
+     return $this->hasMany("App\Models\Forum",'session_id');
+    }
+
 
 
 }

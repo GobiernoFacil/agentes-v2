@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Nombre</strong> <br>
+      <label><strong>Tema</strong> <br>
       {{Form::text('topic',null, ["class" => "form-control"])}} </label>
       @if($errors->has('topic'))
       <strong class="danger">{{$errors->first('topic')}}</strong>
