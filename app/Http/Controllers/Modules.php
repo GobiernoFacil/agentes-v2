@@ -35,7 +35,7 @@ class Modules extends Controller
   {
     //
     $user = Auth::user();
-    $modules = Module::orderBy('start','desc')->paginate($this->pageSize);
+    $modules = Module::orderBy('start','asc')->paginate($this->pageSize);
     return view('admin.modules.module-list')->with([
       'user' => $user,
       'modules' =>$modules,
