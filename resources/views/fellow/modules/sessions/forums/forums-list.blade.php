@@ -30,10 +30,10 @@
 			  <tbody>
 			    @foreach ($forums as $forum)
 			      <tr>
-			        <td><h4> <a href="{{ url('tablero/foro/ver/' . $forum->id) }}">{{$forum->topic}}</a></h4></td>
+			        <td><h4> <a href="{{ url('tablero/foros/'.$session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h4></td>
               <td>{{str_limit($forum->description, $limit = 20, $end = '...')}}</td>
 			        <td>
-			          <a href="{{ url('tablero/foro/ver/' . $forum->id) }}" class="btn xs view">Ver</a>
+			          <a href="{{ url('tablero/foros/' .$session->slug.'/'.$forum->slug.'/ver') }}" class="btn xs view">Ver</a>
 					</tr>
 			    @endforeach
 			  </tbody>

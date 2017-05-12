@@ -18,11 +18,11 @@ class Forum extends Model
     ];
 
     function session(){
-      return $this->belongsTo("App\ModuleSession");
+      return $this->belongsTo("App\Models\ModuleSession");
     }
 
     function forum_messages(){
-      return $this->hasMany("App\ForumMessage");
+      return $this->hasMany("App\Models\ForumMessage");
     }
 
 

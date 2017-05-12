@@ -16,6 +16,6 @@ class ForumMessage extends Model
 
 
   function forum(){
-    return $this->belongsTo("App\Forum");
+    return $this->belongsTo("App\Models\Forum");
   }
 }

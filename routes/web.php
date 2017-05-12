@@ -235,6 +235,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/foros/{module_slug}/{session_slug}', 'Forums@index');
     Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
     Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
+    Route::get('tablero/foros/{session_slug}/{forum_slug}/ver', 'Forums@view');
+    Route::get('tablero/foros/{forum_slug}/mensajes/agregar', 'Forums@addMessage');
+    Route::post('tablero/foros/{forum_slug}/mensajes/save/single', 'Forums@saveMessage');
   });
 
   /* R U T A S  UNICAS DEL Facilitador
