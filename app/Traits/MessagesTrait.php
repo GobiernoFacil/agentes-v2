@@ -121,6 +121,10 @@ trait MessagesTrait{
          //activity file
          'file.required' => 'Este campo es requerido',
          'parent_id.required' => 'Este campo es requerido',
+         //forum
+         'topic.required' => 'Este campo es requerido',
+         'topic.max' => 'Este campo debe contener 256 caracteres como máximo',
+         'topic.unique' => 'Este elemento ya está en uso. Selecciona uno diferente'
       ];
     }
 }
