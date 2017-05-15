@@ -53,13 +53,13 @@
 						</div>
 					</div>
 				</div>
-				@if($module->public)
+				@if($module->public && $today >= $module->start)
 				<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn view">Ir al Módulo</a></li>
 				@endif
 			</div>
-			
-			
-				
+
+
+
 		</div>
 		@endforeach
 	</div>

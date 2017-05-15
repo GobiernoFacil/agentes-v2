@@ -23,13 +23,15 @@ class SessionFellow extends Controller
     {
       //
       $user    = Auth::user();
-      $session  = ModuleSession::where('slug',$slug)->first();
+      $session  = ModuleSession::where('slug',$slug)->firstOrFail();
+      $today = date("Y-m-d");
       return view('fellow.modules.sessions.session-view')->with([
         "user"      => $user,
-        "session"    => $session
+        "session"    => $session,
+        "today" =>$today
       ]);
     }
-    
+
     public function activity($module_slug,$slug,$id)
     {
       //
@@ -42,5 +44,5 @@ class SessionFellow extends Controller
         "activity"  => $activity
       ]);
     }
-    
+
 }
