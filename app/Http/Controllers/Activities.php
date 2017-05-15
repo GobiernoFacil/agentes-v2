@@ -145,7 +145,7 @@ class Activities extends Controller
         public function update(UpdateActivity $request)
         {
             //
-            $data   = $request->except(['_token','start','end','time','link']);
+            $data   = $request->except(['_token','start','end','time','link','link_video']);
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
               $data['type'] = 'files';
