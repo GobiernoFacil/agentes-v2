@@ -2,7 +2,7 @@
 @section('title', $activity->name )
 @section('description', $activity->name)
 @section('body_class', 'fellow aprendizaje modulos')
-@section('breadcrumb_type', 'session view')
+@section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
 
 @section('content')
