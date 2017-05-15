@@ -222,6 +222,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
     // Rutas actividades
     Route::get('tablero/aprendizaje/{module_slug}/{slug}/{id}', 'SessionFellow@activity');
+	//Descargar archivo en actividades
+    Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');    
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
