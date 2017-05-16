@@ -49,4 +49,8 @@ class User extends Authenticatable
     function image(){
       return $this->hasOne("App\Models\Image");
     }
+
+    function fellowData(){
+      return $this->hasOne("App\Models\FellowData");
+    }
 }

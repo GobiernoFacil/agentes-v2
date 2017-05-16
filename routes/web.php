@@ -223,7 +223,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas actividades
     Route::get('tablero/aprendizaje/{module_slug}/{slug}/{id}', 'SessionFellow@activity');
 	//Descargar archivo en actividades
-    Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');    
+    Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
@@ -239,6 +239,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
     Route::get('tablero/foros/{session_slug}/{forum_slug}/ver', 'Forums@view');
     Route::get('tablero/foros/{forum_slug}/mensajes/agregar', 'Forums@addMessage');
+    Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
     Route::post('tablero/foros/{forum_slug}/mensajes/save/single', 'Forums@saveMessage');
   });
 

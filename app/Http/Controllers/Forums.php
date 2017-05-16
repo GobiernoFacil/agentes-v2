@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Forum;
+use App\Models\FellowData;
 use App\Models\ForumMessage;
 use App\Models\ModuleSession;
 // FormValidators
@@ -118,6 +119,32 @@ class Forums extends Controller
         $message->user_id = $user->id;
         $message->forum_id = $forum->id;
         $message->save();
-        return redirect("tablero/foros/{$forum->session->slug}/{$forum->slug}/ver")->with('message','Mensaje creado correctamente');
+        if($forum->session_id){
+          return redirect("tablero/foros/{$forum->session->slug}/{$forum->slug}/ver")->with('message','Mensaje creado correctamente');
+        }else{
+          return redirect("tablero/foros/{$forum->state_name}")->with('message','Mensaje creado correctamente');
+        }
       }
+
+      /**
+       * foro por estado
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @return \Illuminate\Http\Response
+       */
+      public function stateForum($state_name)
+      {
+        $user      = Auth::user();
+        if($user->fellowData->state === $state_name){
+          $forum  = Forum::where('state_name',$state_name)->firstOrFail();
+          return view('fellow.modules.sessions.forums.forum-view')->with([
+            "user"      => $user,
+            "forum"    => $forum
+          ]);
+        }else{
+          return redirect('tablero');
+        }
+
+      }
+
 }
