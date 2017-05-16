@@ -40,4 +40,8 @@ class Activity extends Model
     return $this->hasOne("App\Models\ActivityVideo");
   }
 
+  function forum(){
+    return $this->hasOne("App\Models\Forum");
+  }
+
 }

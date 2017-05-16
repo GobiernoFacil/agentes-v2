@@ -25,5 +25,10 @@ class Forum extends Model
       return $this->hasMany("App\Models\ForumMessage");
     }
 
+    function activity(){
+      return $this->belongsTo("App\Models\Activity");
+    }
+
+
 
 }
