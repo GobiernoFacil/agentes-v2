@@ -65,6 +65,18 @@
     </p>
   </div>
 </div>
+<!-- forum -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Esta actividad cuenta con foro?</strong></label>
+      {{Form::select('hasforum',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('hasforum'))
+      <strong class="danger">{{$errors->first('hasforum')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <!-- horas y # sesión -->
 <div class="row">
   <div class="col-sm-6">
