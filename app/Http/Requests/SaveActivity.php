@@ -38,6 +38,7 @@ class SaveActivity extends FormRequest
               'start'=>'required',
               'time'=>'required',
               'link'=>'required',
+              'hasforum'=>'required'
           ];
         }elseif($this->type==='video'){
           return [
@@ -50,6 +51,7 @@ class SaveActivity extends FormRequest
               'competitor_role'=> 'required',
               'type'=>'required',
               'link_video'=>'required',
+              'hasforum'=>'required'
           ];
 
         }else{
@@ -63,6 +65,7 @@ class SaveActivity extends FormRequest
             'description'=> 'required',
             'competitor_role'=> 'required',
             'type'=>'required',
+            'hasforum'=>'required'
         ];
       }
     }

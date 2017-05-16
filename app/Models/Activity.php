@@ -20,7 +20,8 @@ class Activity extends Model
       'type',
       'files',
       'evaluation',
-      'hasfiles'
+      'hasfiles',
+      'hasforum'
     ];
 
     //modelos relacionados

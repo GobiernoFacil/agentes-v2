@@ -9,6 +9,7 @@ use File;
 use App\Models\Activity;
 use App\Models\ActivityVideo;
 use App\Models\ModuleSession;
+use App\Models\Forum;
 // FormValidators
 use App\Http\Requests\SaveActivity;
 use App\Http\Requests\UpdateActivity;
@@ -87,6 +88,35 @@ class Activities extends Controller
               $video->save();
             }
 
+            if($activity->hasforum==='Sí'){
+              $name   = 'Foro de actividad: '.$request->name;
+              $forum  = new Forum();
+              $unique = Forum::select('topic')->where('topic',$name)->distinct()->get();
+              if($unique->count()>0){
+                $matches = array();
+                if (preg_match('#(\d+)$#', $request->name, $matches)) {
+                  $number = $matches[1]+1;
+                  $name   = $name.' '.$number;
+                  $forum->topic = $name;
+                  $forum->slug  = str_slug($name);
+                }else{
+                  $number = 2;
+                  $name   = $name.' '.$number;
+                  $forum->topic = $name;
+                  $forum->slug  = str_slug($name);
+                }
+              }else{
+                $forum->topic = $name;
+                $forum->slug  = str_slug($name);
+              }
+              $forum->session_id = $session->id;
+              $forum->activity_id = $activity->id;
+              $forum->user_id    = $user->id;
+              $forum->description = $activity->description;
+              $forum->save();
+            }
+
+
 
             if($activity->hasfiles==='Sí'){
               //Agregar archivos
@@ -164,6 +194,40 @@ class Activities extends Controller
               $video->start = $request->start;
               $video->time = $request->time;
               $video->save();
+            }
+
+
+            if($request->hasforum==='Sí'){
+              $forum  = Forum::firstOrCreate(['activity_id'=>$request->id]);
+              $last_name = $forum->topic;
+              $name   = 'Foro de actividad: '.$request->name;
+              if($name != $last_name){
+                $unique = Forum::select('topic')->where('topic',$name)->distinct()->get();
+                if($unique->count()>0){
+                  $matches = array();
+                  if (preg_match('#(\d+)$#', $request->name, $matches)) {
+                    $number = $matches[1]+1;
+                    $name   = $name.' '.$number;
+                    $forum->topic = $name;
+                    $forum->slug  = str_slug($name);
+                  }else{
+                    $number = 2;
+                    $name   = $name.' '.$number;
+                    $forum->topic = $name;
+                    $forum->slug  = str_slug($name);
+                  }
+                }else{
+                  $forum->topic = $name;
+                  $forum->slug  = str_slug($name);
+                }
+              }
+              $forum->description = $request->description;
+              $forum->save();
+            }else{
+              $forum  = Forum::where('activity_id',$request->id)->first();
+              if($forum){
+                $forum->delete();
+              }
             }
 
 

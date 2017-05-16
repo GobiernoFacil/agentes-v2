@@ -41,6 +41,7 @@ use MessagesTrait;
               'start'=>'required',
               'time'=>'required',
               'link'=>'required',
+              'hasforum'=>'required'
           ];
         }elseif($this->type==='video'){
           return [
@@ -53,6 +54,7 @@ use MessagesTrait;
               'competitor_role'=> 'required',
               'type'=>'required',
               'link_video'=>'required',
+              'hasforum'=>'required'
           ];
         }else{
 
@@ -65,6 +67,7 @@ use MessagesTrait;
             'description'=> 'required',
             'competitor_role'=> 'required',
             'type'=>'required',
+            'hasforum'=>'required'
         ];
       }
     }
