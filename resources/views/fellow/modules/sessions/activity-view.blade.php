@@ -49,7 +49,7 @@
 		<div class="col-sm-9">
 			<h2 class="title">Recursos</h2>
   		</div>
-  		<div class="col-sm-12">  
+  		<div class="col-sm-12">
   			@include('admin.modules.activities.activities-requirements-list')
   		</div>
   	</div>
@@ -62,10 +62,47 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h2 class="title">Archivos</h2>
-			@include('admin.modules.activities.activities-files-list')	
+			@include('admin.modules.activities.activities-files-list')
 		</div>
 	</div>
 </div>
 @endif
+
+@if($activity->forum)
+<!--forum-->
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Foro</h2>
+		</div>
+		<div class="col-sm-3 center">
+	    <a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+	  </div>
+	</div>
+
+	@if($activity->forum->forum_messages)
+		@foreach($activity->forum->forum_messages as $message)
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<p>{{$message->message}}</p>
+				</div>
+			</div>
+		@endforeach
+		<div class="row">
+			<div class="col-sm-3 col-sm-offset-2 center">
+				<a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+			</div>
+		</div>
+	@else
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<p>No existen mensajes</p>
+		</div>
+	</div>
+	@endif
+</div>
+@endif
+
+
 
 @endsection
