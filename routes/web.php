@@ -201,6 +201,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/facilitadores/editar/{id}', 'Facilitator@update');
     Route::get('dashboard/facilitadores/deshabilitar/{id}', 'Facilitator@delete');
     Route::get('dashboard/facilitadores/ver/{id}', 'Facilitator@view');
+    /*@NewsEvents Controller */
+    // Rutas CRUD News Events
+    Route::get('dashboard/noticias-eventos', 'NewsEvents@index');
+    Route::get('dashboard/noticias-eventos/agregar', 'NewsEvents@add');
   });
 
   /* R U T A S  UNICAS DEL Fellow

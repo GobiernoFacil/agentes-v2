@@ -17,5 +17,6 @@ class NewsEvent extends Model
     'slug',
     'time',
     'type',
+    'public'
     ];
 }
