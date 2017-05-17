@@ -9,7 +9,7 @@ use App\Models\NewsEvent;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveNewsEvents;
-use App\Http\Requests\UpdateNewsEvents;
+use App\Http\Requests\UpdateNewsEvent;
 class NewsEvents extends Controller
 {
     //Paginación
@@ -93,6 +93,41 @@ class NewsEvents extends Controller
       $new  = new NewsEvent($data);
       $new->save();
       return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
+    }
+
+    /**
+    * editar noticia o evento
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function edit($id)
+    {
+      $user    = Auth::user();
+      $content = NewsEvent::where('id',$id)->firstOrFail();
+      return view('admin.newsEvents.newsEvents-update')->with([
+        "user"      => $user,
+        "content"  =>$content
+        ]);
+    }
+
+    /**
+    * Actualiza noticia o evento
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function update(UpdateNewsEvent $request)
+    {
+      //
+      if($request->type==='news'){
+        $data   = $request->except(['start','end','time','_token']);
+      }else{
+        $data   = $request->except('_token');
+      }
+      $data['slug']    = str_slug($request->title);
+      NewsEvent::where('id',$request->content_id)->update($data);
+      return redirect("dashboard/noticias-eventos/ver/$request->content_id")->with('success',"Se ha actualizado correctamente");
     }
 
 }

@@ -207,6 +207,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/noticias-eventos/agregar', 'NewsEvents@add');
     Route::post('dashboard/noticias-eventos/save', 'NewsEvents@save');
     Route::get('dashboard/noticias-eventos/ver/{content_id}', 'NewsEvents@view');
+    Route::get('dashboard/noticias-eventos/editar/{content_id}', 'NewsEvents@edit');
+    Route::post('dashboard/noticias-eventos/update/{content_id}', 'NewsEvents@update');
   });
 
   /* R U T A S  UNICAS DEL Fellow
