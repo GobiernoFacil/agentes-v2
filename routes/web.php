@@ -205,6 +205,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas CRUD News Events
     Route::get('dashboard/noticias-eventos', 'NewsEvents@index');
     Route::get('dashboard/noticias-eventos/agregar', 'NewsEvents@add');
+    Route::post('dashboard/noticias-eventos/save', 'NewsEvents@save');
+    Route::get('dashboard/noticias-eventos/ver/{content_id}', 'NewsEvents@view');
   });
 
   /* R U T A S  UNICAS DEL Fellow

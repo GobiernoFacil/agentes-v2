@@ -24,6 +24,17 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script>
+$( document ).ready(function() {
+  $('#type').change(function(){
+    if(this.value==='news'){
+      $('#eventData').hide();
+    }else if(this.value==='event'){
+      $('#eventData').show();
+    }else{
+      $('#eventData').hide();
+    }
+  });
+});
 $.datepicker.regional['es'] = {
 closeText: 'Cerrar',
 prevText: '< Ant',

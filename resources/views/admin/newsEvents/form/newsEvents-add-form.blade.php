@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/modulos/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/noticias-eventos/save"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -24,13 +24,15 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'news' =>'Noticia', 'event'=>'Evento'],null, ['class' => 'form-control'])}}
+      {{Form::select('type',[null => "Selecciona una opción", 'news' =>'Noticia', 'event'=>'Evento'],null, ['class' => 'form-control','id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
     </p>
   </div>
 </div>
+
+<div id ="eventData" style="display:none">
 <!-- Fechas -->
 <div class="row">
   <div class="col-sm-6">
@@ -52,8 +54,19 @@
     </p>
   </div>
 </div>
-
-
+<!-- time  -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Hora</strong> <br>
+      {{Form::text('time',null, ["class" => "form-control"])}} </label>
+      @if($errors->has('time'))
+      <strong class="danger">{{$errors->first('time')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+</div>
 <!-- content  -->
 <div class="row">
   <div class="col-sm-12">

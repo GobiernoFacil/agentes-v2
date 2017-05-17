@@ -7,6 +7,9 @@ use Auth;
 // models
 use App\Models\NewsEvent;
 use App\User;
+// FormValidators
+use App\Http\Requests\SaveNewsEvents;
+use App\Http\Requests\UpdateNewsEvents;
 class NewsEvents extends Controller
 {
     //Paginación
@@ -21,6 +24,24 @@ class NewsEvents extends Controller
     {
       //
     }
+
+    /**
+    * Muestra noticia o evento
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function view($id)
+    {
+      //
+      $user   = Auth::user();
+      $content = NewsEvent::find($id);
+      return view('admin.newsEvents.NewsEvent-view')->with([
+        "user"      => $user,
+        "content"    => $content
+      ]);
+    }
+
 
     /**
     * Muestra lista de módulos
@@ -50,6 +71,28 @@ class NewsEvents extends Controller
       return view('admin.newsEvents.newsEvents-add')->with([
         "user"      => $user,
       ]);
+    }
+
+    /**
+    * Guarda nueva noticia o evento
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function save(SaveNewsEvents $request)
+    {
+      //
+      $user   = Auth::user();
+      if($request->type==='news'){
+        $data   = $request->except(['start','end','time','_token']);
+      }else{
+        $data   = $request->except('_token');
+      }
+      $data['user_id'] = $user->id;
+      $data['slug']    = str_slug($request->title);
+      $new  = new NewsEvent($data);
+      $new->save();
+      return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
     }
 
 }
