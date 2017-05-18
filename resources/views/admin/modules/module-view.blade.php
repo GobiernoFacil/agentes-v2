@@ -51,7 +51,7 @@
 	</div>
 </div>
 
-<?php /* DELETE ASAP 
+<?php /* DELETE ASAP
 <div class="box">
 	<div class="row">
 		<div class="col-sm-6">
@@ -85,7 +85,7 @@
 @foreach ($module->sessions as $session)
 <div class="box session_list">
 	<div class="row">
-		<!--icono-->	
+		<!--icono-->
 		<div class="col-sm-1 right">
 			<b class="icon_h session list_s"></b>
 		</div>
@@ -105,9 +105,9 @@
 		<!-- ver sesión-->
 		<div class="col-sm-2">
 			<a class="btn view block sessions_l"  href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">Ver sesión</a>
-			<!-- <a href ="{{ url('dashboard/modulos/eliminar' . $module->id) }}"  id ="{{$module->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
+			 <a href ="{{ url('dashboard/sesiones/eliminar/' . $session->id) }}"  id ="{{$session->id}}" class="btn danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 		</div>
-		
+
 		<div class="footnote">
 			<div class="row">
 				<div class="col-sm-2">
