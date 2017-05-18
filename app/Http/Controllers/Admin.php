@@ -13,6 +13,8 @@ use Mail;
 use App\User;
 use App\Models\Aspirant;
 use App\Models\Image;
+use App\Models\Module;
+
 // FormValidators
 use App\Http\Requests\SaveAdmin;
 use App\Http\Requests\UpdateAdmin;
@@ -42,6 +44,10 @@ class Admin extends Controller
 		$civil_number 	  	  = Aspirant::where('is_activated',1)->where('origin','Sociedad Civil')->count();
 		$privado_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Privado')->count();
 		$academico_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Académico')->count();
+		
+		$modules_count 		  = Module::all()->count();		
+		$facilitators_count   = User::where('type',"Facilitator")->count();		
+		
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
@@ -53,7 +59,9 @@ class Admin extends Controller
 		  'gobierno_number' => $gobierno_number,
 		  'civil_number' 	=> $civil_number,
 		  'privado_number'	=> $privado_number,
-		  'academico_number'=> $academico_number
+		  'academico_number'=> $academico_number,
+		  "modules_count"	=> $modules_count,
+		  'facilitators_count' => $facilitators_count
         ]);
       }
 
