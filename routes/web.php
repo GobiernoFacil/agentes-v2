@@ -206,6 +206,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/facilitadores/editar/{id}', 'Facilitator@update');
     Route::get('dashboard/facilitadores/deshabilitar/{id}', 'Facilitator@delete');
     Route::get('dashboard/facilitadores/ver/{id}', 'Facilitator@view');
+    Route::get('dashboard/facilitadores/eliminar/{id}', 'Facilitator@delete');
     /*@NewsEvents Controller */
     // Rutas CRUD News Events
     Route::get('dashboard/noticias-eventos', 'NewsEvents@index');
