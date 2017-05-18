@@ -12,5 +12,6 @@ public/css/fonts
 public/files/*
 public/archivos/actividades/*
 public/img/users/*
+public/img/newsEvent/*
 public/js/bower_components/
 csv/*

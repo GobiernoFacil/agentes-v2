@@ -14,7 +14,7 @@ class NewsEvents extends Controller
 {
     //Paginación
     public $pageSize = 10;
-
+    const UPLOADS = "img/newsEvent";
     /**
     * Búsqueda de módulo
     *
@@ -128,6 +128,26 @@ class NewsEvents extends Controller
       $data['slug']    = str_slug($request->title);
       NewsEvent::where('id',$request->content_id)->update($data);
       return redirect("dashboard/noticias-eventos/ver/$request->content_id")->with('success',"Se ha actualizado correctamente");
+    }
+
+
+    /**
+    * Agrega imagen
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function uploadImage(Request $request)
+    {
+      if($request->hasFile('file') && $request->file('file')->isValid()){
+        $path  = public_path(self::UPLOADS);
+        $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
+        $request->file('file')->move($path, $name);
+        return response()->JSON([
+          'location' => url("/img/NewsEvent/$name")
+        ]);
+      }
     }
 
 }
