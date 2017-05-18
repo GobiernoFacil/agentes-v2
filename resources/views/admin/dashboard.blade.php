@@ -24,17 +24,19 @@
 	<div class="col-sm-9">
 		<div class="row">
 			<div class="col-sm-6">
-				<div class="box">
+				<div class="box center">
 					<h3 class="sa_title">Módulos</h3>
 					<a class="count_link" href="{{url('dashboard/modulos')}}">{{$modules_count}}</a>
 					<a href="{{url('dashboard/modulos')}}" class="btn gde">Lista de Módulos</a>
+					<a href="{{url('dashboard/modulos/agregar')}}" class="btn gde download">[+] Agregar Módulo</a>
 				</div>
 			</div>
 			<div class="col-sm-6">
-				<div class="box">
+				<div class="box center">
 					<h3 class="sa_title">Facilitadores</h3>
 					<a class="count_link" href="{{url('dashboard/facilitadores')}}">{{$facilitators_count}}</a>
 					<a href="{{url('dashboard/facilitadores')}}" class="btn gde">Lista de Facilitadores</a>
+					<a href="{{url('dashboard/facilitadores/agregar')}}" class="btn gde download">[+] Agregar Facilitador</a>
 				</div>
 			</div>
 			<div class="col-sm-12">
