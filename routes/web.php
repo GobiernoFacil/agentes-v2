@@ -57,6 +57,11 @@ Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
 
+/*@NewsEventFront Controller */
+/*********  Noticias y eventos ******** */
+Route::get('noticias-eventos', 'NewsEventFront@index');
+Route::get('noticias-eventos/{slug}', 'NewsEventFront@get');
+
 /****************** USUARIOS REGISTRADOS ***************/
 Route::group(['middleware' => ['auth']], function () {
   /*@Suscribe Controller */
