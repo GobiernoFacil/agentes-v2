@@ -124,7 +124,9 @@ trait MessagesTrait{
          //forum
          'topic.required' => 'Este campo es requerido',
          'topic.max' => 'Este campo debe contener 256 caracteres como máximo',
-         'topic.unique' => 'Este elemento ya está en uso. Selecciona uno diferente'
+         'topic.unique' => 'Este elemento ya está en uso. Selecciona uno diferente',
+         //news
+         'content.required' => 'Este campo es requerido',
       ];
     }
 }

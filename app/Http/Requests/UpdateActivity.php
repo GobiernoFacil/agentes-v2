@@ -25,7 +25,6 @@ use MessagesTrait;
      */
     public function rules()
     {
-      var_dump($this->toArray());
 
         $activity = Activity::find($this->route("id"));
         if($this->type==='webinar'){
