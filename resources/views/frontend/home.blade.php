@@ -11,14 +11,13 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<div class="bgdimg">
 			<figure>
-				<img src="{{url('img/home_bgd.jpg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+				<img src="{{url('img/oaxaca.jpg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
 			</figure>
 			<div class="cta">
 				<div class="col-sm-8 col-sm-offset-2">
-				<h1>SÉ UN <strong>AGENTE DE CAMBIO</strong></h1>
 				<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
-				<h3>La convocatoria 2017 <strong>ha cerrado</strong>, gracias a quienes participaron en este proceso</h3>
-				<a href="{{url('convocatoria')}}" class="btn i_convoca_w">Convocatoria cerrada</a>
+				<h1></h1>
+				<a href="{{url('convocatoria/resultados-2017')}}" class="btn i_convoca_w blue">Resultados convocatoria 2017 </a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
