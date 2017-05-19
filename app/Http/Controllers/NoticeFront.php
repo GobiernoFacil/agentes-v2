@@ -20,6 +20,11 @@ class NoticeFront extends Controller
       public function convocatoria(){
         return view('frontend.convocatoria.info');
       }
+      
+      //convocatoria
+      public function resultado17(){
+        return view('frontend.convocatoria.resultados2017');
+      }
 
       //convocatoria/bases
       public function bases(){
