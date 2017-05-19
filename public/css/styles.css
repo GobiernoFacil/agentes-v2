@@ -1518,7 +1518,7 @@ h2.danger {
     z-index: 0; }
     .bgdimg figure:after {
       content: "";
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       border-bottom: 8px solid #187fad;
       position: absolute;
       height: 100%;
