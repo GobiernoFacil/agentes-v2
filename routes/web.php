@@ -26,6 +26,7 @@ Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
+Route::get('convocatoria/resultados-2017', 'NoticeFront@resultado17');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
 /** se acabó la convocatoria
