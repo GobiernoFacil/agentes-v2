@@ -15,7 +15,7 @@
 		<p>La información que se recabará consiste en: nombre completo del postulante, edad, empleo, domicilio, correo electrónico, teléfono fijo y/o celular, los datos personales contenidos en currículum y comprobante de domicilio. </p>
 
 		<h2>Fundamento para el tratamiento de datos personales</h2>
-		<p>El INAI tratará los datos personales con fundamento en los artículos 1, 2, fracciones II y V, 3 fracción XXVIII 4, y 25 de la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados. Para las finalidades ulteriores señaladas.</p>
+		<p>El INAI tratará los datos personales con fundamento en los artículos 1, 2, fracciones II y V, 3 fracción XXVIII, 4 y 25 de la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados; así como el artículo 59 de la Ley General de Transparencia y Acceso a la Información Pública. Para las finalidades ulteriores señaladas.</p>
 
 
 		<h2>Finalidades</h2>
@@ -30,7 +30,9 @@
 			<li>Establecer comunicaciones futuras relacionadas con la temática de los Convocantes.					   </li>
 		</ul>
 		<p>De manera adicional, los datos recabados se utilizarán para generar estadísticas e informes sobre los resultados de la Convocatoria en mención. No obstante, es importante señalar que en estas estadísticas e informes, la información no estará asociada con el titular de los datos personales, por lo que no será posible identificarlo, con excepción del nombre de los aspirantes seleccionados.</p>
-		<p>Para conocer mayor información sobre los términos y condiciones en que serán tratados sus datos personales, como los terceros con quienes compartimos su información personal y la forma en que podrá ejercer sus derechos ARCO, puede consultar el aviso de privacidad integral en <a href="{{url('archivos/ConsentimientoDatosPersonales.docx')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</p>
+		<p>Asimismo, es importante señalar que, en cumplimiento del artículo 70, fracción XV, inciso q) de la Ley General de Transparencia y Acceso a la Información Pública se harán públicos los nombres de los candidatos seleccionados. Se informa que no se recabarán datos sensibles.</p>
+		<p>Para conocer mayor información sobre los términos y condiciones en que serán tratados sus datos personales, como los terceros con quienes compartimos su información personal y la forma en que podrá ejercer sus derechos ARCO, puede consultar el aviso de privacidad integral en <a href="{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}" download>{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}</a>.</p>
+		<p>Si desea conocer el procedimiento para el ejercicio de estos derechos puede acudir a la Unidad de Transparencia, enviar un correo electrónico a unidad.transparencia@inai.org.mx o comunicarse al Telinai 01800835-43-24.</p>
 		<div class="notes">
 		<a id="name1"></a>
 		<p><sup>1</sup>  Publicada en el Diario Oficial de la Federación el veintiséis de enero de dos mil diecisiete.
