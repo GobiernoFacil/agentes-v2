@@ -15,9 +15,9 @@
 			</figure>
 			<div class="cta">
 				<div class="col-sm-8 col-sm-offset-2">
-				<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
-				<h1></h1>
-				<a href="{{url('convocatoria/resultados-2017')}}" class="btn i_convoca_w blue">Resultados convocatoria 2017 </a>
+					<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
+					<h1></h1>
+					<a href="{{url('convocatoria/resultados-2017')}}" class="btn i_convoca_w blue">Lista de candidatos seleccionados convocatoria 2017 </a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
