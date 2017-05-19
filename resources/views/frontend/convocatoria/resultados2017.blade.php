@@ -40,8 +40,8 @@
 		<!--Oaxaca-->
 		<h2>Oaxaca</h2>
 		<ul>
-			<li>Emelinne Flores Luna</li>
 			<li>Fermín Sosa Pérez</li>
+			<li>Carolina Chávez Mendoza</li>
 			<li>Nayeli Lucero López Padilla</li>
 			<li>Jazmin Aquino Cruz</li>		
 		</ul>
