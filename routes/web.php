@@ -207,6 +207,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/facilitadores/editar/{id}', 'Facilitator@update');
     Route::get('dashboard/facilitadores/deshabilitar/{id}', 'Facilitator@delete');
     Route::get('dashboard/facilitadores/ver/{id}', 'Facilitator@view');
+    Route::get('dashboard/facilitadores/eliminar/{id}', 'Facilitator@delete');
     /*@NewsEvents Controller */
     // Rutas CRUD News Events
     Route::get('dashboard/noticias-eventos', 'NewsEvents@index');
@@ -215,6 +216,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/noticias-eventos/ver/{content_id}', 'NewsEvents@view');
     Route::get('dashboard/noticias-eventos/editar/{content_id}', 'NewsEvents@edit');
     Route::post('dashboard/noticias-eventos/update/{content_id}', 'NewsEvents@update');
+    Route::post('noticias-eventos/update/image', 'NewsEvents@uploadImage');
   });
 
   /* R U T A S  UNICAS DEL Fellow

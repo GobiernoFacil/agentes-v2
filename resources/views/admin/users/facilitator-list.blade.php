@@ -37,7 +37,7 @@
 			        <td>
 			          <a href="{{ url('dashboard/facilitadores/ver/' . $userf->id) }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('dashboard/facilitadores/editar/' . $userf->id) }}" class="btn xs ev">Editar</a>
-			          <a href ="{{ url('dashboard/facilitadores/eliminar' . $userf->id) }}"  id ="{{$userf->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
+			          <a href ="{{ url('dashboard/facilitadores/eliminar/' . $userf->id) }}"  id ="{{$userf->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>

@@ -41,7 +41,7 @@ class Facilitator extends Controller
       "user"      		=> $user,
     ]);
   }
-  
+
   /**
   * Ver usuario facilitador @ facilitador
   *
@@ -54,7 +54,7 @@ class Facilitator extends Controller
       "user"      		=> $user,
     ]);
   }
-  
+
   /**
   * edita perfil del usuario facilitador @ facilitador
   *
@@ -67,8 +67,8 @@ class Facilitator extends Controller
           "user"      => $user
         ]);
   }
-  
-  
+
+
   /**
   * Actualiza perfil del usuario facilitador @ facilitador
   *
@@ -80,8 +80,8 @@ class Facilitator extends Controller
   {
 	$facilitator = Auth::user();
     $facilitator->name  = $request->name;
-    $facilitator->email = $request->email;  
-	
+    $facilitator->email = $request->email;
+
     //update user data
     if(!empty($request->password)){
       var_dump($request->toArray());
@@ -90,7 +90,7 @@ class Facilitator extends Controller
     }else {
       $data   = $request->only(['name','institution','email']);
     }
-	
+
 	$facilitator->update($data);
     //update facilitator data
     FacilitatorData::where('user_id',$facilitator->id)->update($request->except(['_token','name','email','institution','image','password','password-confirm']));
@@ -110,9 +110,9 @@ class Facilitator extends Controller
     }
     return redirect("tablero-facilitador/perfil")->with('success',"Se ha actualizado correctamente");
   }
-  
+
 /////////////////////////////////////////// Termina Dashboard Usuario facilitador
-  
+
 
   /**
   * Búsqueda de usuario
@@ -133,7 +133,7 @@ class Facilitator extends Controller
   {
     //
     $user = Auth::user();
-    $list = User::where("type", "facilitator")->paginate($this->pageSize);
+    $list = User::where("type", "facilitator")->where("enabled",1)->paginate($this->pageSize);
     return view('admin.users.facilitator-list')->with([
       "user"      => $user,
       "facilitators"  => $list]);
@@ -278,6 +278,12 @@ class Facilitator extends Controller
   public function delete($id)
   {
     //
+    $facilitator        = User::find($id);
+    $facilitator->enabled  = 0;
+    $facilitator->save();
+
+    return redirect("dashboard/facilitadores")->with("message",'Usuario deshabilitado');
+
   }
 
 }
