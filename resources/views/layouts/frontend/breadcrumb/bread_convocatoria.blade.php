@@ -4,7 +4,7 @@
 	@if ($__env->yieldContent('body_class') =="convocatoria")
 	<li>Convocatoria</li>
 	@endif
-	@if ($__env->yieldContent('body_class') =="convocatoria proceso" || $__env->yieldContent('body_class') =="convocatoria aplicar" || $__env->yieldContent('body_class') =="convocatoria finalizar")
+	@if ($__env->yieldContent('body_class') =="convocatoria proceso" || $__env->yieldContent('body_class') =="convocatoria aplicar" || $__env->yieldContent('body_class') =="convocatoria finalizar" || $__env->yieldContent('body_class') =="convocatoria resultado17")
 	<li><a href="{{url('convocatoria')}}">Convocatoria</a></li>
 	@endif
 	@if ($__env->yieldContent('body_class') =="convocatoria proceso")
@@ -15,5 +15,8 @@
 	@endif
 	@if ($__env->yieldContent('body_class') =="convocatoria finalizar")
 	<li>Registro terminado</li>
+	@endif
+	@if ($__env->yieldContent('body_class') =="convocatoria resultado17")
+	<li>Resultado 2017</li>
 	@endif
 </ul>
