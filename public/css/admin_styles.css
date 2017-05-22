@@ -1583,6 +1583,17 @@ a:visited.btn {
       .btn.gde.process:hover,
       a:visited.btn.gde.process:hover {
         background-color: #f8a22f; }
+    a.btn.gde.danger,
+    .btn.gde.danger,
+    a:visited.btn.gde.danger {
+      background-color: red;
+      font-weight: 700;
+      margin-top: 5px;
+      text-align: center; }
+      a.btn.gde.danger:hover,
+      .btn.gde.danger:hover,
+      a:visited.btn.gde.danger:hover {
+        background-color: #b30000; }
   a.btn.block,
   .btn.block,
   a:visited.btn.block {
