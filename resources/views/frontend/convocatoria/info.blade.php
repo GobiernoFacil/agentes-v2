@@ -19,7 +19,7 @@
 				</div>
 				
 				<div class="col-sm-4">
-					<p><a href="{{url('archivos/ConsentimientoDatosPersonales.pdf')}}" class="btn gde download i_download" download>Aviso de Privacidad</a></p>
+					<p><a href="{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}" class="btn gde download i_download" download>Aviso de Privacidad</a></p>
 
 					<?php /*
 					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Proceso de Selección</a></p>
@@ -96,13 +96,13 @@
 
 				<p>Como parte del proceso de postulación, los interesados deberán<a href="#note2"><sup>2</sup></a>:</p>
 				<ol>
-					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('convocatoria/aplicar')}}">{{url('convocatoria/aplicar')}}</a>.</li>
+					<li>Llenar el formato de registro, disponible en el sitio <a href="{{url('')}}">{{url('')}}</a>.</li>
 					<li>Elaborar un ensayo – no mayor a cinco cuartillas –<a href="#note3"><sup>3</sup></a> en el que manifiesten las razones por las cuales estén interesados en participar en el programa de formación de Agentes Locales de Cambio, así como las aportaciones que pueden brindar a su contexto local como resultado de su participación en este programa.</li>
 					<li>Elaborar un video breve – alrededor de 2 minutos – en donde el postulante presente una idea para desarrollar un proyecto en su entidad federativa en el que, a través del uso de herramientas de gobierno abierto, se pueda atender exitosamente un reto local de desarrollo sostenible.<a href="#note4"><sup>4</sup></a></li>
 					<li>Perfil curricular actualizado, en el que se muestre evidencia de su experiencia probada en los temas de gobierno abierto y/o desarrollo sostenible (publicaciones, investigaciones o documentos probatorios que muestren la participación en el desarrollo de proyectos relacionados con estos temas).</li>
 					<li>Presentar una carta membretada que muestre el sector de procedencia del aspirante (sociedad civil, gobierno, académica, iniciativa privada).</li>
 					<li>Presentar una copia de comprobante de domicilio que acredite la residencia del candidato.</li>
-					<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/ConsentimientoDatosPersonales.docx')}}" download>{{url('archivos/ConsentimientoDatosPersonales.docx')}}</a>.</li>
+					<li>Descargar, leer, firmar (en caso de aceptar) y enviar el <a href="aviso-privacidad">Aviso de Privacidad</a> por medio del cual otorguen el consentimiento relativo al tratamiento de sus datos personales, disponible en <a href="{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}" download>{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}</a>.</li>
 				</ol>
 				
 				<p>De los participantes en el programa de formación de Agentes Locales de Cambio en gobierno abierto y desarrollo sostenible se espera:</p>
