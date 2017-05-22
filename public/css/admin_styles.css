@@ -1627,6 +1627,9 @@ a:visited.btn {
     text-align: center;
     text-transform: uppercase; }
 
+.links {
+  font-size: 13px; }
+
 a.count_link,
 .count_link {
   background: #187fad;
