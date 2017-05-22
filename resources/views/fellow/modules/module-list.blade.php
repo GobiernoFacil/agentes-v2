@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="hours">
-						<p><b class="time"></b> {{$module->number_hours}} h</p>
+						<p><b class="watch"></b> {{$module->number_hours}} h</p>
 						</div>
 					</div>
 					<div class="col-sm-12">
@@ -43,7 +43,7 @@
 				<div class="footer">
 					<div class="row">
 						<div class="col-sm-3">
-							<p>{{$module->number_sessions}}					</p>
+							<p><b class="sessionG"></b> {{$module->number_sessions}}</p>
 						</div>
 						<div class="col-sm-6">
 							<p class="center">{{$module->modality}}</p>
