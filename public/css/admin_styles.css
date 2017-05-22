@@ -1171,6 +1171,12 @@ header {
 .module {
   border: 1px solid #b9b9ba;
   padding: 0; }
+  .module.disabled {
+    background: #f9f8f9; }
+    .module.disabled h3 {
+      color: #777; }
+    .module.disabled .hours p {
+      color: #888; }
   .module h3 {
     font-size: 16px;
     padding: 15px 0 0 10px; }
@@ -1199,6 +1205,12 @@ header {
     display: block;
     text-align: center; }
 
+b.candado {
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxMy44MDRweCIgaGVpZ2h0PSIyMC41NThweCIgdmlld0JveD0iMCAwIDEzLjgwNCAyMC41NTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEzLjgwNCAyMC41NTgiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiM0RTUwNTAiIGQ9Ik00LjA5Myw2LjY2OFY1LjI1YzAtMS41MzEsMS4yNDYtMi43NzYsMi43NzctMi43NzZjMS41MzIsMCwyLjc3NiwxLjI0NSwyLjc3NiwyLjc3NnYxLjQxOWMwLjAwOCwwLjAwMywwLjAxNCwwLjAwNSwwLjAyLDAuMDA3YzAuMzk2LDAuMTY4LDAuNzcyLDAuMzcsMS4xMywwLjYwM1Y1LjI1YzAtMi4xNjQtMS43NjEtMy45MjUtMy45MjUtMy45MjVjLTIuMTY1LDAtMy45MjYsMS43NjEtMy45MjYsMy45MjV2Mi4wMjljMC4zNTctMC4yMzQsMC43MzMtMC40MzUsMS4xMy0wLjYwM0M0LjA4MSw2LjY3Myw0LjA4Nyw2LjY3LDQuMDkzLDYuNjY4Ii8+PHBhdGggZmlsbD0iIzRFNTA1MCIgZD0iTTYuODY5LDcuMjZjLTMuMzMyLDAtNi4wMzIsMi43LTYuMDMyLDYuMDMyYzAsMy4zMzEsMi43LDYuMDMyLDYuMDMyLDYuMDMyYzMuMzMxLDAsNi4wMzItMi43MDEsNi4wMzItNi4wMzJDMTIuOTAxLDkuOTYsMTAuMiw3LjI2LDYuODY5LDcuMjYgTTcuNDQ0LDEzLjZ2Mi4wNTNINi4yOTVWMTMuNmMtMC40NTQtMC4yMTQtMC43NjctMC42NzYtMC43NjctMS4yMWMwLTAuNzQxLDAuNjAxLTEuMzQxLDEuMzQxLTEuMzQxYzAuNzQsMCwxLjM0MSwwLjYsMS4zNDEsMS4zNDFDOC4yMSwxMi45MjQsNy44OTYsMTMuMzg2LDcuNDQ0LDEzLjYiLz48L3N2Zz4=") no-repeat 50%;
+  display: inline-block;
+  height: 20px;
+  width: 16px; }
+
 .timeline {
   margin: 30px 0 0;
   min-height: 44px; }
@@ -1209,7 +1221,9 @@ header {
     padding: 0 5px;
     position: relative;
     display: inline-block;
-    font-weight: 300; }
+    font-weight: 300;
+    text-align: right;
+    min-width: 130px; }
     .timeline li:before {
       content: "";
       border-bottom: 2px solid #989999;
@@ -1228,7 +1242,17 @@ header {
       height: 16px;
       position: absolute;
       width: 16px;
-      top: 22px; }
+      top: 22px;
+      right: -5px; }
+    .timeline li.disabled:after {
+      content: "";
+      background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxMy44MDRweCIgaGVpZ2h0PSIyMC41NThweCIgdmlld0JveD0iMCAwIDEzLjgwNCAyMC41NTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEzLjgwNCAyMC41NTgiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiM0RTUwNTAiIGQ9Ik00LjA5Myw2LjY2OFY1LjI1YzAtMS41MzEsMS4yNDYtMi43NzYsMi43NzctMi43NzZjMS41MzIsMCwyLjc3NiwxLjI0NSwyLjc3NiwyLjc3NnYxLjQxOWMwLjAwOCwwLjAwMywwLjAxNCwwLjAwNSwwLjAyLDAuMDA3YzAuMzk2LDAuMTY4LDAuNzcyLDAuMzcsMS4xMywwLjYwM1Y1LjI1YzAtMi4xNjQtMS43NjEtMy45MjUtMy45MjUtMy45MjVjLTIuMTY1LDAtMy45MjYsMS43NjEtMy45MjYsMy45MjV2Mi4wMjljMC4zNTctMC4yMzQsMC43MzMtMC40MzUsMS4xMy0wLjYwM0M0LjA4MSw2LjY3Myw0LjA4Nyw2LjY3LDQuMDkzLDYuNjY4Ii8+PHBhdGggZmlsbD0iIzRFNTA1MCIgZD0iTTYuODY5LDcuMjZjLTMuMzMyLDAtNi4wMzIsMi43LTYuMDMyLDYuMDMyYzAsMy4zMzEsMi43LDYuMDMyLDYuMDMyLDYuMDMyYzMuMzMxLDAsNi4wMzItMi43MDEsNi4wMzItNi4wMzJDMTIuOTAxLDkuOTYsMTAuMiw3LjI2LDYuODY5LDcuMjYgTTcuNDQ0LDEzLjZ2Mi4wNTNINi4yOTVWMTMuNmMtMC40NTQtMC4yMTQtMC43NjctMC42NzYtMC43NjctMS4yMWMwLTAuNzQxLDAuNjAxLTEuMzQxLDEuMzQxLTEuMzQxYzAuNzQsMCwxLjM0MSwwLjYsMS4zNDEsMS4zNDFDOC4yMSwxMi45MjQsNy44OTYsMTMuMzg2LDcuNDQ0LDEzLjYiLz48L3N2Zz4=") no-repeat 50%;
+      display: block;
+      height: 20px;
+      position: absolute;
+      width: 16px;
+      top: 19px;
+      right: -6px; }
 
 .profile.list {
   margin: 0; }
