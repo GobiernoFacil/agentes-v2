@@ -16,7 +16,7 @@
 	<div class = "col-sm-12">
 		<ul class="timeline">
 		@foreach($modules as $module)
-			<li class="active">{{$module->title}}</li>
+			<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{$module->title}}</li>
 		@endforeach
 		</ul>
   	</div>
@@ -26,7 +26,7 @@
 	<div class="row">
 		@foreach($modules as $module)
 		<div class = "col-sm-4">
-			<div class="module">
+			<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
 				<div class="row">
 					<div class="col-sm-9">
 						<h3>{{$module->title}}</h3>
@@ -49,7 +49,7 @@
 							<p class="center">{{$module->modality}}</p>
 						</div>
 						<div class="col-sm-3">
-							<p class="right">{{$module->public ? 'Activo' : 'Candado'}}	</p>
+							<p class="right">{!! $module->public && $today >= $module->start ? 'Activo' : '<b class="candado"></b>'!!}	</p>
 						</div>
 					</div>
 				</div>
