@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="hours">
-						<p><b></b> {{$module->number_hours}} h</p>
+						<p><b class="time"></b> {{$module->number_hours}} h</p>
 						</div>
 					</div>
 					<div class="col-sm-12">
