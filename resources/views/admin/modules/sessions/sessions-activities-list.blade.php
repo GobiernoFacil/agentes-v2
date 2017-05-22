@@ -4,7 +4,7 @@
 		<div class="col-sm-1 right">
 			<b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b>
 		</div>
-		<div class="col-sm-9">
+		<div class="col-sm-{{ $user->type == 'admin' ? '8' : '9'}}">
 			<p>@if($user->type == "admin")
 				<a href="{{ url('dashboard/sesiones/actividades/ver/' . $activity->id) }}">{{$activity->name}}</a>
 				 @else
@@ -12,8 +12,8 @@
 				 @endif
 				<span class="notes">({{$activity->duration}})</span></p>
 		</div>
-		<div class="col-sm-2">
-			<p>
+		<div class="col-sm-{{ $user->type == 'admin' ? '3' : '2'}}">
+			<p class="links right">
 			@if($user->type == "admin")
 			<a href="{{ url('dashboard/sesiones/actividades/ver/' . $activity->id) }}" class="btn xs ev">Ver</a>
 			<a href="{{ url('dashboard/sesiones/actividades/editar/' . $activity->id) }}" class="btn xs view">Actualizar</a>
