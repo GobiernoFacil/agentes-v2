@@ -21,9 +21,10 @@
 				<div class="col-sm-4">
 					<p><a href="{{url('archivos/Aviso_de_Privacidad_Agentes_Locales.docx')}}" class="btn gde download i_download" download>Aviso de Privacidad</a></p>
 
-					<?php /*
-					<p><a href="{{url('convocatoria/proceso-de-seleccion')}}" class="btn gde process">Proceso de Selección</a></p>
-					*/ ?>
+				</div>
+				<div class="col-sm-4">
+					<p><a href="{{url('convocatoria/resultados-2017')}}" class="btn gde process">Candidatos Seleccionados</a></p>
+					
 				</div>
 				
 			</div>
