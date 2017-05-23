@@ -47,7 +47,7 @@
   	<div class="col-sm-3">
   	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar recurso</a></p>
   	</div>
-  	<div class="col-sm-12">  
+  	<div class="col-sm-12">
   		@if($activity->activityRequirements->count() > 0)
   	      @include('admin.modules.activities.activities-requirements-list')
   		@else
@@ -61,8 +61,13 @@
 <!--archivos-->
 <div class="box">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-9">
 			<h2 class="title">Archivos</h2>
+		</div>
+		<div class="col-sm-3">
+  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
+  	</div>
+		<div class="col-sm-12">
 			@if($activity->activityFiles->count() > 0)
 			    @include('admin.modules.activities.activities-files-list')
 			@else
