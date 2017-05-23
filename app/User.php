@@ -53,4 +53,8 @@ class User extends Authenticatable
     function fellowData(){
       return $this->hasOne("App\Models\FellowData");
     }
+
+    function log(){
+      return $this->hasOne("App\Models\Log");
+    }
 }
