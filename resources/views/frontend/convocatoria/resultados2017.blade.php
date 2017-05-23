@@ -10,7 +10,8 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1><strong>Lista de Candidatos Seleccionados de la Convocatoria 2017</strong> del PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</strong>
 		</h1>
-		<h2>Candidatos seleccionados <a href="#note1"><sup>1</sup></a></h2>
+		<h2>Candidatos seleccionados</h2>
+		
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 		<!--Chihuahua-->
@@ -54,13 +55,15 @@
 			<li>Ernesto Urbina Miranda</li>
 		</ul>
 	</div>
-	<div class="col-sm-10 col-sm-offset-1">
-		<div class="line"></div>
-		<div class="notes">
-		<p> <a id="note1"></a>
-			<sup>1</sup> En los próximos días se publicará la información sobre los resultados de las diferentes etapas del proceso de selección.
-		</p>
+	<div class="row">
+				<div class="col-sm-6 col-sm-offset-2">
+					<p class="center"><a href="{{url('convocatoria/metodologia-2017')}}" class="btn gde download">Criterios y metodología de selección &gt;&gt;</a></p>
+				</div>
+				
+				
+				
+			</div>
 		</div>
-	</div>
+	
 </div>
 @endsection
