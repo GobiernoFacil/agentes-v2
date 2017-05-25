@@ -1756,6 +1756,12 @@ sup {
   margin: 0 5px 0 0;
   vertical-align: top; }
 
+.count_m {
+  color: #999;
+  display: block;
+  font-size: 12px;
+  margin-top: 5px; }
+
 .toggle-view li {
   border-top: 1px solid #ccc;
   padding: 10px 15px 20px;
