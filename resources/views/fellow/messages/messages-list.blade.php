@@ -22,26 +22,36 @@
 			<table class="table">
 			  <thead>
 			    <tr>
+			      <th>Conversación con</th>
 			      <th>Asunto</th>
-			      <th>Destinatario</th>
+			      <th></th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    @foreach ($conversations as $conversation)
-			      <tr>
-			        <td><h4> <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a></h4></td>
-							@if($conversation->to_id != $user->id)
-			        <td>{{$conversation->user_to->name}}</td>
-							@else
-							<td>{{$conversation->user->user_id}}</td>
-							@endif
-			        <td>
-			          <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver</a>
+			    <tr>
+				    <td><strong> 	
+					@if($conversation->to_id != $user->id)
+			        	{{$conversation->user_to->name}}
+					@else
+						{{$conversation->user->name}}
+					@endif
+					</strong>
+				    </td>
+			        <td><a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a>
+			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
+			        </td>
+					<td>
+				        {{$conversation->updated_at->diffForHumans()}}
+				    </td>
+					<td>			          
+			          <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
 								<!--
 			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $conversation->id) }}"  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
 								!-->
-					</tr>
+				    </td>
+				</tr>
 			    @endforeach
 			  </tbody>
 			</table>
