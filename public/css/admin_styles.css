@@ -1762,6 +1762,43 @@ sup {
   font-size: 12px;
   margin-top: 5px; }
 
+.message_box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  background: #eee;
+  padding: 10px;
+  position: relative; }
+  .message_box.me {
+    background: #187fad;
+    color: white; }
+    .message_box.me:after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid #187fad;
+      position: absolute;
+      right: -9px;
+      bottom: 7px; }
+  .message_box.not_me:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #eee;
+    position: absolute;
+    left: -9px;
+    bottom: 7px; }
+  .message_box p {
+    margin: 0; }
+  .message_box + p span {
+    color: #999;
+    font-size: 13px; }
+
 .toggle-view li {
   border-top: 1px solid #ccc;
   padding: 10px 15px 20px;
