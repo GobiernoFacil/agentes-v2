@@ -60,8 +60,8 @@
 	<div class="row">
 		<div class="col-sm-4 center">
 				<div class="box ">
-					<h3 class="sa_title">Tus Mensajes</h3>
-					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$modules_count}}</a>
+					<h3 class="sa_title">Tus Conversaciones</h3>
+					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
 					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 				</div>
 			</div>
@@ -105,16 +105,21 @@
 		<!--noticias-->
 		<div class="col-sm-12">
 			<h2>Noticias y avisos</h2>
+			@if($newsEvent->count()>0)
 			<ul>
-				<li><h3>La noticia</h3>
+				@foreach($newsEvent as $content)
+				<li><h3>{{$content->title}}</h3>
 				<p>descripción de la noticia</p>
-				<p>Fecha</p>
+				<p>{{date("d-m-Y", strtotime($content->created_at))}}</p>
 				</li>
-				<li><h3>La noticia</h3>
-				<p>descripción de la noticia</p>
-				<p>Fecha</p>
-				</li>
+				@endforeach
 			</ul>
+			@else
+			<div class="box">
+				<p>Aún no existen noticias o avisos.</p>
+			</div>
+			@endif
+
 		</div>
 
 	</div>

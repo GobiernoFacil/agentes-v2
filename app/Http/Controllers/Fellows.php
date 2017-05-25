@@ -10,6 +10,7 @@ use App\Models\Module;
 use App\Models\Log;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+use App\Models\NewsEvent;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
 class Fellows extends Controller
@@ -30,6 +31,7 @@ class Fellows extends Controller
       $session        = null;
       $activity       = null;
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
+      $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
       if($user_log){
         if($user_log->session_id){
           $session = ModuleSession::find($user_log->session_id);
@@ -46,7 +48,8 @@ class Fellows extends Controller
         "module"        =>  $first_module,
         "session"       => $session,
         "module_last"   => $module_last,
-        "activity"      => $activity
+        "activity"      => $activity,
+        "newsEvent"     => $newsEvent
       ]);
     }
 
