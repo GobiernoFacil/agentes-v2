@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('title', 'Mensaje privado con ' . $conversation->user_to->name)
+@section('description', 'Mensaje privado con ' . $conversation->user_to->name)
+@section('body_class', 'fellow mensajes')
+@section('breadcrumb_type', 'message view')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
