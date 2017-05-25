@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('title', 'Enviar mensaje privado')
+@section('description', 'Enviar mensaje privado')
+@section('body_class', 'fellow mensajes')
+@section('breadcrumb_type', 'message add')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
