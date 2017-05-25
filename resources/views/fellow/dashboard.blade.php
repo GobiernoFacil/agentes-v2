@@ -19,52 +19,30 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Tu última actividad</h2>
+		@if($user->log->count()>0)
 		<div class="box session_list">
-	  	<div class="row">
-			<!--icono-->
-			<div class="col-sm-1 right">
-				<b class="icon_h session list_s"></b>
+		  <div class="row">
+				@if($session)
+					@include('fellow.session-dash-view')
+				@elseif($activity)
+					@include('fellow.activity-dash-view')
+				@else
+					@include('fellow.module-dash-view')
+				@endif
 			</div>
-			<div class="col-sm-9">
-				<h3>Sesión 1</h3>
-				<h2><a href="http://pnud:8888/tablero/aprendizaje/propedeutico/la-sesion">La sesión</a></h2>
-				<div class="divider"></div>
-					<div class="row">
-						<div class="col-sm-9">
-							<p>Perder el tiempo</p>
-						</div>
-						<div class="col-sm-3 notes">
-							<p class="right">Fechas:<br>21-04-2017 al 27-04-2017</p>
-						</div>
-					</div>
-				</div>
-				<!-- ver sesión-->
-								<div class="col-sm-2">
-					<a class="btn view block sessions_l" href="http://pnud:8888/tablero/aprendizaje/propedeutico/la-sesion">Ver sesión</a>
-				</div>
-								<!-- footnote-->
-				<div class="footnote">
-					<div class="row">
-						<div class="col-sm-2">
-							<p><b class="icon_h time"></b>3 h </p>
-						</div>
-						<div class="col-sm-2">
-							<p><b class="icon_h modalidad"></b>Presencial</p>
-						</div>
-						<div class="col-sm-6">
-														<p><strong>Facilitador:</strong>
-																							<img src="http://pnud:8888/img/users/590b63a7f2ff6.png" height="30px">
-																 Andre Gomes -  FC Barcelona <br>
-														</p>
-													</div>
-						<div class="col-sm-2">
-							<p class="right">6 actividades  </p>
-						</div>
-					</div>
-				</div>
+		</div>
+
+	@else
+	<div class="box session_list">
+		<div class="row">
+			<div class="col-sm-12">
+					<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
 			</div>
-	</div>
-	
+			@include('fellow.module-first-dash-view')
+		</div>
+</div>
+	@endif
+
 <!-- avance-->
 <div class="row">
 	<div class="col-sm-12">
@@ -77,8 +55,8 @@
 		</div>
   	</div>
 </div>
-	
-	
+
+
 	<div class="row">
 		<div class="col-sm-4 center">
 				<div class="box ">
@@ -86,7 +64,7 @@
 					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$modules_count}}</a>
 					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 				</div>
-			</div>	
+			</div>
 		<div class="col-sm-8">
 				<div class="box ">
 					<h3 class="sa_title">Tu participación en los foros</h3>
@@ -123,7 +101,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--noticias-->
 		<div class="col-sm-12">
 			<h2>Noticias y avisos</h2>
@@ -138,8 +116,8 @@
 				</li>
 			</ul>
 		</div>
-		
+
 	</div>
-	
+
 </div>
 @endsection

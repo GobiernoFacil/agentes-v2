@@ -7,6 +7,9 @@ use Auth;
 use Hash;
 //Modelos
 use App\Models\Module;
+use App\Models\Log;
+use App\Models\ModuleSession;
+use App\Models\Activity;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
 class Fellows extends Controller
@@ -22,9 +25,28 @@ class Fellows extends Controller
     {
       $user 			    = Auth::user();
       $modules        = Module::all();
+      $first_module   = Module::orderBy('start','asc')->first();
+      $module_last    = null;
+      $session        = null;
+      $activity       = null;
+      $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
+      if($user_log){
+        if($user_log->session_id){
+          $session = ModuleSession::find($user_log->session_id);
+        }elseif($user_log->activity_id){
+          $activity = Activity::find($user_log->activity_id);
+        }else{
+          $module_last = Module::find($user_log->module_id);;
+        }
+      }
+
       return view('fellow.dashboard')->with([
         "user"      		=> $user,
-        "modules_count" => $modules->count()
+        "modules_count" => $modules->count(),
+        "module"        =>  $first_module,
+        "session"       => $session,
+        "module_last"   => $module_last,
+        "activity"      => $activity
       ]);
     }
 
@@ -75,4 +97,5 @@ class Fellows extends Controller
 
       return redirect("dashboard/perfil")->with("message",'Perfil actualizado correctamente');
     }
+
 }
