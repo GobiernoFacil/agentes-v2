@@ -8,7 +8,7 @@
 	<li><a href="{{url('tablero/mensajes')}}">Mensajes</a></li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="message view")
-	<li>Ver Mensaje</li>
+	<li>Ver Conversación con {{$conversation->user_to->name}}</li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="message add")
 	<li>Enviar Mensaje</li>
