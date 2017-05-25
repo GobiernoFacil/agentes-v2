@@ -16,6 +16,22 @@ class Forums extends Controller
     //
     //Paginación
     public $pageSize = 10;
+    /**
+     * Muestra lista de foros general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+      $user     = Auth::user();
+      $forums   = Forum::where('state_name',$user->fellowData->state)->orWhere('state_name',null)->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('fellow.modules.sessions.forums.forums-all-list')->with([
+        "user"      => $user,
+        "forums" => $forums,
+      ]);
+
+    }
+
 
     /**
      * Muestra lista de foros por sesión

@@ -97,7 +97,7 @@
 							</span>
 						</li>
 					</ul>
-					<a href="{{ url('tablero/mensajes') }}" class="btn gde center">Ver los foros</a>
+					<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 				</div>
 			</div>
 		</div>
