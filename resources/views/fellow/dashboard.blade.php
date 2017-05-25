@@ -47,12 +47,15 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Tu avance</h2>
-		<div class="box">
-		<ul class="timeline">
-					<li class="active">Propedeutico</li>
-					<li class="disabled">Batman vs Superman</li>
-				</ul>
-		</div>
+			<div class="box">
+					<ul class="timeline">
+						@if($all_modules->count()>0)
+								@foreach($all_modules as $m)
+										<li class="{{$m->public = 1 ? 'active' : 'disabled'}}">{{$m->title}}</li>
+								@endforeach
+						@endif
+					</ul>
+			</div>
   	</div>
 </div>
 

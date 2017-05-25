@@ -27,6 +27,7 @@ class Fellows extends Controller
       $user 			    = Auth::user();
       $modules        = Module::all();
       $first_module   = Module::orderBy('start','asc')->first();
+      $all_modules    = Module::orderBy('start','asc')->get();
       $module_last    = null;
       $session        = null;
       $activity       = null;
@@ -49,7 +50,8 @@ class Fellows extends Controller
         "session"       => $session,
         "module_last"   => $module_last,
         "activity"      => $activity,
-        "newsEvent"     => $newsEvent
+        "newsEvent"     => $newsEvent,
+        "all_modules"   => $all_modules
       ]);
     }
 
