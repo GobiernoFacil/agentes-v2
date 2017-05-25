@@ -2,7 +2,8 @@
 @section('title', 'Mensajes')
 @section('description', 'Lista de mensajes')
 @section('body_class', 'fellow mensajes')
-@section('breadcrumb_type', 'profile view')
+@section('breadcrumb_type', 'messages list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
@@ -52,7 +53,10 @@
 @else
 <div class="row">
   <div class="col-sm-12">
-    <p>Sin mensajes</p>
+	  <div class="box center">
+	  	<h2>Sin mensajes</h2>
+	  	<a href="{{ url('tablero/mensajes/agregar') }}" class="btn ev"><strong>+</strong> Crear Mensaje</a>
+	  </div>
   </div>
 </div>
 @endif
