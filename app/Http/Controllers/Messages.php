@@ -41,7 +41,7 @@ class Messages extends Controller
     public function add()
     {
       $user   = Auth::user();
-      $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->pluck('name','id');
+      $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->where('id','!=',$user->id)->pluck('name','id');
       return view('fellow.messages.messages-add')->with([
         "user"      => $user,
         'users' => $users
