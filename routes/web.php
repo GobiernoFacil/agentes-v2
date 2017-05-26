@@ -274,5 +274,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
     // Mensajes Facilitador
     Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
+    Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');
   });
 });
