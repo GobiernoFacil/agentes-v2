@@ -125,7 +125,10 @@ class FacilitatorMessages extends Controller
     {
       //
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('id',$request->id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$request->id)->where('to_id',$user->id)->firstOrFail();
+      }
       $message = new Message();
       $message->user_id = $user->id;
       if($conversation->to_id != $user->id){
