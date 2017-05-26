@@ -41,21 +41,26 @@ class FacilitatorMessages extends Controller
 
     ]);
   }
-  
+
   /**
   * Ver mensaje a facilitador @ facilitador
   *
   * @return \Illuminate\Http\Response
   */
-  public function viewMessage()
+  public function viewMessage($id)
   {
     $user 			  = Auth::user();
-    return view('facilitator.messages.message-view')->with([
+    $conversation = Conversation::where('id',$id)->where('user_id',$user->id)->first();
+    if(!$conversation){
+    $conversation = Conversation::where('id',$id)->where('to_id',$user->id)->firstOrFail();
+    }
+     return view('facilitator.messages.messages-conversation')->with([
       "user"      		=> $user,
+      "conversation"  => $conversation
     ]);
   }
-  
-  
+
+
    /**
     * Agregar mensaje
     *
@@ -70,7 +75,7 @@ class FacilitatorMessages extends Controller
         'users' => $users
       ]);
     }
-	
+
 	/**
     * Guarda nueva conversación con mensaje
     *
@@ -94,5 +99,45 @@ class FacilitatorMessages extends Controller
       $message->save();
       return redirect("tablero-facilitador/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
+
+    /**
+    * Agregar mensaje a convesacion
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function addSingle($conversation_id)
+    {
+      $user   = Auth::user();
+      $conversation = Conversation::find($conversation_id);
+      return view('facilitator.messages.messages-single-add')->with([
+        "user"      => $user,
+        'conversation' => $conversation
+      ]);
+    }
+
+    /**
+    * Guarda nuevo mensaje en conversacion
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function saveSingle(SaveSingleMessage $request)
+    {
+      //
+      $user   = Auth::user();
+      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      $message = new Message();
+      $message->user_id = $user->id;
+      if($conversation->to_id != $user->id){
+        $message->to_id   = $conversation->to_id;
+      }else{
+        $message->to_id   = $conversation->user_id;
+      }
+      $message->conversation_id = $conversation->id;
+      $message->message = $request->message;
+      $message->save();
+      return redirect("tablero-facilitador/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+    }
+
 
 }
