@@ -71,35 +71,34 @@
 		<div class="col-sm-8">
 				<div class="box ">
 					<h3 class="sa_title">Tu participación en los foros</h3>
+					@if($forums->count()>0 || $messagesF->count()>0)
 					<ul>
+						@foreach($forums as $forum)
 						<li class="row">
 							<span class="col-sm-2">
-							1 respuesta
+							{{$forum->forum_messages->count()==1 ? $forum->forum_messages->count()." respuesta" : $forum->forum_messages->count()." respuestas" }}
 							</span>
 							<span class="col-sm-10">
-							<h3>¿qué comen los pandas?</h3>
-							<p class="right">Preguntado hace 2 días</p>
+							<h3>{{$forum->topic}}</h3>
+							<p class="right">Preguntado {{$forum->created_at->diffForHumans()}}</p>
 							</span>
 						</li>
+						@endforeach
+						@foreach($messagesF as $mes)
 						<li class="row">
 							<span class="col-sm-2">
-							89 respuesta
+							{{$mes->forum->forum_messages->count()==1 ? $mes->forum->forum_messages->count()." respuesta" : $mes->forum->forum_messages->count()." respuestas" }}
 							</span>
 							<span class="col-sm-10">
-							<h3>¿Qué es el gobierno abierto?</h3>
-							<p class="right">Contestado hace 3 días</p>
+							<h3>{{$mes->forum->topic}}</h3>
+							<p class="right">Preguntado {{$mes->forum->created_at->diffForHumans()}}</p>
 							</span>
 						</li>
-						<li class="row">
-							<span class="col-sm-2">
-							109 respuesta
-							</span>
-							<span class="col-sm-10">
-							<h3>¿Qué leyes obligan al gobierno a garantizar el acceso a la información?</h3>
-							<p class="right">Preguntado hace 3 días</p>
-							</span>
-						</li>
+						@endforeach
 					</ul>
+					@else
+					<p>Aún no cuentas con participación en foros.</p>
+					@endif
 					<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 				</div>
 			</div>

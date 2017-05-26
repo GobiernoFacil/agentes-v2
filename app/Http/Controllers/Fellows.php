@@ -11,6 +11,8 @@ use App\Models\Log;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\NewsEvent;
+use App\Models\Forum;
+use App\Models\ForumMessage;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
 class Fellows extends Controller
@@ -33,6 +35,8 @@ class Fellows extends Controller
       $activity       = null;
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
+      $forums         = Forum::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+      $messages       = ForumMessage::where('user_id',$user->id)->orderBy('created_at','desc')->get();
       if($user_log){
         if($user_log->session_id){
           $session = ModuleSession::find($user_log->session_id);
@@ -51,7 +55,9 @@ class Fellows extends Controller
         "module_last"   => $module_last,
         "activity"      => $activity,
         "newsEvent"     => $newsEvent,
-        "all_modules"   => $all_modules
+        "all_modules"   => $all_modules,
+        "forums"        => $forums,
+        "messagesF"     => $messages
       ]);
     }
 
