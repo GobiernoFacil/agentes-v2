@@ -57,4 +57,8 @@ class User extends Authenticatable
     function log(){
       return $this->hasMany("App\Models\Log");
     }
+
+    function conversations(){
+      return $this->hasMany("App\Models\Conversation");
+    }
 }

@@ -251,6 +251,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
     /*@Forums Controller */
     // Rutas foros
+    Route::get('tablero/foros', 'Forums@all');
     Route::get('tablero/foros/{module_slug}/{session_slug}', 'Forums@index');
     Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
     Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');

@@ -19,74 +19,55 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Tu última actividad</h2>
+		@if($user->log->count()>0)
 		<div class="box session_list">
-	  	<div class="row">
-			<!--icono-->
-			<div class="col-sm-1 right">
-				<b class="icon_h session list_s"></b>
+		  <div class="row">
+				@if($session)
+					@include('fellow.session-dash-view')
+				@elseif($activity)
+					@include('fellow.activity-dash-view')
+				@else
+					@include('fellow.module-dash-view')
+				@endif
 			</div>
-			<div class="col-sm-9">
-				<h3>Sesión 1</h3>
-				<h2><a href="http://pnud:8888/tablero/aprendizaje/propedeutico/la-sesion">La sesión</a></h2>
-				<div class="divider"></div>
-					<div class="row">
-						<div class="col-sm-9">
-							<p>Perder el tiempo</p>
-						</div>
-						<div class="col-sm-3 notes">
-							<p class="right">Fechas:<br>21-04-2017 al 27-04-2017</p>
-						</div>
-					</div>
-				</div>
-				<!-- ver sesión-->
-								<div class="col-sm-2">
-					<a class="btn view block sessions_l" href="http://pnud:8888/tablero/aprendizaje/propedeutico/la-sesion">Ver sesión</a>
-				</div>
-								<!-- footnote-->
-				<div class="footnote">
-					<div class="row">
-						<div class="col-sm-2">
-							<p><b class="icon_h time"></b>3 h </p>
-						</div>
-						<div class="col-sm-2">
-							<p><b class="icon_h modalidad"></b>Presencial</p>
-						</div>
-						<div class="col-sm-6">
-														<p><strong>Facilitador:</strong>
-																							<img src="http://pnud:8888/img/users/590b63a7f2ff6.png" height="30px">
-																 Andre Gomes -  FC Barcelona <br>
-														</p>
-													</div>
-						<div class="col-sm-2">
-							<p class="right">6 actividades  </p>
-						</div>
-					</div>
-				</div>
+		</div>
+
+	@else
+	<div class="box session_list">
+		<div class="row">
+			<div class="col-sm-12">
+					<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
 			</div>
-	</div>
-	
+			@include('fellow.module-first-dash-view')
+		</div>
+</div>
+	@endif
+
 <!-- avance-->
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Tu avance</h2>
-		<div class="box">
-		<ul class="timeline">
-					<li class="active">Propedeutico</li>
-					<li class="disabled">Batman vs Superman</li>
-				</ul>
-		</div>
+			<div class="box">
+					<ul class="timeline">
+						@if($all_modules->count()>0)
+								@foreach($all_modules as $m)
+										<li class="{{$m->public = 1 ? 'active' : 'disabled'}}">{{$m->title}}</li>
+								@endforeach
+						@endif
+					</ul>
+			</div>
   	</div>
 </div>
-	
-	
+
+
 	<div class="row">
 		<div class="col-sm-4 center">
 				<div class="box ">
-					<h3 class="sa_title">Tus Mensajes</h3>
-					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$modules_count}}</a>
+					<h3 class="sa_title">Tus Conversaciones</h3>
+					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
 					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 				</div>
-			</div>	
+			</div>
 		<div class="col-sm-8">
 				<div class="box ">
 					<h3 class="sa_title">Tu participación en los foros</h3>
@@ -119,27 +100,32 @@
 							</span>
 						</li>
 					</ul>
-					<a href="{{ url('tablero/mensajes') }}" class="btn gde center">Ver los foros</a>
+					<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 				</div>
 			</div>
 		</div>
-		
+
 		<!--noticias-->
 		<div class="col-sm-12">
 			<h2>Noticias y avisos</h2>
+			@if($newsEvent->count()>0)
 			<ul>
-				<li><h3>La noticia</h3>
+				@foreach($newsEvent as $content)
+				<li><h3>{{$content->title}}</h3>
 				<p>descripción de la noticia</p>
-				<p>Fecha</p>
+				<p>{{date("d-m-Y", strtotime($content->created_at))}}</p>
 				</li>
-				<li><h3>La noticia</h3>
-				<p>descripción de la noticia</p>
-				<p>Fecha</p>
-				</li>
+				@endforeach
 			</ul>
+			@else
+			<div class="box">
+				<p>Aún no existen noticias o avisos.</p>
+			</div>
+			@endif
+
 		</div>
-		
+
 	</div>
-	
+
 </div>
 @endsection
