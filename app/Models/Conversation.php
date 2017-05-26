@@ -23,4 +23,8 @@ class Conversation extends Model
       return $this->hasMany("App\Models\Message");
     }
 
+    function store_conversations(){
+      return $this->hasMany("App\Models\StoreConversation");
+    }
+
 }

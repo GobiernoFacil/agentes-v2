@@ -61,4 +61,8 @@ class User extends Authenticatable
     function conversations(){
       return $this->hasMany("App\Models\Conversation");
     }
+
+    function store_conversations(){
+      return $this->hasMany("App\Models\StoreConversation");
+    }
 }

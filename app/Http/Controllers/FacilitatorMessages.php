@@ -12,7 +12,7 @@ use Mail;
 use App\User;
 use App\Models\Conversation;
 use App\Models\Message;
-
+use App\Models\StoreConversation;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
 // FormValidators
@@ -34,7 +34,12 @@ class FacilitatorMessages extends Controller
   public function messages()
   {
     $user 			  = Auth::user();
-    $conversations 	  = Conversation::where('user_id',$user->id)->orwhere('to_id',$user->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+    $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+      $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
+    })
+    ->orderBy('created_at','desc')->paginate($this->pageSize);
+
     return view('facilitator.messages.messages-list')->with([
       "user"      		=> $user,
 	  'conversations' =>$conversations,
@@ -108,7 +113,10 @@ class FacilitatorMessages extends Controller
     public function addSingle($conversation_id)
     {
       $user   = Auth::user();
-      $conversation = Conversation::find($conversation_id);
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
       return view('facilitator.messages.messages-single-add')->with([
         "user"      => $user,
         'conversation' => $conversation
@@ -142,5 +150,20 @@ class FacilitatorMessages extends Controller
       return redirect("tablero-facilitador/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
+    /**
+    * archivar convesacion
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function storage($conversation_id)
+    {
+      $user   = Auth::user();
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
+      $storage = StoreConversation::firstOrCreate(["user_id"=>$user->id,"conversation_id"=>$conversation_id]);
+      return redirect('tablero-facilitador/mensajes')->with("success","Se ha archivado correctamente");
+    }
 
 }

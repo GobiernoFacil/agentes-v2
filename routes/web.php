@@ -249,6 +249,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
     Route::post('tablero/mensajes/save', 'Messages@save');
     Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
+    Route::get('tablero/mensajes/conversacion/storage/{conversation_id}', 'Messages@storage');
     /*@Forums Controller */
     // Rutas foros
     Route::get('tablero/foros', 'Forums@all');
@@ -280,5 +281,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');
     Route::get('tablero-facilitador/mensajes/ver/agregar/{id}', 'FacilitatorMessages@addSingle');
     Route::post('tablero-facilitador/mensajes/ver/save/{id}', 'FacilitatorMessages@saveSingle');
+    Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+
   });
 });

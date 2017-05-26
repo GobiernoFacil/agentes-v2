@@ -31,7 +31,7 @@
 			  <tbody>
 			    @foreach ($conversations as $conversation)
 			    <tr>
-				    <td><strong> 	
+				    <td><strong>
 					@if($conversation->to_id != $user->id)
 			        	{{$conversation->user_to->name}}
 					@else
@@ -45,11 +45,10 @@
 					<td>
 				        {{$conversation->updated_at->diffForHumans()}}
 				    </td>
-					<td>			          
+					<td>
 			          <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
-								<!--
-			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $conversation->id) }}"  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
-								!-->
+			          <a href ='{{ url("tablero/mensajes/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
+
 				    </td>
 				</tr>
 			    @endforeach
