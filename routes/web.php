@@ -244,6 +244,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
+    Route::get('tablero/mensajes-archivados', 'Messages@indexStorage');
     Route::get('tablero/mensajes/agregar', 'Messages@add');
     Route::get('tablero/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
     Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
@@ -276,6 +277,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
     // Mensajes Facilitador
     Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
     Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
     Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
     Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');

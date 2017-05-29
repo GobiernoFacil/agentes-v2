@@ -7,8 +7,11 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-6">
 		<h1>Mensajes Privados</h1>
+	</div>
+	<div class="col-sm-3 center">
+		<a href="{{ url('tablero-facilitador/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->store_conversations->count()}})</a>
 	</div>
   <div class="col-sm-3 center">
 		<a href="{{ url('tablero-facilitador/mensajes/agregar') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
