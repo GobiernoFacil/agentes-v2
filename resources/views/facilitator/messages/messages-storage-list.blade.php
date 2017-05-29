@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-9">
 		<h1>Mensajes Privados Archivados</h1>
 	</div>
   <div class="col-sm-3 center">
@@ -42,7 +42,7 @@
 			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
 			        </td>
 					<td>
-				        {{$conversation->updated_at->diffForHumans()}}
+				        {{$conversation->last_message->first()->updated_at->diffForHumans()}}
 				    </td>
 					<td>
 			          <a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
