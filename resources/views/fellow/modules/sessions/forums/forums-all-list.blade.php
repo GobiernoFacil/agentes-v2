@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
-@section('title', '' )
-@section('description','' )
-@section('body_class', '')
+@section('title', 'Foros' )
+@section('description','Foros del Programa de Gobierno Abierto desde lo local' )
+@section('body_class', 'fellow foros')
 @section('breadcrumb_type', '')
 
 @section('content')

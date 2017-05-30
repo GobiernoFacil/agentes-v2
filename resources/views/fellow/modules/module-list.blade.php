@@ -16,7 +16,7 @@
 	<div class = "col-sm-12">
 		<ul class="timeline">
 		@foreach($modules as $module)
-			<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{$module->title}}</li>
+			<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,1,'…')}}</li>
 		@endforeach
 		</ul>
   	</div>
