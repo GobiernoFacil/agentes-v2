@@ -174,7 +174,9 @@ class Activities extends Controller
          */
         public function update(UpdateActivity $request)
         {
+
             //
+            $user   = Auth::user();
             $data   = $request->except(['_token','start','end','time','link','link_video']);
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
@@ -222,6 +224,9 @@ class Activities extends Controller
                 }
               }
               $forum->description = $request->description;
+              $forum->activity_id = $request->id;
+              $forum->user_id     = $user->id;
+              $forum->session_id  = $last->session->id;
               $forum->save();
             }else{
               $forum  = Forum::where('activity_id',$request->id)->first();
@@ -231,7 +236,7 @@ class Activities extends Controller
             }
 
 
-            if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
+          if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
             }elseif($data['type']==='evaluation' && $last->type!=$data['type']){
