@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', '' )
 @section('description','' )
-@section('body_class', '')
+@section('body_class', 'fellow foros')
 @section('breadcrumb_type', '')
 
 @section('content')
