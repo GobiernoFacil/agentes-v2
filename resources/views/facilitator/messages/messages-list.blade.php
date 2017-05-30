@@ -35,8 +35,18 @@
 			    <tr>
 				    <td><strong>
 					@if($conversation->to_id != $user->id)
+			        	@if($conversation->user_to->image)
+							<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' height="25px">
+						@else
+							<img src='{{url("img/users/default.png")}}' height="25px">
+						@endif
 			        	{{$conversation->user_to->name}}
 					@else
+						@if($conversation->user->image)
+							<img src='{{url("img/users/{$conversation->user->image->name}")}}' height="25px">
+						@else
+							<img src='{{url("img/users/default.png")}}' height="25px">
+						@endif
 						{{$conversation->user->name}}
 					@endif
 					</strong>

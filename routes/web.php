@@ -285,8 +285,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
     Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');
     Route::get('tablero-facilitador/mensajes/ver/{conversation_id}', 'FacilitatorMessages@view');
-    Route::get('tablero-facilitador/mensajes/ver/agregar/{id}', 'FacilitatorMessages@addSingle');
-    Route::post('tablero-facilitador/mensajes/ver/save/{id}', 'FacilitatorMessages@saveSingle');
+    Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
+    Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
     Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
 
   });
