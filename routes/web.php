@@ -291,6 +291,9 @@ Route::group(['middleware' => ['auth']], function () {
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
+    Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
+    Route::get('tablero-facilitador/foros/{forum_slug}/mensajes/agregar', 'FacilitatorForums@addMessage');
+    Route::post('tablero-facilitador/foros/{forum_slug}/mensajes/save/single', 'FacilitatorForums@saveMessage');
 
   });
 });
