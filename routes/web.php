@@ -288,6 +288,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
     Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
     Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+    /*@FacilitatorForums Controller */
+    // Rutas foros
+    Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
 
   });
 });
