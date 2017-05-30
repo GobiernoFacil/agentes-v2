@@ -35,6 +35,42 @@ class FacilitatorActivities extends Controller
       "sessions"          => $sessions
     ]);
   }
+  
+  /**
+    * Muestra sesión
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function sessions($id)
+    {
+      //
+      $user    = Auth::user();
+      $session = ModuleSession::find($id);
+      return view('facilitator.activities.session-view')->with([
+        "user"      => $user,
+        "session"    => $session
+      ]);
+    }
+   
+   /**
+    * Muestra actividad
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+   public function activities_view($id)
+   {
+       //
+       $user    = Auth::user();
+       $activity = activity::find($id);
+          $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+       return view('admin.modules.activities.activity-view')->with([
+         "user"      	=> $user,
+         "activity"    => $activity,
+         "session"		=> $session
+       ]);
+   }
 
   /**
   * Ver actividad asignada a facilitador @ facilitador
