@@ -1,13 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('title',  $forum->topic)
+@section('description', 'Ver foro')
+@section('body_class', 'fellow foros')
+@section('breadcrumb_type', 'forum view')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
 <div class="row">
   <div class="col-sm-9">
-    <h1>Foro {{$forum->topic}} </h1>
+    <h1>{{$forum->topic}} </h1>
   </div>
   <div class="col-sm-3 center">
     <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
