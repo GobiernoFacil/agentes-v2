@@ -15,6 +15,20 @@
 		   {{$conversation->user->name}}
 		@endif
 		</h1>
+		@if($conversation->to_id != $user->id)
+			@if($conversation->user_to->image)
+				<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' height="100px">
+			@else
+				<img src='{{url("img/users/default.png")}}' height="100px">
+			@endif
+		@else
+			@if($conversation->user->image)
+				<img src='{{url("img/users/{$conversation->user->image->name}")}}' height="100px">
+			@else
+				<img src='{{url("img/users/default.png")}}' height="100px">
+			@endif
+		@endif
+		
   </div>
   <div class="col-sm-3 center">
     <a href='{{ url("tablero-facilitador/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
