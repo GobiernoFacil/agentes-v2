@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('title',  'Agregar mensaje a ' . $forum->topic)
+@section('description', 'Agregar mensaje a foro')
+@section('body_class', 'fellow foros')
+@section('breadcrumb_type', 'forum add message')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
 <div class="row">
