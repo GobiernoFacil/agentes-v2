@@ -237,6 +237,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@SessionFellow Controller */
     // Rutas módulos
     Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
+    Route::get('tablero/aprendizaje/{module_slug}/{slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
     // Rutas actividades
     Route::get('tablero/aprendizaje/{module_slug}/{slug}/{id}', 'SessionFellow@activity');
 	//Descargar archivo en actividades
