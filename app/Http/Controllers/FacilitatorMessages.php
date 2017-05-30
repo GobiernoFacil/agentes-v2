@@ -187,6 +187,5 @@ class FacilitatorMessages extends Controller
     $storage = StoreConversation::firstOrCreate(["user_id"=>$user->id,"conversation_id"=>$conversation_id]);
     return redirect('tablero-facilitador/mensajes')->with("success","Se ha archivado correctamente");
   }
->>>>>>> 7c3102c3ba95ffe0f8eeef955fb5edfcf5e39154
 
 }
