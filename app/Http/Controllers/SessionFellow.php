@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\Log;
+use App\User;
 
 class SessionFellow extends Controller
 {
@@ -53,6 +54,27 @@ class SessionFellow extends Controller
         "user"      => $user,
         "session"   => $session,
         "activity"  => $activity
+      ]);
+    }
+
+    /**
+    * Muestra sessión
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function viewFacilitator($module_slug,$slug,$id)
+    {
+      //
+      $user    = Auth::user();
+      $session  = ModuleSession::where('slug',$slug)->firstOrFail();
+      $facilitator = User::where('id',$id)->firstOrFail();
+      $today = date("Y-m-d");
+      return view('fellow.modules.sessions.facilitator-view')->with([
+        "user"      => $user,
+        "session"    => $session,
+        "today" =>$today,
+        "facilitator" => $facilitator
       ]);
     }
 

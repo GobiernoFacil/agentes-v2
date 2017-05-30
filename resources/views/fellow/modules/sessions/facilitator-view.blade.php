@@ -1,9 +1,8 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Ver facilitador')
-@section('description', 'Ver facilitador de la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', 'facilitadores')
-@section('breadcrumb_type', 'facilitadores view')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_facilitadores')
+@section('title', 'Ver facilitador' )
+@section('description', '' )
+@section('body_class', 'fellow aprendizaje modulos')
+@section('breadcrumb_type', 'facilitator view')
 
 @section('content')
 <div class="row">
@@ -13,14 +12,6 @@
 </div>
 <div class="box">
 		<div class="row">
-
-	<div class="col-sm-12">
-			<ul class="profile list">
-				<li class="right">
-				<a href="{{ url('dashboard/facilitadores/editar/' . $facilitator->id ) }}" class="btn xs view">Editar Facilitador</a></li>
-			</ul>
-		</div>
-
 		<div class="col-sm-10 col-sm-offset-1 center">
 			<p class="">
 				@if($facilitator->image)
@@ -32,6 +23,7 @@
 			<h2 >{{$facilitator->name}}</h2>
 
 			<h3><strong>{{$facilitator->institution}}</strong></h3>
+      @if($facilitator->FacilitatorData)
 			<div class="divider"></div>
 			<ul class="profile list row">
 				<li class="col-sm-4"><span>Grado de estudios</span>{{$facilitator->FacilitatorData->degree}}</li>
@@ -56,17 +48,8 @@
 
 			<h3>Semblanza</h3>
 			<p>{{$facilitator->FacilitatorData->semblance ? $facilitator->FacilitatorData->semblance : "Sin información" }}</p>
-			<div class="divider"></div>
-			<div class="row notes">
-				<div class="col-sm-6">
-				<p>Fecha de creación: {{ date("d-m-Y, H:i", strtotime($facilitator->created_at)) }} hrs.</p>
-				</div>
-				<div class="col-sm-6">
-				<p>Última actualización: {{ date("d-m-Y, H:i", strtotime($facilitator->updated_at)) }} hrs.</p>
-				</div>
-			</div>
+      @endif
 		</div>
 	</div>
 </div>
-
 @endsection
