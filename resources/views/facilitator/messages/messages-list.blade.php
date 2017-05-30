@@ -7,8 +7,11 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-6">
 		<h1>Mensajes Privados</h1>
+	</div>
+	<div class="col-sm-3 center">
+		<a href="{{ url('tablero-facilitador/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->store_conversations->count()}})</a>
 	</div>
   <div class="col-sm-3 center">
 		<a href="{{ url('tablero-facilitador/mensajes/agregar') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
@@ -30,7 +33,7 @@
 			  <tbody>
 			    @foreach ($conversations as $conversation)
 			    <tr>
-				    <td><strong>	
+				    <td><strong>
 					@if($conversation->to_id != $user->id)
 			        	{{$conversation->user_to->name}}
 					@else
@@ -46,9 +49,8 @@
 				    </td>
 				    <td>
 			          <a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver</a>
-								<!--
-			          <a href ="{{ url('sa/dashboard/administradores/eliminar' . $conversation->id) }}"  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>
-								!-->
+								<a href ='{{ url("tablero-facilitador/mensajes/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
+
 				    </td>
 				</tr>
 			    @endforeach

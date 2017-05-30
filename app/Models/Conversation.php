@@ -23,4 +23,12 @@ class Conversation extends Model
       return $this->hasMany("App\Models\Message");
     }
 
+    function store_conversations(){
+      return $this->hasMany("App\Models\StoreConversation");
+    }
+
+    function last_message(){
+      return $this->hasMany("App\Models\Message")->orderBy('created_at','desc');
+    }
+
 }

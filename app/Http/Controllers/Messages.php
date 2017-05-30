@@ -7,6 +7,7 @@ use Auth;
 // models
 use App\Models\Message;
 use App\Models\Conversation;
+use App\Models\StoreConversation;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveMessage;
@@ -15,6 +16,28 @@ class Messages extends Controller
 {
   //Paginación
   public $pageSize = 10;
+
+
+      /**
+      * Muestra lista de mensajes-archivados
+      *
+      * @return \Illuminate\Http\Response
+      */
+      public function indexStorage()
+      {
+        //
+        $user = Auth::user();
+        $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+        $conversations = Conversation::where('user_id',$user->id)->whereIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+          $query->where('to_id',$user->id)->whereIn('id',$storage->toArray());
+        })
+        ->orderBy('created_at','desc')->paginate($this->pageSize);
+        return view('fellow.messages.messages-storage-list')->with([
+          'user' => $user,
+          'conversations' =>$conversations,
+        ]);
+
+      }
 
     /**
     * Muestra lista de mensajes
@@ -25,7 +48,11 @@ class Messages extends Controller
     {
       //
       $user = Auth::user();
-      $conversations = Conversation::where('user_id',$user->id)->orwhere('to_id',$user->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+      $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+        $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
+      })
+      ->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.messages.messages-list')->with([
         'user' => $user,
         'conversations' =>$conversations,
@@ -41,7 +68,7 @@ class Messages extends Controller
     public function add()
     {
       $user   = Auth::user();
-      $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->pluck('name','id');
+      $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->where('id','!=',$user->id)->pluck('name','id');
       return view('fellow.messages.messages-add')->with([
         "user"      => $user,
         'users' => $users
@@ -83,7 +110,10 @@ class Messages extends Controller
     {
       //
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
       return view('fellow.messages.messages-conversation')->with([
         "user"      => $user,
         "conversation"    => $conversation
@@ -98,7 +128,10 @@ class Messages extends Controller
     public function addSingle($conversation_id)
     {
       $user   = Auth::user();
-      $conversation = Conversation::find($conversation_id);
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
       return view('fellow.messages.messages-single-add')->with([
         "user"      => $user,
         'conversation' => $conversation
@@ -115,15 +148,39 @@ class Messages extends Controller
     {
       //
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->orwhere('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$request->conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
       $message = new Message();
+      $message->user_id = $user->id;
+      if($conversation->to_id != $user->id){
+        $message->to_id   = $conversation->to_id;
+      }else{
+        $message->to_id   = $conversation->user_id;
+      }
       $message->conversation_id = $conversation->id;
-      $message->user_id = $conversation->user_id;
-      $message->to_id   = $conversation->to_id;
       $message->message = $request->message;
       $message->save();
       return redirect("tablero/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
+
+    /**
+    * archivar convesacion
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function storage($conversation_id)
+    {
+      $user   = Auth::user();
+      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      if(!$conversation){
+      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      }
+      $storage = StoreConversation::firstOrCreate(["user_id"=>$user->id,"conversation_id"=>$conversation_id]);
+      return redirect('tablero/mensajes')->with("success","Se ha archivado correctamente");
+    }
+
 
 
 }

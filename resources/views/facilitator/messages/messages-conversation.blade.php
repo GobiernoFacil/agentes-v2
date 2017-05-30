@@ -1,14 +1,14 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Mensaje privado con ' . $conversation->user_to->name)
 @section('description', 'Mensaje privado con ' . $conversation->user_to->name)
-@section('body_class', 'mensajes')
+@section('body_class', 'facilitator mensajes')
 @section('breadcrumb_type', 'message view')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
   <div class="col-sm-9">
-	    <h1>Conversación con  
+	    <h1>Conversación con
 		@if($conversation->to_id != $user->id)
 		   {{$conversation->user_to->name}}
 		@else
@@ -46,7 +46,6 @@
 		@endforeach
         </div>
   	</div>
-  	
 	@else
 	<div class="row">
     	<div class="col-sm-8 col-sm-offset-2">
