@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Mensaje privado con ' . $conversation->user_to->name)
 @section('description', 'Mensaje privado con ' . $conversation->user_to->name)
-@section('body_class', 'facilitator mensajes')
+@section('body_class', 'mensajes')
 @section('breadcrumb_type', 'message view')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 
@@ -34,7 +34,7 @@
 	@if($conversation->messages->count() > 0)
 	<div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-		@foreach($conversation->messages as $message)
+		@foreach($conversation->messages->sortByDesc("updated_at") as $message)
 			<div class="row">
 			  <div class="col-sm-8 {{$message->user_id == $user->id ? 'col-sm-offset-4' : ''}}">
 			    <div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">
