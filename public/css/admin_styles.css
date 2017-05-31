@@ -114,7 +114,6 @@ h5 {
   font-size: 15px;
   /* font-weight: bold; */
   /* font-weight: 500; */
-  letter-spacing: 2px;
   color: gray; }
 
 h6 {
@@ -1892,8 +1891,34 @@ sup {
       background: #fbe0ec;
       color: #4d4d4d;
       font: 300 13px "overpass", Helvetica, Arial, sans-serif; }
+  .forum_list p strong {
+    color: #555; }
   .forum_list p.author {
     font-size: 14px; }
+
+.forum_list h5 {
+  font-size: 12px;
+  display: inline-block; }
+
+.forum_list .type_list {
+  display: inline-block;
+  margin: 0; }
+  .forum_list .type_list li {
+    font-size: 12px;
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px; }
+    .forum_list .type_list li b {
+      background: #ccc;
+      display: inline-block;
+      width: 12px;
+      height: 12px; }
+      .forum_list .type_list li b.general {
+        background: #fffac1; }
+      .forum_list .type_list li b.state {
+        background: #d9fcf7; }
+      .forum_list .type_list li b.module_session {
+        background: #fbe0ec; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
