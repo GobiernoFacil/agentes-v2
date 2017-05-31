@@ -17,6 +17,18 @@
 @foreach ($forums as $forum)
 <div class="box forum_list">
 	<div class="row">
+		<div class="col-sm-12 col-xs-12 right">
+			<h5>Tipos de Foros:</h5>
+			<ul class="type_list">
+				<li><b class="general"></b> General</li>
+				<li><b class="module_session"></b> Aprendizaje</li>
+				<li><b class="state"></b> Tu Estado</li>
+			</ul>
+			<div class="divider"></div>
+		</div>
+	</div>
+	
+	<div class="row">
 		<div class="col-sm-1 col-xs-2">
 			<h3 class="count_messages">{{ $forum->forum_messages->count()}}</h3>
 		</div>
