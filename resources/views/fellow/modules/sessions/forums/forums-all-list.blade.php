@@ -24,7 +24,7 @@
 				<li><b class="module_session"></b> Aprendizaje</li>
 				<li><b class="state"></b> Tu Estado</li>
 			</ul>
-			<div class="divider"></div>
+			<div class="divider b"></div>
 		</div>
 	</div>
 	
@@ -36,7 +36,7 @@
 			<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h2>
 			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 			<p><span class="type">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
-			<p class="author">Creado por <strong>{{$forum->user->institution}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
+			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		</div>
 		<div class="col-sm-12 col-xs-12">
 			<div class="divider"></div>
