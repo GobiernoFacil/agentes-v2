@@ -218,6 +218,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/noticias-eventos/editar/{content_id}', 'NewsEvents@edit');
     Route::post('dashboard/noticias-eventos/update/{content_id}', 'NewsEvents@update');
     Route::post('noticias-eventos/update/image', 'NewsEvents@uploadImage');
+    /*@AdminForums Controller */
+    // Rutas CRUD forums
+    Route::get('dashboard/foros', 'AdminForums@index');
+    Route::get('dashboard/foros/ver/{id}', 'AdminForums@view');
+    Route::get('dashboard/foros/agregar', 'AdminForums@add');
+    Route::post('dashboard/foros/save', 'AdminForums@save');
+    Route::get('dashboard/foros/{forum_slug}/mensajes/agregar', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/{forum_slug}/mensajes/save/single', 'AdminForums@saveMessage');
+    Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
   });
 
   /* R U T A S  UNICAS DEL Fellow

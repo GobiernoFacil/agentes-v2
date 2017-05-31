@@ -125,6 +125,9 @@ trait MessagesTrait{
          'topic.required' => 'Este campo es requerido',
          'topic.max' => 'Este campo debe contener 256 caracteres como máximo',
          'topic.unique' => 'Este elemento ya está en uso. Selecciona uno diferente',
+         'session_id.different'=>"Selecciona una sesión o actividad",
+         'activity_id.different'=>"Selecciona una sesión o actividad",
+
          //news
          'content.required' => 'Este campo es requerido',
       ];
