@@ -40,7 +40,7 @@
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@else
 			<h2><a href='{{url("tablero/foros/{$user->fellowData->state}")}}'>{{$forum->topic}}</a></h2>
-			<p><span class="type">Estado</span></p>			
+			<p><span class="type state">Estado</span></p>			
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		</div>
