@@ -14,7 +14,6 @@
 
 
 @if($forums->count()>0)
-@foreach ($forums as $forum)
 <div class="box forum_list">
 	<div class="row">
 		<div class="col-sm-12 col-xs-12 right">
@@ -27,6 +26,8 @@
 			<div class="divider b"></div>
 		</div>
 	</div>
+	@foreach ($forums as $forum)
+	
 	
 	<div class="row">
 		<div class="col-sm-1 col-xs-2">
@@ -35,7 +36,11 @@
 		<div class="col-sm-11 col-xs-10">
 			<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h2>
 			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
-			<p><span class="type">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
+			@if($forum->session)
+			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
+			@else
+			<p><span class="type">Estado</span></p>			
+			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		</div>
 		<div class="col-sm-12 col-xs-12">
@@ -43,9 +48,8 @@
 		</div>
 	</div>
 
+	@endforeach
 </div>
-@endforeach
-
 <?php /**
 <div class="box">
 	<div class="row">
@@ -103,4 +107,6 @@
   </div>
 </div>
 @endif
+
+
 @endsection
