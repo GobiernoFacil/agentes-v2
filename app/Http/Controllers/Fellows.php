@@ -37,6 +37,7 @@ class Fellows extends Controller
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
       $forums         = Forum::where('user_id',$user->id)->orderBy('created_at','desc')->get();
       $messages       = ForumMessage::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+      $today = date("Y-m-d");
       if($user_log){
         if($user_log->session_id){
           $session = ModuleSession::find($user_log->session_id);
@@ -57,7 +58,8 @@ class Fellows extends Controller
         "newsEvent"     => $newsEvent,
         "all_modules"   => $all_modules,
         "forums"        => $forums,
-        "messagesF"     => $messages
+        "messagesF"     => $messages,
+        "today"			=> $today
       ]);
     }
 
