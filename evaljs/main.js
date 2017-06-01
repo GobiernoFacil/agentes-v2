@@ -4,7 +4,9 @@ var Form, Questions, GFPNUDApp, endpoint,
     addQuestionBtn       = "add-question",
     questionTemplate     = "question-template",
     realQuestionTemplate = "real-question-template",
-    questionsList        = "questions-list";
+    answerTemplate       = "answer-template",
+    questionsList        = "questions-list",
+    fakeEndpoint         = "/fake.php";
 
 // fake data
 Form = {
@@ -47,13 +49,18 @@ GFPNUDApp = {
     var template = document.getElementById(questionTemplate).innerHTML,
         list     = document.getElementById(questionsList),
         li       = document.createElement("li"),
-        form     = null;
+        form     = null,
+        remove   = null,
+        REQFunc  = null;
 
     li.innerHTML = template;
-    form = li.querySelector("form");
-    form.addEventListener("submit", this.saveQuestion);
-
+    form         = li.querySelector("form");
+    remove       = li.querySelector(".remove-question");
+    REQFunc      = this.removeEmptyQuestion.bind(this, li);
+    
     list.appendChild(li);
+    form.addEventListener("submit", this.saveQuestion);
+    remove.addEventListener("click", REQFunc);
   },
 
   saveQuestion : function(e){
@@ -63,7 +70,13 @@ GFPNUDApp = {
         input    = form.querySelector("input[type='text']"),
         value    = input.value,
         li       = form.parentNode,
-        template = document.getElementById(realQuestionTemplate).innerHTML;
+        template = document.getElementById(realQuestionTemplate).innerHTML,
+        anchor   = null,
+        remove   = null,
+        addOpt   = null,
+        that     = this,
+        REQFunc  = this.removeQuestion.bind(this, li),
+        ADOFunc  = this.addOption.bind(this, li);
 
     if(!value){
       return;
@@ -71,18 +84,82 @@ GFPNUDApp = {
 
     li.removeChild(form);
     li.innerHTML = template;
+
+    anchor = li.querySelector(".question-name");
+    remove = li.querySelector(".remove-question");
+    addOpt = li.querySelector(".add-answer");
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, {question : value}, function(res){
+      anchor.innerHTML = res.question;
+      Questions.push(res);
+      remove.addEventListener("click", REQFunc);
+      remove.setAttribute("data-id", res.id);
+
+      addOpt.addEventListener("click", ADOFunc);
+    }, "json");
+    /**/
   },
 
   updateQuestion : function(question, data){
 
   },
 
-  removeQuestion : function(question){
-
+  removeEmptyQuestion : function(li, e){
+    e.preventDefault();
+    li.parentNode.removeChild(li);
   },
 
-  addOption : function(){
+  removeQuestion : function(li, e){
+    e.preventDefault();
 
+    var id        = e.target.getAttribute("data-id"),
+        questions = this.form.questions,
+        question  = questions.filter(function(q){
+                     return q.id == id;
+                   })[0];
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, {id : id}, function(res){
+      questions.splice(questions.indexOf(question), 1);
+      li.parentNode.removeChild(li);
+    }, "json");
+    /**/
+  },
+
+  addOption : function(li, e){
+    e.preventDefault();
+
+    var list     = li.querySelector("ul"),
+        template = document.getElementById(answerTemplate).innerHTML,
+        li       = document.createElement("li"),
+        form     = null,
+        remove   = null,
+        REAFunc  = null;
+
+
+    li.innerHTML = template;
+
+    form    = li.querySelector("form");
+    remove  = li.querySelector(".remove-answer");
+    REOFunc = this.removeEmptyOption.bind(this, list, li);
+
+    list.appendChild(li);
+
+    form.addEventListener("submit", this.saveOption);
+    remove.addEventListener("click", REOFunc);
+
+    //console.log(list, e);
+  },
+
+  saveOption : function(e){
+    e.preventDefault();
+    
+    console.log(e);
+  },
+
+  removeEmptyOption : function(list, li, e){
+    console.log(list, li, e);
   },
 
   removeOption : function(){

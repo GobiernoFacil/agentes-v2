@@ -17,7 +17,7 @@
         <input type="text">
         <input type="submit" value="agregar">
       </p>
-      <p><a href="#">[ x ]</a></p>
+      <p><a class="remove-question" href="#">[ x ]</a></p>
     </form>
   </script>
 
@@ -28,8 +28,19 @@
     <p><a href="#" class="remove-question">[ x ]</a><p>
   </script>
 
+  <script id="answer-template" type="text">
+    <form>
+      <p>
+        <input type="text">
+        <input type="submit" value="agregar">
+        <a class="remove-answer" href="#">[ x ]</a>
+      </p>
+    </form>
+  </script>
+
 
   <!-- THE CODE-->
+  <script src="jquery.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
