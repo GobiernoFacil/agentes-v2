@@ -8,7 +8,7 @@
 	<li><a href="{{url('tablero-facilitador/mensajes')}}">Mensajes</a></li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="message view")
-	<li>Ver Mensaje</li>
+	<li>Conversación</li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="message add")
 	<li>Enviar Mensaje</li>

@@ -51,7 +51,7 @@
 					<ul class="timeline">
 						@if($all_modules->count()>0)
 								@foreach($all_modules as $m)
-										<li class="{{$m->public = 1 ? 'active' : 'disabled'}}">{{$m->title}}</li>
+										<li class="{{ $m->public && $today >= $m->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($m->title,1,'…')}}</li>
 								@endforeach
 						@endif
 					</ul>

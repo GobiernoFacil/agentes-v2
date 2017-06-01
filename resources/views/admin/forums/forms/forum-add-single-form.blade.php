@@ -1,11 +1,10 @@
-{!! Form::open(['url' => url("tablero-facilitador/mensajes/conversacion/save/{$conversation->id}"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/foros/{$forum->slug}/mensajes/save/single"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">Información del mensaje</h2>
   </div>
 </div>
-
 <!-- situación  -->
 <div class="row">
   <div class="col-sm-12">

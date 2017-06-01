@@ -15,6 +15,19 @@
 		   {{$conversation->user->name}}
 		@endif
 		</h1>
+		@if($conversation->to_id != $user->id)
+			@if($conversation->user_to->image)
+				<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' height="100px">
+			@else
+				<img src='{{url("img/users/default.png")}}' height="100px">
+			@endif
+		@else
+			@if($conversation->user->image)
+				<img src='{{url("img/users/{$conversation->user->image->name}")}}' height="100px">
+			@else
+				<img src='{{url("img/users/default.png")}}' height="100px">
+			@endif
+		@endif
   </div>
   <div class="col-sm-3 center">
     <a href='{{ url("tablero/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
@@ -34,7 +47,7 @@
 	@if($conversation->messages->count() > 0)
 	<div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-		@foreach($conversation->messages as $message)
+		@foreach($conversation->messages->sortByDesc("updated_at") as $message)
 			<div class="row">
 			  <div class="col-sm-8 {{$message->user_id == $user->id ? 'col-sm-offset-4' : ''}}">
 			    <div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">

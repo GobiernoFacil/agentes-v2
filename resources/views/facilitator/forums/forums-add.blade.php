@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', '')
 @section('description', '')
-@section('body_class', 'fellow foros')
+@section('body_class', 'facilitator foros')
 @section('breadcrumb_type', '')
 
 @section('content')
@@ -13,7 +13,7 @@
 <div class="box">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      @include('fellow.modules.sessions.forums.forms.forums-add-form')
+      @include('facilitator.forums.forms.forums-add-form')
     </div>
   </div>
 </div>

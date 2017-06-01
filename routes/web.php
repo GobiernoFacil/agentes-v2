@@ -218,6 +218,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/noticias-eventos/editar/{content_id}', 'NewsEvents@edit');
     Route::post('dashboard/noticias-eventos/update/{content_id}', 'NewsEvents@update');
     Route::post('noticias-eventos/update/image', 'NewsEvents@uploadImage');
+    /*@AdminForums Controller */
+    // Rutas CRUD forums
+    Route::get('dashboard/foros', 'AdminForums@index');
+    Route::get('dashboard/foros/ver/{id}', 'AdminForums@view');
+    Route::get('dashboard/foros/agregar', 'AdminForums@add');
+    Route::post('dashboard/foros/save', 'AdminForums@save');
+    Route::get('dashboard/foros/{forum_slug}/mensajes/agregar', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/{forum_slug}/mensajes/save/single', 'AdminForums@saveMessage');
+    Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
   });
 
   /* R U T A S  UNICAS DEL Fellow
@@ -237,6 +246,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@SessionFellow Controller */
     // Rutas módulos
     Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
+    Route::get('tablero/aprendizaje/{module_slug}/{slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
     // Rutas actividades
     Route::get('tablero/aprendizaje/{module_slug}/{slug}/{id}', 'SessionFellow@activity');
 	//Descargar archivo en actividades
@@ -244,6 +254,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
+    Route::get('tablero/mensajes-archivados', 'Messages@indexStorage');
     Route::get('tablero/mensajes/agregar', 'Messages@add');
     Route::get('tablero/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
     Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
@@ -274,14 +285,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero-facilitador/perfil/save', 'Facilitator@saveProfile');
     // Actividades Facilitador
     Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
+    Route::get('tablero-facilitador/actividades/sesion/{id}', 'FacilitatorActivities@sessions');
+    Route::get('tablero-facilitador/actividades/ver/{id}', 'FacilitatorActivities@activities_view');
     // Mensajes Facilitador
     Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
     Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
     Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
     Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');
-    Route::get('tablero-facilitador/mensajes/ver/agregar/{id}', 'FacilitatorMessages@addSingle');
-    Route::post('tablero-facilitador/mensajes/ver/save/{id}', 'FacilitatorMessages@saveSingle');
+    Route::get('tablero-facilitador/mensajes/ver/{conversation_id}', 'FacilitatorMessages@view');
+    Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
+    Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
     Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+    /*@FacilitatorForums Controller */
+    // Rutas foros
+    Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
+    Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
+    Route::get('tablero-facilitador/foros/{forum_slug}/mensajes/agregar', 'FacilitatorForums@addMessage');
+    Route::post('tablero-facilitador/foros/{forum_slug}/mensajes/save/single', 'FacilitatorForums@saveMessage');
 
   });
 });

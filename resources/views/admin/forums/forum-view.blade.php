@@ -1,9 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title',  $forum->topic)
 @section('description', 'Ver foro')
-@section('body_class', 'fellow foros')
-@section('breadcrumb_type', 'forum view')
-@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
+@section('body_class', 'foros')
 
 @section('content')
 <div class="row">
@@ -11,7 +9,7 @@
     <h1>{{$forum->topic}} </h1>
   </div>
   <div class="col-sm-3 center">
-    <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+    <a href='{{ url("dashboard/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
   </div>
 </div>
 <div class="box">
@@ -25,7 +23,7 @@
     @endforeach
     <div class="row">
       <div class="col-sm-3 col-sm-offset-2 center">
-        <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+        <a href='{{ url("dashboard/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
       </div>
     </div>
   @else

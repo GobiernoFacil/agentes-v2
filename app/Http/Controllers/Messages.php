@@ -17,6 +17,28 @@ class Messages extends Controller
   //Paginación
   public $pageSize = 10;
 
+
+      /**
+      * Muestra lista de mensajes-archivados
+      *
+      * @return \Illuminate\Http\Response
+      */
+      public function indexStorage()
+      {
+        //
+        $user = Auth::user();
+        $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+        $conversations = Conversation::where('user_id',$user->id)->whereIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+          $query->where('to_id',$user->id)->whereIn('id',$storage->toArray());
+        })
+        ->orderBy('created_at','desc')->paginate($this->pageSize);
+        return view('fellow.messages.messages-storage-list')->with([
+          'user' => $user,
+          'conversations' =>$conversations,
+        ]);
+
+      }
+
     /**
     * Muestra lista de mensajes
     *
