@@ -34,11 +34,12 @@
 			<h3 class="count_messages">{{ $forum->forum_messages->count()}}</h3>
 		</div>
 		<div class="col-sm-11 col-xs-10">
-			<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h2>
-			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 			@if($forum->session)
+			<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h2>
+			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->			
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@else
+			<h2><a href='{{url("tablero/foros/{$user->fellowData->state}")}}'>{{$forum->topic}}</a></h2>
 			<p><span class="type">Estado</span></p>			
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
