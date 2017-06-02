@@ -7,9 +7,11 @@ use Auth;
 use App\Models\Forum;
 use App\Models\FellowData;
 use App\Models\ForumMessage;
+use App\Models\ForumConversation;
 use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveForum;
+use App\Http\Requests\SaveForumConversation;
 use App\Http\Requests\SaveMessageForum;
 class FacilitatorForums extends Controller
 {
@@ -29,6 +31,25 @@ class FacilitatorForums extends Controller
       return view('facilitator.forums.forums-all-list')->with([
         "user"      => $user,
         "forums" => $forums,
+      ]);
+
+    }
+
+
+    /**
+     * Muestra lista de preguntas por sesión
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($id)
+    {
+      $user     = Auth::user();
+      $forum    = Forum::find($id);
+      $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('facilitator.forums.forums-list')->with([
+        "user"      => $user,
+        "forums" => $forums,
+        "forum"  =>$forum,
       ]);
 
     }
@@ -55,11 +76,11 @@ class FacilitatorForums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addMessage($forum_slug)
+    public function addMessage($id)
     {
         //
         $user      = Auth::user();
-        $forum   = Forum::where('slug',$forum_slug)->firstOrFail();
+        $forum   = ForumConversation::where('id',$id)->firstOrFail();
         return view('facilitator.forums.forum-add-message')->with([
           "user"      => $user,
           "forum" => $forum
@@ -75,12 +96,64 @@ class FacilitatorForums extends Controller
     public function saveMessage(SaveMessageForum $request)
     {
       $user      = Auth::user();
-      $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+      $forum     = ForumConversation::where('id',$request->id)->firstOrFail();
       $message   = new ForumMessage($request->only(['message']));
       $message->user_id = $user->id;
-      $message->forum_id = $forum->id;
+      $message->conversation_id = $forum->id;
       $message->save();
-      return redirect("tablero-facilitador/foros/ver/{$forum->id}")->with('message','Mensaje creado correctamente');
+      return redirect("tablero-facilitador/foros/pregunta/ver/{$forum->id}")->with('message','Mensaje creado correctamente');
     }
+
+    /**
+     * Agregar pregunta a foro
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addQuestion($id)
+    {
+        //
+        $user      = Auth::user();
+        $forum   = Forum::where('id',$id)->firstOrFail();
+        return view('facilitator.forums.forums-add-question')->with([
+          "user"      => $user,
+          "forum" => $forum
+        ]);
+    }
+
+    /**
+     * Guarda nueva pregunta
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveQuestion(SaveForumConversation $request)
+    {
+      $user      = Auth::user();
+      $forum       = Forum::where('id',$request->id)->first();
+      $forumConversation     = new ForumConversation($request->only(['topic','description']));
+      $forumConversation->forum_id = $request->id;
+      $forumConversation->user_id = $user->id;
+      $forumConversation->slug    = str_slug($request->topic);
+      $forumConversation->save();
+      return redirect("tablero-facilitador/foros/pregunta/ver/{$forumConversation->id}")->with('message','Pregunta creada correctamente');
+    }
+
+    /**
+    * Muestra pregunta
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function viewQuestion($id)
+    {
+      //
+      $user   = Auth::user();
+      $question  = ForumConversation::where('id',$id)->firstOrFail();
+      return view('facilitator.forums.forum-question-view')->with([
+        "user"      => $user,
+        "question"    => $question
+      ]);
+    }
+
 
 }
