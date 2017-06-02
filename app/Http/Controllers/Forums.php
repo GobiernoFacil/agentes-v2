@@ -9,6 +9,7 @@ use App\Models\FellowData;
 use App\Models\ForumMessage;
 use App\Models\ModuleSession;
 use App\Models\ForumConversation;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveForum;
 use App\Http\Requests\SaveForumConversation;
@@ -44,7 +45,17 @@ class Forums extends Controller
     {
       $user     = Auth::user();
       $session  = ModuleSession::where('slug',$session_slug)->firstOrFail();
-      $forum    = Forum::where('session_id',$session->id)->firstOrFail();
+      $forum    = Forum::where('session_id',$session->id)->first();
+      if(!$forum){
+        $auser = User::where('institution','Gobierno Fácil')->first();
+        $forum = new Forum();
+        $forum->session_id = $session->id;
+        $forum->user_id    = $auser->id;
+        $forum->topic      = "Foro de la sesión: ".$session->name;
+        $forum->description = "En este foro podrás resolver tus dudas acerca de la sesión.";
+        $forum->slug       = str_slug("Foro de la sesión: ".$session->name);
+        $forum->save();
+      }
       $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-list')->with([
         "user"      => $user,
