@@ -8,8 +8,10 @@ use App\Models\Forum;
 use App\Models\FellowData;
 use App\Models\ForumMessage;
 use App\Models\ModuleSession;
+use App\Models\ForumConversation;
 // FormValidators
 use App\Http\Requests\SaveForum;
+use App\Http\Requests\SaveForumConversation;
 use App\Http\Requests\SaveMessageForum;
 class Forums extends Controller
 {
@@ -42,10 +44,12 @@ class Forums extends Controller
     {
       $user     = Auth::user();
       $session  = ModuleSession::where('slug',$session_slug)->firstOrFail();
-      $forums   = Forum::where('session_id',$session->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $forum    = Forum::where('session_id',$session->id)->firstOrFail();
+      $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-list')->with([
         "user"      => $user,
         "forums" => $forums,
+        "forum"  =>$forum,
         "session" => $session
       ]);
 
@@ -102,6 +106,42 @@ class Forums extends Controller
       $forum->save();
       return redirect("tablero/foros/{$session->module->slug}/{$session->slug}")->with('message','Foro creado correctamente');
     }
+
+    /**
+     * Agregar pregunta a foro
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addQuestion($module_slug,$session_slug)
+    {
+        //
+        $user      = Auth::user();
+        $session   = ModuleSession::where('slug',$session_slug)->firstOrFail();
+        return view('fellow.modules.sessions.forums.forums-add-question')->with([
+          "user"      => $user,
+          "session" => $session
+        ]);
+    }
+
+
+    /**
+     * Guarda nueva pregunta
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveQuestion(SaveForumConversation $request)
+    {
+      $user      = Auth::user();
+      $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+      $forumConversation     = new ForumConversation($request->only(['topic','description']));
+      $forumConversation->user_id = $user->id;
+      $forumConversation->forum_id = $forum->id;
+      $forumConversation->slug    = str_slug($request->topic);
+      $forumConversation->save();
+      return redirect("tablero/foros/{$session->module->slug}/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+    }
+
 
 
     /**
