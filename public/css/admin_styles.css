@@ -1902,6 +1902,10 @@ sup {
   .forum_list p.author {
     font-size: 14px; }
 
+.forum_list li {
+  list-style: none;
+  padding-top: 20px; }
+
 .forum_list h5 {
   font-size: 12px;
   display: inline-block; }

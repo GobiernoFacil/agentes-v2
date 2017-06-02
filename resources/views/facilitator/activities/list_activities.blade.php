@@ -33,7 +33,8 @@
 		</div>
 		<!-- ver sesión-->
 		<div class="col-sm-2">
-			<a class="btn view block sessions_l"  href="{{ url('dashboard/sesiones/ver/' . $session->session->id) }}">Ver sesión</a>
+			{{$session->activity}}
+			<a class="btn view block sessions_l"  href="{{ url('tablero-facilitador/actividades/sesion/' . $session->session->id) }}">Ver sesión</a>
 		</div>
 
 		<div class="footnote">
