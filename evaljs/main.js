@@ -5,6 +5,7 @@ var Form, Questions, GFPNUDApp, endpoint,
     questionTemplate     = "question-template",
     realQuestionTemplate = "real-question-template",
     answerTemplate       = "answer-template",
+    realAnswerTemplate   = "real-answer-template",
     questionsList        = "questions-list",
     fakeEndpoint         = "/fake.php";
 
@@ -15,8 +16,10 @@ Form = {
 };
 
 Questions = [];
+Answers = []; 
 
 Form.questions = Questions;
+Form.answers   = Answers;
 
 
 // the app
@@ -76,7 +79,7 @@ GFPNUDApp = {
         addOpt   = null,
         that     = this,
         REQFunc  = this.removeQuestion.bind(this, li),
-        ADOFunc  = this.addOption.bind(this, li);
+        ADOFunc  = null;//this.addOption.bind(this, li);
 
     if(!value){
       return;
@@ -96,6 +99,7 @@ GFPNUDApp = {
       remove.addEventListener("click", REQFunc);
       remove.setAttribute("data-id", res.id);
 
+      ADOFunc  = that.addOption.bind(that, li, res);
       addOpt.addEventListener("click", ADOFunc);
     }, "json");
     /**/
@@ -127,7 +131,7 @@ GFPNUDApp = {
     /**/
   },
 
-  addOption : function(li, e){
+  addOption : function(li, question, e){
     e.preventDefault();
 
     var list     = li.querySelector("ul"),
@@ -135,7 +139,8 @@ GFPNUDApp = {
         li       = document.createElement("li"),
         form     = null,
         remove   = null,
-        REAFunc  = null;
+        REAFunc  = null,
+        SOFunc   = null;
 
 
     li.innerHTML = template;
@@ -143,19 +148,55 @@ GFPNUDApp = {
     form    = li.querySelector("form");
     remove  = li.querySelector(".remove-answer");
     REOFunc = this.removeEmptyOption.bind(this, list, li);
+    SOFunc  = this.saveOption.bind(this, li, question);
 
     list.appendChild(li);
 
-    form.addEventListener("submit", this.saveOption);
+    form.addEventListener("submit", SOFunc);
     remove.addEventListener("click", REOFunc);
 
     //console.log(list, e);
   },
 
-  saveOption : function(e){
+  saveOption : function(li, question, e){
     e.preventDefault();
-    
-    console.log(e);
+
+    var value = li.querySelector("form").querySelector("input[type='text']").value,
+        answer = {
+          value    : value,
+          question : question.id,
+          selected : false
+        },
+        template = document.getElementById(realAnswerTemplate).innerHTML,
+        that     = this,
+        name     = null,
+        swtch    = null,
+        remove   = null;
+
+    if(!value){
+      return;
+    }
+
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, answer, function(res){
+      that.form.answers.push(res);
+
+      li.innerHTML = template;
+
+      name     = li.querySelector(".answer-name");
+      swtch    = li.querySelector(".switch-answer");
+      remove   = li.querySelector(".remove-answer");
+
+      name.innerHTML = res.value;
+      /*
+      answer-name"></a>
+      <a href="#" class="switch-answer">es respuesta correcta</a>
+      <a href="#" class="remove-answer"
+      */
+    });
+    /**/
+
   },
 
   removeEmptyOption : function(list, li, e){
