@@ -123,6 +123,21 @@ class Forums extends Controller
         ]);
     }
 
+    /**
+     * Agregar pregunta a foro de estado
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addStateQuestion($state_name)
+    {
+        //
+        $user      = Auth::user();
+        return view('fellow.modules.sessions.forums.forums-add-question')->with([
+          "user"      => $user,
+          "session" => $state_name
+        ]);
+    }
+
 
     /**
      * Guarda nueva pregunta
@@ -133,13 +148,26 @@ class Forums extends Controller
     public function saveQuestion(SaveForumConversation $request)
     {
       $user      = Auth::user();
-      $session     = ModuleSession::where('slug',$request->session_slug)->firstOrFail();
+      $session     = ModuleSession::where('slug',$request->session_slug)->first();
+      $forum       = Forum::where('state_name',$request->session_slug)->first();
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
+      if($session){
+        //foro con sesión
+        $forumConversation->forum_id = $session->forums->id;
+      }elseif($forum){
+        //foro de estado
+        $forumConversation->forum_id = $forum->id;
+      }else{
+        //foro general
+      }
       $forumConversation->user_id = $user->id;
-      $forumConversation->forum_id = $session->forums->id;
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
-      return redirect("tablero/foros/pregunta/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+      if($session){
+        return redirect("tablero/foros/pregunta/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+      }else{
+        return redirect("tablero/foros/{$forum->state_name}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+      }
     }
 
 
@@ -198,7 +226,7 @@ class Forums extends Controller
           return redirect("tablero/foros/pregunta/{$conversation->forum->session->slug}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
         }elseif($conversation->forum->state_name){
           //conversacion perteneciente a foro con estado
-          return redirect("tablero/foros/{$forum->state_name}")->with('message','Mensaje creado correctamente');
+          return redirect("tablero/foros/{$conversation->forum->state_name}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
         }else{
           //conversacion perteneciente a foro general
         }
@@ -215,9 +243,12 @@ class Forums extends Controller
         $user      = Auth::user();
         if($user->fellowData->state === $state_name){
           $forum  = Forum::where('state_name',$state_name)->firstOrFail();
-          return view('fellow.modules.sessions.forums.forum-view')->with([
+          $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+          return view('fellow.modules.sessions.forums.forums-list')->with([
             "user"      => $user,
-            "forum"    => $forum
+            "forum"    => $forum,
+            "forums"    => $forums,
+            "session"   => null
           ]);
         }else{
           return redirect('tablero');
