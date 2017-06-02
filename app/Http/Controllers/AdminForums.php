@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Forum;
 use App\Models\ForumMessage;
+use App\Models\ForumConversation;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 // FormValidators
 use App\Http\Requests\SaveAdminForum;
+use App\Http\Requests\SaveForumConversation;
 use App\Http\Requests\SaveMessageForum;
 class AdminForums extends Controller
 {
@@ -21,13 +23,32 @@ class AdminForums extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function all()
   {
     $user     = Auth::user();
     $forums   = Forum::orderBy('created_at','desc')->paginate($this->pageSize);
     return view('admin.forums.forums-all-list')->with([
       "user"      => $user,
       "forums" => $forums,
+    ]);
+
+  }
+
+
+  /**
+   * Muestra lista de preguntas por sesión
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index($id)
+  {
+    $user     = Auth::user();
+    $forum    = Forum::find($id);
+    $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+    return view('admin.forums.forums-list')->with([
+      "user"      => $user,
+      "forums" => $forums,
+      "forum"  =>$forum,
     ]);
 
   }
@@ -95,11 +116,11 @@ class AdminForums extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function addMessage($forum_slug)
+  public function addMessage($id)
   {
       //
       $user      = Auth::user();
-      $forum   = Forum::where('slug',$forum_slug)->firstOrFail();
+      $forum   = ForumConversation::where('id',$id)->firstOrFail();
       return view('admin.forums.forum-add-message')->with([
         "user"      => $user,
         "forum" => $forum
@@ -115,12 +136,12 @@ class AdminForums extends Controller
   public function saveMessage(SaveMessageForum $request)
   {
     $user      = Auth::user();
-    $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+    $forum     = ForumConversation::where('id',$request->id)->firstOrFail();
     $message   = new ForumMessage($request->only(['message']));
     $message->user_id = $user->id;
-    $message->forum_id = $forum->id;
+    $message->conversation_id = $forum->id;
     $message->save();
-    return redirect("dashboard/foros/ver/{$forum->id}")->with('message','Mensaje creado correctamente');
+    return redirect("dashboard/ver/pregunta/foros/{$forum->id}")->with('message','Mensaje creado correctamente');
   }
 
   /**
@@ -137,7 +158,65 @@ class AdminForums extends Controller
         # code...
         $message->delete();
       }
+      foreach ($forum->forum_conversations as $message) {
+        # code...
+        foreach ($message->messages as $mes) {
+          $mes->delete();
+        }
+        $message->delete();
+      }
       $forum->delete();
        return redirect("dashboard/foros")->with('message','Foro eliminado correctamente');
+  }
+
+  /**
+   * Agregar pregunta a foro
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function addQuestion($id)
+  {
+      //
+      $user      = Auth::user();
+      $forum   = Forum::where('id',$id)->firstOrFail();
+      return view('admin.forums.forums-add-question')->with([
+        "user"      => $user,
+        "forum" => $forum
+      ]);
+  }
+
+  /**
+   * Guarda nueva pregunta
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function saveQuestion(SaveForumConversation $request)
+  {
+    $user      = Auth::user();
+    $forum       = Forum::where('id',$request->id)->first();
+    $forumConversation     = new ForumConversation($request->only(['topic','description']));
+    $forumConversation->forum_id = $request->id;
+    $forumConversation->user_id = $user->id;
+    $forumConversation->slug    = str_slug($request->topic);
+    $forumConversation->save();
+    return redirect("dashboard/pregunta/foros/ver/{$forumConversation->id}")->with('message','Pregunta creada correctamente');
+  }
+
+  /**
+  * Muestra pregunta
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function viewQuestion($id)
+  {
+    //
+    $user   = Auth::user();
+    $question  = ForumConversation::where('id',$id)->firstOrFail();
+    return view('admin.forums.forum-question-view')->with([
+      "user"      => $user,
+      "question"    => $question
+    ]);
   }
 }
