@@ -48,7 +48,7 @@ protected $fillable = [
    }
 
    function forums(){
-     return $this->hasMany("App\Models\Forum",'session_id');
+     return $this->hasOne("App\Models\Forum",'session_id');
     }
 
 

@@ -7,10 +7,18 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Foros de la sesión: {{$session->name}}</h1>
+		@if($session)
+		<h1>Preguntas de la sesión: {{$session->name}}</h1>
+		@else
+		<h1>Preguntas del {{$forum->topic}}</h1>
+		@endif
 	</div>
   <div class="col-sm-3 center">
-		<a href='{{ url("tablero/foros/{$session->module->slug}/{$session->slug}/crear") }}' class="btn gde"><strong>+</strong> Crear Foro</a>
+		@if($session)
+		<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde"><strong>+</strong> Agregar Pregunta</a>
+		@else
+		<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde"><strong>+</strong> Agregar Pregunta</a>
+		@endif
 	</div>
 </div>
 
@@ -28,12 +36,20 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    @foreach ($forums as $forum)
+			    @foreach ($forums as $conversation)
 			      <tr>
-			        <td><h4> <a href="{{ url('tablero/foros/'.$session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h4></td>
-              <td>{{str_limit($forum->description, $limit = 20, $end = '...')}}</td>
+							@if($session)
+			        <td><h4> <a href="{{ url('tablero/foros/pregunta/'.$session->slug.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h4></td>
+							@else
+							<td><h4> <a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h4></td>
+							@endif
+              <td>{{str_limit($conversation->description, $limit = 20, $end = '...')}}</td>
 			        <td>
-			          <a href="{{ url('tablero/foros/' .$session->slug.'/'.$forum->slug.'/ver') }}" class="btn xs view">Ver</a>
+								@if($session)
+			          <a href="{{ url('tablero/foros/pregunta/'.$session->slug.'/'.$conversation->slug.'/ver') }}" class="btn xs view">Ver</a>
+								@else
+								<a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}" class="btn xs view">Ver</a>
+								@endif
 					</tr>
 			    @endforeach
 			  </tbody>
@@ -46,7 +62,7 @@
 @else
 <div class="row">
   <div class="col-sm-12">
-    <p>Sin foros</p>
+    <p>Sin preguntas</p>
   </div>
 </div>
 @endif
