@@ -165,13 +165,15 @@ GFPNUDApp = {
         answer = {
           value    : value,
           question : question.id,
-          selected : false
+          selected : 0
         },
         template = document.getElementById(realAnswerTemplate).innerHTML,
         that     = this,
         name     = null,
         swtch    = null,
-        remove   = null;
+        remove   = null,
+        STOFunc  = null,
+        ROFunc   = null;
 
     if(!value){
       return;
@@ -184,16 +186,17 @@ GFPNUDApp = {
 
       li.innerHTML = template;
 
+      STOFunc = that.switchTrueOption.bind(that, li, res);
+      ROFunc  = that.removeOption.bind(that, li, res);
+
       name     = li.querySelector(".answer-name");
       swtch    = li.querySelector(".switch-answer");
       remove   = li.querySelector(".remove-answer");
 
       name.innerHTML = res.value;
-      /*
-      answer-name"></a>
-      <a href="#" class="switch-answer">es respuesta correcta</a>
-      <a href="#" class="remove-answer"
-      */
+
+      swtch.addEventListener("click", STOFunc);
+      remove.addEventListener("click", ROFunc);
     });
     /**/
 
@@ -201,10 +204,34 @@ GFPNUDApp = {
 
   removeEmptyOption : function(list, li, e){
     console.log(list, li, e);
+
+    list.removeChild(li);
   },
 
-  removeOption : function(){
+  switchTrueOption : function(li, opt, e){
+    e.preventDefault();
 
+    var selected = +opt.selected,
+        el       = li.querySelector(".switch-answer"),
+        label    = selected ? "hacer esta pregunta correcta" : "hacer esta respuesta incorrecta";
+
+    opt.selected = selected ? 0 : 1;
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, {opt}, function(res){
+      el.innerHTML = label;
+    }, "json");
+    /**/
+  },
+
+  removeOption : function(li, opt, e){
+    e.preventDefault();
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, {opt}, function(res){
+      li.parentNode.removeChild(li);
+    }, "json");
+    /**/
   }
 };
 
