@@ -18,4 +18,8 @@ class ForumMessage extends Model
   function forum(){
     return $this->belongsTo("App\Models\Forum");
   }
+  function conversation(){
+    return $this->belongsTo("App\Models\Forum",'conversation_id');
+  }
+
 }

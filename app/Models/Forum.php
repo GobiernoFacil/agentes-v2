@@ -33,6 +33,11 @@ class Forum extends Model
       return $this->belongsTo("App\User");
     }
 
+    function forum_conversations(){
+      return $this->hasMany("App\Models\ForumConversation");
+    }
+
+
 
 
 }
