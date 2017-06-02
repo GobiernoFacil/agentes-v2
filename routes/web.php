@@ -268,11 +268,11 @@ Route::group(['middleware' => ['auth']], function () {
   //  Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
   //  Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
     Route::get('tablero/foros/{session_slug}/{forum_slug}/ver', 'Forums@view');
-    Route::get('tablero/foros/{session_slug}/{forum_slug}/pregunta/crear', 'Forums@addQuestion');
-    Route::post('tablero/foros/{session_slug}/{forum_slug}/pregunta/save', 'Forums@saveQuestion');
-    Route::get('tablero/foros/{session_slug}/{forum_slug}/{question_slug}/ver', 'Forums@viewQuestion');
-    Route::get('tablero/foros/{forum_slug}/mensajes/agregar', 'Forums@addMessage');
-    Route::post('tablero/foros/{forum_slug}/mensajes/save/single', 'Forums@saveMessage');
+    Route::get('tablero/foros/{session_slug}/pregunta/crear', 'Forums@addQuestion');
+    Route::post('tablero/foros/{session_slug}/pregunta/save', 'Forums@saveQuestion');
+    Route::get('tablero/foros/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
+    Route::get('tablero/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
+    Route::post('tablero/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
     Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
   });
 

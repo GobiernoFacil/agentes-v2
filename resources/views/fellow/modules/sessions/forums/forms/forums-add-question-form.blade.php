@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/foros/{$session->module->slug}/{$session->slug}/pregunta/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/foros/{$session->slug}/pregunta/save"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -35,7 +35,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Enviar', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Guardar', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}

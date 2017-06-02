@@ -18,7 +18,7 @@ class ForumConversation extends Model
     }
 
     function messages(){
-      return $this->hasMany("App\Models\ForumMessage");
+      return $this->hasMany("App\Models\ForumMessage",'conversation_id');
     }
 
 

@@ -3,7 +3,6 @@
 @section('description', 'Agregar mensaje a foro')
 @section('body_class', 'fellow foros')
 @section('breadcrumb_type', 'forum add message')
-@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
 <div class="row">

@@ -112,7 +112,7 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addQuestion($module_slug,$session_slug)
+    public function addQuestion($session_slug)
     {
         //
         $user      = Auth::user();
@@ -133,13 +133,31 @@ class Forums extends Controller
     public function saveQuestion(SaveForumConversation $request)
     {
       $user      = Auth::user();
-      $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+      $session     = ModuleSession::where('slug',$request->session_slug)->firstOrFail();
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
       $forumConversation->user_id = $user->id;
-      $forumConversation->forum_id = $forum->id;
+      $forumConversation->forum_id = $session->forums->id;
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
-      return redirect("tablero/foros/{$session->module->slug}/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+      return redirect("tablero/foros/pregunta/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+    }
+
+
+    /**
+    * Muestra pregunta
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function viewQuestion($session_slug,$question_slug)
+    {
+      //
+      $user   = Auth::user();
+      $question  = ForumConversation::where('slug',$question_slug)->firstOrFail();
+      return view('fellow.modules.sessions.forums.forum-question-view')->with([
+        "user"      => $user,
+        "question"    => $question
+      ]);
     }
 
 
@@ -153,7 +171,7 @@ class Forums extends Controller
     {
         //
         $user      = Auth::user();
-        $forum   = Forum::where('slug',$forum_slug)->firstOrFail();
+        $forum   = ForumConversation::where('slug',$forum_slug)->firstOrFail();
         return view('fellow.modules.sessions.forums.forum-add-message')->with([
           "user"      => $user,
           "forum" => $forum
@@ -170,15 +188,19 @@ class Forums extends Controller
       public function saveMessage(SaveMessageForum $request)
       {
         $user      = Auth::user();
-        $forum   = Forum::where('slug',$request->forum_slug)->firstOrFail();
+        $conversation   = ForumConversation::where('slug',$request->question_slug)->firstOrFail();
         $message     = new ForumMessage($request->only(['message']));
         $message->user_id = $user->id;
-        $message->forum_id = $forum->id;
+        $message->conversation_id = $conversation->id;
         $message->save();
-        if($forum->session_id){
-          return redirect("tablero/foros/{$forum->session->slug}/{$forum->slug}/ver")->with('message','Mensaje creado correctamente');
-        }else{
+        //conversacion perteneciente a foro con sesion
+        if($conversation->forum->session_id){
+          return redirect("tablero/foros/pregunta/{$conversation->forum->session->slug}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
+        }elseif($conversation->forum->state_name){
+          //conversacion perteneciente a foro con estado
           return redirect("tablero/foros/{$forum->state_name}")->with('message','Mensaje creado correctamente');
+        }else{
+          //conversacion perteneciente a foro general
         }
       }
 
