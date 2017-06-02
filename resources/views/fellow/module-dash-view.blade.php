@@ -1,3 +1,5 @@
+<div class="box session_list">
+	<div class="row">
 <!--icono-->
 <div class="col-sm-1 right">
   <b class="icon_h session list_s"></b>
@@ -33,3 +35,5 @@
       </div>
     </div>
   </div>
+	</div>
+</div>
