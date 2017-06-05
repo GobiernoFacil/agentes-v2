@@ -2,7 +2,7 @@
 @section('title',  $question->topic)
 @section('description', 'Ver pregunta agregada a foro')
 @section('body_class', 'fellow foros')
-@section('breadcrumb_type', 'forum')
+@section('breadcrumb_type', 'forum view question')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
