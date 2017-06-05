@@ -73,7 +73,7 @@
 						@foreach($forums as $forum)
 						<li class="row">
 							<span class="col-sm-2">
-							{{$forum->messages->count()==1 ? $forum->messages->count()." respuesta" : $forum->messages->count()." respuestas" }}
+								<h3 class="count_messages">{{$forum->messages->count()}}</h3>
 							</span>
 							<span class="col-sm-10">
 							@if($forum->forum->session)
@@ -89,7 +89,6 @@
 						<li class="row">
 							<span class="col-sm-2">
 								<h3 class="count_messages">{{$mes->conversation->messages->count()}}</h3>
-
 							</span>
 							<span class="col-sm-10">
 							@if($mes->conversation->forum->session)
