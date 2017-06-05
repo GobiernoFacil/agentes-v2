@@ -200,7 +200,7 @@ class AdminForums extends Controller
     $forumConversation->user_id = $user->id;
     $forumConversation->slug    = str_slug($request->topic);
     $forumConversation->save();
-    return redirect("dashboard/pregunta/foros/ver/{$forumConversation->id}")->with('message','Pregunta creada correctamente');
+    return redirect("dashboard/foros/ver/{$forum->id}")->with('message','Pregunta creada correctamente');
   }
 
   /**

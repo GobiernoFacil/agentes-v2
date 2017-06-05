@@ -135,7 +135,7 @@ class FacilitatorForums extends Controller
       $forumConversation->user_id = $user->id;
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
-      return redirect("tablero-facilitador/foros/pregunta/ver/{$forumConversation->id}")->with('message','Pregunta creada correctamente');
+      return redirect("tablero-facilitador/foros/{$forum->id}")->with('message','Pregunta creada correctamente');
     }
 
     /**
