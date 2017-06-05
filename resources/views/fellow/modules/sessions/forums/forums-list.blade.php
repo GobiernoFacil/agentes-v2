@@ -2,7 +2,8 @@
 @section('title', $forum->topic )
 @section('description',$forum->topic  )
 @section('body_class', 'fellow foros')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'forum view')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
 <div class="row">
