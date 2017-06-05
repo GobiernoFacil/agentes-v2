@@ -15,8 +15,18 @@ Form = {
   name : "primer formulario"
 };
 
-Questions = [];
-Answers = []; 
+Questions = [{
+  id : 1,
+  question : "de qué color son las botas de súperman",
+  order : 1,
+  form : 1
+}];
+Answers = [
+  {id : 1, value : "azules", question : 1, selected : 0},
+  {id : 1, value : "verdes", question : 1, selected : 0},
+  {id : 1, value : "rojas", question : 1, selected : 1}
+];
+
 
 Form.questions = Questions;
 Form.answers   = Answers;
@@ -25,7 +35,7 @@ Form.answers   = Answers;
 // the app
 GFPNUDApp = {
   initialize : function(form){
-    this.form = Form;
+    this.form = form;
 
     this.addQuestion  = this.addQuestion.bind(this);
     this.saveQuestion = this.saveQuestion.bind(this);
@@ -44,6 +54,10 @@ GFPNUDApp = {
     var addQuestion = document.getElementById(addQuestionBtn);
 
     addQuestion.addEventListener("click", this.addQuestion);
+  },
+
+  renderQuestion : function(question, answers){
+    
   },
 
   addQuestion : function(e){
@@ -128,7 +142,7 @@ GFPNUDApp = {
       questions.splice(questions.indexOf(question), 1);
       li.parentNode.removeChild(li);
     }, "json");
-    /**/
+    /* */
   },
 
   addOption : function(li, question, e){
@@ -235,4 +249,4 @@ GFPNUDApp = {
   }
 };
 
-GFPNUDApp.initialize();
+GFPNUDApp.initialize(Form);
