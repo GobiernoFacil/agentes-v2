@@ -38,22 +38,42 @@
   	</div>
 </div>
 
-<!--enlace a agregar respuesta
-	<div class="col-sm-3 center">
-    	<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
-  	</div>-->
+
 <div class="box">
   @if($question->messages->count()>0 )
+  	<div class="row">
+  		<div class="col-sm-9">
+	  		<h2>{{$question->messages->count() == 1 ? $question->messages->count() . ' respuesta' : $question->messages->count() . ' respuestas' }}</h2>
+  		</div>
+  		<!--enlace a agregar respuesta-->
+	  	<div class="col-sm-3 center">
+	  		<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+	  	</div>
+	  	<div class="col-sm-12">
+	  		<div class="divider b"></div>
+  		</div>
+  	</div>
+  	<div class="row">
+        <div class="col-sm-8 col-sm-offset-2 forum_list">
     @foreach($question->messages as $message)
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <p>{{$message->message}}</p>
-        </div>
-      </div>
+      		<div class="row">
+	      		<div class="col-sm-1">
+		  			<img src='{{url("img/users/default.png")}}' width="100%">
+				</div>
+				<div class="col-sm-11">
+	  				<p>{{$message->message}}</p>
+	  				<p class="author">Por {{$message->user_id}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+				</div>
+				<div class="col-sm-12">
+	  			<div class="divider b"></div>
+				</div>
+      		</div>
     @endforeach
+    	</div>
+    </div>
     <div class="row">
-      <div class="col-sm-3 col-sm-offset-2 center">
-        <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+      <div class="col-sm-6 col-sm-offset-3 center">
+        <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
       </div>
     </div>
   @else
