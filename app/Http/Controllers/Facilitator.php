@@ -13,6 +13,9 @@ use App\User;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
 use App\Models\Image;
+use App\Models\Conversation;
+use App\Models\StoreConversation;
+
 // FormValidators
 use App\Http\Requests\SaveFacilitator;
 use App\Http\Requests\UpdateFacilitator;
@@ -36,9 +39,15 @@ class Facilitator extends Controller
   */
   public function dashboard()
   {
-    $user 			  = Auth::user();
+    $user 		   = Auth::user();
+    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+    $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+      $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
+    })
+    ->count();
     return view('facilitator.dashboard')->with([
-      "user"      		=> $user,
+      "user"      	  => $user,
+      "conversations" => $conversations
     ]);
   }
 

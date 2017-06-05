@@ -29,8 +29,8 @@
 			</div>
 			<div class="col-sm-6 center">
 				<div class="box">
-					<h3 class="sa_title">Mensajes</h3>
-					<a href="{{ url('tablero-facilitador/mensajes') }}" class="count_link">{{$user->conversation ? $user->conversation->count() : '0'}}</a>
+					<h3 class="sa_title">Conversaciones</h3>
+					<a href="{{ url('tablero-facilitador/mensajes') }}" class="count_link">{{$conversations}}</a>
 				</div>
 			</div>
 		</div>
