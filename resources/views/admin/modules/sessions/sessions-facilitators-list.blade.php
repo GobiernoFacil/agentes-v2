@@ -6,6 +6,7 @@
 				@if($facilitator->user->image)
 				<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="112px">
 				@else
+				<img src='{{url("img/users/default.png")}}' width="100%">
 				@endif
 			</div>
 			<div class="col-sm-9">
@@ -15,9 +16,17 @@
 					<a href='{{ url("dashboard/facilitadores/ver/" .$facilitator->user->id) }}' class="btn xs view">Ver</a>
 					<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs danger">Remover</a>
 					<!-- <a href ="{{ url('dashboard/requerimientos/eliminar' . $facilitator->id) }}"  id ="{{$facilitator->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
-					@else
+					@endif
+					@if($user->type == "fellow")
 					<a href='{{ url("tablero/aprendizaje/{$session->module->slug}/{$session->slug}/ver/facilitador/{$facilitator->user->id}") }}' class="btn xs view">Ver</a>
 					@endif
+					@if($user->type == "facilitator")
+						@if($user->id !== $facilitator->user->id)
+						<a href="{{ url('tablero-facilitador/facilitadores/ver/' . $facilitator->user->id) }}" class="btn xs ev">Ver</a>
+						@else
+						<a href="{{ url('tablero-facilitador/perfil')}}" class="btn xs ev">Ver tu perfil</a>					
+						@endif
+			 		@endif
 				</p>
 			</div>
 		</div>
