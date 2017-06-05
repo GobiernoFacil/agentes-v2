@@ -12,20 +12,49 @@
 </div>
 <div class="box">
 	<div class="row">
-		<div class="col-sm-5 col-sm-offset-1">
-			<ul class="profile list">
-				<li><h2>{{$user->name}}</h2></li>
-				<li><span>email</span>{{$user->email}}</li>
-				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($user->created_at)) }} hrs.</li>
-				<li><span>Última actualización</span>{{ date("d-m-Y, H:i", strtotime($user->updated_at)) }} hrs.</li>
-			</ul>
-		</div>
-		<div class="col-sm-5">
+		<div class="col-sm-12">
 			<ul class="profile list">
 				<li class="right">
-				<a href="{{ url('tablero/perfil/editar') }}" class="btn xs ev">Editar Perfil</a></li>
+				<a href="{{ url('tablero/perfil/editar') }}" class="btn xs view">Editar tu perfil</a></li>
 			</ul>
 		</div>
+		<div class="col-sm-10 col-sm-offset-1 center">
+			<p class="">
+				@if($user->image)
+				<img src='{{url("img/users/{$user->image->name}")}}' height="150px">
+				@else
+				<img src='{{url("img/users/default.png")}}' height="150px">
+				@endif
+			</p>
+			<h2 >{{$user->name}}</h2>
+
+			<div class="divider"></div>
+			<ul class="profile list row">
+				<li class="col-sm-4"><span>Grado de estudios</span>{{$user->fellowData->degree}}</li>
+				<li class="col-sm-4"><span>email</span>{{$user->email}}</li>
+				<li class="col-sm-4"><span>Sitio Web</span>{{$user->fellowData->web ? $user->fellowData->web : "Sin información" }}</li>
+
+			</ul>
+			<p>
+			@if($user->fellowData->twitter)
+			<a href="#" class="facilitador_i tw"></a>
+			@endif
+			@if($user->fellowData->facebook)
+			<a href="#" class="facilitador_i fb"></a>
+			@endif
+			@if($user->fellowData->linkedin)
+			<a href="#" class="facilitador_i lk"></a>
+			@endif
+			@if($user->fellowData->other)
+			{{$user->fellowData->other}}
+			@endif
+			</p>
+
+			<h3>Semblanza</h3>
+			<p>{{$user->fellowData->semblance ? $user->fellowData->semblance : "Sin información" }}</p>
+			<div class="divider"></div>
+		</div>
+
 	</div>
 </div>
 @endsection
