@@ -73,11 +73,11 @@
 						@foreach($forums as $forum)
 						<li class="row">
 							<span class="col-sm-2">
-							{{$forum->forum_messages->count()==1 ? $forum->forum_messages->count()." respuesta" : $forum->forum_messages->count()." respuestas" }}
+							{{$forum->messages->count()==1 ? $forum->messages->count()." respuesta" : $forum->messages->count()." respuestas" }}
 							</span>
 							<span class="col-sm-10">
-							@if($forum->session)
-							<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug.'/ver') }}">{{$forum->topic}}</a></h2>
+							@if($forum->forum->session)
+							<h2><a href="{{ url('tablero/foros/' .$forum->forum->session->module->slug.'/'.$forum->forum->session->slug) }}">{{$forum->topic}}</a></h2>
 							@else
 							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
 							@endif
@@ -88,17 +88,16 @@
 						@foreach($messagesF as $mes)
 						<li class="row">
 							<span class="col-sm-2">
-								<h3 class="count_messages">{{$mes->forum->forum_messages->count()}}</h3>
-									<?php /*{{$mes->forum->forum_messages->count()==1 ? $mes->forum->forum_messages->count()." respuesta" : $mes->forum->forum_messages->count()." respuestas" }}*/?>
-									
+								<h3 class="count_messages">{{$mes->conversation->messages->count()}}</h3>
+
 							</span>
 							<span class="col-sm-10">
-							@if($mes->forum->session)
-							<h2><a href="{{ url('tablero/foros/' .$mes->forum->session->module->slug.'/'.$mes->forum->session->slug) }}">{{$mes->forum->topic}}</a></h2>
+							@if($mes->conversation->forum->session)
+							<h2><a href="{{ url('tablero/foros/' .$mes->conversation->forum->session->module->slug.'/'.$mes->conversation->forum->session->slug) }}">{{$mes->conversation->topic}}</a></h2>
 							@else
-							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$mes->forum->topic}}</a></h2>
+							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$mes->conversation->topic}}</a></h2>
 							@endif
-							<p><span>Creado {{$mes->forum->created_at->diffForHumans()}}</span></p>
+							<p><span>Creado {{$mes->conversation->forum->created_at->diffForHumans()}}</span></p>
 							</span>
 						</li>
 						@endforeach

@@ -19,7 +19,7 @@ class ForumMessage extends Model
     return $this->belongsTo("App\Models\Forum");
   }
   function conversation(){
-    return $this->belongsTo("App\Models\Forum",'conversation_id');
+    return $this->belongsTo("App\Models\ForumConversation",'conversation_id');
   }
 
 }

@@ -31,4 +31,6 @@ class Conversation extends Model
       return $this->hasMany("App\Models\Message")->orderBy('created_at','desc');
     }
 
+    
+
 }
