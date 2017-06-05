@@ -14,6 +14,7 @@ use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\Image;
+use App\Models\Activity;
 
 
 class FacilitatorActivities extends Controller
@@ -63,9 +64,9 @@ class FacilitatorActivities extends Controller
    {
        //
        $user    = Auth::user();
-       $activity = activity::find($id);
-          $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
-       return view('admin.modules.activities.activity-view')->with([
+       $activity = Activity::find($id);
+       $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+      return view('facilitator.activities.activity-view')->with([
          "user"      	=> $user,
          "activity"    => $activity,
          "session"		=> $session
