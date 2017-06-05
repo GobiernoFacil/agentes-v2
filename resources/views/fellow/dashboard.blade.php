@@ -94,7 +94,7 @@
 							</span>
 							<span class="col-sm-10">
 							@if($mes->forum->session)
-							<h2><a href="{{ url('tablero/foros/' .$mes->forum->session->slug.'/'.$mes->forum->slug.'/ver') }}">{{$mes->forum->topic}}</a></h2>
+							<h2><a href="{{ url('tablero/foros/' .$mes->forum->session->module->slug.'/'.$mes->forum->session->slug) }}">{{$mes->forum->topic}}</a></h2>
 							@else
 							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$mes->forum->topic}}</a></h2>
 							@endif
