@@ -220,12 +220,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('noticias-eventos/update/image', 'NewsEvents@uploadImage');
     /*@AdminForums Controller */
     // Rutas CRUD forums
-    Route::get('dashboard/foros', 'AdminForums@index');
-    Route::get('dashboard/foros/ver/{id}', 'AdminForums@view');
+    Route::get('dashboard/foros', 'AdminForums@all');
+    Route::get('dashboard/foros/ver/{id}', 'AdminForums@index');
     Route::get('dashboard/foros/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/save', 'AdminForums@save');
-    Route::get('dashboard/foros/{forum_slug}/mensajes/agregar', 'AdminForums@addMessage');
-    Route::post('dashboard/foros/{forum_slug}/mensajes/save/single', 'AdminForums@saveMessage');
+    Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
+    Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
+    Route::get('dashboard/ver/pregunta/foros/{id}', 'AdminForums@viewQuestion');
+    Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
   });
 
@@ -304,9 +307,13 @@ Route::group(['middleware' => ['auth']], function () {
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
-    Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
-    Route::get('tablero-facilitador/foros/{forum_slug}/mensajes/agregar', 'FacilitatorForums@addMessage');
-    Route::post('tablero-facilitador/foros/{forum_slug}/mensajes/save/single', 'FacilitatorForums@saveMessage');
+    Route::get('tablero-facilitador/foros/{id}', 'FacilitatorForums@index');
+  //  Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
+    Route::get('tablero-facilitador/foros/pregunta/crear/{id}', 'FacilitatorForums@addQuestion');
+    Route::post('tablero-facilitador/foros/pregunta/save/{id}', 'FacilitatorForums@saveQuestion');
+    Route::get('tablero-facilitador/foros/pregunta/ver/{id}', 'FacilitatorForums@viewQuestion');
+    Route::get('tablero-facilitador/foros/pregunta/mensajes/agregar/{id}', 'FacilitatorForums@addMessage');
+    Route::post('tablero-facilitador/foros/pregunta/mensajes/save/{id}', 'FacilitatorForums@saveMessage');
 
   });
 });
