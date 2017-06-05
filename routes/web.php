@@ -220,12 +220,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('noticias-eventos/update/image', 'NewsEvents@uploadImage');
     /*@AdminForums Controller */
     // Rutas CRUD forums
-    Route::get('dashboard/foros', 'AdminForums@index');
-    Route::get('dashboard/foros/ver/{id}', 'AdminForums@view');
+    Route::get('dashboard/foros', 'AdminForums@all');
+    Route::get('dashboard/foros/ver/{id}', 'AdminForums@index');
     Route::get('dashboard/foros/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/save', 'AdminForums@save');
-    Route::get('dashboard/foros/{forum_slug}/mensajes/agregar', 'AdminForums@addMessage');
-    Route::post('dashboard/foros/{forum_slug}/mensajes/save/single', 'AdminForums@saveMessage');
+    Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
+    Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
+    Route::get('dashboard/ver/pregunta/foros/{id}', 'AdminForums@viewQuestion');
+    Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
   });
 
@@ -265,12 +268,16 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas foros
     Route::get('tablero/foros', 'Forums@all');
     Route::get('tablero/foros/{module_slug}/{session_slug}', 'Forums@index');
-    Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
-    Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
-    Route::get('tablero/foros/{session_slug}/{forum_slug}/ver', 'Forums@view');
-    Route::get('tablero/foros/{forum_slug}/mensajes/agregar', 'Forums@addMessage');
+  //  Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
+  //  Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
+    Route::get('tablero/foros/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
+    Route::get('tablero/foros/{session_slug}/pregunta/crear', 'Forums@addQuestion');
+    Route::get('tablero/foros/pregunta/estado/{state_name}/crear', 'Forums@addStateQuestion');
+    Route::post('tablero/foros/{session_slug}/pregunta/save', 'Forums@saveQuestion');
+    Route::get('tablero/foros/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
+    Route::get('tablero/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
+    Route::post('tablero/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
     Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
-    Route::post('tablero/foros/{forum_slug}/mensajes/save/single', 'Forums@saveMessage');
   });
 
   /* R U T A S  UNICAS DEL Facilitador
@@ -300,9 +307,13 @@ Route::group(['middleware' => ['auth']], function () {
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
-    Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
-    Route::get('tablero-facilitador/foros/{forum_slug}/mensajes/agregar', 'FacilitatorForums@addMessage');
-    Route::post('tablero-facilitador/foros/{forum_slug}/mensajes/save/single', 'FacilitatorForums@saveMessage');
+    Route::get('tablero-facilitador/foros/{id}', 'FacilitatorForums@index');
+  //  Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
+    Route::get('tablero-facilitador/foros/pregunta/crear/{id}', 'FacilitatorForums@addQuestion');
+    Route::post('tablero-facilitador/foros/pregunta/save/{id}', 'FacilitatorForums@saveQuestion');
+    Route::get('tablero-facilitador/foros/pregunta/ver/{id}', 'FacilitatorForums@viewQuestion');
+    Route::get('tablero-facilitador/foros/pregunta/mensajes/agregar/{id}', 'FacilitatorForums@addMessage');
+    Route::post('tablero-facilitador/foros/pregunta/mensajes/save/{id}', 'FacilitatorForums@saveMessage');
 
   });
 });

@@ -20,28 +20,25 @@
 	<div class="col-sm-12">
 		<h2>Tu última actividad</h2>
 		@if($user->log->count()>0)
+			@if($session)
+				@include('fellow.session-dash-view')
+			@elseif($activity)
+				@include('fellow.activity-dash-view')
+			@else
+				@include('fellow.module-dash-view')
+			@endif
+		@else
 		<div class="box session_list">
-		  <div class="row">
-				@if($session)
-					@include('fellow.session-dash-view')
-				@elseif($activity)
-					@include('fellow.activity-dash-view')
-				@else
-					@include('fellow.module-dash-view')
-				@endif
-			</div>
-		</div>
-
-	@else
-	<div class="box session_list">
-		<div class="row">
-			<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-12">
 					<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+				</div>
+				@include('fellow.module-first-dash-view')
 			</div>
-			@include('fellow.module-first-dash-view')
 		</div>
+		@endif
+	</div>
 </div>
-	@endif
 
 <!-- avance-->
 <div class="row">
@@ -69,29 +66,37 @@
 				</div>
 			</div>
 		<div class="col-sm-8">
-				<div class="box ">
+				<div class="box forum_list">
 					<h3 class="sa_title">Tu participación en los foros</h3>
 					@if($forums->count()>0 || $messagesF->count()>0)
 					<ul>
 						@foreach($forums as $forum)
 						<li class="row">
 							<span class="col-sm-2">
-							{{$forum->forum_messages->count()==1 ? $forum->forum_messages->count()." respuesta" : $forum->forum_messages->count()." respuestas" }}
+								<h3 class="count_messages">{{$forum->messages->count()}}</h3>
 							</span>
 							<span class="col-sm-10">
-							<h3>{{$forum->topic}}</h3>
-							<p class="right">Preguntado {{$forum->created_at->diffForHumans()}}</p>
+							@if($forum->forum->session)
+							<h2><a href="{{ url('tablero/foros/' .$forum->forum->session->module->slug.'/'.$forum->forum->session->slug) }}">{{$forum->topic}}</a></h2>
+							@else
+							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
+							@endif
+							<p><span>Preguntado {{$forum->created_at->diffForHumans()}}</span></p>
 							</span>
 						</li>
 						@endforeach
 						@foreach($messagesF as $mes)
 						<li class="row">
 							<span class="col-sm-2">
-							{{$mes->forum->forum_messages->count()==1 ? $mes->forum->forum_messages->count()." respuesta" : $mes->forum->forum_messages->count()." respuestas" }}
+								<h3 class="count_messages">{{$mes->conversation->messages->count()}}</h3>
 							</span>
 							<span class="col-sm-10">
-							<h3>{{$mes->forum->topic}}</h3>
-							<p class="right">Preguntado {{$mes->forum->created_at->diffForHumans()}}</p>
+							@if($mes->conversation->forum->session)
+							<h2><a href="{{ url('tablero/foros/' .$mes->conversation->forum->session->module->slug.'/'.$mes->conversation->forum->session->slug) }}">{{$mes->conversation->topic}}</a></h2>
+							@else
+							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$mes->conversation->topic}}</a></h2>
+							@endif
+							<p><span>Creado {{$mes->conversation->forum->created_at->diffForHumans()}}</span></p>
 							</span>
 						</li>
 						@endforeach

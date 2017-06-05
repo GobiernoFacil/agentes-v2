@@ -12,6 +12,7 @@ use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\NewsEvent;
 use App\Models\Forum;
+use App\Models\ForumConversation;
 use App\Models\ForumMessage;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
@@ -35,8 +36,9 @@ class Fellows extends Controller
       $activity       = null;
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
-      $forums         = Forum::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-      $messages       = ForumMessage::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+      $forums         = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+      $messages   = ForumMessage::select('conversation_id')->where('user_id',$user->id)->groupBy('conversation_id')->get();
+    ///  var_dump($messages->toArray());
       $today = date("Y-m-d");
       if($user_log){
         if($user_log->session_id){
@@ -47,8 +49,7 @@ class Fellows extends Controller
           $module_last = Module::find($user_log->module_id);;
         }
       }
-
-      return view('fellow.dashboard')->with([
+   return view('fellow.dashboard')->with([
         "user"      		=> $user,
         "modules_count" => $modules->count(),
         "module"        =>  $first_module,

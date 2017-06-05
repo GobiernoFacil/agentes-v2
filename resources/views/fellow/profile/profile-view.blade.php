@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Perfil')
 @section('description', 'Ver perfil')
-@section('body_class', 'profile')
+@section('body_class', 'profile fellow')
 @section('breadcrumb_type', 'profile view')
 
 @section('content')
@@ -23,7 +23,7 @@
 		<div class="col-sm-5">
 			<ul class="profile list">
 				<li class="right">
-				<a href="{{ url('tablero/perfil/editar') }}" class="btn xs view">Editar Perfil</a></li>
+				<a href="{{ url('tablero/perfil/editar') }}" class="btn xs ev">Editar Perfil</a></li>
 			</ul>
 		</div>
 	</div>

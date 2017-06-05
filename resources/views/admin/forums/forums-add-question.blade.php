@@ -1,19 +1,19 @@
 @extends('layouts.admin.a_master')
-@section('title',  'Agregar mensaje a ' . $forum->topic)
-@section('description', 'Agregar mensaje a foro')
+@section('title', '')
+@section('description', '')
 @section('body_class', 'facilitator foros')
-@section('breadcrumb_type', 'forum add message')
+@section('breadcrumb_type', '')
 
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar mensaje a pregunta {{$forum->topic}} </h1>
+    <h1>Crear nueva pregunta</h1>
   </div>
 </div>
 <div class="box">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      @include('facilitator.forums.forms.forum-add-single-form')
+      @include('admin.forums.forms.forums-add-question-form')
     </div>
   </div>
 </div>
