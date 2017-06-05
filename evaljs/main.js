@@ -42,6 +42,7 @@ GFPNUDApp = {
 
     this.renderUI(this.form);
     this.enableUI();
+
   },
 
   renderUI : function(form){
@@ -54,10 +55,75 @@ GFPNUDApp = {
     var addQuestion = document.getElementById(addQuestionBtn);
 
     addQuestion.addEventListener("click", this.addQuestion);
+
+    this.form.questions.forEach(function(q){
+      this.renderQuestion(q, this.form.answers);
+    }, this);
   },
 
   renderQuestion : function(question, answers){
+    var anchor, remove, addOpt, REQFunc, ADOFunc,
+        template = document.getElementById(realQuestionTemplate).innerHTML,
+        li       = document.createElement("li"),
+        list     = document.getElementById(questionsList),
+        ul,
+        _answers = answers.filter(function(a){
+          return a.question == question.id;
+        }, this);
+
+    li.innerHTML = template;
+
+    REQFunc      = this.removeEmptyQuestion.bind(this, li);
+    ADOFunc      = this.addOption.bind(this, li, question);
     
+
+    anchor = li.querySelector(".question-name");
+    remove = li.querySelector(".remove-question");
+    addOpt = li.querySelector(".add-answer");
+    ul     = li.querySelector("ul");
+
+    anchor.innerHTML = question.question;
+
+    list.appendChild(li);
+
+    remove.addEventListener("click", REQFunc);
+    remove.setAttribute("data-id", question.id);
+
+    addOpt.addEventListener("click", ADOFunc);
+
+    _answers.forEach(function(a){
+      this.renderAnswer(ul, question, a);
+      //var ADOFunc = this.addOption.bind(this, ul, question, a);
+    }, this);
+
+  },
+
+  renderAnswer : function(ul, question, answer){
+    var template = document.getElementById(realAnswerTemplate).innerHTML,
+        li       = document.createElement("li"),
+        name     = null,
+        swtch    = null,
+        remove   = null,
+        STOFunc  = null,
+        ROFunc   = null;
+
+
+    li.innerHTML = template;
+
+    name     = li.querySelector(".answer-name");
+    swtch    = li.querySelector(".switch-answer");
+    remove   = li.querySelector(".remove-answer");
+
+    name.innerHTML  = answer.value;
+    swtch.innerHTML = !answer.selected ? "hacer esta pregunta correcta" : "hacer esta respuesta incorrecta";
+
+    STOFunc = this.switchTrueOption.bind(this, li, answer);
+    ROFunc  = this.removeOption.bind(this, li, answer);
+
+    swtch.addEventListener("click", STOFunc);
+    remove.addEventListener("click", ROFunc);
+
+    ul.appendChild(li);
   },
 
   addQuestion : function(e){
