@@ -23,6 +23,17 @@
 			 $type = "Lectura";
 		}
 		?>
+		@if(Session::has('success'))
+		<div class="message success">
+	      {{ Session::get('success') }}
+	  	</div>
+	  	@endif
+
+			@if(Session::has('error'))
+			<div class="message error">
+		      {{ Session::get('error') }}
+		  	</div>
+		  	@endif
 		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('tablero/aprendizaje/'.$session->module->slug.'/'. $session->slug) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('tablero/aprendizaje/'.$session->module->slug) }}" class="link">módulo: {{$session->module->title}}</a></h4>
 		<div class="divider b"></div>
 		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span></h1>
@@ -40,6 +51,13 @@
 		</div>
 
 	</div>
+	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-1">
+				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+		</div>
+	</div>
+	@endif
 </div>
 
 @if($activity->activityRequirements->count() > 0)

@@ -38,7 +38,6 @@ class Fellows extends Controller
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
       $forums         = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->get();
       $messages   = ForumMessage::select('conversation_id')->where('user_id',$user->id)->groupBy('conversation_id')->get();
-      var_dump($messages->toArray());
       $today = date("Y-m-d");
       if($user_log){
         if($user_log->session_id){
