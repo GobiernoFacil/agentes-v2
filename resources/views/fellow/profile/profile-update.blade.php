@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Editar Perfil')
 @section('description', 'Edita tu perfil')
-@section('body_class', 'profile')
+@section('body_class', 'profile fellow')
 @section('breadcrumb_type', 'profile edit')
 
 @section('content')
