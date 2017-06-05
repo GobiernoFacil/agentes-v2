@@ -297,6 +297,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/actividades', 'FacilitatorActivities@activities');
     Route::get('tablero-facilitador/actividades/sesion/{id}', 'FacilitatorActivities@sessions');
     Route::get('tablero-facilitador/actividades/ver/{id}', 'FacilitatorActivities@activities_view');
+    Route::get('tablero-facilitador/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     // Mensajes Facilitador
     Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
     Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
