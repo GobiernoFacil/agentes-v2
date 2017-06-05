@@ -1,6 +1,11 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
-@section('description', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
+@if(isset($session->forums))
+  @section('title', 'Agregar tema o nueva pregunta a ' . $session->forums->topic)
+  @section('description', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
+@else
+  @section('title', 'Agregar tema o nueva pregunta a foro del estado de ' .$session )
+  @section('description', 'Agregar tema o nueva pregunta a foro del estado de ' .  $session)
+@endif
 @section('body_class', 'fellow foros')
 @section('breadcrumb_type', 'forum add question')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
@@ -8,7 +13,11 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
+    @if(isset($session->forums))
     <h1>Agregar tema o nueva pregunta a <strong>{{$session->forums->topic}}</strong></h1>
+    @else
+    <h1>Agregar tema o nueva pregunta a <strong>foro del estado de {{$session}}</strong></h1>
+    @endif
   </div>
 </div>
 <div class="box">

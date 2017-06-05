@@ -37,8 +37,8 @@ class Fellows extends Controller
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->get();
       $forums         = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-      $messages   = ForumMessage::select('conversation_id')->where('user_id',$user->id)->groupBy('conversation_id')->get();
-    ///  var_dump($messages->toArray());
+      $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
+      $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
       $today = date("Y-m-d");
       if($user_log){
         if($user_log->session_id){

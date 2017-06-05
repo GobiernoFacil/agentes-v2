@@ -130,6 +130,12 @@ trait MessagesTrait{
 
          //news
          'content.required' => 'Este campo es requerido',
+         'answer_1.required'=>"Contesta esta pregunta",
+         'answer_2.required'=>"Contesta esta pregunta",
+         'answer_3.required'=>"Contesta esta pregunta",
+         'answer_4.required'=>"Contesta esta pregunta",
+         'answer_5.required'=>"Contesta esta pregunta",
+
       ];
     }
 }

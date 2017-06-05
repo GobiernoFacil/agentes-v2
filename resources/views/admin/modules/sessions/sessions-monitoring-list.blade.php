@@ -7,7 +7,9 @@
 					<th>Competencia</th>
 					<th>Actitud</th>
 					<th>Rol del mentor</th>
+					@if($user->type == "admin")
 					<th>Acciones</th>
+					@endif
 				</tr>
 			</thead>
 			<tbody>
@@ -17,11 +19,13 @@
 						<td>{{$evaluation->competitions}}</td>
 						<td>{{$evaluation->attitude}}</td>
 						<td>{{$evaluation->role}}</td>
+						@if($user->type == "admin")
 						<td>
 							<!--<a href="{{ url('dashboard/sesiones/mecanismos-monitoreo/ver/' . $evaluation->id) }}" class="btn xs view">Ver</a>-->
 							<a href="{{ url('dashboard/sesiones/mecanismos-monitoreo/editar/' . $evaluation->id) }}" class="btn xs view">Actualizar</a>
 						 <!-- <a href ="{{ url('dashboard/mecanismos-monitoreo/eliminar' . $evaluation->id) }}"  id ="{{$evaluation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 						</td>
+						@endif
 				</tr>
 				@endforeach
 			</tbody>
