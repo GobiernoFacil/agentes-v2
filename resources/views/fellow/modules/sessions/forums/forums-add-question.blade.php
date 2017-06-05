@@ -1,13 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
+@section('title', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
+@section('description', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
 @section('body_class', 'fellow foros')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'forum add question')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Crear nueva pregunta</h1>
+    <h1>Agregar tema o nueva pregunta a <strong>{{$session->forums->topic}}</strong></h1>
   </div>
 </div>
 <div class="box">
