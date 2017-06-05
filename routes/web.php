@@ -230,6 +230,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
     Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
+    /*@AdminEvaluations Controller */
+    // Rutas evaluation
+    Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
   });
 
   /* R U T A S  UNICAS DEL Fellow
