@@ -2,7 +2,7 @@
 @section('title', 'Ver actividad: ' . $activity->name)
 @section('description', 'Ver actividad')
 @section('body_class', 'actividades')
-@section('breadcrumb_type', 'module session view')
+@section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_activity')
 
 @section('content')
