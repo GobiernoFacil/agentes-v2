@@ -9,8 +9,11 @@ use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\Log;
+use App\Models\DiagnosticAnswer;
 use App\User;
 
+// FormValidators
+use App\Http\Requests\SaveDiagnostic;
 class SessionFellow extends Controller
 {
     //
@@ -76,6 +79,37 @@ class SessionFellow extends Controller
         "today" =>$today,
         "facilitator" => $facilitator
       ]);
+    }
+
+    public function diagnostic()
+    {
+      //
+      $user      = Auth::user();
+      $activity  = Activity::where('slug','examen-diagnostico')->first();
+      $answer    = DiagnosticAnswer::where('user_id',$user->id)->first();
+      if($answer){
+        return redirect("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/$activity->id")->with('error','Ya has contestado la evaluación');
+      }
+      $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
+      $log->session_id = null;
+      $log->module_id = null;
+      $log->activity_id = $activity->id;
+      $log->save();
+      return view('fellow.diagnostic.add-diagnostic')->with([
+        "user"      => $user,
+        "activity"  => $activity
+      ]);
+    }
+
+    public function saveDiagnostic(SaveDiagnostic $request)
+    {
+      //
+      $user      = Auth::user();
+      $answers   = new DiagnosticAnswer($request->except('_token'));
+      $activity  = Activity::where('slug','examen-diagnostico')->first();
+      $answers->user_id  = $user->id;
+      $answers->save();
+      return redirect("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/$activity->id")->with('success','Se ha guardado correctamente');
     }
 
 }
