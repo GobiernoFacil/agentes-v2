@@ -322,6 +322,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/foros/pregunta/ver/{id}', 'FacilitatorForums@viewQuestion');
     Route::get('tablero-facilitador/foros/pregunta/mensajes/agregar/{id}', 'FacilitatorForums@addMessage');
     Route::post('tablero-facilitador/foros/pregunta/mensajes/save/{id}', 'FacilitatorForums@saveMessage');
+    /*@FacilitatorEvaluations Controller */
+    // Rutas evaluation
+    Route::get('tablero-facilitador/evaluacion/diagnostico', 'FacilitatorEvaluations@all');
+    Route::get('tablero-facilitador/evaluacion/diagnostico/ver/{id}', 'FacilitatorEvaluations@view');
 
   });
 });
