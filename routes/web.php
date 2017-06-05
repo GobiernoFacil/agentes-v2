@@ -233,6 +233,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
+    Route::get('dashboard/evaluacion/diagnostico/ver/{id}', 'AdminEvaluations@view');
   });
 
   /* R U T A S  UNICAS DEL Fellow
