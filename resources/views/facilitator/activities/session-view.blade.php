@@ -2,7 +2,7 @@
 @section('title', 'Ver sesión')
 @section('description', 'Ver sesión')
 @section('body_class', 'actividades')
-@section('breadcrumb_type', 'module session view')
+@section('breadcrumb_type', 'session view')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_activity')
 
 @section('content')
