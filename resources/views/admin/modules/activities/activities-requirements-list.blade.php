@@ -17,7 +17,7 @@
 			<td><h4>{{$requirement->name}}</h4></td>
 			<td>{{$requirement->description}}</td>
 			<td>@if($requirement->material_link)
-				  <a class ="link" href="{{$requirement->material_link}}" target='_blank'>Ir a contenido</a>
+				  <a class ="link" href="http://{{$requirement->material_link}}" target='_blank'>Ir a contenido</a>
 					@else
 					<span>Sin información</span>
 					@endif
