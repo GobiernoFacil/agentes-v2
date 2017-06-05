@@ -12,8 +12,12 @@
 				<td>
 				@if($user->type=="admin")	
 					<h4><a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
-				@else
+				@endif
+				@if($user->type == "fellow")
 					<h4><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
+				@endif
+				@if($user->type == "facilitator")
+					<h4><a href='{{url("tablero-facilitador/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
 				@endif
 				</td>
 				<td>{{$file->description}}</td>
@@ -22,8 +26,12 @@
 					<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}' class="btn xs ev">Descargar</a>
 					<a href="{{ url('dashboard/sesiones/actividades/archivos/editar/' . $file->id) }}" class="btn xs view">Actualizar</a>
 				 <!-- <a href ="{{ url('dashboard/modulos/eliminar' . $file->id) }}"  id ="{{$file->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
-				 	@else
+				 	@endif
+				 	@if($user->type == "fellow")
 				 	<a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}' class="btn xs ev">Descargar</a>
+				 	@endif
+				 	@if($user->type == "facilitator")
+				 	<a href='{{url("tablero-facilitador/actividades/archivos/descargar/$file->id")}}' class="btn xs ev">Descargar</a>
 				 	@endif
 				 </td>
 		</tr>
