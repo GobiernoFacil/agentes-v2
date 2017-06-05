@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
 @section('title', $forum->topic )
-@section('description','' )
+@section('description',$forum->topic  )
 @section('body_class', 'fellow foros')
 @section('breadcrumb_type', '')
 
