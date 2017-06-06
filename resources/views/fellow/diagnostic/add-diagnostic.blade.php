@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', 'fellow')
-
+@section('title', 'Evaluación')
+@section('description', 'Evaluación')
+@section('body_class', 'fellow aprendizaje')
+@section('breadcrumb_type', 'module test')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
 @section('content')
 <div class="row">
   <div class="col-sm-12">
