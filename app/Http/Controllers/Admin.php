@@ -35,7 +35,7 @@ class Admin extends Controller
       {
         $user 			  = Auth::user();
         $aspirants 		  = Aspirant::where('is_activated',1)->count();
-
+		$fellows		  = User::where('type',"fellow")->where('enabled',1)->count();		
 		
 		$modules_count 		  = Module::all()->count();		
 		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();		
@@ -44,7 +44,8 @@ class Admin extends Controller
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
 		  "modules_count"	=> $modules_count,
-		  'facilitators_count' => $facilitators_count
+		  'facilitators_count' => $facilitators_count,
+		  'fellows'			   => $fellows
         ]);
       }
 
