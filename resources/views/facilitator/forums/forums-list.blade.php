@@ -46,7 +46,7 @@
 					</div>
 					<div class="col-sm-9">
 						
-						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$forum->id") }}'>{{$conversation->topic}}</a></h2>
+						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						<p class="author">Por {{$conversation->user_id}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
 					</div>
 					<div class="col-sm-2">
