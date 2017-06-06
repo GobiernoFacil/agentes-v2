@@ -6,6 +6,7 @@
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="forum view" || $__env->yieldContent('breadcrumb_type') =="question view")
 	<li><a href="{{url('tablero-facilitador/foros')}}">Foros</a></li>
+	<li>{{$forum->topic}}</li>
 	@endif
 
 </ul>

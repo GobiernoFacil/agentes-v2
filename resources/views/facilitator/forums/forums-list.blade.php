@@ -2,7 +2,8 @@
 @section('title', $forum->topic )
 @section('description','Foros del Programa de Gobierno Abierto desde lo local' )
 @section('body_class', 'foros')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'forum view')
+@section('breadcrumb', 'layouts.facilitator.breadcrumb.b_forums')
 
 @section('content')
 <div class="row">
