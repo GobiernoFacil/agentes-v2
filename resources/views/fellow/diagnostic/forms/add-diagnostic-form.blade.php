@@ -22,7 +22,7 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Menciona dos Objetivos de la Agenda de Desarrollo Sostenible, cómo se relaciona cada uno con los mecanismos de Gobierno Abierto y cómo pueden éstos contribuir a la consecución de dicho objetivos</strong> <br>
+      <label><strong>Menciona dos Objetivos de la Agenda de Desarrollo Sostenible y cómo se relaciona cada uno con los mecanismos de Gobierno Abierto.</strong> <br>
       {{Form::textarea('answer_2',null, ["class" => "form-control"])}} </label>
       @if($errors->has('answer_2'))
       <strong class="danger">{{$errors->first('answer_2')}}</strong>
