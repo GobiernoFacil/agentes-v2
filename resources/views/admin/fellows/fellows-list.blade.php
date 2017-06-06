@@ -1,0 +1,139 @@
+@extends('layouts.admin.a_master')
+@section('title', 'Lista de Fellows')
+@section('description', 'Lista de Fellows')
+@section('body_class', 'fellows')
+@section('breadcrumb_type', 'fellows list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
+
+@section('content')
+<div class="row">
+	<div class="col-sm-9">
+		<h1>Lista de Fellows </h1>
+	</div>
+	<div class="col-sm-3">
+		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
+			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
+			<p id ="nR" style="display:none;">No existen resultados</p>
+		</form>
+	</div>
+</div>
+
+
+
+<div class="row" id ="aspirants">
+	<div class="col-sm-12">
+		<div class="box">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th>Nombre / email</th>
+		      <th>Ciudad / Estado</th>
+		      <th>Procedencia</th>
+		      <th>Registro</th>
+		      <th>Acciones</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    @foreach ($fellows as $fellow)
+		      <tr>
+		        <td><h4><a href="{{ url('dashboard/aspirantes/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->surname." ".$fellow->lastname}}</a></h4>
+		        {{$fellow->email}}
+		        </td>
+		        <td>{{$fellow->city}} <br> <strong>{{$fellow->state}}</strong></td>
+				<td>{{$fellow->origin}}</td>
+		        <td>{{ date("d-m-Y", strtotime($fellow->created_at)) }} <br> {{ date("H:i", strtotime($fellow->created_at)) }} hrs.</td>
+		        
+		        <td>
+		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver</a>
+		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $fellow->id) }}"  id ="{{$fellow->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
+		         </td>
+		    </tr>
+		    @endforeach
+		  </tbody>
+		</table>
+
+		{{ $fellows->links() }}
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id = "boxResults" style="display:none;">
+	<table class="table" id = "resultList">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Email</th>
+				<th>Ciudad, Estado</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody id ="List">
+		</tbody>
+</table>
+</div>
+
+
+@endsection
+
+@section('js-content')
+<script src="{{url('js/app-search.js')}}"></script>
+<script>
+var CONFIG = {
+	search_url:    "{{url('dashboard/fellows/buscar')}}",
+	general_aspirant_url :    "{{url('dashboard/aspirantes/ver')}}",
+	token      : document.querySelector('input[name="_token"]').value
+};
+appSearch.initialize(CONFIG);
+document.getElementById("search-aspirant").onblur = function() {
+	if(this.value==''){
+		var type = document.getElementById("typeAspirantText").innerHTML;
+		if(type==='sin'){
+			document.getElementById("boxResults").style.display ="none";
+			document.getElementById("aspirants").style.display ="block";
+			document.getElementById("nR").style.display ="none";
+			document.getElementById("Noaspirants").style.display ="none";
+			document.getElementById("typeAspirantText").innerHTML = "sin";
+			document.getElementById("typeAspirantTextTitle").innerHTML = "con ";
+		}else{
+			document.getElementById("boxResults").style.display ="none";
+			document.getElementById("aspirants").style.display ="none";
+			document.getElementById("nR").style.display ="none";
+			document.getElementById("Noaspirants").style.display ="block";
+			document.getElementById("typeAspirantText").innerHTML = "con";
+			document.getElementById("typeAspirantTextTitle").innerHTML = "sin ";
+		}
+	}
+
+};
+
+document.getElementById("typeAspirant").addEventListener("click", function(e){
+	e.preventDefault();
+	var type = document.getElementById("typeAspirantText").innerHTML;
+	if(type==='sin'){
+		document.getElementById("boxResults").style.display ="none";
+		document.getElementById("aspirants").style.display ="none";
+		document.getElementById("nR").style.display ="none";
+		document.getElementById("Noaspirants").style.display ="block";
+		document.getElementById("typeAspirantText").innerHTML = "con";
+		document.getElementById("typeAspirantTextTitle").innerHTML = "sin ";
+	}else{
+		document.getElementById("boxResults").style.display ="none";
+		document.getElementById("aspirants").style.display ="block";
+		document.getElementById("nR").style.display ="none";
+		document.getElementById("Noaspirants").style.display ="none";
+		document.getElementById("typeAspirantText").innerHTML = "sin";
+		document.getElementById("typeAspirantTextTitle").innerHTML = "con ";
+	}
+});
+
+</script>
+
+@endsection
