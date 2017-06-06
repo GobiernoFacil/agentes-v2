@@ -161,6 +161,31 @@
 		</tbody>
 </table>
 </div>
+
+
+<div class="col-sm-12">
+				<div class="box">
+					<h2>Aspirantes por Estado</h2>
+					<ul class="inline">
+						<li>Chihuahua: <strong>{{$chihuahua_number}}</strong></li>
+						<li>Morelos: <strong>{{$morelos_number}}</strong></li>
+						<li>Nuevo León: <strong>{{$leon_number}}</strong></li>
+						<li>Oaxaca: <strong>{{$oaxaca_number}}</strong></li>
+						<li>Sonora: <strong>{{$sonora_number}}</strong></li>
+					</ul>
+					<div id="bar"></div>					
+				</div>
+				<div class="box">
+					<h2>Aspirantes por Sector</h2>
+					<ul class="inline">
+						<li>Gobierno: <strong>{{$gobierno_number}}</strong></li>
+						<li>Sociedad Civil: <strong>{{$civil_number}}</strong></li>
+						<li>Sector Privado: <strong>{{$privado_number}}</strong></li>
+						<li>Sector Académico: <strong>{{$academico_number}}</strong></li>
+					</ul>
+					<div id="bar2"></div>					
+				</div>
+			</div>
 @endsection
 
 @section('js-content')
@@ -215,4 +240,50 @@ document.getElementById("typeAspirant").addEventListener("click", function(e){
 });
 
 </script>
+
+<!-- load the d3.js library -->    	
+<script src="{{ url('js/d3/d3.v4.min.js')}}"></script>
+<script>
+	var data = [
+	{
+		"estado": "Chihuahua",
+		"total" : {{$chihuahua_number}}
+	},
+	{
+		"estado": "Morelos",
+		"total" : {{$morelos_number}}
+	},
+	{
+		"estado": "Nuevo León",
+		"total" : {{$leon_number}}
+	},
+	{
+		"estado": "Oaxaca",
+		"total" : {{$oaxaca_number}}
+	},
+	{
+		"estado": "Sonora",
+		"total" : {{$sonora_number}}
+	}
+	];
+	var dataorigin = [
+	{
+		"origin": "Gobierno",
+		"total" : {{$gobierno_number}}
+	},
+	{
+		"origin": "Sociedad Civil",
+		"total" : {{$civil_number}}
+	},
+	{
+		"origin": "Sector Privado",
+		"total" : {{$privado_number}}
+	},
+	{
+		"origin": "Sector Académico",
+		"total" : {{$academico_number}}
+	}
+	];
+</script>
+<script src="{{ url('js/dashboard.js') }}"></script>
 @endsection
