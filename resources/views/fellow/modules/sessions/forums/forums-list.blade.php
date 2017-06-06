@@ -10,7 +10,6 @@
 	<!-- título-->
 	<div class="col-sm-9">
 		<h1>{{$forum->topic}}</h1>		
-		
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
