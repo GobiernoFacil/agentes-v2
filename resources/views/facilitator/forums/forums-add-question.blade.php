@@ -1,8 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', 'facilitator foros')
-@section('breadcrumb_type', '')
+@if(isset($forum->session))
+  @section('title', 'Agregar tema o nueva pregunta a ' . $forum->topic)
+  @section('description', 'Agregar tema o nueva pregunta a ' .  $forum->topic)
+@else
+  @section('title', 'Agregar tema o nueva pregunta a foro del estado de ' .$forum->session )
+  @section('description', 'Agregar tema o nueva pregunta a foro del estado de ' .  $forum->session)
+@endif
+@section('body_class', 'foros')
+@section('breadcrumb_type', 'forum add question')
+@section('breadcrumb', 'layouts.facilitator.breadcrumb.b_forums')
 
 @section('content')
 <div class="row">
