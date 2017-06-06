@@ -35,15 +35,7 @@ class Admin extends Controller
       {
         $user 			  = Auth::user();
         $aspirants 		  = Aspirant::where('is_activated',1)->count();
-		$chihuahua_number = Aspirant::where('is_activated',1)->where('state','Chihuahua')->count();
-		$morelos_number   = Aspirant::where('is_activated',1)->where('state','Morelos')->count();
-		$leon_number 	  = Aspirant::where('is_activated',1)->where('state','Nuevo Léon')->count();
-		$oaxaca_number 	  = Aspirant::where('is_activated',1)->where('state','Oaxaca')->count();
-		$sonora_number 	  = Aspirant::where('is_activated',1)->where('state','Sonora')->count();
-		$gobierno_number 	  = Aspirant::where('is_activated',1)->where('origin','Gobierno')->count();
-		$civil_number 	  	  = Aspirant::where('is_activated',1)->where('origin','Sociedad Civil')->count();
-		$privado_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Privado')->count();
-		$academico_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Académico')->count();
+
 		
 		$modules_count 		  = Module::all()->count();		
 		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();		
@@ -51,15 +43,6 @@ class Admin extends Controller
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
-		  'chihuahua_number'=> $chihuahua_number,
-		  'morelos_number' 	=> $morelos_number,
-		  'leon_number' 	=> $leon_number,
-		  'oaxaca_number' 	=> $oaxaca_number,
-		  'sonora_number' 	=> $sonora_number,
-		  'gobierno_number' => $gobierno_number,
-		  'civil_number' 	=> $civil_number,
-		  'privado_number'	=> $privado_number,
-		  'academico_number'=> $academico_number,
 		  "modules_count"	=> $modules_count,
 		  'facilitators_count' => $facilitators_count
         ]);
