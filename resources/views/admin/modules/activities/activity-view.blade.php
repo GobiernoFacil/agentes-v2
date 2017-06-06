@@ -77,4 +77,8 @@
 		</div>
 	</div>
 </div>
+
+@if($activity->slug ==='examen-diagnostico')
+		@include('admin.modules.activities.diagnostic-view')
+@endif
 @endsection
