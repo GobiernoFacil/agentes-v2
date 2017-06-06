@@ -4,7 +4,7 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="forums list")
 	<li>Foros</li>
 	@endif
-	@if ($__env->yieldContent('breadcrumb_type') =="forum view" || $__env->yieldContent('breadcrumb_type') =="question view" || $__env->yieldContent('breadcrumb_type') =="forum add question" || $__env->yieldContent('breadcrumb_type') =="forum question view")
+	@if ($__env->yieldContent('breadcrumb_type') =="forum view" || $__env->yieldContent('breadcrumb_type') =="question view" || $__env->yieldContent('breadcrumb_type') =="forum add question" || $__env->yieldContent('breadcrumb_type') =="forum question view" || $__env->yieldContent('breadcrumb_type') =="forum add answer")
 	<li><a href="{{url('tablero-facilitador/foros')}}">Foros</a></li>
 	@endif
 	
@@ -12,9 +12,15 @@
 	<li>{{$forum->topic}}</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="forum add question" )
+	@if ($__env->yieldContent('breadcrumb_type') =="forum add question"|| $__env->yieldContent('breadcrumb_type') =="forum add answer" )
 	<li><a href="{{url('tablero-facilitador/foros/' . $forum->id)}}">{{$forum->topic}}</a></li>
+	@endif
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="forum add question" )
 	<li>Agregar tema o pregunta</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="forum add question"|| $__env->yieldContent('breadcrumb_type') =="forum add answer" )
+	<li>Agregar respuesta</li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="forum question view" )
