@@ -9,7 +9,7 @@
 <div class="row">
 	<!-- título-->
 	<div class="col-sm-9">
-		<h1>{{$forum->topic}}</h1>		
+		<h1>{{$forum->topic}}</h1>
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
@@ -32,7 +32,7 @@
 	</div>
 	<!-- descripción-->
 	<div class="col-sm-10 col-sm-offset-1">
-		
+
 		<h4>Descripción</h4>
 		<p>{{$forum->description}}</p>
 	</div>
@@ -55,12 +55,21 @@
 						@else
 						<h2><a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
 						@endif
-						<p class="author">Por {{$conversation->user_id}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						<!--fellow data -->
+						@if($conversation->user->fellowData)
+						<p class="author">Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						@elseif($conversation->user->facilitatorData)
+						<!--facilitator data -->
+						<p class="author">Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						@else
+						<!--super user data -->
+						<p class="author">Por {{$conversation->user->name}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						@endif
 					</div>
 					<div class="col-sm-2">
 						<h3 class="count_messages">{{$conversation->messages->count()}}</h3>
 					</div>
-				</div>				 
+				</div>
 			@endforeach
 			{{ $forums->links() }}
 		</div>
