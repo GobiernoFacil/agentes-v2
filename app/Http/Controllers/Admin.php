@@ -46,7 +46,7 @@ class Admin extends Controller
 		$academico_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Académico')->count();
 		
 		$modules_count 		  = Module::all()->count();		
-		$facilitators_count   = User::where('type',"Facilitator")->count();		
+		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();		
 		
         return view('admin.dashboard')->with([
           "user"      		=> $user,
