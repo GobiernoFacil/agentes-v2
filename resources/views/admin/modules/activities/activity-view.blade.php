@@ -39,6 +39,10 @@
 
 	</div>
 </div>
+@if($activity->slug ==='examen-diagnostico')
+		@include('admin.modules.activities.diagnostic-view')
+@endif
+
 <div class="box">
   <div class="row">
   	<div class="col-sm-9">
@@ -78,7 +82,5 @@
 	</div>
 </div>
 
-@if($activity->slug ==='examen-diagnostico')
-		@include('admin.modules.activities.diagnostic-view')
-@endif
+
 @endsection
