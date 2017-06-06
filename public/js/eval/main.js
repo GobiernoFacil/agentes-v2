@@ -14,6 +14,8 @@ Form = {
   name : "Información del cuestionario"
 };
 
+Questions = [{}];
+Answers = [{}];
 /*Questions = [{
   id : 1,
   question : "de qué color son las botas de súperman",
@@ -25,10 +27,10 @@ Answers = [
   {id : 1, value : "verdes", question : 1, selected : 0},
   {id : 1, value : "rojas", question : 1, selected : 1}
 ];
-
+*/
 
 Form.questions = Questions;
-Form.answers   = Answers;*/
+Form.answers   = Answers;
 
 
 // the app
@@ -56,7 +58,9 @@ var GFPNUDApp = {
     addQuestion.addEventListener("click", this.addQuestion);
 
     this.form.questions.forEach(function(q){
-      this.renderQuestion(q, this.form.answers);
+      if(q.question){
+        this.renderQuestion(q, this.form.answers);
+      }
     }, this);
   },
 
