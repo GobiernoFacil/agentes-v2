@@ -33,11 +33,29 @@ class Aspirants extends Controller
       $aspirantsNo = Aspirant::where('is_activated',1)->whereNotIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
       $aspirants_validated = FileEvaluation::where('hasVideo','!=',null)->distinct('aspirant_id')->pluck('aspirant_id');
       $list_validated = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
+      $chihuahua_number = Aspirant::where('is_activated',1)->where('state','Chihuahua')->count();
+		$morelos_number   = Aspirant::where('is_activated',1)->where('state','Morelos')->count();
+		$leon_number 	  = Aspirant::where('is_activated',1)->where('state','Nuevo Léon')->count();
+		$oaxaca_number 	  = Aspirant::where('is_activated',1)->where('state','Oaxaca')->count();
+		$sonora_number 	  = Aspirant::where('is_activated',1)->where('state','Sonora')->count();
+		$gobierno_number 	  = Aspirant::where('is_activated',1)->where('origin','Gobierno')->count();
+		$civil_number 	  	  = Aspirant::where('is_activated',1)->where('origin','Sociedad Civil')->count();
+		$privado_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Privado')->count();
+		$academico_number 	  = Aspirant::where('is_activated',1)->where('origin','Sector Académico')->count();
       return view('admin.aspirants.aspirant-list')->with([
         'user' => $user,
         'aspirants' =>$aspirants,
         'aspirantsNo' =>$aspirantsNo,
-        'listA'      =>$list_validated
+        'listA'      =>$list_validated,
+        'chihuahua_number'=> $chihuahua_number,
+		  'morelos_number' 	=> $morelos_number,
+		  'leon_number' 	=> $leon_number,
+		  'oaxaca_number' 	=> $oaxaca_number,
+		  'sonora_number' 	=> $sonora_number,
+		  'gobierno_number' => $gobierno_number,
+		  'civil_number' 	=> $civil_number,
+		  'privado_number'	=> $privado_number,
+		  'academico_number'=> $academico_number,
       ]);
     }
 
