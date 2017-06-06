@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use File;
 //Modelos
 use App\Models\Module;
 use App\Models\Log;
@@ -14,11 +15,15 @@ use App\Models\NewsEvent;
 use App\Models\Forum;
 use App\Models\ForumConversation;
 use App\Models\ForumMessage;
+use App\Models\FellowData;
+use App\Models\Image;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
 class Fellows extends Controller
 {
     //
+    // En esta carpeta se guardan las imágenes de los usuarios
+    const UPLOADS = "img/users";
 
     /**
      * Muestra panel de inicio para fellow
@@ -103,13 +108,34 @@ class Fellows extends Controller
       $user = Auth::user();
       $user->name  = $request->name;
       $user->email = $request->email;
-
+      //update user data
       if(!empty($request->password)){
-        $user->password = Hash::make($request->password);
+        $data   = $request->only(['name','email','password']);
+        $data['password'] = Hash::make($request->password);
+      }else {
+        $data   = $request->only(['name','email']);
       }
-      $user->save();
 
-      return redirect("dashboard/perfil")->with("message",'Perfil actualizado correctamente');
+      $user->update($data);
+      //update fellow data
+      FellowData::where('user_id',$user->id)->update($request->except(['_token','name','email','image','password','password-confirm']));
+
+      // [ SAVE THE IMAGE ]
+      if($request->hasFile('image') && $request->file('image')->isValid()){
+        $path  = public_path(self::UPLOADS);
+        $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($path, $name);
+        if($user->image){
+          File::delete($user->image->path."/".$user->image->name);
+        }
+        $image   = Image::firstorCreate(['user_id'=>$user->id,]);
+        $image->name = $name;
+        $image->path = $path;
+        $image->type = 'full';
+        $image->save();
+      }
+
+      return redirect("tablero/perfil")->with("message",'Perfil actualizado correctamente');
     }
 
 }

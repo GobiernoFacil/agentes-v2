@@ -27,4 +27,20 @@ class AdminEvaluations extends Controller
       ]);
 
     }
+
+    /**
+     * Muestra lista de respuestas de diagnostico general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view($id)
+    {
+      $user      = Auth::user();
+      $answers   = DiagnosticAnswer::find($id);
+      return view('admin.evaluations.diagnostic-view')->with([
+        "user"      => $user,
+        "answers"   => $answers,
+      ]);
+
+    }
 }

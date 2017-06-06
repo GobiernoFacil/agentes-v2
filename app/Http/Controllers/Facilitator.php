@@ -87,13 +87,12 @@ class Facilitator extends Controller
   */
   public function saveProfile(UpdateAdminProfile $request)
   {
-	$facilitator = Auth::user();
+	  $facilitator = Auth::user();
     $facilitator->name  = $request->name;
     $facilitator->email = $request->email;
 
     //update user data
     if(!empty($request->password)){
-      var_dump($request->toArray());
       $data   = $request->only(['name','institution','email','password']);
       $data['password'] = Hash::make($request->password);
     }else {

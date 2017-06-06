@@ -233,6 +233,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
+    Route::get('dashboard/evaluacion/diagnostico/ver/{id}', 'AdminEvaluations@view');
   });
 
   /* R U T A S  UNICAS DEL Fellow
@@ -321,6 +322,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/foros/pregunta/ver/{id}', 'FacilitatorForums@viewQuestion');
     Route::get('tablero-facilitador/foros/pregunta/mensajes/agregar/{id}', 'FacilitatorForums@addMessage');
     Route::post('tablero-facilitador/foros/pregunta/mensajes/save/{id}', 'FacilitatorForums@saveMessage');
+    /*@FacilitatorEvaluations Controller */
+    // Rutas evaluation
+    Route::get('tablero-facilitador/evaluacion/diagnostico', 'FacilitatorEvaluations@all');
+    Route::get('tablero-facilitador/evaluacion/diagnostico/ver/{id}', 'FacilitatorEvaluations@view');
 
   });
 });

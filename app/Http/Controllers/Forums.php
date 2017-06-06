@@ -175,9 +175,9 @@ class Forums extends Controller
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
       if($session){
-        return redirect("tablero/foros/pregunta/{$session->slug}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+        return redirect("tablero/foros/{$session->module->slug}/{$session->slug}")->with('message','Pregunta creada correctamente');
       }else{
-        return redirect("tablero/foros/{$forum->state_name}/{$forumConversation->slug}/ver")->with('message','Pregunta creada correctamente');
+        return redirect("tablero/foros/{$forum->state_name}")->with('message','Pregunta creada correctamente');
       }
     }
 
