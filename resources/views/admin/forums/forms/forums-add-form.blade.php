@@ -23,7 +23,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Sesión</strong></label>
-      {{Form::select('session_id',$sessions,0, ['class' => 'form-control'])}}
+      {{Form::select('session_id',$sessions,0, ['class' => 'form-control','id'=>"session"])}}
       @if($errors->has('session_id'))
       <strong class="danger">{{$errors->first('session_id')}}</strong>
       @endif
@@ -35,7 +35,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Actividad</strong></label>
-      {{Form::select('activity_id',$activities,0, ['class' => 'form-control'])}}
+      {{Form::select('activity_id',$activities,0, ['class' => 'form-control','id'=>"activity"])}}
       @if($errors->has('activity_id'))
       <strong class="danger">{{$errors->first('activity_id')}}</strong>
       @endif

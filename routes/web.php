@@ -234,6 +234,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
     Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
+    Route::get('dashboard/foros/session', 'AdminForums@session');
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');

@@ -81,8 +81,8 @@ class AdminForums extends Controller
       $user       = Auth::user();
       $sessions   = ModuleSession::orderBy('name','asc')->pluck('name','id')->toArray();
       $sessions['0'] = 'Selecciona una opción';
-      $activities = Activity::orderBy('name','asc')->pluck('name','id')->toArray();
-      $activities['0'] = 'Selecciona una opción';
+      //$activities = Activity::orderBy('name','asc')->pluck('name','id')->toArray();
+      $activities['0']= 'Selecciona una sesión';
       return view('admin.forums.forums-add')->with([
         "user"      => $user,
         "sessions"      => $sessions,
@@ -218,5 +218,16 @@ class AdminForums extends Controller
       "user"      => $user,
       "question"    => $question
     ]);
+  }
+
+  /**
+   * Get cities
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function session(Request $request){
+    $activities = Activity::where('session_id',$request->input('session'))->get();
+    return response()->json($activities);
   }
 }
