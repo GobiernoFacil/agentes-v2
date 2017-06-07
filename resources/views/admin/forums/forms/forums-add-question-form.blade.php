@@ -2,14 +2,14 @@
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información de la pregunta</h2>
+    <h2 class="sa_title">Información de la pregunta o el tema</h2>
   </div>
 </div>
 <!-- title -->
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Tema</strong> <br>
+      <label><strong>Pregunta o tema</strong> <br>
       {{Form::text('topic',null, ["class" => "form-control"])}} </label>
       @if($errors->has('topic'))
       <strong class="danger">{{$errors->first('topic')}}</strong>
@@ -35,7 +35,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Guardar', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Agregar pregunta o tema', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}

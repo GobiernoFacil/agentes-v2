@@ -7,7 +7,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Crear nueva pregunta</h1>
+    <h1>Agregar nueva pregunta o tema a <strong>{{$forum->topic}}</strong></h1>
   </div>
 </div>
 <div class="box">
