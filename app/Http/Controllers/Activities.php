@@ -10,6 +10,8 @@ use App\Models\Activity;
 use App\Models\ActivityVideo;
 use App\Models\ModuleSession;
 use App\Models\Forum;
+use App\Models\ForumConversation;
+
 // FormValidators
 use App\Http\Requests\SaveActivity;
 use App\Http\Requests\UpdateActivity;
@@ -141,10 +143,14 @@ class Activities extends Controller
             $user     = Auth::user();
             $activity = activity::find($id);
 			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+			$forum    = Forum::where('activity_id',$activity->id)->firstOrFail();
+			$forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
             return view('admin.modules.activities.activity-view')->with([
               "user"      	=> $user,
               "activity"    => $activity,
-              "session"		=> $session
+              "session"		=> $session,
+              "forum"		=> $forum,
+              "forums"		=> $forums
             ]);
         }
 
