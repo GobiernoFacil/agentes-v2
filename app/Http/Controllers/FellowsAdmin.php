@@ -37,52 +37,6 @@ class FellowsAdmin extends Controller
       ]);
     }
 
-
-
-    /**
-     * Lista de aspirantes
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function verify()
-    {
-      $user = Auth::user();
-      $aspirants_validated = FileEvaluation::where('hasVideo','!=',null)->distinct('aspirant_id')->pluck('aspirant_id');
-      $aspirants_filesId  = AspirantsFile::whereNotIn('aspirant_id',$aspirants_validated->toArray())->pluck('aspirant_id');
-      $list_no_validated  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
-      $list_no_validated_count  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->get()->count();
-      $list_validated_count = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->get()->count();
-      $list_validated = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
-      return view('admin.aspirants.aspirant-verified-list')->with([
-        'user' 						=> $user,
-        'listA'     				=>$list_validated,
-        'list_validated_count' 		=> $list_validated_count,
-        'list_no_validated_count'	=>$list_no_validated_count
-      ]);
-    }
-
-    /**
-     * Lista de aspirantes
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function noVerify()
-    {
-      $user = Auth::user();
-      $aspirants_validated = FileEvaluation::where('hasVideo','!=',null)->distinct('aspirant_id')->pluck('aspirant_id');
-      $aspirants_filesId  = AspirantsFile::whereNotIn('aspirant_id',$aspirants_validated->toArray())->pluck('aspirant_id');
-      $list_no_validated_count  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->get()->count();
-      $list_validated_count = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_validated->toArray())->orderBy('created_at','asc')->get()->count();
-      $list_no_validated  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_filesId->toArray())->orderBy('created_at','asc')->paginate($this->pageSize);
-      return view('admin.aspirants.aspirant-NoVerified-list')->with([
-        'user' => $user,
-        'listB'      =>$list_no_validated,
-        'list_validated_count' 		=> $list_validated_count,
-        'list_no_validated_count'	=>$list_no_validated_count
-      ]);
-    }
-
-
     /**
      * Display the specified resource.
      *
@@ -93,22 +47,10 @@ class FellowsAdmin extends Controller
     {
         //
         $user = Auth::user();
-        $aspirant = Aspirant::find($id);
-        $aspirantEvaluation = aspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->first();
-        $allEva             = $aspirant->aspirantEvaluation;
-        $generalGrade = 0;
-        if($allEva->count()>0){
-          foreach ($allEva as $eva) {
-            $generalGrade = $eva->grade + $generalGrade;
-          }
-          $generalGrade = ($generalGrade/2)*10;
-        }
-        return view('admin.aspirants.aspirant-view')->with([
-          'user' => $user,
-          'aspirant' =>$aspirant,
-          'aspirantEvaluation'=>$aspirantEvaluation,
-          'allEva' => $allEva,
-          'generalGrade' => $generalGrade
+        $fellow = User::find($id);
+        return view('admin.fellows.fellow-view')->with([
+          'user' 	=> $user,
+          'fellow' 	=> $fellow,
         ]);
     }
 
