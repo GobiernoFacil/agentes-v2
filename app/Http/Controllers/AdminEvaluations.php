@@ -10,6 +10,7 @@ use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
+use App\Http\Requests\SaveDiagnosticEvaluation2;
 class AdminEvaluations extends Controller
 {
     //
@@ -50,7 +51,7 @@ class AdminEvaluations extends Controller
 
 
     /**
-     * Muestra lista de respuestas de diagnostico general
+     * view evaluacion diagnostico
      *
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +69,7 @@ class AdminEvaluations extends Controller
     }
 
     /**
-     * Muestra lista de respuestas de diagnostico general
+     * save evaluacion diagnostico
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +88,7 @@ class AdminEvaluations extends Controller
       $evaluation->answer_q3_2 = current(array_slice($request->answer_q3_2, 0, 1));
       $evaluation->answer_q3_3 = current(array_slice($request->answer_q3_3, 0, 1));
       $evaluation->answer_q3_4 = current(array_slice($request->answer_q3_4, 0, 1));
-      $evaluation->answer_q3_j = $request->answer_q1_j;
+      $evaluation->answer_q3_j = $request->answer_q3_j;
       $this->evaluateDiagnosticP1($evaluation);
       return redirect("dashboard/evaluacion/diagnostico/evaluar/2/{$evaluation->user->diagnostic->id}/$request->evaluation_id");
 
@@ -103,11 +104,32 @@ class AdminEvaluations extends Controller
       $user       = Auth::user();
       $answers    = DiagnosticAnswer::find($answers_id);
       $evaluation = DiagnosticEvaluation::where("id",$evaluation_id)->firstOrFail();
-      return view('admin.evaluations.diagnostic-evaluation_2')->with([
+      return view('admin.evaluations.diagnostic-evaluation-2')->with([
         "user"      => $user,
         "answers"   => $answers,
         "evaluation" => $evaluation
       ]);
+
+    }
+
+    /**
+     * save evaluacion diagnostico
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveDiagnostic_2(SaveDiagnosticEvaluation2 $request)
+    {
+      $user       = Auth::user();
+      $evaluation = DiagnosticEvaluation::find($request->evaluation_id);
+      $evaluation->answer_q5_1 = current(array_slice($request->answer_q5_1, 0, 1));
+      $evaluation->answer_q5_2 = current(array_slice($request->answer_q5_2, 0, 1));
+      $evaluation->answer_q5_3 = current(array_slice($request->answer_q5_3, 0, 1));
+      $evaluation->answer_q5_j = $request->answer_q5_j;
+      $evaluation->answer_q4_1 = current(array_slice($request->answer_q4_1, 0, 1));
+      $evaluation->answer_q4_2 = current(array_slice($request->answer_q4_2, 0, 1));
+      $evaluation->answer_q4_j = $request->answer_q4_j;
+      $this->evaluateDiagnosticP2($evaluation);
+      return redirect("dashboard/evaluacion/diagnostico/ver/{$evaluation->user->diagnostic->id}");
 
     }
 
@@ -183,6 +205,36 @@ class AdminEvaluations extends Controller
       }
       $evaluation->answer_ponderation_3 = $answer_3_ponderation;
       $evaluation->total_score =  $answer_1_ponderation+$answer_2_ponderation+$answer_3_ponderation;
+      $evaluation->save();
+      return true;
+
+    }
+
+    protected function evaluateDiagnosticP2($evaluation){
+      $answer_4_ponderation = 0;
+      $value_q_4 = 20/2;
+      $answer_5_ponderation = 0;
+      $value_q_5 = 20/3;
+      //evaluate q5
+      if($evaluation->answer_q5_1){
+        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
+      }
+      if($evaluation->answer_q5_2){
+        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
+      }
+      if($evaluation->answer_q5_3){
+        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
+      }
+      $evaluation->answer_ponderation_5 = $answer_5_ponderation;
+      //evaluate q4
+      if($evaluation->answer_q4_1){
+        $answer_4_ponderation = $answer_4_ponderation+$value_q_4;
+      }
+      if($evaluation->answer_q4_2){
+        $answer_4_ponderation = $answer_4_ponderation+$value_q_4;
+      }
+      $evaluation->answer_ponderation_4 = $answer_4_ponderation;
+      $evaluation->total_score = $evaluation->total_score + $answer_4_ponderation+$answer_5_ponderation;
       $evaluation->save();
       return true;
 
