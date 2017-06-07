@@ -230,7 +230,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/foros/save', 'AdminForums@save');
     Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
     Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
-    Route::get('dashboard/ver/pregunta/foros/{id}', 'AdminForums@viewQuestion');
+    Route::get('dashboard/foros/pregunta/ver/{id}', 'AdminForums@viewQuestion');
     Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
     Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');

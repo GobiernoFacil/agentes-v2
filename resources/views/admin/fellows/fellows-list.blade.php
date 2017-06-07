@@ -11,8 +11,8 @@
 		<h1>Lista de Fellows </h1>
 	</div>
 	<div class="col-sm-3">
-		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
-			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
+		<form  role="form" method="GET" action="{{ url('dashboard/fellows') }}" id="search-input">
+			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Fellow o Estado" value="{{request('searchBox', '')}}">
 			<p id ="nR" style="display:none;">No existen resultados</p>
 		</form>
 	</div>
@@ -97,7 +97,7 @@
 <script>
 var CONFIG = {
 	search_url:    "{{url('dashboard/fellows/buscar')}}",
-	general_aspirant_url :    "{{url('dashboard/aspirantes/ver')}}",
+	general_aspirant_url :    "{{url('dashboard/fellows/ver')}}",
 	token      : document.querySelector('input[name="_token"]').value
 };
 appSearch.initialize(CONFIG);

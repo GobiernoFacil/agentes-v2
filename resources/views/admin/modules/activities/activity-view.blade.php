@@ -82,5 +82,9 @@
 	</div>
 </div>
 
+<div class="divider"></div>
+
+@include('layouts.forums.list-at-activity')
+
 
 @endsection

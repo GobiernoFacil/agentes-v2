@@ -2,11 +2,13 @@
 @section('title',  'Agregar mensaje a ' . $forum->topic)
 @section('description', 'Agregar mensaje a foro')
 @section('body_class', 'foros')
+@section('breadcrumb_type', 'forum add answer')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_forums')
 
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar mensaje a foro {{$forum->topic}} </h1>
+    <h1>Agregar respuesta a <strong>{{$forum->topic}}</strong></h1>
   </div>
 </div>
 <div class="box">
