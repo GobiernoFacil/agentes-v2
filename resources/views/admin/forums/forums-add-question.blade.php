@@ -2,7 +2,8 @@
 @section('title', 'Agregar nueva pregunta o tema a ' . $forum->topic)
 @section('description', 'Agregar nueva pregunta o tema a ' . $forum->topic)
 @section('body_class', 'foros')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'forum add question')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_forums')
 
 @section('content')
 <div class="row">

@@ -2,6 +2,8 @@
 @section('title',  'Agregar mensaje a ' . $forum->topic)
 @section('description', 'Agregar mensaje a foro')
 @section('body_class', 'foros')
+@section('breadcrumb_type', 'forum add answer')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_forums')
 
 @section('content')
 <div class="row">
