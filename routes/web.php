@@ -237,8 +237,11 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
-    Route::get('dashboard/evaluacion/diagnostico/ver/{id}', 'AdminEvaluations@view');
-    Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{id}', 'AdminEvaluations@evaluateDignostic_1');
+    Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
+    Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
+    Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');
+    Route::get('dashboard/evaluacion/diagnostico/evaluar/2/{answers_id}/{evaluation_id}', 'AdminEvaluations@evaluateDiagnostic_2');
+    Route::post('dashboard/evaluacion/diagnostico/evaluar/2/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_2');
     Route::get('dashboard/sesiones/actividades/evaluacion/{activity_id}/agregar', 'AdminEvaluations@add');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'AdminEvaluations@saveQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'AdminEvaluations@removeQuestion');

@@ -20,6 +20,7 @@
 			      <th>Nombre</th>
 			      <th>Email</th>
 			      <th>Institución</th>
+						<th>Evaluación</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
@@ -29,6 +30,11 @@
 			        <td><h4> <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}">{{$answer->user->name}}</a></h4></td>
 			        <td>{{$answer->user->email}}</td>
 			        <td>{{$answer->user->fellowData->origin}}</td>
+							@if($answer->user->diagnosticEvaluation)
+							<td>{{$answer->user->diagnosticEvaluation->total_score}}</td>
+							@else
+							<td>Sin evaluar</td>
+							@endif
 			        <td>
 			          <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}" class="btn xs view">Ver</a>
 			          <a href ="{{ url('dashboard/evaluacion/diagnostico/evaluar/1/' . $answer->id) }}"   class="btn xs view ev">Evaluar</a></td>

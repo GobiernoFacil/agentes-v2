@@ -15,6 +15,7 @@ class DiagnosticAnswer extends Model
       'answer_3',
       'answer_4',
       'answer_5',
+
     ];
 
 

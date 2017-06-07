@@ -15,20 +15,39 @@
 		<div class="col-sm-12">
       <ul>
         <li><strong>Concepto de Gobierno Abierto</strong><br>
-          {{$answers->answer_1}}
+          {{$answers->answer_1}}<br>
+					@if($answers->user->diagnosticEvaluation)
+					<strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_1}}
+					@endif
         </li>
         <li><strong>Objetivos de la Agenda de Desarrollo Sostenible</strong><br>
-          {{$answers->answer_2}}
+          {{$answers->answer_2}}<br>
+					@if($answers->user->diagnosticEvaluation)
+					<strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_2}}
+					@endif
         </li>
         <li><strong>Ejemplificación de una acción de incidencia política</strong><br>
-          {{$answers->answer_3}}
+          {{$answers->answer_3}}<br>
+					@if($answers->user->diagnosticEvaluation)
+					<strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_3}}
+					@endif
         </li>
         <li><strong>Elementos que integran una estrategia de comunicación exitosa</strong><br>
-          {{$answers->answer_4}}
+          {{$answers->answer_4}}<br>
+					@if($answers->user->diagnosticEvaluation)
+					<strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_4}}
+					@endif
         </li>
         <li><strong>Descripción de implicaciones presupuestarias del proyecto a generar</strong><br>
-          {{$answers->answer_5}}
+          {{$answers->answer_5}}<br>
+					@if($answers->user->diagnosticEvaluation)
+					<strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_5}}
+					@endif
         </li>
+				@if($answers->user->diagnosticEvaluation)
+				<li><strong>Puntaje Total: </strong>{{$answers->user->diagnosticEvaluation->total_score}}
+				</li>
+				@endif
       </ul>
 		</div>
 	</div>

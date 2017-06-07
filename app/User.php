@@ -69,4 +69,8 @@ class User extends Authenticatable
     function diagnostic(){
       return $this->hasOne("App\Models\DiagnosticAnswer");
     }
+
+    function diagnosticEvaluation(){
+      return $this->hasOne("App\Models\DiagnosticEvaluation");
+    }
 }

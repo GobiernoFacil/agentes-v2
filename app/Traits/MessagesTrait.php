@@ -136,6 +136,26 @@ trait MessagesTrait{
          'answer_4.required'=>"Contesta esta pregunta",
          'answer_5.required'=>"Contesta esta pregunta",
 
+         //diagnosticeva
+         'answer_q1_1.required'=>"Contesta esta pregunta",
+         'answer_q1_2.required'=>"Contesta esta pregunta",
+         'answer_q1_3.required'=>"Contesta esta pregunta",
+         'answer_q1_j.required'=>"Contesta esta pregunta",
+         'answer_q2_1.required'=>"Contesta esta pregunta",
+         'answer_q2_2.required'=>"Contesta esta pregunta",
+         'answer_q2_j.required'=>"Contesta esta pregunta",
+         'answer_q3_1.required'=>"Contesta esta pregunta",
+         'answer_q3_2.required'=>"Contesta esta pregunta",
+         'answer_q3_3.required'=>"Contesta esta pregunta",
+         'answer_q3_4.required'=>"Contesta esta pregunta",
+         'answer_q3_j.required'=>"Contesta esta pregunta",
+         'answer_q4_1.required'=>"Contesta esta pregunta",
+         'answer_q4_2.required'=>"Contesta esta pregunta",
+         'answer_q4_j.required'=>"Contesta esta pregunta",
+         'answer_q5_1.required'=>"Contesta esta pregunta",
+         'answer_q5_2.required'=>"Contesta esta pregunta",
+         'answer_q5_3.required'=>"Contesta esta pregunta",
+         'answer_q5_j.required'=>"Contesta esta pregunta",
       ];
     }
 }
