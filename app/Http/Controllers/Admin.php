@@ -14,6 +14,7 @@ use App\User;
 use App\Models\Aspirant;
 use App\Models\Image;
 use App\Models\Module;
+use App\Models\FacilitatorData;
 
 // FormValidators
 use App\Http\Requests\SaveAdmin;
@@ -35,11 +36,11 @@ class Admin extends Controller
       {
         $user 			  = Auth::user();
         $aspirants 		  = Aspirant::where('is_activated',1)->count();
-		$fellows		  = User::where('type',"fellow")->where('enabled',1)->count();		
-		
-		$modules_count 		  = Module::all()->count();		
-		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();		
-		
+		$fellows		  = User::where('type',"fellow")->where('enabled',1)->count();
+
+		$modules_count 		  = Module::all()->count();
+		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();
+
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
@@ -212,6 +213,7 @@ class Admin extends Controller
       public function viewProfile()
       {
         $user = Auth::user();
+        $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$user->id]);
         return view('admin.profile.profile-view')->with([
           "user"      => $user
         ]);
@@ -226,6 +228,7 @@ class Admin extends Controller
       public function editProfile()
       {
         $user = Auth::user();
+        $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$user->id]);
         return view('admin.profile.profile-update')->with([
           "user"      => $user
         ]);
@@ -240,13 +243,16 @@ class Admin extends Controller
       public function saveProfile(UpdateAdminProfile $request)
       {
         $admin = Auth::user();
-        $admin->name  = $request->name;
-        $admin->email = $request->email;
-
         if(!empty($request->password)){
-          $admin->password = Hash::make($request->password);
+          $data   = $request->only(['name','email','password']);
+          $data['password'] = Hash::make($request->password);
+        }else {
+          $data   = $request->only(['name','email']);
         }
-        $admin->save();
+
+        User::where('id',$admin->id)->update($data);
+        //update facilitator data
+        FacilitatorData::where('user_id',$admin->id)->update($request->except(['_token','name','email','image','password','password-confirm']));
         // [ SAVE THE IMAGE ]
         if($request->hasFile('image') && $request->file('image')->isValid()){
           $path  = public_path(self::UPLOADS);

@@ -250,7 +250,6 @@ class Facilitator extends Controller
   {
     //update user data
     if(!empty($request->password)){
-      var_dump($request->toArray());
       $data   = $request->only(['name','institution','email','password']);
       $data['password'] = Hash::make($request->password);
     }else {
