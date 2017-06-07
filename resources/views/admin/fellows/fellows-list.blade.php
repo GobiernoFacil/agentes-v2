@@ -3,7 +3,7 @@
 @section('description', 'Lista de Fellows')
 @section('body_class', 'fellows')
 @section('breadcrumb_type', 'fellows list')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_fellows')
 
 @section('content')
 <div class="row">
