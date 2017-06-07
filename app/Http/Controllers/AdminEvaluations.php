@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\DiagnosticAnswer;
+use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
 class AdminEvaluations extends Controller
 {
@@ -44,6 +45,26 @@ class AdminEvaluations extends Controller
       ]);
 
     }
+
+
+    /**
+     * Muestra lista de respuestas de diagnostico general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function evaluateDignostic_1($id)
+    {
+      $user       = Auth::user();
+      $answers    = DiagnosticAnswer::find($id);
+      $evaluation = DiagnosticAnswer::firstOrCreate(["user_id"=>$answers->user->id]);
+      return view('admin.evaluations.diagnostic-evaluation')->with([
+        "user"      => $user,
+        "answers"   => $answers,
+        "evaluation" => $evaluation
+      ]);
+
+    }
+
 
     /**
      * Muestra lista de respuestas de diagnostico general

@@ -31,7 +31,7 @@
 			        <td>{{$answer->user->fellowData->origin}}</td>
 			        <td>
 			          <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}" class="btn xs view">Ver</a>
-			         <!-- <a href ="{{ url('dashboard/facilitadores/eliminar/' . $answer->id) }}"  id ="{{$answer->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>-->
+			          <a href ="{{ url('dashboard/evaluacion/diagnostico/evaluar/1/' . $answer->id) }}"   class="btn xs view ev">Evaluar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
