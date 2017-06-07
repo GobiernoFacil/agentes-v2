@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', 'facilitator foros')
+@section('title', 'Agregar nueva pregunta o tema a ' . $forum->topic)
+@section('description', 'Agregar nueva pregunta o tema a ' . $forum->topic)
+@section('body_class', 'foros')
 @section('breadcrumb_type', '')
 
 @section('content')
