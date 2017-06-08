@@ -1,14 +1,16 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
+@section('title', 'Lista de fellows que respondieron el examen diagnóstico')
 @section('description', 'plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
+@section('body_class', 'diagnostic')
+@section('breadcrumb_type', 'diagnostic list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_diagnostic')
 
 @section('content')
 
 @if($answers->count() > 0)
 <div class="row">
-	<div class="col-sm-9">
-		<h1>Lista de usuarios con resultados de evaluación diagnóstico</h1>
+	<div class="col-sm-12">
+		<h1>Lista de fellows que respondieron el examen diagnóstico</h1>
 	</div>
 </div>
 <div class="box">
@@ -17,19 +19,22 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Institución</th>
-						<th>Evaluación</th>
+			      <th>Nombre / Email</th>
+			      <th>Ciudad / Estado</th>
+			      <th>Procedencia</th>
+				  <th>Fecha de examen</th>
+				  <th>Evaluación</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    @foreach ($answers as $answer)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}">{{$answer->user->name}}</a></h4></td>
-			        <td>{{$answer->user->email}}</td>
+			        <td><h4> <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}">{{$answer->user->name}}</a></h4>
+			        {{$answer->user->email}}</td>
+			        <td>{{$answer->user->fellowData->city}} <br> {{$answer->user->fellowData->state}}</td>
 			        <td>{{$answer->user->fellowData->origin}}</td>
+			        <td><a title="{{date('d-m-Y H:i', strtotime($answer->created_at))}}">{{$answer->created_at->diffForHumans()}}</a> </td>
 							@if($answer->user->diagnosticEvaluation)
 							<td>{{$answer->user->diagnosticEvaluation->total_score}}</td>
 							@else

@@ -1,12 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Evaluar')
-@section('description', '')
-@section('body_class', '')
+@section('title', 'Evaluación diagnóstico de ' . $answers->user->name . ' ' . $answers->user->fellowData->surname )
+@section('description', 'Evaluación diagnóstico de ' . $answers->user->name . ' ' . $answers->user->fellowData->surname )
+@section('body_class', 'diagnostic')
+@section('breadcrumb_type', 'diagnostic evaluation 1')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_diagnostic')
 
 @section('content')
 <div class="row">
-  <div class="col-sm-9">
-    <h1>Evaluación diagnóstico de: <strong>{{ $answers->user->name }} {{ $answers->user->fellowData->surname }} {{ $answers->user->fellowData->lastname }}</strong></h1>
+  <div class="col-sm-12">
+    <h1>Evaluación diagnóstico de <strong>{{ $answers->user->name }} {{ $answers->user->fellowData->surname }} {{ $answers->user->fellowData->lastname }}</strong> (1/2)</h1>
   </div>
 </div>
 
