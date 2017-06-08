@@ -73,7 +73,7 @@ class CreateFellows extends Command
                 $fellowData->user_id  = $new_user->id;
                 $fellowData->save();
                 $this->info($aspirant->email.': Created!');
-                $new_user->sendEmail($new_user,$password);
+                $new_user->notify(new FellowEmail($new_user,$password));
               }
             }
         });

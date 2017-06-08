@@ -16,10 +16,11 @@ class FellowEmail extends Notification
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user,$password)
     {
         //
         $this->user = $user;
+        $this->password = $password;
     }
 
     /**
@@ -45,7 +46,7 @@ class FellowEmail extends Notification
       return (new MailMessage)
                   ->from('info@apertus.org.mx')
                   ->subject('no-reply')
-                  ->markdown('vendor.notifications.fellowEmail', ['url' => $url]);
+                  ->markdown('vendor.notifications.fellowEmail', ['url' => $url,'user'=>$this->user,'password'=>$this->password]);
     }
 
     /**

@@ -2,8 +2,8 @@
 Estimado/a {{$user->name." ".$user->fellowData->surname." ".$user->fellowData->lastname}},<br>
 
 Por este medio, te proporcionamos tu nombre de usuario y tu contraseña para acceder a la plataforma Apertus.<br>
-Usuario:{{$user->email}}
-Contraseña:{{$password}}
+<strong>Usuario:</strong> {{$user->email}}<br>
+<strong>Contraseña:</strong> {{$password}}<br>
 
 La contraseña la podrás modificar para fines de privacidad en la liga <a href ="www.apertus.org.mx/tablero/perfil/editar">www.apertus.org.mx/tablero/perfil/editar</a>, donde además puedes completar tu perfil con tu foto, semblanza y redes sociales. La liga para acceder a los contenidos de la plataforma, incluyendo el examen diagnóstico y los módulos de enseñanza es <a href="www.apertus.org.mx/login">www.apertus.org.mx/login</a><br>
 
