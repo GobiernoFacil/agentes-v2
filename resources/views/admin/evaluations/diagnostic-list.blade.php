@@ -1,7 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de fellows que respondieron el examen diagnóstico')
 @section('description', 'plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
+@section('body_class', 'diagnostic')
+@section('breadcrumb_type', 'diagnostic list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_diagnostic')
 
 @section('content')
 
