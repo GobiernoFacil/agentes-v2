@@ -7,6 +7,7 @@ use Auth;
 // models
 use App\Models\Message;
 use App\Models\Conversation;
+use App\Models\FacilitatorModule;
 use App\Models\StoreConversation;
 use App\User;
 // FormValidators
@@ -68,10 +69,29 @@ class Messages extends Controller
     public function add()
     {
       $user   = Auth::user();
-      $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->where('id','!=',$user->id)->pluck('name','id');
+      $assign_users = FacilitatorModule::all()->pluck('user_id');
+      $users = User::where('type','facilitator')
+      ->orwhere(function($query)use($user){
+        $query->where('type','fellow')->where('enabled',1)->where('id','!=',$user->id);
+      })
+      ->orwhere(function($query)use($assign_users,$user){
+        $query->whereIn('id',$assign_users->toArray())->where('enabled',1)->where('id','!=',$user->id);
+      })->orderBy('name','asc')->get();
+      //->pluck('name','id')
+      $names = [];
+      foreach ($users as $p) {
+        if(isset($p->fellowData)){
+          $names[$p->id] = $p->name.' '.$p->fellowData->surname." ".$p->fellowData->lastname;
+        }elseif(isset($p->facilitatorData)){
+            $names[$p->id] = $p->name.' '.$p->facilitatorData->surname." ".$p->facilitatorData->lastname;
+          }else{
+            $names[$p->id] = $p->name;
+          }
+      }
+
       return view('fellow.messages.messages-add')->with([
         "user"      => $user,
-        'users' => $users
+        'users' => $names
       ]);
     }
 
