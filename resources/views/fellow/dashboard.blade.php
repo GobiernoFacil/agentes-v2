@@ -11,9 +11,23 @@
 	<div class="col-sm-12">
 		<div class="box">
 			<p>Bienvenido {{$user->name}} a la plataforma del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
+			
+@if(!$user->diagnostic)
+<div class="box blue">
+	<div class="row">
+		<div class="col-sm-6 right">
+			<h2>Realiza el examen de diagnóstico</h2>
+		</div>
+		<div class="col-sm-6">
+			<a href="{{url('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar')}}" class="btn view">Responder examen</a>
 		</div>
 	</div>
 </div>
+@endif
+		</div>
+	</div>
+</div>
+
 
 <!--actividad-->
 <div class="row">
