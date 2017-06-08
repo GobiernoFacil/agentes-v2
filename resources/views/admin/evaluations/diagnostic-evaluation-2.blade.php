@@ -19,3 +19,31 @@
   </div>
 </div>
 @endsection
+
+@section('js-content')
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(function() {
+  $('.answer_q4_1').click(function(event) {
+     $('.answer_q4_1').not(this).attr('checked', false);
+     $(this).attr('checked', true);
+   });
+  $('.answer_q4_2').click(function(event) {
+     $('.answer_q4_2').not(this).attr('checked', false);
+     $(this).attr('checked', true); });
+
+  $('.answer_q5_1').click(function(event) {
+     $('.answer_q5_1').not(this).attr('checked', false);
+     $(this).attr('checked', true); });
+
+   $('.answer_q5_2').click(function(event) {
+      $('.answer_q5_2').not(this).attr('checked', false);
+      $(this).attr('checked', true); });
+
+  $('.answer_q5_3').click(function(event) {
+     $('.answer_q5_3').not(this).attr('checked', false);
+     $(this).attr('checked', true); });
+
+     });
+</script>
+@endsection
