@@ -249,6 +249,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'AdminEvaluations@saveQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'AdminEvaluations@removeQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'AdminEvaluations@saveAnswer');
+
+    /*@AdminMessages Controller */
+    // Rutas mensajes
+    Route::get('dashboard/mensajes', 'AdminMessages@index');
+    Route::get('dashboard/mensajes-archivados', 'AdminMessages@indexStorage');
+    Route::get('dashboard/mensajes/agregar', 'AdminMessages@add');
+    Route::get('dashboard/mensajes/conversacion/agregar/{conversation_id}', 'AdminMessages@addSingle');
+    Route::post('dashboard/mensajes/conversacion/save/{conversation_id}', 'AdminMessages@saveSingle');
+    Route::post('dashboard/mensajes/save', 'AdminMessages@save');
+    Route::get('dashboard/mensajes/ver/{conversation_id}', 'AdminMessages@view');
+    Route::get('dashboard/mensajes/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
   });
 
   /* R U T A S  UNICAS DEL Fellow
