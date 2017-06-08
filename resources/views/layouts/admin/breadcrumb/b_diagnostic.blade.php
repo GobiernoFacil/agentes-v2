@@ -4,7 +4,7 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="diagnostic list")
 	<li>Lista de Fellows</li>
 	@endif
-	@if ($__env->yieldContent('breadcrumb_type') == "diagnostic view" || $__env->yieldContent('breadcrumb_type') == "diagnostic evaluation 1")
+	@if ($__env->yieldContent('breadcrumb_type') == "diagnostic view" || $__env->yieldContent('breadcrumb_type') == "diagnostic evaluation 1" || $__env->yieldContent('breadcrumb_type') == "diagnostic evaluation 2")
 	<li><a href="{{url('dashboard/evaluacion/diagnostico')}}">Lista de Fellows</a></li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="diagnostic view")
@@ -12,5 +12,8 @@
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="diagnostic evaluation 1")
 	<li>Evaluación de examen de diagnóstico (1/2)</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="diagnostic evaluation 2")
+	<li>Evaluación de examen de diagnóstico (2/2)</li>
 	@endif
 </ul>

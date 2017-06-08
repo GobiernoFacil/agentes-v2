@@ -43,7 +43,7 @@
 		<div class="col-sm-3 right">
 			<h3>Puntaje total: </h3>
 			@if($answers->user->diagnosticEvaluation)
-			<h2>{{$answers->user->diagnosticEvaluation->total_score > 0 ? $answers->user->diagnosticEvaluation->total_score . '/10' : '0/0'  }}</h2>
+			<h2>{{$answers->user->diagnosticEvaluation->total_score > 0 ? $answers->user->diagnosticEvaluation->total_score/10 . '/10' : '0/0'  }}</h2>
 			@endif
 		</div>
 		<div class="col-sm-12">
@@ -56,7 +56,7 @@
 						</span>
 						<span class="col-sm-3 right">
 								@if($answers->user->diagnosticEvaluation)
-								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_1 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_1 : '0' }}</p>
+								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_1 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_1/10 : '0' }}</p>
 								@endif
 						</span>
 					</li>
@@ -67,7 +67,7 @@
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
-								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_2 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_2 : '0' }}</p>
+								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_2 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_2/10 : '0' }}</p>
 							@endif
 						</span>
 					</li>
@@ -78,7 +78,7 @@
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
-								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_3 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_3 : '0' }}</p>
+								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_3 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_3/10 : '0' }}</p>
 							@endif
 						</span>
 					</li>
@@ -89,7 +89,7 @@
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
-								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_4 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_4: '0 ' }}</p>
+								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_4 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_4/10 : '0 ' }}</p>
 							@endif
 						</span>
 					</li>
@@ -100,7 +100,7 @@
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
-								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_5 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_5 : '0'}}</p>
+								<p><strong>Puntaje: </strong>{{$answers->user->diagnosticEvaluation->answer_ponderation_5 > 0 ? $answers->user->diagnosticEvaluation->answer_ponderation_5/10 : '0'}}</p>
 							@endif
 						</span>
 					</li>
