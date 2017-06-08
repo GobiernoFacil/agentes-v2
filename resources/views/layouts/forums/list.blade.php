@@ -38,7 +38,11 @@
 				<div class="row forum_list">
 					<div class="divider b"></div>
 					<div class="col-sm-1">
+						@if($conversation->user->image)
+						<img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%">
+						@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
+						@endif
 					</div>
 					<div class="col-sm-9">
 						@if($user->type =="admin")
@@ -47,7 +51,16 @@
 						@if($user->type =="facilitator")
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
-						<p class="author">Por {{$conversation->user_id}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						<!--fellow data -->
+ 						@if($conversation->user->fellowData)
+ 						<p class="author">Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+ 						@elseif($conversation->user->facilitatorData)
+ 						<!--facilitator data -->
+ 						<p class="author">Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+ 						@else
+ 						<!--super user data -->
+ 						<p class="author">Por {{$conversation->user->name}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+ 						@endif
 					</div>
 					<div class="col-sm-2">
 						<h3 class="count_messages">{{$conversation->messages->count()}}</h3>
