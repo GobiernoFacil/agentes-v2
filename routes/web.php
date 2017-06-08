@@ -156,6 +156,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
     Route::get('dashboard/sesiones/actividades/eliminar/{id}', 'Activities@delete');
+    
+    Route::get('dashboard/sesiones/actividades/foro/pregunta/{id}', 'AdminForums@viewQuestion');
     /*@ActivitiesFiles Controller */
     //CRUD files in activity
     Route::get('dashboard/sesiones/actividades/archivos/agregar/{activity_id}', 'ActivitiesFiles@add');
