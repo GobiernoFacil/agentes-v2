@@ -53,7 +53,7 @@ class Forums extends Controller
     {
       $user     = Auth::user();
       $today = date("Y-m-d");
-      $session  = ModuleSession::where('slug',$session_slug)->where('start','>=',$today)->firstOrFail();
+      $session  = ModuleSession::where('slug',$session_slug)->where('start','<=',$today)->firstOrFail();
       $forum    = Forum::where('session_id',$session->id)->first();
       if(!$forum){
         $auser = User::where('institution','Gobierno Fácil')->first();
