@@ -27,7 +27,15 @@ class Forums extends Controller
     public function all()
     {
       $user     = Auth::user();
-      $forums   = Forum::where('state_name',$user->fellowData->state)->orWhere('state_name',null)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $today = date("Y-m-d");
+      $sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
+      $forums   = Forum::where('state_name',$user->fellowData->state)->orWhere(function($query)use($sessions_id){
+        $query->where('state_name',null)->where('session_id',null);
+      })
+      ->orWhere(function($query)use($sessions_id){
+        $query->whereIn('session_id',$sessions_id->toArray());
+      })
+      ->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-all-list')->with([
         "user"      => $user,
         "forums" => $forums,
@@ -44,7 +52,8 @@ class Forums extends Controller
     public function index($module_slug,$session_slug)
     {
       $user     = Auth::user();
-      $session  = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $today = date("Y-m-d");
+      $session  = ModuleSession::where('slug',$session_slug)->where('start','>=',$today)->firstOrFail();
       $forum    = Forum::where('session_id',$session->id)->first();
       if(!$forum){
         $auser = User::where('institution','Gobierno Fácil')->first();
