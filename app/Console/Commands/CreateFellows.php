@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Notifications\Notifiable;
 use App\Models\Aspirant;
 use App\Models\FellowData;
 use App\User;
 use Excel;
 use Hash;
+use App\Notifications\FellowEmail;
 class CreateFellows extends Command
 {
     /**
@@ -56,7 +58,8 @@ class CreateFellows extends Command
                 $new_user   = new User();
                 $new_user->name  = $aspirant->name;
                 $new_user->email = $aspirant->email;
-                $new_user->password = Hash::make(str_random(8));
+                $password        = str_random(8);
+                $new_user->password = Hash::make($password);
                 $new_user->type = 'fellow';
                 $new_user->enabled = 1;
                 $new_user->save();
@@ -70,6 +73,7 @@ class CreateFellows extends Command
                 $fellowData->user_id  = $new_user->id;
                 $fellowData->save();
                 $this->info($aspirant->email.': Created!');
+                $new_user->sendEmail($new_user,$password);
               }
             }
         });

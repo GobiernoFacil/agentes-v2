@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class MassiveEmail extends Notification
+class FellowEmail extends Notification
 {
     use Queueable;
 
@@ -16,10 +16,10 @@ class MassiveEmail extends Notification
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($user)
     {
         //
-        $this->token = $token;
+        $this->user = $user;
     }
 
     /**
@@ -41,11 +41,11 @@ class MassiveEmail extends Notification
      */
     public function toMail($notifiable)
     {
-      $url = url("/convocatoria/aplicar/confirmacion", $this->token);
+      $url = url("/login");
       return (new MailMessage)
                   ->from('info@apertus.org.mx')
                   ->subject('no-reply')
-                  ->markdown('vendor.notifications.massiveEmail', ['url' => $url]);
+                  ->markdown('vendor.notifications.fellowEmail', ['url' => $url]);
     }
 
     /**
