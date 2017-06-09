@@ -134,36 +134,6 @@ class AdminEvaluations extends Controller
     }
 
 
-    /**
-     * Muestra lista de respuestas de diagnostico general
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function add($activity_id)
-    {
-      $user      = Auth::user();
-      $activity  = Activity::where('id',$activity_id)->firstOrFail();
-      return view('admin.evaluations.evaluation-add')->with([
-        "user"      => $user,
-        "activity"  => $activity
-      ]);
-
-    }
-
-
-    /**
-     * Muestra lista de respuestas de diagnostico general
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function saveQuestion(Request $request)
-    {
-       $res  = $request->toArray();
-       $res["id"] = uniqid();
-       return response()->json($res);
-    }
-
-
     protected function evaluateDiagnosticP1($evaluation){
       $answer_1_ponderation = 0;
       $value_q_1 = 20/3;

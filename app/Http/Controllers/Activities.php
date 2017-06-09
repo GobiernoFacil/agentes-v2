@@ -125,7 +125,7 @@ class Activities extends Controller
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
             }elseif($activity->type==='evaluation'){
               //Agregar evaluacion
-              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
+              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
            }
@@ -247,7 +247,7 @@ class Activities extends Controller
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
             }elseif($data['type']==='evaluation' && $last->type!=$data['type']){
               //Agregar evaluacion
-              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->id")->with('success',"Se ha guardado correctamente");
+              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->id/1")->with('success',"Se ha guardado correctamente");
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
            }

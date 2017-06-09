@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Activity;
-
+use App\Models\QuizInfo;
+// FormValidators
+use App\Http\Requests\SaveQuiz;
 class Quiz extends Controller
 {
     //
@@ -27,4 +29,56 @@ class Quiz extends Controller
           "activity" => $activity
         ]);
     }
+
+
+
+        /**
+         * Agregar cuestionario
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function save(SaveQuiz $request)
+        {
+            //
+            $user      = Auth::user();
+            $activity  = Activity::where('id',$request->activity_id)->firstOrFail();
+            $quiz      = new QuizInfo($request->only(['title','description']));
+            $quiz->activity_id = $activity->id;
+            $quiz->save();
+            return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/2")->with('success','Se ha guardado correctamente');
+
+        }
+
+
+
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function addQuestion($activity_id)
+        {
+          $user      = Auth::user();
+          $activity  = Activity::where('id',$activity_id)->firstOrFail();
+          return view('admin.modules.quiz.evaluation-add')->with([
+            "user"      => $user,
+            "activity"  => $activity
+          ]);
+
+        }
+
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveQuestion(Request $request)
+        {
+           $res  = $request->toArray();
+           $res["id"] = uniqid();
+           return response()->json($res);
+        }
+
 }

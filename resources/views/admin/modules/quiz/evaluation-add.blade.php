@@ -28,7 +28,7 @@
 
 @section('js-content')
   <!-- THE CODE-->
-  @include('admin.evaluations.question-templates')
+  @include('admin.modules.quiz.question-templates')
 
   <script>
   var fakeEndpoint         = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
