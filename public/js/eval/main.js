@@ -9,11 +9,12 @@ var Form, Questions, GFPNUDApp, endpoint,
     questionsList        = "questions-list"
 
 // fake data
-Form = {
+/*Form = {
   id   : 1,
   name : "Información del cuestionario"
-};
+};*/
 
+var Form = = document.getElementById('form');
 Questions = [{}];
 Answers = [{}];
 /*Questions = [{

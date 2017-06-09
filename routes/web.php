@@ -156,7 +156,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
     Route::get('dashboard/sesiones/actividades/eliminar/{id}', 'Activities@delete');
-    
+
     Route::get('dashboard/sesiones/actividades/foro/pregunta/{id}', 'AdminForums@viewQuestion');
     /*@ActivitiesFiles Controller */
     //CRUD files in activity
@@ -175,9 +175,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/requerimientos/update/{id}', 'ActivityRequirements@update');
     Route::get('dashboard/sesiones/actividades/requerimientos/deshabilitar/{id}', 'ActivityRequirements@delete');
     Route::get('dashboard/sesiones/actividades/requerimientos/ver/{id}', 'ActivityRequirements@view');
-    /*@Quiz Controller */
-    //CRUD Quiz
-    Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}', 'Quiz@add');
     /*@Topics Controller */
     //CRUD Topics
     Route::get('dashboard/sesiones/tematicas/{id}', 'Topics@index');
@@ -245,10 +242,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/2/{answers_id}/{evaluation_id}', 'AdminEvaluations@evaluateDiagnostic_2');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/2/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_2');
-    Route::get('dashboard/sesiones/actividades/evaluacion/{activity_id}/agregar', 'AdminEvaluations@add');
-    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'AdminEvaluations@saveQuestion');
-    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'AdminEvaluations@removeQuestion');
-    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'AdminEvaluations@saveAnswer');
+    /*@Quiz Controller */
+    //CRUD Quiz
+    Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}/1', 'Quiz@add');
+    Route::post('dashboard/sesiones/actividades/evaluacion/save/{activity_id}/1', 'Quiz@save');
+    Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}/2', 'Quiz@addQuestion');
+    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'Quiz@saveQuestion');
+    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'Quiz@removeQuestion');
+    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'Quiz@saveAnswer');
 
     /*@AdminMessages Controller */
     // Rutas mensajes
