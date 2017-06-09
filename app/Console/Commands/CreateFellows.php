@@ -49,7 +49,7 @@ class CreateFellows extends Command
 
     public function readExcel()
     {
-      $file = 'csv_2/fellows.csv';
+      $file = 'csv_2/news.csv';
         Excel::load($file, function($reader){
         $reader->each(function($row){
             if(!empty($row->email)){

@@ -17,6 +17,7 @@
           <div id="GF-PNUD-EVALUATION-APP">
             <h1 id="title"></h1>
             <form  id = "form" role="form"  action="" >
+              {{Form::hidden('quizId',$activity->quizInfo->id, ["class" => "form-control","id"=>"quizInfoId"])}} 
               <ul id="questions-list"></ul>
               <p><a href="#" id="add-question">Agregar pregunta</a></p>
             </form>

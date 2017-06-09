@@ -45,4 +45,8 @@ class Activity extends Model
     return $this->hasOne("App\Models\Forum");
   }
 
+  function quizInfo(){
+    return $this->hasOne("App\Models\QuizInfo");
+  }
+
 }
