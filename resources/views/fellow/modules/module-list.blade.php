@@ -23,10 +23,10 @@
 </div>
 
 <div class="box">
-	<div class="row">
 		<?php $counter = 0;?>
 		@foreach($modules as $module)
-		@if(++$counter % 4 === 0)
+		<?php ++$counter;?>
+		@if($counter  == 1)
 		<div class="row">
 		@endif
 		<div class = "col-sm-4">
@@ -62,10 +62,11 @@
 				@endif
 			</div>
 		</div>
-		@if(++$counter % 3 === 0)
+		@if($counter % 3 === 0)
 		</div>
+		<div class="row">
 		@endif
 		@endforeach
-	</div>
+		<div class="clearfix"></div>
 </div>
 @endsection
