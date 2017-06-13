@@ -10,6 +10,7 @@
     </p>
   </div>
 </div>
+@if($facilitator->type!='admin')
 <div class="row">
   <div class="col-sm-6">
     <p>
@@ -30,7 +31,7 @@
     </p>
   </div>
 </div>
-
+@endif
 <!-- expert -->
 <div class="row">
   <div class="col-sm-12">
@@ -43,6 +44,7 @@
     </p>
   </div>
 </div>
+@if($facilitator->type!='admin')
 <div class="row">
   <div class="col-sm-6">
     <p>
@@ -63,7 +65,7 @@
     </p>
   </div>
 </div>
-
+@endif
 <div class="row">
   <div class="col-sm-6">
     <p>
