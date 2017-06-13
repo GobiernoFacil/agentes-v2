@@ -16,20 +16,24 @@
 	<div class = "col-sm-12">
 		<ul class="timeline">
 		@foreach($modules as $module)
-			<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,1,'…')}}</li>
+			<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
 		@endforeach
 		</ul>
   	</div>
 </div>
 
 <div class="box">
-	<div class="row">
+		<?php $counter = 0;?>
 		@foreach($modules as $module)
+		<?php ++$counter;?>
+		@if($counter  == 1)
+		<div class="row">
+		@endif
 		<div class = "col-sm-4">
 			<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
 				<div class="row">
 					<div class="col-sm-9">
-						<h3>{{$module->title}}</h3>
+						<h3>{{\Illuminate\Support\Str::words($module->title,13,'…')}}</h3>
 					</div>
 					<div class="col-sm-3">
 						<div class="hours">
@@ -37,7 +41,7 @@
 						</div>
 					</div>
 					<div class="col-sm-12">
-						<p class="description">{{$module->objective}}</p>
+						<p class="description">{{\Illuminate\Support\Str::words($module->objective,19,'…')}}</p>
 					</div>
 				</div>
 				<div class="footer">
@@ -57,11 +61,12 @@
 				<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn view">Ir al Módulo</a></li>
 				@endif
 			</div>
-
-
-
 		</div>
+		@if($counter % 3 === 0)
+		</div>
+		<div class="row">
+		@endif
 		@endforeach
-	</div>
+		<div class="clearfix"></div>
 </div>
 @endsection
