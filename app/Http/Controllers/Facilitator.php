@@ -12,6 +12,7 @@ use Mail;
 use App\User;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
+use App\Models\FacilitatorModule;
 use App\Models\Image;
 use App\Models\Conversation;
 use App\Models\StoreConversation;
@@ -141,7 +142,12 @@ class Facilitator extends Controller
   {
     //
     $user = Auth::user();
-    $list = User::where("type", "facilitator")->where("enabled",1)->paginate($this->pageSize);
+    $listId = FacilitatorModule::all()->pluck('user_id');
+    $list = User::where("type", "facilitator")
+    ->orWhere(function($query)use($listId){
+      $query->whereIn('id',$listId->toArray())->where("enabled",1);
+    })
+    ->where("enabled",1)->orderBy('name','asc')->paginate($this->pageSize);
     return view('admin.users.facilitator-list')->with([
       "user"      => $user,
       "facilitators"  => $list]);
@@ -216,6 +222,7 @@ class Facilitator extends Controller
     //
     $user    = Auth::user();
     $facilitator = User::find($id);
+    $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$id]);
     return view('admin.users.facilitator-view')->with([
       "user"      => $user,
       "facilitator"    => $facilitator
