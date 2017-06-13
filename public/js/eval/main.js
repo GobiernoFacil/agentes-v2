@@ -208,7 +208,7 @@ var GFPNUDApp = {
                    })[0];
 
     /* SERVER MUMBO YUMBO */
-    $.post(removeQuestionUrl, {id : id}, function(res){
+    $.post(removeQuestionUrl, {id : id,_token:token}, function(res){
       questions.splice(questions.indexOf(question), 1);
       li.parentNode.removeChild(li);
     }, "json");

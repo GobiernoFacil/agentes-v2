@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Activity;
 use App\Models\QuizInfo;
 use App\Models\Question;
+use App\Models\Answer;
 // FormValidators
 use App\Http\Requests\SaveQuiz;
 class Quiz extends Controller
@@ -84,6 +85,22 @@ class Quiz extends Controller
            $question->value   = "string";
            $question->save();
            return response()->json($question->toArray());
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function removeQuestion(Request $request)
+        {
+          $question  = Question::find($request->id);
+          foreach($question->answer as $answer){
+            $answer->delete();
+          }
+          $question->delete();
+          return response()->json(["response"=>"ok"]);
+
         }
 
 }

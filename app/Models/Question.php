@@ -8,7 +8,7 @@ class Question extends Model
 {
     //
     protected $fillable = [
-        'quizInfo_id', 'question', 'type','value'
+        'quizInfo_id', 'question', 'type','value','answer_id'
     ];
 
     //modelos relacionados
