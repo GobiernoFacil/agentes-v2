@@ -92,7 +92,7 @@
 				</div>
 				@else
 				<div class="col-sm-2">
-					<span>Candado</span>
+					<a class="btn view block sessions_l"  href='{{ url("tablero/aprendizaje/{$module->slug}/{$session->slug}") }}'>Revisar sesión</a>
 				</div>
 				@endif
 				<!-- footnote-->
