@@ -24,7 +24,11 @@
 
 <div class="box">
 	<div class="row">
+		<?php $counter = 0;?>
 		@foreach($modules as $module)
+		@if(++$counter % 4 === 0)
+		<div class="row">
+		@endif
 		<div class = "col-sm-4">
 			<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
 				<div class="row">
@@ -57,11 +61,11 @@
 				<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn view">Ir al Módulo</a></li>
 				@endif
 			</div>
-
-
-
 		</div>
+		@if(++$counter % 3 === 0)
+		</div>
+		@endif
 		@endforeach
-	</div>
+	
 </div>
 @endsection
