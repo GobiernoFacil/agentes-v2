@@ -19,17 +19,24 @@
 <script id="real-question-template" type="text">
   <p><a href="#" class="question-name"></a><a href="#" class="remove-question">[ x ]</a></p>
   <ul></ul>
-  <p><a href="#" class="add-answer">Agregar respuesta</a></p>
+  <p><a href="#" class="add-answer btn xs ev">Agregar respuesta</a></p>
 
 </script>
 
 <script id="answer-template" type="text">
   <form>
+  <div class="row" >
+    <div class="col-sm-12">
+      <p>
     <p>
-      <input type="text">
-      <input type="submit" value="agregar">
-      <a class="remove-answer" href="#">[ x ]</a>
+    <label><strong>Escribe la respuesta <a class="remove-answer" href="#">[ x ]</a></strong> <br>
+    {{Form::text('name',null, ["class" => "form-control"])}} </label>
     </p>
+    <div class="row">
+      <div class="col-sm-12">
+    {{Form::submit('Guardar respuesta', ['class' => 'btn gde'])}}
+    </div>
+    </div>
   </form>
 </script>
 

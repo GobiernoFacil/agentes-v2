@@ -103,4 +103,16 @@ class Quiz extends Controller
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveAnswer(Request $request)
+        {
+          var_dump($request->toArray());
+          return response()->json(["id"=>"oasdasdk"]);
+
+        }
+
 }

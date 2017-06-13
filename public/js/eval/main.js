@@ -249,7 +249,8 @@ var GFPNUDApp = {
         answer = {
           value    : value,
           question : question.id,
-          selected : 0
+          selected : 0,
+          _token   : token
         },
         template = document.getElementById(realAnswerTemplate).innerHTML,
         that     = this,
@@ -265,7 +266,7 @@ var GFPNUDApp = {
 
 
     /* SERVER MUMBO YUMBO */
-    $.get(fakeEndpoint, answer, function(res){
+    $.post(saveAnswerUrl, answer, function(res){
       that.form.answers.push(res);
 
       li.innerHTML = template;
