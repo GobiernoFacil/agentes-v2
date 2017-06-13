@@ -6,7 +6,7 @@ var Form, Questions, GFPNUDApp, endpoint,
     realQuestionTemplate = "real-question-template",
     answerTemplate       = "answer-template",
     realAnswerTemplate   = "real-answer-template",
-    questionsList        = "questions-list"
+    questionsList        = "questions-list";
 
 // fake data
 /*Form = {
@@ -14,7 +14,7 @@ var Form, Questions, GFPNUDApp, endpoint,
   name : "Información del cuestionario"
 };*/
 
-var Form = = document.getElementById('form');
+var Form = document.getElementById('form');
 Questions = [{}];
 Answers = [{}];
 /*Questions = [{
@@ -119,7 +119,7 @@ var GFPNUDApp = {
     remove   = li.querySelector(".remove-answer");
 
     name.innerHTML  = answer.value;
-    swtch.innerHTML = !answer.selected ? "hacer esta pregunta correcta" : "hacer esta respuesta incorrecta";
+    swtch.innerHTML = !answer.selected ? "Hacer esta pregunta correcta" : "Hacer esta respuesta incorrecta";
 
     STOFunc = this.switchTrueOption.bind(this, li, answer);
     ROFunc  = this.removeOption.bind(this, li, answer);
@@ -177,7 +177,7 @@ var GFPNUDApp = {
     addOpt = li.querySelector(".add-answer");
 
     /* SERVER MUMBO YUMBO */
-    $.post(saveQuestionUrl, {question : value,_token:token}, function(res){
+    $.post(saveQuestionUrl, {question : value,_token:token,idQuiz:idQ}, function(res){
       anchor.innerHTML = res.question;
       Questions.push(res);
       remove.addEventListener("click", REQFunc);

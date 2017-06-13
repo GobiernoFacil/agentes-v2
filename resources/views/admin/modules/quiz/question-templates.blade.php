@@ -3,7 +3,7 @@
   <form>
     <p>
       <input type="text">
-      <input type="submit" value="agregar">
+      <input type="submit" value="agregar" class ="btn gde">
     </p>
     <p><a class="remove-question" href="#">[ x ]</a></p>
   </form>

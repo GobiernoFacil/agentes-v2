@@ -7,6 +7,7 @@ use Auth;
 // models
 use App\Models\Activity;
 use App\Models\QuizInfo;
+use App\Models\Question;
 // FormValidators
 use App\Http\Requests\SaveQuiz;
 class Quiz extends Controller
@@ -76,9 +77,13 @@ class Quiz extends Controller
          */
         public function saveQuestion(Request $request)
         {
-           $res  = $request->toArray();
-           $res["id"] = uniqid();
-           return response()->json($res);
+
+           $question = new Question();
+           $question->quizInfo_id = $request->idQuiz;
+           $question->question   = $request->question;
+           $question->value   = "string";
+           $question->save();
+           return response()->json($question->toArray());
         }
 
 }
