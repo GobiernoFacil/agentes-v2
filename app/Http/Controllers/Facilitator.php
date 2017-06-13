@@ -240,6 +240,7 @@ class Facilitator extends Controller
     //
     $user      = Auth::user();
     $facilitator   = User::where('id',$id)->with('FacilitatorData')->firstOrFail();
+    $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$id]);
    return view('admin.users.facilitator-update')->with([
       "user"      => $user,
       "facilitator" => $facilitator
