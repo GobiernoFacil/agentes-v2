@@ -33,7 +33,7 @@
 			<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
 				<div class="row">
 					<div class="col-sm-9">
-						<h3>{{$module->title}}</h3>
+						<h3>{{\Illuminate\Support\Str::words($module->title,13,'…')}}</h3>
 					</div>
 					<div class="col-sm-3">
 						<div class="hours">
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="col-sm-12">
-						<p class="description">{{$module->objective}}</p>
+						<p class="description">{{\Illuminate\Support\Str::words($module->objective,19,'…')}}</p>
 					</div>
 				</div>
 				<div class="footer">
