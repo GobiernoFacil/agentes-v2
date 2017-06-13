@@ -30,7 +30,8 @@ class FellowsAdmin extends Controller
     public function index()
     {
       $user = Auth::user();
-	  $fellows	= User::where('type',"fellow")->where('enabled',1)->paginate($this->pageSize);
+      $testUserId = User::where('email','andre@fcb.com')->get()->pluck('id');
+	    $fellows	= User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->paginate($this->pageSize);
       return view('admin.fellows.fellows-list')->with([
         'user' 		=> $user,
         'fellows' 	=>$fellows,

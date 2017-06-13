@@ -36,10 +36,11 @@ class Admin extends Controller
       {
         $user 			  = Auth::user();
         $aspirants 		  = Aspirant::where('is_activated',1)->count();
-		$fellows		  = User::where('type',"fellow")->where('enabled',1)->count();
+        $testUserId = User::where('email','andre@fcb.com')->get()->pluck('id');
+    		$fellows		  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
 
-		$modules_count 		  = Module::all()->count();
-		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();
+    		$modules_count 		  = Module::all()->count();
+    		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();
 
         return view('admin.dashboard')->with([
           "user"      		=> $user,
