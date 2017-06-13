@@ -15,7 +15,7 @@ use App\Models\Aspirant;
 use App\Models\Image;
 use App\Models\Module;
 use App\Models\FacilitatorData;
-
+use App\Models\FacilitatorModule;
 // FormValidators
 use App\Http\Requests\SaveAdmin;
 use App\Http\Requests\UpdateAdmin;
@@ -40,7 +40,12 @@ class Admin extends Controller
     		$fellows		  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
 
     		$modules_count 		  = Module::all()->count();
-    		$facilitators_count   = User::where('type',"facilitator")->where('enabled',1)->count();
+        $listId = FacilitatorModule::all()->pluck('user_id');
+    		$facilitators_count   =  User::where("type", "facilitator")
+        ->orWhere(function($query)use($listId){
+          $query->whereIn('id',$listId->toArray())->where("enabled",1);
+        })
+        ->where("enabled",1)->orderBy('name','asc')->count();
 
         return view('admin.dashboard')->with([
           "user"      		=> $user,
