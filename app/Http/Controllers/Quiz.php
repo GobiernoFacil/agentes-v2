@@ -110,8 +110,11 @@ class Quiz extends Controller
          */
         public function saveAnswer(Request $request)
         {
-          var_dump($request->toArray());
-          return response()->json(["id"=>"oasdasdk"]);
+          $answer  = new Answer();
+          $answer->question_id = $request->question;
+          $answer->value       = $request->value;
+          $answer->save();
+          return response()->json($answer->toArray());
 
         }
 

@@ -313,7 +313,7 @@ var GFPNUDApp = {
     e.preventDefault();
 
     /* SERVER MUMBO YUMBO */
-    $.get(fakeEndpoint, {opt}, function(res){
+    $.post(fakeEndpoint, {opt}, function(res){
       li.parentNode.removeChild(li);
     }, "json");
     /**/

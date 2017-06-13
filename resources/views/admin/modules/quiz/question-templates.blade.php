@@ -42,8 +42,9 @@
 
 <script id="real-answer-template" type="text">
   <p>
-    <a href="#" class="answer-name"></a>
-    <a href="#" class="switch-answer">es respuesta correcta</a>
-    <a href="#" class="remove-answer">[ x ]</a>
+    <a href="#" class="answer-name"></a><a href="#" class="remove-answer">[ x ]</a>
+    <p>
+    <a href="#" class="switch-answer">Seleccionar como respuesta correcta</a>
+    </p>
   <p>
 </script>
