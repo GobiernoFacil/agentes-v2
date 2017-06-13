@@ -30,7 +30,7 @@
 			  <tbody>
 			    @foreach ($answers as $answer)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}">{{$answer->user->name}}</a></h4>
+			        <td><h4> <a href="{{ url('dashboard/evaluacion/diagnostico/ver/' . $answer->id) }}">{{$answer->user->name .' '.$answer->user->fellowData->surname." ".$answer->user->fellowData->lastname}}</a></h4>
 			        {{$answer->user->email}}</td>
 			        <td>{{$answer->user->fellowData->city}} <br> {{$answer->user->fellowData->state}}</td>
 			        <td>{{$answer->user->fellowData->origin}}</td>

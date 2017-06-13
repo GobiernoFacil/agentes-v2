@@ -36,11 +36,11 @@
 		  <tbody>
 		    @foreach ($fellows as $fellow)
 		      <tr>
-		        <td><h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->surname." ".$fellow->lastname}}</a></h4>
+		        <td><h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 		        {{$fellow->email}}
 		        </td>
-		        <td>{{$fellow->city}} <br> <strong>{{$fellow->state}}</strong></td>
-				<td>{{$fellow->origin}}</td>
+		        <td>{{$fellow->fellowData->city}} <br> <strong>{{$fellow->fellowData->state}}</strong></td>
+				<td>{{$fellow->fellowData->origin}}</td>
 		        <td>{{ date("d-m-Y", strtotime($fellow->created_at)) }} <br> {{ date("H:i", strtotime($fellow->created_at)) }} hrs.</td>
 		        
 		        <td>
