@@ -52,10 +52,10 @@ class NewsEvents extends Controller
     {
       //
       $user = Auth::user();
-      $all = NewsEvent::orderBy('created_at','desc')->paginate($this->pageSize);
+      $news = NewsEvent::orderBy('created_at','desc')->paginate($this->pageSize);
       return view('admin.newsEvents.newsEvents-list')->with([
         'user' => $user,
-        'all' =>$all,
+        'news' =>$news,
       ]);
 
     }
