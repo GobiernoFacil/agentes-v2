@@ -41,11 +41,15 @@ class Admin extends Controller
 
     		$modules_count 		  = Module::all()->count();
         $listId = FacilitatorModule::all()->pluck('user_id');
-    		$facilitators_count   =  User::where("type", "facilitator")
+        $adm_count = User::whereIn('id',$listId->toArray())->where('type','!=','facilitator')->where('enabled',1)->count();
+    		/*$facilitators_count   =  User::where("type", "facilitator")
         ->orWhere(function($query)use($listId){
           $query->whereIn('id',$listId->toArray())->where("enabled",1);
         })
+        ->where("enabled",1)->orderBy('name','asc')->count();*/
+        $facilitator_number =  User::where("type", "facilitator")
         ->where("enabled",1)->orderBy('name','asc')->count();
+        $facilitators_count = $facilitator_number + $adm_count;
 
         return view('admin.dashboard')->with([
           "user"      		=> $user,

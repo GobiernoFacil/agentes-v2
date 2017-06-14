@@ -143,11 +143,11 @@ class Facilitator extends Controller
     //
     $user = Auth::user();
     $listId = FacilitatorModule::all()->pluck('user_id');
-    $list = User::where("type", "facilitator")
+    $list = User::where("type", "facilitator")->where("enabled",1)
     ->orWhere(function($query)use($listId){
       $query->whereIn('id',$listId->toArray())->where("enabled",1);
     })
-    ->where("enabled",1)->orderBy('name','asc')->paginate($this->pageSize);
+    ->orderBy('name','asc')->paginate($this->pageSize);
     return view('admin.users.facilitator-list')->with([
       "user"      => $user,
       "facilitators"  => $list]);
