@@ -113,6 +113,7 @@ class Quiz extends Controller
           $answer  = new Answer();
           $answer->question_id = $request->question;
           $answer->value       = $request->value;
+          $answer->selected    = 0;
           $answer->save();
           return response()->json($answer->toArray());
 

@@ -250,6 +250,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'Quiz@saveQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'Quiz@removeQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'Quiz@saveAnswer');
+    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/answer', 'Quiz@removeAnswer');
 
     /*@AdminMessages Controller */
     // Rutas mensajes

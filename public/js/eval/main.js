@@ -119,7 +119,7 @@ var GFPNUDApp = {
     remove   = li.querySelector(".remove-answer");
 
     name.innerHTML  = answer.value;
-    swtch.innerHTML = !answer.selected ? "Hacer esta pregunta correcta" : "Hacer esta respuesta incorrecta";
+    swtch.innerHTML = !answer.selected ? "Seleccionar esta respuesta como correcta" : "Seleccionar esta respuesta como incorrecta";
 
     STOFunc = this.switchTrueOption.bind(this, li, answer);
     ROFunc  = this.removeOption.bind(this, li, answer);
@@ -303,7 +303,7 @@ var GFPNUDApp = {
     opt.selected = selected ? 0 : 1;
 
     /* SERVER MUMBO YUMBO */
-    $.get(fakeEndpoint, {opt}, function(res){
+    $.get('', {opt}, function(res){
       el.innerHTML = label;
     }, "json");
     /**/
@@ -313,7 +313,7 @@ var GFPNUDApp = {
     e.preventDefault();
 
     /* SERVER MUMBO YUMBO */
-    $.post(fakeEndpoint, {opt}, function(res){
+    $.post(removeAnswerUrl, {opt,_token:token}, function(res){
       li.parentNode.removeChild(li);
     }, "json");
     /**/

@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar sesión')
-@section('description', 'Agregar nueva sesión')
+@section('description', 'Agregar preguntas a evaluación')
 @section('body_class', '')
 @section('breadcrumb_type', '')
 @section('breadcrumb', '')
@@ -36,6 +36,7 @@
       saveQuestionUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
       removeQuestionUrl    = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/remove/question")}}',
       saveAnswerUrl        = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/answer")}}',
+      removeAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/remove/answer")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
   </script>
