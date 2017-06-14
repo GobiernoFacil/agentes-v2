@@ -1,4 +1,4 @@
-{!! Form::model($content,['url' => url("dashboard/noticias-eventos/update/{$content->id}"), "class" => "form-horizontal"]) !!}
+{!! Form::model($content,['url' => url("dashboard/noticias-eventos/update/{$content->id}"), "class" => "form-horizontal",'files'=>true]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -108,7 +108,21 @@
     </p>
   </div>
 </div>
-
+<!-- featured image -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Foto</strong></label><br>
+      @if($content->image)
+      <img src='{{url("img/newsEvent/{$content->image->name}")}}'>
+      @endif
+      {{Form::file('image', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato .jpg, .png)
+      @if($errors->has('image'))
+      <strong class="error">{{$errors->first('image')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Actualizar', ['class' => 'btn gde'])}}</p>

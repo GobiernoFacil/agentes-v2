@@ -129,6 +129,7 @@ trait MessagesTrait{
          'activity_id.different'=>"Selecciona una sesión o actividad",
 
          //news
+         'brief.required' => 'Este campo es requerido',
          'content.required' => 'Este campo es requerido',
          'answer_1.required'=>"Contesta esta pregunta",
          'answer_2.required'=>"Contesta esta pregunta",

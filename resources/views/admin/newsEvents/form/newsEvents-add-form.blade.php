@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/noticias-eventos/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/noticias-eventos/save"), "class" => "form-horizontal",'files'=>true]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -106,7 +106,18 @@
     </p>
   </div>
 </div>
-
+<!-- featured image -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Imagen de portada</strong></label><br>
+      {{Form::file('image', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato .jpg, .png)
+      @if($errors->has('image'))
+      <strong class="error">{{$errors->first('image')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <p>{{Form::submit('Guardar', ['class' => 'btn gde'])}}</p>

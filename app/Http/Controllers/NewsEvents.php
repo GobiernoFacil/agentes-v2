@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use File;
 // models
 use App\Models\NewsEvent;
+use App\Models\ImagesNew;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveNewsEvents;
@@ -92,6 +94,17 @@ class NewsEvents extends Controller
       $data['slug']    = str_slug($request->title);
       $new  = new NewsEvent($data);
       $new->save();
+      // [ SAVE THE IMAGE ]
+      if($request->hasFile('image') && $request->file('image')->isValid()){
+        $path  = public_path(self::UPLOADS);
+        $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($path, $name);
+        $image   = ImagesNew::firstorCreate(['newsEvents_id'=>$new->id,]);
+        $image->name = $name;
+        $image->path = $path;
+        $image->type = 'full';
+        $image->save();
+      }
       return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
     }
 
@@ -121,12 +134,27 @@ class NewsEvents extends Controller
     {
       //
       if($request->type==='news'){
-        $data   = $request->except(['start','end','time','_token']);
+        $data   = $request->except(['start','end','time','_token','image']);
       }else{
-        $data   = $request->except('_token');
+        $data   = $request->except('_token','image');
       }
       $data['slug']    = str_slug($request->title);
       NewsEvent::where('id',$request->content_id)->update($data);
+      $content = NewsEvent::find($request->content_id);
+      // [ SAVE THE IMAGE ]
+      if($request->hasFile('image') && $request->file('image')->isValid()){
+        $path  = public_path(self::UPLOADS);
+        $name = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($path, $name);
+        if($content->image){
+          File::delete($content->image->path."/".$content->image->name);
+        }
+        $image   = ImagesNew::firstorCreate(['newsEvents_id'=>$request->content_id]);
+        $image->name = $name;
+        $image->path = $path;
+        $image->type = 'full';
+        $image->save();
+      }
       return redirect("dashboard/noticias-eventos/ver/$request->content_id")->with('success',"Se ha actualizado correctamente");
     }
 

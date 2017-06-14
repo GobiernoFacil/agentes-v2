@@ -17,10 +17,12 @@ class NewsEvent extends Model
     'slug',
     'time',
     'type',
-    'public'
+    'public',
+    'brief',
+    'image_id'
     ];
 
     function image(){
-      return $this->hasOne("App\Models\ImagesNew");
+      return $this->hasOne("App\Models\ImagesNew",'newsEvents_id');
     }
 }
