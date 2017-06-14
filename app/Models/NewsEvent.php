@@ -19,4 +19,8 @@ class NewsEvent extends Model
     'type',
     'public'
     ];
+
+    function image(){
+      return $this->hasOne("App\Models\ImagesNew");
+    }
 }
