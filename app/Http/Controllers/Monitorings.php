@@ -115,7 +115,7 @@ class Monitorings extends Controller
     //
     $data   = $request->except('_token');
     $monitoring = Monitoring::where('id',$request->id)->firstOrFail();
-    
+
     Monitoring::where('id',$request->id)->update($data);
 
     return redirect("dashboard/sesiones/ver/$monitoring->session_id")->with('success',"Se ha guardado correctamente");

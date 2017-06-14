@@ -1,4 +1,4 @@
-{!! Form::model($monitoring,['url' => url("dashboard/sesiones/mecanismos-monitoreo/update/{$monitoring->session->id}"), "class" => "form-horizontal"]) !!}
+{!! Form::model($monitoring,['url' => url("dashboard/sesiones/mecanismos-monitoreo/update/{$monitoring->id}"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
