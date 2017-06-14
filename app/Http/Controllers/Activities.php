@@ -147,7 +147,7 @@ class Activities extends Controller
             if($activity->forum){
               $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
             }else{
-              $forums   = ForumConversation::where('forum_id','99999999999')->orderBy('created_at','desc')->paginate($this->pageSize);
+              $forums   = null;
             }
       		/*	$forum    = Forum::where('activity_id',$activity->id)->firstOrFail();
       			$forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
