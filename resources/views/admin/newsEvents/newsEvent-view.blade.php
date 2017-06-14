@@ -7,7 +7,13 @@
 @section('content')
 <div class="row">
   <div class="col-sm-9">
-    <h1>{{$content->type==='event' ? "Evento: " : "Noticia: "}} {{$content->title}}</h1>
+    @if($content->type==='event')
+    <h1>"Evento: " {{$content->title}}</h1>
+    @elseif($content->type==='news')
+    <h1>"Noticia: " {{$content->title}}</h1>
+    @else
+    <h1>"Aviso: " {{$content->title}}</h1>
+    @endif
 	<p class="author">Por {{$content->user_id}} <span>{{$content->created_at->diffForHumans()}}</span></p>
   </div>
   <div class="col-sm-3">
@@ -22,7 +28,7 @@
   		<p>Fecha fin: {{date("d-m-Y", strtotime($content->end))}}</p>
       <p>Hora: {{$content->time}}</p>
       @endif
-      
+
       @if($content->type==='news')
 	  	{!!$content->content!!}
       @endif
