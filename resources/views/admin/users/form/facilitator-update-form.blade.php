@@ -32,7 +32,7 @@
   </div>
 </div>
 @endif
-<!-- expert -->
+<!-- expert
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -44,6 +44,7 @@
     </p>
   </div>
 </div>
+-->
 @if($facilitator->type!='admin')
 <div class="row">
   <div class="col-sm-6">

@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<!-- expert -->
+<!-- expert
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -43,7 +43,7 @@
     </p>
   </div>
 </div>
-
+-->
 <div class="row">
   <div class="col-sm-6">
     <p>
