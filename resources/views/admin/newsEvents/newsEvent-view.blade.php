@@ -1,13 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
+@section('title', $content->title)
+@section('description', $content->title)
+@section('body_class', 'news')
 @section('breadcrumb_type', '')
 
 @section('content')
 <div class="row">
   <div class="col-sm-9">
     <h1>{{$content->type==='event' ? "Evento: " : "Noticia: "}} {{$content->title}}</h1>
+	<p class="author">Por {{$content->user_id}} <span>{{$content->created_at->diffForHumans()}}</span></p>
   </div>
   <div class="col-sm-3">
 		<a href="{{url('dashboard/noticias-eventos/editar/' . $content->id)}}" class="btn view gde">Editar {{$content->type==='event' ? "evento" : "noticia"}}</a>
