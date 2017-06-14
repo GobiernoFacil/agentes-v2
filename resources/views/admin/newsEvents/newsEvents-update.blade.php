@@ -65,7 +65,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
   });
 
 tinymce.init({
-    selector: 'textarea',
+    selector: '#content',
     relative_urls : false,
     remove_script_host : false,
     convert_urls : true,

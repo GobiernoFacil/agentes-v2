@@ -67,12 +67,26 @@
   </div>
 </div>
 </div>
+
+<!-- brief  -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Breve descripción</strong> <br>
+      {{Form::textarea('brief',null, ["class" => "form-control"])}} </label>
+      @if($errors->has('brief'))
+      <strong class="danger">{{$errors->first('brief')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
 <!-- content  -->
 <div class="row">
   <div class="col-sm-12">
     <p>
       <label><strong>Contenido</strong> <br>
-      {{Form::textarea('content',null, ["class" => "form-control"])}} </label>
+      {{Form::textarea('content',null, ["class" => "form-control",'id'=>'content'])}} </label>
       @if($errors->has('content'))
       <strong class="danger">{{$errors->first('content')}}</strong>
       @endif
