@@ -15,7 +15,20 @@
 </div>
 
 @if($news->count() > 0)
-<div class="box">
+<div class="row">
+	<div class="box">
+		<ul class="list line">
+		@foreach($news as $article)
+			<li>
+			<h4>{{$article->type === 'event' ? "Evento" : "Noticia"}}</h4>
+			<h2><a href="{{url('dashboard/noticias-eventos/ver/' . $article->id)}}">{{$article->title}}</a></h2>
+			<p class="author">Por {{$article->user_id}} <span>{{$article->created_at->diffForHumans()}}</span></p>
+			
+			 {!! \Illuminate\Support\Str::words($article->content,25,'…') !!}
+			</li>
+		@endforeach
+		</ul>
+	</div>
 </div>
 @else
 <div class="row">
