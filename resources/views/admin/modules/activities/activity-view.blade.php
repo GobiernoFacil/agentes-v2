@@ -83,8 +83,20 @@
 </div>
 
 <div class="divider"></div>
-
+@if($activity->forum)
 @include('layouts.forums.list-at-activity')
+@else
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Foro</h2>
+		</div>
+		<div class="col-sm-12">
+    		<p>Sin Foro</p>
+  		</div>
+	</div>
+</div>
+@endif
 
 
 @endsection
