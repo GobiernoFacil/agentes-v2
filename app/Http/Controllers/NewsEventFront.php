@@ -17,7 +17,7 @@ class NewsEventFront extends Controller
     */
     public function index()
     {
-      $all = NewsEvent::where('public',1)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $all = NewsEvent::where('public',1)->where('type','!=','notice')->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('frontend.newsEvents.newsEvents-list')->with([
         'all' =>$all,
       ]);
