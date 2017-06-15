@@ -239,8 +239,8 @@ class Facilitator extends Controller
   {
     //
     $user      = Auth::user();
-    $facilitator   = User::where('id',$id)->with('FacilitatorData')->firstOrFail();
     $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$id]);
+    $facilitator   = User::where('id',$id)->with('FacilitatorData')->firstOrFail();
     if($user->id == $id){
       return redirect('dashboard/perfil/editar');
     }else{
