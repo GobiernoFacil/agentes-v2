@@ -1529,6 +1529,15 @@ a.apertus:hover {
   -moz-opacity: 0.8;
   opacity: 0.8; }
 
+.score li {
+  list-style: none; }
+  .score li .score_a {
+    font-size: 26px;
+    color: #51be92; }
+  .score li .session {
+    color: #999;
+    text-transform: uppercase; }
+
 strong.danger,
 .error {
   background: #cc0000;
