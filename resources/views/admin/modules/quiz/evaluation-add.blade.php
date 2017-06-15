@@ -8,7 +8,7 @@
 @section('content')
   <div class="row">
     <div class="col-sm-12">
-      <h1>Agregar evaluación a {{$activity->name}}</h1>
+      <h1>Agregar preguntas a evaluación de {{$activity->name}}</h1>
     </div>
   </div>
   <div class="box">
@@ -38,8 +38,10 @@
       saveAnswerUrl        = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/answer")}}',
       removeAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/remove/answer")}}',
       switchAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/switch/answer")}}',
+      getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}'
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
+
   </script>
   <script src="{{url('js/eval/main.js')}}"></script>
   <script src="{{url('js/eval/jquery.js')}}"></script>

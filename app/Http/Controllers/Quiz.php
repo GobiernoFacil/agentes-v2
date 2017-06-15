@@ -63,9 +63,11 @@ class Quiz extends Controller
         {
           $user      = Auth::user();
           $activity  = Activity::where('id',$activity_id)->firstOrFail();
+          $questions = $activity->quizInfo->question;
           return view('admin.modules.quiz.evaluation-add')->with([
             "user"      => $user,
-            "activity"  => $activity
+            "activity"  => $activity,
+            "questions" => json_encode($questions),
           ]);
 
         }
@@ -158,6 +160,18 @@ class Quiz extends Controller
             $question->save();
           }
           return response()->json(["response"=>"ok"]);
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function getQuestions(Request $request)
+        {
+          $questions = Question::where('quizInfo_id',$request->idQuiz);
+          return response()->json($answer->toArray());
 
         }
 

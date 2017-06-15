@@ -37,6 +37,7 @@ Form.answers   = Answers;
 // the app
 var GFPNUDApp = {
   initialize : function(form){
+
     this.form = form;
 
     this.addQuestion  = this.addQuestion.bind(this);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Module;
 use App\Models\ModuleSession;
+use App\Models\Activity;
 class FellowEvaluations extends Controller
 {
     //
@@ -25,6 +26,29 @@ class FellowEvaluations extends Controller
          'modules' =>$modules
        ]
       );
+
+    }
+
+
+    /**
+     * Muestra hoja de calificaciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get($activity_slug)
+    {
+      $user      = Auth::user();
+      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
+      if($activity->slug === 'examen-diagnostico'){
+        return view('fellow.evaluation.evaluation-diagnostic-view')->with(
+         [
+           'user'=>$user,
+         ]);
+      }else{
+        return redirect('tablero');
+      }
+
+      
 
     }
 }

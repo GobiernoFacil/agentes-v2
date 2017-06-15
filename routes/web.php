@@ -252,7 +252,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'Quiz@saveAnswer');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/answer', 'Quiz@removeAnswer');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/switch/answer', 'Quiz@switchAnswer');
-
+    Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/get/questions', 'Quiz@getQuestions');
     /*@AdminMessages Controller */
     // Rutas mensajes
     Route::get('dashboard/mensajes', 'AdminMessages@index');
@@ -317,6 +317,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@FellowEvaluations*/
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
+    Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
   });
 
   /* R U T A S  UNICAS DEL Facilitador

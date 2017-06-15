@@ -14,6 +14,6 @@ class QuizInfo extends Model
 
 
   function question(){
-    return $this->hasMany("App\Models\Question");
+    return $this->hasMany("App\Models\Question",'quizInfo_id');
   }
 }
