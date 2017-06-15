@@ -126,9 +126,14 @@ class Quiz extends Controller
          */
         public function removeAnswer(Request $request)
         {
-          $answer = Answer::find($request->id);
-          var_dump($request->toArray());
-          return response()->json(['answer'=>'asdasd']);
+          $answer = Answer::find($request->opt['id']);
+          if($answer->question->answer_id === $request->opt['id']){
+            $question = Question::find($answer->question_id);
+            $question->answer_id =null;
+            $question->save();
+          }
+          $answer->delete();
+          return response()->json(["response"=>"ok"]);
 
         }
 

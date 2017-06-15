@@ -44,7 +44,7 @@
   <p>
     <a href="#" class="answer-name"></a><a href="#" class="remove-answer">[ x ]</a>
     <p>
-    <a href="#" class="switch-answer">Seleccionar como respuesta correcta</a>
+    <a href="#" class="switch-answer btn xs ev">Seleccionar como respuesta correcta</a>
     </p>
   <p>
 </script>

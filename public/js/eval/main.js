@@ -311,13 +311,11 @@ var GFPNUDApp = {
 
   removeOption : function(li, opt, e){
     e.preventDefault();
-    alert("hit");
      console.log(opt);
-    li.removeChild(opt);
     /* SERVER MUMBO YUMBO */
-  /*  $.post(removeAnswerUrl, {opt,_token:token}, function(res){
+    $.post(removeAnswerUrl, {opt,_token:token}, function(res){
       li.parentNode.removeChild(li);
-    }, "json");*/
+    }, "json");
     /**/
   }
 };
