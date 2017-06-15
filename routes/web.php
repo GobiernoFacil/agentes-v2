@@ -313,6 +313,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
     Route::post('tablero/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
     Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
+    /*@FellowEvaluations*/
+    // Rutas calificaciones y evaluaciones
+    Route::get('tablero/calificaciones', 'FellowEvaluations@index');
   });
 
   /* R U T A S  UNICAS DEL Facilitador
