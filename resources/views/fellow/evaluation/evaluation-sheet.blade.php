@@ -2,6 +2,9 @@
 @section('title', 'Calificaciones')
 @section('description', 'Calificaciones')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'score list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_score')
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -32,7 +35,7 @@
                   	<span class="session">Sesión {{$session->order}}</span>
                   </span>
                   <span class="col-sm-6">
-                  <p>{{$session->name}}</p>
+                  	<h4>{{$session->name}}</h4>
                   </span>
                   @foreach($session->activities as $activity)
                   	 <span class="col-sm-3">
