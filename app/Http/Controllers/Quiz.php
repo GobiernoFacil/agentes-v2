@@ -119,4 +119,17 @@ class Quiz extends Controller
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function removeAnswer(Request $request)
+        {
+          $answer = Answer::find($request->id);
+          var_dump($request->toArray());
+          return response()->json(['answer'=>'asdasd']);
+
+        }
+
 }
