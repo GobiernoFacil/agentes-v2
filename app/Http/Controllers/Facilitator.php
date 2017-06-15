@@ -261,11 +261,16 @@ class Facilitator extends Controller
   public function update(UpdateFacilitator $request)
   {
     //update user data
-    if(!empty($request->password)){
-      $data   = $request->only(['name','institution','email','password']);
-      $data['password'] = Hash::make($request->password);
-    }else {
-      $data   = $request->only(['name','institution','email']);
+    $user_to  = User::find($request->id);
+    if($user_to->type!='admin'){
+        if(!empty($request->password)){
+          $data   = $request->only(['name','institution','email','password']);
+          $data['password'] = Hash::make($request->password);
+        }else {
+          $data   = $request->only(['name','institution','email']);
+        }
+    }else{
+      $data   = $request->only(['name']);
     }
    User::where('id',$request->id)->update($data);
     //update facilitator data
