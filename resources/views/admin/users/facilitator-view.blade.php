@@ -41,7 +41,7 @@
 			</ul>
 			<p>
 			@if($facilitator->FacilitatorData->twitter)
-			<a href="{{$facilitator->FacilitatorData->twitter}}" class="facilitador_i tw" target="_blank"></a>
+			<a href="https://twitter.com/{{$facilitator->FacilitatorData->twitter}}" class="facilitador_i tw" target="_blank"></a>
 			@endif
 			@if($facilitator->FacilitatorData->facebook)
 			<a href="{{$facilitator->FacilitatorData->facebook}}" class="facilitador_i fb"  target="_blank"></a>
