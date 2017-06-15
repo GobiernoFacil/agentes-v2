@@ -137,4 +137,28 @@ class Quiz extends Controller
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function switchAnswer(Request $request)
+        {
+          $answer = Answer::find($request->opt['id']);
+          $question = Question::find($answer->question_id);
+          if($answer->selected){
+            $answer->selected = 0;
+            $answer->save();
+            $question->answer_id =null;
+            $question->save();
+          }else{
+            $answer->selected = 1;
+            $answer->save();
+            $question->answer_id =$answer->id;
+            $question->save();
+          }
+          return response()->json(["response"=>"ok"]);
+
+        }
+
 }

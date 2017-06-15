@@ -298,12 +298,12 @@ var GFPNUDApp = {
 
     var selected = +opt.selected,
         el       = li.querySelector(".switch-answer"),
-        label    = selected ? "hacer esta pregunta correcta" : "hacer esta respuesta incorrecta";
+        label    = selected ? "Seleccionar esta respuesta como correcta" : "Seleccionar esta respuesta como incorrecta";
 
     opt.selected = selected ? 0 : 1;
 
     /* SERVER MUMBO YUMBO */
-    $.get('', {opt}, function(res){
+    $.post(switchAnswerUrl, {opt,_token:token}, function(res){
       el.innerHTML = label;
     }, "json");
     /**/
@@ -311,7 +311,6 @@ var GFPNUDApp = {
 
   removeOption : function(li, opt, e){
     e.preventDefault();
-     console.log(opt);
     /* SERVER MUMBO YUMBO */
     $.post(removeAnswerUrl, {opt,_token:token}, function(res){
       li.parentNode.removeChild(li);
