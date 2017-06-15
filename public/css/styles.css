@@ -1482,6 +1482,18 @@ a.apertus:hover {
   -moz-opacity: 0.8;
   opacity: 0.8; }
 
+.login_c {
+  background: #1b4760;
+  padding: 10px 0;
+  font-size: 13px; }
+  .login_c a {
+    background: #f15c44;
+    color: white;
+    display: inline-block;
+    padding: 3px 6px; }
+    .login_c a:hover {
+      background: #ef472c; }
+
 .home .title {
   font-weight: 300;
   line-height: 1.4;

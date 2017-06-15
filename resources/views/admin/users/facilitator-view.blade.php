@@ -41,13 +41,13 @@
 			</ul>
 			<p>
 			@if($facilitator->FacilitatorData->twitter)
-			<a href="#" class="facilitador_i tw"></a>
+			<a href="https://twitter.com/{{$facilitator->FacilitatorData->twitter}}" class="facilitador_i tw" target="_blank"></a>
 			@endif
 			@if($facilitator->FacilitatorData->facebook)
-			<a href="#" class="facilitador_i fb"></a>
+			<a href="{{$facilitator->FacilitatorData->facebook}}" class="facilitador_i fb"  target="_blank"></a>
 			@endif
 			@if($facilitator->FacilitatorData->linkedin)
-			<a href="#" class="facilitador_i lk"></a>
+			<a href="{{$facilitator->FacilitatorData->linkedin}}" class="facilitador_i lk"  target="_blank"></a>
 			@endif
 			@if($facilitator->FacilitatorData->other)
 			{{$facilitator->FacilitatorData->other}}

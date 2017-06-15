@@ -84,6 +84,16 @@
 @endif
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
+	
+	<div class="login_c">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-8 right">
+					<a href="{{url('login')}}">Ingresar a la Plataforma</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
 		<header>

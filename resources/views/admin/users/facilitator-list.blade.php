@@ -31,7 +31,19 @@
 			  <tbody>
 			    @foreach ($facilitators as $userf)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/facilitadores/ver/' . $userf->id) }}">{{$userf->name}}</a></h4></td>
+			        <td>
+				        <div class="row">
+					        <div class="col-sm-2">
+				        @if($userf->image)
+						<img src='{{url("img/users/{$userf->image->name}")}}' width="30px">
+						@else
+						<img src='{{url("img/users/default.png")}}' width="30px">
+						@endif
+					        </div>
+					        <div class="col-sm-10">
+				        <h4> <a href="{{ url('dashboard/facilitadores/ver/' . $userf->id) }}">{{$userf->name}}</a></h4>
+					        </div>
+				    </td>
 			        <td>{{$userf->email}}</td>
 			        <td>{{$userf->institution}}</td>
 			        <td>
