@@ -15,8 +15,10 @@ var Form, Questions, GFPNUDApp, endpoint,
 };*/
 
 var Form = document.getElementById('form');
-Questions = [{}];
-Answers = [{}];
+
+
+//Questions = [{}];
+//Answers = [{}];
 /*Questions = [{
   id : 1,
   question : "de qué color son las botas de súperman",
@@ -67,18 +69,19 @@ var GFPNUDApp = {
   },
 
   renderQuestion : function(question, answers){
+
     var anchor, remove, addOpt, REQFunc, ADOFunc,
         template = document.getElementById(realQuestionTemplate).innerHTML,
         li       = document.createElement("li"),
         list     = document.getElementById(questionsList),
         ul,
         _answers = answers.filter(function(a){
-          return a.question == question.id;
+          return a.question_id == question.id;
         }, this);
 
     li.innerHTML = template;
 
-    REQFunc      = this.removeEmptyQuestion.bind(this, li);
+    REQFunc      = this.removeQuestion.bind(this, li);
     ADOFunc      = this.addOption.bind(this, li, question);
 
 
@@ -207,8 +210,7 @@ var GFPNUDApp = {
         question  = questions.filter(function(q){
                      return q.id == id;
                    })[0];
-
-    /* SERVER MUMBO YUMBO */
+    /* SERVER MUMBO YUMBO*/
     $.post(removeQuestionUrl, {id : id,_token:token}, function(res){
       questions.splice(questions.indexOf(question), 1);
       li.parentNode.removeChild(li);
