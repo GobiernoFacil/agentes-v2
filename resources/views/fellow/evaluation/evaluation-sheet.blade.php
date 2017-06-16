@@ -40,7 +40,7 @@
                   @foreach($session->activities as $activity)
                   	 <span class="col-sm-3">
                       @if($activity->type === 'evaluation')
-                      <span>{{$activity->hasfiles === 'No' ? 'Examen en línea' : 'Revisión de Productos'}}</span>
+                      <a href="{{url('tablero/calificaciones/ver/' . $activity->slug)}}" class="link_a">{{$activity->hasfiles === 'No' ? 'Examen en línea' : 'Revisión de Productos'}}</a>
                       @endif
                   	 </span>
                   	  <span class="col-sm-2 right">
