@@ -1476,6 +1476,14 @@ span.le_link {
   font-size: 21px;
   font-weight: 300; }
 
+.news .published_ {
+  background: #2e7b5c;
+  color: white;
+  padding: 2px 4px;
+  display: inline-block; }
+  .news .published_.n {
+    background: red; }
+
 /*
 	////////////////////////////////// barras 
 */
