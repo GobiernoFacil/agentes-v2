@@ -22,6 +22,9 @@
               <p><a href="#" id="add-question" class ="btn xs ev">Agregar pregunta</a></p>
             </form>
           </div>
+          <div class="col-sm-8 col-sm-offset-2">
+           <a href='{{url("dashboard/sesiones/actividades/ver/$activity->id")}}' class="btn gde">FINALIZAR</a>
+          </div>
         </div>
       </div>
     </div>
@@ -42,9 +45,9 @@
       getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
-      QuestionCode         = <?php echo $questions; ?>;
+      Questions        = <?php echo $questions; ?>;
       Answers              = <?php echo $answers; ?>;
-      console.log(Answers);
+
 
   </script>
   <script src="{{url('js/eval/main.js')}}"></script>
