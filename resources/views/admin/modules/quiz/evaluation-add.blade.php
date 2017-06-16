@@ -31,6 +31,7 @@
   <!-- THE CODE-->
   @include('admin.modules.quiz.question-templates')
 
+  <script src="{{url('js/eval/jquery.js')}}"></script>
   <script>
   var fakeEndpoint         = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
       saveQuestionUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
@@ -38,11 +39,13 @@
       saveAnswerUrl        = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/answer")}}',
       removeAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/remove/answer")}}',
       switchAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/switch/answer")}}',
-      getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}'
+      getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
+      QuestionCode         = <?php echo $questions; ?>;
+      Answers              = <?php echo $answers; ?>;
+      console.log(Answers);
 
   </script>
   <script src="{{url('js/eval/main.js')}}"></script>
-  <script src="{{url('js/eval/jquery.js')}}"></script>
 @endsection

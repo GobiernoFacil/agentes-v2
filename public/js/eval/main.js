@@ -15,8 +15,10 @@ var Form, Questions, GFPNUDApp, endpoint,
 };*/
 
 var Form = document.getElementById('form');
-Questions = [{}];
-Answers = [{}];
+
+
+//Questions = [{}];
+//Answers = [{}];
 /*Questions = [{
   id : 1,
   question : "de qué color son las botas de súperman",
@@ -30,7 +32,7 @@ Answers = [
 ];
 */
 
-Form.questions = Questions;
+Form.questions = QuestionCode;
 Form.answers   = Answers;
 
 
@@ -73,7 +75,7 @@ var GFPNUDApp = {
         list     = document.getElementById(questionsList),
         ul,
         _answers = answers.filter(function(a){
-          return a.question == question.id;
+          return a.question_id == question.id;
         }, this);
 
     li.innerHTML = template;

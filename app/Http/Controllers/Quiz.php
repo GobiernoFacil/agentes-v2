@@ -64,10 +64,20 @@ class Quiz extends Controller
           $user      = Auth::user();
           $activity  = Activity::where('id',$activity_id)->firstOrFail();
           $questions = $activity->quizInfo->question;
+          $answers   = [];
+          foreach($questions as $question){
+            if($question->answer){
+              foreach($question->answer as $answer){
+                $answers[] = $answer->toArray();
+              }
+            }
+          }
+
           return view('admin.modules.quiz.evaluation-add')->with([
             "user"      => $user,
             "activity"  => $activity,
-            "questions" => json_encode($questions),
+            "questions" => json_encode($questions->toArray()),
+            "answers" => json_encode($answers),
           ]);
 
         }
@@ -170,8 +180,8 @@ class Quiz extends Controller
          */
         public function getQuestions(Request $request)
         {
-          $questions = Question::where('quizInfo_id',$request->idQuiz);
-          return response()->json($answer->toArray());
+          $questions = Question::where('quizInfo_id',$request->idQuiz)->get();
+          return response()->json($questions->toArray());
 
         }
 
