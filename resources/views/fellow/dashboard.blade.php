@@ -8,22 +8,28 @@
 	<div class="col-sm-12">
 		<h1>Tablero de control</h1>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-9">
 		<div class="box">
 			<p>Bienvenido {{$user->name}} a la plataforma del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
 			
-@if(!$user->diagnostic)
-<div class="box blue">
-	<div class="row">
-		<div class="col-sm-6 right">
-			<h2>Realiza el examen de diagnóstico</h2>
-		</div>
-		<div class="col-sm-6">
-			<a href="{{url('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar')}}" class="btn view">Responder examen</a>
+			@if(!$user->diagnostic)
+			<div class="box blue">
+				<div class="row">
+					<div class="col-sm-6 right">
+						<h2>Realiza el examen de diagnóstico</h2>
+					</div>
+					<div class="col-sm-6">
+						<a href="{{url('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar')}}" class="btn view">Responder examen</a>
+					</div>
+				</div>
+			</div>
+			@endif
 		</div>
 	</div>
-</div>
-@endif
+	<div class="col-sm-3">
+		<div class="box blue center">
+			<h2>Calificaciones</h2>
+			<a href="{{url('tablero/calificaciones')}}" class="btn view gde">Ver calificaciones</a></h2>
 		</div>
 	</div>
 </div>
