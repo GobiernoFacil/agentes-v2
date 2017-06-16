@@ -47,8 +47,7 @@ class Admin extends Controller
           $query->whereIn('id',$listId->toArray())->where("enabled",1);
         })
         ->where("enabled",1)->orderBy('name','asc')->count();*/
-        $facilitator_number =  User::where("type", "facilitator")
-        ->where("enabled",1)->orderBy('name','asc')->count();
+        $facilitator_number =  User::where("type", "facilitator")->where("enabled",1)->count();
         $facilitators_count = $facilitator_number + $adm_count;
 
         return view('admin.dashboard')->with([
