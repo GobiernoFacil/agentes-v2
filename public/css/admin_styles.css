@@ -1451,6 +1451,28 @@ span.le_link {
         background: #3ca078; }
 
 /*
+	////////////////////////////////// news 
+*/
+.news .list.line li {
+  list-style: none; }
+
+.news .type_n {
+  background: black;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  padding: 3px 7px; }
+  .news .type_n.event {
+    background: #f15c44; }
+  .news .type_n.news {
+    background: #187fad; }
+
+.news .author {
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 10px; }
+
+/*
 	////////////////////////////////// barras 
 */
 #bar .bar, #bar2 .bar {
