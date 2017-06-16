@@ -53,6 +53,7 @@
 						<span class="col-sm-9">
 						<h3>Describe brevemente el concepto de Gobierno Abierto, así como su relación con la resolución de problemas públicos y la gestión pública gubernamental:</h3>
 						<p><strong>Respuesta:</strong> {{$answers->answer_1}}</p>
+						<p><strong>Comentarios: </strong>{{$answers->user->diagnosticEvaluation->answer_q1_j}}</p>
 						</span>
 						<span class="col-sm-3 right">
 								@if($answers->user->diagnosticEvaluation)
@@ -64,6 +65,7 @@
 						<span class="col-sm-9">
 							<h3>Menciona dos Objetivos de la Agenda de Desarrollo Sostenible y cómo se relaciona cada uno con los mecanismos de Gobierno Abierto:</h3>
 							<p><strong>Respuesta:</strong> {{$answers->answer_2}}</p>
+							<p><strong>Comentarios: </strong>{{$answers->user->diagnosticEvaluation->answer_q2_j}}</p>
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
@@ -75,6 +77,7 @@
 						<span class="col-sm-9">
 							<h3>Ejemplificación de una acción de incidencia política</h3>
 							<p><strong>Respuesta:</strong> {{$answers->answer_3}}</p>
+							<p><strong>Comentarios: </strong>{{$answers->user->diagnosticEvaluation->answer_q3_j}}</p>
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
@@ -86,6 +89,7 @@
 						<span class="col-sm-9">
 							<h3>Elementos que integran una estrategia de comunicación exitosa</h3>
 							<p><strong>Respuesta:</strong> {{$answers->answer_4}}</p>
+							<p><strong>Comentarios: </strong>{{$answers->user->diagnosticEvaluation->answer_q4_j}}</p>
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
@@ -97,6 +101,7 @@
 						<span class="col-sm-9">
 							<h3>Descripción de implicaciones presupuestarias del proyecto a generar</h3>
 							<p><strong>Respuesta:</strong> {{$answers->answer_5}}</p>
+							<p><strong>Comentarios: </strong>{{$answers->user->diagnosticEvaluation->answer_q5_j}}</p>
 						</span>
 						<span class="col-sm-3 right">
 							@if($answers->user->diagnosticEvaluation)
