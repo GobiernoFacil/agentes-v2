@@ -2,8 +2,8 @@
 @section('title', 'Noticas y Eventos')
 @section('description', 'Noticias y eventos')
 @section('body_class', 'news')
-@section('breadcrumb_type', '')
-
+@section('breadcrumb_type', 'news list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_news')
 @section('content')
 <div class="row">
 	<div class="col-sm-9">

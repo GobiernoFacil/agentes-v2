@@ -2,7 +2,8 @@
 @section('title', $content->title)
 @section('description', $content->title)
 @section('body_class', 'news')
-@section('breadcrumb_type', '')
+@section('breadcrumb_type', 'news view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_news')
 
 @section('content')
 
