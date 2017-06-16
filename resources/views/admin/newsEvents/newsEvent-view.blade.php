@@ -5,34 +5,51 @@
 @section('breadcrumb_type', '')
 
 @section('content')
-<div class="row">
-  <div class="col-sm-9">
-    @if($content->type==='event')
-    <h1>"Evento: " {{$content->title}}</h1>
-    @elseif($content->type==='news')
-    <h1>"Noticia: " {{$content->title}}</h1>
-    @else
-    <h1>"Aviso: " {{$content->title}}</h1>
-    @endif
-	<p class="author">Por {{$content->user_id}} <span>{{$content->created_at->diffForHumans()}}</span></p>
-  </div>
-  <div class="col-sm-3">
-		<a href="{{url('dashboard/noticias-eventos/editar/' . $content->id)}}" class="btn view gde">Editar {{$content->type==='event' ? "evento" : "noticia"}}</a>
-  </div>
-</div>
+
 <div class="box">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      @if($content->type==='event')
-      <p>Fecha inicio: {{date("d-m-Y", strtotime($content->start))}}</p>
-  		<p>Fecha fin: {{date("d-m-Y", strtotime($content->end))}}</p>
-      <p>Hora: {{$content->time}}</p>
-      @endif
-
-      @if($content->type==='news')
-	  	{!!$content->content!!}
-      @endif
-    </div>
+	  <div class="col-sm-9">
+	  	<h4 class="type_n {{$content->type}}">
+	  	@if($content->type==='event')
+	  	Evento
+	  	@elseif($content->type==='news')
+	  	Noticia
+	  	@else
+	  	Aviso
+	  	@endif
+	  	</h4>
+	  	<h1>{{$content->title}}</h1>
+  	  </div>
+  	  <div class="col-sm-3">
+  	    	<a href="{{url('dashboard/noticias-eventos/editar/' . $content->id)}}" class="btn view gde">Editar {{$content->type==='event' ? "evento" : "noticia"}}</a>
+  	  </div>
+  	  <!--author-->
+  	  <div class="col-sm-12">
+	  	  <div class="divider b"></div>
+	  	<p class="author">Por {{$content->user_id}} <span>{{$content->created_at->diffForHumans()}}</span></p>
+	  	  <div class="divider b"></div>
+  	  </div>
+  	  <div class="col-sm-8 col-sm-offset-2">
+  	    @if($content->type==='event')
+  	    	<p class="lead">{{$content->brief}}</p>
+  	    	<div class="row">
+	  	    	<div class="col-sm-4">
+		  	    	<h3>Fecha de inicio:</h3>
+  					<p>{{date("d-m-Y", strtotime($content->start))}}</p>
+	  	    	</div>
+	  	    	<div class="col-sm-4 center">
+		  	    	<h3>Fecha en que termina:</h3>
+  					<p>{{date("d-m-Y", strtotime($content->end))}}</p>
+	  	    	</div>
+	  	    	<div class="col-sm-4 right">
+		  	    	<h3>Hora:</h3>
+  					<p>{{$content->time}}</p>
+	  	    	</div>
+  	    	</div>
+  	    @else
+  	    	{!!$content->content!!}
+  	    @endif
+  	  </div>
   </div>
 </div>
 @endsection
