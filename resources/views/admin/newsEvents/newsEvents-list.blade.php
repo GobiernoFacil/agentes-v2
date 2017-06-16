@@ -21,16 +21,15 @@
 		@foreach($news as $article)
 			<li>
 				@if($article->type==='event')
-				<h4>"Evento"</h4>
+				<h4 class="type_n {{$article->type}}">Evento</h4>
 				@elseif($article->type==='news')
-				<h4>"Noticia"</h4>
+				<h4 class="type_n {{$article->type}}">Noticia</h4>
 				@else
-				<h4>"Aviso"</h4>
+				<h4 class="type_n {{$article->type}}">Aviso</h4>
 				@endif
 			<h2><a href="{{url('dashboard/noticias-eventos/ver/' . $article->id)}}">{{$article->title}}</a></h2>
 			<p class="author">Por {{$article->user_id}} <span>{{$article->created_at->diffForHumans()}}</span></p>
-
-			 {!! \Illuminate\Support\Str::words($article->content,25,'…') !!}
+			 {!! \Illuminate\Support\Str::words($article->brief,50,'…') !!}
 			</li>
 		@endforeach
 		</ul>
