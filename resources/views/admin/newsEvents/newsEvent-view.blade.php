@@ -47,6 +47,7 @@
 	  	    	</div>
   	    	</div>
   	    @else
+  	    	<p class="lead">{{$content->brief}}</p>
   	    	{!!$content->content!!}
   	    @endif
   	  </div>
