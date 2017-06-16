@@ -1537,6 +1537,12 @@ a.apertus:hover {
   .score li .session {
     color: #999;
     text-transform: uppercase; }
+  .score li a.link_a {
+    color: #333;
+    border-bottom: 1px dotted #51be92; }
+    .score li a.link_a:hover {
+      color: #000;
+      border-bottom: 1px dotted #3ca078; }
 
 strong.danger,
 .error {
