@@ -205,19 +205,16 @@ var GFPNUDApp = {
 
   updateQuestion : function(question, e){
 
-    console.log(question, e);
     var template = document.getElementById(updateQuestionTemplate).innerHTML,
         el       = e.target,
         parent   = el.parentNode,
         input, form, SUQFunc;
-
 
     parent.removeChild(el);
     parent.innerHTML = template;
 
     input = parent.querySelector("input[type='text']");
     form  = parent.querySelector("form");
-
     input.value = question.question;
 
     SUQFunc = this.saveUpdatedQuestion.bind(this, parent, question);
@@ -225,18 +222,15 @@ var GFPNUDApp = {
   },
   saveUpdatedQuestion : function(parent, question, e){
     e.preventDefault();
-
     var value    = e.target.querySelector("input[type='text']").value,
         template = document.getElementById(updatedQuestionTemplate).innerHTML,
         that     = this,
         anchor, UQFunc;
 
     if(!value) return;
-
     question.question = value;
-
     /* SERVER MUMBO YUMBO */
-    $.get(fakeEndpoint, question, function(res){
+    $.post(updateQuestionUrl, {question,_token:token}, function(res){
       UQFunc           = that.updateQuestion.bind(that, res);
       parent.innerHTML = template;
       anchor           = parent.querySelector("a");

@@ -17,7 +17,7 @@
 </script>
 
 <script id="real-question-template" type="text">
-  <p><a href="#" class="question-name"></a><a href="#" class="remove-question">[ x ]</a></p>
+  <p><a href="#" class="question-name"></a></p><a href="#" class="remove-question">[ x ]</a>
   <ul></ul>
   <p><a href="#" class="add-answer btn xs ev">Agregar respuesta</a></p>
 
@@ -46,7 +46,7 @@
     <p>
     <a href="#" class="switch-answer btn xs ev">Seleccionar como respuesta correcta</a>
     </p>
-  <p>
+  </p>
 </script>
 
 <script id="update-question-template" type="text">
@@ -59,5 +59,5 @@
 </script>
 
 <script id="real-question-update-template" type="text">
-  <a href="#" class="question-name">
+  <a href="#" class="question-name"></a>
 </script>

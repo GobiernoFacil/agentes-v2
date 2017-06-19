@@ -104,6 +104,22 @@ class Quiz extends Controller
          *
          * @return \Illuminate\Http\Response
          */
+        public function updateQuestions(Request $request)
+        {
+           $question = Question::find($request->question["id"]);
+           if($request->question["question"]){
+            $question->question = $request->question["question"];
+            $question->save();
+          }
+           return response()->json($question->toArray());
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
         public function removeQuestion(Request $request)
         {
           $question  = Question::find($request->id);
