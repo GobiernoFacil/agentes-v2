@@ -31,11 +31,11 @@
 				@endif
 					 </div>
 					  <div class="col-sm-3 right">
-				<p class="author">{!! $article->public == 1 ? '<span class="published_ s">Publicado</span>' : '<span class="published_ n">Sin publicar</span>' !!}</p>
+					  	<p class="author">{!! $article->public == 1 ? '<span class="published_ s">Publicado</span>' : '<span class="published_ n">Sin publicar</span>' !!} <a href="{{url('dashboard/noticias-eventos/editar/' . $article->id)}}" class="btn view">Editar {{$article->type==='event' ? "evento" : "noticia"}}</a></p>
 					  </div>
 				</div>
 			<h2><a href="{{url('dashboard/noticias-eventos/ver/' . $article->id)}}">{{$article->title}}</a></h2>
-			<p class="author">Por {{$article->user_id}} <span>{{$article->created_at->diffForHumans()}}</span></p>
+			<p class="author">Por {{$article->user->name}} <span>{{$article->created_at->diffForHumans()}}</span></p>
 			 {!! \Illuminate\Support\Str::words($article->brief,50,'…') !!}
 			</li>
 		@endforeach
