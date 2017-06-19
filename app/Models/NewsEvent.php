@@ -25,4 +25,8 @@ class NewsEvent extends Model
     function image(){
       return $this->hasOne("App\Models\ImagesNew",'newsEvents_id');
     }
+
+    function user(){
+      return $this->belongsTo("App\User");
+    }
 }
