@@ -38,7 +38,7 @@ class NewsEventsFellow extends Controller
       //
       $user   = Auth::user();
       $content = NewsEvent::find($id);
-      return view('fellows.news.NewsEvent-view')->with([
+      return view('fellow.news.NewsEvent-view')->with([
         "user"      => $user,
         "content"    => $content
       ]);
@@ -55,7 +55,7 @@ class NewsEventsFellow extends Controller
       //
       $user = Auth::user();
       $news = NewsEvent::orderBy('created_at','desc')->paginate($this->pageSize);
-      return view('fellows.news.newsEvents-list')->with([
+      return view('fellow.news.newsEvents-list')->with([
         'user' => $user,
         'news' =>$news,
       ]);
