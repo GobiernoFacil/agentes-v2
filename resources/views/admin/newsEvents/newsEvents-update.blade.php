@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
-@section('description', '')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('title', 'Actualizar: ' . $content->title)
+@section('description', 'Actualizar: ' . $content->title)
+@section('body_class', 'news')
+@section('breadcrumb_type', 'news update')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_news')
 
 @section('content')
 <div class="row">

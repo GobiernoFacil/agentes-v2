@@ -1,8 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar noticia')
 @section('description', 'Agregar nueva noticia')
-@section('body_class', '')
-@section('breadcrumb_type', '')
+@section('body_class', 'news')
+@section('breadcrumb_type', 'news add')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_news')
 
 @section('content')
 <div class="row">
