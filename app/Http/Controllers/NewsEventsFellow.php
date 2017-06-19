@@ -33,11 +33,11 @@ class NewsEventsFellow extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function view($id)
+    public function view($news_slug)
     {
       //
       $user   = Auth::user();
-      $content = NewsEvent::find($id);
+      $content = NewsEvent::where('slug',$news_slug)->first();
       return view('fellow.news.NewsEvent-view')->with([
         "user"      => $user,
         "content"    => $content
