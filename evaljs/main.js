@@ -110,7 +110,8 @@ GFPNUDApp = {
         swtch    = null,
         remove   = null,
         STOFunc  = null,
-        ROFunc   = null;
+        ROFunc   = null,
+        SOFunc   = null;
 
 
     li.innerHTML = template;
@@ -124,9 +125,11 @@ GFPNUDApp = {
 
     STOFunc = this.switchTrueOption.bind(this, li, answer);
     ROFunc  = this.removeOption.bind(this, li, answer);
+    SOFunc  = this.updateOption.bind(this, li, answer);
 
     swtch.addEventListener("click", STOFunc);
     remove.addEventListener("click", ROFunc);
+    name.addEventListener("click", SOFunc);
 
     ul.appendChild(li);
   },
@@ -182,7 +185,7 @@ GFPNUDApp = {
     $.get(fakeEndpoint, {question : value}, function(res){
       anchor.innerHTML = res.question;
       Questions.push(res);
-      anchor.addEventListener("click", updateQuestion);
+      //anchor.addEventListener("click", that.updateQuestion);
       remove.addEventListener("click", REQFunc);
       remove.setAttribute("data-id", res.id);
 
@@ -195,6 +198,8 @@ GFPNUDApp = {
   },
 
   updateQuestion : function(question, e){
+
+    console.log(question, e);
     var template = document.getElementById(updateQuestionTemplate).innerHTML,
         el       = e.target,
         parent   = el.parentNode,
@@ -298,7 +303,8 @@ GFPNUDApp = {
         swtch    = null,
         remove   = null,
         STOFunc  = null,
-        ROFunc   = null;
+        ROFunc   = null,
+        UOFunc   = null;
 
     if(!value){
       return;
@@ -313,6 +319,7 @@ GFPNUDApp = {
 
       STOFunc = that.switchTrueOption.bind(that, li, res);
       ROFunc  = that.removeOption.bind(that, li, res);
+      UOFunc  = that.updateOption.bind(that, li, res);
 
       name     = li.querySelector(".answer-name");
       swtch    = li.querySelector(".switch-answer");
@@ -322,9 +329,77 @@ GFPNUDApp = {
 
       swtch.addEventListener("click", STOFunc);
       remove.addEventListener("click", ROFunc);
+      name.addEventListener("click", UOFunc);
     });
     /**/
 
+  },
+
+  updateOption : function(li, option, e){
+    console.log(li, option, e);
+
+    var template = document.getElementById(answerTemplate).innerHTML,
+        ROFunc  = null,
+        UOFunc   = null,
+        submit, input, form, remove;
+
+
+    li.innerHTML = template;
+    submit = li.querySelector("input[type='submit']");
+    input  = li.querySelector("input[type='text']");
+    form   = li.querySelector("form");
+    remove = li.querySelector(".remove-answer");
+
+    submit.value = "editar";
+    input.value  = option.value;
+
+    ROFunc  = this.removeOption.bind(this, li, option);
+    UOFunc  = this.updateSavedOption.bind(this, li, option);
+
+    form.addEventListener("submit", UOFunc);
+    remove.addEventListener("click", ROFunc);
+  },
+
+  updateSavedOption : function(li, option, e){
+    e.preventDefault();
+
+    var value    = li.querySelector("form").querySelector("input[type='text']").value,
+        answer   = option,
+        template = document.getElementById(realAnswerTemplate).innerHTML,
+        that     = this,
+        name     = null,
+        swtch    = null,
+        remove   = null,
+        STOFunc  = null,
+        ROFunc   = null,
+        UOFunc   = null;
+
+    if(!value){
+      return;
+    }
+
+    answer.value = value;
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, answer, function(res){
+      answer = res;
+
+      li.innerHTML = template;
+
+      STOFunc = that.switchTrueOption.bind(that, li, res);
+      ROFunc  = that.removeOption.bind(that, li, res);
+      UOFunc  = that.updateOption.bind(that, li, res);
+
+      name     = li.querySelector(".answer-name");
+      swtch    = li.querySelector(".switch-answer");
+      remove   = li.querySelector(".remove-answer");
+
+      name.innerHTML = res.value;
+
+      swtch.addEventListener("click", STOFunc);
+      remove.addEventListener("click", ROFunc);
+      name.addEventListener("click", UOFunc);
+    });
   },
 
   removeEmptyOption : function(list, li, e){
