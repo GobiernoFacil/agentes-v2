@@ -229,8 +229,9 @@ var GFPNUDApp = {
 
     if(!value) return;
     question.question = value;
+    question._token   = token;
     /* SERVER MUMBO YUMBO */
-    $.post(updateQuestionUrl, {question,_token:token}, function(res){
+    $.post(updateQuestionUrl, question, function(res){
       UQFunc           = that.updateQuestion.bind(that, res);
       parent.innerHTML = template;
       anchor           = parent.querySelector("a");
@@ -381,9 +382,10 @@ var GFPNUDApp = {
     }
 
     answer.value = value;
+    answer._token = token;
 
     /* SERVER MUMBO YUMBO */
-    $.get(fakeEndpoint, answer, function(res){
+    $.post(updateAnswerUrl, answer, function(res){
       answer = res;
 
       li.innerHTML = template;

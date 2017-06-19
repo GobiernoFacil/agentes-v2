@@ -45,6 +45,7 @@
       switchAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/switch/answer")}}',
       getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}',
       updateQuestionUrl    = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/update/questions")}}',
+      updateAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/update/answer")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
       Questions        = <?php echo $questions; ?>;
