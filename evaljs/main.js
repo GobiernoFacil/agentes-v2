@@ -3,6 +3,8 @@ var Form, Questions, GFPNUDApp, endpoint,
     titleId              = "title",
     addQuestionBtn       = "add-question",
     questionTemplate     = "question-template",
+    updateQuestionTemplate  = "update-question-template",
+    updatedQuestionTemplate = "real-question-update-template",
     realQuestionTemplate = "real-question-template",
     answerTemplate       = "answer-template",
     realAnswerTemplate   = "real-answer-template",
@@ -62,7 +64,7 @@ GFPNUDApp = {
   },
 
   renderQuestion : function(question, answers){
-    var anchor, remove, addOpt, REQFunc, ADOFunc,
+    var anchor, remove, addOpt, REQFunc, ADOFunc, UQFunc,
         template = document.getElementById(realQuestionTemplate).innerHTML,
         li       = document.createElement("li"),
         list     = document.getElementById(questionsList),
@@ -75,6 +77,7 @@ GFPNUDApp = {
 
     REQFunc      = this.removeEmptyQuestion.bind(this, li);
     ADOFunc      = this.addOption.bind(this, li, question);
+    UQFunc       = this.updateQuestion.bind(this, question);
     
 
     anchor = li.querySelector(".question-name");
@@ -91,6 +94,8 @@ GFPNUDApp = {
 
     addOpt.addEventListener("click", ADOFunc);
 
+    anchor.addEventListener("click", UQFunc);
+
     _answers.forEach(function(a){
       this.renderAnswer(ul, question, a);
       //var ADOFunc = this.addOption.bind(this, ul, question, a);
@@ -105,7 +110,8 @@ GFPNUDApp = {
         swtch    = null,
         remove   = null,
         STOFunc  = null,
-        ROFunc   = null;
+        ROFunc   = null,
+        SOFunc   = null;
 
 
     li.innerHTML = template;
@@ -119,9 +125,11 @@ GFPNUDApp = {
 
     STOFunc = this.switchTrueOption.bind(this, li, answer);
     ROFunc  = this.removeOption.bind(this, li, answer);
+    SOFunc  = this.updateOption.bind(this, li, answer);
 
     swtch.addEventListener("click", STOFunc);
     remove.addEventListener("click", ROFunc);
+    name.addEventListener("click", SOFunc);
 
     ul.appendChild(li);
   },
@@ -159,6 +167,7 @@ GFPNUDApp = {
         addOpt   = null,
         that     = this,
         REQFunc  = this.removeQuestion.bind(this, li),
+        UQFunc   = null;
         ADOFunc  = null;//this.addOption.bind(this, li);
 
     if(!value){
@@ -176,16 +185,59 @@ GFPNUDApp = {
     $.get(fakeEndpoint, {question : value}, function(res){
       anchor.innerHTML = res.question;
       Questions.push(res);
+      //anchor.addEventListener("click", that.updateQuestion);
       remove.addEventListener("click", REQFunc);
       remove.setAttribute("data-id", res.id);
 
       ADOFunc  = that.addOption.bind(that, li, res);
+      UQFunc  = that.updateQuestion.bind(that, res);
       addOpt.addEventListener("click", ADOFunc);
+      anchor.addEventListener("click", UQFunc);
     }, "json");
     /**/
   },
 
-  updateQuestion : function(question, data){
+  updateQuestion : function(question, e){
+
+    console.log(question, e);
+    var template = document.getElementById(updateQuestionTemplate).innerHTML,
+        el       = e.target,
+        parent   = el.parentNode,
+        input, form, SUQFunc;
+
+
+    parent.removeChild(el);
+    parent.innerHTML = template;
+
+    input = parent.querySelector("input[type='text']");
+    form  = parent.querySelector("form");
+
+    input.value = question.question;
+
+    SUQFunc = this.saveUpdatedQuestion.bind(this, parent, question);
+    form.addEventListener("submit", SUQFunc);
+  },
+
+  saveUpdatedQuestion : function(parent, question, e){
+    e.preventDefault();
+
+    var value    = e.target.querySelector("input[type='text']").value,
+        template = document.getElementById(updatedQuestionTemplate).innerHTML,
+        that     = this,
+        anchor, UQFunc;
+
+    if(!value) return;
+
+    question.question = value;
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, question, function(res){
+      UQFunc           = that.updateQuestion.bind(that, res);
+      parent.innerHTML = template;
+      anchor           = parent.querySelector("a");
+      anchor.addEventListener("click", UQFunc);
+      anchor.innerHTML = res.question;
+    }, "json");
 
   },
 
@@ -234,8 +286,6 @@ GFPNUDApp = {
 
     form.addEventListener("submit", SOFunc);
     remove.addEventListener("click", REOFunc);
-
-    //console.log(list, e);
   },
 
   saveOption : function(li, question, e){
@@ -253,7 +303,8 @@ GFPNUDApp = {
         swtch    = null,
         remove   = null,
         STOFunc  = null,
-        ROFunc   = null;
+        ROFunc   = null,
+        UOFunc   = null;
 
     if(!value){
       return;
@@ -268,6 +319,7 @@ GFPNUDApp = {
 
       STOFunc = that.switchTrueOption.bind(that, li, res);
       ROFunc  = that.removeOption.bind(that, li, res);
+      UOFunc  = that.updateOption.bind(that, li, res);
 
       name     = li.querySelector(".answer-name");
       swtch    = li.querySelector(".switch-answer");
@@ -277,14 +329,80 @@ GFPNUDApp = {
 
       swtch.addEventListener("click", STOFunc);
       remove.addEventListener("click", ROFunc);
+      name.addEventListener("click", UOFunc);
     });
     /**/
 
   },
 
-  removeEmptyOption : function(list, li, e){
-    console.log(list, li, e);
+  updateOption : function(li, option, e){
+    console.log(li, option, e);
 
+    var template = document.getElementById(answerTemplate).innerHTML,
+        ROFunc  = null,
+        UOFunc   = null,
+        submit, input, form, remove;
+
+
+    li.innerHTML = template;
+    submit = li.querySelector("input[type='submit']");
+    input  = li.querySelector("input[type='text']");
+    form   = li.querySelector("form");
+    remove = li.querySelector(".remove-answer");
+
+    submit.value = "editar";
+    input.value  = option.value;
+
+    ROFunc  = this.removeOption.bind(this, li, option);
+    UOFunc  = this.updateSavedOption.bind(this, li, option);
+
+    form.addEventListener("submit", UOFunc);
+    remove.addEventListener("click", ROFunc);
+  },
+
+  updateSavedOption : function(li, option, e){
+    e.preventDefault();
+
+    var value    = li.querySelector("form").querySelector("input[type='text']").value,
+        answer   = option,
+        template = document.getElementById(realAnswerTemplate).innerHTML,
+        that     = this,
+        name     = null,
+        swtch    = null,
+        remove   = null,
+        STOFunc  = null,
+        ROFunc   = null,
+        UOFunc   = null;
+
+    if(!value){
+      return;
+    }
+
+    answer.value = value;
+
+    /* SERVER MUMBO YUMBO */
+    $.get(fakeEndpoint, answer, function(res){
+      answer = res;
+
+      li.innerHTML = template;
+
+      STOFunc = that.switchTrueOption.bind(that, li, res);
+      ROFunc  = that.removeOption.bind(that, li, res);
+      UOFunc  = that.updateOption.bind(that, li, res);
+
+      name     = li.querySelector(".answer-name");
+      swtch    = li.querySelector(".switch-answer");
+      remove   = li.querySelector(".remove-answer");
+
+      name.innerHTML = res.value;
+
+      swtch.addEventListener("click", STOFunc);
+      remove.addEventListener("click", ROFunc);
+      name.addEventListener("click", UOFunc);
+    });
+  },
+
+  removeEmptyOption : function(list, li, e){
     list.removeChild(li);
   },
 
