@@ -320,7 +320,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
-    Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@index');
+    Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
   });
 
   /* R U T A S  UNICAS DEL Facilitador
