@@ -54,7 +54,7 @@ class NewsEventsFellow extends Controller
     {
       //
       $user = Auth::user();
-      $news = NewsEvent::orderBy('created_at','desc')->paginate($this->pageSize);
+      $news = NewsEvent::where('public', 1)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.news.newsEvents-list')->with([
         'user' => $user,
         'news' =>$news,
