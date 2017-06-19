@@ -35,6 +35,7 @@
   @include('admin.modules.quiz.question-templates')
 
   <script src="{{url('js/eval/jquery.js')}}"></script>
+  <script src="{{url('js/eval/sortable.js')}}"></script>
   <script>
   var fakeEndpoint         = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
       saveQuestionUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',

@@ -48,3 +48,16 @@
     </p>
   <p>
 </script>
+
+<script id="update-question-template" type="text">
+  <form>
+    <p>
+      <input type="text">
+      <input type="submit" value="editar">
+    <p>
+  </form>
+</script>
+
+<script id="real-question-update-template" type="text">
+  <a href="#" class="question-name">
+</script>
