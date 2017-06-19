@@ -318,6 +318,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
     Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
+    //// noticias
+    Route::get('tablero/noticias', 'NewsEventsFellow@index');
+    Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@index');
   });
 
   /* R U T A S  UNICAS DEL Facilitador
