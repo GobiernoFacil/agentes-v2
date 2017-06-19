@@ -18,9 +18,9 @@
             <h1 id="title"></h1>
             <form  id = "form" role="form"  action="" >
               {{Form::hidden('quizId',$activity->quizInfo->id, ["class" => "form-control","id"=>"quizInfoId"])}}
-              <ul id="questions-list"></ul>
-              <p><a href="#" id="add-question" class ="btn xs ev">Agregar pregunta</a></p>
-            </form>
+           </form>
+           <ul id="questions-list"></ul>
+           <p><a href="#" id="add-question" class ="btn xs ev">Agregar pregunta</a></p>
           </div>
           <div class="col-sm-8 col-sm-offset-2">
            <a href='{{url("dashboard/sesiones/actividades/ver/$activity->id")}}' class="btn gde">FINALIZAR</a>
@@ -35,6 +35,7 @@
   @include('admin.modules.quiz.question-templates')
 
   <script src="{{url('js/eval/jquery.js')}}"></script>
+  <script src="{{url('js/eval/sortable.js')}}"></script>
   <script>
   var fakeEndpoint         = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
       saveQuestionUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/save/question")}}',
@@ -43,6 +44,8 @@
       removeAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/remove/answer")}}',
       switchAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/switch/answer")}}',
       getQuestionUrl       = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/get/questions")}}',
+      updateQuestionUrl    = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/update/questions")}}',
+      updateAnswerUrl      = '{{url("dashboard/sesiones/actividades/evaluacion/$activity->id/update/answer")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
       Questions        = <?php echo $questions; ?>;

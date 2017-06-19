@@ -104,6 +104,22 @@ class Quiz extends Controller
          *
          * @return \Illuminate\Http\Response
          */
+        public function updateQuestions(Request $request)
+        {
+           $question = Question::find($request->id);
+           if($request->question){
+            $question->question = $request->question;
+            $question->save();
+          }
+           return response()->json($question->toArray());
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
         public function removeQuestion(Request $request)
         {
           $question  = Question::find($request->id);
@@ -123,14 +139,31 @@ class Quiz extends Controller
         public function saveAnswer(Request $request)
         {
           $answer  = new Answer();
-          $answer->question_id = $request->question;
-          $answer->value       = $request->value;
-          $answer->selected    = 0;
-          $answer->save();
+          if($request->question){
+            $answer->question_id = $request->question;
+            $answer->value       = $request->value;
+            $answer->selected    = 0;
+            $answer->save();
+          }
           return response()->json($answer->toArray());
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateAnswer(Request $request)
+        {
+          $answer = Answer::find($request->id);
+          if($request->value){
+           $answer->value = $request->value;
+           $answer->save();
+         }
+          return response()->json($answer->toArray());
+
+        }
         /**
          * Muestra lista de respuestas de diagnostico general
          *
