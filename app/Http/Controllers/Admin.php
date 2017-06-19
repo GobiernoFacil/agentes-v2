@@ -16,6 +16,8 @@ use App\Models\Image;
 use App\Models\Module;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
+use App\Models\NewsEvent;
+
 // FormValidators
 use App\Http\Requests\SaveAdmin;
 use App\Http\Requests\UpdateAdmin;
@@ -49,14 +51,16 @@ class Admin extends Controller
         ->where("enabled",1)->orderBy('name','asc')->count();*/
         $facilitator_number =  User::where("type", "facilitator")->where("enabled",1)->count();
         $facilitators_count = $facilitator_number + $adm_count;
-
+		$news = NewsEvent::orderBy('created_at','desc')->take(3)->get();
+		
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
 		  "modules_count"	=> $modules_count,
 		  'facilitators_count' => $facilitators_count,
-		  'fellows'			   => $fellows
-        ]);
+		  'fellows'			   => $fellows,
+		  'news'			   => $news
+         ]);
       }
 
       /**

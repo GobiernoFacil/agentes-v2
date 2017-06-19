@@ -27,7 +27,14 @@
   	  <!--author-->
   	  <div class="col-sm-12">
 	  	  <div class="divider b"></div>
-	  	<p class="author">Por {{$content->user_id}} <span>{{$content->created_at->diffForHumans()}}</span></p>
+  	  </div>
+  	  <div class="col-sm-9">
+	  	  <p class="author">Por {{$content->user->name}} <span>{{$content->created_at->diffForHumans()}}</span></p>
+  	  </div>
+  	  <div class="col-sm-3 right">
+	  	  <p class="author">{!! $content->public == 1 ? '<span class="published_ s">Publicado</span>' : '<span class="published_ n">Sin publicar</span>' !!}</p>
+  	  </div>
+  	  <div class="col-sm-12">
 	  	  <div class="divider b"></div>
   	  </div>
   	  <div class="col-sm-8 col-sm-offset-2">
