@@ -42,7 +42,7 @@
   </div>
 </div>
 <!-- files -->
-<div class="row" id='user-file' style = "{{$activity->files=='Sí' && $activity->type=='evaluation' ? '':'display:none;'}}">
+<div class="row" id='user-file' style = "{{ $activity->type=='evaluation' ? '':'display:none;'}}">
   <div class="col-sm-12">
     <p>
       <label><strong>¿El usuario contará con carga de archivos?</strong></label>
