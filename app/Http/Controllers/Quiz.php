@@ -225,7 +225,24 @@ class Quiz extends Controller
          */
         public function checkAnswers($quizId,$activity_id)
         {
+          $user = Auth::user();
+          $quiz = QuizInfo::find($quizId);
+          if($quiz->question->count()>0){
+            foreach ($quiz->question as $question) {
+              if($question->answer->count()>0){
+                  $selected = Answer::where('selected',1)->where('question_id',$question->id)->get();
+                  if($selected->count()==0){
+                    return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity_id/2")->with('error',"La pregunta: '$question->question' no cuenta con respuesta correcta");
+                  }
+              }else{
+                return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity_id/2")->with('error',"La pregunta: '$question->question' no cuenta con respuesta");
+              }
+            }
+            return redirect("dashboard/sesiones/actividades/ver/$activity_id");
 
+          }else{
+            return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity_id/2")->with('error','No se ha agregado ninguna pregunta');
+          }
 
         }
 

@@ -14,6 +14,11 @@
   <div class="box">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
+        @if(Session::has('error'))
+  			<div class="message error">
+  		      {{ Session::get('error') }}
+  		  	</div>
+  		  	@endif
           <div id="GF-PNUD-EVALUATION-APP">
             <h1 id="title"></h1>
             <form  id = "form" role="form"  action="" >
