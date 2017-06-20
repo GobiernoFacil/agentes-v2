@@ -132,21 +132,24 @@
 		<!--noticias-->
 		<div class="col-sm-12">
 			<h2>Noticias y avisos</h2>
-			@if($newsEvent->count()>0)
-			<ul>
-				@foreach($newsEvent as $content)
-				<li><h3>{{$content->title}}</h3>
-				<p>descripción de la noticia</p>
-				<p>{{date("d-m-Y", strtotime($content->created_at))}}</p>
-				</li>
-				@endforeach
-			</ul>
-			@else
-			<div class="box">
-				<p>Aún no existen noticias o avisos.</p>
+			<div class="box news">
+				@if($newsEvent->count()>0)
+				<ul class="list line">
+					@foreach($newsEvent as $article)
+					@include('layouts.news.dashboard-news-list')
+					@endforeach
+				</ul>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="divider"></div>
+					</div>
+					<div class="col-sm-8 col-sm-offset-2 center">
+						<p><a href="{{url('tablero/noticias')}}" class="btn view gde download">Ver Noticas</a></p>
+					</div>
+				@else
+				<p>Aún no existen noticias o avisos.</p>			
+				@endif
 			</div>
-			@endif
-
 		</div>
 
 	</div>

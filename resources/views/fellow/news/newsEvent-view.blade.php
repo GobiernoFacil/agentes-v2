@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', $content->title)
 @section('description', $content->title)
-@section('body_class', 'news')
+@section('body_class', 'news fellow')
 @section('breadcrumb_type', 'news view')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_news')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_news')
 
 @section('content')
 
