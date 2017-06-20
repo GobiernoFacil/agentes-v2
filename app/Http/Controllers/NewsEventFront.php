@@ -33,7 +33,7 @@ class NewsEventFront extends Controller
     public function get($slug)
     {
       $content = NewsEvent::where('slug',$slug)->where('public',1)->firstOrFail();
-      return view('frontend.newsEvents.NewsEvent-view')->with([
+      return view('frontend.newsEvents.newsEvents-view')->with([
         "content"    => $content
       ]);
     }
