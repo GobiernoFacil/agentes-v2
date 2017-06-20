@@ -43,6 +43,10 @@
 		@include('admin.modules.activities.diagnostic-view')
 @endif
 
+@if($activity->type ==='evaluation' && $activity->files==='No')
+		@include('admin.modules.activities.evaluation-view')
+@endif
+
 <div class="box">
   <div class="row">
   	<div class="col-sm-9">
