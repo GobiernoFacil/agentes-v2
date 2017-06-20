@@ -247,6 +247,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}/1', 'Quiz@add');
     Route::post('dashboard/sesiones/actividades/evaluacion/save/{activity_id}/1', 'Quiz@save');
     Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}/2', 'Quiz@addQuestion');
+    Route::get('dashboard/sesiones/actividades/evaluacion/checkAnswers/{quiz_id}/{activity_id}', 'Quiz@checkAnswers');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/question', 'Quiz@saveQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/remove/question', 'Quiz@removeQuestion');
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/save/answer', 'Quiz@saveAnswer');

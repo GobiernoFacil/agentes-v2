@@ -14,6 +14,11 @@
   <div class="box">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
+        @if(Session::has('error'))
+  			<div class="message error">
+  		      {{ Session::get('error') }}
+  		  	</div>
+  		  	@endif
           <div id="GF-PNUD-EVALUATION-APP">
             <h1 id="title"></h1>
             <form  id = "form" role="form"  action="" >
@@ -23,7 +28,7 @@
            <p><a href="#" id="add-question" class ="btn xs ev">Agregar pregunta</a></p>
           </div>
           <div class="col-sm-8 col-sm-offset-2">
-           <a href='{{url("dashboard/sesiones/actividades/ver/$activity->id")}}' class="btn gde">FINALIZAR</a>
+           <a href='{{url("dashboard/sesiones/actividades/evaluacion/checkAnswers/{$activity->quizInfo->id}/{$activity->id}")}}' class="btn gde">FINALIZAR</a>
           </div>
         </div>
       </div>
