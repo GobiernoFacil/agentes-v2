@@ -218,4 +218,15 @@ class Quiz extends Controller
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function checkAnswers($quizId,$activity_id)
+        {
+
+
+        }
+
 }

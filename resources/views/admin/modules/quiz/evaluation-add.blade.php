@@ -23,7 +23,7 @@
            <p><a href="#" id="add-question" class ="btn xs ev">Agregar pregunta</a></p>
           </div>
           <div class="col-sm-8 col-sm-offset-2">
-           <a href='{{url("dashboard/sesiones/actividades/ver/$activity->id")}}' class="btn gde">FINALIZAR</a>
+           <a href='{{url("dashboard/sesiones/actividades/evaluacion/checkAnswers/{$activity->quizInfo->id}/{$activity->id}")}}' class="btn gde">FINALIZAR</a>
           </div>
         </div>
       </div>
