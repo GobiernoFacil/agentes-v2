@@ -326,6 +326,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
     Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
     Route::get('tablero/evaluacion/{activity_slug}', 'FellowEvaluations@add');
+    Route::post('tablero/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
 
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');

@@ -7,6 +7,8 @@ use Auth;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+// FormValidators
+use App\Http\Requests\SaveFellowEvaluation;
 class FellowEvaluations extends Controller
 {
     //
@@ -66,5 +68,15 @@ class FellowEvaluations extends Controller
              'user'=>$user,
              'activity'=>$activity
            ]);
+    }
+
+    /**
+     * Muestra hoja de calificaciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function save(SaveFellowEvaluation $request)
+    {
+    
     }
 }
