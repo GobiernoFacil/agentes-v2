@@ -1277,6 +1277,12 @@ b.sessionG {
       font-size: 12px;
       text-transform: uppercase; }
 
+.list-facilitator {
+  list-style: none; }
+  .list-facilitator li {
+    font-size: 12px;
+    padding: 4px 0; }
+
 .modulos .center {
   margin-bottom: 0; }
 
