@@ -16,7 +16,6 @@
 	<ul>
 		<li><a href="{{url('')}}" class="btn_home {{ $__env->yieldContent('body_class') == 'home' ? 'active' : ''}}"><span>Inicio</span></a></li>
 		<li><a href="{{url('programa-gobierno-abierto')}}" class="{{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Programa</span></a></li>
-		<li><a href="{{url('convocatoria')}}" class="btn_convocatoria {{ $__env->yieldContent('body_class') == 'convocatoria' ? 'active' : ''}}"><span>Convocatoria</span></a></li>
 		<li><a href="{{url('gobierno-abierto')}}" class="btn_abierto {{ $__env->yieldContent('body_class') == 'abierto' ? 'active' : ''}}"><span>Gobierno Abierto</span></a></li>
 		<li><a href="{{url('noticias-eventos')}}" class="btn_noticias {{ $__env->yieldContent('body_class') == 'noticias' ? 'active' : ''}}"><span>Noticias</span></a></li>
 		<li><a href="{{url('contacto')}}" class="btn_contacto {{ $__env->yieldContent('body_class') == 'contacto' ? 'active' : ''}}"><span>Contacto</span></a></li>
