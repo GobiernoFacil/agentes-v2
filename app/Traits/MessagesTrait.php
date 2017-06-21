@@ -160,6 +160,27 @@ trait MessagesTrait{
          'answer_q5_2.required'=>"Contesta esta pregunta",
          'answer_q5_3.required'=>"Contesta esta pregunta",
          'answer_q5_j.required'=>"Contesta esta pregunta",
+         //evaluation
+         'answer_q1.required'=>"Contesta esta pregunta",
+         'answer_q2.required'=>"Contesta esta pregunta",
+         'answer_q3.required'=>"Contesta esta pregunta",
+         'answer_q4.required'=>"Contesta esta pregunta",
+         'answer_q5.required'=>"Contesta esta pregunta",
+         'answer_q6.required'=>"Contesta esta pregunta",
+         'answer_q7.required'=>"Contesta esta pregunta",
+         'answer_q8.required'=>"Contesta esta pregunta",
+         'answer_q9.required'=>"Contesta esta pregunta",
+         'answer_q10.required'=>"Contesta esta pregunta",
+         'answer_q11.required'=>"Contesta esta pregunta",
+         'answer_q12.required'=>"Contesta esta pregunta",
+         'answer_q13.required'=>"Contesta esta pregunta",
+         'answer_q14.required'=>"Contesta esta pregunta",
+         'answer_q15.required'=>"Contesta esta pregunta",
+         'answer_q16.required'=>"Contesta esta pregunta",
+         'answer_q17.required'=>"Contesta esta pregunta",
+         'answer_q18.required'=>"Contesta esta pregunta",
+         'answer_q19.required'=>"Contesta esta pregunta",
+         'answer_q20.required'=>"Contesta esta pregunta",
       ];
     }
 }
