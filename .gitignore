@@ -11,6 +11,7 @@ public/css/fonts
 *.DS_Store
 public/files/*
 public/archivos/actividades/*
+public/archivos/fellows/*
 public/img/users/*
 public/img/newsEvent/*
 public/js/bower_components/

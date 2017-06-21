@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+use App\Models\FellowFile;
 use App\Models\Log;
 use App\Models\DiagnosticAnswer;
 use App\User;
@@ -48,6 +49,7 @@ class SessionFellow extends Controller
       $user      = Auth::user();
       $session   = ModuleSession::where('slug',$slug)->first();
       $activity  = Activity::where('id',$id)->first();
+      $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
       $log->session_id = null;
       $log->module_id = null;
@@ -56,7 +58,8 @@ class SessionFellow extends Controller
       return view('fellow.modules.sessions.activity-view')->with([
         "user"      => $user,
         "session"   => $session,
-        "activity"  => $activity
+        "activity"  => $activity,
+        'files'     => $files
       ]);
     }
 

@@ -291,6 +291,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas diagnostico
     Route::get('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
     Route::post('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
+    /*@FellowFiles */
+    //Rutas archivos
+    Route::get('tablero/archivos/{activity_slug}/agregar', 'FellowFiles@add');
+    Route::post('tablero/archivos/{activity_slug}/save', 'FellowFiles@save');
 	//Descargar archivo en actividades
     Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     /*@Messages Controller */

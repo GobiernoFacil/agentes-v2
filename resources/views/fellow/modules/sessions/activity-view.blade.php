@@ -69,6 +69,32 @@
 	@endif
 </div>
 
+@if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico')
+<div class="box">
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-1">
+				<a href='{{ url("") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+		</div>
+	</div>
+</div>
+@elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
+<div class="box">
+	<div class="row">
+		@if(!$files)
+		<div class="col-sm-3 col-sm-offset-1">
+				<a href='{{ url("tablero/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
+		</div>
+		@else
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="box blue center">
+				<h2>Ya cuentas con un archivo</h2>
+			</div>
+		</div>
+		@endif
+	</div>
+</div>
+@endif
+
 @if($activity->activityRequirements->count() > 0)
 <!-- recursos-->
 <div class="box">
