@@ -3,7 +3,7 @@
 @section('description', 'Noticias y Eventos')
 @section('body_class', 'noticias')
 @section('canonical', url('noticias-eventos') )
-@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_convocatoria')
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_news')
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">

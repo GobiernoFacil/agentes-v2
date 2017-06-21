@@ -1,9 +1,9 @@
 @extends('layouts.frontend.master')
 @section('title', $content->title)
 @section('description', 'Noticias y Eventos')
-@section('body_class', 'noticias')
-@section('canonical', url('noticias-eventos') )
-@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_convocatoria')
+@section('body_class', 'noticias view')
+@section('canonical', url('noticias-eventos/' . $content->slug ) )
+@section('breadcrumb', 'layouts.frontend.breadcrumb.bread_news')
 @section('content')
 
 <article class="news_view">
