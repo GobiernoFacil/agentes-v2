@@ -55,7 +55,6 @@
 	@endif
 
 	<meta property="og:image" content='{{url("img/{$og_image}")}}'/>
-	<meta name="google-site-verification" content="25EWiZYhEow1KloBD_b-tjWyJhD2NuT6ykHoUjwAx6o" />
 	<!--css-custom-->
 	
 	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
