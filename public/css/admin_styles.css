@@ -1281,7 +1281,8 @@ b.sessionG {
   list-style: none; }
   .list-facilitator li {
     font-size: 12px;
-    padding: 4px 0; }
+    padding: 4px 0;
+    border-bottom: 1px solid #ccc; }
 
 .box-facilitator {
   padding-bottom: 30px; }
