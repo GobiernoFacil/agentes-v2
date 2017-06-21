@@ -19,12 +19,16 @@
 	</div>
 	<!--avatar-->
 	<div class="col-sm-1">
-		<img src='{{url("img/users/default.png")}}' width="100%">
+		@if($user->image)
+		<img src='{{url("img/users/{$question->user->image->name}")}}' widht="100%">
+		@else
+		<img src='{{url("img/users/default.png")}}' widht="100%">
+		@endif
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
     	<h1>{{$question->topic}} </h1>    
-		<p class="author">Por {{$question->user_id}} <span>{{$question->created_at->diffForHumans()}}</span></p>
+		<p class="author">Por {{$question->user->name}} <span>{{$question->created_at->diffForHumans()}}</span></p>
 	</div>
 	<!--mensajes-->
 	<div class="col-sm-2 forum_list">
