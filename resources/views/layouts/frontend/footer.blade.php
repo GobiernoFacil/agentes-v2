@@ -1,3 +1,16 @@
+@if ($__env->yieldContent('body_class') == 'home')
+<section class="gab">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2 class="title">¿QUÉ ES <strong>GOBIERNO ABIERTO</strong>?</h2>
+				<p>Gobierno Abierto es un enfoque que propone una forma particular de entender los procesos de gobierno, a partir de principios como los de la transparencia y la participación ciudadana.</p>
+					<a href="{{url('gobierno-abierto')}}" class="btn blue">LEER MÁS ></a>
+			</div>
+		</div>
+	</div>
+</section>
+@endif
 @if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
 <div class="map_container">
   <!-- el mapa! -->
