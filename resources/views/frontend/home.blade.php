@@ -11,13 +11,13 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<div class="bgdimg">
 			<figure>
-				<img src="{{url('img/oaxaca.jpg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+				<img src="{{url('img/home_bgd3.JPG')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
 			</figure>
 			<div class="cta">
 				<div class="col-sm-8 col-sm-offset-2">
 					<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
 					<h1></h1>
-					<a href="{{url('convocatoria/resultados-2017')}}" class="btn i_convoca_w blue">Lista de candidatos seleccionados convocatoria 2017 </a>
+					<a href="{{url('programa-gobierno-abierto')}}" class="btn blue">¿Qué es el Programa de Formación?</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -26,12 +26,7 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-8 col-sm-offset-2">
-		<h2 class="title">¿QUÉ ES EL PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE?</h2>
-	</div>
 	<div class="col-sm-10 col-sm-offset-1">
-		<p>El Programa contribuye al fortalecimiento de una buena gobernanza en México a partir de prácticas de <strong>Gobierno Abierto</strong>, participación ciudadana, transparencia y anticorrupción, con esquemas innovadores de desarrollo de capacidades y de vinculación social que permitan el empoderamiento de agentes de cambio, así como el impulso de espacios de diálogo y co creación a nivel subnacional.</p>
-		<p>Es una iniciativa del <a href="http://www.mx.undp.org/">Programa de las Naciones Unidas para el Desarrollo (PNUD)</a>, posible gracias al apoyo de la <a href="https://www.usaid.gov/mexico">Agencia de los Estados Unidos para el Desarrollo Internacional</a> (USAID por sus siglas en inglés), desarrollada y acompañada por el trabajo conjunto de actores tanto del gobierno como de la sociedad civil: el <a href="http://inicio.ifai.org.mx">Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</a>, <a href="http://www.gesoc.org.mx/site/">Gestión Social y Cooperación (GESOC)</a>, <a href="https://gobiernofacil.com">Gobierno Fácil</a> y <a href="http://www.prosociedad.org/">ProSociedad</a>. Conoce más sobre el proyecto:</p>
 		<div class="row">
 			<div class="col-sm-4 col-xs-4">
 				<a href="{{url('programa-gobierno-abierto')}}" class="icon i_programa">
@@ -39,13 +34,13 @@
 				</a>
 			</div>
 			<div class="col-sm-4 col-xs-4">
-				<a href="{{url('convocatoria')}}" class="icon i_convocatoria">
-					<span>CONVOCATORIA</span>
+				<a href="{{url('noticias-eventos')}}" class="icon i_news">
+					<span>NOTICIAS</span>
 				</a>
 			</div>
 			<div class="col-sm-4 col-xs-4">
-				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance">
-					<span>ALCANCE</span>
+				<a href="{{url('gobierno-abierto')}}" class="icon i_ga">
+					<span>GOBIERNO ABIERTO</span>
 				</a>
 			</div>
 		</div>
