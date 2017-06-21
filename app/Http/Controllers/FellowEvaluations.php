@@ -47,8 +47,24 @@ class FellowEvaluations extends Controller
       }else{
         return redirect('tablero');
       }
+    }
 
-      
-
+      /**
+       * Muestra evaluacion de actividad
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function add($activity_slug)
+      {
+        $user      = Auth::user();
+        $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
+        if(!$activity->quizInfo){
+          return redirect('tablero');
+        }
+        return view('fellow.evaluation.evaluation-add')->with(
+           [
+             'user'=>$user,
+             'activity'=>$activity
+           ]);
     }
 }
