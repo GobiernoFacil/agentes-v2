@@ -10,16 +10,16 @@
 	<div class="col-sm-12">
 		<?php switch($activity->type) {
 			case "lecture":
-				$type = "Lectura";
-				break;
+			$type = "Lectura";
+			break;
 			case "video":
-				$type = "Video";
-				break;
+			$type = "Video";
+			break;
 			case "evaluation":
-				$type = "Evaluación";
-				break;
+			$type = "Evaluación";
+			break;
 			default:
-			 $type = "Lectura";
+			$type = "Lectura";
 		}
 		?>
 		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('/dashboard/sesiones/ver/'. $session->id) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('dashboard/modulos/ver/'.$session->module->id) }}" class="link">módulo: {{$session->module->title}}</a></h4>
@@ -40,26 +40,42 @@
 	</div>
 </div>
 @if($activity->slug ==='examen-diagnostico')
-		@include('admin.modules.activities.diagnostic-view')
+@include('admin.modules.activities.diagnostic-view')
+@endif
+
+@if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico')
+@include('admin.modules.activities.evaluation-view')
+@elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación</h2>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2">
+			<p>Carga de archivo</p>
+		</div>
+	</div>
+</div>
+
 @endif
 
 <div class="box">
-  <div class="row">
-  	<div class="col-sm-9">
-  	  <h2 class="title">Recursos</h2>
-  	</div>
-  	<div class="col-sm-3">
-  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar recurso</a></p>
-  	</div>
-  	<div class="col-sm-12">
-  		@if($activity->activityRequirements->count() > 0)
-  	      @include('admin.modules.activities.activities-requirements-list')
-  		@else
-  		    <p>Sin recurso</p>
-  	      <a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar recurso</a>
-  		@endif
-  	</div>
-  </div>
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Recursos</h2>
+		</div>
+		<div class="col-sm-3">
+			<p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar recurso</a></p>
+		</div>
+		<div class="col-sm-12">
+			@if($activity->activityRequirements->count() > 0)
+			@include('admin.modules.activities.activities-requirements-list')
+			@else
+			<p>Sin recurso</p>
+			<a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar recurso</a>
+			@endif
+		</div>
+	</div>
 </div>
 
 <!--archivos-->
@@ -69,14 +85,14 @@
 			<h2 class="title">Archivos</h2>
 		</div>
 		<div class="col-sm-3">
-  	   <p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
-  	</div>
+			<p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
+		</div>
 		<div class="col-sm-12">
 			@if($activity->activityFiles->count() > 0)
-			    @include('admin.modules.activities.activities-files-list')
+			@include('admin.modules.activities.activities-files-list')
 			@else
-				<p>Sin archivos</p>
-				<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
+			<p>Sin archivos</p>
+			<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
 			@endif
 		</div>
 	</div>
@@ -92,8 +108,8 @@
 			<h2 class="title">Foro</h2>
 		</div>
 		<div class="col-sm-12">
-    		<p>Sin Foro</p>
-  		</div>
+			<p>Sin Foro</p>
+		</div>
 	</div>
 </div>
 @endif
