@@ -1,6 +1,6 @@
 <div class="row">
 	@foreach ($session->facilitators as $facilitator)
-	<div class="col-sm-6">
+	<div class="col-sm-6 box-facilitator">
 		<div class="row">
 			<div class="col-sm-3">
 				@if($facilitator->user->image)

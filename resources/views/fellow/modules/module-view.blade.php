@@ -106,15 +106,23 @@
 						</div>
 						<div class="col-sm-6">
 							@if($session->facilitators->count() > 0)
-							<p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
+							<p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong></p>
+							<ul class="list-facilitator">
 							@foreach ($session->facilitators as $facilitator)
+								<li class="row">
+								<span class="col-sm-2 right">
 								@if($facilitator->user->image)
 								<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
 								@else
+								<img src='{{url("img/users/default.png")}}' height="30px">
 								@endif
-								 {{$facilitator->user->name}} -  {{$facilitator->user->institution}} <br>
+								</span>
+								<span class="col-sm-10">
+								 {{$facilitator->user->name}} -  {{$facilitator->user->institution == "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales" ? "INAI" : $facilitator->user->institution}}
+								</span>
+								</li>
 							@endforeach
-							</p>
+							</ul>
 							@endif
 						</div>
 						<div class="col-sm-2">
