@@ -73,4 +73,8 @@ class User extends Authenticatable
     function diagnosticEvaluation(){
       return $this->hasOne("App\Models\DiagnosticEvaluation");
     }
+
+    function fellowFiles(){
+      return $this->hasMany("App\Models\FellowFile");
+    }
 }
