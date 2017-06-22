@@ -68,7 +68,14 @@
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
+						@if($message->user->type==='fellow')
+						<p class="author">Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+
+						@elseif($message->user->type==='facilitator')
+						<p class="author">Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						@else
 	  				<p class="author">Por {{$message->user->name}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						@endif
 				</div>
 				<div class="col-sm-12">
 	  			<div class="divider b"></div>

@@ -129,7 +129,7 @@
 			<h2 class="title">Foro</h2>
 		</div>
 		<div class="col-sm-3 center">
-	    <a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+	    <a href='{{ url("tablero/foros/{$activity->session->slug}/pregunta/crear") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
 	  </div>
 	</div>
 
@@ -143,7 +143,7 @@
 		@endforeach
 		<div class="row">
 			<div class="col-sm-3 col-sm-offset-2 center">
-				<a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+				<a href='{{ url("tablero/foros/{$activity->session->slug}/pregunta/crear") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
 			</div>
 		</div>
 	@else
