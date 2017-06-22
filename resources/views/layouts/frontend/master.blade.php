@@ -55,7 +55,6 @@
 	@endif
 
 	<meta property="og:image" content='{{url("img/{$og_image}")}}'/>
-
 	<!--css-custom-->
 	
 	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">

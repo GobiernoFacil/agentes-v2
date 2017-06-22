@@ -355,13 +355,10 @@
 					<td>Nuevo León					   </td>
 					<td>Aldo Felipe Rodríguez Verduzco </td>
 				</tr>
+				
 				<tr>
 					<td>Nuevo León					   </td>
-					<td>Alfonso Noé Martínez Alejandre </td>
-				</tr>
-				<tr>
-					<td>Nuevo León					   </td>
-					<td>Eric Hernández Quintero		   </td>
+					<td>Tatiana Lizzeth Loza Caro		   </td>
 				</tr>
 				<tr>
 					<td>Nuevo León					   </td>
@@ -373,7 +370,7 @@
 				</tr>
 				<tr>
 					<td>Sonora						   </td>
-					<td>Marisol Bárbara Calzada Torres </td>
+					<td>Cynthia Dennis Coronado Ruiz</td>
 				</tr>
 				<tr>
 					<td>Sonora						   </td>
@@ -398,6 +395,10 @@
 				<tr>
 					<td>Oaxaca						   </td>
 					<td>Jazmín Aquino Cruz			   </td>
+				</tr>
+				<tr>
+					<td>Oaxaca						   </td>
+					<td>Jacob Fabian Gonzalez			   </td>
 				</tr>
 			</tbody>
 		</table>

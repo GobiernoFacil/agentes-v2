@@ -14,45 +14,28 @@
 		
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
-		<!--Chihuahua-->
-		<h2>Chihuahua</h2>
+		
 		<ul>
-			<li>Denisse Herrera Benavides</li>
+			<li>Adán Gurrola Ruiz</li>
+			<li>Aldo Felipe Rodríguez Verduzco</li>
 			<li>Carlos Martín Castañeda Márquez</li>
-			<li>Sergio Eugenio Velasco Medina</li>
+			<li>Carolina Chávez Mendoza</li>
 			<li>Célida Jazmín Torres Molina</li>
-		</ul>
-		<!--Morelos-->
-		<h2>Morelos</h2>
-		<ul>
-			<li>Roberto Salinas Ramírez</li>
+			<li>Cynthia Dennis Coronado Ruiz</li>
+			<li>Denisse Herrera Benavides</li>
+			<li>Emmanuel Aguilar Burgoa</li>
+			<li>Ernesto Urbina Miranda</li>
+			<li>Fermín Sosa Pérez</li>
+			<li>Flor Dessire Leon Hernandez</li>
+			<li>Jacob Fabian Gonzalez</li>
+			<li>Jazmin Aquino Cruz</li>		
+			<li>Jesus Anwar Benitez Acosta</li>		
 			<li>Julio Jorge Mendez Alvarez</li>
 			<li>Mireya Arteaga Dirzo</li>
-			<li>Flor Dessire Leon Hernandez</li>
-		</ul>
-		<!--Nuevo León-->
-		<h2>Nuevo León</h2>
-		<ul>
-			<li>Aldo Felipe Rodríguez Verduzco</li>
-			<li>Alfonso Noé Martinez Alejandre</li>
-			<li>Eric Hernández Quintero</li>
-			<li>Emmanuel Aguilar Burgoa</li>
-		</ul>
-		<!--Oaxaca-->
-		<h2>Oaxaca</h2>
-		<ul>
-			<li>Fermín Sosa Pérez</li>
-			<li>Carolina Chávez Mendoza</li>
 			<li>Nayeli Lucero López Padilla</li>
-			<li>Jazmin Aquino Cruz</li>		
-		</ul>
-		<!--Sonora-->
-		<h2>Sonora</h2>
-		<ul>
-			<li>Jesus Anwar Benitez Acosta</li>		
-			<li>Marisol Bárbara Calzada Torres</li>
-			<li>Adán Gurrola Ruiz</li>
-			<li>Ernesto Urbina Miranda</li>
+			<li>Roberto Salinas Ramírez</li>
+			<li>Sergio Eugenio Velasco Medina</li>
+			<li>Tatiana Lizzeth Loza Caro</li>
 		</ul>
 	</div>
 	<div class="row">
