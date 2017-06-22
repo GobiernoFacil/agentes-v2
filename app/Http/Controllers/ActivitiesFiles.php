@@ -55,6 +55,24 @@ class ActivitiesFiles extends Controller
     }
 
     /**
+     * Agregar archivo a actividad
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addSingle($activity_id)
+    {
+        //
+        $user      = Auth::user();
+        $activity  = Activity::where('id',$activity_id)->firstOrFail();
+        $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+        return view('admin.modules.activities.activity-files-add-single')->with([
+          "user"      	=> $user,
+          "activity" 	=> $activity,
+          "session"		=> $session
+        ]);
+    }
+
+    /**
      * Guarda nuevo archivo en  actividad
      *
      * @param  \Illuminate\Http\Request  $request
@@ -80,10 +98,38 @@ class ActivitiesFiles extends Controller
         }
         if($activity->type==='evaluation'){
           //cargar evaluacion
-          return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id")->with('success',"Se ha guardado correctamente");
+          return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id/1")->with('success',"Se ha guardado correctamente");
         }else{
           return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
         }
+    }
+
+    /**
+     * Guarda nuevo archivo en  actividad
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveSingle(SaveActivityFiles $request)
+    {
+        //
+        $user      = Auth::user();
+        $activity   = Activity::where('id',$request->activity_id)->firstOrFail();
+        $path  = public_path(self::UPLOADS);
+        // [ SAVE THE file ]
+        if($request->hasFile('file') && $request->file('file')->isValid()){
+          $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
+          $request->file('file')->move($path, $name);
+          $file         = new ActivitiesFile();
+          $file->name = $request->name;
+          $file->identifier = $name;
+          $file->description = $request->description;
+          $file->activity_id = $request->activity_id;
+          $file->path = $path;
+          $file->save();
+        }
+
+        return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
     }
 
     /**
@@ -96,7 +142,7 @@ class ActivitiesFiles extends Controller
         //
         $user      = Auth::user();
         $file      = ActivitiesFile::where('id',$file_id)->firstOrFail();
-        
+
         $activity  = Activity::where('id',$file->activity_id)->firstOrFail();
         $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
 
