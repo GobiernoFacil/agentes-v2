@@ -23,7 +23,7 @@
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
-    	<h1>{{$question->topic}} </h1>    
+    	<h1>{{$question->topic}} </h1>
 		<p class="author">Por {{$question->user_id}} <span>{{$question->created_at->diffForHumans()}}</span></p>
 	</div>
 	<!--mensajes-->
@@ -62,7 +62,7 @@
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
-	  				<p class="author">Por {{$message->user_id}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+	  				<p class="author">Por {{$message->user->name}} <span>{{$message->created_at->diffForHumans()}}</span></p>
 				</div>
 				<div class="col-sm-12">
 	  			<div class="divider b"></div>

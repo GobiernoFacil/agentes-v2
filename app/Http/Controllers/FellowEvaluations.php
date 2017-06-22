@@ -77,6 +77,9 @@ class FellowEvaluations extends Controller
      */
     public function save(SaveFellowEvaluation $request)
     {
-    
+      $user = Auth::user();
+      $activity = Activity::where('slug',$request->activity_slug)->firstOrFail();
+      
+
     }
 }

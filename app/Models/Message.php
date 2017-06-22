@@ -14,4 +14,7 @@ class Message extends Model
     function conversation(){
       return $this->belongsTo("App\Models\Conversation");
     }
+    function user(){
+      return $this->belongsTo("App\User");
+    }
 }
