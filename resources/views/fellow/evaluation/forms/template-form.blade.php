@@ -13,7 +13,7 @@
         <?php $count =0;?>
         @foreach($question->answer as $answer)
           <p>
-          <label>{{Form::radio('answer_q'.$countP.'['.$count.']','1', null,['class' => 'form-control answer_q'.$countP])}}{{$answer->value}} </label>
+          <label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP])}}{{$answer->value}} </label>
             <?php $count++;?>
             </p>
         @endforeach

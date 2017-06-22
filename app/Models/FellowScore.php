@@ -11,4 +11,12 @@ class FellowScore extends Model
     protected $fillable = [
         'user_id', 'questionInfo_id','score'
     ];
+    function user(){
+      return $this->belongsTo("App\User");
+    }
+
+    function quizInfo(){
+      return $this->belongsTo("App\Models\quizInfo",'questionInfo_id');
+    }
+
 }
