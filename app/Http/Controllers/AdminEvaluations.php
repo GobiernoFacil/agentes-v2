@@ -8,6 +8,7 @@ use Auth;
 use App\Models\DiagnosticAnswer;
 use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
+use App\Models\FellowFile;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
@@ -30,6 +31,46 @@ class AdminEvaluations extends Controller
         "user"      => $user,
         "answers"   => $answers,
       ]);
+
+    }
+
+    /**
+     * Muestra lista de actividades a evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+      $user       = Auth::user();
+      $activities   = Activity::where('type','evaluation')->where('files','Sí')->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('admin.evaluations.activities-list')->with([
+        "user"      => $user,
+        "activities"   => $activities,
+      ]);
+
+    }
+
+    /**
+     * Muestra lista de fellows con archivos para evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexActivity($activity_id)
+    {
+      $user       = Auth::user();
+      $activity   = Activity::where('id',$activity_id)->firstOrFail();
+      if($activity->files ==='Sí'){
+        //ver fellows con archivos
+        $fellows  = FellowFile::where('activity_id',$activity->id)->paginate($this->pageSize);
+        return view('admin.evaluations.activities-files-list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows
+        ]);
+      }else{
+        //ver fellows con examen automatico
+      }
+
 
     }
 

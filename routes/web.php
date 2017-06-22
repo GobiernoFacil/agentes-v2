@@ -239,6 +239,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
+    Route::get('dashboard/evaluacion', 'AdminEvaluations@index');
+    Route::get('dashboard/evaluacion/actividad/ver/{activity_id}', 'AdminEvaluations@indexActivity');
     Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');
