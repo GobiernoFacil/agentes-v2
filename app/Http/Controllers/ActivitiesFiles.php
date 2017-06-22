@@ -98,7 +98,8 @@ class ActivitiesFiles extends Controller
         }
         if($activity->type==='evaluation'){
           //cargar evaluacion
-          return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id/1")->with('success',"Se ha guardado correctamente");
+        //  return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id/1")->with('success',"Se ha guardado correctamente");
+        return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
         }else{
           return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
         }
