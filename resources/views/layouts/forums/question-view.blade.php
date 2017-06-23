@@ -11,12 +11,27 @@
 	</div>
 	<!--avatar-->
 	<div class="col-sm-1">
+		@if($question->user->image)
+		<img src='{{url("img/users/{$question->user->image->name}")}}' width="100%">
+		@else
 		<img src='{{url("img/users/default.png")}}' width="100%">
+		@endif
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
-    	<h1>{{$question->topic}} </h1>    
-		<p class="author">Por {{$question->user->name}} <span>{{$question->created_at->diffForHumans()}}</span></p>
+    	<h1>{{$question->topic}} </h1>
+    	<p class="author">Por
+    	@if($question->user->fellowData)  
+    	<!--fellow data -->  
+		{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}} 
+		@elseif($question->user->facilitatorData)  
+    	<!--facilitator data -->  
+		{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}} 
+		@else
+		<!--super user data -->
+		{{$question->user->name}}
+		@endif	
+		<span>{{$question->created_at->diffForHumans()}}</span></p>
 	</div>
 	<!--mensajes-->
 	<div class="col-sm-2 forum_list">
@@ -58,11 +73,26 @@
     @foreach($question->messages as $message)
       		<div class="row">
 	      		<div class="col-sm-1">
-		  			<img src='{{url("img/users/default.png")}}' width="100%">
+		      		@if($message->user->image)
+			  		<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
+			  		@else
+			  		<img src='{{url("img/users/default.png")}}' width="100%">
+			  		@endif
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
-	  				<p class="author">Por {{$message->user->name}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+	  				<p class="author">Por 
+		  			@if($message->user->fellowData) 	
+		  			<!--fellow data -->  
+		  			{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}} 
+		  			@elseif($message->user->facilitatorData)  
+		  			<!--facilitator data -->  
+		  			{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}} 
+		  			@else
+		  			<!--super user data -->
+		  			{{$message->user->name}}
+		  			@endif	
+		  			<span>{{$message->created_at->diffForHumans()}}</span></p>
 				</div>
 				<div class="col-sm-12">
 	  			<div class="divider b"></div>
