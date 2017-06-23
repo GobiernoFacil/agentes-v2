@@ -20,8 +20,8 @@
 			      <th>Nombre / Email</th>
 			      <th>Ciudad / Estado</th>
 			      <th>Procedencia</th>
-				  <th>Fecha de examen</th>
-				  <th>Evaluación</th>
+					  <th>Fecha de examen</th>
+					  <th>Evaluación</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
@@ -35,7 +35,7 @@
 			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->created_at))}}">{{$fellow->created_at->diffForHumans()}}</a> </td>
 							<td>Sin evaluar</td>
 			        <td>
-			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/ver/' . $fellow->id) }}" class="btn xs view">Ver</a>
+			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
 			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}"   class="btn xs view ev">Evaluar</a></td>
 			    </tr>
 			    @endforeach

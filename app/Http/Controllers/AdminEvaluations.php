@@ -15,7 +15,7 @@ use App\Http\Requests\SaveDiagnosticEvaluation2;
 class AdminEvaluations extends Controller
 {
     //
-
+    const UPLOADS = "archivos/fellows";
     //Paginación
     public $pageSize = 10;
     /**
@@ -172,6 +172,25 @@ class AdminEvaluations extends Controller
       $this->evaluateDiagnosticP2($evaluation);
       return redirect("dashboard/evaluacion/diagnostico/ver/{$evaluation->user->diagnostic->id}");
 
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function download(Request $request){
+      $user = Auth::user();
+      $data = FellowFile::find($request->file_id);
+      $file = $data->path;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+
+      $filename = $data->name.".".$ext;
+      return response()->download($file, $filename, $headers);
     }
 
 
