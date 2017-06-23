@@ -90,6 +90,22 @@ class AdminEvaluations extends Controller
 
     }
 
+    /**
+     * Muestra campos para evaluar archivo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fileEvaluation($file_id)
+    {
+      $user      = Auth::user();
+      $data      = FellowFile::where('id',$file_id)->firstOrFail();
+      return view('admin.evaluations.file-evaluation')->with([
+        "user"      => $user,
+        "data"   => $data,
+      ]);
+
+    }
+
 
     /**
      * view evaluacion diagnostico

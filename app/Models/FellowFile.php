@@ -15,4 +15,8 @@ class FellowFile extends Model
     function user(){
       return $this->belongsTo("App\User");
     }
+
+    function activity(){
+      return $this->belongsTo("App\Models\Activity");
+    }
 }
