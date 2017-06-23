@@ -141,7 +141,7 @@ class AdminForums extends Controller
     $message->user_id = $user->id;
     $message->conversation_id = $forum->id;
     $message->save();
-    return redirect("dashboard/ver/pregunta/foros/{$forum->id}")->with('message','Mensaje creado correctamente');
+    return redirect("dashboard/foros/pregunta/ver/{$forum->id}")->with('message','Mensaje creado correctamente');
   }
 
   /**
