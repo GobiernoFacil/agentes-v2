@@ -10,6 +10,8 @@ use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
+use App\Models\ForumConversation;
+
 use App\Models\Log;
 use App\Models\DiagnosticAnswer;
 use App\User;
@@ -18,8 +20,8 @@ use App\User;
 use App\Http\Requests\SaveDiagnostic;
 class SessionFellow extends Controller
 {
-    //
-
+	//Paginación
+  public $pageSize = 10;
     /**
     * Muestra sessión
     *
@@ -51,6 +53,13 @@ class SessionFellow extends Controller
       $session   = ModuleSession::where('slug',$slug)->first();
       $activity  = Activity::where('id',$id)->first();
       $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
+      $forum    = $activity->forum;
+      //forums
+      if($activity->forum){
+        $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      }else{
+        $forums   = null;
+      }
       if($activity->quizInfo){
         $score     = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->count();
       }else{
@@ -66,7 +75,9 @@ class SessionFellow extends Controller
         "session"   => $session,
         "activity"  => $activity,
         'files'     => $files,
-        "score"     => $score
+        "score"     => $score,
+        "forums"	=> $forums,
+        "forum"		=> $forum,
       ]);
     }
 
