@@ -9,13 +9,16 @@ use App\Models\DiagnosticAnswer;
 use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
 use App\Models\FellowFile;
+use App\Models\FilesEvaluation;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
+use App\Http\Requests\SaveFellowFileEvaluation;
 class AdminEvaluations extends Controller
 {
     //
     const UPLOADS = "archivos/fellows";
+    const UPLOADSF = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 10;
     /**
@@ -106,6 +109,33 @@ class AdminEvaluations extends Controller
 
     }
 
+    /**
+     * Muestra campos para evaluar archivo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveFileEvaluation(SaveFellowFileEvaluation $request)
+    {
+      $user = Auth::user();
+      $data = FellowFile::where('id',$request->file_id)->firstOrFail();
+      $eva  = new FilesEvaluation();
+      $eva->user_id = $user->id;
+      $eva->fellow_id = $data->user_id;
+      $eva->activity_id = $data->activity->id;
+      $eva->url     = $request->url;
+      $eva->score     = $request->score;
+      $eva->comments = $request->comments;
+      $path  = public_path(self::UPLOADSF);
+      // [ SAVE THE file ]
+      if($request->hasFile('file') && $request->file('file')->isValid()){
+        $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
+        $request->file('file')->move($path, $name);
+        $eva->name = $request->file('file')->getClientOriginalName();
+        $eva->path = $path.'/'.$name;
+      }
+      $eva->save();
+      return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
+    }
 
     /**
      * view evaluacion diagnostico

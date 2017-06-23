@@ -133,6 +133,9 @@ trait MessagesTrait{
 
          //news
          'brief.required' => 'Este campo es requerido',
+         'score.required' => 'Este campo es requerido',
+         'score.numeric' => 'Escribe un número',
+         'url.required' => 'Este campo es requerido',
          'content.required' => 'Este campo es requerido',
          'answer_1.required'=>"Contesta esta pregunta",
          'answer_2.required'=>"Contesta esta pregunta",
