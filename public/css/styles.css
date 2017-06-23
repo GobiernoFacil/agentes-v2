@@ -1504,6 +1504,17 @@ a.apertus:hover {
   text-align: center;
   margin-bottom: 40px; }
 
+.stats {
+  border-bottom: 3px solid #187fad;
+  margin-bottom: 60px;
+  padding: 20px 15px 40px; }
+  .stats p {
+    font-size: 23px;
+    font-weight: 300; }
+  .stats svg path {
+    fill: #444;
+    stroke: #444; }
+
 .gab {
   background: #51be92;
   color: white;
