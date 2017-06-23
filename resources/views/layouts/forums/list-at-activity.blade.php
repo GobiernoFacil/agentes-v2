@@ -11,6 +11,9 @@
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
+		@if($user->type =="fellow")
+		<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		@endif
 	</div>
 	<!-- descripción-->
 	<div class="col-sm-12 forum_list">
@@ -42,6 +45,9 @@
 						@if($user->type =="facilitator")
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
+						@if($user->type =="fellow")
+						<h2><a href='{{ url("tablero/foros/pregunta/$session->slug/$conversation->slug/ver") }}'>{{$conversation->topic}}</a></h2>
+						@endif
 						<!--fellow data -->
  						@if($conversation->user->fellowData)
  						<p class="author">Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
@@ -70,6 +76,9 @@
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
+		@if($user->type =="fellow")
+		<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		@endif
 		</div>
 		
 	</div>
@@ -86,6 +95,9 @@
   			@endif
   			@if($user->type =="facilitator")
   			<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+  			@endif
+  			@if($user->type =="fellow")
+  			<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
   			@endif
   		</div>
 	</div>
