@@ -27,8 +27,10 @@
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
-    	<h1>{{$question->topic}} </h1>    
+
+    	<h1>{{$question->topic}} </h1>
 		<p class="author">Por {{$question->user->name}} <span>{{$question->created_at->diffForHumans()}}</span></p>
+
 	</div>
 	<!--mensajes-->
 	<div class="col-sm-2 forum_list">
@@ -66,7 +68,14 @@
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
-	  				<p class="author">Por {{$message->user_id}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						@if($message->user->type==='fellow')
+						<p class="author">Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+
+						@elseif($message->user->type==='facilitator')
+						<p class="author">Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						@else
+	  				<p class="author">Por {{$message->user->name}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						@endif
 				</div>
 				<div class="col-sm-12">
 	  			<div class="divider b"></div>

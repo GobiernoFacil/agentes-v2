@@ -8,13 +8,17 @@ use Auth;
 use App\Models\DiagnosticAnswer;
 use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
+use App\Models\FellowFile;
+use App\Models\FilesEvaluation;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
+use App\Http\Requests\SaveFellowFileEvaluation;
 class AdminEvaluations extends Controller
 {
     //
-
+    const UPLOADS = "archivos/fellows";
+    const UPLOADSF = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 10;
     /**
@@ -34,6 +38,46 @@ class AdminEvaluations extends Controller
     }
 
     /**
+     * Muestra lista de actividades a evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+      $user       = Auth::user();
+      $activities   = Activity::where('type','evaluation')->where('files','Sí')->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('admin.evaluations.activities-list')->with([
+        "user"      => $user,
+        "activities"   => $activities,
+      ]);
+
+    }
+
+    /**
+     * Muestra lista de fellows con archivos para evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexActivity($activity_id)
+    {
+      $user       = Auth::user();
+      $activity   = Activity::where('id',$activity_id)->firstOrFail();
+      if($activity->files ==='Sí'){
+        //ver fellows con archivos
+        $fellows  = FellowFile::where('activity_id',$activity->id)->paginate($this->pageSize);
+        return view('admin.evaluations.activities-files-list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows
+        ]);
+      }else{
+        //ver fellows con examen automatico
+      }
+
+
+    }
+
+    /**
      * Muestra lista de respuestas de diagnostico general
      *
      * @return \Illuminate\Http\Response
@@ -49,6 +93,49 @@ class AdminEvaluations extends Controller
 
     }
 
+    /**
+     * Muestra campos para evaluar archivo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fileEvaluation($file_id)
+    {
+      $user      = Auth::user();
+      $data      = FellowFile::where('id',$file_id)->firstOrFail();
+      return view('admin.evaluations.file-evaluation')->with([
+        "user"      => $user,
+        "data"   => $data,
+      ]);
+
+    }
+
+    /**
+     * Muestra campos para evaluar archivo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveFileEvaluation(SaveFellowFileEvaluation $request)
+    {
+      $user = Auth::user();
+      $data = FellowFile::where('id',$request->file_id)->firstOrFail();
+      $eva  = new FilesEvaluation();
+      $eva->user_id = $user->id;
+      $eva->fellow_id = $data->user_id;
+      $eva->activity_id = $data->activity->id;
+      $eva->url     = $request->url;
+      $eva->score     = $request->score;
+      $eva->comments = $request->comments;
+      $path  = public_path(self::UPLOADSF);
+      // [ SAVE THE file ]
+      if($request->hasFile('file') && $request->file('file')->isValid()){
+        $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
+        $request->file('file')->move($path, $name);
+        $eva->name = $request->file('file')->getClientOriginalName();
+        $eva->path = $path.'/'.$name;
+      }
+      $eva->save();
+      return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
+    }
 
     /**
      * view evaluacion diagnostico
@@ -131,6 +218,25 @@ class AdminEvaluations extends Controller
       $this->evaluateDiagnosticP2($evaluation);
       return redirect("dashboard/evaluacion/diagnostico/ver/{$evaluation->user->diagnostic->id}");
 
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function download(Request $request){
+      $user = Auth::user();
+      $data = FellowFile::find($request->file_id);
+      $file = $data->path;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+
+      $filename = $data->name.".".$ext;
+      return response()->download($file, $filename, $headers);
     }
 
 

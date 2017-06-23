@@ -70,13 +70,23 @@
 </div>
 
 @if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico' && $activity->quizInfo)
-<div class="box">
-	<div class="row">
-		<div class="col-sm-3 col-sm-offset-1">
-				<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+	@if(!$score)
+		<div class="box">
+			<div class="row">
+				<div class="col-sm-3 col-sm-offset-1">
+						<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
+		@else
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="box blue center">
+					<h2>Ya respondiste el examen</h2>
+				</div>
+			</div>
+		</div>
+		@endif
 @elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
@@ -129,7 +139,7 @@
 			<h2 class="title">Foro</h2>
 		</div>
 		<div class="col-sm-3 center">
-	    <a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+	    <a href='{{ url("tablero/foros/{$activity->session->slug}/pregunta/crear") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
 	  </div>
 	</div>
 
@@ -143,7 +153,7 @@
 		@endforeach
 		<div class="row">
 			<div class="col-sm-3 col-sm-offset-2 center">
-				<a href='{{ url("tablero/foros/{$activity->forum->slug}/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+				<a href='{{ url("tablero/foros/{$activity->session->slug}/pregunta/crear") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
 			</div>
 		</div>
 	@else

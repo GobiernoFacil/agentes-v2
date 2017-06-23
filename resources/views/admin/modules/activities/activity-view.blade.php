@@ -85,14 +85,14 @@
 			<h2 class="title">Archivos</h2>
 		</div>
 		<div class="col-sm-3">
-			<p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
+			<p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
 		</div>
 		<div class="col-sm-12">
 			@if($activity->activityFiles->count() > 0)
 			@include('admin.modules.activities.activities-files-list')
 			@else
 			<p>Sin archivos</p>
-			<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/$activity->id")}}' class="btn xs view">Agregar archivo</a>
+			<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
 			@endif
 		</div>
 	</div>

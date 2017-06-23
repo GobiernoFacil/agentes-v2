@@ -21,5 +21,8 @@ class ForumMessage extends Model
   function conversation(){
     return $this->belongsTo("App\Models\ForumConversation",'conversation_id');
   }
+  function user(){
+    return $this->belongsTo("App\User");
+  }
 
 }

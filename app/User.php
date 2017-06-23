@@ -77,4 +77,16 @@ class User extends Authenticatable
     function fellowFiles(){
       return $this->hasMany("App\Models\FellowFile");
     }
+
+    function fellowAnswers(){
+      return $this->hasMany("App\Models\FellowAnswer");
+    }
+
+    function fellowScore(){
+      return $this->hasMany("App\Models\FellowScore");
+    }
+
+    function fileScore(){
+      return $this->hasMany("App\Models\FilesEvaluation",'fellow_id');
+    }
 }

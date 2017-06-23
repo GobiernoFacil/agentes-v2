@@ -161,7 +161,9 @@ Route::group(['middleware' => ['auth']], function () {
     /*@ActivitiesFiles Controller */
     //CRUD files in activity
     Route::get('dashboard/sesiones/actividades/archivos/agregar/{activity_id}', 'ActivitiesFiles@add');
+    Route::get('dashboard/sesiones/actividades/archivos/agregar/nuevo/{activity_id}', 'ActivitiesFiles@addSingle');
     Route::post('dashboard/sesiones/actividades/archivos/crear/{activity_id}', 'ActivitiesFiles@save');
+    Route::post('dashboard/sesiones/actividades/archivos/single/{activity_id}', 'ActivitiesFiles@saveSingle');
     Route::get('dashboard/sesiones/actividades/archivos/ver/{id}', 'ActivitiesFiles@view');
     Route::get('dashboard/sesiones/actividades/archivos/editar/{file_id}', 'ActivitiesFiles@edit');
     Route::get('dashboard/sesiones/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
@@ -237,6 +239,11 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
+    Route::get('dashboard/evaluacion', 'AdminEvaluations@index');
+    Route::get('dashboard/evaluacion/actividad/ver/{activity_id}', 'AdminEvaluations@indexActivity');
+    Route::get('dashboard/evaluacion/actividad/archivo/get/{file_id}', 'AdminEvaluations@download');
+    Route::get('dashboard/evaluacion/actividad/archivo/evaluar/{file_id}', 'AdminEvaluations@fileEvaluation');
+    Route::post('dashboard/evaluacion/actividad/archivo/evaluar/save/{file_id}', 'AdminEvaluations@saveFileEvaluation');
     Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');

@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\FellowFile;
+use App\Models\FellowScore;
 use App\Models\Log;
 use App\Models\DiagnosticAnswer;
 use App\User;
@@ -50,6 +51,11 @@ class SessionFellow extends Controller
       $session   = ModuleSession::where('slug',$slug)->first();
       $activity  = Activity::where('id',$id)->first();
       $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
+      if($activity->quizInfo){
+        $score     = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->count();
+      }else{
+        $score = null;
+      }
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
       $log->session_id = null;
       $log->module_id = null;
@@ -59,7 +65,8 @@ class SessionFellow extends Controller
         "user"      => $user,
         "session"   => $session,
         "activity"  => $activity,
-        'files'     => $files
+        'files'     => $files,
+        "score"     => $score
       ]);
     }
 
