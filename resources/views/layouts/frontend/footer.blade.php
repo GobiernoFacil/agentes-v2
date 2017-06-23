@@ -13,6 +13,13 @@
 @endif
 @if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
 <div class="map_container">
+	<section>
+	<div class="container">
+			<div class="col-sm-8 col-sm-offset-2">
+		<h2 class="title"><strong>ALCANCE</strong> DEL PROGRAMA DE GOBIERNO ABIERTO DESDE LO LOCAL PARA EL DESARROLLO SOSTENIBLE</h2>
+		</div>
+	</div>
+	</section>
   <!-- el mapa! -->
   <div id="map"></div>
 </div>
