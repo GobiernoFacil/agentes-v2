@@ -8,8 +8,18 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Agregar preguntas a evaluación de {{$activity->name}}</h1>
-		<p>Da clic en <strong>Agregar pregunta</strong> para comenzar. Cuando estén todas las preguntas da clic en finalizar</p>
+		<h1>Agregar preguntas a evaluación de <strong>{{$activity->name}}</strong></h1>
+		<div class="divider"></div>
+		<p>Instrucciones:</p>
+		<ol>
+			<li>Da clic en <strong>Agregar pregunta</strong> para comenzar.</li>
+			<li>Escribe la pregunta y guárdala.</li>
+			<li>Agrega respuesta a la pregunta y guárdala.</li>
+			<li>Selecciona una respuesta como la correcta.</li>
+			<li>Puedes editar preguntas y respuestas dando clic sobre ella.</li>
+			<li>Puedes eliminar preguntas y respuestas dando clic en [X].</li>
+			<li>Cuando estén todas las preguntas da clic en finalizar.</li>
+		</ol>
 	</div>
 </div>
 <div class="box">
