@@ -1374,7 +1374,7 @@ span.le_link {
   border-top: 1px solid #f2f2f2;
   border-left: 3px solid #f2f2f2;
   margin-bottom: 30px;
-  padding: 5px; }
+  padding: 15px 10px 8px; }
   #questions-list li ul li {
     margin-bottom: 15px; }
   #questions-list li p {
@@ -1408,7 +1408,9 @@ a:visited.remove-question {
   top: 5px;
   right: 0; }
 
-.switch-answer {
+a:link.switch-answer.btn.xs,
+a:visited.switch-answer.btn.xs {
+  background: #555;
   font-size: 12px; }
 
 .icon_h {
