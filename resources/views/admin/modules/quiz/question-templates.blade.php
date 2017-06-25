@@ -19,7 +19,7 @@
 <script id="real-question-template" type="text">
   <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
-  <p><a href="#" class="add-answer btn xs ev">Agregar respuesta</a></p>
+  <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
 
 </script>
 
