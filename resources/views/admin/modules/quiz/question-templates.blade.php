@@ -5,7 +5,7 @@
     <div class="col-sm-12">
       <p>
     <p>
-    <label><strong>Escribe la pregunta <a class="remove-question" href="#">[ x ]</a></strong> <br>
+    <label><strong>Escribe la pregunta <a class="remove-question" href="#" title="Eliminar pregunta">x</a></strong> <br>
     {{Form::text('name',null, ["class" => "form-control"])}} </label>
     </p>
     <div class="row">
@@ -17,7 +17,7 @@
 </script>
 
 <script id="real-question-template" type="text">
-  <p><a href="#" class="question-name"></a></p><a href="#" class="remove-question">[ x ]</a>
+  <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
   <p><a href="#" class="add-answer btn xs ev">Agregar respuesta</a></p>
 
@@ -29,7 +29,7 @@
     <div class="col-sm-12">
       <p>
     <p>
-    <label><strong>Escribe la respuesta <a class="remove-answer" href="#">[ x ]</a></strong> <br>
+    <label><strong>Escribe la respuesta <a class="remove-answer" href="#">x</a></strong> <br>
     {{Form::text('name',null, ["class" => "form-control"])}} </label>
     </p>
     <div class="row">
@@ -42,10 +42,7 @@
 
 <script id="real-answer-template" type="text">
   <p>
-    <a href="#" class="answer-name"></a><a href="#" class="remove-answer">[ x ]</a>
-    <p>
-    <a href="#" class="switch-answer btn xs ev">Seleccionar como respuesta correcta</a>
-    </p>
+    <a href="#" class="answer-name"></a> <a href="#" class="remove-answer">x</a>  <a href="#" class="switch-answer btn xs ev">Seleccionar como respuesta correcta</a>   
   </p>
 </script>
 
