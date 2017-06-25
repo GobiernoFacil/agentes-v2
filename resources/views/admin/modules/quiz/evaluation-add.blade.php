@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar sesión')
+@section('title', 'Agregar preguntas a evaluación')
 @section('description', 'Agregar preguntas a evaluación')
-@section('body_class', 'quiz')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'modulos')
+@section('breadcrumb_type', 'add questions')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_quiz')
 
 @section('content')
 <div class="row">
