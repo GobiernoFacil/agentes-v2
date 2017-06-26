@@ -50,7 +50,18 @@ class FellowEvaluations extends Controller
            'user'=>$user,
          ]);
       }else{
-
+        if(!$activity->quizInfo){
+          return redirect('tablero');
+        }
+        $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
+        $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
+        return view('fellow.evaluation.evaluation-view')->with(
+         [
+           'user'=>$user,
+           'answers'=>$answers,
+           'score'  => $score,
+           'activity'=>$activity
+         ]);
       }
     }
 

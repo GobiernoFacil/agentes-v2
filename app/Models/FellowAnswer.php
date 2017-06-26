@@ -24,4 +24,7 @@ class FellowAnswer extends Model
     function user(){
       return $this->belongsTo("App\User");
     }
+    function answer(){
+      return $this->belongsTo("App\Models\Answer");
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Answer;
 class Question extends Model
 {
     //
@@ -18,5 +18,9 @@ class Question extends Model
 
     function answer(){
       return $this->hasMany("App\Models\Answer");
+    }
+
+    function correct_Answer($question_id){
+      return Answer::where('question_id',$question_id)->where('selected',1)->first();
     }
 }

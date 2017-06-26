@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\MyResetPassword;
-
+use App\Models\FellowAnswer;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -89,4 +89,10 @@ class User extends Authenticatable
     function fileScore(){
       return $this->hasMany("App\Models\FilesEvaluation",'fellow_id');
     }
+
+    function fellowAnswer($question_id,$user_id){
+      $answer = fellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->first();
+      return $answer ;
+    }
+
 }
