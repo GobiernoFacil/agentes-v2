@@ -1,12 +1,15 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Evaluación de'. $activity->name )
+@section('title', $activity->quizInfo->title )
 @section('description', 'Evaluación de'.  $activity->name)
 @section('body_class', 'fellow aprendizaje modulos')
+@section('breadcrumb_type', 'view questions')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_quiz')
 
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Evaluación {{$activity->quizInfo->title}}</h1>
+    <h1>{{$activity->quizInfo->title}}</h1>
+    <p><strong>Instrucciones:</strong> Selecciona la respuesta correcta.</p>
   </div>
 </div>
 
