@@ -1,7 +1,8 @@
 {!! Form::open(['url' => url("tablero/evaluacion/{$activity->slug}/save"), "class" => "form-horizontal"]) !!}
 <div class="row">
 	<div class="col-sm-12">
-		<p>{{$activity->quizInfo->description}}</p>
+		<h2>{{$activity->quizInfo->description}}</h2>
+		<div class="divider b"></div>
 	</div>
 </div>
   <?php $countP =1;?>
