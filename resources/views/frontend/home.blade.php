@@ -76,7 +76,7 @@
 	C25.872,13.543,28.956,10.459,32.747,10.459z M7.501,25.119c0-1.906,1.55-3.457,3.455-3.457s3.455,1.551,3.455,3.457
 	c0,1.904-1.55,3.455-3.455,3.455S7.501,27.023,7.501,25.119z"/>
 </svg>
-					<h3>200 aspirarantes</h3>
+					<h3>200 aspirantes</h3>
 				</div>
 				<div class="col-sm-4 center">
 					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
