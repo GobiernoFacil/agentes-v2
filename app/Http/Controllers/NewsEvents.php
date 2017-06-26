@@ -38,7 +38,7 @@ class NewsEvents extends Controller
       //
       $user   = Auth::user();
       $content = NewsEvent::find($id);
-      return view('admin.newsEvents.NewsEvent-view')->with([
+      return view('admin.newsEvents.newsEvent-view')->with([
         "user"      => $user,
         "content"    => $content
       ]);

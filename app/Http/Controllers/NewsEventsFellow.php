@@ -38,7 +38,7 @@ class NewsEventsFellow extends Controller
       //
       $user   = Auth::user();
       $content = NewsEvent::where('slug',$news_slug)->first();
-      return view('fellow.news.NewsEvent-view')->with([
+      return view('fellow.news.newsEvent-view')->with([
         "user"      => $user,
         "content"    => $content
       ]);

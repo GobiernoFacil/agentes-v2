@@ -18,9 +18,9 @@
 			<a href="{{ url('dashboard/fellows') }}" class="btn gde">Lista de Fellows</a>
 		</div>
 		<div class="box blue">
-			<h3>Evaluar Examen de diagnóstico</h3>
+			<h3>Evaluaciones</h3>
 			<p></p>
-			<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn gde">Ir a Evaluación</a>
+			<a href="{{ url('dashboard/evaluacion') }}" class="btn gde">Ir a Evaluaciones</a>
 		</div>
 	</div>
 	<div class="col-sm-9">
