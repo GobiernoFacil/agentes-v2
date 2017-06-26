@@ -10,6 +10,7 @@ use App\Models\Activity;
 use App\Models\Answer;
 use App\Models\FellowAnswer;
 use App\Models\FellowScore;
+use App\Models\FilesEvaluation;
 // FormValidators
 use App\Http\Requests\SaveFellowEvaluation;
 class FellowEvaluations extends Controller
@@ -25,10 +26,27 @@ class FellowEvaluations extends Controller
     {
       $user     = Auth::user();
       $modules  = Module::orderBy('start','asc')->get();
+      $fellowScores = FellowScore::where('user_id',$user->id)->get();
+      $fileScores = FilesEvaluation::where('fellow_id',$user->id)->get();
+      $total = Activity::where('type','evaluation')->count();
+      $score  = 0;
+      foreach ($fellowScores as $fscore) {
+          $score = $score + $fscore->score;
+      }
+      foreach ($fileScores as $ffscore){
+          $score = $score + $ffscore->score;
+      }
+
+      if($total!= 0){
+        $average = $score/$total;
+      }else{
+        $average = 0;
+      }
       return view('fellow.evaluation.evaluation-sheet')->with(
        [
          'user'=>$user,
-         'modules' =>$modules
+         'modules' =>$modules,
+         'average' => $average
        ]
       );
 
@@ -63,6 +81,29 @@ class FellowEvaluations extends Controller
            'activity'=>$activity
          ]);
       }
+    }
+
+
+    /**
+     * Muestra hoja de calificaciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFile($activity_slug)
+    {
+      $user      = Auth::user();
+      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
+      if($activity->files!='Sí'){
+        return redirect('tablero');
+      }
+      $score = FilesEvaluation::where('activity_id',$activity->id)->where('fellow_id',$user->id)->first();
+      return view('fellow.evaluation.evaluation-file-view')->with(
+         [
+           'user'=>$user,
+           'activity'=>$activity,
+           'score' =>$score
+      ]);
+
     }
 
       /**
@@ -131,5 +172,24 @@ class FellowEvaluations extends Controller
         $uScore->save();
         return redirect("tablero/calificaciones/ver/{$activity->slug}");
 
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function download(Request $request){
+      $user = Auth::user();
+      $data = FilesEvaluation::find($request->score_id);
+      $file = $data->path;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+
+      $filename = $data->name.".".$ext;
+      return response()->download($file, $filename, $headers);
     }
 }

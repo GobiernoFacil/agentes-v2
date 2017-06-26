@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Ver calificación {{$activity->quizInfo->title}}</h1>
+    <h1>Ver calificación {{$activity->title}}</h1>
   </div>
 </div>
 
@@ -18,27 +18,33 @@
 			</div>
 		    <div class="col-sm-12">
 				<div class="divider top"></div>
-				<ol class="list line">
-          @foreach($activity->quizInfo->question as $question)
+				<ul class="list">
 					<li class="row">
 						<span class="col-sm-9">
-						<h3>{{$question->question}}</h3>
-						<p><strong>Tu respuesta:</strong> {{$user->fellowAnswer($question->id,$user->id)->answer->value}}</p>
-            @if(!$user->fellowAnswer($question->id,$user->id)->correct)
-            <p><strong>Respuesta correcta:</strong> {{$question->correct_Answer($question->id)->value}}</p>
-            @endif
+						<h3>Comentarios</h3>
+						<p>{{$score->comments}}</p>
 						</span>
 						<span class="col-sm-3 right">
-              @if($user->fellowAnswer($question->id,$user->id)->correct)
-              <p><strong>Correcta </strong></p>
-              @else
-							<p><strong class ="danger">Incorrecta </strong></p>
-              @endif
 						</span>
 					</li>
-          @endforeach
 
-            	</ol>
+          <li class="row">
+						<span class="col-sm-9">
+						<h3>Url</h3>
+						<p>{{$score->url}}</p>
+						</span>
+						<span class="col-sm-3 right">
+						</span>
+					</li>
+          <li class="row">
+						<span class="col-sm-9">
+						<h3>Descargar archivo corregido</h3>
+						<a href="{{ url('tablero/calificaciones/archivo/get/' . $score->id) }}" class="btn xs view">Descargar</a>
+						</span>
+						<span class="col-sm-3 right">
+						</span>
+					</li>
+        </ul>
               <a href ="{{ url('tablero/calificaciones') }}"   class="btn view">Continuar</a>
 		    </div>
     @else

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\FellowScore;
 class Activity extends Model
 {
     //
@@ -47,6 +47,10 @@ class Activity extends Model
 
   function quizInfo(){
     return $this->hasOne("App\Models\QuizInfo");
+  }
+
+  function fellowScore($questionInfo_id,$user_id){
+    return FellowScore::where('questionInfo_id',$questionInfo_id)->where('user_id',$user_id)->first();
   }
 
 }

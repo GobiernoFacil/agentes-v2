@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
+use App\Models\FilesEvaluation;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -91,8 +92,12 @@ class User extends Authenticatable
     }
 
     function fellowAnswer($question_id,$user_id){
-      $answer = fellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->first();
+      $answer = FellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->first();
       return $answer ;
+    }
+
+    function fileFellowScore($fellow_id,$activity_id){
+      return FilesEvaluation::where('activity_id',$activity_id)->where('fellow_id',$fellow_id)->first();
     }
 
 }

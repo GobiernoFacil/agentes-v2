@@ -332,6 +332,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
     Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
+    Route::get('tablero/calificaciones/archivos/ver/{activity_slug}', 'FellowEvaluations@getFile');
+    Route::get('tablero/calificaciones/archivo/get/{score_id}', 'FellowEvaluations@download');
     Route::get('tablero/evaluacion/{activity_slug}', 'FellowEvaluations@add');
     Route::post('tablero/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
 
