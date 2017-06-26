@@ -50,7 +50,7 @@ class FellowEvaluations extends Controller
            'user'=>$user,
          ]);
       }else{
-        return redirect('tablero');
+
       }
     }
 
@@ -61,11 +61,17 @@ class FellowEvaluations extends Controller
        */
       public function add($activity_slug)
       {
-        $user      = Auth::user();
-        $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
+        $user         = Auth::user();
+        $activity     = Activity::where('slug',$activity_slug)->firstOrFail();
         if(!$activity->quizInfo){
           return redirect('tablero');
+        }else{
+          $check_answer = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->first();
+          if($check_answer){
+            return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->id}")->with('message','Ya has contestado la evaluación.');
+          }
         }
+
         return view('fellow.evaluation.evaluation-add')->with(
            [
              'user'=>$user,
@@ -112,7 +118,7 @@ class FellowEvaluations extends Controller
         $uScore->questionInfo_id = $activity->quizInfo->id;
         $uScore->score = $score;
         $uScore->save();
-        return redirect("dashboard/sesiones/actividades/ver/$activity->id");
+        return redirect("tablero/calificaciones/ver/{$activity->slug}");
 
     }
 }
