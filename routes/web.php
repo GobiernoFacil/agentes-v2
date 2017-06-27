@@ -245,6 +245,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/evaluacion/actividad/archivo-corregido/get/{file_id}', 'AdminEvaluations@downloadEv');
     Route::get('dashboard/evaluacion/actividad/archivo/evaluar/{file_id}', 'AdminEvaluations@fileEvaluation');
     Route::post('dashboard/evaluacion/actividad/archivo/evaluar/save/{file_id}', 'AdminEvaluations@saveFileEvaluation');
+    Route::get('dashboard/evaluacion/actividad/resultados/ver/{quiz_id}', 'AdminEvaluations@viewEvaluation');
     Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');

@@ -33,7 +33,7 @@
 			        <td>{{$fellow->user->fellowData->city}} <br> {{$fellow->user->fellowData->state}}</td>
 			        <td>{{$fellow->user->fellowData->origin}}</td>
 			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->created_at))}}">{{$fellow->created_at->diffForHumans()}}</a> </td>
-							<td>Sin evaluar</td>
+							<td>{{$fellow->user->FellowScoreActivity($fellow->user->id,$activity->quizInfo->id) ? number_format($fellow->user->FellowScoreActivity($fellow->user->id,$activity->quizInfo->id)->score,2)  : 'Sin evaluar'}}</td>
 			        <td>
 			          <a href ="{{ url('dashboard/evaluacion/actividad/resultados/ver/' . $fellow->id) }}"   class="btn xs view ev">Ver</a></td>
 			    </tr>

@@ -12,6 +12,7 @@ use App\Models\Activity;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
@@ -78,7 +79,7 @@ class AdminEvaluations extends Controller
           return redirect('dashboard');
         }
         $fellows  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
-        return view('admin.evaluations.activities-fellows -list')->with([
+        return view('admin.evaluations.activities-fellows-list')->with([
           "user"      => $user,
           "activity"   => $activity,
           "fellows"   =>$fellows
@@ -348,6 +349,24 @@ class AdminEvaluations extends Controller
       $evaluation->total_score = $evaluation->total_score + $answer_4_ponderation+$answer_5_ponderation;
       $evaluation->save();
       return true;
+
+    }
+
+    /**
+     * Muestra lista de respuestas de diagnostico general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewEvaluation($quizInfo_id)
+    {
+      $user      = Auth::user();
+      $score     = FellowScore::find($quizInfo_id);
+      $userf     = User::find($score->user_id);
+      return view('admin.evaluations.evaluation-view')->with([
+        "user"      => $user,
+        "score"   => $score,
+        "userf"      => $userf,
+      ]);
 
     }
 }
