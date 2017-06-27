@@ -27,7 +27,7 @@ class SaveFellowFileEvaluation extends FormRequest
     {
         return [
             //
-            'file' => 'file|mimes:doc,docx,pdf|max:25000',
+            'file_e' => 'file|mimes:doc,docx,pdf|max:100000',
             'score' => 'required|numeric',
             'url'  =>'required'
         ];

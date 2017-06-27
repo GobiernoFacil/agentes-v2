@@ -45,11 +45,11 @@ class FellowFiles extends Controller
         $activity   = Activity::where('slug',$request->activity_slug)->firstOrFail();
         $path  = public_path(self::UPLOADS);
         // [ SAVE THE file ]
-        if($request->hasFile('file') && $request->file('file')->isValid()){
-          $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
-          $request->file('file')->move($path, $name);
+        if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+          $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+          $request->file('file_e')->move($path, $name);
           $file         = new FellowFile();
-          $file->name = $request->file('file')->getClientOriginalName();
+          $file->name = $request->file('file_e')->getClientOriginalName();
           $file->activity_id = $activity->id;
           $file->path = $path.'/'.$name;
           $file->user_id = $user->id;

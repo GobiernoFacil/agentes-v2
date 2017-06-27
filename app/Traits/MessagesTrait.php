@@ -124,6 +124,10 @@ trait MessagesTrait{
          'file.mimes' => 'Debe ser un archivo de tipo doc,docx o pdf',
          'file.max' => 'Debe pesar 2.5 MB como máximo.',
          'parent_id.required' => 'Este campo es requerido',
+         //file fellow
+         'file_e.required' => 'Este campo es requerido',
+         'file_e.mimes' => 'Debe ser un archivo de tipo doc,docx o pdf',
+         'file_e.max' => 'Debe pesar 10 MB como máximo.',
          //forum
          'topic.required' => 'Este campo es requerido',
          'topic.max' => 'Este campo debe contener 256 caracteres como máximo',

@@ -4,9 +4,9 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Archivo</strong></label><br>
-      {{Form::file('file', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF, DOC,DOCX)
-      @if($errors->has('file'))
-      <strong class="error">{{$errors->first('file')}}</strong>
+      {{Form::file('file_e', ['class' => ''])}} (documento no mayor a 10 Mb, formato PDF, DOC,DOCX)
+      @if($errors->has('file_e'))
+      <strong class="error">{{$errors->first('file_e')}}</strong>
       @endif
     </p>
   </div>
