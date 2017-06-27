@@ -29,18 +29,22 @@ $( document ).ready(function() {
     if(this.value==='evaluation'){
       $('#user-file').show();
       $('#video').hide();
+      $('#end-file').show();
       $('#webinar').hide();
     }else if(this.value==='video'){
       $('#user-file').hide();
       $('#video').show();
+      $('#end-file').hide();
       $('#webinar').hide();
     }else if(this.value==='webinar'){
       $('#user-file').hide();
       $('#video').hide();
+      $('#end-file').hide();
       $('#user-file').hide();
       $('#webinar').show();
     }else{
       $('#webinar').hide();
+      $('#end-file').hide();
       $('#user-file').hide();
       $('#video').hide();
     }

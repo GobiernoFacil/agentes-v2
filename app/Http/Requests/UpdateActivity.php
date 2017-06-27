@@ -55,6 +55,20 @@ use MessagesTrait;
               'link_video'=>'required',
               'hasforum'=>'required'
           ];
+        }elseif($this->type==='evaluation'){
+          return [
+              //
+              'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'order'=> 'required|numeric',
+              'duration'=> 'required|numeric',
+              'facilitator_role'=> 'required',
+              'description'=> 'required',
+              'competitor_role'=> 'required',
+              'type'=>'required',
+              'hasforum'=>'required',
+              'files'=>'required',
+              'end'=>'required'
+          ];
         }else{
 
         return [

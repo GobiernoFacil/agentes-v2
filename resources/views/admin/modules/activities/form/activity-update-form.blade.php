@@ -53,6 +53,18 @@
     </p>
   </div>
 </div>
+<!-- cierre -->
+<div class="row" id ="end-file" style ="{{ $activity->type=='evaluation' ? '':'display:none;'}}">
+<div class="col-sm-12">
+  <p>
+    <label><strong>Fecha de cierre</strong> <br>
+    {{Form::text('end',null, ["class" => "form-control",'id'=>'startE'])}} </label>
+    @if($errors->has('end'))
+    <strong class="danger">{{$errors->first('end')}}</strong>
+    @endif
+  </p>
+</div>
+</div>
 <!-- upload -->
 <div class="row">
   <div class="col-sm-12">

@@ -69,7 +69,7 @@ class Activities extends Controller
             //
             $user      = Auth::user();
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
-            $activity  = new Activity($request->except(['_token','time','start','end','link']));
+            $activity  = new Activity($request->except(['_token','time','start','link']));
             if($request->files ==='Sí'){
               $activity->type = 'files';
             }
@@ -190,7 +190,7 @@ class Activities extends Controller
 
             //
             $user   = Auth::user();
-            $data   = $request->except(['_token','start','end','time','link','link_video']);
+            $data   = $request->except(['_token','start','time','link','link_video']);
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
               $data['type'] = 'files';

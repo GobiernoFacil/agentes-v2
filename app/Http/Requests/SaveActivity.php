@@ -54,9 +54,21 @@ class SaveActivity extends FormRequest
               'hasforum'=>'required'
           ];
 
+        }elseif($this->type==='evaluation'){
+          return [
+          'name'=> 'required|max:256|unique:activities',
+          'order'=> 'required|numeric',
+          'duration'=> 'required|numeric',
+          'facilitator_role'=> 'required',
+          'description'=> 'required',
+          'competitor_role'=> 'required',
+          'type'=>'required',
+          'hasforum'=>'required',
+          'end'=>'required',
+          'files'=>'required'
+        ];
         }else{
-
-        return [
+          return [
             //
             'name'=> 'required|max:256|unique:activities',
             'order'=> 'required|numeric',
