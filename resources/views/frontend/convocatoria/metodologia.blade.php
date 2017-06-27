@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1>¿Cómo se seleccionaron los candidatos para la convocatoria 2017 del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>?</h1>
-		<h2>Criterios y metodología de selección</h2>
+		<h2>Criterios y metodología de selección  <a href="#nota"><sup>1</sup></a></h2>
 		<p>El proceso de selección tuvo por objeto elegir 20 integrantes del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, edición 2017. Como criterio inicial se buscó seleccionar a 4 candidatos por cada una de las 5 entidades federativas que se incorporaron a esta primera convocatoria (Chihuahua, Morelos, Nuevo León, Oaxaca y Sonora).</p>
 
 		<p>El proceso de selección se llevó a cabo con base en el total de postulaciones recibidas, así como en los requisitos establecidos en la convocatoria. El proceso de selección se conformó por las siguientes etapas:</p>
@@ -403,7 +403,14 @@
 			</tbody>
 		</table>
 	</div>
-	
-	
+	<div class="col-sm-12">
+		<div class="divider"></div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<a id="nota"></a>
+		<div class="notes">
+			<p><sup>1</sup>  <strong>Nota</strong>: Dos candidatos declinaron su participación en el Programa por motivos personales, y a un candidato no se le formalizó su candidatura al no cumplir con los requisitos establecidos en la convocatoria y la documentación solicitada en el marco del proyecto. Por lo tanto, los tres candidatos que los sustituyeron fueron seleccionados de acuerdo al criterio establecido en la Base 4 de la Convocatoria “<em>…En caso de que un participante decida abandonar el programa, dicho espacio será ocupado por el aspirante rechazado con la calificación más alta en el proceso de selección</em>”.</p>
+		</div>
+	</div>
 </div>
 @endsection
