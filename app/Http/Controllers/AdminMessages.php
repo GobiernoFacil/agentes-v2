@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
+use Mail;
+use App\Notifications\SendNewMessage;
 // models
 use App\Models\Message;
 use App\Models\Conversation;
@@ -100,6 +103,7 @@ class AdminMessages extends Controller
       $conversation->user_id = $user->id;
       $conversation->title   = $request->title;
       $conversation->to_id   = $request->to_id;
+      $to_user = User::find($request->to_id);
       $conversation->save();
       $message = new Message();
       $message->conversation_id = $conversation->id;
@@ -107,6 +111,8 @@ class AdminMessages extends Controller
       $message->to_id   = $request->to_id;
       $message->message = $request->message;
       $message->save();
+      //envía correo
+      $to_user->notify(new SendNewMessage($user,$to_user));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
@@ -166,12 +172,16 @@ class AdminMessages extends Controller
       $message->user_id = $user->id;
       if($conversation->to_id != $user->id){
         $message->to_id   = $conversation->to_id;
+        $to_user          =  User::find($conversation->to_id);
       }else{
         $message->to_id   = $conversation->user_id;
+        $to_user          =  User::find($conversation->user_id);
       }
       $message->conversation_id = $conversation->id;
       $message->message = $request->message;
       $message->save();
+      //envía correo
+       $to_user->notify(new SendNewMessage($user,$to_user));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
