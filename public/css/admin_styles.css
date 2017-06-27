@@ -1633,6 +1633,11 @@ a.apertus:hover {
       color: #000;
       border-bottom: 1px dotted #3ca078; }
 
+.score_a.block {
+  font-size: 26px;
+  color: #51be92;
+  display: block; }
+
 strong.danger,
 .error {
   background: #cc0000;
