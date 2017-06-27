@@ -26,7 +26,7 @@
 			  <tbody>
 			    @foreach ($activities as $activity)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a></h4></td>
+							<td><h4> <a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a></h4></td>
 			        <td>{{$activity->session->name}}</td>
 			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
 			        <td>

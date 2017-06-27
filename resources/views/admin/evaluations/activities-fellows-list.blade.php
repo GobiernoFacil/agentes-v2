@@ -8,7 +8,7 @@
 @if($fellows->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Lista de usuarios con archivos para evaluar</h1>
+		<h1>Lista de usuarios con evaluación</h1>
 	</div>
 </div>
 <div class="box">
@@ -33,10 +33,9 @@
 			        <td>{{$fellow->user->fellowData->city}} <br> {{$fellow->user->fellowData->state}}</td>
 			        <td>{{$fellow->user->fellowData->origin}}</td>
 			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->created_at))}}">{{$fellow->created_at->diffForHumans()}}</a> </td>
-							<td>{{$fellow->user->fileFellowScore($fellow->user->id,$activity->id) ? $fellow->user->fileFellowScore($fellow->user->id,$activity->id)->score : 'Sin evaluar'}}</td>
+							<td>Sin evaluar</td>
 			        <td>
-			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
-			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}"   class="btn xs view ev">Evaluar</a></td>
+			          <a href ="{{ url('dashboard/evaluacion/actividad/resultados/ver/' . $fellow->id) }}"   class="btn xs view ev">Ver</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
@@ -49,13 +48,13 @@
 @else
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de usuarios con archivos para evaluar</h1>
+		<h1>Lista de usuarios con evaluación</h1>
 	</div>
 </div>
 <div class="box">
 	<div class="row center">
 		<div class="col-sm-10 col-sm-offset-1">
-		<h2>Sin usuarios con archivos</h2>
+		<h2>Sin usuarios con evaluación</h2>
 		</div>
 	</div>
 </div>

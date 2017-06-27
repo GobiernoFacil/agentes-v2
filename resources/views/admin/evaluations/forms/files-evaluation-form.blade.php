@@ -1,4 +1,4 @@
-{!! Form::open(['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$data->id", "class" => "form-horizontal", 'files'=>true]) !!}
+{!! Form::model($fellow,['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$data->id", "class" => "form-horizontal", 'files'=>true]) !!}
 
 
 <div class="row">
@@ -41,6 +41,9 @@
       {{Form::file('file', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF, DOC,DOCX)
       @if($errors->has('file'))
       <strong class="error">{{$errors->first('file')}}</strong>
+      @endif
+      @if($fellow->path)
+      <a href="{{ url('dashboard/evaluacion/actividad/archivo-corregido/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
       @endif
     </p>
   </div>

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use File;
 // models
 use App\Models\DiagnosticAnswer;
 use App\Models\DiagnosticEvaluation;
 use App\Models\Activity;
 use App\Models\FellowFile;
+use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
@@ -45,7 +47,7 @@ class AdminEvaluations extends Controller
     public function index()
     {
       $user       = Auth::user();
-      $activities   = Activity::where('type','evaluation')->where('files','Sí')->orderBy('created_at','desc')->paginate($this->pageSize);
+      $activities   = Activity::where('type','evaluation')->orderBy('session_id','desc')->paginate($this->pageSize);
       return view('admin.evaluations.activities-list')->with([
         "user"      => $user,
         "activities"   => $activities,
@@ -72,6 +74,15 @@ class AdminEvaluations extends Controller
         ]);
       }else{
         //ver fellows con examen automatico
+        if(!$activity->quizInfo){
+          return redirect('dashboard');
+        }
+        $fellows  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
+        return view('admin.evaluations.activities-fellows -list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows
+        ]);
       }
 
 
@@ -102,9 +113,11 @@ class AdminEvaluations extends Controller
     {
       $user      = Auth::user();
       $data      = FellowFile::where('id',$file_id)->firstOrFail();
+      $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id]);
       return view('admin.evaluations.file-evaluation')->with([
         "user"      => $user,
         "data"   => $data,
+        "fellow" => $fellow
       ]);
 
     }
@@ -118,7 +131,7 @@ class AdminEvaluations extends Controller
     {
       $user = Auth::user();
       $data = FellowFile::where('id',$request->file_id)->firstOrFail();
-      $eva  = new FilesEvaluation();
+      $eva  = FilesEvaluation::where('fellow_id',$data->user_id)->where('activity_id',$data->activity_id)->first();
       $eva->user_id = $user->id;
       $eva->fellow_id = $data->user_id;
       $eva->activity_id = $data->activity->id;
@@ -128,6 +141,9 @@ class AdminEvaluations extends Controller
       $path  = public_path(self::UPLOADSF);
       // [ SAVE THE file ]
       if($request->hasFile('file') && $request->file('file')->isValid()){
+        if($eva->path){
+          File::delete($eva->path);
+        }
         $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
         $request->file('file')->move($path, $name);
         $eva->name = $request->file('file')->getClientOriginalName();
@@ -228,6 +244,25 @@ class AdminEvaluations extends Controller
     public function download(Request $request){
       $user = Auth::user();
       $data = FellowFile::find($request->file_id);
+      $file = $data->path;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+
+      $filename = $data->name.".".$ext;
+      return response()->download($file, $filename, $headers);
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function downloadEv(Request $request){
+      $user = Auth::user();
+      $data = FilesEvaluation::find($request->file_id);
       $file = $data->path;
       $ext  = substr(strrchr($file,'.'),1);
       $mime = mime_content_type ($file);
