@@ -17,13 +17,17 @@
 			<h3 class="count_messages">{{ $forum->forum_conversations->count()}}</h3>
 		</div>
 		<div class="col-sm-11 col-xs-10">
-			@if($user->type == "admin")				
+			@if($user->type == "admin")
 				<h2><a href="{{ url('dashboard/foros/ver/'.$forum->id) }}">{{$forum->topic}}</a></h2>
 				<!--<a href ="{{ url('dashboard/foros/eliminar/' . $forum->id) }}"  id ="{{$forum->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 				@if($forum->session)
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 				@else
-				<p><span class="type state">Estado</span></p>
+					@if($forum->slug ==='foro-general')
+					<p><span class="type general">General</span></p>
+					@else
+					<p><span class="type state">Estado</span></p>
+					@endif
 				@endif
 			@endif
 			@if($user->type == "fellow")
@@ -33,7 +37,11 @@
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 				@else
 				<h2><a href='{{url("tablero-facilitador/foros/{$forum->id}")}}'>{{$forum->topic}}</a></h2>
-				<p><span class="type state">Estado</span></p>
+					@if($forum->slug ==='foro-general')
+					<p><span class="type general">General</span></p>
+					@else
+					<p><span class="type state">Estado</span></p>
+					@endif
 				@endif
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>

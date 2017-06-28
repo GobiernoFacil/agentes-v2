@@ -1,7 +1,7 @@
 <div class="row">
 <!-- título-->
 	<div class="col-sm-9">
-		<h1>{{$forum->topic}}</h1>		
+		<h1>{{$forum->topic}}</h1>
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
@@ -18,7 +18,11 @@
 		@if($forum->session)
 		<p><span class="type module_session">{{$forum->session->module->title}} / {{$forum->session->name}}</span></p>
 		@else
-		<p><span class="type state">Estado</span></p>
+			@if($forum->slug ==='foro-general')
+			<p><span class="type general">General</span></p>
+			@else
+			<p><span class="type state">Estado</span></p>
+			@endif
 		@endif
 		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		<div class="divider top"></div>
@@ -65,7 +69,7 @@
 					<div class="col-sm-2">
 						<h3 class="count_messages">{{$conversation->messages->count()}}</h3>
 					</div>
-				</div>				 
+				</div>
 			@endforeach
 			{{ $forums->links() }}
 		</div>
@@ -80,7 +84,7 @@
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		</div>
-		
+
 	</div>
 </div>
 @else

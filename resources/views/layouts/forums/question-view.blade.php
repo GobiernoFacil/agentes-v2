@@ -5,7 +5,11 @@
 		@if($question->forum->session)
 		<p><span class="type module_session">{{$question->forum->session->module->title}} / {{$question->forum->session->name}}</span></p>
 		@else
-		<p><span class="type state">Estado</span></p>
+			@if($question->forum->slug ==='foro-general')
+			<p><span class="type general">General</span></p>
+			@else
+			<p><span class="type state">Estado</span></p>
+			@endif
 		@endif
 		<div class="divider b"></div>
 	</div>
@@ -21,16 +25,16 @@
 	<div class="col-sm-9 forum_list">
     	<h1>{{$question->topic}} </h1>
     	<p class="author">Por
-    	@if($question->user->fellowData)  
-    	<!--fellow data -->  
-		{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}} 
-		@elseif($question->user->facilitatorData)  
-    	<!--facilitator data -->  
-		{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}} 
+    	@if($question->user->fellowData)
+    	<!--fellow data -->
+		{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}
+		@elseif($question->user->facilitatorData)
+    	<!--facilitator data -->
+		{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}}
 		@else
 		<!--super user data -->
 		{{$question->user->name}}
-		@endif	
+		@endif
 		<span>{{$question->created_at->diffForHumans()}}</span></p>
 	</div>
 	<!--mensajes-->
@@ -81,17 +85,17 @@
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
-	  				<p class="author">Por 
-		  			@if($message->user->fellowData) 	
-		  			<!--fellow data -->  
-		  			{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}} 
-		  			@elseif($message->user->facilitatorData)  
-		  			<!--facilitator data -->  
-		  			{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}} 
+	  				<p class="author">Por
+		  			@if($message->user->fellowData)
+		  			<!--fellow data -->
+		  			{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}
+		  			@elseif($message->user->facilitatorData)
+		  			<!--facilitator data -->
+		  			{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}}
 		  			@else
 		  			<!--super user data -->
 		  			{{$message->user->name}}
-		  			@endif	
+		  			@endif
 		  			<span>{{$message->created_at->diffForHumans()}}</span></p>
 				</div>
 				<div class="col-sm-12">

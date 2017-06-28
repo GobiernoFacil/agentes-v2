@@ -13,7 +13,11 @@
 		@if($question->forum->session)
 		<p><span class="type module_session">{{$question->forum->session->module->title}} / {{$question->forum->session->name}}</span></p>
 		@else
-		<p><span class="type state">Estado</span></p>
+			@if($question->forum->slug ==='foro-general')
+			<p><span class="type general">General</span></p>
+			@else
+			<p><span class="type state">Estado</span></p>
+			@endif
 		@endif
 		<div class="divider b"></div>
 	</div>
