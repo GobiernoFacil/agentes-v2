@@ -46,8 +46,15 @@
 					<p>{{$content->time}}</p>
 			  	</div>
 			</div>
+			@if($content->image)
+				<p><img src='{{url("img/newsEvent/{$content->image->name}")}}'></p>
+			@endif
+			{!!$content->content!!}
 			@else
 			<p class="lead">{{$content->brief}}</p>
+			@if($content->image)
+				<p><img src='{{url("img/newsEvent/{$content->image->name}")}}'></p>
+			@endif
 			{!!$content->content!!}
 			@endif
 		</div>

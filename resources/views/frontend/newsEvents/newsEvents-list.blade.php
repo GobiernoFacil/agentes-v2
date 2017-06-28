@@ -17,6 +17,9 @@
 					@foreach($all as $article)
 					<?php $count_a++?>					
 					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}}">
+						@if($article->image)
+						<p><img src='{{url("img/newsEvent/{$article->image->name}")}}'></p>
+						@endif	
 						@if($article->type==='event')
 						<h4 class="type_n {{$article->type}}">Evento</h4>
 						@elseif($article->type==='news')
