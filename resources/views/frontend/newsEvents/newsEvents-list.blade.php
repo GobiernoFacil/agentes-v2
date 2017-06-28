@@ -17,17 +17,20 @@
 					@foreach($all as $article)
 					<?php $count_a++?>					
 					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}}">
+					
 						@if($article->image)
-						<p><img src='{{url("img/newsEvent/{$article->image->name}")}}'></p>
+						<img src='{{url("img/newsEvent/{$article->image->name}")}}'>
 						@endif	
+						<span class="{{$count_a == 1 ?'first' : ''}}">
 						@if($article->type==='event')
 						<h4 class="type_n {{$article->type}}">Evento</h4>
 						@elseif($article->type==='news')
 						<h4 class="type_n {{$article->type}}">Noticia</h4>
 						@endif
-					
+						
 						<h2><a href="{{url('noticias-eventos/' . $article->slug)}}">{{$article->title}}</a></h2>
 						<p class="author">Por {{$article->user->name}} <span>{{$article->created_at->diffForHumans()}}</span></p>
+						</span>
 					</li>
 					@endforeach
 				</ul>
