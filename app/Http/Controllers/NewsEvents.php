@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use File;
+use App\Notifications\SendNotice;
 // models
 use App\Models\NewsEvent;
 use App\Models\ImagesNew;
@@ -104,6 +106,15 @@ class NewsEvents extends Controller
         $image->path = $path;
         $image->type = 'full';
         $image->save();
+      }
+
+      if($request->type==='notice' && $new->public){
+        $fellows = User::where('type','fellow')->where('enabled',1)->get();
+        foreach ($fellows as $fellow) {
+          //envía correo
+          $fellow->notify(new SendNotice($fellow,$new));
+        }
+
       }
       return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
     }
