@@ -33,13 +33,24 @@
         @if($session->facilitators->count()>0)
         <div class="col-sm-6">
           <p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
+	       <ul class="list-facilitator">
+
           @foreach ($session->facilitators as $facilitator)
+          	<li class="row">
+          	<span class="col-sm-2 right">
             @if($facilitator->user->image)
             <img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
             @else
+            <img src='{{url("img/users/default.png")}}' height="30px">
             @endif
-             {{$facilitator->user->name}} -  {{$facilitator->user->institution}} <br>
+          	</span>
+          	<span class="col-sm-10">
+
+            {{$facilitator->user->name}} -  {{$facilitator->user->institution}} 
+          	</span>
+          	</li>
           @endforeach
+	       </ul>
           </p>
         </div>
         @else
