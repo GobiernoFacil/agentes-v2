@@ -1812,6 +1812,11 @@ sup {
     border-bottom: 0;
     border-top: 0;
     padding: 0; }
+    .news_list li:first-child figure,
+    .news_view li:first-child figure {
+      overflow: hidden;
+      width: 100%;
+      max-height: 300px; }
     .news_list li:first-child img,
     .news_view li:first-child img {
       width: 100%; }
