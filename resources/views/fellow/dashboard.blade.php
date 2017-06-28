@@ -11,7 +11,7 @@
 	<div class="col-sm-9">
 		<div class="box">
 			<p>Bienvenido {{$user->name}} a la plataforma del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
-			
+
 			@if(!$user->diagnostic)
 			<div class="box blue">
 				<div class="row">
@@ -96,11 +96,13 @@
 								<h3 class="count_messages">{{$forum->messages->count()}}</h3>
 							</span>
 							<span class="col-sm-10">
-							@if($forum->forum->session)
-							<h2><a href="{{ url('tablero/foros/' .$forum->forum->session->module->slug.'/'.$forum->forum->session->slug) }}">{{$forum->topic}}</a></h2>
-							@else
-							<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
-							@endif
+								@if($forum->forum)
+									@if($forum->forum->session)
+									<h2><a href="{{ url('tablero/foros/' .$forum->forum->session->module->slug.'/'.$forum->forum->session->slug) }}">{{$forum->topic}}</a></h2>
+									@else
+									<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
+									@endif
+								@endif
 							<p><span>Preguntado {{$forum->created_at->diffForHumans()}}</span></p>
 							</span>
 						</li>
@@ -147,7 +149,7 @@
 						<p><a href="{{url('tablero/noticias')}}" class="btn view gde download">Ver Noticas</a></p>
 					</div>
 				@else
-				<p>Aún no existen noticias o avisos.</p>			
+				<p>Aún no existen noticias o avisos.</p>
 				@endif
 			</div>
 		</div>
