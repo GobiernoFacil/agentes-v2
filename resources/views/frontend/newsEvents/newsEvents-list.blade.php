@@ -19,9 +19,11 @@
 					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}}">
 					
 						@if($article->image)
+						<a href="{{url('noticias-eventos/' . $article->slug)}}" class="img_f">
 						<figure>
 						<img src='{{url("img/newsEvent/{$article->image->name}")}}'>
 						</figure>
+						</a>
 						@endif	
 						<span class="{{$count_a == 1 ?'first' : ''}}">
 						@if($article->type==='event')

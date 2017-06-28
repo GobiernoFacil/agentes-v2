@@ -1812,6 +1812,19 @@ sup {
     border-bottom: 0;
     border-top: 0;
     padding: 0; }
+    .news_list li:first-child a.img_f,
+    .news_view li:first-child a.img_f {
+      position: relative;
+      display: block;
+      border: 0; }
+    .news_list li:first-child a.img_f:hover figure:after,
+    .news_view li:first-child a.img_f:hover figure:after {
+      content: "";
+      background: rgba(81, 190, 146, 0.2);
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%; }
     .news_list li:first-child figure,
     .news_view li:first-child figure {
       overflow: hidden;
