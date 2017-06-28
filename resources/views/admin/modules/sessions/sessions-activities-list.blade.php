@@ -4,8 +4,7 @@
 	<!--icono-->
 	@if($user->type =='fellow')
 		@if($activity->type==='evaluation')
-			@if($activity->end >= $today )
-			{{var_dump($activity->end)}}
+			@if($today )
 			<div class="col-sm-1 right">
 				<b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b>
 			</div>
@@ -24,7 +23,7 @@
 
 	@if($user->type =='fellow')
 	 	@if($activity->type ==='evaluation')
-			@if($activity->end >= $today )
+			@if($today )
 			<div class="col-sm-{{ $user->type == 'admin' ? '8' : '9'}}">
 				<p>
 					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
