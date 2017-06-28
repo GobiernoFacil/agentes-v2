@@ -269,8 +269,8 @@ class Forums extends Controller
       public function stateForum($state_name)
       {
         $user      = Auth::user();
-        if($user->fellowData->state === $state_name || $state_name ="foro-general"){
-          if($state_name==='foro-general'){
+        if($user->fellowData->state == $state_name || $state_name =="foro-general"){
+          if($state_name=='foro-general'){
             $state_name= 'General';
           }
           $forum  = Forum::where('state_name',$state_name)->firstOrFail();
