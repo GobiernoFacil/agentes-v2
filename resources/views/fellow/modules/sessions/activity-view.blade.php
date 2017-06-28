@@ -6,7 +6,7 @@
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
 
 @section('content')
-
+<?php $today = date("Y-m-d");?>
 <div class="row">
 	<div class="col-sm-12">
 		<?php switch($activity->type) {
@@ -71,13 +71,23 @@
 
 @if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico' && $activity->quizInfo)
 	@if(!$score)
-		<div class="box">
+			@if($activity->end >= $today )
+				<div class="box">
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-1">
+								<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+						</div>
+					</div>
+				</div>
+			@else
 			<div class="row">
-				<div class="col-sm-3 col-sm-offset-1">
-						<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="box blue center">
+						<h2>El tiempo para responder el examen ha terminado</h2>
+					</div>
 				</div>
 			</div>
-		</div>
+			@endif
 		@else
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
@@ -91,9 +101,19 @@
 <div class="box">
 	<div class="row">
 		@if(!$files)
-		<div class="col-sm-3 col-sm-offset-1">
-				<a href='{{ url("tablero/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
-		</div>
+			@if($activity->end >= $today )
+					<div class="col-sm-3 col-sm-offset-1">
+							<a href='{{ url("tablero/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
+					</div>
+					@else
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<div class="box blue center">
+								<h2>El tiempo para subir el archivo ha terminado</h2>
+							</div>
+						</div>
+					</div>
+					@endif
 		@else
 		<div class="col-sm-10 col-sm-offset-1">
 			<div class="box blue center">
