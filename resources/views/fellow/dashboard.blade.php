@@ -100,7 +100,11 @@
 									@if($forum->forum->session)
 									<h2><a href="{{ url('tablero/foros/' .$forum->forum->session->module->slug.'/'.$forum->forum->session->slug) }}">{{$forum->topic}}</a></h2>
 									@else
-									<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
+										@if($forum->forum->slug==='foro-general')
+										<h2><a href="{{url("tablero/foros/{$forum->forum->slug}")}}">{{$forum->topic}}</a></h2>
+										@else
+										<h2><a href="{{url("tablero/foros/{$user->fellowData->state}")}}">{{$forum->topic}}</a></h2>
+										@endif
 									@endif
 								@endif
 							<p><span>Preguntado {{$forum->created_at->diffForHumans()}}</span></p>
