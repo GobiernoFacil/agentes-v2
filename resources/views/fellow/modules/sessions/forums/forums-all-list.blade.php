@@ -28,7 +28,6 @@
 	</div>
 	@foreach ($forums as $forum)
 
-
 	<div class="row">
 		<div class="col-sm-1 col-xs-2">
 			<h3 class="count_messages">{{ $forum->forum_conversations->count()}}</h3>
@@ -39,8 +38,13 @@
 			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@else
-			<h2><a href='{{url("tablero/foros/{$user->fellowData->state}")}}'>{{$forum->topic}}</a></h2>
-			<p><span class="type state">Estado</span></p>
+				@if($forum->topic==='Foro General')
+					<h2><a href='{{url("tablero/foros/{$forum->slug}")}}'>{{$forum->topic}}</a></h2>
+					<p><span class="type general">General</span></p>
+				@else
+				<h2><a href='{{url("tablero/foros/{$user->fellowData->state}")}}'>{{$forum->topic}}</a></h2>
+				<p><span class="type state">Estado</span></p>
+				@endif
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		</div>

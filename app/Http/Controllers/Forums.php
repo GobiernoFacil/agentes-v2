@@ -29,8 +29,12 @@ class Forums extends Controller
       $user     = Auth::user();
       $today = date("Y-m-d");
       $sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
-      $forums   = Forum::where('state_name',$user->fellowData->state)->orWhere(function($query)use($sessions_id){
+      $forums   = Forum::where('state_name',$user->fellowData->state)
+      ->orWhere(function($query)use($sessions_id){
         $query->where('state_name',null)->where('session_id',null);
+      })
+      ->orWhere(function($query){
+        $query->where('state_name','General');
       })
       ->orWhere(function($query)use($sessions_id){
         $query->whereIn('session_id',$sessions_id->toArray());
@@ -169,7 +173,11 @@ class Forums extends Controller
     {
       $user      = Auth::user();
       $session     = ModuleSession::where('slug',$request->session_slug)->first();
-      $forum       = Forum::where('state_name',$request->session_slug)->first();
+      if($request->session_slug==='foro-general'){
+        $forum       = Forum::where('state_name','General')->first();
+      }else{
+        $forum       = Forum::where('state_name',$request->session_slug)->first();
+      }
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
       if($session){
         //foro con sesión
@@ -261,7 +269,10 @@ class Forums extends Controller
       public function stateForum($state_name)
       {
         $user      = Auth::user();
-        if($user->fellowData->state === $state_name){
+        if($user->fellowData->state === $state_name || $state_name ="foro-general"){
+          if($state_name==='foro-general'){
+            $state_name= 'General';
+          }
           $forum  = Forum::where('state_name',$state_name)->firstOrFail();
           $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
           return view('fellow.modules.sessions.forums.forums-list')->with([

@@ -16,7 +16,11 @@
 		@if($session)
 		<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@else
-		<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
+			@if($forum->topic ==='Foro General')
+			<a href='{{ url("tablero/foros/pregunta/estado/{$forum->slug}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
+			@else
+			<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
+			@endif
 		@endif
 	</div>
 	<!-- descripción-->
@@ -25,7 +29,11 @@
 		@if($session)
 		<p><span class="type module_session">{{$forum->session->module->title}} / {{$forum->session->name}}</span></p>
 		@else
-		<p><span class="type state">Estado</span></p>
+			@if($forum->topic ==='Foro General')
+			<p><span class="type general">General</span></p>
+			@else
+			<p><span class="type state">Estado</span></p>
+			@endif
 		@endif
 		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		<div class="divider top"></div>
@@ -53,7 +61,11 @@
 						@if($session)
 						<h2> <a href="{{ url('tablero/foros/pregunta/'.$session->slug.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
 						@else
-						<h2><a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
+								@if($forum->topic ==='Foro General')
+									<h2><a href="{{ url('tablero/foros/'.$forum->slug.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
+								@else
+									<h2><a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
+								@endif
 						@endif
 						<!--fellow data -->
 						@if($conversation->user->fellowData)
@@ -95,7 +107,11 @@
 			@if($session)
 				<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
 			@else
-				<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
+				@if($forum->topic ==='Foro General')
+					<a href='{{ url("tablero/foros/pregunta/estado/{$forum->slug}/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
+				@else
+					<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
+				@endif
 			@endif
   		</div>
 	</div>

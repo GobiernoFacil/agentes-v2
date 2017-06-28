@@ -3,8 +3,13 @@
   @section('title', 'Agregar tema o nueva pregunta a ' . $session->forums->topic)
   @section('description', 'Agregar tema o nueva pregunta a ' .  $session->forums->topic)
 @else
-  @section('title', 'Agregar tema o nueva pregunta a foro del estado de ' .$session )
-  @section('description', 'Agregar tema o nueva pregunta a foro del estado de ' .  $session)
+  @if($session === 'foro-general')
+    @section('title', 'Agregar tema o nueva pregunta a foro general' )
+    @section('description', 'Agregar tema o nueva pregunta a foro general')
+  @else
+    @section('title', 'Agregar tema o nueva pregunta a foro del estado de ' .$session )
+    @section('description', 'Agregar tema o nueva pregunta a foro del estado de ' .  $session)
+  @endif
 @endif
 @section('body_class', 'fellow foros')
 @section('breadcrumb_type', 'forum add question')
@@ -16,7 +21,11 @@
     @if(isset($session->forums))
     <h1>Agregar tema o nueva pregunta a <strong>{{$session->forums->topic}}</strong></h1>
     @else
-    <h1>Agregar tema o nueva pregunta a <strong>foro del estado de {{$session}}</strong></h1>
+      @if($session === 'foro-general')
+        <h1>Agregar tema o nueva pregunta a <strong>foro general</strong></h1>
+      @else
+        <h1>Agregar tema o nueva pregunta a <strong>foro del estado de {{$session}}</strong></h1>
+      @endif
     @endif
   </div>
 </div>
