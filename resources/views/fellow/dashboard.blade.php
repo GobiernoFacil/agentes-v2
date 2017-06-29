@@ -60,6 +60,25 @@
 	</div>
 </div>
 
+<!--proximas actividades-->
+<div class="row">
+	<div class="col-sm-12">
+		<h2>Próximas evaluaciones</h2>
+		@if($next_activities->count()>0)
+				@include('fellow.next-activity-dash-view')
+		@else
+		<div class="box session_list">
+			<div class="row">
+				<div class="col-sm-12">
+					<p><strong>No hay evaluaciones próximas.</strong></p>
+				</div>
+			</div>
+		</div>
+		@endif
+	</div>
+</div>
+
+
 <!-- avance-->
 <div class="row">
 	<div class="col-sm-12">

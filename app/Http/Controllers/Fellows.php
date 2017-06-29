@@ -54,6 +54,11 @@ class Fellows extends Controller
           $module_last = Module::find($user_log->module_id);;
         }
       }
+      $time = strtotime($today);
+      $final = date("Y-m-d", strtotime("+1 month", $time));
+      $sess_id         = ModuleSession::where('start','<=',$final)->where('start','>=',$today)->pluck('id');
+      $next_activities = Activity::where('type','evaluation')->whereIn('session_id',$sess_id->toArray())->orderBy('session_id','asc')->limit(5)->get();
+
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
         "modules_count" => $modules->count(),
@@ -65,7 +70,8 @@ class Fellows extends Controller
         "all_modules"   => $all_modules,
         "forums"        => $forums,
         "messagesF"     => $messages,
-        "today"			=> $today
+        "today"			    => $today,
+        "next_activities" =>$next_activities
       ]);
     }
 
