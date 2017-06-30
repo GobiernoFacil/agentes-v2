@@ -14,7 +14,16 @@
         <?php $count  = 1;?>
         @foreach($activity->quizInfo->question as $question)
         <li><h4>Pregunta {{$count}}</h4>
-          {{$question->question}}</li>
+          {{$question->question}}
+          <ul>
+           @foreach($question->answer as $answer)
+           <li>{{$answer->value}} 
+           	@if($answer->selected === 1)
+           	<span class="success">Respuesta correcta</span></li>
+           	@endif
+           @endforeach
+          </ul>
+          </li>
           <?php $count++;?>
           @endforeach
           @else
