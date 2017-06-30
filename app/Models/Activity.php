@@ -31,7 +31,7 @@ class Activity extends Model
   }
 
   function activityRequirements(){
-    return $this->hasMany("App\Models\ActivityRequirement");
+    return $this->hasMany("App\Models\ActivityRequirement")->orderBy('order','asc');
   }
 
   function activityFiles(){
