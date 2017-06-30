@@ -23,7 +23,7 @@
 	</div>
 	<!--avatar-->
 	<div class="col-sm-1">
-		@if($user->image)
+		@if($question->user->image)
 		<img src='{{url("img/users/{$question->user->image->name}")}}' widht="100%">
 		@else
 		<img src='{{url("img/users/default.png")}}' widht="100%">
