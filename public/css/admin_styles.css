@@ -1646,6 +1646,15 @@ strong.danger,
   display: block;
   padding: 5px; }
 
+strong.success,
+.success {
+  background: green;
+  color: white;
+  margin: 10px 0;
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px; }
+
 a.btn,
 .btn,
 a:visited.btn {
