@@ -28,7 +28,7 @@ protected $fillable = [
   }
 
   function activities(){
-    return $this->hasMany("App\Models\Activity",'session_id')->orderBy('order','asc');
+    return $this->hasMany("App\Models\Activity",'session_id')->orderBy('created_at','asc');
   }
 
   function topics(){
