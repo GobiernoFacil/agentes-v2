@@ -29,6 +29,9 @@
 					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
 					<span class="notes">({{$activity->duration}})</span>
 				</p>
+				@if(!empty($activity->end))
+				<p>Fecha límite: <strong>{{ date("j/m/Y", strtotime($activity->end))}}</strong></p>
+				@endif
 			</div>
 			<div class="col-sm-{{ $user->type == 'admin' ? '3' : '2'}}">
 				<p class="links right">
@@ -45,6 +48,9 @@
 					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
 					<span class="notes">({{$activity->duration}})</span>
 				</p>
+				@if(!empty($activity->end))
+				<p>Fecha límite: {{ date("j / m / Y", strtotime($activity->end))}}</p>
+				@endif
 			</div>
 			<div class="col-sm-{{ $user->type == 'admin' ? '3' : '2'}}">
 				<p class="links right">
