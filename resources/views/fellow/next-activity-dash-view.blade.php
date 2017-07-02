@@ -25,6 +25,9 @@
 	      <div class="col-sm-2">
 	        <p><b class="icon_h time"></b>{{$activity->duration}} h </p>
 	      </div>
+	      <div class="col-sm-3">
+		      <p>Fecha límite: <strong>{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</strong></p>
+	      </div>
 	    </div>
 	  </div>
 		</div>
