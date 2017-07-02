@@ -38,7 +38,9 @@
 		<div class="divider b"></div>
 		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span></h1>
 		<div class="divider"></div>
+		@if(!empty($activity->end))
 		<h2>Fecha límite: {{ date("j / m / Y", strtotime($activity->end))}}</h2>
+		@endif
 	</div>
 </div>
 
