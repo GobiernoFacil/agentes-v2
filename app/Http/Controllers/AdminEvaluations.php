@@ -360,7 +360,7 @@ class AdminEvaluations extends Controller
     public function viewEvaluation($quizInfo_id)
     {
       $user      = Auth::user();
-      $score     = FellowScore::find($quizInfo_id);
+      $score     = FellowScore::where('questionInfo_id',$quizInfo_id)->firstOrFail();
       $userf     = User::find($score->user_id);
       return view('admin.evaluations.evaluation-view')->with([
         "user"      => $user,
