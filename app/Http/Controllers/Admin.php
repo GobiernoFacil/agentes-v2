@@ -52,7 +52,7 @@ class Admin extends Controller
         $facilitator_number =  User::where("type", "facilitator")->where("enabled",1)->count();
         $facilitators_count = $facilitator_number + $adm_count;
 		$news = NewsEvent::orderBy('created_at','desc')->take(3)->get();
-		
+
         return view('admin.dashboard')->with([
           "user"      		=> $user,
           "aspirants"		=> $aspirants,
@@ -281,5 +281,9 @@ class Admin extends Controller
           $image->save();
         }
         return redirect("dashboard/perfil")->with("message",'Perfil actualizado correctamente');
+      }
+
+      public function time(){
+        echo date('Y-m-d H:i:s');
       }
 }
