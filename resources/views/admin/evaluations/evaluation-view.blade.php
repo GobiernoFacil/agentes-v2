@@ -23,12 +23,11 @@
 					<li class="row">
 						<span class="col-sm-9">
 						<h3>{{$question->question}}</h3>
-						<p><strong>Tu respuesta:</strong> {{$userf->fellowAnswer($question->id,$userf->id)->answer->value}}</p>
             @if($userf->fellowAnswer($question->id,$userf->id))
+						<p><strong>Tu respuesta:</strong> {{$userf->fellowAnswer($question->id,$userf->id)->answer->value}}</p>
               @if(!$userf->fellowAnswer($question->id,$userf->id)->correct)
               <p><strong>Respuesta correcta:</strong> {{$question->correct_Answer($question->id)->value}}</p>
               @endif
-            @endif
 						</span>
 						<span class="col-sm-3 right">
               @if($userf->fellowAnswer($question->id,$userf->id)->correct)
@@ -37,6 +36,7 @@
 							<p><strong class ="danger">Incorrecta </strong></p>
               @endif
 						</span>
+            @endif
 					</li>
           @endforeach
 
