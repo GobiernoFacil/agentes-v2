@@ -13,6 +13,7 @@ use Mail;
 use App\User;
 use App\Models\Aspirant;
 use App\Models\Image;
+use App\Models\Conversation;
 use App\Models\Module;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
@@ -51,7 +52,13 @@ class Admin extends Controller
         ->where("enabled",1)->orderBy('name','asc')->count();*/
         $facilitator_number =  User::where("type", "facilitator")->where("enabled",1)->count();
         $facilitators_count = $facilitator_number + $adm_count;
-		$news = NewsEvent::orderBy('created_at','desc')->take(3)->get();
+		    $news = NewsEvent::orderBy('created_at','desc')->take(3)->get();
+        $conversation_id     = Conversation::where('user_id',$user->id)->pluck('id');
+        $conversations_count = Conversation::where('user_id',$user->id)
+        ->orWhere(function($query)use($conversation_id,$user){
+          $query->where('to_id',$user->id)->whereNotIn('id',$conversation_id->toArray());
+        })
+        ->count();
 
         return view('admin.dashboard')->with([
           "user"      		=> $user,
@@ -59,7 +66,8 @@ class Admin extends Controller
 		  "modules_count"	=> $modules_count,
 		  'facilitators_count' => $facilitators_count,
 		  'fellows'			   => $fellows,
-		  'news'			   => $news
+		  'news'			   => $news,
+      'conversations_count' =>$conversations_count
          ]);
       }
 
