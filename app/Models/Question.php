@@ -23,4 +23,8 @@ class Question extends Model
     function correct_Answer($question_id){
       return Answer::where('question_id',$question_id)->where('selected',1)->first();
     }
+
+    function count_correct($question_id){
+      return Answer::where('question_id',$question_id)->where('selected',1)->count();
+    }
 }

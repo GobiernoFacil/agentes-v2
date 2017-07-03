@@ -12,12 +12,15 @@
       <p>
         <label><strong>{{$question->question}}</strong> <br></label>
         <?php $count =0;?>
-        @foreach($question->answer as $answer)
-          <p>
-          <label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP])}}{{$answer->value}} </label>
-            <?php $count++;?>
-            </p>
-        @endforeach
+				@if($question->count_correct($question->id)>1)
+				<a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar todo</a>
+				@endif
+	        @foreach($question->answer as $answer)
+	          <p>
+	          <label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}{{$answer->value}} </label>
+	            <?php $count++;?>
+	            </p>
+	        @endforeach
       </p>
       @if($errors->has('answer_q'.$countP))
       <strong class="danger">{{$errors->first('answer_q'.$countP)}}</strong>
