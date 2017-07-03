@@ -26,7 +26,7 @@ class SaveFellowFiles extends FormRequest
     {
         return [
             //
-            'file' => 'required|file|mimes:doc,docx,pdf|max:25000',
+            'file_e' => 'required|file|mimes:doc,docx,pdf|max:100000',
         ];
     }
 }
