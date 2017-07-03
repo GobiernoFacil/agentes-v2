@@ -94,6 +94,7 @@ trait MessagesTrait{
          'name.unique' => 'El nombre debe de ser único',
          'order.required' => 'Este campo es requerido',
          'order.numeric' => 'Escribe un número',
+         'order.integer' => 'Este campo debe ser un número entero',
          'hours.numeric' => 'Escribe un número',
          'hours.required'=> 'El total de horas es requerido',
          //Actividades

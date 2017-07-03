@@ -31,7 +31,7 @@ use MessagesTrait;
           return [
               //
               'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
-              'order'=> 'required|numeric',
+              'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
               'description'=> 'required',
@@ -46,7 +46,7 @@ use MessagesTrait;
           return [
               //
               'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
-              'order'=> 'required|numeric',
+              'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
               'description'=> 'required',
@@ -59,7 +59,7 @@ use MessagesTrait;
           return [
               //
               'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
-              'order'=> 'required|numeric',
+              'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
               'facilitator_role'=> 'required',
               'description'=> 'required',
@@ -74,7 +74,7 @@ use MessagesTrait;
         return [
             //
             'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
-            'order'=> 'required|numeric',
+            'order'=> 'required|numeric|integer',
             'duration'=> 'required|numeric',
             'facilitator_role'=> 'required',
             'description'=> 'required',
