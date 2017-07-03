@@ -285,13 +285,5 @@ class Admin extends Controller
 
       public function time(){
         echo date('Y-m-d H:i:s');
-        $admin           = new User();
-        $admin->type     = "test";
-        $admin->name     = "prueba";
-        $admin->email    = "prueba@hot.com";
-        $admin->institution    = "nada";
-        $admin->enabled  = 0;
-        $admin->password = Hash::make('adasdasdasdasd');
-        $admin->save();
       }
 }
