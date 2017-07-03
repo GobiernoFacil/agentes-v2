@@ -22,6 +22,11 @@
 			<p></p>
 			<a href="{{ url('dashboard/evaluacion') }}" class="btn gde">Ir a Evaluaciones</a>
 		</div>
+		<div class="box">
+			<h3 class="sa_title">Mensajes</h3>
+			<!--<a class="count_link"  href="{{ url('dashboard/mensajes') }}">{{$fellows}}</a>-->
+			<a href="{{ url('dashboard/mensajes') }}" class="btn gde">Lista de Mensajes</a>
+		</div>
 	</div>
 	<div class="col-sm-9">
 		<div class="row">
