@@ -112,7 +112,7 @@ class AdminMessages extends Controller
       $message->message = $request->message;
       $message->save();
       //envía correo
-      $to_user->notify(new SendNewMessage($user,$to_user));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
@@ -181,7 +181,7 @@ class AdminMessages extends Controller
       $message->message = $request->message;
       $message->save();
       //envía correo
-       $to_user->notify(new SendNewMessage($user,$to_user));
+       $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
