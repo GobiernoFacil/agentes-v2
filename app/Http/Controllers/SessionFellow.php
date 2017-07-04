@@ -61,7 +61,7 @@ class SessionFellow extends Controller
         $forums   = null;
       }
       if($activity->quizInfo){
-        $score     = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->count();
+        $score     = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first();
       }else{
         $score = null;
       }
