@@ -118,7 +118,7 @@ class FellowEvaluations extends Controller
         if(!$activity->quizInfo){
           return redirect('tablero');
         }else{
-          $check_answer = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->first();
+          $check_answer = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first();
           if($check_answer){
             return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->id}")->with('message','Ya has contestado la evaluación.');
           }
