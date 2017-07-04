@@ -56,8 +56,8 @@ class Fellows extends Controller
       }
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
-      $sess_id         = ModuleSession::where('start','<=',$final)->where('start','>=',$today)->pluck('id');
-      $next_activities = Activity::where('type','evaluation')->whereIn('session_id',$sess_id->toArray())->orderBy('session_id','asc')->limit(5)->get();
+      $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
+      $next_activities = Activity::where('type','evaluation')->where('end','>=',$today)->whereIn('session_id',$sess_id->toArray())->orderBy('end','asc')->limit(5)->get();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
