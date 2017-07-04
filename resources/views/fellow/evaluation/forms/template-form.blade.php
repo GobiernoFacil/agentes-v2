@@ -13,7 +13,7 @@
         <label><strong>{{$question->question}}</strong> <br></label>
         <?php $count =0;?>
 				@if($question->count_correct($question->id)>1)
-				<a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar todo</a>
+				<a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas</a>
 				@endif
 	        @foreach($question->answer as $answer)
 	          <p>
