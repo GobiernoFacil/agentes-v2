@@ -16,7 +16,9 @@ use App\Models\Forum;
 use App\Models\ForumConversation;
 use App\Models\ForumMessage;
 use App\Models\FellowData;
+use App\Models\FellowScore;
 use App\Models\Image;
+use App\Models\QuizInfo;
 use Carbon\Carbon;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
@@ -58,7 +60,14 @@ class Fellows extends Controller
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
       $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
-      $next_activities = Activity::where('type','evaluation')->where('end','>=',$today)->whereIn('session_id',$sess_id->toArray())->orderBy('end','asc')->limit(3)->get();
+      $quiz_ids        = FellowScore::where('user_id',$user->id)->pluck('questionInfo_id');
+      $activityAlready = QuizInfo::whereIn('id',$quiz_ids->toArray())->pluck('activity_id');
+      $next_activities = Activity::where('type','evaluation')->where('end','>=',$today)
+      ->whereIn('session_id',$sess_id->toArray())
+      ->whereNotIn('id',$activityAlready->toArray())
+      ->orderBy('end','asc')
+      ->limit(3)
+      ->get();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
