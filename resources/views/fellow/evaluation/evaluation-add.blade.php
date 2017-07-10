@@ -28,13 +28,20 @@ $(document).ready(function() {
   <?php $countP =1;?>
   @foreach($activity->quizInfo->question as $question)
     <?php $count =0;?>
-    @foreach($question->answer as $answer)
-    $('.answer_q{{$countP}}').click(function(event) {
-       $('.answer_q{{$countP}}').not(this).attr('checked', false);
-       $(this).attr('checked', true);
-     });
-    <?php $count++;?>
-    @endforeach
+    @if($question->count_correct($question->id)==1)
+      @foreach($question->answer as $answer)
+      $('.answer_q{{$countP}}').click(function(event) {
+         $('.answer_q{{$countP}}').not(this).attr('checked', false);
+         $(this).attr('checked', true);
+       });
+      <?php $count++;?>
+      @endforeach
+    @else
+      $('#delete{{$countP}}_{{$count}}').click(function(event) {
+          event.preventDefault();
+          $('.answer_q{{$countP}}').not(this).attr('checked', false);
+       });
+    @endif
     <?php $countP++;?>
   @endforeach
 });

@@ -30,17 +30,21 @@ class SaveFellowEvaluation extends FormRequest
         $countP =1;
         $arr   = [];
         foreach ($activity->quizInfo->question as $question) {
-           $temp = ['answer_q'.$countP =>'required'];
            if(!$this->{'answer_q'.$countP}){
-             return [
+            return [
                 'answer_q'.$countP =>'required'
+             ];
+           }
+           if($question->count_correct($question->id)!=1 && count($this->{'answer_q'.$countP})!= $question->count_correct($question->id)){
+             return [
+                'answer_q'.$countP =>'array|between:'.$question->count_correct($question->id).','.$question->count_correct($question->id)
              ];
            }
            $countP++;
         }
 
-        return [
+       return [
 
-        ];
+      ];
     }
 }

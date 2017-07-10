@@ -97,6 +97,22 @@ class User extends Authenticatable
       return $answer ;
     }
 
+    function fellowMAnswer($question_id,$user_id,$answer_id){
+      $answer = FellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->where('answer_id',$answer_id)->first();
+      return $answer ;
+    }
+
+
+    function fellowMultipleAnswers($question_id,$user_id){
+      $answer = FellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->get();
+      return $answer ;
+    }
+
+    function count_incorrect($question_id,$user_id){
+      $answer = FellowAnswer::where('question_id',$question_id)->where('user_id',$user_id)->where('correct',0)->count();
+      return $answer ;
+    }
+
     function fileFellowScore($fellow_id,$activity_id){
       return FilesEvaluation::where('activity_id',$activity_id)->where('fellow_id',$fellow_id)->first();
     }

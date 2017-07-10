@@ -93,7 +93,7 @@
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <label><strong>Número de activdad</strong> <br>
+      <label><strong>Número de actividad</strong> <br>
       {{Form::text('order',null, ["class" => "form-control"])}} </label>
       @if($errors->has('order'))
       <strong class="danger">{{$errors->first('order')}}</strong>

@@ -24,7 +24,7 @@
 		</div>
 		<div class="box">
 			<h3 class="sa_title">Mensajes</h3>
-			<!--<a class="count_link"  href="{{ url('dashboard/mensajes') }}">{{$fellows}}</a>-->
+			<a class="count_link"  href="{{ url('dashboard/mensajes') }}">{{$conversations_count}}</a>
 			<a href="{{ url('dashboard/mensajes') }}" class="btn gde">Lista de Mensajes</a>
 		</div>
 	</div>
@@ -66,6 +66,6 @@
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 @endsection

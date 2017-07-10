@@ -18,27 +18,53 @@
 			</div>
 		    <div class="col-sm-12">
 				<div class="divider top"></div>
-				<ol class="list line">
+        <ol class="list line">
           @foreach($score->quizInfo->question as $question)
-					<li class="row">
-						<span class="col-sm-9">
-						<h3>{{$question->question}}</h3>
-						<p><strong>Tu respuesta:</strong> {{$userf->fellowAnswer($question->id,$userf->id)->answer->value}}</p>
-            @if(!$userf->fellowAnswer($question->id,$userf->id)->correct)
-            <p><strong>Respuesta correcta:</strong> {{$question->correct_Answer($question->id)->value}}</p>
+            @if($question->count_correct($question->id)>1)
+              <li class="row">
+                <span class="col-sm-9">
+                <h3>{{$question->question}}</h3>
+                <p><strong>Respuestas:</strong></p>
+                @foreach($userf->fellowMultipleAnswers($question->id,$userf->id) as $answerM)
+                    <p> {{$answerM->answer->value}}</p>
+                @endforeach
+                @if($user->count_incorrect($question->id,$userf->id)>=1)
+                  <p><strong>Respuestas correctas:</strong></p>
+                  @foreach($question->all_correct_Answer($question->id) as $answerM)
+                      <p> {{$answerM->value}}</p>
+                  @endforeach
+                @endif
+                </span>
+                <span class="col-sm-3 right">
+                  @if($user->count_incorrect($question->id,$userf->id)>=1)
+                  <p><strong class ="danger">Incorrecta </strong></p>
+                  @else
+                  <p><strong>Correcta </strong></p>
+                  @endif
+                </span>
+              </li>
+
+            @else
+              <li class="row">
+                <span class="col-sm-9">
+                <h3>{{$question->question}}</h3>
+                <p><strong>Respuesta:</strong> {{$userf->fellowAnswer($question->id,$userf->id)->answer->value}}</p>
+                @if(!$userf->fellowAnswer($question->id,$userf->id)->correct)
+                <p><strong>Respuesta correcta:</strong> {{$question->correct_Answer($question->id)->value}}</p>
+                @endif
+                </span>
+                <span class="col-sm-3 right">
+                  @if($userf->fellowAnswer($question->id,$userf->id)->correct)
+                  <p><strong>Correcta </strong></p>
+                  @else
+                  <p><strong class ="danger">Incorrecta </strong></p>
+                  @endif
+                </span>
+              </li>
             @endif
-						</span>
-						<span class="col-sm-3 right">
-              @if($userf->fellowAnswer($question->id,$userf->id)->correct)
-              <p><strong>Correcta </strong></p>
-              @else
-							<p><strong class ="danger">Incorrecta </strong></p>
-              @endif
-						</span>
-					</li>
           @endforeach
 
-            	</ol>
+              </ol>
 		    </div>
     @else
     	<div class="col-sm-12">

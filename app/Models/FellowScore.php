@@ -16,7 +16,7 @@ class FellowScore extends Model
     }
 
     function quizInfo(){
-      return $this->belongsTo("App\Models\quizInfo",'questionInfo_id');
+      return $this->belongsTo("App\Models\QuizInfo",'questionInfo_id');
     }
 
 }

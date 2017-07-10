@@ -357,10 +357,10 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewEvaluation($quizInfo_id)
+    public function viewEvaluation($score_id)
     {
       $user      = Auth::user();
-      $score     = FellowScore::find($quizInfo_id);
+      $score     = FellowScore::where('id',$score_id)->firstOrFail();
       $userf     = User::find($score->user_id);
       return view('admin.evaluations.evaluation-view')->with([
         "user"      => $user,
