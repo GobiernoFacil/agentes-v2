@@ -77,7 +77,7 @@
 					   <li class="row">
 					   		<!--activity name--->
 					   		<span class="col-sm-6">
-					   			<p><span><strong>{{$activity->name}}</strong></span></p>
+					   			<p><a href='{{url("tablero/aprendizaje/{$activity->session->slug}/{$activity->session->slug}/$activity->id")}}'><strong>{{$activity->name}}</strong></a></p>
 					   		</span>
 					   		<!--evaluation type--->
 					   		
