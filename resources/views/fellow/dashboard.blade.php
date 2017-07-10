@@ -156,7 +156,7 @@
 						<div class="divider"></div>
 					</div>
 					<div class="col-sm-8 col-sm-offset-2 center">
-						<p><a href="{{url('tablero/noticias')}}" class="btn view gde ">Ver Noticas</a></p>
+						<p><a href="{{url('tablero/noticias')}}" class="btn view gde ">Ver todas las noticas y avisos</a></p>
 					</div>
 				@else
 				<p>Aún no existen noticias o avisos.</p>

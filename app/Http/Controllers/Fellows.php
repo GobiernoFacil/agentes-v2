@@ -41,7 +41,7 @@ class Fellows extends Controller
       $session        = null;
       $activity       = null;
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
-      $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','asc')->limit(3)->get();
+      $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
       $forums         = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->get();
       $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
       $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
