@@ -33,7 +33,15 @@
 			<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
 				<div class="row">
 					<div class="col-sm-9">
-						<h3>{{\Illuminate\Support\Str::words($module->title,13,'…')}}</h3>
+						<h3>
+							@if($module->public && $today >= $module->start )
+							<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}'>
+							@endif
+							{{\Illuminate\Support\Str::words($module->title,13,'…')}}
+							@if($module->public && $today >= $module->start )
+							</a>
+							@endif
+						</h3>
 					</div>
 					<div class="col-sm-3">
 						<div class="hours">
