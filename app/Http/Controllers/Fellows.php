@@ -17,6 +17,7 @@ use App\Models\ForumConversation;
 use App\Models\ForumMessage;
 use App\Models\FellowData;
 use App\Models\Image;
+use Carbon\Carbon;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
 class Fellows extends Controller
@@ -57,7 +58,7 @@ class Fellows extends Controller
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
       $sess_id         = ModuleSession::where('start','<=',$final)->where('start','>=',$today)->pluck('id');
-      $next_activities = Activity::where('type','evaluation')->whereIn('session_id',$sess_id->toArray())->orderBy('session_id','asc')->limit(5)->get();
+      $next_activities = Activity::where('type','evaluation')->whereIn('session_id',$sess_id->toArray())->orderBy('session_id','asc')->limit(3)->get();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
