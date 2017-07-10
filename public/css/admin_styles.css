@@ -1847,6 +1847,14 @@ a.link {
     color: white; }
   .box.session_list {
     padding-bottom: 0; }
+  .box.next_eval {
+    padding-top: 0; }
+    .box.next_eval a.btn.sessions_l,
+    .box.next_eval .btn.sessions_l,
+    .box.next_eval a:visited.btn.sessions_l {
+      line-height: 50px;
+      min-height: 50px;
+      margin-bottom: 30px; }
 
 .aspirantes h2 {
   margin-bottom: 30px; }
@@ -1964,15 +1972,27 @@ sup {
   .lecturas li h2 span {
     font-weight: 300; }
 
-.footnote {
+.footnote,
+.header_note {
   background: #f9fafa;
   color: #606060;
   clear: both;
   min-height: 20px;
   padding: 15px; }
-  .footnote p {
+  .footnote p,
+  .header_note p {
     font-size: 14px;
     margin-bottom: 0; }
+
+.header_note {
+  background: #a9220d;
+  margin: 0 0 30px; }
+  .header_note p {
+    color: white; }
+    .header_note p span {
+      text-transform: uppercase; }
+    .header_note p strong {
+      color: white; }
 
 .forum_list h2 {
   font-size: 21px;
