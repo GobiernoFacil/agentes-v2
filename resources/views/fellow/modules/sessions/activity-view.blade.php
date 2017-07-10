@@ -58,7 +58,7 @@
 	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-1">
-				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
 		</div>
 	</div>
 	@endif
@@ -79,7 +79,7 @@
 				<div class="box">
 					<div class="row">
 						<div class="col-sm-3 col-sm-offset-1">
-								<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde"><strong>+</strong> Ir a evaluación</a>
+								<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
 						</div>
 					</div>
 				</div>
