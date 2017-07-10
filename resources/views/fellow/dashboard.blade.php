@@ -9,28 +9,35 @@
 		<h1>Tablero de control</h1>
 	</div>
 	<div class="col-sm-9">
-		<div class="box">
-			<p>Bienvenido {{$user->name}} a la plataforma del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>.</p>
-
-			@if(!$user->diagnostic)
-			<div class="box blue">
-				<div class="row">
-					<div class="col-sm-6 right">
-						<h2>Realiza el examen de diagnóstico</h2>
-					</div>
-					<div class="col-sm-6">
-						<a href="{{url('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar')}}" class="btn view">Responder examen</a>
-					</div>
+		<!--proximas actividades-->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="divider b"></div>
+		<h2>Próximas evaluaciones</h2>
+		@if($next_activities->count()>0)
+				@include('fellow.next-activity-dash-view')
+		@else
+		<div class="box session_list">
+			<div class="row">
+				<div class="col-sm-12">
+					<p><strong>No hay evaluaciones próximas.</strong></p>
 				</div>
 			</div>
-			@endif
 		</div>
+		@endif
+	</div>
+</div>
 	</div>
 	<div class="col-sm-3">
 		<div class="box blue center">
 			<h2>Calificaciones</h2>
 			<a href="{{url('tablero/calificaciones')}}" class="btn view gde">Ver calificaciones</a></h2>
 		</div>
+		<div class="box ">
+					<h3 class="sa_title">Tus Conversaciones</h3>
+					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
+					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
+				</div>
 	</div>
 </div>
 
@@ -38,6 +45,7 @@
 <!--actividad-->
 <div class="row">
 	<div class="col-sm-12">
+		<div class="divider b"></div>
 		<h2>Tu última actividad</h2>
 		@if($user->log->count()>0)
 			@if($session)
@@ -60,30 +68,14 @@
 	</div>
 </div>
 
-<!--proximas actividades-->
-<div class="row">
-	<div class="col-sm-12">
-		<h2>Próximas evaluaciones</h2>
-		@if($next_activities->count()>0)
-				@include('fellow.next-activity-dash-view')
-		@else
-		<div class="box session_list">
-			<div class="row">
-				<div class="col-sm-12">
-					<p><strong>No hay evaluaciones próximas.</strong></p>
-				</div>
-			</div>
-		</div>
-		@endif
-	</div>
-</div>
+
 
 
 <!-- avance-->
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Tu avance</h2>
 			<div class="box">
+					<h3 class="sa_title">Tu avance</h3>
 					<ul class="timeline">
 						@if($all_modules->count()>0)
 								@foreach($all_modules as $m)
@@ -97,14 +89,8 @@
 
 
 	<div class="row">
-		<div class="col-sm-4 center">
-				<div class="box ">
-					<h3 class="sa_title">Tus Conversaciones</h3>
-					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
-					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
-				</div>
-			</div>
-		<div class="col-sm-8">
+		
+		<div class="col-sm-6">
 				<div class="box forum_list">
 					<h3 class="sa_title">Tu participación en los foros</h3>
 					@if($forums->count()>0 || $messagesF->count()>0)
@@ -152,12 +138,13 @@
 					<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 				</div>
 			</div>
-		</div>
+	
 
 		<!--noticias-->
-		<div class="col-sm-12">
-			<h2>Noticias y avisos</h2>
+		<div class="col-sm-6">
 			<div class="box news">
+					<h3 class="sa_title">Noticias y avisos</h3>
+					<p></p>
 				@if($newsEvent->count()>0)
 				<ul class="list line">
 					@foreach($newsEvent as $article)
@@ -169,7 +156,7 @@
 						<div class="divider"></div>
 					</div>
 					<div class="col-sm-8 col-sm-offset-2 center">
-						<p><a href="{{url('tablero/noticias')}}" class="btn view gde download">Ver Noticas</a></p>
+						<p><a href="{{url('tablero/noticias')}}" class="btn view gde ">Ver Noticas</a></p>
 					</div>
 				@else
 				<p>Aún no existen noticias o avisos.</p>
@@ -178,6 +165,6 @@
 		</div>
 
 	</div>
-
+	</div>
 </div>
 @endsection
