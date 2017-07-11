@@ -38,6 +38,11 @@
 					<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
 					<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 				</div>
+				<div class="box ">
+							<h3 class="sa_title">Tus archivos</h3>
+							<a href="{{ url('tablero/perfil/archivos') }}" class="count_link">{{$user->fellowFiles->count()}}</a>
+							<a href="{{ url('tablero/perfil/archivos') }}" class="btn gde">Ver todos los archivos</a>
+						</div>
 	</div>
 </div>
 
@@ -89,7 +94,7 @@
 
 
 	<div class="row">
-		
+
 		<div class="col-sm-6">
 				<div class="box forum_list">
 					<h3 class="sa_title">Tu participación en los foros</h3>
@@ -138,7 +143,7 @@
 					<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 				</div>
 			</div>
-	
+
 
 		<!--noticias-->
 		<div class="col-sm-6">
