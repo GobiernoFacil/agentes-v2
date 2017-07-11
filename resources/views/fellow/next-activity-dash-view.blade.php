@@ -10,7 +10,7 @@
 	@if($count_a == 1)
 	<div class="col-sm-12">
 	@endif
-	
+
 		<div class="box session_list next_eval">
 			<div class="row">
 				<!-- footnote-->
@@ -25,7 +25,7 @@
 				      </div>
 				    </div>
 				  </div>
-				
+
 				<div class="col-sm-12">
 				  <h5>Actividad {{$activity->order}}</h5>
 				  <h2><a href='{{url("tablero/aprendizaje/{$activity->session->slug}/{$activity->session->slug}/$activity->id")}}'>{{$activity->name}}</a></h2>
@@ -47,9 +47,13 @@
 				  </div>
 				  <!-- ver sesión-->
 				  <div class="col-sm-12">
-				    <a class="btn view block sessions_l" href='{{url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
+						@if($activity->files==='Sí')
+							<a class="btn view block sessions_l" href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Comenzar evaluación</a>
+						@else
+				    	<a class="btn view block sessions_l" href='{{url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
+						@endif
 				  </div>
-		         
+
 			</div>
 		</div>
 	</div>

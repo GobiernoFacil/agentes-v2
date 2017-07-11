@@ -10,12 +10,14 @@ use App\Models\Activity;
 use App\Models\Answer;
 use App\Models\FellowAnswer;
 use App\Models\FellowScore;
+use App\Models\QuizInfo;
 use App\Models\FilesEvaluation;
 // FormValidators
 use App\Http\Requests\SaveFellowEvaluation;
 class FellowEvaluations extends Controller
 {
     //
+    public $pageSize = 10;
 
     /**
      * Muestra hoja de calificaciones
@@ -215,4 +217,30 @@ class FellowEvaluations extends Controller
       $filename = $data->name.".".$ext;
       return response()->download($file, $filename, $headers);
     }
+
+
+
+    /**
+     * Lista de evaluaciones del usuario
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexEvaluations()
+    {
+      $user               = Auth::user();
+      $activities         = Activity::where('type','evaluation')
+      ->orderBy('end','asc')
+      ->paginate($this->pageSize);
+      $today = date("Y-m-d");
+
+      return view('fellow.evaluation.evaluation-list-view')->with(
+         [
+           'user'=>$user,
+           'activities' =>$activities,
+           'today' => $today
+      ]);
+
+    }
+
+
 }
