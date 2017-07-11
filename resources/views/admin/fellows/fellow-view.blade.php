@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<ul class="profile list">
-				<li><span>Nombre:</span> 
+				<li><span>Nombre:</span>
 				@if($user->image)
 				<img src='{{url("img/users/{$user->image->name}")}}' height="50px">
 				@else

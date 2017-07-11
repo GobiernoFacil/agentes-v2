@@ -16,6 +16,7 @@ use App\Models\Forum;
 use App\Models\ForumConversation;
 use App\Models\ForumMessage;
 use App\Models\FellowData;
+use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\Image;
 use App\Models\QuizInfo;
@@ -27,6 +28,8 @@ class Fellows extends Controller
     //
     // En esta carpeta se guardan las imágenes de los usuarios
     const UPLOADS = "img/users";
+    //Paginación
+    public $pageSize = 10;
 
     /**
      * Muestra panel de inicio para fellow
@@ -152,6 +155,41 @@ class Fellows extends Controller
       }
 
       return redirect("tablero/perfil")->with("message",'Perfil actualizado correctamente');
+    }
+
+    /**
+     * ver archivos de evaluación del usuario  fellow
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function viewFiles()
+    {
+      $user = Auth::user();
+      $files = FellowFile::where('user_id',$user->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('fellow.profile.profile-files')->with([
+        "user"      => $user,
+        "files"     => $files
+      ]);
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function download(Request $request){
+      $user = Auth::user();
+      $data = FellowFile::where('id',$request->file_id)->where('user_id',$user->id)->firstOrFail();
+      $file = $data->path;
+      $ext  = substr(strrchr($file,'.'),1);
+      $mime = mime_content_type ($file);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+
+      $filename = $data->name.".".$ext;
+      return response()->download($file, $filename, $headers);
     }
 
 }

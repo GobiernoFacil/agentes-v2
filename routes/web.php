@@ -288,6 +288,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/perfil', 'Fellows@viewProfile');
     Route::get('tablero/perfil/editar', 'Fellows@editProfile');
     Route::post('tablero/perfil/save', 'Fellows@saveProfile');
+    Route::get('tablero/perfil/archivos', 'Fellows@viewFiles');
+    Route::get('tablero/perfil/archivos/descargar/{file_id}', 'Fellows@download');
     /*@ModulesFellow Controller */
     // Rutas módulos
     Route::get('tablero/aprendizaje', 'ModulesFellow@index');
