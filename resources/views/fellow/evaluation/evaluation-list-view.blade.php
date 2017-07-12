@@ -10,11 +10,10 @@
 	<div class="col-sm-12">
 		<h1>Evaluaciones</h1>
 	</div>
-</div>
-
-		@foreach ($activities as $activity)
-    		<div class="col-sm-12">
+	
+	<div class="col-sm-12">
           <div class="box session_list">
+		@foreach ($activities as $activity)
             <div class="row">
               <!-- footnote-->
                 <div class="header_note">
@@ -82,11 +81,12 @@
                 </div>
 
             </div>
-          </div>
-          </div>
 			    @endforeach
-
+          </div>
   {{ $activities->links() }}
+          </div>
+  </div>
+
 @else
 <div class="row">
 	<div class="col-sm-9">
