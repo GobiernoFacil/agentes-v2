@@ -10,7 +10,7 @@
 	<div class="col-sm-12">
 		<h1>Evaluaciones</h1>
 	</div>
-	
+
 	<div class="col-sm-12">
           <div class="box session_list">
 		@foreach ($activities as $activity)
@@ -37,6 +37,25 @@
                     <div class="col-sm-12">
                         <p><strong>Módulo</strong>: {{$activity->session->module->title}}</p>
                         <p><strong>Sesión</strong>: {{$activity->session->name}}</p>
+												@if($activity->files==='Sí')
+													@if($user->FellowFileUp($user->id,$activity->id))
+														<p><strong>Completada</strong>: Si</p>
+													@else
+													  <p><strong>Completada</strong>: No</p>
+													@endif
+												@else
+												 @if($activity->quizInfo)
+													 @if($user->FellowScoreActivity($user->id,$activity->quizInfo->id))
+													  <p><strong>Completada</strong>: Si</p>
+													 @else
+														 <p><strong>Completada</strong>: No</p>
+													 @endif
+												 @else
+												 <p><strong>Completada</strong>: No</p>
+												 @endif
+												@endif
+
+
                     </div>
                   </div>
                 </div>
@@ -51,27 +70,27 @@
                 <div class="col-sm-12">
                   @if($activity->end >= $today )
                         @if($activity->files==='Sí')
-                          @if($user->FellowFileUp($user->id,$activity->id))
-                          <div class="box blue center">
-                            <h2>Ya cuentas con un archivo</h2>
-                          </div>
-                          @else
-                          <a class="btn view block sessions_l" href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Comenzar evaluación</a>
-                          @endif
+	                          @if($user->FellowFileUp($user->id,$activity->id))
+	                          <div class="box blue center">
+	                            <h2>Ya cuentas con un archivo</h2>
+	                          </div>
+	                          @else
+	                          <a class="btn view block sessions_l" href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Comenzar evaluación</a>
+	                          @endif
                         @else
-                          @if($activity->quizInfo)
-                            @if($user->FellowScoreActivity($user->id,$activity->quizInfo->id))
-                            <div class="box blue center">
-                      				<h2>Ya respondiste el examen</h2>
-                      			</div>
-                          @else
-                          <div class="box blue center">
-                            <h2>La evaluación aún no esta disponible</h2>
-                          </div>
-                          @endif
-                          @else
-                          <a class="btn view block sessions_l" href='{{url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
-                          @endif
+		                          @if($activity->quizInfo)
+		                            @if($user->FellowScoreActivity($user->id,$activity->quizInfo->id))
+		                            <div class="box blue center">
+		                      				<h2>Ya respondiste el examen</h2>
+		                      			</div>
+			                          @else
+																	<a class="btn view block sessions_l" href='{{url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
+			                          @endif
+		                          @else
+																<div class="box blue center">
+																	<h2>La evaluación aún no esta disponible</h2>
+																</div>
+		                          @endif
                         @endif
                   @else
                   <div class="box blue center">
