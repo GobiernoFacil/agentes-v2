@@ -135,5 +135,10 @@ class ActivityRequirements extends Controller
         public function delete($id)
         {
             //
+            $requirement  = ActivityRequirement::where('id',$id)->firstOrFail();
+            $ac_id  = $requirement->activity_id;
+            $requirement->delete();
+            return redirect("dashboard/sesiones/actividades/ver/$ac_id")->with('success',"Se ha eliminado correctamente");
+
         }
 }
