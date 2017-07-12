@@ -200,4 +200,21 @@ class ActivitiesFiles extends Controller
       $filename = $data->name.".".$ext;
       return response()->download($file, $filename, $headers);
     }
+
+    /**
+     * elimina archivo
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        //
+        $file  = ActivitiesFile::where('id',$id)->firstOrFail();
+        $ac_id  = $file->activity_id;
+        File::delete($file->path."/".$file->identifier);
+        $file->delete();
+        return redirect("dashboard/sesiones/actividades/ver/$ac_id")->with('success',"Se ha eliminado correctamente");
+
+    }
 }

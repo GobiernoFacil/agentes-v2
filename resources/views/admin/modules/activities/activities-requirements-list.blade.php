@@ -27,7 +27,7 @@
 			<td>
 				<!--<a href="{{ url('dashboard/sesiones/actividades/requerimientos/ver/' . $requirement->id) }}" class="btn xs ev">Ver</a>-->
 				<a href="{{ url('dashboard/sesiones/actividades/requerimientos/editar/' . $requirement->id) }}" class="btn xs view">Actualizar</a>
-				<!-- <a href ="{{ url('dashboard/modulos/eliminar' . $requirement->id) }}"  id ="{{$requirement->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
+				<a href ="{{ url('dashboard/sesiones/actividades/requerimientos/deshabilitar/' . $requirement->id) }}"  id ="{{$requirement->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 			 </td>
 			 @endif
 		</tr>
