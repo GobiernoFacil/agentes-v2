@@ -101,7 +101,6 @@
   {{ $activities->links() }}
           </div>
   </div>
-
 @else
 <div class="row">
 	<div class="col-sm-9">
