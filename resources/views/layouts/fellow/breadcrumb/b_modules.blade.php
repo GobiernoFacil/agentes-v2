@@ -4,7 +4,7 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="module list")
 	<li>Módulos de aprendizaje</li>
 	@endif
-	@if ($__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="session view" || $__env->yieldContent('breadcrumb_type') =="activity view" || $__env->yieldContent('breadcrumb_type') =="module test")
+	@if ($__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="session view" || $__env->yieldContent('breadcrumb_type') =="activity view" || $__env->yieldContent('breadcrumb_type') =="module test" || $__env->yieldContent('breadcrumb_type') =="evaluation list")
 	<li><a href="{{url('tablero/aprendizaje')}}">Módulos de aprendizaje</a></li>
 	@endif
 	
@@ -28,6 +28,10 @@
 	<!--ver sessión.-->
 	<li><a href="{{ url('tablero/aprendizaje/' .$session->module->slug .'/' . $session->slug ) }}">Sesión {{$session->order . ': ' . $session->name}}</a></li>
 	<li>Actividad: {{$activity->name}}</li>
+	@endif
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="evaluation list" )
+	<li>Lista de Evaluaciones - Ensayos</li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="module test" )
