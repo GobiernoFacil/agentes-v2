@@ -24,9 +24,13 @@
 				  <p>Estatus</p>
 				</div>
 			</div><!--row ends-->
-			<div class="divider"></div>
+			<div class="col-sm-12">
+				<div class="divider"></div>
+			</div>
 			@foreach($module->sessions as $session)
-			<h2 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h2>
+			<div class="col-sm-5">
+				<h2 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h2>
+			</div>
 			<!--lista evaluaciones-->
 			<div class="session_list">
 				@if($session->activity_eval($session->id)->count() > 0)
@@ -101,7 +105,16 @@
 					</div><!--row ends-->
 					@endforeach
 				@else
-				<h4>Sin evaluaciones</h4>
+					<div class="row">
+						<!--divider-->
+						<div class="col-sm-11 col-sm-offset-1">
+						  <div class="divider"></div>
+						</div>
+						<!--- título-->
+						<div class="col-sm-4 col-sm-offset-1">
+            			  <h4>Sin evaluaciones</h4>
+            			</div>
+					</div>
 				@endif
             </div><!--lista ends-->
 			@endforeach
