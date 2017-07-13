@@ -7,7 +7,8 @@
 @if($modules->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Evaluaciones/Tareas</h1>
+		<h1>Evaluaciones / Ensayos</h1>
+		<p>En este apartado podrás consultar las evaluaciones o ensayos que has realizado y las que aún no has completado.</p>
 		{{ $modules->links() }}
 		<?php $count_modules = 1; ?>
 		@foreach ($modules as $module)
@@ -29,7 +30,7 @@
 			</div>
 			@foreach($module->sessions as $session)
 			<div class="col-sm-5">
-				<h2 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h2>
+				<h3 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h3>
 			</div>
 			<!--lista evaluaciones-->
 			<div class="session_list">
@@ -38,12 +39,12 @@
 					<div class="row">
 						<!--divider-->
 						<div class="col-sm-11 col-sm-offset-1">
-						  <div class="divider"></div>
+						  <div class="divider b"></div>
 						</div>
 						<!--- título-->
 						<div class="col-sm-4 col-sm-offset-1">
             			  <h5>Actividad {{$activity->order}}</h5>
-            			  <h3><a href='{{url("tablero/aprendizaje/{$activity->session->slug}/{$activity->session->slug}/$activity->id")}}'>{{$activity->name}}</a></h3>
+            			  <p><a href='{{url("tablero/aprendizaje/{$activity->session->slug}/{$activity->session->slug}/$activity->id")}}'class="link lists_ev">{{$activity->name}}</a></p>
             			</div>
             			<!--- tipo de evaluación-->
             			<div class="col-sm-2">
@@ -51,7 +52,7 @@
             			</div>
             			<!--fecha-->
             			<div class="col-sm-2">
-            				<p><strong><span>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</span></strong><br>
+            				<p class="notetime uppercase black"><strong><span>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</span></strong><br>
 	            				{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</p>
             			</div>
 						<!--- status-->
@@ -64,7 +65,7 @@
 						        <p><strong>Sin archivos</strong></p>
 						      </div>
 						      @if($activity->end >= $today )
-						      <a class="btn view block " href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Subir archivo</a>
+						      <a class="btn ev block " href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Subir archivo</a>
 						      @else
 						        <div class="footnote">
 						            <p>El tiempo de la actividad ha terminado</p>
@@ -80,7 +81,7 @@
 						        <p>Sin completar</p>
 						        </div>
 						        @if($activity->end >= $today )
-						        <a class="btn view block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
+						        <a class="btn ev block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
 						        @else
 						        <div class="footnote">
 						            <p>El tiempo de la actividad ha terminado</p>
@@ -92,7 +93,7 @@
 						        <p>Sin completar</p>
 						      </div>
 						      @if($activity->end >= $today )
-						        <a class="btn view block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
+						        <a class="btn ev block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
 						        @else
 						        <div class="footnote">
 									<p>El tiempo de la actividad ha terminado</p>
