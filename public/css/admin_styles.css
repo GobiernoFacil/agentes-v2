@@ -1660,6 +1660,22 @@ strong.danger,
   display: block;
   padding: 5px; }
 
+.without {
+  background: #cc0000;
+  color: white;
+  margin: 0;
+  display: inline-block;
+  font-size: 14px;
+  padding: 5px; }
+
+.with {
+  background: green;
+  color: white;
+  margin: 0;
+  display: inline-block;
+  font-size: 14px;
+  padding: 5px; }
+
 strong.success,
 .success {
   background: green;
