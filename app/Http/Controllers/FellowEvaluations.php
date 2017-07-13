@@ -228,15 +228,16 @@ class FellowEvaluations extends Controller
     public function indexEvaluations()
     {
       $user               = Auth::user();
-      $activities         = Activity::where('type','evaluation')
-      ->orderBy('end','asc')
-      ->paginate($this->pageSize);
+      /*$activities         = Activity::where('type','evaluation')
+      ->orderBy('session_id','asc')
+      ->paginate($this->pageSize);*/
+      $modules = Module::where('public',1)->orderBy('start','asc')->paginate($this->pageSize);
       $today = date("Y-m-d");
 
       return view('fellow.evaluation.evaluation-list-view')->with(
          [
            'user'=>$user,
-           'activities' =>$activities,
+           'modules' =>$modules,
            'today' => $today
       ]);
 

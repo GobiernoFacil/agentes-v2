@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Activity;
 class ModuleSession extends Model
 {
     //
@@ -50,6 +50,11 @@ protected $fillable = [
    function forums(){
      return $this->hasOne("App\Models\Forum",'session_id');
     }
+
+  function activity_eval($session_id){
+    $activities = Activity::where('session_id',$session_id)->where('type','evaluation')->orderBy('end','asc')->get();
+    return $activities;
+  }
 
 
 
