@@ -1,7 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de evaluaciones' )
 @section('description', 'Lista de tareas y evaluaciones')
-@section('body_class', 'fellow')
+@section('body_class', 'fellow aprendizaje')
+@section('breadcrumb_type', 'evaluation list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
 
 @section('content')
 @if($modules->count() > 0)
@@ -59,11 +61,9 @@
 						<div class="col-sm-3">
 						  @if($activity->files==='Sí')
 						    @if($user->FellowFileUp($user->id,$activity->id))
-						      <p><strong>Completada</strong></p>
+						       <p><span class="with">Archivos enviados</span></p>
 						    @else
-						      <div class="header_note">
-						        <p><strong>Sin archivos</strong></p>
-						      </div>
+						      <p><span class="without">Sin archivos</span></p>
 						      @if($activity->end >= $today )
 						      <a class="btn ev block " href='{{ url("tablero/archivos/{$activity->slug}/agregar")}}'>Subir archivo</a>
 						      @else
@@ -75,11 +75,12 @@
 						  @else
 						    @if($activity->quizInfo)
 						      @if($user->FellowScoreActivity($user->id,$activity->quizInfo->id))
-						        <p><strong>Completada</strong></p>
+						        <p><span class="with">Completada</span></p>
+							    <p class="notetime uppercase black">Calificación: <strong>{{round($user->FellowScoreActivity($user->id,$activity->quizInfo->id)->score,2)}}</strong> <br> Fecha: <strong>{{date("j/m/Y", strtotime($user->FellowScoreActivity($user->id,$activity->quizInfo->id)->created_at))}}</strong>
+						        </p>
 						      @else
-						        <div class="header_note">
-						        <p>Sin completar</p>
-						        </div>
+						        
+						        <p><span class="without">Sin completar</span></p>
 						        @if($activity->end >= $today )
 						        <a class="btn ev block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
 						        @else
@@ -89,9 +90,7 @@
 						        @endif
 						      @endif
 						    @else
-						      <div class="header_note">
-						        <p>Sin completar</p>
-						      </div>
+						        <p><span class="without">Sin completar</span></p>
 						      @if($activity->end >= $today )
 						        <a class="btn ev block " href='{{ url("tablero/evaluacion/{$activity->slug}")}}'>Comenzar evaluación</a>
 						        @else
