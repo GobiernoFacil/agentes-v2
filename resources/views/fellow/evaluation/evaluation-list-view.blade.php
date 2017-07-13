@@ -112,7 +112,7 @@
 						</div>
 						<!--- título-->
 						<div class="col-sm-3 col-sm-offset-5">
-            			  <h4>Sin evaluaciones</h4>
+            			  <p>Sin evaluaciones</p>
             			</div>
 					</div>
 				@endif
