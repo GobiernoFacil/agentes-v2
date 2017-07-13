@@ -1167,6 +1167,9 @@ header {
 .fellow footer {
   background: #37383a; }
 
+h3.title {
+  font-weight: 500; }
+
 .module {
   border: 1px solid #b9b9ba;
   margin-bottom: 25px;
@@ -1455,6 +1458,17 @@ a:visited.switch-answer.btn.xs {
   color: #999;
   font-size: 13px;
   font-weight: 500; }
+  .notetime.black strong {
+    color: black; }
+
+.uppercase {
+  text-transform: uppercase; }
+
+.table_t p {
+  color: #999;
+  font-size: 12px;
+  margin: 0;
+  text-transform: uppercase; }
 
 /*
 	////////////////////////////////// lists 
@@ -1806,8 +1820,21 @@ a.count_link:hover {
   background: #0c3d53;
   color: #51be92; }
 
-a.link {
+a.link,
+a:link.link,
+a:visited.link {
   border-bottom: 1px solid #51be92; }
+  a.link.lists_ev,
+  a:link.link.lists_ev,
+  a:visited.link.lists_ev {
+    border-bottom: 1px dotted #187fad;
+    color: #187fad;
+    font-weight: 700; }
+    a.link.lists_ev:hover,
+    a:link.link.lists_ev:hover,
+    a:visited.link.lists_ev:hover {
+      border-bottom: 1px solid #187fad;
+      color: #0f4e6a; }
 
 .breadcrumb {
   background: rgba(0, 0, 0, 0.1);
