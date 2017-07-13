@@ -111,7 +111,7 @@
 						  <div class="divider"></div>
 						</div>
 						<!--- título-->
-						<div class="col-sm-4 col-sm-offset-1">
+						<div class="col-sm-3 col-sm-offset-5">
             			  <h4>Sin evaluaciones</h4>
             			</div>
 					</div>
