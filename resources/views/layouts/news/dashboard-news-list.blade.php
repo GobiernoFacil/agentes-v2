@@ -21,5 +21,8 @@
 	@if($user->type == "fellow")
 	<h3><a href="{{url('tablero/noticias/ver/' . $article->slug)}}">{{$article->title}}</a></h3>
 	@endif
+	@if($user->type == "facilitator")
+	<h3><a href="{{url('tablero-facilitador/noticias/ver/' . $article->slug)}}">{{$article->title}}</a></h3>
+	@endif
 	<p class="author">Por {{$article->user->name}} <span>{{$article->created_at->diffForHumans()}}</span></p>
 </li>
