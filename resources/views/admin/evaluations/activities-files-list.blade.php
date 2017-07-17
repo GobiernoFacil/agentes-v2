@@ -2,9 +2,10 @@
 @section('title', $activity->name)
 @section('description', 'plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'evaluation')
+@section('breadcrumb_type', 'evaluation activity view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
-
 @if($fellows->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
