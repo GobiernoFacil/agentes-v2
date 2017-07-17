@@ -16,6 +16,7 @@ use App\Models\FacilitatorModule;
 use App\Models\Image;
 use App\Models\Conversation;
 use App\Models\StoreConversation;
+use App\Models\NewsEvent;
 
 // FormValidators
 use App\Http\Requests\SaveFacilitator;
@@ -41,6 +42,7 @@ class Facilitator extends Controller
   public function dashboard()
   {
     $user 		   = Auth::user();
+    $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
     $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
     $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
       $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
@@ -48,7 +50,8 @@ class Facilitator extends Controller
     ->count();
     return view('facilitator.dashboard')->with([
       "user"      	  => $user,
-      "conversations" => $conversations
+      "conversations" => $conversations,
+      "newsEvent"	  => $newsEvent
     ]);
   }
 
