@@ -69,6 +69,9 @@
 				<h2>Ya respondiste el examen</h2>
 			</div>
 		</div>
+		<div class="col-sm-12">
+				<div class="divider b"></div>
+			</div>
 	</div>
 	@endif
 </div>
@@ -90,6 +93,9 @@
 						<h2>El tiempo para responder el examen ha terminado</h2>
 					</div>
 				</div>
+				<div class="col-sm-12">
+					<div class="divider b"></div>
+				</div>
 			</div>
 			@endif
 		@else
@@ -98,6 +104,9 @@
 				<div class="box blue center">
 					<h2>Ya respondiste el examen</h2>
 				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="divider b"></div>
 			</div>
 		</div>
 		@endif
@@ -116,6 +125,9 @@
 								<h2>El tiempo para subir el archivo ha terminado</h2>
 							</div>
 						</div>
+						<div class="col-sm-12">
+							<div class="divider b"></div>
+						</div>
 					</div>
 					@endif
 		@else
@@ -124,6 +136,9 @@
 				<h2>Ya cuentas con un archivo</h2>
 			</div>
 		</div>
+		<div class="col-sm-12">
+				<div class="divider b"></div>
+			</div>
 		@endif
 	</div>
 </div>
