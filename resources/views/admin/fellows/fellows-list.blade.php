@@ -43,7 +43,7 @@
 						<img src='{{url("img/users/default.png")}}' height="30px">
 						@endif
 			        </div>
-			        <div class="col-sm-12">
+			        <div class="col-sm-10">
 			        <h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 		        {{$fellow->email}}
 			        </div>
