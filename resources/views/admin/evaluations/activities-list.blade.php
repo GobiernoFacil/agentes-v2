@@ -30,17 +30,21 @@
 			      <tr>
 					<td>
 						<h4>
-						@if($activity->files=='Sí')
+						@if($activity->files=='Sí' || $activity->slug==='examen-diagnostico' )
 						<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
 						@else
-							@if($activity->quizInfo)
-							<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+							@if($activity->slug==='examen-diagnostico')
+							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
 							@else
-							 {{$activity->name}}
+									@if($activity->quizInfo)
+									<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+									@else
+									 {{$activity->name}}
+									@endif
 							@endif
 						@endif
-						</h4>	
-						<strong>Módulo:</strong> {{$activity->session->module->title}}				
+						</h4>
+						<strong>Módulo:</strong> {{$activity->session->module->title}}
 					</td>
 			        <td>{{$activity->session->name}}</td>
 			        <td><strong>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</strong><br>
@@ -50,10 +54,14 @@
 						@if($activity->files=='Sí')
 							<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
 						@else
-							@if($activity->quizInfo)
-								<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+							@if($activity->slug==='examen-diagnostico')
+							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
 							@else
-							 Sin examen
+								@if($activity->quizInfo)
+									<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+								@else
+								 Sin examen
+								@endif
 							@endif
 						@endif
 					</td>
