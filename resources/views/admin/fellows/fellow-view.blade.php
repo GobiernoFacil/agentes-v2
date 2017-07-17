@@ -20,12 +20,12 @@
 				<img src='{{url("img/users/{$user->image->name}")}}' height="50px">
 				@else
 				<img src='{{url("img/users/default.png")}}' height="50px">
-				@endif<h2>{{$fellow->name." ".$fellow->surname." ".$fellow->lastname}}</h2></li>
+				@endif<h2>{{$fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</h2></li>
 				<li><span>Email:</span> {{$fellow->email}}</li>
-				<li><span>Nivel de estudios:</span> {{$fellow->degree}}</li>
-				<li><span>Procedencia:</span> {{$fellow->origin ? $fellow->origin : "Sin información"}}</li>
-				<li><span>Ciudad:</span> {{$fellow->city}}</li>
-				<li><span>Estado:</span> {{$fellow->state}}</li>
+				<li><span>Nivel de estudios:</span> {{$fellow->fellowData->degree}}</li>
+				<li><span>Procedencia:</span> {{$fellow->fellowData->origin ? $fellow->fellowData->origin : "Sin información"}}</li>
+				<li><span>Ciudad:</span> {{$fellow->fellowData->city}}</li>
+				<li><span>Estado:</span> {{$fellow->fellowData->state}}</li>
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($fellow->created_at)) }} hrs.</li>
 			</ul>
 		</div>
