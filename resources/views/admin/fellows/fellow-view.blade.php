@@ -28,7 +28,7 @@
 				<li><span>Procedencia:</span> {{$fellow->fellowData->origin ? $fellow->fellowData->origin : "Sin información"}}</li>
 				<li><span>Ciudad:</span> {{$fellow->fellowData->city}}</li>
 				<li><span>Estado:</span> {{$fellow->fellowData->state}}</li>
-				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($fellow->created_at)) }} hrs.</li>*/
+				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($fellow->created_at)) }} hrs.</li>
 				
 			</ul>
 		</div>
