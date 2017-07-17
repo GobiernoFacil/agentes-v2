@@ -4,10 +4,16 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="evaluation list")
 	<li>Evaluaciones</li>
 	@endif
-	@if ($__env->yieldContent('breadcrumb_type') =="evaluation activity view")
+	@if ($__env->yieldContent('breadcrumb_type') =="evaluation activity view" || $__env->yieldContent('breadcrumb_type') =="evaluation single view")
 	<li><a href="{{url('dashboard/evaluacion')}}">Evaluaciones</a></li>
+	@endif
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="evaluation activity view")
 	<li>{{$activity->name}}</li>
 	@endif
 	
+	@if ($__env->yieldContent('breadcrumb_type') =="evaluation single view")
+	<li>{{!empty($score->quizInfo->title) ? $score->quizInfo->title : 'Ver calificación'}}</li>
+	@endif
 	
 </ul>
