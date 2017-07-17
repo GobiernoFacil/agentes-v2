@@ -56,7 +56,7 @@
 					<div class="divider b"></div>
 					<div class="col-sm-1">
 						@if($conversation->user->image)
-						<img src='{{url("img/users/$conversation->user->image->name")}}' width="100%">
+						<img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%">
 						@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
 						@endif
