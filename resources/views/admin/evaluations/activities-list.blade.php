@@ -30,7 +30,15 @@
 			        <td>{{$activity->session->name}}</td>
 			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
 			        <td>
+								@if($activity->files=='Sí')
 			          <a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+								@else
+									@if($activity->quizInfo)
+										<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+									@else
+									 Sin examen
+									@endif
+								@endif
 							</td>
 			    </tr>
 			    @endforeach
