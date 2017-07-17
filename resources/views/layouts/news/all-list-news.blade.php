@@ -21,6 +21,9 @@
 	@if($user->type == "fellow")
 	<h2><a href="{{url('tablero/noticias/ver/' . $article->slug)}}">{{$article->title}}</a></h2>
 	@endif
+	@if($user->type == "facilitator")
+	<h2><a href="{{url('tablero-facilitador/noticias/ver/' . $article->slug)}}">{{$article->title}}</a></h2>
+	@endif
 	<p class="author">Por {{$article->user->name}} <span>{{$article->created_at->diffForHumans()}}</span></p>
 	 {!! \Illuminate\Support\Str::words($article->brief,50,'…') !!}
 </li>
