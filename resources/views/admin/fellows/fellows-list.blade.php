@@ -29,19 +29,28 @@
 		      <th>Nombre / email</th>
 		      <th>Ciudad / Estado</th>
 		      <th>Procedencia</th>
-		      <th>Registro</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    @foreach ($fellows as $fellow)
 		      <tr>
-		        <td><h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
+		        <td><div class="row">
+			        <div class="col-sm-2">
+				        @if($fellow->image)
+						<img src='{{url("img/users/{$fellow->image->name}")}}' height="30px">
+						@else
+						<img src='{{url("img/users/default.png")}}' height="30px">
+						@endif
+			        </div>
+			        <div class="col-sm-12">
+			        <h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 		        {{$fellow->email}}
+			        </div>
+		       	 </div>
 		        </td>
 		        <td>{{$fellow->fellowData->city}} <br> <strong>{{$fellow->fellowData->state}}</strong></td>
 				<td>{{$fellow->fellowData->origin}}</td>
-		        <td>{{ date("d-m-Y", strtotime($fellow->created_at)) }} <br> {{ date("H:i", strtotime($fellow->created_at)) }} hrs.</td>
 		        
 		        <td>
 		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver</a>
