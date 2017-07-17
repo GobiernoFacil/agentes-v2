@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Noticas y Eventos')
 @section('description', 'Noticias y eventos')
-@section('body_class', 'news fellow')
+@section('body_class', 'news')
 @section('breadcrumb_type', 'news list')
-@section('breadcrumb', 'layouts.fellow.breadcrumb.b_news')
+@section('breadcrumb', 'layouts.facilitator.breadcrumb.b_news')
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
