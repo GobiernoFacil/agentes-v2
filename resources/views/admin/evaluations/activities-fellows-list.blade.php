@@ -34,7 +34,7 @@
 			  <tbody>
 			    @foreach ($fellows as $fellow)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/ver/' . $fellow->id) }}">{{$fellow->user->name .' '.$fellow->user->fellowData->surname." ".$fellow->user->fellowData->lastname}}</a></h4>
+			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/resultados/ver/' . $fellow->id) }}">{{$fellow->user->name .' '.$fellow->user->fellowData->surname." ".$fellow->user->fellowData->lastname}}</a></h4>
 			        {{$fellow->user->email}}</td>
 			        <td>{{$fellow->user->fellowData->city}} <br> {{$fellow->user->fellowData->state}}</td>
 			        <td>{{$fellow->user->fellowData->origin}}</td>
