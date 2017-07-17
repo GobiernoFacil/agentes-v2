@@ -33,8 +33,32 @@
 					<a href="{{ url('tablero-facilitador/mensajes') }}" class="count_link">{{$conversations}}</a>
 				</div>
 			</div>
+			<!--noticias-->
+			<div class="col-sm-12">
+				<div class="box news">
+					<h3 class="sa_title">Noticias y avisos</h3>
+					<p></p>
+					@if($newsEvent->count()>0)
+					<ul class="list line">
+						@foreach($newsEvent as $article)
+						@include('layouts.news.dashboard-news-list')
+						@endforeach
+					</ul>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="divider"></div>
+						</div>
+						<div class="col-sm-8 col-sm-offset-2 center">
+							<p><a href="{{url('tablero-facilitador/noticias')}}" class="btn view gde ">Ver todas las noticas y avisos</a></p>
+						</div>
+					@else
+					<p>Aún no existen noticias o avisos.</p>
+					@endif
+				</div>
+			</div>
 		</div>
 	</div>
+	
 
 </div>
 @endsection
