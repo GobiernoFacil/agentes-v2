@@ -4,4 +4,10 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="evaluation list")
 	<li>Evaluaciones</li>
 	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="evaluation activity view")
+	<li><a href="{{url('dashboard/evaluacion')}}">Evaluaciones</a></li>
+	<li>{{$activity->name}}</li>
+	@endif
+	
+	
 </ul>
