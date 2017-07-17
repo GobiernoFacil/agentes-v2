@@ -8,12 +8,18 @@
 @if($fellows->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Lista de usuarios con evaluación</h1>
+		<h1>{{$activity->name}}</h1>
+		<h2>Módulo: {{$activity->session->module->title}}</h2>
+		<h3>Sesión: {{$activity->session->name}}</h3>
+		
+		
 	</div>
 </div>
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
+			<h3 class="title center">Lista de usuarios con evaluación</h3>
+			<div class="divider b"></div>
 			<table class="table">
 			  <thead>
 			    <tr>
