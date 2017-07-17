@@ -19,6 +19,7 @@
 			    <tr>
 			      <th>Nombre</th>
 			      <th>Sesión</th>
+			      <th>Fecha límite</th>
 			      <th>Tipo</th>
 			      <th>Acciones</th>
 			    </tr>
@@ -26,20 +27,35 @@
 			  <tbody>
 			    @foreach ($activities as $activity)
 			      <tr>
-							<td><h4> <a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a></h4></td>
-			        <td>{{$activity->session->name}}</td>
+					<td>
+						<h4>
+						@if($activity->files=='Sí')
+						<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+						@else
+							@if($activity->quizInfo)
+							<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+							@else
+							 {{$activity->name}}
+							@endif
+						@endif
+						</h4>					
+					</td>
+			        <td>Módulo: {{$activity->session->module->title}}<br>
+				        Sesión: {{$activity->session->name}}</td>
+			        <td><strong>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</strong><br>
+	            				{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</td>
 			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
 			        <td>
-								@if($activity->files=='Sí')
-			          <a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
-								@else
-									@if($activity->quizInfo)
-										<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
-									@else
-									 Sin examen
-									@endif
-								@endif
-							</td>
+						@if($activity->files=='Sí')
+							<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+						@else
+							@if($activity->quizInfo)
+								<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+							@else
+							 Sin examen
+							@endif
+						@endif
+					</td>
 			    </tr>
 			    @endforeach
 			  </tbody>
