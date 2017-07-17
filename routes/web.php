@@ -388,6 +388,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas evaluation
     Route::get('tablero-facilitador/evaluacion/diagnostico', 'FacilitatorEvaluations@all');
     Route::get('tablero-facilitador/evaluacion/diagnostico/ver/{id}', 'FacilitatorEvaluations@view');
+    
+    //// noticias
+    Route::get('tablero-facilitador/noticias', 'NewsEventsFacilitator@index');
+    Route::get('tablero-facilitador/noticias/ver/{news_slug}', 'NewsEventsFacilitator@view');
 
   });
 });
