@@ -53,13 +53,17 @@
 @else
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de usuarios con evaluación</h1>
+		<h1>{{$activity->name}}</h1>
+		<h2>Módulo: {{$activity->session->module->title}}</h2>
+		<h3>Sesión: {{$activity->session->name}}</h3>
 	</div>
 </div>
 <div class="box">
 	<div class="row center">
 		<div class="col-sm-10 col-sm-offset-1">
-		<h2>Sin usuarios con evaluación</h2>
+			<h3 class="title center">Lista de usuarios con evaluación</h3>
+			<div class="divider b"></div>
+			<h2>Sin usuarios con evaluación</h2>
 		</div>
 	</div>
 </div>
