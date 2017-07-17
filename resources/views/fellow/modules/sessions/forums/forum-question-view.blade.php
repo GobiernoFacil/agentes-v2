@@ -68,7 +68,11 @@
     @foreach($question->messages as $message)
       		<div class="row">
 	      		<div class="col-sm-1">
-		  			<img src='{{url("img/users/default.png")}}' width="100%">
+		      		@if($message->user->image)
+						<img src='{{url("img/users/$message->user->image->name")}}' width="100%">
+						@else
+						<img src='{{url("img/users/default.png")}}' width="100%">
+						@endif
 				</div>
 				<div class="col-sm-11">
 	  				<p>{{$message->message}}</p>
