@@ -1,7 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Evaluación de archivos de ' . $data->user->name . ' ' . $data->user->fellowData->surname )
 @section('description', 'Evaluación de archivos de ' . $data->user->name . ' ' . $data->user->fellowData->surname )
-@section('body_class', '')
+@section('body_class', 'evaluation')
+@section('breadcrumb_type', 'evaluation file')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
 <div class="row">
