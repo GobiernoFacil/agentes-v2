@@ -114,7 +114,7 @@ class AdminEvaluations extends Controller
     {
       $user      = Auth::user();
       $data      = FellowFile::where('id',$file_id)->firstOrFail();
-      $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id]);
+      $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id,'user_id'=>$user->id]);
       return view('admin.evaluations.file-evaluation')->with([
         "user"      => $user,
         "data"   => $data,
