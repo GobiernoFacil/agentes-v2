@@ -67,14 +67,14 @@
         <div class="col-sm-8 col-sm-offset-2 forum_list">
     @foreach($question->messages as $message)
       		<div class="row">
-	      		<div class="col-sm-1">
+	      		<div class="col-sm-2">
 		      		@if($message->user->image)
 						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
 						@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
 						@endif
 				</div>
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 	  				<p>{{$message->message}}</p>
 						@if($message->user->type==='fellow')
 						<p class="author">Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
