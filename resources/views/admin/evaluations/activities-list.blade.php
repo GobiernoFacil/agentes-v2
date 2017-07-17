@@ -38,10 +38,10 @@
 							 {{$activity->name}}
 							@endif
 						@endif
-						</h4>					
+						</h4>	
+						<strong>Módulo:</strong> {{$activity->session->module->title}}				
 					</td>
-			        <td>Módulo: {{$activity->session->module->title}}<br>
-				        Sesión: {{$activity->session->name}}</td>
+			        <td>{{$activity->session->name}}</td>
 			        <td><strong>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</strong><br>
 	            				{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</td>
 			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
