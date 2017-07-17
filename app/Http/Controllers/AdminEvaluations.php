@@ -48,7 +48,7 @@ class AdminEvaluations extends Controller
     public function index()
     {
       $user       = Auth::user();
-      $activities   = Activity::where('type','evaluation')->orderBy('session_id','desc')->paginate($this->pageSize);
+      $activities   = Activity::where('type','evaluation')->orderBy('end','asc')->paginate($this->pageSize);
       return view('admin.evaluations.activities-list')->with([
         "user"      => $user,
         "activities"   => $activities,
