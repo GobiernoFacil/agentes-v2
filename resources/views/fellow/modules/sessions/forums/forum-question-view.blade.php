@@ -69,7 +69,7 @@
       		<div class="row">
 	      		<div class="col-sm-1">
 		      		@if($message->user->image)
-						<img src='{{url("img/users/$message->user->image->name")}}' width="100%">
+						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
 						@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
 						@endif
