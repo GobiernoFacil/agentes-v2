@@ -1,10 +1,11 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de actividades que cuentan con evaluación')
 @section('description', 'Plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
+@section('body_class', 'evaluation')
+@section('breadcrumb_type', 'evaluation list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
-
 @if($activities->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
