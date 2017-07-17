@@ -1,18 +1,17 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
+@section('title', $activity->name)
 @section('description', 'plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
+@section('body_class', 'evaluacion')
+@section('breadcrumb_type', 'evaluation activity view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
-
 @if($fellows->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
 		<h1>{{$activity->name}}</h1>
 		<h2>Módulo: {{$activity->session->module->title}}</h2>
 		<h3>Sesión: {{$activity->session->name}}</h3>
-		
-		
 	</div>
 </div>
 <div class="box">
