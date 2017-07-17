@@ -1,11 +1,11 @@
 @extends('layouts.admin.a_master')
-@section('title', '')
+@section('title',  !empty($score->quizInfo->title) ? $score->quizInfo->title : 'Ver calificación')
 @section('description', 'plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', '')
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Ver calificación {{!empty($score->quizInfo->title) ? $score->quizInfo->title : ''}}</h1>
+    <h1>Ver calificación: <strong>{{!empty($score->quizInfo->title) ? $score->quizInfo->title : ''}}</strong></h1>
   </div>
 </div>
 
