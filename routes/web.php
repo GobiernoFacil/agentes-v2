@@ -157,6 +157,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/update/{id}', 'Activities@update');
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/eliminar/{id}', 'Activities@delete');
+    Route::get('dashboard/sesiones/actividades/asignadas', 'Activities@viewAsign');
 
     Route::get('dashboard/sesiones/actividades/foro/pregunta/{id}', 'AdminForums@viewQuestion');
     /*@ActivitiesFiles Controller */
