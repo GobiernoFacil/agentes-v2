@@ -7,12 +7,17 @@ use Auth;
 use Mail;
 //Models
 use App\User;
+use App\Models\Module;
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
 use App\Models\FileEvaluation;
 use App\Models\City;
 use App\Models\AspirantEvaluation;
 use App\Models\Institution;
+use App\Models\FellowScore;
+use App\Models\QuizInfo;
+use App\Models\FilesEvaluation;
+use App\Models\Activity;
 // FormValidators
 use App\Http\Requests\SaveEvaluation;
 use App\Http\Requests\SaveFilesEvaluation;
@@ -49,9 +54,27 @@ class FellowsAdmin extends Controller
         //
         $user = Auth::user();
         $fellow = User::find($id);
+        $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
+        $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
+        $total = Activity::where('type','evaluation')->count();
+        $score  = 0;
+        foreach ($fellowScores as $fscore) {
+            $score = $score + $fscore->score;
+        }
+        foreach ($fileScores as $ffscore){
+            $score = $score + $ffscore->score;
+        }
+
+        if($total!= 0){
+          $average = $score/$total;
+        }else{
+          $average = 0;
+        }
+
         return view('admin.fellows.fellow-view')->with([
           'user' 	=> $user,
           'fellow' 	=> $fellow,
+          'average' => $average
         ]);
     }
 
@@ -364,5 +387,45 @@ class FellowsAdmin extends Controller
        }
 
      }
+
+     /**
+      * Display the evaluations sheet
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function viewSheet($id)
+     {
+         $user     = Auth::user();
+         $fellow   = User::find($id);
+         $modules  = Module::orderBy('start','asc')->get();
+         $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
+         $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
+         $total = Activity::where('type','evaluation')->count();
+         $score  = 0;
+         foreach ($fellowScores as $fscore) {
+             $score = $score + $fscore->score;
+         }
+         foreach ($fileScores as $ffscore){
+             $score = $score + $ffscore->score;
+         }
+
+         if($total!= 0){
+           $average = $score/$total;
+         }else{
+           $average = 0;
+         }
+         return view('admin.fellows.evaluation-sheet')->with(
+          [
+            'user'=>$user,
+            'modules' =>$modules,
+            'average' => $average,
+            'fellow'  => $fellow
+          ]
+         );
+     }
+
+
+  
 
 }

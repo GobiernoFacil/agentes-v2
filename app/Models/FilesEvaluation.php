@@ -12,6 +12,9 @@ class FilesEvaluation extends Model
     protected $fillable = [
         'user_id', 'activity_id','fellow_id','name','score','path','url','comments'
     ];
+    //modelos relacionados
+  function activity(){
+    return $this->belongsTo("App\Models\Activity");
+  }
 
-    
 }

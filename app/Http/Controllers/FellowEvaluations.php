@@ -56,7 +56,7 @@ class FellowEvaluations extends Controller
 
 
     /**
-     * Muestra hoja de calificaciones
+     * Muestra evaluacion de actividad
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +87,7 @@ class FellowEvaluations extends Controller
 
 
     /**
-     * Muestra hoja de calificaciones
+     * Muestra evaluacion de archivo
      *
      * @return \Illuminate\Http\Response
      */
@@ -109,7 +109,7 @@ class FellowEvaluations extends Controller
     }
 
       /**
-       * Muestra evaluacion de actividad
+       * Muestra evaluacion
        *
        * @return \Illuminate\Http\Response
        */
@@ -134,7 +134,7 @@ class FellowEvaluations extends Controller
     }
 
     /**
-     * Muestra hoja de calificaciones
+     * salva evaluacion
      *
      * @return \Illuminate\Http\Response
      */

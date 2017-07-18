@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/ver/{id}', 'FellowsAdmin@view');
+    Route::get('dashboard/fellows/calificaciones/ver/{id}', 'FellowsAdmin@viewSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
@@ -247,6 +248,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/evaluacion/actividad/archivo/evaluar/{file_id}', 'AdminEvaluations@fileEvaluation');
     Route::post('dashboard/evaluacion/actividad/archivo/evaluar/save/{file_id}', 'AdminEvaluations@saveFileEvaluation');
     Route::get('dashboard/evaluacion/actividad/resultados/ver/{quiz_id}', 'AdminEvaluations@viewEvaluation');
+    Route::get('dashboard/evaluacion/actividad/archivos/resultados/ver/{file_score_id}', 'AdminEvaluations@viewFileEvaluation');
     Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');
@@ -388,7 +390,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas evaluation
     Route::get('tablero-facilitador/evaluacion/diagnostico', 'FacilitatorEvaluations@all');
     Route::get('tablero-facilitador/evaluacion/diagnostico/ver/{id}', 'FacilitatorEvaluations@view');
-    
+
     //// noticias
     Route::get('tablero-facilitador/noticias', 'NewsEventsFacilitator@index');
     Route::get('tablero-facilitador/noticias/ver/{news_slug}', 'NewsEventsFacilitator@view');

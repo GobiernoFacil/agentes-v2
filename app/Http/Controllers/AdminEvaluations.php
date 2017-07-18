@@ -369,4 +369,25 @@ class AdminEvaluations extends Controller
       ]);
 
     }
+
+    /**
+     * Muestra evaluacion de archivos
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewFileEvaluation($score_id)
+    {
+      $user      = Auth::user();
+      $score     = FilesEvaluation::where('id',$score_id)->firstOrFail();
+      $userf     = User::find($score->user_id);
+      return view('admin.evaluations.evaluation-file-view')->with([
+        "user"      => $user,
+        "score"   => $score,
+        "userf"      => $userf,
+      ]);
+
+    }
+
+
+
 }
