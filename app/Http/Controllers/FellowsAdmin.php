@@ -53,7 +53,7 @@ class FellowsAdmin extends Controller
     {
         //
         $user = Auth::user();
-        $fellow = User::find($id);
+        $fellow = User::where('id',$id)->where('type','fellow')->where('enabled',1)->firstOrFail();
         $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
         $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
         $total = Activity::where('type','evaluation')->count();
@@ -426,6 +426,6 @@ class FellowsAdmin extends Controller
      }
 
 
-  
+
 
 }
