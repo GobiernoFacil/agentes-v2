@@ -39,14 +39,18 @@
 	</div>
 </div>
 
-<div class="box">
+<div class="box session_list">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 right">
-	 	 <p>Promedio general <span class="score_a block">{{number_format($average,2)}}</span></p>
+		<div class="col-sm-6  center">
+			<h3 class="title">Promedio general</h3>
+			<h2><span class="score_a block">{{number_format($average,2)}}</span></h2>
 	   </div>
 		 <!-- ver sesión-->
-		 <div class="col-sm-3">
+		 <div class="col-sm-6">
 			 <a class="btn view block sessions_l"  href="{{ url('dashboard/fellows/calificaciones/ver/' . $fellow->id) }}">Ir a calificaciones</a>
+		 </div>
+		 <div class="col-sm-12">
+			 <div class="divider b"></div>
 		 </div>
 	</div>
 </div>
