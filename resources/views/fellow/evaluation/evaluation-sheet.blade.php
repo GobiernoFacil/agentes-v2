@@ -80,7 +80,7 @@
 					   			<p><a href='{{url("tablero/aprendizaje/{$activity->session->slug}/{$activity->session->slug}/$activity->id")}}'><strong>{{$activity->name}}</strong></a></p>
 					   		</span>
 					   		<!--evaluation type--->
-					   		
+
                             @if($activity->files === 'Sí')
                         	<span class="col-sm-3">
                             	<a href="{{url('tablero/calificaciones/archivos/ver/' . $activity->slug)}}" class="link_a">Revisión de productos</a>
@@ -89,19 +89,25 @@
   	                          <span class="score_a">{{$user->fileFellowScore($user->id,$activity->id) ? number_format($user->fileFellowScore($user->id,$activity->id)->score,2) : "Sin calificación" }}</span>
                         	  </span>
                             @else
-                        	<span class="col-sm-3">
-                             <a href="{{url('tablero/calificaciones/ver/' . $activity->slug)}}" class="link_a">Examen en línea</a>
-                            </span>
+                            @if($activity->quizInfo)
+                          	   <span class="col-sm-3">
+                               <a href="{{url('tablero/calificaciones/ver/' . $activity->slug)}}" class="link_a">Examen en línea</a>
+                              </span>
+                              @else
+                              <span class="col-sm-3">
+                              Examen en línea
+                             </span>
+                              @endif
                         	<span class="col-sm-2 right">
                               @if($activity->quizInfo)
                              <span class="score_a">{{$activity->fellowScore($activity->quizInfo->id,$user->id) ? number_format($activity->fellowScore($activity->quizInfo->id,$user->id)->score,2) : "Sin calificación" }}</span>
                              @else
-                           <span class="">Sin calificación</span>
+                           <span class="">Evaluación no disponible</span>
                              @endif
                              </span>
                             @endif
                         </li>
-                      
+
                         @endif
                     @endforeach
                   </ul>
