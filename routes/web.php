@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
     Route::post('dashboard/sesiones/facilitadores/buscar', 'ModuleSessions@searchFacilitator');
     Route::post('dashboard/sesiones/facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
+    Route::get('dashboard/sesiones-asignadas/', 'ModuleSessions@viewAssign');
     /*@Activities Controller */
     //CRUD activities
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
@@ -157,7 +158,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/update/{id}', 'Activities@update');
     Route::get('dashboard/sesiones/actividades/deshabilitar/{id}', 'Activities@delete');
     Route::get('dashboard/sesiones/actividades/eliminar/{id}', 'Activities@delete');
-    Route::get('dashboard/sesiones/actividades/asignadas', 'Activities@viewAsign');
 
     Route::get('dashboard/sesiones/actividades/foro/pregunta/{id}', 'AdminForums@viewQuestion');
     /*@ActivitiesFiles Controller */

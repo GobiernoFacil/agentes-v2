@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Module;
 use App\User;
 use App\Models\ModuleSession;
+use App\Models\FacilitatorModule;
 // FormValidators
 use App\Http\Requests\SaveSession;
 use App\Http\Requests\UpdateSession;
@@ -494,6 +495,20 @@ class ModuleSessions extends Controller
      }
 
 
-
+     /**
+      * Muestra sesiones asignadas como facilitador
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function viewAssign()
+     {
+       $user 			  = Auth::user();
+       $sessions     = FacilitatorModule::where('user_id',$user->id)->paginate($this->pageSize);
+       return view('admin.modules.sessions.sessions-assign-list')->with([
+         "user"      		=> $user,
+         "sessions"          => $sessions
+       ]);
+     }
 
 }

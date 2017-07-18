@@ -285,4 +285,5 @@ class Activities extends Controller
             $activity->delete();
             return redirect("dashboard/sesiones/ver/$session_id")->with('success',"Se ha eliminado correctamente");
         }
+
 }
