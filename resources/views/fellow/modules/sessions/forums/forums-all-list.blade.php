@@ -34,7 +34,7 @@
 		</div>
 		<div class="col-sm-11 col-xs-10">
 			@if($forum->session)
-			<h2><a href="{{ url('tablero/foros/' .$forum->session->module->slug.'/'.$forum->session->slug) }}">{{$forum->topic}}</a></h2>
+			<h2><a href="{{ url('tablero/foros/' .$forum->session->slug.'/'.$forum->slug) }}">{{$forum->topic}}</a></h2>
 			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@else

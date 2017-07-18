@@ -53,12 +53,12 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($module_slug,$session_slug)
+    public function index($session_slug,$forum_slug)
     {
       $user     = Auth::user();
       $today = date("Y-m-d");
       $session  = ModuleSession::where('slug',$session_slug)->where('start','<=',$today)->firstOrFail();
-      $forum    = Forum::where('session_id',$session->id)->first();
+      $forum    = Forum::where('slug',$forum_slug)->first();
       if(!$forum){
         $auser = User::where('institution','Gobierno Fácil')->first();
         $forum = new Forum();

@@ -326,7 +326,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Forums Controller */
     // Rutas foros
     Route::get('tablero/foros', 'Forums@all');
-    Route::get('tablero/foros/{module_slug}/{session_slug}', 'Forums@index');
+    Route::get('tablero/foros/{session_slug}/{forum_slug}', 'Forums@index');
   //  Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
   //  Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
     Route::get('tablero/foros/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
