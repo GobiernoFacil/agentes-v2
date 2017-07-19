@@ -1,7 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de sesiones')
 @section('description', 'Lista de sesiones asignadas a ti')
-@section('body_class', '')
+@section('body_class', 'modulos')
+@section('breadcrumb_type', 'module session assign')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">
@@ -18,10 +20,11 @@
 		</div>
 		<div class="col-sm-9">
 			<h3>Sesión {{$session->session->order}}</h3>
-			<h2>{{$session->session->name}} </h2>
+			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->session->id) }}">{{$session->session->name}}</a> </h2>
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col-sm-9">
+					<p><strong>Módulo</strong>: {{$session->session->module->title}} </p>
 					<p>{{$session->session->objective}}</p>
 				</div>
 				<div class="col-sm-3 notes">
