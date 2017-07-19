@@ -57,7 +57,7 @@ class Fellows extends Controller
         }elseif($user_log->activity_id){
           $activity = Activity::find($user_log->activity_id);
         }else{
-          $module_last = Module::find($user_log->module_id);;
+          $module_last = Module::find($user_log->module_id);
         }
       }
       $time = strtotime($today);

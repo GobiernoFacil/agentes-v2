@@ -59,7 +59,7 @@
 				@include('fellow.session-dash-view')
 			@elseif($activity)
 				@include('fellow.activity-dash-view')
-			@else
+			@elseif($module_last)
 				@include('fellow.module-dash-view')
 			@endif
 		@else
