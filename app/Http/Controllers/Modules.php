@@ -38,7 +38,7 @@ class Modules extends Controller
     //
     $user 		= Auth::user();
     $modules 	= Module::orderBy('start','asc')->paginate($this->pageSize);
-    $sessions   = FacilitatorModule::where('user_id',$user->id)->get();
+    $sessions   = FacilitatorModule::where('user_id',$user->id)->count();
     return view('admin.modules.module-list')->with([
       'user' 	 => $user,
       'modules'  =>$modules,
