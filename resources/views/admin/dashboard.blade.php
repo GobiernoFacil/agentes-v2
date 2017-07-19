@@ -22,11 +22,6 @@
 			<p></p>
 			<a href="{{ url('dashboard/evaluacion') }}" class="btn gde">Ir a Evaluaciones</a>
 		</div>
-		<div class="box">
-			<h3 class="sa_title">Mensajes</h3>
-			<a class="count_link"  href="{{ url('dashboard/mensajes') }}">{{$conversations_count}}</a>
-			<a href="{{ url('dashboard/mensajes') }}" class="btn gde">Lista de Mensajes</a>
-		</div>
 	</div>
 	<div class="col-sm-9">
 		<div class="row">
@@ -45,6 +40,22 @@
 					<a class="count_link" href="{{url('dashboard/facilitadores')}}">{{$facilitators_count}}</a>
 					<a href="{{url('dashboard/facilitadores')}}" class="btn gde">Lista de Facilitadores</a>
 					<a href="{{url('dashboard/facilitadores/agregar')}}" class="btn gde download">[+] Agregar Facilitador</a>
+				</div>
+			</div>
+			<!--mensajes-->
+			<div class="col-sm-6">
+				<div class="box center">
+					<h3 class="sa_title">Mensajes</h3>
+					<a class="count_link"  href="{{ url('dashboard/mensajes') }}">{{$conversations_count}}</a>
+					<a href="{{ url('dashboard/mensajes') }}" class="btn gde">Lista de Mensajes</a>
+				</div>
+			</div>
+			<!--sesiones asignadas-->
+			<div class="col-sm-6">
+				<div class="box center">
+					<h3 class="sa_title">Sesiones asignadas</h3>
+					<a class="count_link"  href="{{ url('dashboard/sesiones-asignadas/') }}">{{$sessions_count}}</a>
+					<a href="{{ url('dashboard/sesiones-asignadas/') }}" class="btn gde">Lista de Sesiones asignadas</a>
 				</div>
 			</div>
 			<!-- noticias -->
