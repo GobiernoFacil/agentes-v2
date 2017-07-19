@@ -5,12 +5,16 @@
 	<li>Módulos</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit" || $__env->yieldContent('breadcrumb_type') =="module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring" || $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files" || $__env->yieldContent('breadcrumb_type') == "module session update files")
+	@if ($__env->yieldContent('breadcrumb_type') =="module add" || $__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="module session view" || $__env->yieldContent('breadcrumb_type') =="module session topic add" || $__env->yieldContent('breadcrumb_type') =="module session topic edit" || $__env->yieldContent('breadcrumb_type') =="module session expert add" || $__env->yieldContent('breadcrumb_type') =="module session add activity" || $__env->yieldContent('breadcrumb_type') == "module session view activity" || $__env->yieldContent('breadcrumb_type') == "module session add monitoring" || $__env->yieldContent('breadcrumb_type') == "module session add requirement" || $__env->yieldContent('breadcrumb_type') == "module session update requirement" || $__env->yieldContent('breadcrumb_type') == "module session add files" || $__env->yieldContent('breadcrumb_type') == "module session update files" || $__env->yieldContent('breadcrumb_type') == "module session assign")
 	<li><a href="{{url('dashboard/modulos')}}">Módulos</a></li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="module add")
 	<li>Agregar módulo</li>
+	@endif
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="module session assign")
+	<li>Sesiones asignadas</li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="module view")
