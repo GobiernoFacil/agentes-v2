@@ -9,6 +9,7 @@ use App\Models\FellowData;
 use App\Models\ForumMessage;
 use App\Models\ModuleSession;
 use App\Models\ForumConversation;
+use App\ModelsForumLog;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveForum;
@@ -192,7 +193,7 @@ class Forums extends Controller
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
       if($session){
-        return redirect("tablero/foros/{$session->module->slug}/{$session->slug}")->with('message','Pregunta creada correctamente');
+        return redirect("tablero/foros/{$session->slug}/{$session->forums->slug}")->with('message','Pregunta creada correctamente');
       }else{
         return redirect("tablero/foros/{$forum->state_name}")->with('message','Pregunta creada correctamente');
       }
