@@ -10,6 +10,8 @@ use App\User;
 // FormValidators
 use App\Http\Requests\SaveModule;
 use App\Http\Requests\UpdateModule;
+use App\Models\FacilitatorModule;
+
 class Modules extends Controller
 {
   //
@@ -34,11 +36,13 @@ class Modules extends Controller
   public function index()
   {
     //
-    $user = Auth::user();
-    $modules = Module::orderBy('start','asc')->paginate($this->pageSize);
+    $user 		= Auth::user();
+    $modules 	= Module::orderBy('start','asc')->paginate($this->pageSize);
+    $sessions   = FacilitatorModule::where('user_id',$user->id)->count();
     return view('admin.modules.module-list')->with([
-      'user' => $user,
-      'modules' =>$modules,
+      'user' 	 => $user,
+      'modules'  =>$modules,
+      'sessions' => $sessions
     ]);
 
   }

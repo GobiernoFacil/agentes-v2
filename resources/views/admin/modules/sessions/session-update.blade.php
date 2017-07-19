@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Actualizar sesión')
 @section('description', 'Actualizar nueva sesión')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'modulos')
+@section('breadcrumb_type', 'module session update')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">

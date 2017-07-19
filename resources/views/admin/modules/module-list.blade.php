@@ -89,6 +89,34 @@
 </div>
 
 @endif
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="divider"></div>
+		<h1>Tus sesiones asignadas</h1>
+		
+		@if($sessions > 0)
+		<div class="box session_list">
+			<div class="row">
+				<div class="col-sm-7 right">
+					<h2><br>Tienes  {{$sessions == 1 ?  $sessions .  ' sesión asignada' : $sessions .' sesiones asignadas'}}</h2>
+				</div>
+				<div class="col-sm-5">
+					<a class="btn view block sessions_l"  href="{{ url('dashboard/sesiones-asignadas/') }}">Ver lista de sesiones asignadas</a>
+				</div>
+				<div class="col-sm-12">
+					<div class="divider b"></div>
+				</div>
+			</div>
+		</div>
+		@else
+		<div class="box center">
+			<h2>Aún no te han asignado sesiones</h2>
+		</div>
+		@endif
+	</div>
+</div>
+
 @endsection
 
 @section('js-content')

@@ -50,7 +50,8 @@ class Admin extends Controller
           $query->whereIn('id',$listId->toArray())->where("enabled",1);
         })
         ->where("enabled",1)->orderBy('name','asc')->count();*/
-        $facilitator_number =  User::where("type", "facilitator")->where("enabled",1)->count();
+        $sessions_count     = FacilitatorModule::where('user_id',$user->id)->count();
+        $facilitator_number = User::where("type", "facilitator")->where("enabled",1)->count();
         $facilitators_count = $facilitator_number + $adm_count;
 		    $news = NewsEvent::orderBy('created_at','desc')->take(3)->get();
         $conversation_id     = Conversation::where('user_id',$user->id)->pluck('id');
@@ -61,13 +62,14 @@ class Admin extends Controller
         ->count();
 
         return view('admin.dashboard')->with([
-          "user"      		=> $user,
-          "aspirants"		=> $aspirants,
-		  "modules_count"	=> $modules_count,
-		  'facilitators_count' => $facilitators_count,
-		  'fellows'			   => $fellows,
-		  'news'			   => $news,
-      'conversations_count' =>$conversations_count
+          "user"      			=> $user,
+          "aspirants"			=> $aspirants,
+		  "modules_count"		=> $modules_count,
+		  'facilitators_count'  => $facilitators_count,
+		  'fellows'			    => $fellows,
+		  'news'			    => $news,
+		  'conversations_count' => $conversations_count,
+		  'sessions_count'		=> $sessions_count
          ]);
       }
 
