@@ -52,7 +52,7 @@
 	</div>
 	@endforeach
 </div>
-
+{{ $forums->links() }}
 @else
 <div class="row">
   <div class="col-sm-12">

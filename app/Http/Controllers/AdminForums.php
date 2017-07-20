@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use App\Models\Forum;
 use App\Models\ForumMessage;
@@ -10,6 +11,10 @@ use App\Models\ForumConversation;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\ForumLog;
+use App\User;
+use App\Models\FacilitatorModule;
+use App\Models\FellowData;
+use App\Notifications\SendForumNotice;
 // FormValidators
 use App\Http\Requests\SaveAdminForum;
 use App\Http\Requests\SaveForumConversation;
@@ -117,6 +122,7 @@ class AdminForums extends Controller
     $log->action  = 'create-forum';
     $log->forum_id = $forum->id;
     $log->save();
+    $this->send_to($forum,null,'create');
     return redirect("dashboard/foros/ver/$forum->id")->with('message','Foro creado correctamente');
   }
   /**
@@ -158,6 +164,7 @@ class AdminForums extends Controller
     $log->forum_id = $conversation->forum->id;
     $log->message_id = $message->id;
     $log->save();
+    $this->send_to($conversation->forum,$conversation,'message');
     return redirect("dashboard/foros/pregunta/ver/{$conversation->id}")->with('message','Mensaje creado correctamente');
   }
 
@@ -232,6 +239,7 @@ class AdminForums extends Controller
     $log->conversation_id = $forumConversation->id;
     $log->forum_id = $forum->id;
     $log->save();
+    $this->send_to($forum,$forumConversation,'question');
     return redirect("dashboard/foros/ver/{$forum->id}")->with('message','Pregunta creada correctamente');
   }
 
@@ -261,5 +269,71 @@ class AdminForums extends Controller
   public function session(Request $request){
     $activities = Activity::where('session_id',$request->input('session'))->get();
     return response()->json($activities);
+  }
+
+  protected function send_to($forum,$conversation,$type){
+      if(!$forum->state_name && $type!="create"){
+        //usuarios en el foro
+        $user_ids = ForumLog::where('forum_id',$forum->id)->pluck('user_id');
+        $users    = User::whereIn('id',$user_ids->toArray())->where('enabled',1)->get();
+        foreach ($users as $userA) {
+          $this->send($userA,$forum,$conversation,$type);
+        }
+      }elseif(!$forum->state_name && $type==="create"){
+       //a todos los usuarios fellow y facilitator
+       $assign_f = FacilitatorModule::all()->pluck('user_id');
+       $users = User::where('type','fellow')
+       ->orWhere(function($query)use($assign_f){
+         $query->whereIn('id',$assign_f->toArray());
+       })
+       ->orWhere(function($query){
+         $query->where('type','facilitator');
+       })
+       ->where('enabled',1)->get();
+        foreach ($users as $userA) {
+          $this->send($userA,$forum,$conversation,$type);
+        }
+
+      }else{
+        if($forum->state_name==='General'){
+          //a todos los usuarios fellow y facilitator
+          $assign_f = FacilitatorModule::all()->pluck('user_id');
+          $users = User::where('type','fellow')
+          ->orWhere(function($query)use($assign_f){
+            $query->whereIn('id',$assign_f->toArray());
+          })
+          ->orWhere(function($query){
+            $query->where('type','facilitator');
+          })
+          ->where('enabled',1)->get();
+           foreach ($users as $userA) {
+             $this->send($userA,$forum,$conversation,$type);
+           }
+        }else{
+          //usuarios del estado y facilitator
+          $assign_f = FacilitatorModule::all()->pluck('user_id');
+          $assign_state = FellowData::where('state',$forum->state_name)->pluck('user_id');
+          $users = User::where('type','facilitator')
+          ->orWhere(function($query)use($assign_f){
+            $query->whereIn('id',$assign_f->toArray());
+          })
+          ->orWhere(function($query)use($assign_state){
+            $query->where('type','fellow')->whereIn('id',$assign_state->toArray());
+          })
+          ->where('enabled',1)->get();
+           foreach ($users as $userA) {
+             $this->send($userA,$forum,$conversation,$type);
+           }
+        }
+      }
+  }
+
+
+  protected function send($userA,$forum,$conversation,$type){
+    if($type==='create'){
+      $userA->notify(new SendForumNotice($userA,$forum,$type,null,null));
+    }else{
+      $userA->notify(new SendForumNotice($userA,$forum,$type,$conversation,null));
+    }
   }
 }
