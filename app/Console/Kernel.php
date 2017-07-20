@@ -18,7 +18,8 @@ class Kernel extends ConsoleKernel
         Commands\SendMassiveEmails::class,
         Commands\SendAspirantsCount::class,
         Commands\AddAspirants::class,
-        Commands\CreateFellows::Class
+        Commands\CreateFellows::Class,
+        Commands\ForumLogs::Class
     ];
 
     /**

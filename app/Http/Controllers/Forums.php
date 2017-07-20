@@ -192,12 +192,24 @@ class Forums extends Controller
       $forumConversation->user_id = $user->id;
       $forumConversation->slug    = str_slug($request->topic);
       $forumConversation->save();
+      //forum log
+      $log = new ForumLog();
+      $log->user_id = $user->id;
+      $log->type    = 'fellow';
+      $log->action  = 'create-question';
+      $log->conversation_id = $forumConversation->id;
       if($session){
-        $log = new ForumLog();
-        $log->user_id = $user->id;
+        $log->forum_id = $session->forums->id;
+        $log->save();
         return redirect("tablero/foros/{$session->slug}/{$session->forums->slug}")->with('message','Pregunta creada correctamente');
       }else{
-        return redirect("tablero/foros/{$forum->state_name}")->with('message','Pregunta creada correctamente');
+        $log->forum_id = $forum->id;
+        $log->save();
+        if($request->session_slug==='foro-general'){
+          return redirect("tablero/foros/foro-general")->with('message','Pregunta creada correctamente');
+        }else{
+          return redirect("tablero/foros/{$forum->state_name}")->with('message','Pregunta creada correctamente');
+        }
       }
     }
 
@@ -252,6 +264,15 @@ class Forums extends Controller
         $message->user_id = $user->id;
         $message->conversation_id = $conversation->id;
         $message->save();
+        //forum log
+        $log = new ForumLog();
+        $log->user_id = $user->id;
+        $log->type    = 'fellow';
+        $log->action  = 'add-message';
+        $log->conversation_id = $conversation->id;
+        $log->forum_id = $conversation->forum->id;
+        $log->message_id = $message->id;
+        $log->save();
         //conversacion perteneciente a foro con sesion
         if($conversation->forum->session_id){
           return redirect("tablero/foros/pregunta/{$conversation->forum->session->slug}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');

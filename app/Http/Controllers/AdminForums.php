@@ -9,6 +9,7 @@ use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+use App\Models\ForumLog;
 // FormValidators
 use App\Http\Requests\SaveAdminForum;
 use App\Http\Requests\SaveForumConversation;
@@ -109,6 +110,13 @@ class AdminForums extends Controller
       $forum->activity_id = $activity->id;
     }
     $forum->save();
+    //forum log
+    $log = new ForumLog();
+    $log->user_id = $user->id;
+    $log->type    = 'admin';
+    $log->action  = 'create-forum';
+    $log->forum_id = $forum->id;
+    $log->save();
     return redirect("dashboard/foros/ver/$forum->id")->with('message','Foro creado correctamente');
   }
   /**
@@ -136,12 +144,21 @@ class AdminForums extends Controller
   public function saveMessage(SaveMessageForum $request)
   {
     $user      = Auth::user();
-    $forum     = ForumConversation::where('id',$request->id)->firstOrFail();
+    $conversation     = ForumConversation::where('id',$request->id)->firstOrFail();
     $message   = new ForumMessage($request->only(['message']));
     $message->user_id = $user->id;
-    $message->conversation_id = $forum->id;
+    $message->conversation_id = $conversation->id;
     $message->save();
-    return redirect("dashboard/foros/pregunta/ver/{$forum->id}")->with('message','Mensaje creado correctamente');
+    //forum log
+    $log = new ForumLog();
+    $log->user_id = $user->id;
+    $log->type    = 'admin';
+    $log->action  = 'add-message';
+    $log->conversation_id = $conversation->id;
+    $log->forum_id = $conversation->forum->id;
+    $log->message_id = $message->id;
+    $log->save();
+    return redirect("dashboard/foros/pregunta/ver/{$conversation->id}")->with('message','Mensaje creado correctamente');
   }
 
   /**
@@ -165,6 +182,13 @@ class AdminForums extends Controller
         }
         $message->delete();
       }
+      //forum log
+      $log = new ForumLog();
+      $log->user_id = $user->id;
+      $log->type    = 'admin';
+      $log->action  = 'delete-forum';
+      $log->forum_id = $forum->id;
+      $log->save();
       $forum->delete();
        return redirect("dashboard/foros")->with('message','Foro eliminado correctamente');
   }
@@ -200,6 +224,14 @@ class AdminForums extends Controller
     $forumConversation->user_id = $user->id;
     $forumConversation->slug    = str_slug($request->topic);
     $forumConversation->save();
+    //forum log
+    $log = new ForumLog();
+    $log->user_id = $user->id;
+    $log->type    = 'admin';
+    $log->action  = 'create-question';
+    $log->conversation_id = $forumConversation->id;
+    $log->forum_id = $forum->id;
+    $log->save();
     return redirect("dashboard/foros/ver/{$forum->id}")->with('message','Pregunta creada correctamente');
   }
 
