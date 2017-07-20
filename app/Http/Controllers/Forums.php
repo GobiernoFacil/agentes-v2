@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Auth;
+use Crypt;
 use App\Models\Forum;
 use App\Models\FellowData;
 use App\Models\ForumMessage;
@@ -380,6 +381,52 @@ class Forums extends Controller
           $userA->notify(new SendForumNotice($userA,$forum,$type,null,null));
         }else{
           $userA->notify(new SendForumNotice($userA,$forum,$type,$conversation,null));
+        }
+      }
+
+
+      /**
+       * ver perfil
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @return \Illuminate\Http\Response
+       */
+      public function profileUser($name,$surname,$lastname)
+      {
+         $user = Auth::user();
+          //fellow
+          $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
+          $userF      = User::find($fellowData->user_id);
+          return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+            "user"      => $user,
+            "userF"      => $userF,
+          ]);
+      }
+
+      /**
+       * ver perfil
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @return \Illuminate\Http\Response
+       */
+      public function profileAdminUser($name,$type)
+      {
+
+        $user = Auth::user();
+        if($type==1){
+         $userF      = User::where('name',$name)->where('type','admin')->firstOrFail();
+          return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+            "user"      => $user,
+            "userF"      => $userF,
+          ]);
+        }elseif($type==2){
+          $userF      = User::where('name',$name)->where('type','facilitator')->firstOrFail();
+           return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+             "user"      => $user,
+             "userF"      => $userF,
+           ]);
+        }else{
+          return redirect('tablero');
         }
       }
 

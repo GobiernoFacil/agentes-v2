@@ -71,16 +71,44 @@
 									<h2><a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
 								@endif
 						@endif
+
+
+
 						<!--fellow data -->
+						<?php
+						if($conversation->user->type=== 'facilitator'){
+							$type = 2;
+						}else{
+							$type = 1;
+						}
+						?>
 						@if($conversation->user->fellowData)
-						<p class="author">Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/{$conversation->user->fellowData->surname}/{$conversation->user->fellowData->lastname}")}}'>
+							Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}
+						  </a>
+							<span>{{$conversation->created_at->diffForHumans()}}</span>
+						</p>
 						@elseif($conversation->user->facilitatorData)
 						<!--facilitator data -->
-						<p class="author">Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
+							Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}}
+						  </a>
+							<span>{{$conversation->created_at->diffForHumans()}}</span>
+						</p>
 						@else
 						<!--super user data -->
-						<p class="author">Por {{$conversation->user->name}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+						<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
+							Por {{$conversation->user->name}}
+						  </a>
+							<span>{{$conversation->created_at->diffForHumans()}}</span>
+						</p>
 						@endif
+
+
+
 					</div>
 					<div class="col-sm-2">
 						<h3 class="count_messages">{{$conversation->messages->count()}}</h3>

@@ -337,6 +337,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
     Route::post('tablero/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
     Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
+    Route::get('tablero/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
+    Route::get('tablero/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
     /*@FellowEvaluations*/
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');

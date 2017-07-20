@@ -54,6 +54,7 @@
 	</div>
 
 	@endforeach
+	{{ $forums->links() }}
 </div>
 <?php /**
 <div class="box">

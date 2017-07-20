@@ -75,14 +75,34 @@
 						@endif
 				</div>
 				<div class="col-sm-10">
+					<?php
+					if($message->user->type=== 'facilitator'){
+						$type = 2;
+					}else{
+						$type = 1;
+					}
+					?>
 	  				<p>{{$message->message}}</p>
 						@if($message->user->type==='fellow')
-						<p class="author">Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
-
+						<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/{$message->user->fellowData->surname}/{$message->user->fellowData->lastname}")}}'>
+								Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}}
+						  </a>
+							<span>{{$message->created_at->diffForHumans()}}</span>
+						</p>
 						@elseif($message->user->type==='facilitator')
-						<p class="author">Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+						<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/$type")}}'>
+							  Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}}
+						  </a>
+							<span>{{$message->created_at->diffForHumans()}}</span>
+						</p>
 						@else
-	  				<p class="author">Por {{$message->user->name}} <span>{{$message->created_at->diffForHumans()}}</span></p>
+	  				<p class="author">
+							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/$type")}}'>
+								Por {{$message->user->name}}
+							</a>
+							<span>{{$message->created_at->diffForHumans()}}</span></p>
 						@endif
 				</div>
 				<div class="col-sm-12">
