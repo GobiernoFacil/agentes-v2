@@ -27,6 +27,16 @@
 		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span> <span class="le_link right"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span></h1>
 	</div>
 </div>
+@if($activity->type == 'video')
+	@if($activity->videos)
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="divider"></div>
+			<div id="ytVideo"></div>
+		</div>
+	</div>
+	@endif
+@endif
 <div class="box">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
@@ -112,6 +122,28 @@
 		</div>
 	</div>
 </div>
+@endif
+
+
+@if($activity->type == 'video')
+	@if($activity->videos)
+		<script>
+			function getId(url) {
+				var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+				var match = url.match(regExp);
+				if (match && match[2].length == 11) {
+					return match[2];
+				} 
+				else {
+					return 'error';
+    			}
+			}
+
+			var ytId = getId('{{$activity->videos->link}}');
+
+			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
+		</script>	
+	@endif
 @endif
 
 
