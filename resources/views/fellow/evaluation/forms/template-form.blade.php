@@ -23,10 +23,10 @@
 		        	<?php $count =0;?>
 					
 			        @foreach($question->answer as $answer)
+			        	<div class="divider b"></div>
 			          	<p class="row"><label><span class="col-sm-1">{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}</span><span class="col-sm-11">{{$answer->value}}</span></label>
 			            <?php $count++;?>
 						</p>
-						<div class="divider b"></div>
 			        @endforeach
 			        @if($question->count_correct($question->id)>1)
 					<p><a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
