@@ -12,7 +12,7 @@
 			@foreach($activity->quizInfo->question as $question)
 			<li class="row">
 		    	<div class="col-sm-12">
-		    		<h3>{{$question->question}}</h3>
+		    		<h3 class="title">{{$question->question}}</h3>
 		    	</div>
 		    	<div class="col-sm-12">
 		    	@if($errors->has('answer_q'.$countP))
@@ -21,6 +21,7 @@
 		    	</div>
 				<div class="col-sm-10 col-sm-offset-1">
 		        	<?php $count =0;?>
+					
 					<ul class="list line">
 			        @foreach($question->answer as $answer)
 			          	<li><label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}{{$answer->value}} </label>
@@ -29,7 +30,7 @@
 			        @endforeach
 					</ul>
 			        @if($question->count_correct($question->id)>1)
-					<p><a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas</a></p>
+					<p><a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
 					@endif
 		    	</div>
 		  </li>
