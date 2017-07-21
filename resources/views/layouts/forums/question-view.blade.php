@@ -14,23 +14,83 @@
 		<div class="divider b"></div>
 	</div>
 	<!--avatar-->
-	<div class="col-sm-1">
+	<div class="col-sm-2">
 		@if($question->user->image)
-		<img src='{{url("img/users/{$question->user->image->name}")}}' width="100%">
+			@if($question->user->fellowData)
+			<!--fellow data -->
+				@if($user->type =="admin")
+				<!--si dashboard admin-->
+	 				<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">
+	 			@endif
+	 			@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 				<a>
+	 			@endif
+			@elseif($question->user->facilitatorData)
+			<!--facilitator data -->
+				@if($user->type =="admin")
+				<!--si dashboard admin-->
+	 				<a href="{{url('dashboard/facilitadores/ver/' . $question->user->id )}}">
+	 			@endif
+	 			@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 				<a>
+	 			@endif
+			@else
+			<a>
+			@endif
+			<img src='{{url("img/users/{$question->user->image->name}")}}' width="100%"></a>
 		@else
-		<img src='{{url("img/users/default.png")}}' width="100%">
+			@if($question->user->fellowData)
+				@if($user->type =="admin")
+				<!--si dashboard admin-->
+	 				<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">
+	 			@endif
+	 			@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 				<a>
+	 			@endif
+			@elseif($question->user->facilitatorData)
+			<!--facilitator data -->
+				@if($user->type =="admin")
+				<!--si dashboard admin-->
+	 				<a href="{{url('dashboard/facilitadores/ver/' . $question->user->id )}}">
+	 			@endif
+	 			@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 				<a>
+	 			@endif
+			@else
+			<a>
+			@endif
+			<img src='{{url("img/users/default.png")}}' width="100%"></a>
 		@endif
 	</div>
 	<!--pregunta-->
-	<div class="col-sm-9 forum_list">
+	<div class="col-sm-8 forum_list">
     	<h1>{{$question->topic}} </h1>
     	<p class="author">Por
     	@if($question->user->fellowData)
     	<!--fellow data -->
-		{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}
+    		@if($user->type =="admin")
+		  		<!--si dashboard admin-->
+	 			<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}</a>
+	 		@endif
+	 		@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 			{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}
+	 		@endif
 		@elseif($question->user->facilitatorData)
     	<!--facilitator data -->
-		{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}}
+    		@if($user->type =="admin")
+		  		<!--si dashboard admin-->
+	 			<a href="{{url('dashboard/facilitadores/ver/' . $question->user->id )}}">{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}}</a>
+	 		@endif
+		  	@if($user->type =="facilitator")
+	 			<!--si dashboard facilitador-->
+	 			{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}}
+	 		@endif
+		
 		@else
 		<!--super user data -->
 		{{$question->user->name}}
@@ -76,22 +136,82 @@
         <div class="col-sm-8 col-sm-offset-2 forum_list">
     @foreach($question->messages as $message)
       		<div class="row">
-	      		<div class="col-sm-1">
+	      		<div class="col-sm-2">
 		      		@if($message->user->image)
-			  		<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
-			  		@else
-			  		<img src='{{url("img/users/default.png")}}' width="100%">
-			  		@endif
+						@if($message->user->fellowData)
+						<!--fellow data -->
+							@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 							<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 							<a>
+	 						@endif
+						@elseif($message->user->facilitatorData)
+						<!--facilitator data -->
+							@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 							<a href="{{url('dashboard/facilitadores/ver/' . $message->user->id )}}">
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 							<a>
+	 						@endif
+						@else
+						<a>
+						@endif
+						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%"></a>
+					@else
+						@if($message->user->fellowData)
+							@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 							<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 							<a>
+	 						@endif
+						@elseif($message->user->facilitatorData)
+						<!--facilitator data -->
+							@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 							<a href="{{url('dashboard/facilitadores/ver/' . $message->user->id )}}">
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 							<a>
+	 						@endif
+						@else
+						<a>
+						@endif
+						<img src='{{url("img/users/default.png")}}' width="100%"></a>
+					@endif
+		      		
 				</div>
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 	  				<p>{{$message->message}}</p>
 	  				<p class="author">Por
 		  			@if($message->user->fellowData)
 		  			<!--fellow data -->
-		  			{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}
+		  				@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 						<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}</a>
+	 					@endif
+	 					@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 						{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}
+	 					@endif
 		  			@elseif($message->user->facilitatorData)
 		  			<!--facilitator data -->
-		  			{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}}
+		  				@if($user->type =="admin")
+		  					<!--si dashboard admin-->
+	 						<a href="{{url('dashboard/facilitadores/ver/' . $message->user->id )}}">{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}}</a>
+	 					@endif
+		  				@if($user->type =="facilitator")
+	 						<!--si dashboard facilitador-->
+	 						{{$message->user->name." ".$message->user->facilitatorData->surname." ".$message->user->facilitatorData->lastname}}
+	 					@endif
 		  			@else
 		  			<!--super user data -->
 		  			{{$message->user->name}}
