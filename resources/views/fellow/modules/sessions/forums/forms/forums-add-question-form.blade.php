@@ -14,6 +14,9 @@
       @if($errors->has('topic'))
       <strong class="danger">{{$errors->first('topic')}}</strong>
       @endif
+      @if($errors->has('similar_slug'))
+      <strong class="danger">Escriba una pregunta o tema único</strong>
+      @endif
     </p>
   </div>
 </div>

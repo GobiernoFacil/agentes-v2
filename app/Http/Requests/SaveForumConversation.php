@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\ForumConversation;
 use App\Traits\MessagesTrait;
 class SaveForumConversation extends FormRequest
 {
@@ -24,10 +25,26 @@ class SaveForumConversation extends FormRequest
      */
     public function rules()
     {
-        return [
+        if($this->topic){
+          $slug         = str_slug($this->topic);
+          $similar_slug = ForumConversation::where('slug',$slug)->first();
+          if($similar_slug){
+            return [
+                    'similar_slug'=>'required',
+                ];
+          }else{
+            return [
+              //
+              'topic'     => 'required|max:256|unique:forum_conversations',
+              'description' => 'required',
+            ];
+          }
+        }else{
+          return [
             //
             'topic'     => 'required|max:256|unique:forum_conversations',
             'description' => 'required',
-        ];
+          ];
+        }
     }
 }
