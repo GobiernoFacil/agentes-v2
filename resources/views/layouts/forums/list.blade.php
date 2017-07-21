@@ -43,9 +43,21 @@
 					<div class="divider b"></div>
 					<div class="col-sm-1">
 						@if($conversation->user->image)
-						<img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%">
+							@if($conversation->user->fellowData)
+							<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}"><img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%"></a>
+							@elseif($conversation->user->facilitatorData)
+							<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}"><img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%"></a>
+							@else
+							<img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%">
+							@endif
 						@else
-						<img src='{{url("img/users/default.png")}}' width="100%">
+							@if($conversation->user->fellowData)
+							<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}"><img src='{{url("img/users/default.png")}}' width="100%"></a>
+							@elseif($conversation->user->facilitatorData)
+							<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}"><img src='{{url("img/users/default.png")}}' width="100%"></a>
+							@else
+							<img src='{{url("img/users/default.png")}}' width="100%">
+							@endif
 						@endif
 					</div>
 					<div class="col-sm-9">
@@ -55,12 +67,27 @@
 						@if($user->type =="facilitator")
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
-						<!--fellow data -->
+						
  						@if($conversation->user->fellowData)
- 						<p class="author">Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+ 						<!--fellow data -->
+ 						<p class="author">Por 
+	 						@if($user->type =="admin")
+	 						<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}">{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}</a>
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} 
+	 						@endif
+	 						<span>{{$conversation->created_at->diffForHumans()}}</span></p>
  						@elseif($conversation->user->facilitatorData)
  						<!--facilitator data -->
- 						<p class="author">Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>
+ 						<p class="author">Por 
+	 						@if($user->type =="admin")
+	 						<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}">{{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} </a>
+	 						@endif
+	 						@if($user->type =="facilitator")
+	 						{{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} 
+	 						@endif
+	 						<span>{{$conversation->created_at->diffForHumans()}}</span></p>
  						@else
  						<!--super user data -->
  						<p class="author">Por {{$conversation->user->name}} <span>{{$conversation->created_at->diffForHumans()}}</span></p>

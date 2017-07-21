@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h1>{{$activity->quizInfo->title}}</h1>
-    <p><strong>Instrucciones:</strong> Selecciona la respuesta correcta.</p>
+    <p><strong>Instrucciones:</strong> Selecciona las respuestas correctas.</p>
   </div>
 </div>
 
