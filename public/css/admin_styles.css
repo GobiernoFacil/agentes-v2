@@ -1727,7 +1727,8 @@ a:visited.btn {
     a.btn.danger:hover,
     .btn.danger:hover,
     a:visited.btn.danger:hover {
-      background-color: #b30000; }
+      background-color: #b30000;
+      border: 0; }
   a.btn.add,
   .btn.add,
   a:visited.btn.add {
