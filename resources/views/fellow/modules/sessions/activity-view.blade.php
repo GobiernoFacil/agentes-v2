@@ -44,6 +44,16 @@
 	</div>
 </div>
 
+@if($activity->type == 'video')
+	@if($activity->videos)
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="ytVideo"></div>
+		</div>
+	</div>
+	@endif
+@endif
+
 <div class="box">
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
@@ -175,5 +185,26 @@
 @endif
 
 
+
+@if($activity->type == 'video')
+	@if($activity->videos)
+		<script>
+			function getId(url) {
+				var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+				var match = url.match(regExp);
+				if (match && match[2].length == 11) {
+					return match[2];
+				} 
+				else {
+					return 'error';
+    			}
+			}
+
+			var ytId = getId('{{$activity->videos->link}}');
+
+			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
+		</script>	
+	@endif
+@endif
 
 @endsection
