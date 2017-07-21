@@ -201,7 +201,7 @@
 			}
 
 			var ytId = getId('{{$activity->videos->link}}');
-			console.log({{$activity->videos->link}});
+			console.log('{{$activity->videos->link}}');
 			console.log(ytId);
 			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
 		</script>	
