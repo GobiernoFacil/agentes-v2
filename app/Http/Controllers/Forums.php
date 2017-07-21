@@ -205,7 +205,7 @@ class Forums extends Controller
       if($session){
         $log->forum_id = $session->forums->id;
         $log->save();
-        $this->send_to($session->forums,$forumConversation,'question');
+       $this->send_to($session->forums,$forumConversation,'question');
         return redirect("tablero/foros/{$session->slug}/{$session->forums->slug}")->with('message','Pregunta creada correctamente');
       }else{
         $log->forum_id = $forum->id;
