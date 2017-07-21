@@ -15,7 +15,7 @@
 
 <div class="box">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
       @include('fellow.evaluation.forms.template-form')
     </div>
   </div>
