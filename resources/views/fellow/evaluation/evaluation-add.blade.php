@@ -4,7 +4,7 @@
 @section('body_class', 'fellow aprendizaje modulos')
 @section('breadcrumb_type', 'view questions')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_quiz')
-
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -37,8 +37,10 @@ $(document).ready(function() {
       <?php $count++;?>
       @endforeach
     @else
-      $('#delete{{$countP}}_{{$count}}').click(function(event) {
+    console.log("delete");
+      $('.delete{{$countP}}_{{$count}}').click(function(event) {
           event.preventDefault();
+          console.log('this');
           $('.answer_q{{$countP}}').not(this).attr('checked', false);
        });
     @endif
