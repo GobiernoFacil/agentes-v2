@@ -22,13 +22,11 @@
 				<div class="col-sm-10 col-sm-offset-1">
 		        	<?php $count =0;?>
 					
-					<ul class="list line">
 			        @foreach($question->answer as $answer)
-			          	<li><label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}{{$answer->value}} </label>
+			          	<p><label>{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}{{$answer->value}} </label>
 			            <?php $count++;?>
-						</li>
+						</p>
 			        @endforeach
-					</ul>
 			        @if($question->count_correct($question->id)>1)
 					<p><a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
 					@endif
