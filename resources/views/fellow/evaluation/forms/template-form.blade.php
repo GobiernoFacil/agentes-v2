@@ -29,7 +29,8 @@
 						</p>
 			        @endforeach
 			        @if($question->count_correct($question->id)>1)
-					<p><a hred="#" class="btn xs view" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
+			        <div class="divider b"></div>
+					<p class="right"><a hred="#" class="btn xs danger" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
 					@endif
 		    	</div>
 		  </li>
