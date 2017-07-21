@@ -27,8 +27,6 @@
 	            </p>
 	        @endforeach
     </div>
-      
-    </div>
   </li>
     <?php $countP++;?>
   @endforeach
