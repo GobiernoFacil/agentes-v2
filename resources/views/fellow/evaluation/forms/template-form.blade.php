@@ -9,15 +9,15 @@
 	<?php $countP =1;?>
 	@foreach($activity->quizInfo->question as $question)
 	<li class="row">
-    	<div class="col-sm-12">
+    	<div class="col-sm-10 col-sm-offset-1">
     		<h3>{{$question->question}}</h3>
     	</div>
-    	<div class="col-sm-12">
+    	<div class="col-sm-10 col-sm-offset-1">
     	@if($errors->has('answer_q'.$countP))
     	<strong class="danger">{{$errors->first('answer_q'.$countP)}}</strong>
     	@endif
     	</div>
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-9 col-sm-offset-2">
         	<?php $count =0;?>
 			<ul class="list line">
 	        @foreach($question->answer as $answer)
