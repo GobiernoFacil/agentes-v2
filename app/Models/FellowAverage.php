@@ -31,7 +31,8 @@ class FellowAverage extends Model
      */
     function scoreModule($module_id,$fellow_id)
     {
-      $sessions_id = ModuleSession::where('module_id',$module_id)->pluck('id');
+      $today = date("Y-m-d");
+      $sessions_id = ModuleSession::where('module_id',$module_id)->where('start','<=',$today)->pluck('id');
       //obtener id de sesiones que cuenten con evaluaciones automaticas o de archivos
       $activities_id = Activity::where('type','evaluation')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
       $forums_id     = Forum::whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
@@ -50,7 +51,8 @@ class FellowAverage extends Model
           $fellow_average->type= 'module';
           $fellow_average->average = $total_score/($sessions->count());
       }else{
-          $fellow_average->type= 'none';
+          $fellow_average->type= 'sin';
+          $fellow_average->average= null;
       }
       $fellow_average->save();
       $this->score($fellow_id);
@@ -91,6 +93,7 @@ class FellowAverage extends Model
       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'session_id'=>$session->id]);
       if(gettype($files_score) === 'string' && gettype($eva_score) === 'string' && gettype($forum_score) === 'string'){
         $fellow_average->type = 'sin';
+        $fellow_average->average= null;
       }else{
         $final_score = $this->get_session_score($files_score,$eva_score,$forum_score);
         $fellow_average->average = $final_score;
@@ -109,19 +112,21 @@ class FellowAverage extends Model
      */
     function score($fellow_id)
     {
-      $modules = Module::all();
+      $today = date("Y-m-d");
+      $modules = Module::where('start','<=',$today)->get();
       $total_score = 0;
       foreach($modules as $module){
         $score = FellowAverage::where('module_id',$module->id)->where('user_id',$fellow_id)->first();
         if($score){
           $total_score = $total_score + $score->average;
         }
-       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'type'=>'total']);
-       if($modules->count()>0){
-         $fellow_average->average= $total_score/($modules->count());
-       }else{
-         $fellow_average->average= 0;
-       }
+      }
+
+      $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'type'=>'total']);
+      if($modules->count()>0){
+        $fellow_average->average= $total_score/($modules->count());
+      }else{
+        $fellow_average->average= 0;
       }
       $fellow_average->save();
       return true;
