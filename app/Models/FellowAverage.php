@@ -25,13 +25,36 @@ class FellowAverage extends Model
     ];
 
     /**
-     * calcula promedio del modulo
+     * calcula promedio del modulo de acuerdo a id e id de usuario
      *
      * @return \Illuminate\Http\Response
      */
-    function scoreModule()
+    function scoreModule($module_id,$fellow_id)
     {
+      $sessions_id = ModuleSession::where('module_id',$module_id)->pluck('id');
+      //obtener id de sesiones que cuenten con evaluaciones automaticas o de archivos
+      $activities_id = Activity::where('type','evaluation')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $forums_id     = Forum::whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $ids = array_unique(array_merge($activities_id->toArray(),$forums_id->toArray()));
+      $total_score = 0;
+      $sessions  = ModuleSession::whereIn('id',$ids)->get();
+      foreach($sessions as $session){
+           $session_score = FellowAverage::where('session_id',$session->id)->where('user_id',$fellow_id)->first();
+           if($session_score){
+             $total_score = $session_score->average + $total_score;
+           }
+        }
 
+      $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'module_id'=>$module_id]);
+      if($sessions->count()>0){
+          $fellow_average->type= 'module';
+          $fellow_average->average = $total_score/($sessions->count());
+      }else{
+          $fellow_average->type= 'none';
+      }
+      $fellow_average->save();
+      $this->score($fellow_id);
+      return true;
     }
 
     /**
@@ -67,25 +90,41 @@ class FellowAverage extends Model
       }
       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'session_id'=>$session->id]);
       if(gettype($files_score) === 'string' && gettype($eva_score) === 'string' && gettype($forum_score) === 'string'){
-        $fellow_average->type = 'None';
+        $fellow_average->type = 'sin';
       }else{
         $final_score = $this->get_session_score($files_score,$eva_score,$forum_score);
         $fellow_average->average = $final_score;
       }
       $fellow_average->save();
+      $this->scoreModule($session->module_id,$fellow_id);
       return true;
 
 
     }
 
     /**
-     * calcula promedio total
+     * calcula promedio total para id de usuario
      *
      * @return \Illuminate\Http\Response
      */
-    function score()
+    function score($fellow_id)
     {
-
+      $modules = Module::all();
+      $total_score = 0;
+      foreach($modules as $module){
+        $score = FellowAverage::where('module_id',$module->id)->where('user_id',$fellow_id)->first();
+        if($score){
+          $total_score = $total_score + $score->average;
+        }
+       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'type'=>'total']);
+       if($modules->count()>0){
+         $fellow_average->average= $total_score/($modules->count());
+       }else{
+         $fellow_average->average= 0;
+       }
+      }
+      $fellow_average->save();
+      return true;
     }
 
     /**
