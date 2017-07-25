@@ -11,10 +11,10 @@
 	
 	<div class="col-sm-3">
 		<div class="box">
-			<ul class="list">
-				<li><a class="btn_dash sh" href="#" data-info="eval">Próximas evaluaciones</a></li>
+			<ul class="list_dash">
+				<li><a class="btn_dash sh active" href="#" data-info="eval">Próximas evaluaciones</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="act">Actividades</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="score">Calificaciones</a></li>
+				<li><a class="btn_dash" href="{{url('tablero/calificaciones')}}" data-info="score">Calificaciones</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="forum">Foros</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="avisos">Avisos</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="files">Tus Archivos</a></li>
@@ -160,13 +160,15 @@
 <script src="{{url('js/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script>
 	$("div.AP_div").each(function(){
-     $(this).hide();
-    if($(this).attr('id') == 'eval') {
-        $(this).show();
-    }
+    	$(this).hide();
+		if($(this).attr('id') == 'eval') {
+        	$(this).show();
+    	}
 	});
-	$('a.btn_dash').on( "click", function(e) {
+	$('a.sh').on( "click", function(e) {
 	    e.preventDefault();
+	    $('a.sh').removeClass('active');
+	    $(this).addClass('active');
 	    var id = $(this).attr('data-info'); 
 	    $("div.AP_div").each(function(){
 	        $(this).hide();
@@ -174,6 +176,7 @@
 	            $(this).show();
 	        }
 	    });
+	    
 	});
 </script>
 @endsection
