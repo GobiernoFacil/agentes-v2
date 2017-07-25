@@ -56,8 +56,8 @@
 		</div>
 	</div>
 </div>
-<div class="box">	
-	<div class="row">	
+<div class="box">
+	<div class="row">
 		<div class="col-sm-3">
 			<h3 class="right">Calificaciones</h3>
 		</div>
@@ -66,8 +66,18 @@
 		</div>
 	</div>
 </div>
-<div class="box">	
-	<div class="row">	
+<div class="box">
+	<div class="row">
+		<div class="col-sm-3">
+			<h3 class="right">Participaciones</h3>
+		</div>
+		<div class="col-sm-6 ">
+			<a href="{{ url('tablero/participaciones') }}" class="btn gde view">Ver participaciones</a>
+		</div>
+	</div>
+</div>
+<div class="box">
+	<div class="row">
 		<div class="col-sm-3">
 			<h3 class="right">{{$user->fellowFiles->count()}} Archivos</h3>
 		</div>

@@ -339,6 +339,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
     Route::get('tablero/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
     Route::get('tablero/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
+    Route::get('tablero/participaciones', 'Forums@participations');
     /*@FellowEvaluations*/
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
