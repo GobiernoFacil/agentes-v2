@@ -1928,6 +1928,22 @@ sup {
   margin: 0 5px 0 0;
   vertical-align: top; }
 
+.list_dash {
+  margin: 0; }
+  .list_dash li {
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    list-style: none;
+    text-transform: uppercase; }
+    .list_dash li a {
+      color: #ccc;
+      display: block;
+      padding: 10px; }
+      .list_dash li a.active {
+        color: black; }
+      .list_dash li a:hover {
+        color: #333; }
+
 .count_m {
   color: #999;
   display: block;
