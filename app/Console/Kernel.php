@@ -19,7 +19,8 @@ class Kernel extends ConsoleKernel
         Commands\SendAspirantsCount::class,
         Commands\AddAspirants::class,
         Commands\CreateFellows::Class,
-        Commands\ForumLogs::Class
+        Commands\ForumLogs::Class,
+        Commands\UpdateAverages::Class
     ];
 
     /**

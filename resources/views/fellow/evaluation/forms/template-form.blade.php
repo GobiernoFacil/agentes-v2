@@ -21,7 +21,7 @@
 		    	</div>
 				<div class="col-sm-10 col-sm-offset-1">
 		        	<?php $count =0;?>
-					
+
 			        @foreach($question->answer as $answer)
 			        	<div class="divider b"></div>
 			          	<p class="row"><label><span class="col-sm-1">{{Form::radio('answer_q'.$countP.'['.$count.']',$answer->id, null,['class' => 'form-control answer_q'.$countP,'id'=>'answer_'.$countP.'_'.$count])}}</span><span class="col-sm-11">{{$answer->value}}</span></label>
@@ -31,6 +31,12 @@
 			        @if($question->count_correct($question->id)>1)
 			        <div class="divider b"></div>
 					<p class="right"><a hred="#" class="btn xs danger" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$countP}}</a></p>
+					<script>
+					$('#delete{{$countP}}_{{$count}}').click(function(event) {
+		          event.preventDefault();
+		          $('.answer_q{{$countP}}').not(this).attr('checked', false);
+		       });
+					</script>
 					@endif
 		    	</div>
 		  </li>

@@ -12,6 +12,7 @@ use App\Models\Activity;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
+use App\Models\FellowAverage;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
@@ -151,6 +152,8 @@ class AdminEvaluations extends Controller
         $eva->path = $path.'/'.$name;
       }
       $eva->save();
+      $fellowAverage = new FellowAverage();
+      $fellowAverage->scoreSession($data->activity_id,$data->user_id);
       return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
     }
 
