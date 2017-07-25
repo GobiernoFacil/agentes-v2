@@ -26,8 +26,9 @@
 				<img src='{{url("img/users/default.png")}}' height="150px">
 				@endif
 			</p>
-			<h2 >{{$user->name}}</h2>
-
+			<h2>{{$user->name}} {{$user->fellowData->surname}} {{$user->fellowData->lastname}}</h2>
+			<h3>Procedencia: {{$user->fellowData->origin}} </h3>
+			<p>{{$user->fellowData->city}}, {{$user->fellowData->state}}</p>
 			<div class="divider"></div>
 			<ul class="profile list row">
 				<li class="col-sm-4"><span>Grado de estudios</span>{{$user->fellowData->degree}}</li>
@@ -37,13 +38,13 @@
 			</ul>
 			<p>
 			@if($user->fellowData->twitter)
-			<a href="#" class="facilitador_i tw"></a>
+			<a href="{{$user->fellowData->twitter}}" class="facilitador_i tw"></a>
 			@endif
 			@if($user->fellowData->facebook)
-			<a href="#" class="facilitador_i fb"></a>
+			<a href="{{$user->fellowData->facebook}}" class="facilitador_i fb"></a>
 			@endif
 			@if($user->fellowData->linkedin)
-			<a href="#" class="facilitador_i lk"></a>
+			<a href="{{$user->fellowData->linkedin}}" class="facilitador_i lk"></a>
 			@endif
 			@if($user->fellowData->other)
 			{{$user->fellowData->other}}
