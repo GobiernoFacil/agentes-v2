@@ -54,5 +54,26 @@
 		 </div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Participaciones</h1>
+	</div>
+</div>
+
+<div class="box session_list">
+	<div class="row">
+		<div class="col-sm-6  center">
+			<h3 class="title">Participaciones totales en foros</h3>
+			<h2><span class="score_a block">{{$fellow->total_participations($fellow->id)}}</span></h2>
+	   </div>
+		 <!-- ver sesión-->
+		 <div class="col-sm-6">
+			 <a class="btn view block sessions_l"  href="{{ url('dashboard/fellows/participaciones/ver/' . $fellow->id) }}">Ir a participaciones</a>
+		 </div>
+		 <div class="col-sm-12">
+			 <div class="divider b"></div>
+		 </div>
+	</div>
+</div>
 
 @endsection

@@ -120,6 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/fellows', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/ver/{id}', 'FellowsAdmin@view');
     Route::get('dashboard/fellows/calificaciones/ver/{id}', 'FellowsAdmin@viewSheet');
+    Route::get('dashboard/fellows/participaciones/ver/{id}', 'FellowsAdmin@participationSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');

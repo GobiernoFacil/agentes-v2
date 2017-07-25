@@ -1,14 +1,13 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de participaciones' )
 @section('description', 'Lista de participaciones')
-@section('body_class', 'fellow aprendizaje')
+@section('body_class', '')
 
 @section('content')
 @if($modules->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Participaciones</h1>
-		<p>En este apartado podrás consultar los foros en los que has participado.</p>
+		<h1>Participaciones de {{$fellow->name.' '.$fellow->fellowdata->surname.' '.$fellow->fellowdata->lastname}}</h1>
 		{{ $modules->links() }}
 		<?php $count_modules = 1; ?>
 		@foreach ($modules as $module)
@@ -40,7 +39,7 @@
 						</div>
 						<!--- título-->
 						<div class="col-sm-4 col-sm-offset-1">
-            			  <p><a href='{{url("tablero/foros/{$session->slug}/{$forum->slug}")}}'class="link lists_ev">{{$forum->topic}}</a></p>
+            			  <h5>Foro: "{{$forum->topic}}"</h5>
             			</div>
             			<!--fecha-->
             			<div class="col-sm-2 col-sm-offset-2">
@@ -49,7 +48,7 @@
             			</div>
 						<!--- status-->
 						<div class="col-sm-3">
-              @if($session->check_participation($user->id,$forum->id))
+              @if($session->check_participation($fellow->id,$forum->id))
                 <p><span class="with">Participaste</span></p>
               @else
                 <p><span class="without">Sin participar</span></p>

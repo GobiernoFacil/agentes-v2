@@ -9,6 +9,7 @@ use App\Models\FellowAnswer;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
+use App\Models\ForumLog;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -123,5 +124,9 @@ class User extends Authenticatable
 
     function FellowFileUp($user_id,$activity_id){
       return FellowFile::where('activity_id',$activity_id)->where('user_id',$user_id)->first();
+    }
+
+    function total_participations($user_id){
+      return ForumLog::where('user_id',$user_id)->where('type','fellow')->count();
     }
 }

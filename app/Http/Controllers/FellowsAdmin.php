@@ -425,6 +425,26 @@ class FellowsAdmin extends Controller
          );
      }
 
+     /**
+      * Display the participation sheet
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function participationSheet($id)
+     {
+         $user     = Auth::user();
+         $fellow   = User::find($id);
+         $modules  = Module::orderBy('start','asc')->paginate($this->pageSize);;
+         return view('admin.fellows.participation-sheet')->with(
+          [
+            'user'=>$user,
+            'fellow'  => $fellow,
+            'modules' =>$modules
+          ]
+         );
+     }
+
 
 
 
