@@ -63,7 +63,7 @@
 <div class="box session_list">
 	<div class="row">
 		<div class="col-sm-6  center">
-			<h3 class="title">Participaciones totales en foros</h3>
+			<h3 class="title">Participaciones totales en foros (incluyendo foro general y de su estado)</h3>
 			<h2><span class="score_a block">{{$fellow->total_participations($fellow->id)}}</span></h2>
 	   </div>
 		 <!-- ver sesión-->

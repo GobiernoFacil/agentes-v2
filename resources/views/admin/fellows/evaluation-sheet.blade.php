@@ -11,7 +11,7 @@
     <h1>Calificaciones de {{$fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname}}</h1>
   </div>
  <div class="col-sm-3 right">
-	 <p>Promedio general: <span class="score_a block">{{number_format($average,2)}}</span></p>
+	 <p>Promedio general: <span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></p>
   </div>
 </div>
 <div class="box score">
@@ -68,7 +68,9 @@
 		@foreach($modules as $module)
 			@if($module->title !="Examen de diagnóstico" && $module->title !="Examen diagnóstico")
 			<h2 class ="title">Módulo {{$n}}</h2>
-			<p><strong>{{$module->title}}</strong></p>
+			<p><strong>{{$module->title}}</strong><br>
+        <span class="note"><strong>Calificación: </strong> {{$fellow->module_average($fellow->id,$module->id) ? number_format($fellow->module_average($fellow->id,$module->id)->average,2) : 'Sin calificación'}}</span>
+      </p>
 			<ul class="list">
 				@foreach($module->sessions as $session)
                 <li class="row">
@@ -77,6 +79,7 @@
                   </span>
                   <span class="col-sm-6">
                   	<h4>{{$session->name}}</h4>
+                    <span class="note"><strong>Calificación: </strong> {{$fellow->session_average($fellow->id,$session->id) ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'Sin calificación'}}</span>
                   </span>
                   <span class="col-sm-12">
                     <ul>

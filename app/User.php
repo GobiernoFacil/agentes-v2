@@ -10,6 +10,7 @@ use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
 use App\Models\ForumLog;
+use App\Models\FellowAverage;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -128,5 +129,15 @@ class User extends Authenticatable
 
     function total_participations($user_id){
       return ForumLog::where('user_id',$user_id)->where('type','fellow')->count();
+    }
+
+    function total_average($user_id){
+      return FellowAverage::where('user_id',$user_id)->where('type','total')->first();
+    }
+    function module_average($user_id,$module_id){
+      return FellowAverage::where('user_id',$user_id)->where('module_id',$module_id)->first();
+    }
+    function session_average($user_id,$session_id){
+      return FellowAverage::where('user_id',$user_id)->where('session_id',$session_id)->first();
     }
 }
