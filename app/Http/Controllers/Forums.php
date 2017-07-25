@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Crypt;
+use App\Models\FacilitatorModule;
 use App\Models\Forum;
 use App\Models\FellowData;
 use App\Models\ForumMessage;
-use App\Models\ModuleSession;
 use App\Models\ForumConversation;
 use App\Models\ForumLog;
+use App\Models\Module;
+use App\Models\ModuleSession;
 use App\User;
-use App\Models\FacilitatorModule;
 use App\Notifications\SendForumNotice;
 // FormValidators
 use App\Http\Requests\SaveForum;
@@ -431,5 +432,25 @@ class Forums extends Controller
           return redirect('tablero');
         }
       }
+
+      /**
+      * Muestra hoja de participaciones
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+      public function participations()
+      {
+        //
+        $user   = Auth::user();
+        $today  = date('Y-m-d');
+        $modules = Module::paginate($this->pageSize);
+        return view('fellow.modules.sessions.forums.participation-view')->with([
+          "user"      => $user,
+          'modules'   =>$modules,
+          'today'     =>$today
+        ]);
+      }
+
 
 }

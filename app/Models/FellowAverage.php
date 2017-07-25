@@ -186,7 +186,7 @@ class FellowAverage extends Model
       $forums = Forum::where('session_id',$session_id)->get();
       $total_score = 0;
       foreach($forums as $forum){
-        $participation = ForumLog::where('forum_id','user_id',$fellow_id)->where('type','fellow')->first();
+        $participation = ForumLog::where('forum_id',$forum->id)->where('user_id',$fellow_id)->where('type','fellow')->first();
         if($participation){
           $total_score = $total_score +10;
         }
