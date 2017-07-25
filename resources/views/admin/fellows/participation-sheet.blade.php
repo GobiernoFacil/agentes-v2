@@ -49,7 +49,7 @@
 						<!--- status-->
 						<div class="col-sm-3">
               @if($session->check_participation($fellow->id,$forum->id))
-                <p><span class="with">Participaste</span></p>
+                <p><span class="with">Participó</span></p>
               @else
                 <p><span class="without">Sin participar</span></p>
               @endif
