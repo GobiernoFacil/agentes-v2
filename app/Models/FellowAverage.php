@@ -65,10 +65,14 @@ class FellowAverage extends Model
      * Si no existen actividades del tipo de ponderación, se ajustan de acuerdo a los porcentajes centrales
      * @return \Illuminate\Http\Response
      */
-    function scoreSession($activity_id,$fellow_id)
+    function scoreSession($activity_id=null,$fellow_id,$session_id=null)
     {
-      $activity = Activity::find($activity_id);
-      $session  = $activity->session;
+      if(!$session_id){
+        $activity = Activity::find($activity_id);
+        $session  = $activity->session;
+      }else{
+        $session = ModuleSession::find($session_id);
+      }
       //Checar actividades con archivos
       $file_count = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->count();
       if($file_count>0){
@@ -101,8 +105,6 @@ class FellowAverage extends Model
       $fellow_average->save();
       $this->scoreModule($session->module_id,$fellow_id);
       return true;
-
-
     }
 
     /**
