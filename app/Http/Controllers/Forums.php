@@ -444,7 +444,7 @@ class Forums extends Controller
         //
         $user   = Auth::user();
         $today  = date('Y-m-d');
-        $modules = Module::paginate($this->pageSize);
+        $modules = Module::orderBy('start','desc')->where('public',1)->paginate($this->pageSize);
         return view('fellow.modules.sessions.forums.participation-view')->with([
           "user"      => $user,
           'modules'   =>$modules,
