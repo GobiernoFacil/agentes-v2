@@ -1,16 +1,13 @@
+<div class="box">
 <div class="row">
-	<?php $count_a = $next_activities->count();?>
+	<div class="col-sm-8">
+		<h2>Próximas evaluaciones </h2>
+	</div>
+	<div class="col-sm-4 right">
+		<a href='{{url("tablero/evaluaciones")}}' class="btn ev xs right">Ver lista de evaluaciones >></a>
+	</div>
 @foreach($next_activities as $activity)
-	@if($count_a == 3)
-	<div class="col-sm-4">
-	@endif
-	@if($count_a == 2)
-	<div class="col-sm-6">
-	@endif
-	@if($count_a == 1)
 	<div class="col-sm-12">
-	@endif
-
 		<div class="box session_list next_eval">
 			<div class="row">
 				<!-- footnote-->
@@ -58,4 +55,5 @@
 		</div>
 	</div>
 @endforeach
+</div>
 </div>
