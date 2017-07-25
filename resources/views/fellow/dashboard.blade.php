@@ -14,11 +14,11 @@
 			<ul class="list_dash">
 				<li><a class="btn_dash sh active" href="#" data-info="eval">Próximas evaluaciones</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="act">Actividades</a></li>
-				<li><a class="btn_dash" href="{{url('tablero/calificaciones')}}" data-info="score">Calificaciones</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="forum">Foros</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="avisos">Avisos</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="files">Tus Archivos</a></li>
 				<li><a class="btn_dash sh" href="#" data-info="messages">Tus Conversaciones</a></li>
+				<li><a class="btn_dash" href="{{url('tablero/calificaciones')}}" data-info="score">Tus Calificaciones</a></li>
 			</ul>
 		</div>
 	</div>
