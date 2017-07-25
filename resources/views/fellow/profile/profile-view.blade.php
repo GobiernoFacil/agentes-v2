@@ -53,16 +53,27 @@
 
 			<h3>Semblanza</h3>
 			<p>{{$user->fellowData->semblance ? $user->fellowData->semblance : "Sin información" }}</p>
-			<div class="divider"></div>
-			<h3>Archivos</h3>
-			<div class="row">
-			<div class="col-sm-6 col-sm-offset-3">
-				<a href="{{ url('tablero/perfil/archivos') }}" class="btn gde view">Ver ({{$user->fellowFiles->count()}})</a>
-			</div>
-			</div>
-			<div class="divider"></div>
 		</div>
-
+	</div>
+</div>
+<div class="box">	
+	<div class="row">	
+		<div class="col-sm-3">
+			<h3 class="right">Calificaciones</h3>
+		</div>
+		<div class="col-sm-6 ">
+			<a href="{{ url('tablero/calificaciones') }}" class="btn gde view">Ver calificaciones</a>
+		</div>
+	</div>
+</div>
+<div class="box">	
+	<div class="row">	
+		<div class="col-sm-3">
+			<h3 class="right">{{$user->fellowFiles->count()}} Archivos</h3>
+		</div>
+		<div class="col-sm-6 ">
+			<a href="{{ url('tablero/perfil/archivos') }}" class="btn gde view">Ver archivos ({{$user->fellowFiles->count()}})</a>
+		</div>
 	</div>
 </div>
 @endsection
