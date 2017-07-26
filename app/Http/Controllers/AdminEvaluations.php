@@ -13,6 +13,7 @@ use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\FellowAverage;
+use App\Models\RetroLog;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
@@ -154,6 +155,9 @@ class AdminEvaluations extends Controller
       $eva->save();
       $fellowAverage = new FellowAverage();
       $fellowAverage->scoreSession($data->activity_id,$data->user_id);
+      $retro   = RetroLog::firstOrCreate(['user_id'=>$data->user_id,'activity_id'=>$data->activity->id]);
+      $retro->status = 0;
+      $retro->save();
       return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
     }
 
