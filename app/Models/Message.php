@@ -17,4 +17,8 @@ class Message extends Model
     function user(){
       return $this->belongsTo("App\User");
     }
+
+    function log(){
+      return $this->hasOne("App\Models\ConversationLog");
+    }
 }

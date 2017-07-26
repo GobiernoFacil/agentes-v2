@@ -51,7 +51,13 @@
 			    <div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">
 			    <p>{{$message->message}}</p>
 			    </div>
-			    <p><span>{{$message->updated_at->diffForHumans()}}</span></p>
+			    <p><span>{{$message->updated_at->diffForHumans()}}</span>
+          @if($message->log)
+            @if($message->log->user_id == $user->id)
+            <span>{{$message->log->status == '1' ? '(Visto)' : '(No visto)' }}</span>
+            @endif
+          @endif
+          </p>
 			  </div>
 			</div>
 		@endforeach

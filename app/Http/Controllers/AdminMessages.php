@@ -10,6 +10,7 @@ use App\Notifications\SendNewMessage;
 // models
 use App\Models\Message;
 use App\Models\Conversation;
+use App\Models\ConversationLog;
 use App\Models\FacilitatorModule;
 use App\Models\StoreConversation;
 use App\User;
@@ -111,6 +112,11 @@ class AdminMessages extends Controller
       $message->to_id   = $request->to_id;
       $message->message = $request->message;
       $message->save();
+      //Guardar log de ultimo mensaje(ultimo que vio)
+      $converLog = ConversationLog::firstOrCreate(['user_id'=>$user->id,'conversation_id'=>$conversation->id]);
+      $converLog->message_id = $message->id;
+      $converLog->status =0;
+      $converLog->save();
       //envía correo
       $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
@@ -127,10 +133,24 @@ class AdminMessages extends Controller
       //
       $user   = Auth::user();
       $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
-      if(!$conversation){
-      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      if($conversation){
+        //determinar dirección de comunicación
+        $to_user = $conversation->to_id;
+      }else{
+        $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+        //determinar dirección de comunicación
+        $to_user = $conversation->user_id;
       }
-      return view('admin.messages.messages-conversation')->with([
+      //último mensaje creado por el destinatario
+      $last_message = Message::where('conversation_id',$conversation->id)->where('user_id',$to_user)->orderBy('updated_at','desc')->first();
+      if($last_message){
+        $conversationLog = ConversationLog::where('conversation_id',$conversation->id)->where('message_id',$last_message->id)->where('user_id',$to_user)->first();
+        if($conversationLog){
+          $conversationLog->status = 1;
+          $conversationLog->save();
+        }
+      }
+     return view('admin.messages.messages-conversation')->with([
         "user"      => $user,
         "conversation"    => $conversation
       ]);
@@ -180,8 +200,13 @@ class AdminMessages extends Controller
       $message->conversation_id = $conversation->id;
       $message->message = $request->message;
       $message->save();
+      //Guardar log de ultimo mensaje(ultimo que vio)
+      $converLog = ConversationLog::firstOrCreate(['user_id'=>$user->id,'conversation_id'=>$conversation->id]);
+      $converLog->message_id = $message->id;
+      $converLog->status =0;
+      $converLog->save();
       //envía correo
-       $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
       return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 

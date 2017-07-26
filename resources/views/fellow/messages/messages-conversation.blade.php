@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-9">
-	    <h1>Conversación con  
+	    <h1>Conversación con
 		@if($conversation->to_id != $user->id)
 		   {{$conversation->user_to->name}}
 		@else
@@ -53,13 +53,19 @@
 			    <div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">
 			    <p>{{$message->message}}</p>
 			    </div>
-			    <p><span>{{$message->updated_at->diffForHumans()}}</span></p>
+          <p><span>{{$message->updated_at->diffForHumans()}}</span>
+            @if($message->log)
+              @if($message->log->user_id == $user->id)
+                <span>{{$message->log->status == '1' ? '(Visto)' : '(No visto)' }}</span>
+              @endif
+            @endif
+          </p>
 			  </div>
 			</div>
 		@endforeach
         </div>
   	</div>
-  	
+
 	@else
 	<div class="row">
     	<div class="col-sm-8 col-sm-offset-2">

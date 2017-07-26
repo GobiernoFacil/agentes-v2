@@ -28,7 +28,7 @@
 				<img src='{{url("img/users/default.png")}}' height="100px">
 			@endif
 		@endif
-		
+
   </div>
   <div class="col-sm-3 center">
     <a href='{{ url("tablero-facilitador/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
@@ -54,7 +54,13 @@
 			    <div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">
 			    <p>{{$message->message}}</p>
 			    </div>
-			    <p><span>{{$message->updated_at->diffForHumans()}}</span></p>
+			    <p><span>{{$message->updated_at->diffForHumans()}}</span>
+            @if($message->log)
+              @if($message->log->user_id == $user->id)
+                <span>{{$message->log->status == '1' ? '(Visto)' : '(No visto)' }}</span>
+              @endif
+            @endif
+          </p>
 			  </div>
 			</div>
 		@endforeach
