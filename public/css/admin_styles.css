@@ -1499,6 +1499,8 @@ a:visited.switch-answer.btn.xs {
   padding-bottom: 20px; }
   .list.line li:last-child {
     border: 0; }
+  .list.line li.no-padding {
+    padding-bottom: 0; }
 
 .pagination {
   margin-left: 0; }
@@ -1552,6 +1554,16 @@ a:visited.switch-answer.btn.xs {
   display: inline-block; }
   .news .published_.n {
     background: red; }
+
+.activity strong {
+  color: #187fad; }
+
+.sub_tab {
+  background: #f2f2f2;
+  display: block;
+  font-size: 13px;
+  padding: 5px;
+  text-align: center; }
 
 /*
 	////////////////////////////////// barras 
