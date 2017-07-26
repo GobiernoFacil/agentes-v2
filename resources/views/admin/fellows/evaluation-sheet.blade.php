@@ -69,7 +69,7 @@
 			@if($module->title !="Examen de diagnóstico" && $module->title !="Examen diagnóstico")
 			<h2 class ="title">Módulo {{$n}}</h2>
 			<p><strong>{{$module->title}}</strong><br>
-        <span class="note"><strong>Calificación: </strong> {{$fellow->module_average($fellow->id,$module->id) ? number_format($fellow->module_average($fellow->id,$module->id)->average,2) : 'Sin calificación'}}</span>
+        <span class="note"><strong>Calificación: </strong> {{$fellow->module_average($fellow->id,$module->id) ? $fellow->module_average($fellow->id,$module->id)->type !='sin' ? number_format($fellow->module_average($fellow->id,$module->id)->average,2) : 'No aplica'  : 'Sin calificación'}}</span>
       </p>
 			<ul class="list">
 				@foreach($module->sessions as $session)
@@ -79,7 +79,7 @@
                   </span>
                   <span class="col-sm-6">
                   	<h4>{{$session->name}}</h4>
-                    <span class="note"><strong>Calificación: </strong> {{$fellow->session_average($fellow->id,$session->id) ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'Sin calificación'}}</span>
+                    <span class="note"><strong>Calificación: </strong> {{$fellow->session_average($fellow->id,$session->id) ? $fellow->session_average($fellow->id,$session->id)->type !='sin' ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</span>
                   </span>
                   <span class="col-sm-12">
                     <ul>

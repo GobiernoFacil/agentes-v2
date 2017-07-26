@@ -75,6 +75,7 @@ class FellowAverage extends Model
       }
       //Checar actividades con archivos
       $file_count = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->count();
+      echo('Archivos: '.$file_count.' ');
       if($file_count>0){
         $files_score = $this->get_files_activities($session->id,$fellow_id);
       }else{
@@ -82,6 +83,7 @@ class FellowAverage extends Model
       }
       //Checar actividades con evaluaciones
       $eva_count = Activity::where('type','evaluation')->where('files','No')->where('session_id',$session->id)->count();
+      echo('Evaluaciones: '.$eva_count.' ');
       if($eva_count>0){
         $eva_score = $this->get_evaluation_activities($session->id,$fellow_id);
       }else{
@@ -89,6 +91,7 @@ class FellowAverage extends Model
       }
       //Checar participación en foros
       $forum_count = Forum::where('session_id',$session->id)->count();
+      echo('Foros: '.$forum_count.' ');
       if($forum_count>0){
         $forum_score = $this->get_forum_participation($session->id,$fellow_id);
       }else{
@@ -104,7 +107,7 @@ class FellowAverage extends Model
       }
       $fellow_average->save();
       $this->scoreModule($session->module_id,$fellow_id);
-      return true;
+      return "File: ". $files_score." Eva: ".$eva_score." Foros:".$forum_score." Final: ".$fellow_average->average;
     }
 
     /**
@@ -115,8 +118,14 @@ class FellowAverage extends Model
     function score($fellow_id)
     {
       $today = date("Y-m-d");
-      $modules = Module::where('start','<=',$today)->get();
+      $sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
+      //obtener id de sesiones que cuenten con evaluaciones automaticas o de archivos
+      $activities_id = Activity::where('type','evaluation')->where('name','!=','Examen diagnóstico')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $forums_id     = Forum::whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $ids = array_unique(array_merge($activities_id->toArray(),$forums_id->toArray()));
       $total_score = 0;
+      $sessions  = ModuleSession::whereIn('id',$ids)->pluck('module_id');
+      $modules   = Module::whereIn('id',$sessions->toArray())->get();
       foreach($modules as $module){
         $score = FellowAverage::where('module_id',$module->id)->where('user_id',$fellow_id)->first();
         if($score){
@@ -208,23 +217,33 @@ class FellowAverage extends Model
 
      function get_session_score($files_score,$eva_score,$forum_score){
          $total_score = 0;
-       if(gettype($files_score) === 'integer' && gettype($eva_score) === 'integer' && gettype($forum_score) === 'integer'){
+       if(gettype($files_score) != 'string' && gettype($eva_score) != 'string' && gettype($forum_score) != 'string'){
          $total_score = (($files_score*4)/10) + (($eva_score*3)/10) + (($forum_score*3)/10);
          return $total_score;
-       }elseif(gettype($files_score) ==='string' && gettype($eva_score) ==='integer' && gettype($forum_score) === 'integer'){
+       }elseif(gettype($files_score) ==='string' && gettype($eva_score) != 'string'&& gettype($forum_score) != 'string'){
          $total_score =  (($eva_score*5)/10) + (($forum_score*5)/10);
          return $total_score;
-       }elseif(gettype($files_score ==='integer') && (gettype($eva_score) ==='string' || gettype($forum_score) === 'string')){
+       }elseif(gettype($files_score) != 'string' && gettype($eva_score) !='string' &&  gettype($forum_score) === 'string'){
          $new_max_files = ((4*10)/7);
          $new_max_other = ((3*10)/7);
-         if(gettype($eva_score) ==='string'){
           $total_score =  (($eva_score*$new_max_other)/10) + (($files_score*$new_max_files)/10);
-         }else{
-           $total_score =  (($forum_score*$new_max_other)/10) + (($files_score*$new_max_files)/10);
-         }
          return $total_score;
+       }elseif(gettype($files_score) != 'string' &&  gettype($forum_score) != 'string' && gettype($eva_score) ==='string'){
+         $new_max_files = ((4*10)/7);
+         $new_max_other = ((3*10)/7);
+         $total_score =  (($forum_score*$new_max_other)/10) + (($files_score*$new_max_files)/10);
+         return $total_score;
+
        }else{
-         return $total_score;
+          if(gettype($files_score) != 'string'){
+            return $files_score;
+          }elseif(gettype($eva_score) != 'string'){
+            return $eva_score;
+          }elseif(gettype($forum_score) != 'string'){
+            return $forum_score;
+          }else{
+            return $total_score;
+          }
 
        }
 

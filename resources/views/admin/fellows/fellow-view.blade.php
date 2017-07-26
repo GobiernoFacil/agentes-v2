@@ -43,7 +43,7 @@
 	<div class="row">
 		<div class="col-sm-6  center">
 			<h3 class="title">Promedio general</h3>
-			<h2><span class="score_a block">{{number_format($average,2)}}</span></h2>
+			<h2><span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></h2>
 	   </div>
 		 <!-- ver sesión-->
 		 <div class="col-sm-6">
