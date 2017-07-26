@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\Models\Module;
-use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\Answer;
 use App\Models\FellowAnswer;
-use App\Models\FellowScore;
-use App\Models\QuizInfo;
+use App\Models\FellowAverage;
 use App\Models\FilesEvaluation;
+use App\Models\FellowScore;
+use App\Models\Module;
+use App\Models\ModuleSession;
+use App\Models\QuizInfo;
 // FormValidators
 use App\Http\Requests\SaveFellowEvaluation;
 class FellowEvaluations extends Controller
@@ -196,6 +197,8 @@ class FellowEvaluations extends Controller
         $uScore->questionInfo_id = $activity->quizInfo->id;
         $uScore->score = $score;
         $uScore->save();
+        $fellowAverage = new FellowAverage();
+        $fellowAverage->scoreSession($activity->id,$user->id,null);
        return redirect("tablero/calificaciones/ver/{$activity->slug}");
     }
 

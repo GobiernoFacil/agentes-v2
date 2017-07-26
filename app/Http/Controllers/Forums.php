@@ -9,6 +9,7 @@ use Crypt;
 use App\Models\FacilitatorModule;
 use App\Models\Forum;
 use App\Models\FellowData;
+use App\Models\FellowAverage;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ForumLog;
@@ -206,7 +207,9 @@ class Forums extends Controller
       if($session){
         $log->forum_id = $session->forums->id;
         $log->save();
-       $this->send_to($session->forums,$forumConversation,'question');
+        $this->send_to($session->forums,$forumConversation,'question');
+        $fellowAverage = new FellowAverage();
+        $fellowAverage->scoreSession(null,$user->id,$session->id);
         return redirect("tablero/foros/{$session->slug}/{$session->forums->slug}")->with('message','Pregunta creada correctamente');
       }else{
         $log->forum_id = $forum->id;
@@ -283,6 +286,8 @@ class Forums extends Controller
         $this->send_to($conversation->forum,$conversation,'message');
         //conversacion perteneciente a foro con sesion
         if($conversation->forum->session_id){
+          $fellowAverage = new FellowAverage();
+          $fellowAverage->scoreSession(null,$user->id,$conversation->forum->session_id);
           return redirect("tablero/foros/pregunta/{$conversation->forum->session->slug}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
         }elseif($conversation->forum->state_name){
           //conversacion perteneciente a foro con estado
