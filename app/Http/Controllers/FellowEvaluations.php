@@ -13,6 +13,7 @@ use App\Models\FellowScore;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\QuizInfo;
+use App\Models\RetroLog;
 // FormValidators
 use App\Http\Requests\SaveFellowEvaluation;
 class FellowEvaluations extends Controller
@@ -100,6 +101,9 @@ class FellowEvaluations extends Controller
         return redirect('tablero');
       }
       $score = FilesEvaluation::where('activity_id',$activity->id)->where('fellow_id',$user->id)->first();
+      $retro   = RetroLog::firstOrCreate(['user_id'=>$user->id,'activity_id'=>$activity->id]);
+      $retro->status = 1;
+      $retro->save();
       return view('fellow.evaluation.evaluation-file-view')->with(
          [
            'user'=>$user,
