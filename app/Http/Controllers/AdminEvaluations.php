@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use File;
 // models
@@ -15,6 +16,8 @@ use App\Models\FilesEvaluation;
 use App\Models\FellowAverage;
 use App\Models\RetroLog;
 use App\User;
+//Notifications
+use App\Notifications\SendRetroEmail;
 // FormValidators
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
@@ -158,6 +161,8 @@ class AdminEvaluations extends Controller
       $retro   = RetroLog::firstOrCreate(['user_id'=>$data->user_id,'activity_id'=>$data->activity->id]);
       $retro->status = 0;
       $retro->save();
+      $fellow = User::find($data->user_id);
+      $fellow->notify(new SendRetroEmail($fellow,$data->activity));
       return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
     }
 
