@@ -1,7 +1,7 @@
 <!--título del módulo-->
 <div class="col-sm-9">
-	<h2 class ="title">Módulo {{$n}}</h2>
-	<p><strong>{{$module->title}}</strong></p>
+	<h4>Módulo {{$n}}</h4>
+	<h2 class ="title">{{$module->title}}</h2>
 </div>
 <!--calificación del módulo-->
 <div class="col-sm-3 right">
