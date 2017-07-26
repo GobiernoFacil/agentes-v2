@@ -1,5 +1,11 @@
 <h2 class ="title">Módulo 1</h2>
 <p><strong>{{$module->title}}</strong></p>
+<div class="col-sm-3 col-sm-offset-6">
+	<h5>Tipo de evaluación</h5>
+</div>
+<div class="col-sm-2 right">
+	<h5>Calificación</h5>
+</div>
 <ul class="list">
 	@foreach($module->sessions as $session)
 	<li class="row">
@@ -32,4 +38,4 @@
 	</li>
 	@endforeach
 </ul>
-<div class="divider b"></div>
+<div class="divider"></div>
