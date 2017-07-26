@@ -28,7 +28,7 @@
 		    <tr>
 		      <th>Nombre / email</th>
 		      <th>Ciudad / Estado</th>
-		      <th>Procedencia</th>
+		      <th>Promedio</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
@@ -45,15 +45,18 @@
 			        </div>
 			        <div class="col-sm-10">
 			        <h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
-		        {{$fellow->email}}
+					{{$fellow->email}}<br>
+					{{$fellow->fellowData->origin}}
 			        </div>
 		       	 </div>
 		        </td>
 		        <td>{{$fellow->fellowData->city}} <br> <strong>{{$fellow->fellowData->state}}</strong></td>
-				<td>{{$fellow->fellowData->origin}}</td>
+				<td>
+					<a href="{{ url('dashboard/fellows/calificaciones/ver/' . $fellow->id) }}"><span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></a>
+				</td>
 		        
 		        <td>
-		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver</a>
+		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver perfil</a>
 		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $fellow->id) }}"  id ="{{$fellow->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 		         </td>
 		    </tr>

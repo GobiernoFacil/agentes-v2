@@ -1,11 +1,13 @@
-<h2 class ="title">Módulo 1</h2>
-<p><strong>{{$module->title}}</strong></p>
+<h4>Módulo 1</h4>
+<h2 class="title">{{$module->title}}</h2>
+<div class="divider b"></div>
 <div class="col-sm-3 col-sm-offset-6">
-	<h5>Tipo de evaluación</h5>
+	<h5><span class="sub_tab">Tipo de evaluación</span></h5>
 </div>
 <div class="col-sm-2 right">
-	<h5>Calificación</h5>
+	<h5><span class="sub_tab">Calificación</span></h5>
 </div>
+
 <ul class="list">
 	@foreach($module->sessions as $session)
 	<li class="row">
@@ -31,7 +33,7 @@
 			</span>
 			<span class="col-sm-2 right">
 			@if($activity->name ==="Examen diagnóstico")
-				<span class="score_a">{{$fellow->diagnosticEvaluation ? $fellow->diagnosticEvaluation->total_score/10 : "Sin calificación" }}</span>
+				<span>{{$fellow->diagnosticEvaluation ? $fellow->diagnosticEvaluation->total_score/10 : "Sin calificación" }}</span>
 			@endif
 			</span>
 		@endforeach
