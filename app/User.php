@@ -140,4 +140,10 @@ class User extends Authenticatable
     function session_average($user_id,$session_id){
       return FellowAverage::where('user_id',$user_id)->where('session_id',$session_id)->first();
     }
+    function forum_participation($user_id,$session_id){
+      $fellowAverage  = new FellowAverage();
+      return  $fellowAverage->get_forum_participation($session_id,$user_id);
+
+    }
+
 }

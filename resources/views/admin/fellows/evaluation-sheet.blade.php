@@ -79,7 +79,8 @@
                   </span>
                   <span class="col-sm-6">
                   	<h4>{{$session->name}}</h4>
-                    <span class="note"><strong>Calificación: </strong> {{$fellow->session_average($fellow->id,$session->id) ? $fellow->session_average($fellow->id,$session->id)->type !='sin' ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</span>
+                    <span class="note"><strong>Calificación: </strong> {{$fellow->session_average($fellow->id,$session->id) ? $fellow->session_average($fellow->id,$session->id)->type !='sin' ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</span><br>
+                    <span class="note"><strong>Participaciones: </strong>{{$fellow->forum_participation($fellow->id,$session->id) > 0  ? $fellow->forum_participation($fellow->id,$session->id) : 'Sin participación' }}</span>
                   </span>
                   <span class="col-sm-12">
                     <ul>
