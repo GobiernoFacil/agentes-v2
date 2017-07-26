@@ -75,7 +75,6 @@ class FellowAverage extends Model
       }
       //Checar actividades con archivos
       $file_count = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->count();
-      echo('Archivos: '.$file_count.' ');
       if($file_count>0){
         $files_score = $this->get_files_activities($session->id,$fellow_id);
       }else{
@@ -83,7 +82,6 @@ class FellowAverage extends Model
       }
       //Checar actividades con evaluaciones
       $eva_count = Activity::where('type','evaluation')->where('files','No')->where('session_id',$session->id)->count();
-      echo('Evaluaciones: '.$eva_count.' ');
       if($eva_count>0){
         $eva_score = $this->get_evaluation_activities($session->id,$fellow_id);
       }else{
@@ -91,7 +89,6 @@ class FellowAverage extends Model
       }
       //Checar participación en foros
       $forum_count = Forum::where('session_id',$session->id)->count();
-      echo('Foros: '.$forum_count.' ');
       if($forum_count>0){
         $forum_score = $this->get_forum_participation($session->id,$fellow_id);
       }else{
@@ -107,7 +104,8 @@ class FellowAverage extends Model
       }
       $fellow_average->save();
       $this->scoreModule($session->module_id,$fellow_id);
-      return "File: ". $files_score." Eva: ".$eva_score." Foros:".$forum_score." Final: ".$fellow_average->average;
+      //return "File: ". $files_score." Eva: ".$eva_score." Foros:".$forum_score." Final: ".$fellow_average->average;
+      return true;
     }
 
     /**

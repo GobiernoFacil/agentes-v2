@@ -53,8 +53,7 @@ class UpdateAverages extends Command
       foreach ($fellows as $fellow) {
         foreach ($sessions as $session) {
           $fellow_average = new FellowAverage();
-          $this->info($session->name);
-          $this->info($fellow_average->scoreSession(null,$fellow->id,$session->id));
+          $fellow_average->scoreSession(null,$fellow->id,$session->id);
         }
         $this->info('Fellow: '.$fellow->name.' '.$fellow->fellowData->surname.' actualizado');
       }

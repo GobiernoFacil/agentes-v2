@@ -11,7 +11,7 @@
     <h1>Calificaciones</h1>
   </div>
  <div class="col-sm-3 right">
-	 <p>Promedio general: <span class="score_a block">{{number_format($average,2)}}</span></p>
+	 <p>Promedio general: <span class="score_a block">{{$user->total_average($user->id) ? number_format($user->total_average($user->id)->average,2) : 'Sin promedio'}}</span></p>
   </div>
 </div>
 <div class="box score">
