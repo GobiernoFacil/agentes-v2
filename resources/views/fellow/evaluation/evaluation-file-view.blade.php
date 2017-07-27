@@ -3,6 +3,8 @@
 @section('description', 'Calificaciones')
 @section('body_class', 'fellow')
 @section('content')
+
+@if(!empty($score))
 <div class="row">
   <div class="col-sm-12">
     <h1>Ver calificación {{$score->activity->title}}</h1>
@@ -49,4 +51,12 @@
 		    </div>
   </div>
 </div>
+@else
+<div class="row">
+	<div class="col-sm-12">
+    	<h1>Tu ensayo aún no has sido evaluado por el equipo de Prosociedad.</h1>
+  </div>
+</div>
+
+@endif
 @endsection
