@@ -2,6 +2,10 @@
 @section('title', 'Calificaciones')
 @section('description', 'Calificaciones')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'score file')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_score')
+
+
 @section('content')
 
 @if(!empty($score))
