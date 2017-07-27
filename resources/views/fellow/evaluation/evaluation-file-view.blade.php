@@ -54,7 +54,7 @@
 @else
 <div class="row">
 	<div class="col-sm-12">
-    	<h1>Tu ensayo aún no has sido evaluado por el equipo de Prosociedad.</h1>
+    	<h1>Tu ensayo aún no ha sido evaluado por el equipo de Prosociedad.</h1>
   </div>
 </div>
 
