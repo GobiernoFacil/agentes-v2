@@ -123,7 +123,7 @@ class Activities extends Controller
             if($activity->hasfiles==='Sí'){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
-            }elseif($activity->type==='evaluation'){
+            }elseif($activity->type==='evaluation' && $activity->files!='Sí'){
               //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
            }else{
@@ -191,6 +191,7 @@ class Activities extends Controller
             //
             $user   = Auth::user();
             $data   = $request->except(['_token','start','time','link','link_video']);
+
             $data['slug']    = str_slug($request->name);
             if($request->files ==='Sí'){
               $data['type'] = 'files';
@@ -248,13 +249,17 @@ class Activities extends Controller
               }
             }
 
-
           if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
-            }elseif($data['type']==='evaluation' && $last->type!=$data['type']){
+            }elseif($request->type==='evaluation' && $data["files"] != "Sí"){
               //Agregar evaluacion
-              return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->id/1")->with('success',"Se ha guardado correctamente");
+              if($last->quizInfo){
+                  return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
+              }else{
+
+                  return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
+              }
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
            }
@@ -281,6 +286,19 @@ class Activities extends Controller
             }
             if($activity->videos){
               $activity->videos->delete();
+            }
+            if($activity->quizInfo){
+              foreach ($activity->quizInfo->question as $question) {
+                # code...
+                if($question->answer){
+                  foreach ($question->answer as $answer) {
+                    # code...
+                    $answer->delete();
+                  }
+                }
+                $question->delete();
+              }
+              $activity->quizInfo->delete();
             }
             $activity->delete();
             return redirect("dashboard/sesiones/ver/$session_id")->with('success',"Se ha eliminado correctamente");

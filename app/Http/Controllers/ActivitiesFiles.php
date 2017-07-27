@@ -96,10 +96,15 @@ class ActivitiesFiles extends Controller
           $file->path = $path;
           $file->save();
         }
-        if($activity->type==='evaluation'){
+        if($activity->type==='evaluation' && $activity->files != 'Sí'){
           //cargar evaluacion
         //  return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id/1")->with('success',"Se ha guardado correctamente");
-        return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
+        if($activity->quizInfo){
+            return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/2")->with('success',"Se ha guardado correctamente");
+        }else{
+
+            return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
+        }
         }else{
           return redirect("dashboard/sesiones/actividades/ver/$request->activity_id")->with('success',"Se ha actualizado correctamente");
         }
