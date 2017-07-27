@@ -12,13 +12,13 @@
 	<div class="col-sm-3">
 		<div class="box">
 			<ul class="list_dash">
-				<li><a class="btn_dash sh active" href="#" data-info="eval">Próximas evaluaciones</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="act">Actividades</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="forum">Foros</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="avisos">Avisos</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="files">Tus Archivos</a></li>
-				<li><a class="btn_dash sh" href="#" data-info="messages">Tus Conversaciones</a></li>
-				<li><a class="btn_dash" href="{{url('tablero/calificaciones')}}" data-info="score">Tus Calificaciones</a></li>
+				<li><a class="btn_dash sh active" href="#" data-info="eval"><b class="icon_f i_eval"></b><span>Evaluaciones</span></a></li>
+				<li><a class="btn_dash sh" href="#" data-info="act"><b class="icon_f i_act"></b><span>Actividades</span></a></li>
+				<li><a class="btn_dash sh" href="#" data-info="forum"><b class="icon_f i_forum"></b>Foros</a></li>
+				<li><a class="btn_dash sh" href="#" data-info="avisos"><b class="icon_f i_aviso"></b>Avisos</a></li>
+				<li><a class="btn_dash sh" href="#" data-info="files"><b class="icon_f i_files"></b>Tus Archivos</a></li>
+				<li><a class="btn_dash sh" href="#" data-info="messages"><b class="icon_f i_messages"></b><span>Conversaciones</span></a></li>
+				<li><a class="btn_dash" href="{{url('tablero/calificaciones')}}" data-info="score"><b class="icon_f i_score"></b><span>Calificaciones</span></a></li>
 			</ul>
 		</div>
 	</div>
