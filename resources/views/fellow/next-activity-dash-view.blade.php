@@ -1,11 +1,4 @@
-<div class="box">
 <div class="row">
-	<div class="col-sm-8">
-		<h2>Próximas evaluaciones </h2>
-	</div>
-	<div class="col-sm-4 right">
-		<a href='{{url("tablero/evaluaciones")}}' class="btn ev xs right">Ver lista de evaluaciones >></a>
-	</div>
 @foreach($next_activities as $activity)
 	<div class="col-sm-12">
 		<div class="box session_list next_eval">
@@ -55,5 +48,4 @@
 		</div>
 	</div>
 @endforeach
-</div>
 </div>
