@@ -2,7 +2,7 @@
 <div class="col-sm-1 right">
   <b class="icon_h session list_s"></b>
 </div>
-<div class="col-sm-9">
+<div class="col-sm-8">
   <h3>Módulo 1</h3>
   <h2><a href='{{url("tablero/aprendizaje/$module->slug")}}'>{{$module->title}}</a></h2>
   <div class="divider"></div>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <!-- ver sesión-->
-          <div class="col-sm-2">
+          <div class="col-sm-3">
     <a class="btn view block sessions_l" href='{{url("tablero/aprendizaje/$module->slug")}}'>Ver módulo</a>
   </div>
           <!-- footnote-->
