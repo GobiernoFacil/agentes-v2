@@ -26,6 +26,15 @@
 	<div class="col-sm-9">
 		<!--evaluaciones-->
 		<div id="eval" class="AP_div">
+			<div class="divider b"></div>
+			<div class="row">
+				<div class="col-sm-8">
+					<h2>Próximas evaluaciones </h2>
+				</div>
+				<div class="col-sm-4 right">
+					<a href='{{url("tablero/evaluaciones")}}' class="btn ev xs right">Ver lista de evaluaciones >></a>
+				</div>
+			</div>
 		@if($next_activities->count()>0)
 			@include('fellow.next-activity-dash-view')
 		@else
