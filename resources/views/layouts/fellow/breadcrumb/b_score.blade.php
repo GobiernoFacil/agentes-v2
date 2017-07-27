@@ -16,7 +16,7 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="score file")
 		<li>
 		@if(!empty($score))
-		{{$score->activity->title}}
+		{{$score->activity->name}}
 		@else
 		Evaluación de ensayo
 		@endif
