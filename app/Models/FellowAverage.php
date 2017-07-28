@@ -34,22 +34,32 @@ class FellowAverage extends Model
       $today = date("Y-m-d");
       $sessions_id = ModuleSession::where('module_id',$module_id)->where('start','<=',$today)->pluck('id');
       //obtener id de sesiones que cuenten con evaluaciones automaticas o de archivos
-      $activities_id = Activity::where('type','evaluation')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+    /*  $file_ids       = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$sessions_id)->pluck('id');
+      $new_file_count = FilesEvaluation::where('fellow_id',$fellow_id)->whereIn('activity_id',$file_ids->toArray())->where('score','!=',null)->pluck('activity_id');
+      $files_id      = Activity::whereIn('id',$new_file_count->toArray())->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $activities_id = Activity::where('type','evaluation')->where('files','No')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
       $forums_id     = Forum::whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
-      $ids = array_unique(array_merge($activities_id->toArray(),$forums_id->toArray()));
+      $temp = array_unique(array_merge($files_id->toArray(),$forums_id->toArray()));
+      $ids = array_unique(array_merge($temp,$forums_id->toArray()));
       $total_score = 0;
-      $sessions  = ModuleSession::whereIn('id',$ids)->get();
-      foreach($sessions as $session){
+      $sessions  = ModuleSession::whereIn('id',$ids)->get();*/
+      $total_score = 0;
+      $scores = FellowAverage::whereNull('type')->where('user_id',$fellow_id)->whereIn('session_id',$sessions_id->toArray())->get();
+    /*  foreach($sessions as $session){
            $session_score = FellowAverage::where('session_id',$session->id)->where('user_id',$fellow_id)->first();
            if($session_score){
              $total_score = $session_score->average + $total_score;
            }
+        }*/
+      foreach($scores as $score){
+               if($score->average){
+                 $total_score = $score->average + $total_score;
+               }
         }
-
       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'module_id'=>$module_id]);
-      if($sessions->count()>0){
+      if($scores->count()>0){
           $fellow_average->type= 'module';
-          $fellow_average->average = $total_score/($sessions->count());
+          $fellow_average->average = $total_score/($scores->count());
       }else{
           $fellow_average->type= 'sin';
           $fellow_average->average= null;
@@ -74,8 +84,10 @@ class FellowAverage extends Model
         $session = ModuleSession::find($session_id);
       }
       //Checar actividades con archivos
-      $file_count = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->count();
-      if($file_count>0){
+      //$file_count = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->count();
+      $file_ids   = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session->id)->pluck('id');
+      $new_file_count = FilesEvaluation::where('fellow_id',$fellow_id)->whereIn('activity_id',$file_ids->toArray())->where('score','!=',null)->count();
+      if($new_file_count>0){
         $files_score = $this->get_files_activities($session->id,$fellow_id);
       }else{
         $files_score = 'None';
@@ -103,8 +115,9 @@ class FellowAverage extends Model
         $fellow_average->average = $final_score;
       }
       $fellow_average->save();
+
       $this->scoreModule($session->module_id,$fellow_id);
-      //return "File: ". $files_score." Eva: ".$eva_score." Foros:".$forum_score." Final: ".$fellow_average->average;
+      return "File: ". $files_score." Eva: ".$eva_score." Foros:".$forum_score." Final: ".$fellow_average->average.' Tipo: '.$fellow_average->type;
       return true;
     }
 
@@ -116,24 +129,35 @@ class FellowAverage extends Model
     function score($fellow_id)
     {
       $today = date("Y-m-d");
-      $sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
+      /*$sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
       //obtener id de sesiones que cuenten con evaluaciones automaticas o de archivos
-      $activities_id = Activity::where('type','evaluation')->where('name','!=','Examen diagnóstico')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
+      $file_ids       = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$sessions_id)->pluck('id');
+      $new_file_count = FilesEvaluation::where('fellow_id',$fellow_id)->whereIn('activity_id',$file_ids->toArray())->where('score','!=',null)->pluck('activity_id');
+      $files_id      = Activity::whereIn('id',$new_file_count->toArray())->whereIn('session_id',$sessions_id->toArray())->where('name','!=','Examen diagnóstico')->pluck('session_id');
+      $activities_id = Activity::where('type','evaluation')->where('files','No')->where('name','!=','Examen diagnóstico')->whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
       $forums_id     = Forum::whereIn('session_id',$sessions_id->toArray())->pluck('session_id');
-      $ids = array_unique(array_merge($activities_id->toArray(),$forums_id->toArray()));
+      $temp = array_unique(array_merge($files_id->toArray(),$forums_id->toArray()));
+      $ids = array_unique(array_merge($temp,$forums_id->toArray()));
       $total_score = 0;
       $sessions  = ModuleSession::whereIn('id',$ids)->pluck('module_id');
-      $modules   = Module::whereIn('id',$sessions->toArray())->get();
-      foreach($modules as $module){
+      $modules   = Module::whereIn('id',$sessions->toArray())->get();*/
+      $total_score = 0;
+      $modules   = Module::where('title','!=','Examen de diagnóstico')->where('start','<=',$today)->pluck('id');
+      $scores    = FellowAverage::where('type','module')->where('user_id',$fellow_id)->whereIn('module_id',$modules->toArray())->get();
+    /*  foreach($modules as $module){
         $score = FellowAverage::where('module_id',$module->id)->where('user_id',$fellow_id)->first();
         if($score){
           $total_score = $total_score + $score->average;
         }
-      }
-
+      }*/
+      foreach($scores as $score){
+               if($score->average){
+                 $total_score = $score->average + $total_score;
+               }
+        }
       $fellow_average = FellowAverage::firstOrCreate(['user_id'=>$fellow_id,'type'=>'total']);
-      if($modules->count()>0){
-        $fellow_average->average= $total_score/($modules->count());
+      if($scores->count()>0){
+        $fellow_average->average= $total_score/($scores->count());
       }else{
         $fellow_average->average= 0;
       }
@@ -148,7 +172,7 @@ class FellowAverage extends Model
      */
     function get_files_activities($session_id,$fellow_id){
       $file_activities_ids = Activity::where('type','evaluation')->where('files','Sí')->where('session_id',$session_id)->pluck('id');
-      $scores              = FilesEvaluation::where('fellow_id',$fellow_id)->whereIn('activity_id',$file_activities_ids->toArray())->get();
+      $scores              = FilesEvaluation::where('fellow_id',$fellow_id)->where('score','!=',null)->whereIn('activity_id',$file_activities_ids->toArray())->get();
       $total_score = 0;
       if($scores->count()>0){
         foreach($scores as $score){

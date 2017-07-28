@@ -52,7 +52,9 @@ class UpdateAverages extends Command
       $sessions = ModuleSession::where('start','<=',$today)->get();
       foreach ($fellows as $fellow) {
         foreach ($sessions as $session) {
+          //$this->info($session->name);
           $fellow_average = new FellowAverage();
+            //$this->info($fellow_average->scoreSession(null,$fellow->id,$session->id));
           $fellow_average->scoreSession(null,$fellow->id,$session->id);
         }
         $this->info('Fellow: '.$fellow->name.' '.$fellow->fellowData->surname.' actualizado');

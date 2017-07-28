@@ -7,12 +7,17 @@
 	<!--calificación de sesión-->
 	<span class="col-sm-3 right">
 		Calificación de la sesión: <br>
+		<?php $today = date('Y-m-d');?>
+		@if($session->start <= $today)
 		<strong>{{$fellow->session_average($fellow->id,$session->id) ? $fellow->session_average($fellow->id,$session->id)->type !='sin' ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</strong>
+		@else
+		<strong>No aplica</strong>
+		@endif
 	</span>
 	<span class="col-sm-11">
 		<div class="divider b"></div>
 	</span>
-        
+
     <!--evaluaciones-->
     <span class="col-sm-11">
         <ul>
@@ -38,7 +43,11 @@
 	        	 Participaciones
 	        	</span>
 	        	<span class="col-sm-3 right">
-	        	 {{$fellow->forum_participation($fellow->id,$session->id) > 0  ? $fellow->forum_participation($fellow->id,$session->id) : 'Sin participación' }}
+							@if($session->forums)
+	        	 	{{$fellow->forum_participation($fellow->id,$session->id) > 0  ? $fellow->forum_participation($fellow->id,$session->id) : 'Sin participación' }}
+						 @else
+						 	Sin foros
+						 @endif
 	        	</span>
 	        </li>
         </ul>
