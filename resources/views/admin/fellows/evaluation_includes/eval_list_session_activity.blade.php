@@ -62,9 +62,9 @@
         <span class="col-sm-3 right">
         @if($activity->quizInfo)
             @if($activity->fellowScore($activity->quizInfo->id,$fellow->id))
-            	{{$activity->fellowScore($activity->quizInfo->id,$fellow->id) ? number_format($activity->fellowScore($activity->quizInfo->id,$fellow->id)->score,2) : "Sin calificación" }}
+            	{{$activity->fellowScore($activity->quizInfo->id,$fellow->id) ? number_format($activity->fellowScore($activity->quizInfo->id,$fellow->id)->score,2) : "No realizado" }}
             @else
-            	<span>Sin calificación</span>
+            	<span>No realizado</span>
             @endif
         @else
             <span class="">Sin examen</span>
