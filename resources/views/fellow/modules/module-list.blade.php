@@ -9,6 +9,7 @@
 <div class="row">
 	<div class="col-sm-9">
     	<h1>Módulos de aprendizaje</h1>
+    	<p><a href="{{ url('tablero/calificaciones/metodologia') }}" class="link">Consulta la metodología de las calificaciones ></a></p>
 	</div>
 	<div class="col-sm-3">
 		<a href='{{url("tablero/evaluaciones")}}' class="btn ev">Ver evaluaciones y ensayos</a>
@@ -79,5 +80,7 @@
 		@endif
 		@endforeach
 		<div class="clearfix"></div>
+		
 </div>
+
 @endsection
