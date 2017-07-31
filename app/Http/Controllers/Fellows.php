@@ -18,6 +18,7 @@ use App\Models\ForumMessage;
 use App\Models\FellowData;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
+use App\Models\FilesEvaluation;
 use App\Models\Image;
 use App\Models\QuizInfo;
 use Carbon\Carbon;
@@ -65,9 +66,11 @@ class Fellows extends Controller
       $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
       $quiz_ids        = FellowScore::where('user_id',$user->id)->pluck('questionInfo_id');
       $activityAlready = QuizInfo::whereIn('id',$quiz_ids->toArray())->pluck('activity_id');
+      $filesAlready    = FellowFile::where('user_id',$user->id)->pluck('activity_id');
+      $temp = array_unique(array_merge($activityAlready->toArray(),$filesAlready->toArray()));
       $next_activities = Activity::where('type','evaluation')->where('end','>=',$today)
       ->whereIn('session_id',$sess_id->toArray())
-      ->whereNotIn('id',$activityAlready->toArray())
+      ->whereNotIn('id',$temp)
       ->orderBy('end','asc')
       ->limit(3)
       ->get();
