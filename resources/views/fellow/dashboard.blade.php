@@ -168,7 +168,7 @@
 			<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
 			<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 			@if($noMessages->count()>0)
-				<p><h3 class="sa_title">Mensajes sin contestar</h3></p>
+				<p><h3 class="sa_title">Mensajes sin leer</h3></p>
 				@include('fellow.message-dash-view')
 			@endif
 		</div>
