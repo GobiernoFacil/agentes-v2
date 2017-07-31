@@ -8,6 +8,7 @@ use Hash;
 use File;
 //Modelos
 use App\Models\Module;
+use App\Models\Conversation;
 use App\Models\Log;
 use App\Models\ModuleSession;
 use App\Models\Activity;
@@ -21,6 +22,7 @@ use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\Image;
 use App\Models\RetroLog;
+use App\Models\ConversationLog;
 use App\Models\QuizInfo;
 use Carbon\Carbon;
 //Requests
@@ -87,6 +89,10 @@ class Fellows extends Controller
       $noForum = $forum->all_nonactive_forums_fellow($user->id);
       //lista retro-alimentacion de archivos sin ver
       $retroFiles = RetroLog::where('user_id',$user->id)->orderBy('created_at','asc')->where('status',0)->get();
+      //Lista de mensajes sin contestar
+      $con  = new Conversation();
+      $noMessages = $con->get_no_messages($user->id);
+
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
@@ -102,7 +108,8 @@ class Fellows extends Controller
         "today"			    => $today,
         "next_activities" =>$next_activities,
         "noForum"       => $noForum,
-        'retro'         => $retroFiles
+        'retro'         => $retroFiles,
+        'noMessages'    => $noMessages
       ]);
     }
 
