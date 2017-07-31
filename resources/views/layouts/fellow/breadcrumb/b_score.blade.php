@@ -5,8 +5,12 @@
 	<li>Calificaciones</li>
 	@endif
 	
-	@if ($__env->yieldContent('breadcrumb_type') =="score diagnostic" || $__env->yieldContent('breadcrumb_type') =="score file")
+	@if ($__env->yieldContent('breadcrumb_type') =="score diagnostic" || $__env->yieldContent('breadcrumb_type') =="score file" || $__env->yieldContent('breadcrumb_type') =="score methodology")
 	<li><a href="{{url('tablero/calificaciones')}}">Calificaciones</a></li>
+	@endif
+	
+	@if ($__env->yieldContent('breadcrumb_type') =="score methodology")
+	<li>Metodología</li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="score diagnostic")
