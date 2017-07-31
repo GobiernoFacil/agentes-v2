@@ -156,6 +156,10 @@
 			<h3 class="sa_title">Tus archivos</h3>
 			<a href="{{ url('tablero/perfil/archivos') }}" class="count_link">{{$user->fellowFiles->count()}}</a>
 			<a href="{{ url('tablero/perfil/archivos') }}" class="btn gde">Ver todos los archivos</a>
+			@if($retro->count()>0)
+				<p><h3 class="sa_title">Evaluaciones de archivos sin revisar</h3></p>
+				@include('fellow.retro-activity-dash-view')
+			@endif
 		</div>
 
 		<!--conversaciones-->

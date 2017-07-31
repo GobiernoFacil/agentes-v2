@@ -20,6 +20,7 @@ use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\Image;
+use App\Models\RetroLog;
 use App\Models\QuizInfo;
 use Carbon\Carbon;
 //Requests
@@ -84,6 +85,9 @@ class Fellows extends Controller
       //lista de foros sin participar
       $forum  = new Forum();
       $noForum = $forum->all_nonactive_forums_fellow($user->id);
+      //lista retro-alimentacion de archivos sin ver
+      $retroFiles = RetroLog::where('user_id',$user->id)->orderBy('created_at','asc')->where('status',0)->get();
+
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
         "modules_count" => $modules->count(),
@@ -98,6 +102,7 @@ class Fellows extends Controller
         "today"			    => $today,
         "next_activities" =>$next_activities,
         "noForum"       => $noForum,
+        'retro'         => $retroFiles
       ]);
     }
 
