@@ -40,18 +40,24 @@ class Fellows extends Controller
     public function dashboard()
     {
       $user 			    = Auth::user();
+      //modulos
       $modules        = Module::all();
       $first_module   = Module::orderBy('start','asc')->first();
       $all_modules    = Module::orderBy('start','asc')->get();
       $module_last    = null;
       $session        = null;
       $activity       = null;
+      //última actividad
       $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
+      //noticias y eventos
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
+      //foros
       $forums         = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->get();
       $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
+      //conversaciones
       $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
       $today = date("Y-m-d");
+      //obtener la ultima actividad
       if($user_log){
         if($user_log->session_id){
           $session = ModuleSession::find($user_log->session_id);
@@ -63,6 +69,7 @@ class Fellows extends Controller
       }
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
+      //lista de evaluaciones proximas sin contestar
       $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
       $quiz_ids        = FellowScore::where('user_id',$user->id)->pluck('questionInfo_id');
       $activityAlready = QuizInfo::whereIn('id',$quiz_ids->toArray())->pluck('activity_id');
@@ -74,7 +81,9 @@ class Fellows extends Controller
       ->orderBy('end','asc')
       ->limit(3)
       ->get();
-
+      //lista de foros sin participar
+      $forum  = new Forum();
+      $noForum = $forum->all_nonactive_forums_fellow($user->id);
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
         "modules_count" => $modules->count(),
@@ -87,7 +96,8 @@ class Fellows extends Controller
         "forums"        => $forums,
         "messagesF"     => $messages,
         "today"			    => $today,
-        "next_activities" =>$next_activities
+        "next_activities" =>$next_activities,
+        "noForum"       => $noForum,
       ]);
     }
 

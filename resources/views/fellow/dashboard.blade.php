@@ -8,7 +8,7 @@
 	<div class="col-sm-12">
 		<h1>Tablero de control</h1>
 	</div>
-	
+
 	<div class="col-sm-3">
 		<div class="box">
 			<ul class="list_dash">
@@ -22,7 +22,7 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="col-sm-9">
 		<!--evaluaciones-->
 		<div id="eval" class="AP_div">
@@ -35,8 +35,13 @@
 					<a href='{{url("tablero/evaluaciones")}}' class="btn ev xs right">Ver lista de evaluaciones >></a>
 				</div>
 			</div>
-		@if($next_activities->count()>0)
-			@include('fellow.next-activity-dash-view')
+		@if($next_activities->count()>0 || $noForum->count() >0 )
+			 @if($next_activities->count()>0)
+				@include('fellow.next-activity-dash-view')
+			 @endif
+			 @if($noForum->count()>0)
+					@include('fellow.no-participation-forum-dash-view')
+			 @endif
 		@else
 			<div class="box session_list">
 				<div class="row">
@@ -47,7 +52,7 @@
 			</div>
 		@endif
 		</div>
-		
+
 		<!--actividad-->
 		<div id="act" class="row AP_div">
 			<div class="col-sm-12">
@@ -73,7 +78,7 @@
 				@endif
 			</div>
 		</div>
-		
+
 		<!--foros-->
 		<div id="forum" class="box forum_list AP_div">
 			<h3 class="sa_title">Tu participación en los foros</h3>
@@ -121,7 +126,7 @@
 			@endif
 			<a href="{{ url('tablero/foros') }}" class="btn gde center">Ver los foros</a>
 		</div>
-		
+
 		<!-- noticias y avisos-->
 		<div id="avisos" class="box news AP_div">
 			<h3 class="sa_title">Noticias y avisos</h3>
@@ -142,24 +147,24 @@
 			</div>
 			@else
 			<p>Aún no existen noticias o avisos.</p>
-			@endif		
+			@endif
 		</div>
-		
-		
+
+
 		<!---archivos-->
 		<div id="files" class="box AP_div">
 			<h3 class="sa_title">Tus archivos</h3>
 			<a href="{{ url('tablero/perfil/archivos') }}" class="count_link">{{$user->fellowFiles->count()}}</a>
 			<a href="{{ url('tablero/perfil/archivos') }}" class="btn gde">Ver todos los archivos</a>
 		</div>
-		
+
 		<!--conversaciones-->
 		<div id="messages" class="box AP_div">
 			<h3 class="sa_title">Tus Conversaciones</h3>
 			<a href="{{ url('tablero/mensajes') }}" class="count_link">{{$user->conversations->count()}}</a>
 			<a href="{{ url('tablero/mensajes') }}" class="btn gde">Ver todos los mensajes</a>
 		</div>
-		
+
 	</div>
 </div>
 
@@ -178,14 +183,14 @@
 	    e.preventDefault();
 	    $('a.sh').removeClass('active');
 	    $(this).addClass('active');
-	    var id = $(this).attr('data-info'); 
+	    var id = $(this).attr('data-info');
 	    $("div.AP_div").each(function(){
 	        $(this).hide();
 	        if($(this).attr('id') == id) {
 	            $(this).show();
 	        }
 	    });
-	    
+
 	});
 </script>
 @endsection
