@@ -7,12 +7,12 @@
 
 @section('content')
 <div class="row">
-  <div class="col-sm-9">
-    <h1>Calificaciones de {{$fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname}}</h1>
-  </div>
- <div class="col-sm-3 right">
-	 <p>Promedio general: <span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></p>
-  </div>
+	<div class="col-sm-9">
+	  <h1>Calificaciones de {{$fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname}}</h1>
+	</div>
+	<div class="col-sm-3 right">
+		<p>Promedio general: <span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></p>
+	</div>
 </div>
 <div class="box score">
   <div class="row">

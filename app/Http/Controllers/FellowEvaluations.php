@@ -55,7 +55,23 @@ class FellowEvaluations extends Controller
       );
 
     }
+	
+	
+	 /**
+     * Muestra metodología de calificaciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function methodology()
+    {
+      $user     = Auth::user();
+      return view('fellow.evaluation.evaluation-methodology')->with(
+       [
+         'user'=>$user,
+       ]
+      );
 
+    }
 
     /**
      * Muestra evaluacion de actividad
