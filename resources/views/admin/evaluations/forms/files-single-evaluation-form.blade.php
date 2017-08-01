@@ -1,9 +1,17 @@
-@if($data)
-{!! Form::model($fellow,['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$data->id/0", "class" => "form-horizontal", 'files'=>true]) !!}
-@else
-{!! Form::model($fellow,['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$fellow->id/1", "class" => "form-horizontal", 'files'=>true]) !!}
-@endif
+{!! Form::open(['url' => "dashboard/evaluacion/actividad/archivo/save/{$activity->id}", "class" => "form-horizontal", 'files'=>true]) !!}
 
+<!-- fellow -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Fellow</strong></label>
+      {{Form::select('fellow_id',$fellows,null, ['class' => 'form-control'])}}
+      @if($errors->has('fellow_id'))
+      <strong class="danger">{{$errors->first('fellow_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -44,9 +52,6 @@
       {{Form::file('file_e', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF, DOC,DOCX)
       @if($errors->has('file_e'))
       <strong class="error">{{$errors->first('file_e')}}</strong>
-      @endif
-      @if($fellow->path)
-      <a href="{{ url('dashboard/evaluacion/actividad/archivo-corregido/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
       @endif
     </p>
   </div>

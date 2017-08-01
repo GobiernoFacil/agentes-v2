@@ -19,6 +19,7 @@ use App\User;
 //Notifications
 use App\Notifications\SendRetroEmail;
 // FormValidators
+use App\Http\Requests\AddSingleFileEvaluation;
 use App\Http\Requests\SaveDiagnosticEvaluation1;
 use App\Http\Requests\SaveDiagnosticEvaluation2;
 use App\Http\Requests\SaveFellowFileEvaluation;
@@ -72,7 +73,8 @@ class AdminEvaluations extends Controller
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
       if($activity->files ==='Sí'){
         //ver fellows con archivos
-        $fellows  = FellowFile::where('activity_id',$activity->id)->paginate($this->pageSize);
+        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
+        $fellows  = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
         return view('admin.evaluations.activities-files-list')->with([
           "user"      => $user,
           "activity"   => $activity,
@@ -115,12 +117,19 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fileEvaluation($file_id)
+    public function fileEvaluation($file_id,$eva=null)
     {
       $user      = Auth::user();
-      $data      = FellowFile::where('id',$file_id)->firstOrFail();
-      $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id,'user_id'=>$user->id]);
-      return view('admin.evaluations.file-evaluation')->with([
+      if($eva){
+        //file_id es id de FilesEvaluation
+        $data = null;
+        $fellow    = FilesEvaluation::find($file_id);
+        var_dump($fellow->user->toArray());
+      }else{
+        $data      = FellowFile::where('id',$file_id)->first();
+        $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id]);
+      }
+     return view('admin.evaluations.file-evaluation')->with([
         "user"      => $user,
         "data"   => $data,
         "fellow" => $fellow
@@ -136,34 +145,38 @@ class AdminEvaluations extends Controller
     public function saveFileEvaluation(SaveFellowFileEvaluation $request)
     {
       $user = Auth::user();
-      $data = FellowFile::where('id',$request->file_id)->firstOrFail();
-      $eva  = FilesEvaluation::where('fellow_id',$data->user_id)->where('activity_id',$data->activity_id)->first();
+      $path  = public_path(self::UPLOADSF);
+      if($request->eva){
+        //file_id es FilesEvaluation id
+        $eva = FilesEvaluation::where('id',$request->file_id)->firstOrFail();
+        $eva->user_id = $user->id;
+      }else{
+        $data = FellowFile::where('id',$request->file_id)->firstOrFail();
+        $eva  = FilesEvaluation::where('fellow_id',$data->user_id)->where('activity_id',$data->activity_id)->first();
+      }
       $eva->user_id = $user->id;
-      $eva->fellow_id = $data->user_id;
-      $eva->activity_id = $data->activity->id;
       $eva->url     = $request->url;
       $eva->score     = $request->score;
       $eva->comments = $request->comments;
-      $path  = public_path(self::UPLOADSF);
       // [ SAVE THE file ]
-      if($request->hasFile('file') && $request->file('file')->isValid()){
+      if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
         if($eva->path){
           File::delete($eva->path);
         }
-        $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
-        $request->file('file')->move($path, $name);
-        $eva->name = $request->file('file')->getClientOriginalName();
+        $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+        $request->file('file_e')->move($path, $name);
+        $eva->name = $request->file('file_e')->getClientOriginalName();
         $eva->path = $path.'/'.$name;
       }
       $eva->save();
       $fellowAverage = new FellowAverage();
-      $fellowAverage->scoreSession($data->activity_id,$data->user_id);
-      $retro   = RetroLog::firstOrCreate(['user_id'=>$data->user_id,'activity_id'=>$data->activity->id]);
+      $fellowAverage->scoreSession($eva->activity_id,$eva->fellow_id);
+      $retro   = RetroLog::firstOrCreate(['user_id'=>$eva->fellow_id,'activity_id'=>$eva->activity_id]);
       $retro->status = 0;
       $retro->save();
-      $fellow = User::find($data->user_id);
+      $fellow = User::find($eva->fellow_id);
       $fellow->notify(new SendRetroEmail($fellow,$data->activity));
-      return redirect("dashboard/evaluacion/actividad/ver/{$data->activity->id}")->with('message','Se ha guarado correctamente');
+      return redirect("dashboard/evaluacion/actividad/ver/{$eva->activity_id}")->with('message','Se ha guarado correctamente');
     }
 
     /**
@@ -399,7 +412,88 @@ class AdminEvaluations extends Controller
       ]);
 
     }
+    /**
+     * Agregar calificacion manual de archivo (sin archivo)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addSingle($activity_id)
+    {
+      $user      = Auth::user();
+      $activity  = Activity::where('id',$activity_id)->firstOrFail();
+      //usuarios sin archivos
+      $fellows_id   = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
+      $fellows   = User::where('enabled',1)->where('type','fellow')->whereNotIn('id',$fellows_id->toArray())->orderBy('name','asc')->get();
+      $data = [];
+      foreach ($fellows as $fellow) {
+        $data[$fellow->id] = $fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname;
+      }
+      $fellows = $data;
+      $fellows[null] = 'Selecciona un fellow';
+      return view('admin.evaluations.file-single-evaluation')->with([
+        "user"      => $user,
+        "activity"   => $activity,
+        "fellows"   => $fellows
+      ]);
 
+    }
+
+    /**
+     * Agregar calificacion manual de archivo (sin archivo)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveSingle(AddSingleFileEvaluation $request)
+    {
+      $user      = Auth::user();
+      $eva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
+      $eva->user_id  = $user->id;
+      $eva->url     = $request->url;
+      $eva->score     = $request->score;
+      $eva->comments = $request->comments;
+      $path  = public_path(self::UPLOADSF);
+      // [ SAVE THE file ]
+      if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+        if($eva->path){
+          File::delete($eva->path);
+        }
+        $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+        $request->file('file_e')->move($path, $name);
+        $eva->name = $request->file('file_e')->getClientOriginalName();
+        $eva->path = $path.'/'.$name;
+      }
+      $eva->save();
+      $fellowAverage = new FellowAverage();
+      $fellowAverage->scoreSession($request->activity_id,$request->fellow_id);
+      $retro   = RetroLog::firstOrCreate(['user_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
+      $retro->status = 0;
+      $retro->save();
+      $fellow = User::find($request->fellow_id);
+      $activity = Activity::find($request->activity_id);
+      $fellow->notify(new SendRetroEmail($fellow,$activity));
+      return redirect("dashboard/evaluacion/actividad/ver/{$activity->id}")->with('message','Se ha guarado correctamente');
+
+    }
+
+    /**
+     * Muestra lista de fellow evaluados para la actividad tipo trabajo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewEvaluations($activity_id)
+    {
+      $user       = Auth::user();
+      $activity   = Activity::where('files','Sí')->where('id',$activity_id)->firstOrFail();
+      //ver fellows con archivos
+      $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+      $fellows     = User::where('type','fellow')->where('enabled',1)->whereIn('id',$fellows_ids->toArray())->paginate($this->pageSize);
+      return view('admin.evaluations.activities-files-done-list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows
+        ]);
+
+    }
 
 
 }

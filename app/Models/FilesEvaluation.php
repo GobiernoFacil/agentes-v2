@@ -17,4 +17,8 @@ class FilesEvaluation extends Model
     return $this->belongsTo("App\Models\Activity");
   }
 
+  function user(){
+    return $this->belongsTo("App\User",'fellow_id');
+  }
+
 }

@@ -6,14 +6,20 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
-@if($fellows->count() > 0)
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<h1>{{$activity->name}}</h1>
 		<h2>Módulo: {{$activity->session->module->title}}</h2>
 		<h3>Sesión: {{$activity->session->name}}</h3>
 	</div>
+	<div class="col-sm-3 center">
+		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación</a>
+	</div>
+	<div class="col-sm-3 center">
+		<a href='{{ url("dashboard/evaluacion/actividad/archivo/evaluados/{$activity->id}") }}' class="btn gde">Ver evaluaciones</a>
+	</div>
 </div>
+@if($fellows->count() > 0)
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
@@ -40,7 +46,7 @@
 							<td>{{$fellow->user->fileFellowScore($fellow->user->id,$activity->id) ? $fellow->user->fileFellowScore($fellow->user->id,$activity->id)->score : 'Sin evaluar'}}</td>
 			        <td>
 			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
-			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}"   class="btn xs view ev">Evaluar</a></td>
+			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}/0"   class="btn xs view ev">Evaluar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
@@ -51,19 +57,16 @@
 	</div>
 </div>
 @else
-<div class="row">
-	<div class="col-sm-9">
-		<h1>{{$activity->name}}</h1>
-		<h2>Módulo: {{$activity->session->module->title}}</h2>
-		<h3>Sesión: {{$activity->session->name}}</h3>
-	</div>
-</div>
+
 <div class="box">
 	<div class="row center">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h3 class="title center">Lista de usuarios con archivos para evaluar</h3>
 			<div class="divider b"></div>
-			<h2>Sin usuarios con archivos</h2>
+			<h2>Sin usuarios con archivos para evaluar</h2>
+		</div>
+		<div class="col-sm-3 col-sm-offset-4 center">
+			<a href='{{ url("dashboard/evaluacion/actividad/archivo/evaluados/{$activity->id}") }}' class="btn gde">Ver evaluaciones</a>
 		</div>
 	</div>
 </div>

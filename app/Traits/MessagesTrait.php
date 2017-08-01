@@ -232,6 +232,8 @@ trait MessagesTrait{
          'answer_q29.between'=>"El número de respuestas seleccionadas no es el indicado",
          'answer_q30.between'=>"El número de respuestas seleccionadas no es el indicado",
          'answer_q31.between'=>"El número de respuestas seleccionadas no es el indicado",
+         'fellow_id.required' =>"Selecciona un fellow",
+         'score.between'=>"Este campo debe tener un valor entre 0 y 10",
       ];
     }
 }
