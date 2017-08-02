@@ -7,15 +7,22 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-6">
-		<h1>{{$activity->name}}</h1>
-		<h2>Módulo: {{$activity->session->module->title}}</h2>
-		<h3>Sesión: {{$activity->session->name}}</h3>
+	<div class="col-sm-9">
+		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
+		
 	</div>
-	<div class="col-sm-3 center">
+	<div class="col-sm-3 right">
 		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación</a>
 	</div>
-	<div class="col-sm-3 center">
+	
+	<div class="col-sm-12">
+		<div class="divider b"></div>
+	</div>
+	<div class="col-sm-9">
+		<h3 class="title">Módulo: {{$activity->session->module->title}}</h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
+	</div>
+	<div class="col-sm-3 right">
 		<a href='{{ url("dashboard/evaluacion/actividad/archivo/evaluados/{$activity->id}") }}' class="btn gde">Ver evaluaciones</a>
 	</div>
 </div>
@@ -29,7 +36,6 @@
 			    <tr>
 			      <th>Nombre / Email</th>
 			      <th>Ciudad / Estado</th>
-			      <th>Procedencia</th>
 					  <th>Fecha de examen</th>
 					  <th>Evaluación</th>
 			      <th>Acciones</th>
