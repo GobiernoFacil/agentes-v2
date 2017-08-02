@@ -7,12 +7,12 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-8">
 		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
 		
 	</div>
-	<div class="col-sm-3 right">
-		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación</a>
+	<div class="col-sm-4 right">
+		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="divider b"></div>
