@@ -8,19 +8,23 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>{{$activity->name}}</h1>
-		<h2>Módulo: {{$activity->session->module->title}}</h2>
-		<h3>Sesión: {{$activity->session->name}}</h3>
+		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
+		
 	</div>
 	<div class="col-sm-3 right">
 		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación</a>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider b"></div>
+		<h3 class="title">Módulo: <strong>{{$activity->session->module->title}}</strong></h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
 	</div>
 </div>
 @if($fellows->count() > 0)
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3 class="title center">Lista de usuarios con archivos evaluados</h3>
+			<h2 class="title center">Lista de usuarios con archivos evaluados</h2>
 			<table class="table">
 			  <thead>
 			    <tr>
