@@ -7,28 +7,31 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-6">
-		<h1>{{$activity->name}}</h1>
-		<h2>Módulo: {{$activity->session->module->title}}</h2>
-		<h3>Sesión: {{$activity->session->name}}</h3>
+	<div class="col-sm-8">
+		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
+		
 	</div>
-	<div class="col-sm-3 center">
-		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación</a>
+	<div class="col-sm-4 right">
+		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider b"></div>
+		<h3 class="title">Módulo: <strong>{{$activity->session->module->title}}</strong></h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
 	</div>
 </div>
 @if($fellows->count() > 0)
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h3 class="title center">Lista de usuarios con archivos evaluados</h3>
+			<h2 class="title center">Lista de usuarios con archivos evaluados</h2>
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th>Nombre / Email</th>
-			      <th>Ciudad / Estado</th>
-			      <th>Procedencia</th>
-					  <th>Fecha de examen</th>
-					  <th>Evaluación</th>
+			      	<th>Nombre / Email</th>
+			      	<th>Ciudad / Estado</th>
+					<th>Fecha de evaluación</th>
+					<th>Evaluación</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
@@ -38,7 +41,6 @@
 			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}">{{$fellow->name .' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 			        {{$fellow->email}}</td>
 			        <td>{{$fellow->fellowData->city}} <br> {{$fellow->fellowData->state}}</td>
-			        <td>{{$fellow->fellowData->origin}}</td>
 			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->fileFellowScore($fellow->id,$activity->id)->created_at))}}">{{$fellow->fileFellowScore($fellow->id,$activity->id)->created_at->diffForHumans()}}</a> </td>
 							<td>{{$fellow->fileFellowScore($fellow->id,$activity->id) ? $fellow->fileFellowScore($fellow->id,$activity->id)->score : 'Sin evaluar'}}</td>
 			        <td>
