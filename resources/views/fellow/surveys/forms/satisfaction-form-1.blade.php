@@ -813,7 +813,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>{{Form::submit('Guardar evaluación', ['class' => 'btn gde'])}}</p>
+    <p>{{Form::submit('Guardar encuesta', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
