@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\FellowSurvey;
+use App\Models\Module;
+use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveSatisfactionSurvey;
 class FellowSurveys extends Controller
@@ -100,4 +102,58 @@ class FellowSurveys extends Controller
       ]);
 
     }
+
+    /**
+     * index de modulos
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexModules()
+    {
+      $user     = Auth::user();
+      $today    = date('Y-m-d');
+      $modules  = Module::where('start','<=',$today)->where('public',1)->get();
+      return view('fellow.surveys.survey-module-list')->with([
+        'user'=>$user,
+        'modules' =>$modules
+      ]);
+
+    }
+
+    /**
+     * index de sesiones del modulo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSessions($module_slug)
+    {
+      $user     = Auth::user();
+      $module   = Module::where('slug',$module_slug)->firstOrFail();
+      $sessions = $module->sessions;
+      return view('fellow.surveys.survey-sessions-list')->with([
+        'user'=>$user,
+        'module'=>$module,
+        'sessions' =>$sessions
+      ]);
+
+    }
+
+    /**
+     * index de sesiones del modulo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexFacilitators($session_slug)
+    {
+      $user         = Auth::user();
+      $session      = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $facilitators = $session;
+      return view('fellow.surveys.survey-facilitator-list')->with([
+        'user'=>$user,
+        'session'=>$session,
+        'facilitators' =>$facilitators
+      ]);
+
+    }
+
 }

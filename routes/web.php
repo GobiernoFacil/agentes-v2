@@ -360,6 +360,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@welcome');
     Route::get('tablero/encuestas/encuesta-satisfaccion/1', 'FellowSurveys@addSurvey');
     Route::post('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@saveSurvey');
+    Route::get('tablero/encuestas/facilitadores-modulos', 'FellowSurveys@indexModules');
+    Route::get('tablero/encuestas/facilitadores/{module_slug}/sesiones', 'FellowSurveys@indexSessions');
+    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}', 'FellowSurveys@indexFacilitator');
+    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}', 'FellowSurveys@surveyFacilitator');
     Route::get('tablero/encuestas/gracias', 'FellowSurveys@thanks');
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
