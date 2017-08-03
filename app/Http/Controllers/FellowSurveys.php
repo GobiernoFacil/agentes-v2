@@ -14,7 +14,7 @@ class FellowSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function view()
+    public function addSurvey()
     {
       $user     = Auth::user();
       return view('fellow.surveys.satisfaction-survey-1')->with([

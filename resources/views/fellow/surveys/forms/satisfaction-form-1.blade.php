@@ -278,18 +278,18 @@
             <div class="col-sm-12">
               <span>Lecturas</span>
               <ul class="inline">
-                <li><label><span>1</span>{{Form::radio('sur_6_1[1]','1', $evaluation->sur_6_1 == 1 ? true : false,['class' => 'form-control sur_6_1'])}}	</label></li>
-                <li><label><span>2</span>{{Form::radio('sur_6_1[2]','2', $evaluation->sur_6_1 == 2 ? true : false,['class' => 'form-control sur_6_1'])}}	</label></li>
-                <li><label><span>3</span>{{Form::radio('sur_6_1[3]','3', $evaluation->sur_6_1 == 3 ? true : false,['class' => 'form-control sur_6_1'])}}	</label></li>
+                <li><label><span>1</span>{{Form::radio('sur_6_1[1]','1', $evaluation->sur_6_1 == 1 ? true : false,['class' => 'form-control sur_6_1','id'=>'sur_6_1_1'])}}	</label></li>
+                <li><label><span>2</span>{{Form::radio('sur_6_1[2]','2', $evaluation->sur_6_1 == 2 ? true : false,['class' => 'form-control sur_6_1','id'=>'sur_6_1_2'])}}	</label></li>
+                <li><label><span>3</span>{{Form::radio('sur_6_1[3]','3', $evaluation->sur_6_1 == 3 ? true : false,['class' => 'form-control sur_6_1','id'=>'sur_6_1_3'])}}	</label></li>
                 </ul>
                   @if($errors->has('sur_6_1'))
                   <strong class="danger">{{$errors->first('sur_6_1')}}</strong>
                 @endif
-                <span>videos</span>
+                <span>Videos</span>
                 <ul class="inline">
-                  <li><label><span>1</span>{{Form::radio('sur_6_2[1]','1', $evaluation->sur_6_2 == 1 ? true : false,['class' => 'form-control sur_6_2'])}}	</label></li>
-                  <li><label><span>2</span>{{Form::radio('sur_6_2[2]','2', $evaluation->sur_6_2 == 2 ? true : false,['class' => 'form-control sur_6_2'])}}	</label></li>
-                  <li><label><span>3</span>{{Form::radio('sur_6_2[3]','3', $evaluation->sur_6_2 == 3 ? true : false,['class' => 'form-control sur_6_2'])}}	</label></li>
+                  <li><label><span>1</span>{{Form::radio('sur_6_2[1]','1', $evaluation->sur_6_2 == 1 ? true : false,['class' => 'form-control sur_6_2','id'=>'sur_6_2_1'])}}	</label></li>
+                  <li><label><span>2</span>{{Form::radio('sur_6_2[2]','2', $evaluation->sur_6_2 == 2 ? true : false,['class' => 'form-control sur_6_2','id'=>'sur_6_2_2'])}}	</label></li>
+                  <li><label><span>3</span>{{Form::radio('sur_6_2[3]','3', $evaluation->sur_6_2 == 3 ? true : false,['class' => 'form-control sur_6_2','id'=>'sur_6_2_3'])}}	</label></li>
                     </ul>
                     @if($errors->has('sur_6_2'))
                     <strong class="danger">{{$errors->first('sur_6_2')}}</strong>
@@ -297,9 +297,9 @@
 
                   <span>Foros</span>
                   <ul class="inline">
-                    <li><label><span>1</span>{{Form::radio('sur_6_3[1]','1', $evaluation->sur_6_3 == 1 ? true : false,['class' => 'form-control sur_6_3'])}}	</label></li>
-                    <li><label><span>2</span>{{Form::radio('sur_6_3[2]','2', $evaluation->sur_6_3 == 2 ? true : false,['class' => 'form-control sur_6_3'])}}	</label></li>
-                    <li><label><span>3</span>{{Form::radio('sur_6_3[3]','3', $evaluation->sur_6_3 == 3 ? true : false,['class' => 'form-control sur_6_3'])}}	</label></li>
+                    <li><label><span>1</span>{{Form::radio('sur_6_3[1]','1', $evaluation->sur_6_3 == 1 ? true : false,['class' => 'form-control sur_6_3','id'=>'sur_6_3_1'])}}	</label></li>
+                    <li><label><span>2</span>{{Form::radio('sur_6_3[2]','2', $evaluation->sur_6_3 == 2 ? true : false,['class' => 'form-control sur_6_3','id'=>'sur_6_3_2'])}}	</label></li>
+                    <li><label><span>3</span>{{Form::radio('sur_6_3[3]','3', $evaluation->sur_6_3 == 3 ? true : false,['class' => 'form-control sur_6_3','id'=>'sur_6_3_3'])}}	</label></li>
                       </ul>
                       @if($errors->has('sur_6_3'))
                       <strong class="danger">{{$errors->first('sur_6_3')}}</strong>
@@ -317,18 +317,18 @@
               <div class="col-sm-12">
                 <span>Otro/a Agente de Cambio</span>
                 <ul class="inline">
-                  <li><label><span>1</span>{{Form::radio('sur_7_1[1]','1', $evaluation->sur_7_1 == 1 ? true : false,['class' => 'form-control sur_7_1'])}}	</label></li>
-                  <li><label><span>2</span>{{Form::radio('sur_7_1[2]','2', $evaluation->sur_7_1 == 2 ? true : false,['class' => 'form-control sur_7_1'])}}	</label></li>
-                  <li><label><span>3</span>{{Form::radio('sur_7_1[3]','3', $evaluation->sur_7_1 == 3 ? true : false,['class' => 'form-control sur_7_1'])}}	</label></li>
+                  <li><label><span>1</span>{{Form::radio('sur_7_1[1]','1', $evaluation->sur_7_1 == 1 ? true : false,['class' => 'form-control sur_7_1','id'=>'sur_7_1_1'])}}	</label></li>
+                  <li><label><span>2</span>{{Form::radio('sur_7_1[2]','2', $evaluation->sur_7_1 == 2 ? true : false,['class' => 'form-control sur_7_1','id'=>'sur_7_1_2'])}}	</label></li>
+                  <li><label><span>3</span>{{Form::radio('sur_7_1[3]','3', $evaluation->sur_7_1 == 3 ? true : false,['class' => 'form-control sur_7_1','id'=>'sur_7_1_3'])}}	</label></li>
                   </ul>
                     @if($errors->has('sur_7_1'))
                     <strong class="danger">{{$errors->first('sur_7_1')}}</strong>
                   @endif
                   <span>Con facilitador/a</span>
                   <ul class="inline">
-                    <li><label><span>1</span>{{Form::radio('sur_7_2[1]','1', $evaluation->sur_7_2 == 1 ? true : false,['class' => 'form-control sur_7_2'])}}	</label></li>
-                    <li><label><span>2</span>{{Form::radio('sur_7_2[2]','2', $evaluation->sur_7_2 == 2 ? true : false,['class' => 'form-control sur_7_2'])}}	</label></li>
-                    <li><label><span>3</span>{{Form::radio('sur_7_2[3]','3', $evaluation->sur_7_2 == 3 ? true : false,['class' => 'form-control sur_7_2'])}}	</label></li>
+                    <li><label><span>1</span>{{Form::radio('sur_7_2[1]','1', $evaluation->sur_7_2 == 1 ? true : false,['class' => 'form-control sur_7_2','id'=>'sur_7_2_1'])}}	</label></li>
+                    <li><label><span>2</span>{{Form::radio('sur_7_2[2]','2', $evaluation->sur_7_2 == 2 ? true : false,['class' => 'form-control sur_7_2','id'=>'sur_7_2_2'])}}	</label></li>
+                    <li><label><span>3</span>{{Form::radio('sur_7_2[3]','3', $evaluation->sur_7_2 == 3 ? true : false,['class' => 'form-control sur_7_2','id'=>'sur_7_2_3'])}}	</label></li>
                       </ul>
                       @if($errors->has('sur_7_2'))
                       <strong class="danger">{{$errors->first('sur_7_2')}}</strong>
@@ -336,9 +336,9 @@
 
                     <span>Con soporte técnico</span>
                     <ul class="inline">
-                      <li><label><span>1</span>{{Form::radio('sur_7_3[1]','1', $evaluation->sur_7_3 == 1 ? true : false,['class' => 'form-control sur_7_3'])}}	</label></li>
-                      <li><label><span>2</span>{{Form::radio('sur_7_3[2]','2', $evaluation->sur_7_3 == 2 ? true : false,['class' => 'form-control sur_7_3'])}}	</label></li>
-                      <li><label><span>3</span>{{Form::radio('sur_7_3[3]','3', $evaluation->sur_7_3 == 3 ? true : false,['class' => 'form-control sur_7_3'])}}	</label></li>
+                      <li><label><span>1</span>{{Form::radio('sur_7_3[1]','1', $evaluation->sur_7_3 == 1 ? true : false,['class' => 'form-control sur_7_3','id'=>'sur_7_3_1'])}}	</label></li>
+                      <li><label><span>2</span>{{Form::radio('sur_7_3[2]','2', $evaluation->sur_7_3 == 2 ? true : false,['class' => 'form-control sur_7_3','id'=>'sur_7_3_2'])}}	</label></li>
+                      <li><label><span>3</span>{{Form::radio('sur_7_3[3]','3', $evaluation->sur_7_3 == 3 ? true : false,['class' => 'form-control sur_7_3','id'=>'sur_7_3_3'])}}	</label></li>
                         </ul>
                         @if($errors->has('sur_7_3'))
                         <strong class="danger">{{$errors->first('sur_7_3')}}</strong>

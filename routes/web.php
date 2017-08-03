@@ -357,7 +357,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@FellowSurveys*/
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/encuestas', 'FellowSurveys@index');
-    Route::get('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@view');
+    Route::get('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@addSurvey');
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
     Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');

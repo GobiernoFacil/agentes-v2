@@ -64,33 +64,166 @@ $(document).ready(function() {
          $('.sur_5_4').not(this).attr('checked', false);
          $(this).attr('checked', true); });
 
-         $('.sur_6_1').click(function(event) {
-            $('.sur_6_1').not(this).attr('checked', false);
-            $(this).attr('checked', true); });
+      $('.sur_6_1').click(function(event) {
+          $('.sur_6_1').not(this).attr('checked', false);
+          if($('.sur_6_1:checked').attr('id')==='sur_6_1_1'){
+            if($('#sur_6_2_1').is(":checked")){
+              $('#sur_6_2_1').attr('checked', false);
+            }
+            if($('#sur_6_3_1').is(":checked")){
+              $('#sur_6_3_1').attr('checked', false);
+            }
+          }else if($('.sur_6_1:checked').attr('id')==='sur_6_1_2'){
+            if($('#sur_6_2_2').is(":checked")){
+              $('#sur_6_2_2').attr('checked', false);
+            }
+            if($('#sur_6_3_2').is(":checked")){
+              $('#sur_6_3_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_6_2_3').is(":checked")){
+              $('#sur_6_2_3').attr('checked', false);
+            }
+            if($('#sur_6_3_3').is(":checked")){
+              $('#sur_6_3_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true);
+      });
 
-          $('.sur_6_2').click(function(event) {
-             $('.sur_6_2').not(this).attr('checked', false);
-             $(this).attr('checked', true); });
+      $('.sur_6_2').click(function(event) {
+          $('.sur_6_2').not(this).attr('checked', false);
+          if($('.sur_6_2:checked').attr('id')==='sur_6_2_1'){
+            if($('#sur_6_1_1').is(":checked")){
+              $('#sur_6_1_1').attr('checked', false);
+            }
+            if($('#sur_6_3_1').is(":checked")){
+              $('#sur_6_3_1').attr('checked', false);
+            }
+          }else if($('.sur_6_2:checked').attr('id')==='sur_6_2_2'){
+            if($('#sur_6_1_2').is(":checked")){
+              $('#sur_6_1_2').attr('checked', false);
+            }
+            if($('#sur_6_3_2').is(":checked")){
+              $('#sur_6_3_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_6_1_3').is(":checked")){
+              $('#sur_6_1_3').attr('checked', false);
+            }
+            if($('#sur_6_3_3').is(":checked")){
+              $('#sur_6_3_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true); });
 
-         $('.sur_6_3').click(function(event) {
-            $('.sur_6_3').not(this).attr('checked', false);
-            $(this).attr('checked', true); });
+      $('.sur_6_3').click(function(event) {
+          $('.sur_6_3').not(this).attr('checked', false);
+          if($('.sur_6_3:checked').attr('id')==='sur_6_3_1'){
+            if($('#sur_6_2_1').is(":checked")){
+              $('#sur_6_2_1').attr('checked', false);
+            }
+            if($('#sur_6_1_1').is(":checked")){
+              $('#sur_6_1_1').attr('checked', false);
+            }
+          }else if($('.sur_6_3:checked').attr('id')==='sur_6_3_2'){
+            if($('#sur_6_2_2').is(":checked")){
+              $('#sur_6_2_2').attr('checked', false);
+            }
+            if($('#sur_6_1_2').is(":checked")){
+              $('#sur_6_1_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_6_2_3').is(":checked")){
+              $('#sur_6_2_3').attr('checked', false);
+            }
+            if($('#sur_6_1_3').is(":checked")){
+              $('#sur_6_1_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true); });
 
-            $('.sur_7_1').click(function(event) {
-               $('.sur_7_1').not(this).attr('checked', false);
-               $(this).attr('checked', true); });
+      $('.sur_7_1').click(function(event) {
+          $('.sur_7_1').not(this).attr('checked', false);
+          if($('.sur_7_1:checked').attr('id')==='sur_7_1_1'){
+            if($('#sur_7_2_1').is(":checked")){
+              $('#sur_7_2_1').attr('checked', false);
+            }
+            if($('#sur_7_3_1').is(":checked")){
+              $('#sur_7_3_1').attr('checked', false);
+            }
+          }else if($('.sur_7_1:checked').attr('id')==='sur_7_1_2'){
+            if($('#sur_7_2_2').is(":checked")){
+              $('#sur_7_2_2').attr('checked', false);
+            }
+            if($('#sur_7_3_2').is(":checked")){
+              $('#sur_7_3_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_7_2_3').is(":checked")){
+              $('#sur_7_2_3').attr('checked', false);
+            }
+            if($('#sur_7_3_3').is(":checked")){
+              $('#sur_7_3_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true); });
 
-             $('.sur_7_2').click(function(event) {
-                $('.sur_7_2').not(this).attr('checked', false);
-                $(this).attr('checked', true); });
+      $('.sur_7_2').click(function(event) {
+          $('.sur_7_2').not(this).attr('checked', false);
+          if($('.sur_7_2:checked').attr('id')==='sur_7_2_1'){
+            if($('#sur_7_1_1').is(":checked")){
+              $('#sur_7_1_1').attr('checked', false);
+            }
+            if($('#sur_7_3_1').is(":checked")){
+              $('#sur_7_3_1').attr('checked', false);
+            }
+          }else if($('.sur_7_2:checked').attr('id')==='sur_7_2_2'){
+            if($('#sur_7_1_2').is(":checked")){
+              $('#sur_7_1_2').attr('checked', false);
+            }
+            if($('#sur_7_3_2').is(":checked")){
+              $('#sur_7_3_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_7_1_3').is(":checked")){
+              $('#sur_7_1_3').attr('checked', false);
+            }
+            if($('#sur_7_3_3').is(":checked")){
+              $('#sur_7_3_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true); });
 
-            $('.sur_7_3').click(function(event) {
-               $('.sur_7_3').not(this).attr('checked', false);
-               $(this).attr('checked', true); });
+      $('.sur_7_3').click(function(event) {
+          $('.sur_7_3').not(this).attr('checked', false);
+          if($('.sur_7_3:checked').attr('id')==='sur_7_3_1'){
+            if($('#sur_7_2_1').is(":checked")){
+              $('#sur_7_2_1').attr('checked', false);
+            }
+            if($('#sur_7_1_1').is(":checked")){
+              $('#sur_7_1_1').attr('checked', false);
+            }
+          }else if($('.sur_7_3:checked').attr('id')==='sur_7_3_2'){
+            if($('#sur_7_2_2').is(":checked")){
+              $('#sur_7_2_2').attr('checked', false);
+            }
+            if($('#sur_7_1_2').is(":checked")){
+              $('#sur_7_1_2').attr('checked', false);
+            }
+          }else{
+            if($('#sur_7_2_3').is(":checked")){
+              $('#sur_7_2_3').attr('checked', false);
+            }
+            if($('#sur_7_1_3').is(":checked")){
+              $('#sur_7_1_3').attr('checked', false);
+            }
+          }
+          $(this).attr('checked', true); });
 
-               $('.sur_8').click(function(event) {
-                  $('.sur_8').not(this).attr('checked', false);
-                  $(this).attr('checked', true); });
+      $('.sur_8').click(function(event) {
+          $('.sur_8').not(this).attr('checked', false);
+          $(this).attr('checked', true); });
 
 
                   $('.sur_9').click(function(event) {
