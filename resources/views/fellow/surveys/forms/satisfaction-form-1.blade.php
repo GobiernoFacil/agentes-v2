@@ -1,4 +1,4 @@
-{!! Form::model($evaluation,['url' => url('dashboard/aspirantes/evaluar').'/'.$aspirant->id, "class" => "form-horizontal"]) !!}
+{!! Form::model($evaluation,['url' => url('tablero/encuestas/encuesta-satisfaccion'), "class" => "form-horizontal"]) !!}
 
 <div class="row">
   <div class="col-sm-12">
