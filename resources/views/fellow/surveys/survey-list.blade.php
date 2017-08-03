@@ -24,7 +24,7 @@
 			  </thead>
 			  <tbody>
 			    <tr>
-            <td><h4><a href='url("tablero/encuestas/encuesta-satisfaccion")'>Encuesta de satisfacción</a></h4></td>
+            <td><h4><a href='{{url("tablero/encuestas/encuesta-satisfaccion")}}'>Encuesta de satisfacción</a></h4></td>
             <td>Encuesta de satisfacción Plataforma Apertus</td>
             <td>{{$user->fellow_survey ? 'Completada' : 'Sin contestar'}}</td>
             <td>
