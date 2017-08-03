@@ -12,6 +12,38 @@ class FellowSurveys extends Controller
     //
 
     /**
+     * index de encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+      $user     = Auth::user();
+      return view('fellow.surveys.survey-list')->with([
+        'user'=>$user,
+      ]);
+
+    }
+
+    /**
+     * bienvenida
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function welcome()
+    {
+      $user     = Auth::user();
+      $survey   = FellowSurvey::where('user_id',$user->id)->first();
+      if($survey){
+        return redirect('tablero/encuestas')->with('error',"Ya has contestado la encuesta");
+      }
+      return view('fellow.surveys.survey-welcome')->with([
+        'user'=>$user,
+      ]);
+
+    }
+
+    /**
      * Muestra encuesta satisfaccion
      *
      * @return \Illuminate\Http\Response
@@ -19,8 +51,7 @@ class FellowSurveys extends Controller
     public function addSurvey()
     {
       $user     = Auth::user();
-    //  $survey   = FellowSurvey::where('user_id',$user->id)->first();
-    $survey=false;
+      $survey   = FellowSurvey::where('user_id',$user->id)->first();
       if($survey){
         return redirect('tablero/encuestas')->with('error',"Ya has contestado la encuesta");
       }
@@ -52,7 +83,21 @@ class FellowSurveys extends Controller
         }
       }
     FellowSurvey::where('id',$survey->id)->update($to_save);
-    return redirect('tablero/encuestas/encuesta-satisfaccion/gracias')->with('success',"Se ha guardado correctamente");
+    return redirect('tablero/encuestas/gracias')->with('success',"Se ha guardado correctamente");
+
+    }
+
+    /**
+     * Muestra encuesta satisfaccion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function thanks()
+    {
+      $user     = Auth::user();
+      return view('fellow.surveys.survey-thanks')->with([
+        'user'=>$user,
+      ]);
 
     }
 }

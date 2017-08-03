@@ -11,6 +11,7 @@ use App\Models\FellowScore;
 use App\Models\FellowFile;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -144,6 +145,10 @@ class User extends Authenticatable
       $fellowAverage  = new FellowAverage();
       return  $fellowAverage->get_forum_participation($session_id,$user_id);
 
+    }
+
+    function fellow_survey(){
+      return $this->hasOne("App\Models\FellowSurvey");
     }
 
 }
