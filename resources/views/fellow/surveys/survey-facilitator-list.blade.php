@@ -36,22 +36,21 @@
 		      <tr>
 		        <td><div class="row">
 			        <div class="col-sm-2">
-				        @if($facilitator->user->image)
+				    @if($facilitator->user->image)
 						<img src='{{url("img/users/{$facilitator->image->name}")}}' height="30px">
 						@else
 						<img src='{{url("img/users/default.png")}}' height="30px">
 						@endif
 			        </div>
 			        <div class="col-sm-10">
-			        <h4><a href="{{ url('dashboard/fellows/ver/' . $facilitator->id) }}">{{$facilitator->user->name}}</a></h4>
+			        <h4><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></h4>
 					{{$facilitator->user->email}}<br>
 			        </div>
 		       	 </div>
 		        </td>
 
 		        <td>
-		          <a href="{{ url('dashboard/fellows/ver/' . $facilitator->id) }}" class="btn xs view">Ver perfil</a>
-		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $facilitator->id) }}"  id ="{{$facilitator->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
+		          <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/{$facilitator->user->name}")}}' class="btn xs view">Ver perfil</a>
 		         </td>
 		    </tr>
 		    @endforeach

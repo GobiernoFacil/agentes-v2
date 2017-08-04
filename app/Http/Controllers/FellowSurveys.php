@@ -139,7 +139,7 @@ class FellowSurveys extends Controller
     }
 
     /**
-     * index de sesiones del modulo
+     * index de facilitadores de la sesión
      *
      * @return \Illuminate\Http\Response
      */
@@ -153,6 +153,17 @@ class FellowSurveys extends Controller
         'session'=>$session,
         'facilitators' =>$facilitators
       ]);
+
+    }
+
+    /**
+     * Muestra encuesta de facilitador
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function surveyFacilitator()
+    {
+      $user     = Auth::user();
 
     }
 
