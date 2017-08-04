@@ -9,6 +9,7 @@
 	<div class="row">
     <div class="col-sm-10 col-sm-offset-1">
 			<h3 class="title center">Lista de módulos</h3>
+			<p class= "center">Selecciona un módulo para ver sus sesiones</p>
 			<div class="divider b"></div>
 		</div>
 		<div class="col-sm-12">

@@ -9,12 +9,15 @@ use App\Models\FacilitatorSurvey;
 use App\Models\FellowSurvey;
 use App\Models\Module;
 use App\Models\ModuleSession;
+use App\Models\FacilitatorModule;
 // FormValidators
 use App\Http\Requests\SaveSatisfactionSurvey;
 use App\Http\Requests\SaveFacilitatorSurvey;
 class FellowSurveys extends Controller
 {
     //
+    //Paginación
+    public $pageSize = 10;
 
     /**
      * index de encuestas
@@ -115,7 +118,8 @@ class FellowSurveys extends Controller
     {
       $user     = Auth::user();
       $today    = date('Y-m-d');
-      $modules  = Module::where('start','<=',$today)->where('public',1)->get();
+      $modules_ids = FacilitatorModule::pluck('module_id');
+      $modules  = Module::where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
       return view('fellow.surveys.survey-module-list')->with([
         'user'=>$user,
         'modules' =>$modules
@@ -130,9 +134,11 @@ class FellowSurveys extends Controller
      */
     public function indexSessions($module_slug)
     {
+
       $user     = Auth::user();
       $module   = Module::where('slug',$module_slug)->firstOrFail();
-      $sessions = $module->sessions;
+      $sessions_ids = FacilitatorModule::pluck('session_id');
+      $sessions = ModuleSession::where('module_id',$module->id)->whereIn('id',$sessions_ids->toArray())->paginate($this->pageSize);;
       return view('fellow.surveys.survey-sessions-list')->with([
         'user'=>$user,
         'module'=>$module,

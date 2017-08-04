@@ -31,10 +31,18 @@
               @if($user->fellow_survey)
               Completada
               @else
-              <a href="{{ url('tablero/encuestas/encuesta-satisfaccion') }}" class="btn xs view">Contestar</a>
+              <a href="{{ url('tablero/encuestas/encuesta-satisfaccion') }}" class="btn xs view">Ver</a>
               @endif
             </td>
 				</tr>
+				<tr>
+					<td><h4><a href='{{url("tablero/encuestas/encuesta-satisfaccion")}}'>Encuesta de facilitadores</a></h4></td>
+					<td>Encuesta de facilitadores por sesión</td>
+					<td>No aplica</td>
+					<td>
+						<a href="{{ url('tablero/encuestas/facilitadores-modulos') }}" class="btn xs view">Ver</a>
+					</td>
+			</tr>
 			  </tbody>
 			</table>
 		</div>

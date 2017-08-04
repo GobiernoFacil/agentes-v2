@@ -9,6 +9,7 @@
 	<div class="row">
     <div class="col-sm-10 col-sm-offset-1">
 			<h3 class="title center">Lista de sesiones</h3>
+			<p class="center">Selecciona una sesión para ver sus facilitadores</p>
 			<div class="divider b"></div>
 		</div>
     <div class="col-sm-12">
@@ -40,6 +41,7 @@
       @endforeach
 			  </tbody>
 			</table>
+			{{ $sessions->links() }}
 		</div>
 	</div>
 </div>
