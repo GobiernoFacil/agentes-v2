@@ -16,6 +16,64 @@
   <div class="row">
 
     <div class="col-sm-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>MÓDULO</th>
+					<th>EVALUACIÓN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><h3>SEMINARIO 1	</h3>							  </td>
+					<td><ul>
+					<li>	Ensayo individual	</li>					  
+					<li>Participación			</li>				  
+					<li>Trabajo por equipos 1	</li>				  
+					</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><h3>CURSO 1 VIRTUAL	</h3>						  </td>
+					<td>
+						<ul>
+							<li>Participación en Foros					  </li>
+							<li>Exámenes en línea al finalizar cada sesión</li>
+							<li>Trabajo por equipos 2					  </li>
+						</ul>					  
+					</td>
+				</tr>
+				<tr>
+					<td><h3>CURSO 2 VIRTUAL </h3>							  </td>
+					<td>
+						<ul>
+							<li>Participación en Foros					  </li>
+							<li>Exámenes en línea al finalizar cada sesión</li>
+							<li>Trabajo por equipos 3					  </li>
+						</ul>				 
+					</td>
+				</tr>
+				<tr>
+					<td><h3>SEMINARIO 2 </h3>							  </td>
+					<td>
+						<ul>
+							<li>Participación			</li>				  
+							<li>Trabajo por equipos 4	</li>				
+						</ul>  
+					</td>
+				</tr>
+				<tr>
+					<td><h3>CURSO 3 VIRTUAL	</h3>						  </td>
+					<td>
+						<ul>
+						<li>Participación en Foros					  </li>
+						<li>Exámenes en línea al finalizar cada sesión</li>
+						<li>Trabajo por equipos 5					  </li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	   
 		<table class="table">
 			<thead>
