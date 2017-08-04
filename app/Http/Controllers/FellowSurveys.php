@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
+use App\Models\FacilitatorSurvey;
 use App\Models\FellowSurvey;
 use App\Models\Module;
 use App\Models\ModuleSession;
 // FormValidators
 use App\Http\Requests\SaveSatisfactionSurvey;
+use App\Http\Requests\SaveFacilitatorSurvey;
 class FellowSurveys extends Controller
 {
     //
@@ -156,15 +159,120 @@ class FellowSurveys extends Controller
 
     }
 
+
+    /**
+     * instrucciones facilitador survey
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function welcomeFacilitator($session_slug,$name)
+    {
+      $user     = Auth::user();
+      $session     = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $facilitator = User::where('type','facilitator')->where('enabled',1)->where('name',$name)
+      ->orWhere(function($query)use($name){
+        $query->where('type','admin')
+        ->where('enabled',1)
+        ->where('name',$name);
+      })
+      ->firstOrFail();
+      $done        = FacilitatorSurvey::where('session_id',$session->id)->where('user_id',$user->id)->where('facilitator_id',$facilitator->id)->first();
+      if($done){
+        return redirect("tablero/encuestas/facilitadores-sesiones/{$session->slug}")->with(['error'=>'Ya has evaluado a este facilitador para esta sesión']);
+      }
+      return view('fellow.surveys.survey-welcome-facilitator')->with([
+        'user'=>$user,
+        'session'=>$session,
+        'facilitator' =>$facilitator
+      ]);
+
+    }
+
     /**
      * Muestra encuesta de facilitador
      *
      * @return \Illuminate\Http\Response
      */
-    public function surveyFacilitator()
+    public function surveyFacilitator($session_slug,$name)
     {
-      $user     = Auth::user();
+      $user        = Auth::user();
+      $session     = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $facilitator = User::where('type','facilitator')->where('enabled',1)->where('name',$name)
+      ->orWhere(function($query)use($name){
+        $query->where('type','admin')
+        ->where('enabled',1)
+        ->where('name',$name);
+      })
+      ->firstOrFail();
+      $done        = FacilitatorSurvey::where('session_id',$session->id)->where('user_id',$user->id)->where('facilitator_id',$facilitator->id)->first();
+      if($done){
+        return redirect("tablero/encuestas/facilitadores-sesiones/{$session->slug}")->with(['error'=>'Ya has evaluado a este facilitador para esta sesión']);
+      }
+      return view('fellow.surveys.survey-facilitator')->with([
+        'user'=>$user,
+        'session'=>$session,
+        'facilitator' =>$facilitator,
+        'survey'   =>$user
+      ]);
+
 
     }
+
+        /**
+         * guarda encuesta satisfaccion
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveFacilitatorSurvey(SaveFacilitatorSurvey $request)
+        {
+          $user   = Auth::user();
+          $session     = ModuleSession::where('slug',$request->session_slug)->firstOrFail();
+          $facilitator = User::where('type','facilitator')->where('enabled',1)->where('name',$request->name)
+          ->orWhere(function($query)use($request){
+            $query->where('type','admin')
+            ->where('enabled',1)
+            ->where('name',$request->name);
+          })
+          ->firstOrFail();
+          $survey = FacilitatorSurvey::firstOrCreate(['user_id'=>$user->id,'session_id'=>$session->id,'facilitator_id'=>$facilitator->id]);
+          $data   = $request->except(['_token']);
+          $keys   = array_keys($data);
+          $to_save = [];
+          foreach($keys as $d){
+            if(is_array($data[$d])){
+              $to_save[$d] = current(array_slice($data[$d], 0, 1));
+            }else{
+              $to_save[$d] =$data[$d];
+            }
+          }
+        FacilitatorSurvey::where('id',$survey->id)->update($to_save);
+        return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
+
+        }
+
+        /**
+         * Muestra encuesta satisfaccion
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function thanksFacilitator($session_slug,$name)
+        {
+          $user     = Auth::user();
+          $session     = ModuleSession::where('slug',$session_slug)->firstOrFail();
+          $facilitator = User::where('type','facilitator')->where('enabled',1)->where('name',$name)
+          ->orWhere(function($query)use($name){
+            $query->where('type','admin')
+            ->where('enabled',1)
+            ->where('name',$name);
+          })
+          ->firstOrFail();
+          return view('fellow.surveys.survey-facilitator-thanks')->with([
+            'user'=>$user,
+            'session'=>$session,
+            'facilitator'=>$facilitator
+          ]);
+
+        }
+
 
 }

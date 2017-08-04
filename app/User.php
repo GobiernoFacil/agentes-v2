@@ -9,6 +9,7 @@ use App\Models\FellowAnswer;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
+use App\Models\FacilitatorSurvey;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
 
@@ -149,6 +150,11 @@ class User extends Authenticatable
 
     function fellow_survey(){
       return $this->hasOne("App\Models\FellowSurvey");
+    }
+
+    function facilitator_survey($session_id,$user_id,$facilitator_id){
+      $survey = FacilitatorSurvey::where('user_id', $user_id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
+      return $survey;
     }
 
 }

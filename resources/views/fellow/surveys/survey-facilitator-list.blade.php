@@ -37,20 +37,24 @@
 		        <td><div class="row">
 			        <div class="col-sm-2">
 				    @if($facilitator->user->image)
-						<img src='{{url("img/users/{$facilitator->image->name}")}}' height="30px">
+						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
 						@else
 						<img src='{{url("img/users/default.png")}}' height="30px">
 						@endif
 			        </div>
 			        <div class="col-sm-10">
-			        <h4><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></h4>
+			        <h4><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></h4>
 					{{$facilitator->user->email}}<br>
 			        </div>
 		       	 </div>
 		        </td>
 
 		        <td>
-		          <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/{$facilitator->user->name}")}}' class="btn xs view">Ver perfil</a>
+							@if(!$user->facilitator_survey($session->id,$user->id,$facilitator->user->id))
+		          <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}' class="btn xs view">Ir a encuesta</a>
+							@else
+							Completada
+							@endif
 		         </td>
 		    </tr>
 		    @endforeach

@@ -283,6 +283,15 @@ trait MessagesTrait{
          'sur_16_3.required'=>"Contesta esta pregunta",
          'sur_16_4.required'=>"Contesta esta pregunta",
          'sur_16_5.required'=>"Contesta esta pregunta",
+         'fa_1.required'=>'Contesta esta pregunta',
+         'fa_2.required'=>'Contesta esta pregunta',
+         'fa_3.required'=>'Contesta esta pregunta',
+         'fa_4.required'=>'Contesta esta pregunta',
+         'fa_5.required'=>'Contesta esta pregunta',
+         'fa_6.required'=>'Contesta esta pregunta',
+         'fa_7.required'=>'Contesta esta pregunta',
+         'fa_8.required'=>'Contesta esta pregunta',
+         'fa_9.required'=>'Contesta esta pregunta',
       ];
     }
 }

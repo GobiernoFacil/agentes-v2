@@ -12,7 +12,7 @@
   </div>
 </div>
 @endsection
-
+@section('js-content')
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function() {
@@ -306,3 +306,4 @@ $(document).ready(function() {
 });
 
 </script>
+@endsection
