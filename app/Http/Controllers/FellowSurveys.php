@@ -143,11 +143,11 @@ class FellowSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexFacilitators($session_slug)
+    public function indexFacilitator($session_slug)
     {
       $user         = Auth::user();
       $session      = ModuleSession::where('slug',$session_slug)->firstOrFail();
-      $facilitators = $session;
+      $facilitators = $session->facilitators;
       return view('fellow.surveys.survey-facilitator-list')->with([
         'user'=>$user,
         'session'=>$session,
