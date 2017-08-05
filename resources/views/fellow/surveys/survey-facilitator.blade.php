@@ -28,4 +28,37 @@
 </div>
 @endsection
 @section('js-content')
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(function() {
+  $('.fa_1').click(function(event) {
+     $('.fa_1').not(this).attr('checked', false);
+     $(this).attr('checked', true);
+   });
+   $('.fa_2').click(function(event) {
+      $('.fa_2').not(this).attr('checked', false);
+      $(this).attr('checked', true);
+    });
+    $('.fa_3').click(function(event) {
+       $('.fa_3').not(this).attr('checked', false);
+       $(this).attr('checked', true);
+     });
+     $('.fa_4').click(function(event) {
+        $('.fa_4').not(this).attr('checked', false);
+        $(this).attr('checked', true);
+      });
+      $('.fa_5').click(function(event) {
+         $('.fa_5').not(this).attr('checked', false);
+         $(this).attr('checked', true);
+       });
+       $('.fa_6').click(function(event) {
+          $('.fa_6').not(this).attr('checked', false);
+          $(this).attr('checked', true);
+        });
+          $('.fa_9').click(function(event) {
+             $('.fa_9').not(this).attr('checked', false);
+             $(this).attr('checked', true);
+           });
+ });
+</script>
 @endsection
