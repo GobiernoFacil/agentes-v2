@@ -118,8 +118,9 @@ class FellowSurveys extends Controller
     {
       $user     = Auth::user();
       $today    = date('Y-m-d');
+      //a un solo módulo
       $modules_ids = FacilitatorModule::pluck('module_id');
-      $modules  = Module::where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+      $modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
       return view('fellow.surveys.survey-module-list')->with([
         'user'=>$user,
         'modules' =>$modules
