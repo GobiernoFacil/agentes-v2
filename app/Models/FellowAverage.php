@@ -113,6 +113,7 @@ class FellowAverage extends Model
       }else{
         $final_score = $this->get_session_score($files_score,$eva_score,$forum_score);
         $fellow_average->average = $final_score;
+        $fellow_average->type = null;
       }
       $fellow_average->save();
 
