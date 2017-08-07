@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Encuesta de {{$facilitator->name}}</h2>
+    <h2 class="sa_title">Evaluación de agente de cambio a facilitador</h2>
     <p>En una escala de 0 a 10, donde 0 es muy deficiente y 10 es muy bueno, evalúe las siguientes oraciones</p>
 	<ol class="list line">
     <!--1-->
