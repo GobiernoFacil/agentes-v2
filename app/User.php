@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Cache;
 use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
 use App\Models\FilesEvaluation;
@@ -155,6 +156,11 @@ class User extends Authenticatable
     function facilitator_survey($session_id,$user_id,$facilitator_id){
       $survey = FacilitatorSurvey::where('user_id', $user_id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
       return $survey;
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 
 }
