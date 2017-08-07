@@ -2,6 +2,8 @@
 @section('title', 'Comenzar encuesta de satisfacción')
 @section('description', 'Comenzar encuesta de satisfacción')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'survey welcome')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_survey')
 
 @section('content')
 <div class="box">

@@ -2,6 +2,8 @@
 @section('title', 'Gracias por participar')
 @section('description', 'Gracias por contestar la encuesta')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'survey thanks')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_survey')
 
 @section('content')
 <div class="box">

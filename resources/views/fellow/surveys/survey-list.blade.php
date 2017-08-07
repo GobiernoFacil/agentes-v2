@@ -2,6 +2,8 @@
 @section('title', 'Encuestas en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Encuestas en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'survey list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_survey')
 
 @section('content')
 <div class="row">

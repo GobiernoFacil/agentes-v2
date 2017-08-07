@@ -1,12 +1,14 @@
 @extends('layouts.admin.a_master')
-@section('title', '' )
-@section('description', '')
+@section('title', 'Evaluación de facilitador' )
+@section('description', 'Evaluación de facilitador')
 @section('body_class', 'fellow')
+@section('breadcrumb_type', 'survey welcome facilitator name')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_survey')
 
 @section('content')
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2 center">
-    <h1>Encuesta de facilitador</h1>
+    <h1>Evaluación de agente de cambio a <strong>{{$facilitator->name}}</strong></h1>
   </div>
   <div class="col-sm-12">
     <div class="divider b"></div>
