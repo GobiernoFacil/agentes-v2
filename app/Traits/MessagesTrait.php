@@ -292,6 +292,10 @@ trait MessagesTrait{
          'fa_7.required'=>'Contesta esta pregunta',
          'fa_8.required'=>'Contesta esta pregunta',
          'fa_9.required'=>'Contesta esta pregunta',
+         'web.url'      => 'El formato no corresponde con el de una URL válida',
+         'linkedin.url'      => 'El formato no corresponde con el de una URL válida',
+         'facebook.url'      => 'El formato no corresponde con el de una URL válida',
+         'other.url'      => 'El formato no corresponde con el de una URL válida',
       ];
     }
 }

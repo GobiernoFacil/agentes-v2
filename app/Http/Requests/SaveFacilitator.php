@@ -29,7 +29,11 @@ class SaveFacilitator extends FormRequest
             'name'     => 'required',
             'email'    => 'required|email|max:255|unique:users',
             'institution' => 'required',
-            'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
+            'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
+            'web'      => 'url|nullable',
+            'facebook' => 'url|nullable',
+            'linkedin' => 'url|nullable',
+            'other'    => 'url|nullable'
         ];
     }
 }

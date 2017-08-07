@@ -30,7 +30,11 @@ class UpdateFacilitator extends FormRequest
           if($user->type==='admin'){
             return [
             'name'     => 'required',
-            'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
+            'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
+            'web'      => 'url|nullable',
+            'facebook' => 'url|nullable',
+            'linkedin' => 'url|nullable',
+            'other'    => 'url|nullable'
             ];
           }else{
             return [
@@ -39,7 +43,11 @@ class UpdateFacilitator extends FormRequest
             'institution' => 'required',
             'password' => 'min:8|nullable',
             'password-confirm'=>'same:password',
-            'image'    => 'file|mimes:jpg,png,jpeg|max:2500'
+            'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
+            'web'      => 'url|nullable',
+            'facebook' => 'url|nullable',
+            'linkedin' => 'url|nullable',
+            'other'    => 'url|nullable'
             ];
         }
     }
