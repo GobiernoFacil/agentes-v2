@@ -284,6 +284,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/mensajes/ver/{conversation_id}', 'AdminMessages@view');
     Route::get('dashboard/mensajes/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
     Route::get('dashboard/horario', 'Admin@time');
+    /*@AdminIndicators Controller */
+    // Rutas de indicadores
+    Route::get('dashboard/indicadores', 'AdminIndicators@index');
   });
 
   /* R U T A S  UNICAS DEL Fellow
