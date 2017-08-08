@@ -16,6 +16,7 @@
   <div class="row">
 
     <div class="col-sm-12">
+	    <p>A continuación se exponen los productos de evaluación categorizados por cada uno de los  módulos con la finalidad de que los participantes puedan visualizar el tipo de actividades y la carga de trabajo aproximada. A manera general la evaluación consta de exámenes en línea, trabajos individuales, participación en los fotos y trabajos por equipo.</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -74,6 +75,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="divider"></div>
+		<p>Para obtener la calificación final se deberá de obtener al menos el 70 puntos de 100 posibles, los cuales corresponden a los exámenes (30%), los trabajos (40%), y la participación presencial y virtual en los foros. </p>
 	   
 		<table class="table">
 			<thead>
