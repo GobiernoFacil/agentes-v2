@@ -289,6 +289,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/indicadores', 'AdminIndicators@index');
     Route::get('dashboard/indicadores/fellows/descargar', 'AdminIndicators@downloadFellows');
     Route::get('dashboard/indicadores/facilitadores/descargar', 'AdminIndicators@downloadFacilitators');
+    /*@AdminSurveys Controller */
+    //Rutas de encuestas
+    Route::get('dashboard/encuestas', 'AdminSurveys@index');
+    Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');
+    Route::get('dashboard/encuestas/facilitadores-modulos', 'AdminSurveys@indexModules');
+    Route::get('dashboard/encuestas/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminSurveys@surveyFacilitator');
   });
 
   /* R U T A S  UNICAS DEL Fellow
