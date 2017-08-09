@@ -6,7 +6,7 @@
 	<ol class="list line">
     <!--1-->
     <li>
-			<p>En una escala de 0 a 10, donde cero es nada relevante y diez es muy relevante ¿En qué grado consideras que la estructura de la plataforma (sesión de inicio, módulos, foros, etc.) es adecuada para su uso?</p>
+			<p>En una escala de 0 a 10, donde cero es nada adecuada y diez es muy adecuada ¿En qué grado consideras que la estructura de la plataforma (sesión de inicio, módulos, foros, etc.) es adecuada para su uso?</p>
 			<div class="row">
 				<div class="col-sm-6">
 					<ul class="inline">
@@ -39,7 +39,7 @@
 		</li>
     <!--2-->
 		<li>
-			<p>En una escala de 0 a 10, donde cero es nada relevante y diez es muy relevante ¿En qué grado consideras que el diseño de la plataforma (accesibilidad, navegación en secciones, etc.) es adecuado para su uso?</p>
+			<p>En una escala de 0 a 10, donde cero es nada adecuado y diez es muy adecuado ¿En qué grado consideras que el diseño de la plataforma (accesibilidad, navegación en secciones, etc.) es adecuado para su uso?</p>
 			<div class="row">
 				<div class="col-sm-6">
 					<ul class="inline">
@@ -168,7 +168,7 @@
 
     <!--4-->
 		<li>
-			<p>En una escala de 0 a 10, donde cero es nada de acuerdo y diez es completamente de acuerdo ¿Consideras que el lenguaje utilizado en la plataforma es claro?, ¿facilita el uso de la misma?</p>
+			<p>En una escala de 0 a 10, donde cero es nada claro y diez es completamente claro ¿Consideras que el lenguaje utilizado en la plataforma es claro?, ¿facilita el uso de la misma?</p>
 			<div class="row">
 				<div class="col-sm-12">
 					<ul class="inline">
