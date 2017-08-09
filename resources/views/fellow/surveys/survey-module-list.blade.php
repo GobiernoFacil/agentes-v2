@@ -21,13 +21,13 @@
 						<th>Módulo</th>
 						<th>
 							<div class="row">
-								<div class="col-sm-5">	
+								<div class="col-sm-5">
 								Sesión
 								</div>
-								<div class="col-sm-5">	
+								<div class="col-sm-5">
 								Facilitador
 								</div>
-								<div class="col-sm-2">	
+								<div class="col-sm-2">
 								Acción
 								</div>
 							</div>
@@ -43,7 +43,7 @@
 						<td><h4>
 							<!--<a href='{{url("tablero/encuestas/facilitadores/$module->slug/sesiones")}}'>-->{{$module->title}}<!--</a>--></h4></td>
 						<td>
-	            
+
 							<div class="row">
 							@foreach($module->sessions as $session)
 								<div class="col-sm-5">
@@ -52,25 +52,27 @@
 								<div class="col-sm-7">
 									<ul class="list line">
 							    	@foreach($session->facilitators as $facilitator)
-										<li class="row">
-											<div class="col-sm-2">
-											@if($facilitator->user->image)
-												<img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
-											@else
-												<img src='{{url("img/users/default.png")}}' width="100%">
-											@endif
-							    			</div>
-											<div class="col-sm-6">
-												<p><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></p>
-							    			</div>
-											<div class="col-sm-4">
-											@if(!$user->facilitator_survey($session->id,$user->id,$facilitator->user->id))
-												<a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}' class="btn xs view">Ir a encuesta</a>
-											@else
-												Completada
-											@endif
-											</div>
-										</li>
+										 @if($facilitator->user->email != 'contacto@prosociedad.org')
+												<li class="row">
+													<div class="col-sm-2">
+													@if($facilitator->user->image)
+														<img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
+													@else
+														<img src='{{url("img/users/default.png")}}' width="100%">
+													@endif
+									    			</div>
+													<div class="col-sm-6">
+														<p><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></p>
+									    			</div>
+													<div class="col-sm-4">
+													@if(!$user->facilitator_survey($session->id,$user->id,$facilitator->user->id))
+														<a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/w/{$facilitator->user->name}")}}' class="btn xs view">Ir a encuesta</a>
+													@else
+														Completada
+													@endif
+													</div>
+												</li>
+									 @endif
 									@endforeach
 									</ul>
 								</div>
