@@ -10,7 +10,7 @@
       <h1>¡Gracias por contestar la encuesta!</h1>
     </div>
     <div class="col-sm-4 col-sm-offset-4 center">
-      <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}") }}' class="btn gde">Finalizar</a>
+      <a href='{{ url("tablero/encuestas/facilitadores-modulos") }}' class="btn gde">Finalizar</a>
     </div>
 
   </div>
