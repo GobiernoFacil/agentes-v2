@@ -287,6 +287,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminIndicators Controller */
     // Rutas de indicadores
     Route::get('dashboard/indicadores', 'AdminIndicators@index');
+    Route::get('dashboard/indicadores/fellows/descargar', 'AdminIndicators@downloadFellows');
+    Route::get('dashboard/indicadores/facilitadores/descargar', 'AdminIndicators@downloadFacilitators');
   });
 
   /* R U T A S  UNICAS DEL Fellow
