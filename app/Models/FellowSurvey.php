@@ -59,4 +59,9 @@ class FellowSurvey extends Model
       'sur_16_4',
       'sur_16_5',
     ];
+
+    function user(){
+      return $this->belongsTo("App\User");
+    }
+
 }

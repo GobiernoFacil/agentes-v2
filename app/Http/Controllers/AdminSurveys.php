@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Module;
 use App\Models\FacilitatorModule;
+use App\Models\FellowSurvey;
 class AdminSurveys extends Controller
 {
     //
+    //Paginación
+    public $pageSize = 10;
 
     /**
      * Muestra lista para ver resultado de encuestas
@@ -31,6 +34,28 @@ class AdminSurveys extends Controller
      */
     public function indexFellows()
     {
+      $user       = Auth::user();
+      $fellows    = FellowSurvey::orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('admin.surveys.survey-satisfaction-list-fellows')->with([
+        "user"      => $user,
+        "fellows"   => $fellows
+      ]);
+    }
+
+
+    /**
+     * Muestra resultados de encuestas para el facilitador y sesión
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function surveyFellow($fellow_id)
+    {
+      $user       = Auth::user();
+      $fellow     = FellowSurvey::where('id',$fellow_id)->firstOrFail();
+      return view('admin.surveys.survey-fellow')->with([
+        "user"      => $user,
+        "fellow"   => $fellow
+      ]);
     }
 
         /**

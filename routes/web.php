@@ -293,6 +293,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');
+    Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows/{fellows_id}', 'AdminSurveys@surveyFellow');
     Route::get('dashboard/encuestas/facilitadores-modulos', 'AdminSurveys@indexModules');
     Route::get('dashboard/encuestas/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminSurveys@surveyFacilitator');
   });
