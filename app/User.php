@@ -158,6 +158,10 @@ class User extends Authenticatable
       return $survey;
     }
 
+    function facilitators_survey(){
+      return $this->hasMany("App\Models\FacilitatorSurvey");
+    }
+
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);

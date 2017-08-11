@@ -7,12 +7,14 @@ use Auth;
 use Hash;
 use File;
 //Modelos
+use App\User;
 use App\Models\Module;
 use App\Models\Conversation;
 use App\Models\Log;
 use App\Models\ModuleSession;
 use App\Models\Activity;
 use App\Models\NewsEvent;
+use App\Models\FacilitatorModule;
 use App\Models\Forum;
 use App\Models\ForumConversation;
 use App\Models\ForumMessage;
@@ -59,6 +61,11 @@ class Fellows extends Controller
       $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
       //conversaciones
       $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
+      $module_survey  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->first();
+      $non_email_list = ['contacto@prosociedad.org'];
+      $non_user_sur   = User::whereIn('email',$non_email_list)->pluck('id');
+      $fac_number    = FacilitatorModule::where('module_id',$module_survey->id)->whereNotIn('user_id',$non_user_sur->toArray())->count();
+
       $today = date("Y-m-d");
       //obtener la ultima actividad
       if($user_log){
@@ -109,7 +116,8 @@ class Fellows extends Controller
         "next_activities" =>$next_activities,
         "noForum"       => $noForum,
         'retro'         => $retroFiles,
-        'noMessages'    => $noMessages
+        'noMessages'    => $noMessages,
+        'fac_number'    => $fac_number
       ]);
     }
 

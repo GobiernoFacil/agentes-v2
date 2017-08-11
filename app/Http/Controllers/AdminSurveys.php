@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Module;
 use App\Models\FacilitatorModule;
 use App\Models\FellowSurvey;
+use App\Models\FacilitatorSurvey;
 class AdminSurveys extends Controller
 {
     //
@@ -84,5 +85,11 @@ class AdminSurveys extends Controller
          */
         public function surveyFacilitator($session_id,$facilitator_id)
         {
+          $user       = Auth::user();
+          $fellow     = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
+          return view('admin.surveys.survey-faacilitator')->with([
+            "user"      => $user,
+            "fellow"   => $fellow
+          ]);
         }
 }

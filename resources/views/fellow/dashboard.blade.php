@@ -76,6 +76,7 @@
 					</div>
 				</div>
 				@endif
+				@include('fellow.survey-dash-view')
 			</div>
 		</div>
 
