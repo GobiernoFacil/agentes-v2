@@ -7,6 +7,9 @@
 <div class="col-sm-3 right">
 	<p>Calificación del módulo:
 		<span class="score_a block">{{$user->module_average($user->id,$module->id) ? $user->module_average($user->id,$module->id)->type !='sin' ? number_format($user->module_average($user->id,$module->id)->average,2) : 'No aplica'  : 'Sin calificación'}}</span>
+		@if(!$module->check_last_activity($module->id))
+		<strong>No se toma en consideración</strong>
+		@endif
 	</p>
 </div>
 <!--divider-->
