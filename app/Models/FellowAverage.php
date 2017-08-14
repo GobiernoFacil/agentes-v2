@@ -143,8 +143,15 @@ class FellowAverage extends Model
       $sessions  = ModuleSession::whereIn('id',$ids)->pluck('module_id');
       $modules   = Module::whereIn('id',$sessions->toArray())->get();*/
       $total_score = 0;
-      $modules   = Module::where('title','!=','Examen de diagnóstico')->where('start','<=',$today)->pluck('id');
-      $scores    = FellowAverage::where('type','module')->where('user_id',$fellow_id)->whereIn('module_id',$modules->toArray())->get();
+      $modules   = Module::where('title','!=','Examen de diagnóstico')->where('start','<=',$today)->orderBy('start','asc')->get();
+      $real_modules = [];
+      foreach ($modules as $module) {
+         $check = $module->check_last_activity($module->id);
+         if($check){
+           $real_modules[] = $module->id;
+         }
+      }
+      $scores    = FellowAverage::where('type','module')->where('user_id',$fellow_id)->whereIn('module_id',$real_modules)->get();
     /*  foreach($modules as $module){
         $score = FellowAverage::where('module_id',$module->id)->where('user_id',$fellow_id)->first();
         if($score){
