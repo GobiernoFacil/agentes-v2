@@ -143,7 +143,7 @@ class FellowAverage extends Model
       $sessions  = ModuleSession::whereIn('id',$ids)->pluck('module_id');
       $modules   = Module::whereIn('id',$sessions->toArray())->get();*/
       $total_score = 0;
-      $modules   = Module::where('title','!=','Examen de diagnóstico')->where('title','!=','CURSO 2 - Herramientas para la Acción')->where('start','<=',$today)->orderBy('start','asc')->get();
+      $modules   = Module::where('title','!=','Examen de diagnóstico')->where('start','<=',$today)->orderBy('start','asc')->get();
       $real_modules = [];
       foreach ($modules as $module) {
          $check = $module->check_last_activity($module->id);
