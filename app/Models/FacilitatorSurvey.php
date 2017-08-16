@@ -23,4 +23,13 @@ protected $fillable = [
     'fa_8',
     'fa_9',
   ];
+
+  function facilitator(){
+    return $this->belongsTo("App\User",'facilitator_id');
+  }
+
+  function session(){
+    return $this->belongsTo("App\Models\ModuleSession");
+  }
+
 }

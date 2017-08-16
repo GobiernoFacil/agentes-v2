@@ -85,11 +85,12 @@ class AdminSurveys extends Controller
          */
         public function surveyFacilitator($session_id,$facilitator_id)
         {
-          $user       = Auth::user();
-          $fellow     = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
-          return view('admin.surveys.survey-faacilitator')->with([
+          $user            = Auth::user();
+          $facilitatorData    = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->firstOrFail();
+
+          return view('admin.surveys.survey-facilitator')->with([
             "user"      => $user,
-            "fellow"   => $fellow
+            "facilitatorData"   => $facilitatorData
           ]);
         }
 }

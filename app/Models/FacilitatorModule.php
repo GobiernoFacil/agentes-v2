@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\FacilitatorSurvey;
 class FacilitatorModule extends Model
 {
     //
@@ -20,5 +20,12 @@ class FacilitatorModule extends Model
     function session(){
       return $this->belongsTo("App\Models\ModuleSession",'session_id');
     }
+
+    function count_answers($session_id,$facilitator_id){
+      return FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->count();
+
+    }
+
+
 
 }

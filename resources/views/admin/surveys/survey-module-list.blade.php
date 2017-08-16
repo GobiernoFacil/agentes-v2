@@ -60,10 +60,20 @@
 													@endif
 									    			</div>
 													<div class="col-sm-6">
-														<p><a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/{$facilitator->id}")}}'>{{$facilitator->user->name}}</a></p>
+														<p>
+															@if($facilitator->count_answers($session->id,$facilitator->user->id))
+																<a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/{$facilitator->user->id}")}}'>{{$facilitator->user->name}}</a>
+															@else
+																{{$facilitator->user->name}}
+															@endif
+														</p>
 									    			</div>
 													<div class="col-sm-4">
-														<a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/{$facilitator->id}")}}' class="btn xs view">Ver</a>
+														@if($facilitator->count_answers($session->id,$facilitator->user->id))
+															<a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/{$facilitator->user->id}")}}' class="btn xs view">Ver</a>
+														@else
+															Sin encuestas
+														@endif
 													</div>
 												</li>
 									 @endif
