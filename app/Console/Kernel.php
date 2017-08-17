@@ -20,7 +20,8 @@ class Kernel extends ConsoleKernel
         Commands\AddAspirants::class,
         Commands\CreateFellows::Class,
         Commands\ForumLogs::Class,
-        Commands\UpdateAverages::Class
+        Commands\UpdateAverages::Class,
+        Commands\CreateCsvFacSurvey::Class
     ];
 
     /**

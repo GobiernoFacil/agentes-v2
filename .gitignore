@@ -16,5 +16,6 @@ public/archivos/fellowsEva/*
 public/img/users/*
 public/img/newsEvent/*
 public/js/bower_components/
-csv/*
+csv/cities.csv
+csv/survey_fac_results/*
 composer.lock
