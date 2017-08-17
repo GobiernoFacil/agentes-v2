@@ -31,46 +31,60 @@
 						<span class="col-sm-9">
 						<h3>La claridad de exposición del facilitador fue</h3>
 						</span>
-            <svg width="960" height="500"></svg>
+            <svg width="960" height="500" id ="fac_1"></svg>
 					</li>
           <li class="row">
 						<span class="col-sm-9">
 						<h3>El facilitador motiva y despierta interés en los agentes de cambio a través de su exposición</h3>
+						<svg width="960" height="500" id ="fac_2"></svg>
 						</span>
 					</li>
           <li class="row">
 						<span class="col-sm-9">
 						<h3>El facilitador da retroalimentación a los estudiantes</h3>
+						<svg width="960" height="500" id ="fac_3"></svg>
 						</span>
 					</li>
           <li class="row">
             <span class="col-sm-9">
             <h3>El facilitador responde con claridad a las preguntas de los estudiantes</h3>
+						<svg width="960" height="500" id ="fac_4"></svg>
             </span>
           </li>
           <li class="row">
             <span class="col-sm-9">
             <h3>En el desarrollo de su exposición el facilitador presenta ejemplos relevantes sobre los temas tratados</h3>
+						<svg width="960" height="500" id ="fac_5"></svg>
             </span>
           </li>
           <li class="row">
             <span class="col-sm-9">
             <h3>El facilitador presentó de forma organizada los contenidos abordados</h3>
+						<svg width="960" height="500" id ="fac_6"></svg>
             </span>
           </li>
           <li class="row">
             <span class="col-sm-9">
             <h3>¿Qué fortalezas identificas en el facilitador?</h3>
+						<small>Comentarios: {{$all->count()}}</small>
+						@foreach($all as $data)
+							<p>{{$data->fa_7}}</p>
+						@endforeach
             </span>
           </li>
           <li class="row">
             <span class="col-sm-9">
             <h3>¿Qué áreas de mejora identificas en el facilitador?</h3>
+						<small>Comentarios: {{$all->count()}}</small>
+							@foreach($all as $data)
+								<p>{{$data->fa_8}}</p>
+							@endforeach
             </span>
           </li>
           <li class="row">
             <span class="col-sm-9">
             <h3>¿Propondría a este facilitador para que dirigiera otro curso de este programa de formación?</h3>
+						<svg width="960" height="500" id ="fac_9"></svg>
             </span>
           </li>
 				</ol>
@@ -82,15 +96,13 @@
 @section('js-content')
 <script src="https://d3js.org/d3.v4.js"></script>
 <script>
-var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom;
-
-var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-    y = d3.scaleLinear().rangeRound([height, 0]);
-
-var g = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var url_1 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_1.csv');?>";
+var url_2 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_2.csv');?>";
+var url_3 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_3.csv');?>";
+var url_4 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_4.csv');?>";
+var url_5 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_5.csv');?>";
+var url_6 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_6.csv');?>";
+var url_9 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_9.csv');?>";
 </script>
+<script src="{{url('js/survey/survey-facilitator.js')}}"></script>
 @endsection

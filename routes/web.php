@@ -296,6 +296,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows/{fellows_id}', 'AdminSurveys@surveyFellow');
     Route::get('dashboard/encuestas/facilitadores-modulos', 'AdminSurveys@indexModules');
     Route::get('dashboard/encuestas/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminSurveys@surveyFacilitator');
+    Route::get('dashboard/encuestas/get_csv/{file_name}', 'AdminSurveys@getCsv');
   });
 
   /* R U T A S  UNICAS DEL Fellow
