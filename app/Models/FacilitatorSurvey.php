@@ -34,6 +34,7 @@ protected $fillable = [
   }
 
   function store_answers_survey_sessions($session_id,$facilitator_id,$module_id){
+    $path = base_path();
     $index   = ['fa_1','fa_2','fa_3','fa_4','fa_5','fa_6', 'fa_9'];
     $options = ['0','1','2','3','4','5','6','7','8','9','10'];
     $headers = ["options","values"];
@@ -64,7 +65,7 @@ protected $fillable = [
               $sheet->appendRow($arr);
             }
           });
-        })->store('csv','csv/survey_fac_results');
+        })->store('csv',$path.'/csv/survey_fac_results');
       }
     }
   }
