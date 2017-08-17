@@ -64,7 +64,7 @@ protected $fillable = [
               $sheet->appendRow($arr);
             }
           });
-        })->store('xlsx','csv/survey_fac_results');
+        })->store('csv','csv/survey_fac_results');
       }
     }
   }

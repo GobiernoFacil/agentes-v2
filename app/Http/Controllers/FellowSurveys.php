@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\CreateCsvFacilitators;
 use Auth;
 use App\User;
 use App\Models\FacilitatorSurvey;
@@ -253,6 +254,7 @@ class FellowSurveys extends Controller
             }
           }
         FacilitatorSurvey::where('id',$survey->id)->update($to_save);
+        dispatch(new CreateCsvFacilitators($survey->id));
         return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
 
         }
