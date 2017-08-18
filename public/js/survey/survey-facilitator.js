@@ -16,7 +16,7 @@ var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 		var tool_tip = d3.tip()
 	       .attr("class", "d3-tip")
 	       .offset([-8, 0])
-	       .html(function(d) { return "Total: " + d.values +"</br>"+ ((d.values*100)/total) +"%" });
+	       .html(function(d) { return "Total: " + d.values +"</br>"+ ((d.values*100)/total).toFixed(2) +"%" });
 	     svg.call(tool_tip);
 			 svg2.call(tool_tip);
 			 svg3.call(tool_tip);
