@@ -43,8 +43,15 @@ protected $fillable = [
       foreach ($index as $i) {
         $values = [];
         foreach ($options as $option) {
-          $count = FacilitatorSurvey::where($i,$option)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->count();
-          $values[$option]=$count;
+          if($i != 'fa_9'){
+            $count = FacilitatorSurvey::where($i,$option)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->count();
+            $values[$option]=$count;
+          }else{
+            if($option === '0' || $option ==='1'){
+              $count = FacilitatorSurvey::where($i,$option)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->count();
+              $values[$option]=$count;
+            }
+          }
         }
         Excel::create("mo_".$module_id."_sess_".$session_id."_fac_".$facilitator_id."_".$i, function($excel)use($facilitator_id,$i,$options,$values,$headers) {
           // Set the title
@@ -54,15 +61,26 @@ protected $fillable = [
                 ->setCompany('Gobierno Fácil');
           // Call them separately
           $excel->setDescription('Resultado facilitador '.$facilitator_id);
-          $excel->sheet('Resultados', function($sheet)use($options,$values,$headers){
+          $excel->sheet('Resultados', function($sheet)use($options,$values,$headers,$i){
             $sheet->row(1, $headers);
             $sheet->row(1, function($row) {
               $row->setBackground('#000000');
               $row->setFontColor('#ffffff');
             });
             foreach ($options as $option) {
-              $arr = [$option,$values[$option]];
-              $sheet->appendRow($arr);
+              if($i != 'fa_9'){
+                $arr = [$option,$values[$option]];
+                $sheet->appendRow($arr);
+              }else{
+                if($option === '0' || $option ==='1'){
+                  if($option === '0'){
+                    $arr = ['No',$values[$option]];
+                  }else{
+                    $arr = ['Sí',$values[$option]];
+                  }
+                  $sheet->appendRow($arr);
+                }
+              }
             }
           });
         })->store('csv',$path.'/csv/survey_fac_results');
