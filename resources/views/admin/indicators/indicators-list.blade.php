@@ -27,6 +27,7 @@
 			        <td><h4><a>Percepción de facilitadores</a></h4></td>
 			        <td>Proporción de facilitadores evaluados favorablemete por parte de los agentes de cambio</td>
 			        <td>
+								<a href="{{ url('dashboard/indicadores/facilitadores-modulos') }}" class="btn xs view">Ver</a>
 			          <a href="{{ url('dashboard/indicadores/facilitadores/descargar') }}" class="btn xs view">Descargar</a>
               </td>
 			    </tr>

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Excel;
 use App\Models\Module;
-use App\Models\FacilitatorSurver;
+use App\Models\FacilitatorModule;
+use App\Models\FacilitatorSurvey;
 class AdminIndicators extends Controller
 {
     //
@@ -66,6 +67,42 @@ class AdminIndicators extends Controller
 
     }
 
+
+    /**
+     * index de modulos
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexModules()
+    {
+      $user     = Auth::user();
+      $today    = date('Y-m-d');
+      //a un solo módulo
+      $modules_ids = FacilitatorModule::pluck('module_id');
+      $modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+      return view('admin.indicators.survey-fac-module-list')->with([
+        'user'=>$user,
+        'modules' =>$modules
+      ]);
+
+    }
+
+    /**
+     * Muestra resultados de encuestas para el facilitador y sesión
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function surveyFacilitator($session_id,$facilitator_id)
+    {
+      $user            = Auth::user();
+      $facilitatorData = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->firstOrFail();
+      $all             = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
+      return view('admin.indicators.survey-facilitator')->with([
+        "user"      => $user,
+        "facilitatorData"   => $facilitatorData,
+        "all"      => $all
+      ]);
+    }
 
 
     /**
