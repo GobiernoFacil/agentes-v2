@@ -71,6 +71,7 @@
 													<div class="col-sm-4">
 														@if($facilitator->count_answers($session->id,$facilitator->user->id))
 															<a href='{{ url("dashboard/indicadores/facilitadores-modulos/{$session->id}/{$facilitator->user->id}")}}' class="btn xs view">Ver</a>
+                              <a href='{{ url("dashboard/indicadores/facilitadores/descargar/{$session->id}/{$facilitator->user->id}") }}' class="btn xs view">Descargar</a>
 														@else
 															Sin encuestas
 														@endif
