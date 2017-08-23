@@ -291,6 +291,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/indicadores/facilitadores-modulos', 'AdminIndicators@indexModules');
     Route::get('dashboard/indicadores/facilitadores/descargar/{session_id}/{facilitator_id}', 'AdminIndicators@downloadFacilitator');
     Route::get('dashboard/indicadores/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminIndicators@surveyFacilitator');
+    Route::get('dashboard/indicadores/satisfaccion', 'AdminIndicators@surveySatisfaction');
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');

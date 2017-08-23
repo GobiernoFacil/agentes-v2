@@ -8,6 +8,7 @@ use Excel;
 use App\Models\Module;
 use App\Models\FacilitatorModule;
 use App\Models\FacilitatorSurvey;
+use App\Models\FellowSurvey;
 use PDF;
 class AdminIndicators extends Controller
 {
@@ -107,6 +108,22 @@ class AdminIndicators extends Controller
       return view('admin.indicators.survey-facilitator')->with([
         "user"      => $user,
         "facilitatorData"   => $facilitatorData,
+        "all"      => $all
+      ]);
+    }
+
+
+    /**
+     * Muestra resultados de encuestas satisfaccion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function surveySatisfaction()
+    {
+      $user            = Auth::user();
+      $all             = FellowSurvey::orderBy('created_at','desc')->get();
+      return view('admin.indicators.survey-satisfaction')->with([
+        "user"      => $user,
         "all"      => $all
       ]);
     }
