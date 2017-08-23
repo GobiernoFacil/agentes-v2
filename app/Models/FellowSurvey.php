@@ -111,21 +111,21 @@ class FellowSurvey extends Model
                       'sur_16_5',
                     ];
           $options = ['0','1','2','3','4','5','6','7','8','9','10'];
-          $options_2 = ['1','2','3'];
-          $options_3 = ['0','1'];
           $headers = ["options","values"];
           foreach ($index as $i) {
             $values = [];
             foreach ($options as $option) {
-              if($i != 'sur_6_1' || $i != 'sur_6_2'|| $i != 'sur_6_3'|| $i != 'sur_7_1' || $i != 'sur_7_2' || $i != 'sur_7_3' || $i != 'sur_8'){
+              if($i !== 'sur_6_1' && $i !== 'sur_6_2' && $i !== 'sur_6_3' && $i !== 'sur_7_1' && $i !== 'sur_7_2' && $i !== 'sur_7_3' && $i !== 'sur_8'){
                 $count = FellowSurvey::where($i,$option)->count();
                 $values[$option]=$count;
               }elseif($i === 'sur_6_1' || $i === 'sur_6_2'|| $i === 'sur_6_3'|| $i === 'sur_7_1' || $i === 'sur_7_2' || $i === 'sur_7_3') {
+
                 if($option === '1' || $option ==='2' || $option ==='3' ){
                   $count = FellowSurvey::where($i,$option)->count();
                   $values[$option]=$count;
                 }
               }else{
+
                          if($option === '0' || $option ==='1'){
                             $count = FellowSurvey::where($i,$option)->count();
                             $values[$option]=$count;
@@ -148,15 +148,21 @@ class FellowSurvey extends Model
                 });
                 foreach ($options as $option) {
 
-                    if($i != 'sur_6_1' || $i != 'sur_6_2'|| $i != 'sur_6_3'|| $i != 'sur_7_1' || $i != 'sur_7_2' || $i != 'sur_7_3' || $i != 'sur_8'){
+                    if($i !== 'sur_6_1' && $i !== 'sur_6_2'&& $i !== 'sur_6_3'&& $i !== 'sur_7_1' && $i !== 'sur_7_2' && $i !== 'sur_7_3' && $i !== 'sur_8'){
                        $arr = [$option,$values[$option]];
                        $sheet->appendRow($arr);
                     }elseif($i === 'sur_6_1' || $i === 'sur_6_2'|| $i === 'sur_6_3'|| $i === 'sur_7_1' || $i === 'sur_7_2' || $i === 'sur_7_3') {
                       if($option === '1' || $option ==='2' || $option ==='3' ){
-                         $arr = [$option,$values[$option]];
+                         if($option === '1'){
+                                      $arr = ['Mayor uso',$values[$option]];
+                         }elseif($option==='2'){
+                                      $arr = ['Medio',$values[$option]];
+                         }else{
+                                      $arr = ['Menor uso',$values[$option]];
+                         }
                          $sheet->appendRow($arr);
                       }
-                    }else{
+                    }elseif($i === 'sur_8'){
                                if($option === '0' || $option ==='1'){
                                   if($option === '0'){
                                       $arr = ['No',$values[$option]];

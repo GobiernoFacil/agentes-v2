@@ -103,4 +103,13 @@ class AdminSurveys extends Controller
           $path = base_path().'/csv/survey_fac_results/'.$file_name;
           return response()->file($path);
         }
+
+        /* Obtiene el csv de los resultados de encuesta satisfaccion
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function get_csv($file_name){
+          $path = base_path().'/csv/survey_fellow_results/'.$file_name;
+          return response()->file($path);
+        }
 }

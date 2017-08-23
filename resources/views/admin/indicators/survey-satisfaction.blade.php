@@ -216,3 +216,162 @@
 	</div>
 </div>
 @endsection
+
+@section('js-content')
+<style>
+
+.bar {
+  fill: #187fad;;
+}
+
+.bar:hover {
+  fill: #0a3345;
+}
+
+.d3-tip {
+      line-height: 1;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips specifically */
+    .d3-tip.n:after {
+      margin: -2px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+
+
+
+</style>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="{{url('js/survey/d3-tip.js')}}"></script>
+<script>
+var total = {{$all->count()}};
+<?php 
+ $index = [
+                      'sur_1',
+                      'sur_2',
+                      'sur_3_1',
+                      'sur_3_2',
+                      'sur_3_3',
+                      'sur_3_4',
+                      'sur_3_5',
+                      'sur_4',
+                      'sur_5_1',
+                      'sur_5_2',
+                      'sur_5_3',
+                      'sur_5_4',
+                      'sur_6_1',
+                      'sur_6_2',
+                      'sur_6_3',
+                      'sur_7_1',
+                      'sur_7_2',
+                      'sur_7_3',
+                      'sur_8',
+                      'sur_9',
+                      'sur_10',
+                      'sur_11',
+                      'sur_13_1',
+                      'sur_13_2',
+                      'sur_13_3',
+                      'sur_13_4',
+                      'sur_14_1',
+                      'sur_14_2',
+                      'sur_14_3',
+                      'sur_14_4',
+                      'sur_15_1',
+                      'sur_15_2',
+                      'sur_15_3',
+                      'sur_15_4',
+                      'sur_16_1',
+                      'sur_16_2',
+                      'sur_16_3',
+                      'sur_16_4'
+                    ];
+ foreach($index as $i){
+ 	?>
+ 	var url_{{$i}} = "<?php echo url('dashboard/encuestas/get_csv/fellow/su_'.$i.'.csv');?>";
+ 	var svg_{{$i}} = d3.select("#{{$i}}"),
+    margin = {top: 50, right: 40, bottom: 30, left: 40},
+    width = +svg_{{$i}}.attr("width") - margin.left - margin.right,
+    height = +svg_{{$i}}.attr("height") - margin.top - margin.bottom,
+		aspect = width / height;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+		var tool_tip = d3.tip()
+	       .attr("class", "d3-tip")
+	       .offset([-8, 0])
+	       .html(function(d) { return "Total: " + d.values +"</br>"+ ((d.values*100)/total).toFixed(2) +"%" });
+	     svg_{{$i}}.call(tool_tip);
+
+var g = svg_{{$i}}.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		d3.select(window)
+			  .on("resize", function() {
+			    var targetWidth = svg.node().getBoundingClientRect().width;
+			    svg.attr("width", targetWidth);
+			    svg.attr("height", targetWidth / aspect);
+			  });
+		d3.csv(url_{{$i}}, function(error, data) {
+		  if (error) throw error;
+
+		  // format the data
+		  data.forEach(function(d) {
+		    d.values = +d.values;
+		  });
+
+		  // Scale the range of the data in the domains
+		  x.domain(data.map(function(d) { return d.options; }));
+		  y.domain([0, d3.max(data, function(d) { return d.values; })]);
+
+		  // append the rectangles for the bar chart
+		  svg_{{$i}}.selectAll(".bar")
+		      .data(data)
+		    .enter().append("rect")
+		      .attr("class", "bar")
+		      .attr("x", function(d) { return x(d.options); })
+		      .attr("width", x.bandwidth())
+		      .attr("y", function(d) { return y(d.values); })
+		      .attr("height", function(d) { return height - y(d.values); })
+					.on('mouseover', tool_tip.show)
+      	  .on('mouseout', tool_tip.hide);
+
+		  // add the x Axis
+		  svg_{{$i}}.append("g")
+		      .attr("transform", "translate(0," + height + ")")
+		      .call(d3.axisBottom(x));
+
+		  // add the y Axis
+		  svg_{{$i}}.append("g")
+		      .call(d3.axisLeft(y));
+
+		});
+<?php
+
+ }
+?>
+
+</script>
+<script src="{{url('js/survey/survey-fellow.js')}}"></script>
+@endsection
