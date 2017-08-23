@@ -21,7 +21,8 @@ class Kernel extends ConsoleKernel
         Commands\CreateFellows::Class,
         Commands\ForumLogs::Class,
         Commands\UpdateAverages::Class,
-        Commands\CreateCsvFacSurvey::Class
+        Commands\CreateCsvFacSurvey::Class,
+        Commands\CreateCsvFellowsSurvey::Class
     ];
 
     /**
