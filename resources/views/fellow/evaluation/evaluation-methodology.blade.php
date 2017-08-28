@@ -94,7 +94,7 @@
 				</tr>
 				<tr>
 					<td><h3>Trabajos</h3>																												</td>
-					<td><p>Se refiere a los trabajos que cada fellow carga dentro de la plataforma. Pueden ser trabajos individuales o por equipo.</p> </td>
+					<td><p>Se refiere a los trabajos que cada fellow carga dentro de la plataforma. Pueden ser trabajos individuales o por equipo<a href="#note1"><sup>1</sup></a>.</p> </td>
 					<td><h4>40%	</h4>																													</td>
 				</tr>
 				<tr>
@@ -108,7 +108,15 @@
 				</tr>
 			</tbody>
 		</table>
-		 
+		<div class="divider"></div>
+    </div>
+    <a id="note1"></a>
+    <div class="col-sm-10 col-sm-offset-1">
+	    <div class="notes">
+		 <p><sup>1</sup> 
+			 Cuando exista un retraso en la entrega de trabajos, desde el primer día se calificará sobre 8. Si el retraso es mayor a una semana (más de 7 días), se reconsiderará el caso.
+		 </p>
+		</div>
     </div>
   </div>
 </div>
