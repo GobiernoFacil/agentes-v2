@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,49 +7,6 @@
     <title></title>
     <link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
   	<link rel="stylesheet" href="{{url('css/admin_styles.css')}}">
-    <style>
-
-    .bar {
-      fill: #187fad;;
-    }
-
-    .bar:hover {
-      fill: #0a3345;
-    }
-
-    .d3-tip {
-          line-height: 1;
-          padding: 6px;
-          background: rgba(0, 0, 0, 0.8);
-          color: #fff;
-          border-radius: 4px;
-          font-size: 12px;
-        }
-
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip:after {
-          box-sizing: border-box;
-          display: inline;
-          font-size: 10px;
-          width: 100%;
-          line-height: 1;
-          color: rgba(0, 0, 0, 0.8);
-          content: "\25BC";
-          position: absolute;
-          text-align: center;
-        }
-
-        /* Style northward tooltips specifically */
-        .d3-tip.n:after {
-          margin: -2px 0 0 0;
-          top: 100%;
-          left: 0;
-        }
-
-
-
-
-    </style>
   </head>
   <body>
     <div class="row">
@@ -148,18 +106,5 @@
     		</div>
     	</div>
     </div>
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="{{url('js/survey/d3-tip.js')}}"></script>
-    <script>
-    var url_1 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_1.csv');?>";
-    var url_2 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_2.csv');?>";
-    var url_3 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_3.csv');?>";
-    var url_4 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_4.csv');?>";
-    var url_5 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_5.csv');?>";
-    var url_6 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_6.csv');?>";
-    var url_9 = "<?php echo url('dashboard/encuestas/get_csv/mo_'.$facilitatorData->session->module->id.'_sess_'.$facilitatorData->session->id.'_fac_'.$facilitatorData->facilitator->id.'_fa_9.csv');?>";
-    var total = {{$all->count()}};
-    </script>
-    <script src="{{url('js/survey/survey-facilitator.js')}}"></script>
   </body>
 </html>

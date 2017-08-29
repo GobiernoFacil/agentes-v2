@@ -61,6 +61,7 @@ class Fellows extends Controller
       $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
       //conversaciones
       $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
+      //encuestas
       $module_survey  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->first();
       $non_email_list = ['contacto@prosociedad.org'];
       $non_user_sur   = User::whereIn('email',$non_email_list)->pluck('id');

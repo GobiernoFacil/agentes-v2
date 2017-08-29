@@ -19,4 +19,5 @@ public/js/bower_components/
 csv/cities.csv
 csv/survey_fac_results/*
 csv/survey_fellow_results/*
+csv/survey_images_fellow/*
 composer.lock
