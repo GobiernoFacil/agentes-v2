@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\FacilitatorModule;
 use App\Models\FacilitatorSurvey;
 use App\Models\FellowSurvey;
+use App\Models\ModuleSession;
 use PDF;
 class AdminIndicators extends Controller
 {
@@ -36,41 +37,11 @@ class AdminIndicators extends Controller
      */
     public function downloadFacilitator($session_id,$facilitator_id)
     {
-      /*  $module  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->first();
-        Excel::create('indicadores_facilitadores', function($excel) use($module){
-          // Set the title
-          $excel->setTitle('Indicadores de percepción positiva de facilitadores');
-          // Chain the setters
-          $excel->setCreator('Gobierno Fácil')
-                ->setCompany('Gobierno Fácil');
-          // Call them separately
-          $excel->setDescription('Proporción de facilitadores evaluados favorablemete por parte de los agentes de cambio');
-          $excel->sheet('Curso 1', function($sheet)use($module){
-            $sheet->row(1, [$module->title,'','']);
-            $sheet->row(1, function($row) {
-              $row->setBackground('#000000');
-              $row->setFontColor('#ffffff');
-            });
-            $sheet->row(2, ['Sesión','Facilitador','Percepción positiva']);
-            $sheet->row(2, function($row) {
-              $row->setBackground('#000000');
-              $row->setFontColor('#ffffff');
-            });
-            foreach ($module->sessions as $session) {
-              foreach($session->facilitators as $facilitator){
-               if($facilitator->user->email != 'contacto@prosociedad.org') {
-                  $sheet->appendRow([$session->name,$facilitator->user->name]);
-                }
-              }
-            }
-          });
-
-      })->download('xlsx');*/
-
       $user            = Auth::user();
       $facilitatorData = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->firstOrFail();
       $all             = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
-      $pdf = PDF::loadView('admin.indicators.pdf.fac-survey-template', compact(['user','facilitatorData','all']));
+      $session         = ModuleSession::where('id',$session_id)->firstOrFail();
+      $pdf = PDF::loadView('admin.indicators.pdf.fac-survey-template', compact(['user','facilitatorData','all','session']))->setPaper('a4', 'landscape');
       $name  = 'modulo_curso_1_'.$facilitatorData->facilitator->name.'.pdf';
       return $pdf->download($name);
     }

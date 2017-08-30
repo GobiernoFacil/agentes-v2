@@ -20,4 +20,5 @@ csv/cities.csv
 csv/survey_fac_results/*
 csv/survey_fellow_results/*
 csv/survey_images_fellow/*
+csv/survey_images_facilitator/*
 composer.lock
