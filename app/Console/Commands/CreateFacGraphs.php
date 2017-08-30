@@ -107,7 +107,10 @@ class CreateFacGraphs extends Command
 
                             $b1plot->SetColor("white");
                             $b1plot->SetFillColor("#187fad");
-
+                            $b1plot->value->Show();
+                            $b1plot->value->SetColor("black","darkred");
+                            $b1plot->value->HideZero();
+                            $b1plot->value->SetFormat('%01.1f');
                             $graph->Stroke($image_path);
 
 

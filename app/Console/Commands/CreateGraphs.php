@@ -128,6 +128,8 @@ class CreateGraphs extends Command
                   $b1plot->SetColor("white");
                   $b1plot->SetFillColor("#187fad");
 
+                  $b1plot->value->Show();
+                  $b1plot->value->SetColor("black","darkred");
                   $graph->Stroke($image_path);
 
 
@@ -136,4 +138,5 @@ class CreateGraphs extends Command
             }
           }
     }
+
 }

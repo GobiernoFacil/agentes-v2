@@ -4,11 +4,15 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style>
+    .page_break { page-break-before: always; }
+    </style>
   </head>
-  <body>
-    <main class="main-content">
+  <body class ="">
+    <section>
       <!--content-->
   		<div class="container">
+        <div class="box">
         <div class="row">
         	<div class="col-sm-12">
         		<h1>Resultados de encuesta de <strong>{{$facilitatorData->facilitator->name}}</strong></h1>
@@ -20,7 +24,7 @@
             <span>
           		@if($facilitatorData->facilitator->image)
               <?php $image_path = public_path()."/img/users/".$facilitatorData->facilitator->image->name;?>
-          		<img src='{{$image_path}}'>
+          		<img src='{{$image_path}}' height="60px">
           		@else
           		<img src='{{public_path()."/img/users/default.png"}}' height="40px">
           		@endif
@@ -30,6 +34,7 @@
         		<p>{{$facilitatorData->facilitator->facilitatorData->institution}}</p>
         	</div>
         </div>
+        <div class="page_break"></div>
         <div class="box">
         	<div class="row">
         		<div class="col-sm-12">
@@ -79,6 +84,7 @@
                     <img src='{{base_path()."/csv/survey_images_facilitator/mo_{$session->module->id}_sess_{$session->id}_fac_{$facilitatorData->facilitator->id}_fa_6.jpg"}}' width="1000">
                   </span>
                 </li>
+                <div class="page_break"></div>
                 <li class="row">
                   <span class="col-sm-9">
                   <h3>¿Qué fortalezas identificas en el facilitador?</h3>
@@ -90,6 +96,7 @@
                   @endforeach
                   </span>
                 </li>
+                <div class="page_break"></div>
                 <li class="row">
                   <span class="col-sm-9">
                   <h3>¿Qué áreas de mejora identificas en el facilitador?</h3>
@@ -111,9 +118,10 @@
               </ol>
         				<div class="divider"></div>
         		</div>
+          </div>
         	</div>
         </div>
       </div>
-  </main>
+  </section>
   </body>
 </html>
