@@ -108,6 +108,8 @@ class AdminIndicators extends Controller
     public function downloadFellows()
     {
 
+      $path  = base_path().'/csv/reports/encuesta_satisfaccion.pdf';
+      return response()->download($path);
     }
 
 

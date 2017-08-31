@@ -36,7 +36,7 @@
             <td>Porcentaje de agentes de cambio que tienen una percepción positiva de la plataforma web</td>
             <td>
               <a href="{{ url('dashboard/indicadores/satisfaccion') }}" class="btn xs view">Ver</a>
-             <!-- <a href="{{ url('dashboard/indicadores/fellows/descargar') }}" class="btn xs view">Descargar</a>-->
+             <a href="{{ url('dashboard/indicadores/fellows/descargar') }}" class="btn xs view">Descargar</a>
             </td>
         </tr>
 			  </tbody>

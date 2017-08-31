@@ -9,6 +9,7 @@ use Amenadiel\JpGraph\Plot;
 use Amenadiel\JpGraph\Themes;
 use Excel;
 use File;
+use App\Jobs\CreatePDFSurveyReport;
 class CreateGraphs extends Command
 {
     /**
@@ -42,7 +43,7 @@ class CreateGraphs extends Command
      */
     public function handle()
     {
-        //paths
+       //paths
         $path_fellow      = base_path().'/csv/survey_fellow_results';
         $index_fellows = [
                       'sur_1',
@@ -102,7 +103,7 @@ class CreateGraphs extends Command
                     $values[] = $result->values;
                 }
                   // Create the graph. These two calls are always required
-                  $graph = new Graph\Graph(1000,500,'auto');
+                  $graph = new Graph\Graph(800,300,'auto');
                   $graph->SetScale("textlin");
 
                   $theme_class=new Themes\UniversalTheme;
@@ -130,6 +131,8 @@ class CreateGraphs extends Command
 
                   $b1plot->value->Show();
                   $b1plot->value->SetColor("black","darkred");
+                  $b1plot->value->HideZero();
+                  $b1plot->value->SetFormat('%01.1f');
                   $graph->Stroke($image_path);
 
 
@@ -137,6 +140,7 @@ class CreateGraphs extends Command
               })->first();
             }
           }
+          dispatch(new CreatePDFSurveyReport());
     }
 
 }

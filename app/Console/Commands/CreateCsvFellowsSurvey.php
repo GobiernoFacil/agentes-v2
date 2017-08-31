@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 
 use App\Models\FellowSurvey;
-
+use App\Jobs\CreateCsvFacilitators;
 
 class CreateCsvFellowsSurvey extends Command
 {
@@ -47,7 +47,7 @@ class CreateCsvFellowsSurvey extends Command
             $surveys->store_answers_survey($surveys);
            $this->info("All done");
           }
-          
-        
+
+
     }
 }
