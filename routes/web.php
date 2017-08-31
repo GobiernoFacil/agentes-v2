@@ -389,6 +389,10 @@ Route::group(['middleware' => ['auth']], function () {
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
     Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
+    /*@FellowDiagnostic*/
+    //// diagnostico
+    Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
+    Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
   });
 
   /* R U T A S  UNICAS DEL Facilitador

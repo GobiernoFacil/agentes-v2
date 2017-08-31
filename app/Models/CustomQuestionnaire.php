@@ -17,6 +17,6 @@ class CustomQuestionnaire extends Model
 
     //modelos relacionados
     function questions(){
-      return $this->hasMany("App\Models\CustomQuestion");
+      return $this->hasMany("App\Models\CustomQuestion",'questionnaire_id');
     }
 }
