@@ -11,7 +11,10 @@ use Excel;
 use File;
 use App\Models\FacilitatorModule;
 use App\Models\Module;
+use App\Models\ModuleSession;
+use App\Models\FacilitatorSurvey;
 use App\User;
+use PDF;
 class CreateFacGraphs extends Command
 {
     /**
@@ -121,6 +124,16 @@ class CreateFacGraphs extends Command
                         ');
                       }
                     }
+
+                  $facilitatorData = FacilitatorSurvey::where('session_id',$facilitator->session->id)->where('facilitator_id',$facilitator->user->id)->first();
+                  if($facilitatorData ){
+                    $all             = FacilitatorSurvey::where('session_id',$facilitator->session->id)->where('facilitator_id',$facilitator->user->id)->get();
+                    $session         = ModuleSession::where('id',$facilitator->session->id)->first();
+                    $name            = 'modulo_curso_1_'.$facilitatorData->facilitator->id.'.pdf';
+                    $path            = base_path().'/csv/reports/'.$name;
+                    $pdf = PDF::loadView('admin.indicators.pdf.fac-survey-template', compact(['user','facilitatorData','all','session']))->setPaper('a4', 'landscape')->save($path);
+                  }
+
       }
     }
     }

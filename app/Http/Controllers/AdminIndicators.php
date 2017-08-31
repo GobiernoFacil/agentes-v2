@@ -39,11 +39,8 @@ class AdminIndicators extends Controller
     {
       $user            = Auth::user();
       $facilitatorData = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->firstOrFail();
-      $all             = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
-      $session         = ModuleSession::where('id',$session_id)->firstOrFail();
-      $pdf = PDF::loadView('admin.indicators.pdf.fac-survey-template', compact(['user','facilitatorData','all','session']))->setPaper('a4', 'landscape');
-      $name  = 'modulo_curso_1_'.$facilitatorData->facilitator->name.'.pdf';
-      return $pdf->download($name);
+      $path  = base_path().'/csv/reports/modulo_curso_1_'.$facilitatorData->facilitator->id.'.pdf';
+      return response()->download($path);
     }
 
 
