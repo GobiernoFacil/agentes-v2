@@ -9,6 +9,12 @@
 		<h1>Tablero de control</h1>
 	</div>
 
+	@if(Session::has('message'))
+		<div class="col-sm-12 message success">
+				{{ Session::get('message') }}
+		</div>
+	@endif
+
 	<div class="col-sm-3">
 		<div class="box">
 			<ul class="list_dash">

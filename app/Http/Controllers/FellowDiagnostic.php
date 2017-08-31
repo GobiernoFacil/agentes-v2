@@ -21,7 +21,7 @@ class FellowDiagnostic extends Controller
         //
         $user            = Auth::user();
         $questionnaire   = CustomQuestionnaire::where('slug',$slug)->firstOrFail();
-        $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id')->first();
+        $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
         if($answers){
           return redirect('tablero');
         }

@@ -26,6 +26,8 @@ use App\Models\Image;
 use App\Models\RetroLog;
 use App\Models\ConversationLog;
 use App\Models\QuizInfo;
+use App\Models\CustomFellowAnswer;
+use App\Models\CustomQuestionnaire;
 use Carbon\Carbon;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
@@ -100,7 +102,9 @@ class Fellows extends Controller
       //Lista de mensajes sin contestar
       $con  = new Conversation();
       $noMessages = $con->get_no_messages($user->id);
-
+      //diagnostico
+      $questionnaire   = CustomQuestionnaire::where('slug','transversalizacion-de-la-perspectiva-de-genero')->first();
+      $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
@@ -118,7 +122,9 @@ class Fellows extends Controller
         "noForum"       => $noForum,
         'retro'         => $retroFiles,
         'noMessages'    => $noMessages,
-        'fac_number'    => $fac_number
+        'fac_number'    => $fac_number,
+        'custom_test'   => $answers,
+        'questionnaire' => $questionnaire
       ]);
     }
 
