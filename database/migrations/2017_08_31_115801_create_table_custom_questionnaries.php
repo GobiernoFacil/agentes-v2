@@ -19,7 +19,7 @@ class CreateTableCustomQuestionnaries extends Migration
             $table->integer('user_id')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->text('slug')->unique()->nullable();
+            $table->text('slug')->nullable();
             $table->timestamps();
         });
     }
