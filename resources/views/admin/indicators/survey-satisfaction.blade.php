@@ -20,16 +20,26 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 					</span>
 					<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_1"></svg>
+					<span class="col-sm-9">
+						<strong>Promedio: <span id ="sur_1_av"></span></strong>
+					</span>
+					<span class="col-sm-9">
 					<h2>Comentarios</h2>
 						<small>Total: {{$all->count()}}</small>
 						@foreach($all as $data)
 							<p>{{$data->sur_j1}}</p>
 						@endforeach
+					</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>¿En qué grado consideras que el diseño de la plataforma (accesibilidad, navegación en secciones, etc.) es adecuado para su uso?</h3>
 						<svg width="1000" height="500"style ="padding-left:40px; padding-top:20px"  id ="sur_2"></svg>
+					</span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_2_av"></span></strong>
+						</span>
+						<span class ="col-sm-9">
 						<h2>Comentarios</h2>
 						<small>Total: {{$all->count()}}</small>
 						@foreach($all as $data)
@@ -41,17 +51,32 @@
 					<span class="col-sm-9">
 						<h3>¿En qué grado consideras que la estructura organizativa de las siguientes secciones es adecuada?</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Login de la Plataforma</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_1"></svg>
-						<span>Módulos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_2"></svg>
-						<span>Cursos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_3"></svg>
-						<span>Sesiones</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_4"></svg>
-						<span>Evaluaciones</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_5"></svg>
 					</span>
+						<span class="col-sm-9">Login de la Plataforma</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_3_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Módulos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_3_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Cursos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_3_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Sesiones</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_3_4_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Evaluaciones</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_3_5"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_3_5_av"></span></strong>
+						</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
@@ -59,44 +84,67 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px"  id ="sur_4"></svg>
 					</span>
+					<span class="col-sm-9">
+						<strong>Promedio: <span id ="sur_4_av"></span></strong>
+					</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Con respecto a los contenidos multimedia (vídeos y webinars), ¿cómo calificas su calidad en cuanto a los siguientes aspectos? </h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Imagen</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_1"></svg>
-						<span>Audio</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_2"></svg>
-						<span>Duración</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_3"></svg>
-						<span>Pertinencia del contenido</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_4"></svg>
+
 					</span>
+						<span class="col-sm-9">Imagen</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_5_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Audio</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_5_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Duración</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_5_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Pertinencia del contenido</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_5_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_5_4_av"></span></strong>
+						</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Señala el orden en el que has usado con mayor o menor frecuencia los siguientes recursos</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Lecturas</span>
+						</span>
+						<span class="col-sm-9">Lecturas</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_6_1"></svg>
-						<span>Videos</span>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_6_1_av"></span></strong>
+						<span class="col-sm-9">Videos</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_6_2"></svg>
-						<span>Foros</span>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_6_2_av"></span></strong>
+						<span class="col-sm-9">Foros</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_6_3"></svg>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_6_3_av"></span></strong>
 					</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Señala el orden en el que has interactuado con mayor o menor frecuencia con los siguientes usuarios en la plataforma</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Imagen</span>
+						</span>
+						<span class="col-sm-9">Imagen</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_7_1"></svg>
-						<span>Audio</span>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_7_1_av"></span></strong>
+						<span class="col-sm-9">Audio</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_7_2"></svg>
-						<span>Duración</span>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_7_2_av"></span></strong>
+						<span class="col-sm-9">Duración</span>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_7_3"></svg>
-					</span>
+						<strong style =" visibility: hidden;">Promedio: <span id ="sur_7_3_av"></span></strong>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
@@ -104,6 +152,7 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 					</span>
 					<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_8"></svg>
+					<strong style =" visibility: hidden;">Promedio: <span id ="sur_8_av"></span></strong>
 					<h2>Comentarios</h2>
 						<small>Total: {{$all->count()}}</small>
 						@foreach($all as $data)
@@ -116,11 +165,16 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 					</span>
 					<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_9"></svg>
+					<span class="col-sm-9">
+						<strong>Promedio: <span id ="sur_9_av"></span></strong>
+					</span>
+					<span class="col-sm-10">
 					<h2>Comentarios</h2>
 						<small>Total: {{$all->count()}}</small>
 						@foreach($all as $data)
 							<p>{{$data->sur_j9}}</p>
 						@endforeach
+					</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
@@ -128,17 +182,25 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 					</span>
 					<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_10"></svg>
+					<span class="col-sm-9">
+						<strong>Promedio: <span id ="sur_10_av"></span></strong>
+					</span>
+					<span class="col-sm-10">
 					<h2>Comentarios</h2>
 						<small>Total: {{$all->count()}}</small>
 						@foreach($all as $data)
 							<p>{{$data->sur_j10}}</p>
 						@endforeach
+					</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>¿Qué tan satisfecho te sientes con la experiencia de uso de la Plataforma?</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px"  id ="sur_11"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_11_av"></span></strong>
+						</span>
 					</span>
 				</li>
 				<li class="row">
@@ -159,57 +221,109 @@
 					<span class="col-sm-9">
 						<h3>Sesión “Los ejes del Gobierno Abierto, la gobernanza y la atención de la corrupción”</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Lecturas</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_1"></svg>
-						<span>Cápsulas de expertos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_2"></svg>
-						<span>Facilitador</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_3"></svg>
-						<span>Contenido en general</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_4"></svg>
+
 					</span>
+						<span class="col-sm-9">Lecturas</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_13_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Cápsulas de expertos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_13_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Facilitador</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_13_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9"> Contenido en general</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_13_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_13_4_av"></span></strong>
+						</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Sesión “Panorama internacional y el papel de los ODS en el Gobierno Abierto”</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Lecturas</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_1"></svg>
-						<span>Cápsulas de expertos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_2"></svg>
-						<span>Facilitador</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_3"></svg>
-						<span>Contenido en general</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_4"></svg>
+
 					</span>
+						<span class="col-sm-9">Lecturas</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_14_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Cápsulas de expertos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_14_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Facilitador</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_14_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Contenido en general</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_14_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_14_4_av"></span></strong>
+						</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Sesión “ODS en la Agenda Nacional de Gobierno Abierto”</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Lecturas</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_1"></svg>
-						<span>Cápsulas de expertos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_2"></svg>
-						<span>Facilitador</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_3"></svg>
-						<span>Contenido en general</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_4"></svg>
+
 					</span>
+						<span class="col-sm-9">Lecturas</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_15_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Cápsulas de expertos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_15_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Facilitador</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_15_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Contenido en general</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_15_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_15_4_av"></span></strong>
+						</span>
 				</li>
 				<li class="row">
 					<span class="col-sm-9">
 						<h3>Sesión “Debates principales en Gobierno Abierto y Objetivo 16 "Paz Justicia e Instituciones Fuertes”</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
-						<span>Lecturas</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_1"></svg>
-						<span>Cápsulas de expertos</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_2"></svg>
-						<span>Facilitador</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_3"></svg>
-						<span>Contenido en general</span>
-						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_4"></svg>
+
 					</span>
+						<span class="col-sm-9">Lecturas</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_16_1_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Cápsulas de expertos</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_16_2_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Facilitador</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_16_3_av"></span></strong>
+						</span>
+						<span class="col-sm-9">Contenido en general</span>
+						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="sur_16_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="sur_16_4_av"></span></strong>
+						</span>
 				</li>
 		    </ol>
 		</div>
@@ -265,7 +379,7 @@
 <script src="{{url('js/survey/d3-tip.js')}}"></script>
 <script>
 var total = {{$all->count()}};
-<?php 
+<?php
  $index = [
                       'sur_1',
                       'sur_2',
@@ -341,6 +455,13 @@ var g = svg_{{$i}}.append("g")
 		    d.values = +d.values;
 		  });
 
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
 		  y.domain([0, d3.max(data, function(d) { return d.values; })]);
@@ -365,7 +486,8 @@ var g = svg_{{$i}}.append("g")
 		  // add the y Axis
 		  svg_{{$i}}.append("g")
 		      .call(d3.axisLeft(y));
-
+					var name  = "<?php echo $i.'_av';?>";
+					document.getElementById(name).textContent=(average/total).toFixed(2);
 		});
 <?php
 
