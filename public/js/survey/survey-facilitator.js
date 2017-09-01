@@ -42,6 +42,15 @@ var g = svg.append("g")
 		    d.values = +d.values;
 		  });
 
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+			document.getElementById("fac_1_av").textContent=(average/total).toFixed(2);
+
+
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
 		  y.domain([0, d3.max(data, function(d) { return d.values; })]);
@@ -77,6 +86,13 @@ var g = svg.append("g")
 		  data.forEach(function(d) {
 		    d.values = +d.values;
 		  });
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+			document.getElementById("fac_2_av").textContent=(average/total).toFixed(2);
 
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
@@ -116,6 +132,13 @@ var g = svg.append("g")
 		  data.forEach(function(d) {
 		    d.values = +d.values;
 		  });
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+				average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+			});
+			document.getElementById("fac_3_av").textContent=(average/total).toFixed(2);
 
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
@@ -154,6 +177,14 @@ var g = svg.append("g")
 		  data.forEach(function(d) {
 		    d.values = +d.values;
 		  });
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+			document.getElementById("fac_4_av").textContent=(average/total).toFixed(2);
+
 
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
@@ -193,6 +224,14 @@ var g = svg.append("g")
 			data.forEach(function(d) {
 				d.values = +d.values;
 			});
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+			document.getElementById("fac_5_av").textContent=(average/total).toFixed(2);
+
 
 			// Scale the range of the data in the domains
 			x.domain(data.map(function(d) { return d.options; }));
@@ -230,6 +269,14 @@ var g = svg.append("g")
 			data.forEach(function(d) {
 				d.values = +d.values;
 			});
+			var average = 0;
+			var total   = 0;
+			data.forEach(function(all) {
+		    average = (all.values*parseInt(all.options)) + average;
+				total   = total + all.values;
+		  });
+			document.getElementById("fac_6_av").textContent=(average/total).toFixed(2);
+
 
 			// Scale the range of the data in the domains
 			x.domain(data.map(function(d) { return d.options; }));

@@ -33,12 +33,18 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						</span>
             <svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_1_av"></span></strong>
+						</span>
 					</li>
           <li class="row">
 						<span class="col-sm-9">
 						<h3>El facilitador motiva y despierta interés en los agentes de cambio a través de su exposición</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500"style ="padding-left:40px; padding-top:20px"  id ="fac_2"></svg>
+						</span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_2_av"></span></strong>
 						</span>
 					</li>
           <li class="row">
@@ -47,6 +53,9 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_3"></svg>
 						</span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_3_av"></span></strong>
+						</span>
 					</li>
           <li class="row">
             <span class="col-sm-9">
@@ -54,6 +63,9 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px"  id ="fac_4"></svg>
             </span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_4_av"></span></strong>
+						</span>
           </li>
           <li class="row">
             <span class="col-sm-9">
@@ -61,6 +73,9 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_5"></svg>
             </span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_5_av"></span></strong>
+						</span>
           </li>
           <li class="row">
             <span class="col-sm-9">
@@ -70,6 +85,9 @@
 						<span class="col-sm-12">
 							<svg width="1000" height="500"  style ="padding-left:40px; padding-top:20px"id ="fac_6"></svg>
 					  </span>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_6_av"></span></strong>
+						</span>
           </li>
           <li class="row">
             <span class="col-sm-9">
