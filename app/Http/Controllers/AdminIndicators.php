@@ -104,10 +104,6 @@ class AdminIndicators extends Controller
      */
     public function downloadFellows()
     {
-      $all             = FellowSurvey::orderBy('created_at','desc')->get();
-      $name            = 'encuesta_satisfaccion.pdf';
-      $path            = base_path().'/csv/reports/'.$name;
-      $pdf             = PDF::loadView('admin.indicators.pdf.fellow-survey-template', compact(['all']))->setPaper('a4', 'landscape')->save($path);
 
       $path  = base_path().'/csv/reports/encuesta_satisfaccion.pdf';
       return response()->download($path);
