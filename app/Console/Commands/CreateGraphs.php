@@ -9,6 +9,8 @@ use Amenadiel\JpGraph\Plot;
 use Amenadiel\JpGraph\Themes;
 use Excel;
 use File;
+use PDF;
+use App\Models\FellowSurvey;
 use App\Jobs\CreatePDFSurveyReport;
 class CreateGraphs extends Command
 {
@@ -140,7 +142,10 @@ class CreateGraphs extends Command
               })->first();
             }
           }
-          dispatch(new CreatePDFSurveyReport());
+          $all             = FellowSurvey::orderBy('created_at','desc')->get();
+          $name            = 'encuesta_satisfaccion.pdf';
+          $path            = base_path().'/csv/reports/'.$name;
+          $pdf             = PDF::loadView('admin.indicators.pdf.fellow-survey-template', compact(['all']))->setPaper('a4', 'landscape')->save($path);
     }
 
 }
