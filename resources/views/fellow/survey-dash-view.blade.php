@@ -1,4 +1,5 @@
 @if(!$custom_test)
+<h2>Cuestionario diagnóstico</h2>
 <div class="box session_list">
 	<div class="row">
 <!--icono-->
