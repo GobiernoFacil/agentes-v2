@@ -23,7 +23,7 @@ class CreateCustomQuestionnaire extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Carga un cuestionario, se requiere el nombre del archivo';
 
     /**
      * Create a new command instance.

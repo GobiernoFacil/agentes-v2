@@ -45,9 +45,9 @@ class Kernel extends ConsoleKernel
       $schedule->command('command:update-averages')
               ->dailyAt('10:00')
               ->emailOutputTo('carlos@gobiernofacil.com');
-      $schedule->command('command:create-csv-fac-survey')
+    /*  $schedule->command('command:create-csv-fac-survey')
                       ->dailyAt('17:00')
-                      ->emailOutputTo('carlos@gobiernofacil.com');
+                      ->emailOutputTo('carlos@gobiernofacil.com');*/
     }
 
     /**
