@@ -22,5 +22,6 @@ csv/survey_fellow_results/*
 csv/survey_images_fellow/*
 csv/survey_images_facilitator/*
 csv/survey_fac_answers/*
+csv/survey_fellow_answers/*
 csv/reports/*
 composer.lock

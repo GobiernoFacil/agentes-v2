@@ -21,7 +21,7 @@ class CreateCsvFacSurvey extends Command
      *
      * @var string
      */
-    protected $description = 'Crea csv de los resultados de las encuestas para los facilitadores por sesión del modulo 1, se selecciona 1 para csv de estadistica y 2 para generar csv de las respuestas';
+    protected $description = 'Crea csv de los resultados de las encuestas para los facilitadores por sesión del modulo 1, se selecciona 1 para xlsx de estadistica por pregunta (para graficar) y 2 para generar xlsx de todas las respuestas';
 
     /**
      * Create a new command instance.
