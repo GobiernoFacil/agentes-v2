@@ -19,4 +19,7 @@ class CustomQuestionnaire extends Model
     function questions(){
       return $this->hasMany("App\Models\CustomQuestion",'questionnaire_id');
     }
+    function fellow_answers(){
+      return $this->hasMany("App\Models\CustomFellowAnswer",'questionnaire_id');
+    }
 }

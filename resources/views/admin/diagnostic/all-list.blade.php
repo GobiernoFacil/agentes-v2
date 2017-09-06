@@ -26,12 +26,11 @@
 			  <tbody>
           @foreach($questionnaires as $questionnaire)
 			      <tr>
-			        <td><h4><a href = '{{url("tablero-facilitador/diagnostico/$questionnaire->id")}}'>{{$questionnaire->title}}</a></h4></td>
+			        <td><h4><a href = '{{url("dashboard/diagnostico/$questionnaire->id")}}'>{{$questionnaire->title}}</a></h4></td>
 			        <td>{{$questionnaire->description}}</td>
 							<td>{{$questionnaire->fellow_answers()->distinct('user_id')->count('user_id')}}</td>
 			        <td>
-								<a href='{{ url("tablero-facilitador/diagnostico/{$questionnaire->id}") }}' class="btn xs view">Ver</a>
-			         <!-- <a href="{{ url('dashboard/indicadores/facilitadores/descargar') }}" class="btn xs view">Descargar</a>-->
+								<a href='{{ url("dashboard/diagnostico/{$questionnaire->id}") }}' class="btn xs view">Ver</a>
               </td>
 			    </tr>
           @endforeach
