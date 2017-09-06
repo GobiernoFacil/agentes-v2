@@ -43,6 +43,24 @@ class AdminIndicators extends Controller
       return response()->download($path);
     }
 
+    /**
+     * Genera excel con indicadores de facilitadores
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadFacilitatorXLSX($session_id,$facilitator_id)
+    {
+      $user            = Auth::user();
+      $facilitatorData = FacilitatorSurvey::where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->firstOrFail();
+      $path  = base_path().'/csv/survey_fac_answers/mo_2_sess_'.$session_id.'_fac_'.$facilitatorData->facilitator->id.'.xlsx';
+      $mime = mime_content_type ($path);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+      return response()->download($path, 'sesion_'.$session_id.'_fac_'.$facilitatorData->facilitator->id.'.xlsx', $headers);
+    }
+
+
 
     /**
      * index de modulos
@@ -108,6 +126,24 @@ class AdminIndicators extends Controller
       $path  = base_path().'/csv/reports/encuesta_satisfaccion.pdf';
       return response()->download($path);
     }
+
+    /**
+     * Genera excel con indicadores de fellows
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadFellowsXLSX()
+    {
+
+      $path  = base_path().'/csv/survey_fellow_answers/satisfaction_survey.xlsx';
+      $mime = mime_content_type ($path);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+      return response()->download($path, 'encuesta_satisfaccion.xlsx', $headers);
+    }
+
+
 
 
     protected function get_score_session_facilitator($session,$facilitator){

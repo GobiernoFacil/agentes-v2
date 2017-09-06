@@ -69,7 +69,7 @@ class CreateCsvFacSurvey extends Command
                foreach ($session->facilitators as $facilitator) {
                      $survey = FacilitatorSurvey::where('session_id',$session->id)->where('facilitator_id',$facilitator->user->id)->first();
                      if($survey){
-                       Excel::create("mo_".$module->id."_sess_".$session->id."_fac_".$facilitator->id, function($excel)use($facilitator,$options,$headers,$session,$survey,$index,$q_ind) {
+                       Excel::create("mo_".$module->id."_sess_".$session->id."_fac_".$facilitator->user->id, function($excel)use($facilitator,$options,$headers,$session,$survey,$index,$q_ind) {
                          // Set the title
                          $excel->setTitle('Resultados de encuesta');
                          // Chain the setters
