@@ -19,6 +19,9 @@ class CustomQuestion extends Model
     }
 
     function answers(){
-      return $this->hasMany("App\Models\CustomAnswer");
+      return $this->hasMany("App\Models\CustomAnswer",'question_id');
+    }
+    function answers_fellows(){
+      return $this->hasMany("App\Models\CustomFellowAnswer",'question_id');
     }
 }

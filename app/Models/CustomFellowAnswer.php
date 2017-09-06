@@ -21,7 +21,7 @@ class CustomFellowAnswer extends Model
     }
 
     function question(){
-      return $this->belongsTo("App\Models\CustomQuestion");
+      return $this->belongsTo("App\Models\CustomQuestion",'question_id');
     }
 
     function user(){

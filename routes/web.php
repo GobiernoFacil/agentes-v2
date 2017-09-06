@@ -439,5 +439,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/noticias', 'NewsEventsFacilitator@index');
     Route::get('tablero-facilitador/noticias/ver/{news_slug}', 'NewsEventsFacilitator@view');
 
+    //// diagnostico
+    Route::get('tablero-facilitador/diagnostico', 'FacilitatorDiagnostic@index');
+    Route::get('tablero-facilitador/diagnostico/{custom_id}', 'FacilitatorDiagnostic@getCustom');
+    Route::get('tablero-facilitador/diagnostico/descargar/{type}/{custom_id}', 'FacilitatorDiagnostic@download');
   });
 });

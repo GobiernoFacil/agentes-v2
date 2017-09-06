@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
         Commands\CreateCsvFellowsSurvey::Class,
         Commands\CreateGraphs::Class,
         Commands\CreateFacGraphs::Class,
-        Commands\CreateCustomQuestionnaire::Class
+        Commands\CreateCustomQuestionnaire::Class,
+        Commands\CreateDiagnosticFiles::Class
     ];
 
     /**
