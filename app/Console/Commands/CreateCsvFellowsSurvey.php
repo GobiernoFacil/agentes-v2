@@ -79,22 +79,18 @@ class CreateCsvFellowsSurvey extends Command
                           'sur_13_2',
                           'sur_13_3',
                           'sur_13_4',
-                          'sur_13_5',
                           'sur_14_1',
                           'sur_14_2',
                           'sur_14_3',
                           'sur_14_4',
-                          'sur_14_5',
                           'sur_15_1',
                           'sur_15_2',
                           'sur_15_3',
                           'sur_15_4',
-                          'sur_15_5',
                           'sur_16_1',
                           'sur_16_2',
                           'sur_16_3',
                           'sur_16_4',
-                          'sur_16_5',
                         ];
               $q_ind   = ['sur_j1','sur_j2','sur_j8','sur_j9','sur_j10','sur_j12'];
               $options = ['0','1','2','3','4','5','6','7','8','9','10'];
