@@ -16,4 +16,13 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="diagnostic evaluation 2")
 	<li>Evaluación de examen de diagnóstico (2/2)</li>
 	@endif
+
+	@if ($__env->yieldContent('breadcrumb_type') == "diagnostic list view")
+	<li>Lista de Cuestionarios</li>
+	@endif
+
+	@if ($__env->yieldContent('breadcrumb_type') == "diagnostic custom view")
+	<li><a href="{{url('dashboard/evaluacion/diagnostico')}}">Lista de Cuestionarios</a></li>
+	<li>{{$questionnaire->title}}</li>
+	@endif
 </ul>

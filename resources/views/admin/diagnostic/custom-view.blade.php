@@ -2,7 +2,8 @@
 @section('title', 'Lista de examen diagnóstico')
 @section('description', 'Lista de examen diagnóstico')
 @section('body_class', '')
-
+@section('breadcrumb_type', 'diagnostic custom view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_diagnostic')
 @section('content')
 
 
