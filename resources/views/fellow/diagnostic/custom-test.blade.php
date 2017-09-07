@@ -2,6 +2,8 @@
 @section('title', 'Evaluación diagnóstico '. $questionnaire->title)
 @section('description', 'Evaluación diagnóstico '. $questionnaire->title)
 @section('body_class', 'fellow aprendizaje')
+@section('breadcrumb_type', 'custom view')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_diagnostic')
 @section('content')
 <div class="row">
   <div class="col-sm-12">
