@@ -2,7 +2,8 @@
 @section('title', 'Resultados de encuesta por sesión de ' . $facilitatorData->facilitator->name)
 @section('description', 'Resultados de encuesta por sesión de ' . $facilitatorData->facilitator->name.' sesión '.$facilitatorData->session->name)
 @section('body_class', '')
-
+@section('breadcrumb_type', 'survey facilitator view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
@@ -33,12 +34,18 @@
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						</span>
             <svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_1"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_1_av"></span></strong>
+						</span>
 					</li>
           <li class="row">
 						<span class="col-sm-9">
 						<h3>El facilitador motiva y despierta interés en los agentes de cambio a través de su exposición</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500"style ="padding-left:40px; padding-top:20px"  id ="fac_2"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_2_av"></span></strong>
+						</span>
 						</span>
 					</li>
           <li class="row">
@@ -46,6 +53,9 @@
 						<h3>El facilitador da retroalimentación a los estudiantes</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_3"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_3_av"></span></strong>
+						</span>
 						</span>
 					</li>
           <li class="row">
@@ -53,6 +63,9 @@
             <h3>El facilitador responde con claridad a las preguntas de los estudiantes</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px"  id ="fac_4"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_4_av"></span></strong>
+						</span>
             </span>
           </li>
           <li class="row">
@@ -60,6 +73,9 @@
             <h3>En el desarrollo de su exposición el facilitador presenta ejemplos relevantes sobre los temas tratados</h3>
 						<small><strong>Respuestas: {{$all->count()}}</strong></small>
 						<svg width="1000" height="500" style ="padding-left:40px; padding-top:20px" id ="fac_5"></svg>
+						<span class="col-sm-9">
+							<strong>Promedio: <span id ="fac_5_av"></span></strong>
+						</span>
             </span>
           </li>
           <li class="row">
@@ -69,6 +85,9 @@
             </span>
 						<span class="col-sm-12">
 							<svg width="1000" height="500"  style ="padding-left:40px; padding-top:20px"id ="fac_6"></svg>
+							<span class="col-sm-9">
+								<strong>Promedio: <span id ="fac_6_av"></span></strong>
+							</span>
 					  </span>
           </li>
           <li class="row">

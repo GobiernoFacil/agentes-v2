@@ -2,6 +2,8 @@
 @section('title', 'Encuestas en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Encuestas en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', '')
+@section('breadcrumb_type', 'survey list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 @section('content')
 <div class="row">
 	<div class="col-sm-12 ">

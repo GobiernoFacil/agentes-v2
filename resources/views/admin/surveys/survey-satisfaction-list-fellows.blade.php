@@ -2,7 +2,8 @@
 @section('title', 'Lista de Fellows con encuesta')
 @section('description', 'Lista de Fellows con encuesta de satisfacción')
 @section('body_class', '')
-
+@section('breadcrumb_type', 'survey fellow list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 @section('content')
 <div class="row">
 	<div class="col-sm-9">

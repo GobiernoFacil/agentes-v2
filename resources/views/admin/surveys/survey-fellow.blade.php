@@ -2,7 +2,8 @@
 @section('title', 'Respuestas de encuesta de satisfacción de ' . $fellow->user->name . ' ' . $fellow->user->fellowData->surname)
 @section('description', 'Respuestas de encuesta de satisfacción de ' . $fellow->user->name . ' ' . $fellow->user->fellowData->surname)
 @section('body_class', '')
-
+@section('breadcrumb_type', 'survey fellow view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 @section('content')
 
 <div class="row">
