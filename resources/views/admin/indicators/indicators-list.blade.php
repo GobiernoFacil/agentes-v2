@@ -2,7 +2,8 @@
 @section('title', 'Lista de indicadores')
 @section('description', 'Lista de indicadores de la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', '')
-
+@section('breadcrumb_type', 'indicator list')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_indicators')
 @section('content')
 
 

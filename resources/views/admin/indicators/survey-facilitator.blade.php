@@ -2,7 +2,8 @@
 @section('title', 'Resultados de encuesta por sesión de ' . $facilitatorData->facilitator->name)
 @section('description', 'Resultados de encuesta por sesión de ' . $facilitatorData->facilitator->name.' sesión '.$facilitatorData->session->name)
 @section('body_class', '')
-
+@section('breadcrumb_type', 'indicator facilitator view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_indicators')
 @section('content')
 <div class="row">
 	<div class="col-sm-12">

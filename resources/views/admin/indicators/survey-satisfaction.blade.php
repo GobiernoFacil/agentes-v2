@@ -2,7 +2,8 @@
 @section('title', 'Resultados de encuestas de satisfacción')
 @section('description', 'Resultados de encuesta de satisfacción')
 @section('body_class', '')
-
+@section('breadcrumb_type', 'indicator fellow view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_indicators')
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
