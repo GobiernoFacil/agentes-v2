@@ -27,6 +27,11 @@
 			<p></p>
 			<a href="{{ url('dashboard/encuestas') }}" class="btn gde">Ir a Encuestas</a>
 		</div>
+		<div class="box">
+			<h3>Indicadores</h3>
+			<p></p>
+			<a href="{{ url('dashboard/indicadores') }}" class="btn gde">Ir a Indicadores</a>
+		</div>
 	</div>
 	<div class="col-sm-9">
 		<div class="row">
