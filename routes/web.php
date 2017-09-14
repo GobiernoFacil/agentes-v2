@@ -20,6 +20,7 @@ Auth::routes();
 /*********  INICIO ******** */
 Route::get('/', 'Front@index');
 Route::get('programa-gobierno-abierto', 'Front@descripcion');
+Route::get('programa-gobierno-abierto/descarga/{type}', 'Front@download');
 Route::get('contacto', 'Front@contacto');
 Route::get('aviso-privacidad', 'Front@politicas');
 Route::get('redes-sociales', 'Front@redes');

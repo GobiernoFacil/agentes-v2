@@ -41,5 +41,28 @@ class Front extends Controller
       return view('welcome');
     }
 
+    /**
+     * Genera descarga pdf
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function download($type)
+    {
+      if($type==='seminaro-1'){
+          $path  = public_path().'/archivos/Programa_Primer_Seminario_Internacional.pdf';
+          $name  = 'Programa_Primer_Seminario_Internacional.pdf';
+      }elseif($type==='seminaro-2'){
+          $path  = public_path().'/archivos/Agenda_2ndoSeminario_Internacional.pdf';
+          $name  = 'Agenda_2ndoSeminario_Internacional.pdf';
+      }else{
+        return redirect('/');
+      }
+
+      $mime = mime_content_type ($path);
+      $headers = array(
+        'Content-Type: '.$mime,
+      );
+      return response()->download($path, $name, $headers);
+    }
 
 }

@@ -10,7 +10,7 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1>PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE <a href="#nota"><sup>1</sup></a></h1>
 		<p>El programa tiene como propósitos el fortalecimiento de capacidades, la vinculación y empoderamiento de una <strong>red de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong> que promuevan la consolidación de acciones orientadas a fortalecer prácticas de transparencia y participación ciudadana a nivel local en México.  </p>
-		
+
 		<p>Este programa ofrecerá una plataforma única para el aprendizaje, la reflexión, el intercambio de ideas y experiencias, así como para la realización de proyectos que puedan ponerse en marcha en el corto plazo, y que utilicen las perspectivas de gobierno abierto y desarrollo sostenible para transformar alguna realidad de su localidad o región.</p>
 		<p>Al concluir la etapa formativa, se esperaría que los egresados se integren y participen activamente en los trabajos que se realizan en su entidad federativa en el marco de los ejercicios locales de Gobierno Abierto promovidos por el INAI.</p>
 		<div class="row">
@@ -31,7 +31,7 @@
 						</ul>
 						</div>
 					</li>
-					
+
 					<!---Metodología-->
 					<li>
 						<h3>Metodología y Modalidad</h3>
@@ -67,9 +67,9 @@
 											<td>En línea</td></tr>
 										</table>
 									</td>
-									
+
 								</tr>
-														
+
 								<!-- seminario 2-->
 								<tr>
 									<td><h4>2. SEMINARIO 1 <br>“Identificación de Problemáticas Sociales en el marco de los ODS y Alternativas de Solución mediante el Gobierno Abierto”</h4></td>
@@ -95,7 +95,7 @@
 												<td>2.5 Cierre y evaluación</td>
 												<td>En línea</td>
 											</tr>
-											
+
 										</table>
 									</td>
 								</tr>
@@ -208,13 +208,13 @@
 												<td>7.2 Reunión con Secretariados Técnicos</td>
 												<td>Presencial</td>
 											</tr>
-											
+
 										</table>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						
+
 						<table class="table">
 							<thead>
 								<tr><th><h3>TEMAS TRANSVERSALES</h3></th></tr>
@@ -227,7 +227,7 @@
 								<tr><td><h4>Desarrollo de Capacidad Local</h4></td></tr>
 							</tbody>
 						</table>
-						
+
 						</div>
 					</li>
 					<!-- coordinandores-->
@@ -238,7 +238,7 @@
 						<ul>
 							<li>
 							<h3>Irina Alberro Behocaray</h3>
-							<p>Previamente trabajó como Profesora-Investigadora en El Colegio de México (2007-2011). También ha sido Profesora en la Universidad Iberoamericana, la Universidad de Northwestern y Profesora Invitada en el Departamento de Ciencia Política de la Universidad de Minnesota. Adicionalmente ha ocupado diversos puestos en la Administración Pública Federal, en particular en la Secretaría de Hacienda y la Secretaría de Agricultura. Sus publicaciones incluyen capítulos en libros y revistas académicas nacionales e internacionales, en temas de elecciones, perfil socioeconómico de los votantes, opinión pública y administración pública. 
+							<p>Previamente trabajó como Profesora-Investigadora en El Colegio de México (2007-2011). También ha sido Profesora en la Universidad Iberoamericana, la Universidad de Northwestern y Profesora Invitada en el Departamento de Ciencia Política de la Universidad de Minnesota. Adicionalmente ha ocupado diversos puestos en la Administración Pública Federal, en particular en la Secretaría de Hacienda y la Secretaría de Agricultura. Sus publicaciones incluyen capítulos en libros y revistas académicas nacionales e internacionales, en temas de elecciones, perfil socioeconómico de los votantes, opinión pública y administración pública.
 							Estudió la licenciatura en Economía en el ITAM, la Maestría en Políticas Públicas en la Universidad de Chicago y la Maestría y el Doctorado en Ciencia Política en la Universidad de Northwestern.)</p>
 							</li>
 							<li>
@@ -283,6 +283,13 @@
 						<p>A quienes acrediten el 80% de los puntos a evaluar serán acreedores a un reconocimiento que avale su participación en el programa.</p>
 						</div>
 					</li>
+					<!--Enlaces-->
+					<li>
+						<h3><a href="{{url('programa-gobierno-abierto/descarga/seminaro-1')}}" style ="border-bottom: 0px;">1er Seminario Internacional “Gobierno Abierto desde lo local para el desarrollo sostenible” del 21 al 23 de septiembre, 2017 en la Ciudad de México</a></h3>
+					</li>
+					<li>
+						<h3><a href="{{url('programa-gobierno-abierto/descarga/seminaro-2')}}" style ="border-bottom: 0px;">2ndo Seminario Internacional “Gobierno Abierto desde lo local para el desarrollo sostenible” del 11 al 13 de septiembre, 2017 en la Ciudad de Oaxaca<a></h3>
+					</li>
 				</ul>
 			</div>
 			<div class="col-sm-3">
@@ -294,7 +301,7 @@
 			</div>
 
 		</div>
-		
+
 		<a name="nota"></a>
 		<div class="notes">
 		<p><sup>1</sup> El <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong> es promovido por el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), la Oficina para México del Programa de Naciones Unidas para el Desarrollo (PNUD-México), GESOC, Agencia para el Desarrollo, A.C., ProSociedad Hacer Bien el Bien, A.C., y Gobierno Fácil – con el apoyo de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID) en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”</p>
