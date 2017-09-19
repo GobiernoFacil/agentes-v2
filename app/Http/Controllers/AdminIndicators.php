@@ -23,9 +23,16 @@ class AdminIndicators extends Controller
     public function index()
     {
       $user       = Auth::user();
-      return view('admin.indicators.indicators-list')->with([
+      $modules    = Module::where('start','>=','2017-07-01')->where('modality','En línea')->orderBy('start','asc')->get();
+    /*  return view('admin.indicators.indicators-board')->with([
         "user"      => $user,
-      ]);
+        "modules"   => $modules
+      ]);*/
+
+      return view('admin.indicators.indicators-list')->with([
+         "user"      => $user,
+         "modules"   => $modules
+       ]);
 
     }
 
