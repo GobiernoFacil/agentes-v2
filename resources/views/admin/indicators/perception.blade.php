@@ -66,6 +66,7 @@ $index = [
   			  <thead>
   			    <tr>
   			      <th>Género</th>
+              <th>Total</th>
   			      <th>Percepción Positiva</th>
   			      <th>Porcentaje</th>
   			    </tr>
@@ -73,17 +74,20 @@ $index = [
   			  <tbody>
   			      <tr>
   			        <td><h4>Femenino</h4></td>
+                <td>{{$female->count()}}</td>
   			        <td>{{$total_female}}</td>
   			        <td>{{($total_female*100)/$female->count()}}%</td>
   			    </tr>
             <tr>
               <td><h4>Masculino</h4></td>
+                <td>{{$male->count()}}</td>
               <td>{{$total_male}}</td>
               <td>{{round(($total_male*100)/$male->count())}}%</td>
           </tr>
 
           <tr>
             <td><h4>Total</h4></td>
+            <td>{{$female->count() + $male->count() }}</td>
             <td>{{$total_male + $total_female}}</td>
             <td>{{round((($total_male + $total_female)*100)/($male->count()+$female->count()))}}%</td>
         </tr>
