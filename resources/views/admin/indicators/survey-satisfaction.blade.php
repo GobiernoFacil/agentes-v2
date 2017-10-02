@@ -14,6 +14,11 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="divider top"></div>
+			<div class="row">
+				<span class="col-sm-4 col-sm-offset-8" id ="general_div" style="display:none;">
+					<strong>Promedio General: <span id ="general"></span></strong>
+				</span>
+			</div>
 			<ol class="list line">
 				<li class="row">
 					<span class="col-sm-9">
@@ -217,6 +222,11 @@
 			<div class="divider"></div>
 			<h2 class="sa_title">Valoración de cada sesión del Curso 1 “Gobierno Abierto y los ODS”</h2>
 			<p>En una escala de 0 a 10, donde 0 es nada  y 10 es mucho, señala en qué grado cada elemento ha contruibuido a tu aprendizaje para la siguientes sesiones</p>
+			<div class="row">
+				<span class="col-sm-4 col-sm-offset-8" id ="general_div_2" style="display:none;">
+					<strong>Promedio General: <span id ="general_2"></span></strong>
+				</span>
+			</div>
 			<ol>
 				<li class="row">
 					<span class="col-sm-9">
@@ -380,6 +390,8 @@
 <script src="{{url('js/survey/d3-tip.js')}}"></script>
 <script>
 var total = {{$all->count()}};
+var average_total = 0;
+var average_total_2 = 0;
 <?php
  $index = [
                       'sur_1',
@@ -461,7 +473,17 @@ var g = svg_{{$i}}.append("g")
 			data.forEach(function(all) {
 		    average = (all.values*parseInt(all.options)) + average;
 				total   = total + all.values;
+
 		  });
+			<?php if(strlen($i)<8 && $i!='sur_8'){?>
+				if((average/total)){
+					average_total = average_total +(average/total);
+				}
+			<?php }else{ ?>
+				if((average/total)){
+					average_total_2 = average_total_2 +(average/total);
+				}
+		<?php	} ?>
 
 		  // Scale the range of the data in the domains
 		  x.domain(data.map(function(d) { return d.options; }));
@@ -494,7 +516,15 @@ var g = svg_{{$i}}.append("g")
 
  }
 ?>
-
+var interval = setInterval(function() {
+    if(document.readyState === 'complete') {
+        clearInterval(interval);
+				document.getElementById('general').textContent=(average_total/15).toFixed(2);
+				document.getElementById('general_div').style.display = "block" ;
+				document.getElementById('general_2').textContent=(average_total_2/15).toFixed(2);
+				document.getElementById('general_div_2').style.display = "block" ;
+    }
+}, 14000);
 </script>
 <script src="{{url('js/survey/survey-fellow.js')}}"></script>
 @endsection
