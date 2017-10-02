@@ -27,7 +27,7 @@
 								Facilitador
 								</div>
 								<div class="col-sm-2">
-								Percepción
+								Percepción positiva
 								</div>
 								<div class="col-sm-2">
 								Acción
