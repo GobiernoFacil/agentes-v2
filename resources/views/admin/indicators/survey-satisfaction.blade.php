@@ -524,7 +524,7 @@ var interval = setInterval(function() {
 				document.getElementById('general_2').textContent=(average_total_2/15).toFixed(2);
 				document.getElementById('general_div_2').style.display = "block" ;
     }
-}, 14000);
+}, 13000);
 </script>
 <script src="{{url('js/survey/survey-fellow.js')}}"></script>
 @endsection

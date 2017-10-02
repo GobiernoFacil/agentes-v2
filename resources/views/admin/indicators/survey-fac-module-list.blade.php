@@ -23,8 +23,11 @@
 								<div class="col-sm-5">
 								Sesión
 								</div>
-								<div class="col-sm-5">
+								<div class="col-sm-3">
 								Facilitador
+								</div>
+								<div class="col-sm-2">
+								Percepción
 								</div>
 								<div class="col-sm-2">
 								Acción
@@ -54,13 +57,13 @@
 										 @if($facilitator->user->email != 'contacto@prosociedad.org')
 												<li class="row">
 													<div class="col-sm-2">
-													@if($facilitator->user->image)
-														<img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
-													@else
-														<img src='{{url("img/users/default.png")}}' width="100%">
-													@endif
+																@if($facilitator->user->image)
+																	<img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
+																@else
+																	<img src='{{url("img/users/default.png")}}' width="100%">
+																@endif
 									    			</div>
-													<div class="col-sm-6">
+													<div class="col-sm-3">
 														<p>
 															@if($facilitator->count_answers($session->id,$facilitator->user->id))
 																<a href='{{ url("dashboard/indicadores/facilitadores-modulos/{$session->id}/{$facilitator->user->id}")}}'>{{$facilitator->user->name}}</a>
@@ -69,6 +72,13 @@
 															@endif
 														</p>
 									    			</div>
+														<div class="col-sm-3">
+																	@if($facilitator->count_answers($session->id,$facilitator->user->id))
+																		{{$facilitator->get_perception($session->id,$facilitator->user->id)}}
+																	@else
+																		Sin respuestas
+																	@endif
+										    			</div>
 													<div class="col-sm-4">
 														@if($facilitator->count_answers($session->id,$facilitator->user->id))
 															<a href='{{ url("dashboard/indicadores/facilitadores-modulos/{$session->id}/{$facilitator->user->id}")}}' class="btn xs view">Ver</a>
