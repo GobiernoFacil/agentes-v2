@@ -32,9 +32,16 @@
 			         <!-- <a href="{{ url('dashboard/indicadores/facilitadores/descargar') }}" class="btn xs view">Descargar</a>-->
               </td>
 			    </tr>
+					<tr>
+						<td><h4>Percepción de fellows</h4></td>
+						<td>Porcentaje de agentes de cambio que tienen una percepción positiva de la plataforma web</td>
+						<td>
+							<a href="{{ url('dashboard/indicadores/percepcion-positiva') }}" class="btn xs view">Ver</a>
+						</td>
+				</tr>
           <tr>
-            <td><h4>Percepción de fellows</h4></td>
-            <td>Porcentaje de agentes de cambio que tienen una percepción positiva de la plataforma web</td>
+            <td><h4>Encuesta de satisfacción</h4></td>
+            <td>Resultados de encuesta de satisfacción</td>
             <td>
               <a href="{{ url('dashboard/indicadores/satisfaccion') }}" class="btn xs view">Ver</a>
               <a href="{{ url('dashboard/indicadores/fellows/descargar') }}" class="btn xs view">Descargar PDF</a>

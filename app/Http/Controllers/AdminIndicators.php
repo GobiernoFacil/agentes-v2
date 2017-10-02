@@ -10,6 +10,8 @@ use App\Models\FacilitatorModule;
 use App\Models\FacilitatorSurvey;
 use App\Models\FellowSurvey;
 use App\Models\ModuleSession;
+use App\Models\FellowData;
+use App\User;
 use PDF;
 class AdminIndicators extends Controller
 {
@@ -148,6 +150,25 @@ class AdminIndicators extends Controller
         'Content-Type: '.$mime,
       );
       return response()->download($path, 'encuesta_satisfaccion.xlsx', $headers);
+    }
+
+
+    /**
+     * Genera lista con el número de fellows por género
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function perception()
+    {
+      $user            = Auth::user();
+      $enabled         = User::where('email','!=','andre@fcb.com')->where('type','fellow')->where('enabled',1)->pluck('id');
+      $male            = FellowData::where('gender','Male')->whereIn('user_id',$enabled->toArray())->get();
+      $female          = FellowData::where('gender','Female')->whereIn('user_id',$enabled->toArray())->get();
+      return view('admin.indicators.perception')->with([
+        "user"      => $user,
+        "male"      => $male,
+        "female"    => $female,
+      ]);
     }
 
 
