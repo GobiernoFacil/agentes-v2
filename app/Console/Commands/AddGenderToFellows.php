@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\FellowData;
 use App\User;
+use App\Models\Aspirant;
+use League\Csv\Reader;
 
 
 class AddGenderToFellows extends Command
@@ -21,7 +23,7 @@ class AddGenderToFellows extends Command
      *
      * @var string
      */
-    protected $description = 'adds gender to fellows';
+    protected $description = 'adds gender to fellows and aspirants';
 
     /**
      * Create a new command instance.
@@ -55,6 +57,19 @@ class AddGenderToFellows extends Command
             $this->info($fellow->fellowData->gender);
           }
         }
+
+        $file_path  = base_path() . "/csv_2/gender.csv";
+        $csv = Reader::createFromPath($file_path)
+        ->setHeaderOffset(0);
+        foreach ($csv as $record) {
+          $aspirant   = Aspirant::where('email',$record['email'])->first();
+          if($aspirant){
+            $aspirant->gender = $record['gender'];
+            $aspirant->save();
+          }
+        }
+
+
 
 
     }
