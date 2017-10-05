@@ -47,11 +47,21 @@ class FellowDiagnostic extends Controller
           $name   = 'question_'.$count.'_'.$question->id;
           //multiple rows and columns type radio
           if($question->options_rows_number > 1){
+             foreach ($question->answers as $answer) {
+               # code...
+               $temp_name = $name.'_'.$answer->id;
+               $data = current(array_slice($request->{$temp_name}, 0, 1));
+               $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id,'answer_id'=>$answer->id]);
+               $answer->answer = $data;
+               $answer->save();
+             }
 
           }elseif($question->options_rows_number === 1){
             //one row type radio
             $data = current(array_slice($request->{$name}, 0, 1));
-            var_dump($request->{$data});
+            $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
+            $answer->answer = $data;
+            $answer->save();
           }else{
             //open question
               $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
@@ -59,13 +69,10 @@ class FellowDiagnostic extends Controller
               $answer->save();
           }
 
-        /*  $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
-          $answer->answer = $request->{$name};
-          $answer->save();*/
           $count++;
         }
 
-    //    return redirect('tablero')->with(['message'=>'Se ha guardado correctamente']);
+        return redirect('tablero')->with(['message'=>'Se ha guardado correctamente']);
 
 
     }

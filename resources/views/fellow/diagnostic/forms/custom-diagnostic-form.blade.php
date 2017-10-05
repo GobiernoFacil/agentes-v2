@@ -14,11 +14,11 @@
     <!-- answer_open -->
       <div class="col-sm-12">
         <p>
-          <label><strong>{{$question->question}}</strong> <br>
+          <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong><br>
             <p>{{$question->observations ?  $question->observations : ""}}</p>
           {{Form::textarea('question_'.$count.'_'.$question->id,null, ["class" => "form-control"])}} </label>
           @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$question->id)}}</strong>
+          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
           @endif
         </p>
         <div class="divider"></div>
@@ -27,7 +27,7 @@
     <!-- answer_radio -->
       <div class="col-sm-12">
         <p>
-          <label><strong>{{$question->question}}</strong> <br>
+          <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong>  <br>
           <p>{{$question->observations ?  $question->observations : ""}}</p></label>
           <div class="row">
           <!--table -->
@@ -69,12 +69,17 @@
                      	<div class="row">
 					 	@for($i=1; $i <= $question->options_columns_number; $i++)
 					 		<div class="col-sm-3">
-					 			<label>{{Form::radio('question_'.$count.'_'.$question->id.'_'.$answer->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id.'_'.$answer->id])}}</label>
+					 			<label>{{Form::radio('question_'.$count.'_'.$question->id.'_'.$answer->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id.'_'.$answer->id])}}</label>
 					 		</div>
 					 	@endfor
+
+
                      	</div>
                      </div>
                   </div>
+                  @if($errors->has('question_'.$count.'_'.$question->id.'_'.$answer->id))
+                  <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id.'_'.$answer->id)}}</strong>
+                  @endif
                   <div class="divider"></div>
                 @endforeach
           </div>
@@ -87,9 +92,9 @@
                     @if($i===1)
                         <label>
                         	<span class="row">
-                        		<span class="col-sm-9">{{$question->min_label}}</span> 
+                        		<span class="col-sm-9">{{$question->min_label}}</span>
                         		<span class="col-sm-3">{{$i}}<br>
-								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}
+								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
                         		</span>
                         	</span>
                         </label>
@@ -98,21 +103,21 @@
       						<span class="row">
                         		<span class="col-sm-3">
                         			{{$i}}<br>
-									{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}
+									{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
 								</span>
 								<span class="col-sm-6">
 								{{$question->max_label}}
 								</span>
       						</span>
-      						
+
       					</label>
                     @else
-                    
+
                         <label>
                         	<span class="row">
                         		<span class="col-sm-3">
                         		{{$i}}<br>
-								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}
+								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
                         		</span>
                         	</span>
                        </label>
@@ -123,7 +128,7 @@
     					</ul>
           @endif
           @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$question->id)}}</strong>
+          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
           @endif
         </p>
          <div class="divider"></div>
