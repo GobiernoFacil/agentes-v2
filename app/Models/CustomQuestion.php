@@ -10,7 +10,13 @@ class CustomQuestion extends Model
     protected $fillable = [
       'questionnaire_id',
       'question',
-      'type'
+      'type',
+      'observations',
+      'required',
+      'min_label',
+      'max_label',
+      'options_columns_number',
+      'options_rows_number'
     ];
 
     //modelos relacionados

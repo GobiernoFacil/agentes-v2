@@ -9,7 +9,9 @@ class CustomAnswer extends Model
     //
     protected $fillable = [
       'question_id',
-      'answer'
+      'answer',
+      'order',
+      'value'
     ];
     //modelos relacionados
     function question(){
