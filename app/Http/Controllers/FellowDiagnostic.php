@@ -42,15 +42,30 @@ class FellowDiagnostic extends Controller
         $user            = Auth::user();
         $questionnaire   = CustomQuestionnaire::where('slug',$request->slug)->firstOrFail();
         $count = 1;
+
         foreach ($questionnaire->questions as $question) {
           $name   = 'question_'.$count.'_'.$question->id;
-          $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
+          //multiple rows and columns type radio
+          if($question->options_rows_number > 1){
+
+          }elseif($question->options_rows_number === 1){
+            //one row type radio
+            $data = current(array_slice($request->{$name}, 0, 1));
+            var_dump($request->{$data});
+          }else{
+            //open question
+              $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
+              $answer->answer = $request->{$name};
+              $answer->save();
+          }
+
+        /*  $answer = CustomFellowAnswer::firstOrCreate(['user_id'=>$user->id,'questionnaire_id'=>$questionnaire->id,'question_id'=>$question->id]);
           $answer->answer = $request->{$name};
-          $answer->save();
+          $answer->save();*/
           $count++;
         }
 
-        return redirect('tablero')->with(['message'=>'Se ha guardado correctamente']);
+    //    return redirect('tablero')->with(['message'=>'Se ha guardado correctamente']);
 
 
     }
