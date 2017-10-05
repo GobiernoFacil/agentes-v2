@@ -7,7 +7,7 @@ use Excel;
 use File;
 use App\Models\CustomQuestion;
 use App\Models\CustomQuestionnaire;
-use App\Models\Customanswer;
+use App\Models\CustomAnswer;
 use App\User;
 class CreateCustomQuestionnaire extends Command
 {
