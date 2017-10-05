@@ -18,7 +18,7 @@
             <p>{{$question->observations ?  $question->observations : ""}}</p>
           {{Form::textarea('question_'.$count.'_'.$question->id,null, ["class" => "form-control"])}} </label>
           @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
+          <strong class="danger">{{$errors->first('question_'.$question->id)}}</strong>
           @endif
         </p>
     </div>
@@ -47,13 +47,10 @@
                       @if($i===1)
                         <span>{{$answer->answer}}</span>
                       @endif
-                      <li><label>{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control'.'question_'.$count.'_'.$question->id])}}</label></li>
+                      <li><label>{{Form::radio('question_'.$count.'_'.$question->id.'_'.$answer->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id.'_'.$answer->id])}}</label></li>
                     @endfor
                   </ul>
                 @endforeach
-
-
-
 
           @else
 
@@ -62,11 +59,11 @@
                 @for($i=1; $i <= $question->options_columns_number; $i++)
                   <li>
                         @if($i===1)
-                        <label><span>{{$question->min_label}}</span> {{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control'.'question_'.$count.'_'.$question->id])}}</label>
+                        <label><span>{{$question->min_label}}</span> {{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}</label>
                         @elseif($i===$question->options_columns_number)
-      						      <label> {{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control'.'question_'.$count.'_'.$question->id])}}<span>{{$question->max_label}}</span></label>
+      						      <label> {{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}<span>{{$question->max_label}}</span></label>
                         @else
-                        <label>{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control'.'question_'.$count.'_'.$question->id])}}</label>
+                        <label>{{Form::radio('question_'.$count.'_'.$question->id."[$i]",null, "",['class' => 'form-control '.'question_'.$question->id])}}</label>
                         @endif
                    </li>
                 @endfor
@@ -74,7 +71,7 @@
     					</ul>
           @endif
           @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
+          <strong class="danger">{{$errors->first('question_'.$question->id)}}</strong>
           @endif
         </p>
     </div>

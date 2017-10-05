@@ -18,3 +18,29 @@
   </div>
 </div>
 @endsection
+
+@section('js-content')
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(function() {
+  @foreach($questionnaire->questions as $question)
+    @if($question->options_rows_number >1)
+      @foreach($question->answers as $answer)
+      $("{{'.question_'.$question->id.'_'.$answer->id}}").click(function(event) {
+         $("{{'.question_'.$question->id.'_'.$answer->id}}").not(this).attr('checked', false);
+         $(this).attr('checked', true);
+       });
+      @endforeach
+
+    @elseif($question->options_rows_number === 1)
+      $("{{'.question_'.$question->id}}").click(function(event) {
+         $("{{'.question_'.$question->id}}").not(this).attr('checked', false);
+         $(this).attr('checked', true);
+       });
+    @endif
+  @endforeach
+});
+
+</script>
+@endsection
