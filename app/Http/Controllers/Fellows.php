@@ -105,6 +105,9 @@ class Fellows extends Controller
       //diagnostico
       $questionnaire   = CustomQuestionnaire::where('slug','transversalizacion-de-la-perspectiva-de-genero')->first();
       $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
+      //diagnostico seminario 2
+      $questionnaire_2      = CustomQuestionnaire::where('slug','evaluacion-de-seminario-2')->first();
+      $diagnostic_2         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire_2->id)->first();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
@@ -124,7 +127,9 @@ class Fellows extends Controller
         'noMessages'    => $noMessages,
         'fac_number'    => $fac_number,
         'custom_test'   => $answers,
-        'questionnaire' => $questionnaire
+        'questionnaire' => $questionnaire,
+        'diagnostic_2'  => $diagnostic_2,
+        'questionnaire_2' => $questionnaire_2
       ]);
     }
 
