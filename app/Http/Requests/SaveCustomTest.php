@@ -20,7 +20,11 @@ class SaveCustomTest extends FormRequest
 
     public function messages()
     {
-      $questionnaire = CustomQuestionnaire::where('slug',$this->route("slug"))->first();
+      if($this->session_id){
+          $questionnaire = CustomQuestionnaire::where('type','facilitator')->first();
+      }else{
+          $questionnaire = CustomQuestionnaire::where('slug',$this->route("slug"))->first();
+      }
       $countP =1;
       foreach ($questionnaire->questions as $question) {
          if($question->options_rows_number > 1){
@@ -59,8 +63,11 @@ class SaveCustomTest extends FormRequest
      */
     public function rules()
     {
-
-      $questionnaire = CustomQuestionnaire::where('slug',$this->route("slug"))->first();
+      if($this->session_id){
+          $questionnaire = CustomQuestionnaire::where('type','facilitator')->first();
+      }else{
+          $questionnaire = CustomQuestionnaire::where('slug',$this->route("slug"))->first();
+      }
       $countP =1;
       foreach ($questionnaire->questions as $question) {
         if($question->options_rows_number > 1){

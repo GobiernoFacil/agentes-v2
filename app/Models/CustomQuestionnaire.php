@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\CustomFellowAnswer;
 class CustomQuestionnaire extends Model
 {
     //
@@ -12,7 +12,8 @@ class CustomQuestionnaire extends Model
       'user_id',
       'title',
       'description',
-      'slug'
+      'slug',
+      'type'
     ];
 
     //modelos relacionados
@@ -21,5 +22,11 @@ class CustomQuestionnaire extends Model
     }
     function fellow_answers(){
       return $this->hasMany("App\Models\CustomFellowAnswer",'questionnaire_id');
+    }
+
+    function facilitator_survey($session_id,$user_id,$facilitator_id){
+
+      return CustomFellowAnswer::where('session_id',$session_id)->where('user_id',$user_id)->where('facilitator_id',$facilitator_id)->first();
+
     }
 }

@@ -396,6 +396,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/w/{name}', 'FellowSurveys@welcomeFacilitator');
     Route::get('tablero/encuestas/gracias', 'FellowSurveys@thanks');
     Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}/gracias', 'FellowSurveys@thanksFacilitator');
+    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@customFacilitator');
+    Route::post('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
     Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');

@@ -11,9 +11,13 @@ use App\Models\FellowSurvey;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorModule;
+use App\Models\CustomQuestionnaire;
+use App\Models\CustomFellowAnswer;
 // FormValidators
 use App\Http\Requests\SaveSatisfactionSurvey;
 use App\Http\Requests\SaveFacilitatorSurvey;
+// FormValidators
+use App\Http\Requests\SaveCustomTest;
 class FellowSurveys extends Controller
 {
     //
@@ -121,10 +125,19 @@ class FellowSurveys extends Controller
       $today    = date('Y-m-d');
       //a un solo módulo
       $modules_ids = FacilitatorModule::pluck('module_id');
-      $modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+      //$modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+      $modules  = Module::where('title','CURSO 2 - Herramientas para la Acción')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+      $questionnaire = CustomQuestionnaire::where('type','facilitator')->firstOrFail();
+      /*
       return view('fellow.surveys.survey-module-list')->with([
         'user'=>$user,
         'modules' =>$modules
+      ]);*/
+
+      return view('fellow.surveys.survey-custom-list')->with([
+        'user'=>$user,
+        'modules' =>$modules,
+        'questionnaire'=>$questionnaire
       ]);
 
     }
@@ -280,6 +293,105 @@ class FellowSurveys extends Controller
             'session'=>$session,
             'facilitator'=>$facilitator
           ]);
+
+        }
+
+        /**
+         * Muestra encuesta de facilitador
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function customFacilitator($session_slug,$name)
+        {
+          $user        = Auth::user();
+          $session     = ModuleSession::where('slug',$session_slug)->firstOrFail();
+          $facilitator = User::where('type','facilitator')->where('enabled',1)->where('name',$name)
+          ->orWhere(function($query)use($name){
+            $query->where('type','admin')
+            ->where('enabled',1)
+            ->where('name',$name);
+          })
+          ->firstOrFail();
+          $done        = CustomFellowAnswer::where('session_id',$session->id)->where('user_id',$user->id)->where('facilitator_id',$facilitator->id)->first();
+          if($done){
+            return redirect("tablero/encuestas/facilitadores-sesiones/{$session->slug}")->with(['error'=>'Ya has evaluado a este facilitador para esta sesión']);
+          }
+          $survey      = CustomQuestionnaire::where('type','facilitator')->first();
+          return view('fellow.surveys.survey-custom-facilitator')->with([
+            'user'=>$user,
+            'session'=>$session,
+            'facilitator' =>$facilitator,
+            'questionnaire'   =>$survey
+          ]);
+
+
+        }
+
+
+        /**
+         * Muestra encuesta de facilitador
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveCustomFacilitator(SaveCustomTest $request)
+        {
+
+          $user            = Auth::user();
+          $questionnaire   = CustomQuestionnaire::where('type','facilitator')->firstOrFail();
+          $session     = ModuleSession::where('id',$request->session_id)->firstOrFail();
+          $facilitator = User::where('id',$request->facilitator_id)->firstOrFail();
+          $count = 1;
+
+          foreach ($questionnaire->questions as $question) {
+            $name   = 'question_'.$count.'_'.$question->id;
+            //multiple rows and columns type radio
+            if($question->options_rows_number > 1){
+               foreach ($question->answers as $answer) {
+                 # code...
+                 $temp_name = $name.'_'.$answer->id;
+                 $data = current(array_slice($request->{$temp_name}, 0, 1));
+                 $answer =
+                 CustomFellowAnswer::firstOrCreate([
+                 'user_id'=>$user->id,
+                 'questionnaire_id'=>$questionnaire->id,
+                 'question_id'=>$question->id,
+                 'answer_id'=>$answer->id,
+                 'facilitator_id'=>$request->facilitator_id,
+                 'session_id' => $request->session_id
+                 ]);
+                 $answer->answer = $data;
+                 $answer->save();
+               }
+
+            }elseif($question->options_rows_number === 1){
+              //one row type radio
+              $data = current(array_slice($request->{$name}, 0, 1));
+              $answer = CustomFellowAnswer::firstOrCreate([
+                'user_id'=>$user->id,
+                'questionnaire_id'=>$questionnaire->id,
+                'question_id'=>$question->id,
+                'facilitator_id'=>$request->facilitator_id,
+                'session_id' => $request->session_id
+              ]);
+              $answer->answer = $data;
+              $answer->save();
+            }else{
+              //open question
+                $answer = CustomFellowAnswer::firstOrCreate([
+                  'user_id'=>$user->id,
+                  'questionnaire_id'=>$questionnaire->id,
+                  'question_id'=>$question->id,
+                  'facilitator_id'=>$request->facilitator_id,
+                  'session_id' => $request->session_id
+                ]);
+                $answer->answer = $request->{$name};
+                $answer->save();
+            }
+
+            $count++;
+          }
+
+          return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
 
         }
 
