@@ -299,6 +299,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');
+    Route::get('dashboard/encuestas/diagnostico/{survey_id}', 'AdminSurveys@customSurvey');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows/{fellows_id}', 'AdminSurveys@surveyFellow');
     Route::get('dashboard/encuestas/facilitadores-modulos', 'AdminSurveys@indexModules');

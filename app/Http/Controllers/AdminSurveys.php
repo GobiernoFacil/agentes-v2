@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Models\FacilitatorModule;
 use App\Models\FellowSurvey;
 use App\Models\FacilitatorSurvey;
+use App\Models\CustomQuestionnaire;
 class AdminSurveys extends Controller
 {
     //
@@ -22,8 +23,10 @@ class AdminSurveys extends Controller
     public function index()
     {
       $user       = Auth::user();
+      $custom     = CustomQuestionnaire::all();
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
+        "custom"    => $custom
       ]);
 
     }
@@ -111,5 +114,21 @@ class AdminSurveys extends Controller
         public function get_csv($file_name){
           $path = base_path().'/csv/survey_fellow_results/'.$file_name;
           return response()->file($path);
+        }
+
+
+        /**
+         * Muestra resultados de encuestas
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function customSurvey($id)
+        {
+          $user            = Auth::user();
+          $questionnaire   = CustomQuestionnaire::where('id',$id)->firstOrFail();
+          return view('admin.surveys.survey-custom')->with([
+            "user"      => $user,
+            "questionnaire"   => $questionnaire,
+          ]);
         }
 }
