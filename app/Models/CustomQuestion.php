@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\CustomFellowAnswer;
 class CustomQuestion extends Model
 {
     //
@@ -29,5 +29,31 @@ class CustomQuestion extends Model
     }
     function answers_fellows(){
       return $this->hasMany("App\Models\CustomFellowAnswer",'question_id');
+    }
+
+    function data_to_graph(){
+      $temp = [];
+      for ($i=1; $i <= $this->options_columns_number ; $i++) {
+        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('answer',$i)->count();
+        $temp[] = [
+            'options' => $i,
+            'values'  => $value
+          ];
+
+      }
+      return $temp;
+    }
+
+    function data_to_graph_rows($answer_id){
+      $temp = [];
+      for ($i=1; $i <= $this->options_columns_number ; $i++) {
+        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('answer',$i)->where('answer_id',$answer_id)->count();
+        $temp[] = [
+            'options' => $i,
+            'values'  => $value
+          ];
+
+      }
+      return $temp;
     }
 }
