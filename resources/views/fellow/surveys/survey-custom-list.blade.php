@@ -52,6 +52,7 @@
 								<div class="col-sm-7">
 									<ul class="list line">
 							    	@foreach($session->facilitators as $facilitator)
+                     @if($facilitator->user->email != 'contacto@prosociedad.org')
 												<li class="row">
 													<div class="col-sm-2">
 													@if($facilitator->user->image)
@@ -71,6 +72,29 @@
 													@endif
 													</div>
 												</li>
+                     @else
+
+                       <li class="row">
+                         <div class="col-sm-2">
+                         @if($facilitator->user->image)
+                           <img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
+                         @else
+                           <img src='{{url("img/users/default.png")}}' width="100%">
+                         @endif
+                           </div>
+                         <div class="col-sm-6">
+                           <p><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/Carlos Bauche Madero")}}'>{{$facilitator->user->name}}</a></p>
+                           </div>
+                         <div class="col-sm-4">
+                         @if(!$questionnaire->facilitator_survey($session->id,$user->id,51))
+                           <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/Carlos Bauche Madero")}}' class="btn xs view">Ir a encuesta</a>
+                         @else
+                           Completada
+                         @endif
+                         </div>
+                       </li>
+
+                     @endif
 									@endforeach
 									</ul>
 								</div>
