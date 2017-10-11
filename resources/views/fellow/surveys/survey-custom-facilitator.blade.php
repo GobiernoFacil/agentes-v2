@@ -8,7 +8,7 @@
 <div class="row">
 
   <div class="col-sm-8 col-sm-offset-2 center">
-    <h1>Evaluación de agente de cambio  <strong>{{$facilitator->name}}</strong></h1>
+    <h1>Evaluación de agente de cambio a <strong>{{$facilitator->name}}</strong></h1>
   </div>
   <div class="col-sm-12">
     <div class="divider b"></div>
@@ -24,7 +24,7 @@
 </div>
 <div class="box">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-10 col-sm-offset-1">
       @include('fellow.surveys.forms.custom-facilitator-form')
     </div>
   </div>
