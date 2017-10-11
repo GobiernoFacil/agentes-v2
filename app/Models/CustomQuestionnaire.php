@@ -29,4 +29,10 @@ class CustomQuestionnaire extends Model
       return CustomFellowAnswer::where('session_id',$session_id)->where('user_id',$user_id)->where('facilitator_id',$facilitator_id)->first();
 
     }
+
+
+    function admin_facilitator_survey($session_id,$facilitator_id){
+      return CustomFellowAnswer::where('questionnaire_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
+
+    }
 }

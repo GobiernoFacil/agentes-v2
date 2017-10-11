@@ -56,4 +56,30 @@ class CustomQuestion extends Model
       }
       return $temp;
     }
+
+    function data_to_graph_facilitator($session_id,$facilitator_id){
+      $temp = [];
+      for ($i=1; $i <= $this->options_columns_number ; $i++) {
+        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->where('answer',$i)->count();
+        $temp[] = [
+            'options' => $i,
+            'values'  => $value
+          ];
+
+      }
+      return $temp;
+    }
+
+    function data_to_graph_rows_facilitator($answer_id,$session_id,$facilitator_id){
+      $temp = [];
+      for ($i=1; $i <= $this->options_columns_number ; $i++) {
+        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('answer',$i)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->where('answer_id',$answer_id)->count();
+        $temp[] = [
+            'options' => $i,
+            'values'  => $value
+          ];
+
+      }
+      return $temp;
+    }
 }

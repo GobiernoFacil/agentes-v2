@@ -9,6 +9,8 @@ use App\Models\FacilitatorModule;
 use App\Models\FellowSurvey;
 use App\Models\FacilitatorSurvey;
 use App\Models\CustomQuestionnaire;
+use App\Models\ModuleSession;
+use App\User;
 class AdminSurveys extends Controller
 {
     //
@@ -23,7 +25,7 @@ class AdminSurveys extends Controller
     public function index()
     {
       $user       = Auth::user();
-      $custom     = CustomQuestionnaire::all();
+      $custom     = CustomQuestionnaire::whereNull('type')->get();
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
         "custom"    => $custom
@@ -73,10 +75,17 @@ class AdminSurveys extends Controller
           $today    = date('Y-m-d');
           //a un solo módulo
           $modules_ids = FacilitatorModule::pluck('module_id');
-          $modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
+          $modules  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')
+          ->orWhere(function($query){
+            $query->where('title','CURSO 2 - Herramientas para la Acción');
+          })
+          ->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')
+          ->get();
+          $questionnaire = CustomQuestionnaire::where('type','facilitator')->first();
           return view('admin.surveys.survey-module-list')->with([
             'user'=>$user,
-            'modules' =>$modules
+            'modules' =>$modules,
+            'questionnaire'=>$questionnaire
           ]);
 
         }
@@ -129,6 +138,25 @@ class AdminSurveys extends Controller
           return view('admin.surveys.survey-custom')->with([
             "user"      => $user,
             "questionnaire"   => $questionnaire,
+          ]);
+        }
+
+        /**
+         * Muestra resultados de encuestas
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function customFacilitator($session_id,$facilitator_id)
+        {
+          $user            = Auth::user();
+          $questionnaire   = CustomQuestionnaire::where('type','facilitator')->firstOrFail();
+          $facilitatorData = User::where('id',$facilitator_id)->firstOrFail();
+          $session         = ModuleSession::where('id',$session_id)->firstOrFail();
+          return view('admin.surveys.survey-facilitator-custom')->with([
+            "user"      => $user,
+            "questionnaire"   => $questionnaire,
+            'facilitatorData' => $facilitatorData,
+            'session'         => $session
           ]);
         }
 }

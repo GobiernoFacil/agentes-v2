@@ -1,12 +1,22 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Encuesta '.$questionnaire->title)
-@section('description', 'Encuesta '.$questionnaire->title)
+@section('title', 'Resultados de encuesta por sesión de ' . $facilitatorData->name)
+@section('description', 'Resultados de encuesta por sesión de ' . $facilitatorData->name.' sesión '.$session->name)
 @section('body_class', '')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Resultados de encuesta <strong>{{$questionnaire->title}}</strong></h1>
+		<h1>Resultados de encuesta de <strong>{{$facilitatorData->name}}</strong></h1>
+    <h2>Sesión <strong>{{$session->name}}</strong></h2>
+		<div class="divider top"></div>
+	</div>
+	<!--info fellow-->
+	<div class="col-sm-1 center">
+		@if($facilitatorData->image)
+		<img src='{{url("img/users/{$facilitatorData->image->name}")}}' width="1000">
+		@else
+		<img src='{{url("img/users/default.png")}}' height="40px">
+		@endif
 	</div>
 </div>
 
@@ -60,7 +70,6 @@
     </div>
   </div>
 </div>
-
 @endsection
 
 
@@ -119,7 +128,7 @@ var answers       = 0;
       @if($question->type === 'radio')
         @if($question->options_rows_number >1)
 		            @foreach($question->answers as $answer)
-										var data_{{$question->id.'_'.$answer->id}} = <?php echo json_encode($question->data_to_graph_rows($answer->id)); ?>;
+										var data_{{$question->id.'_'.$answer->id}} = <?php echo json_encode($question->data_to_graph_rows($answer->id,$session->id,$facilitatorData->id)); ?>;
 										var max_value = {{$question->options_columns_number}};
 										var svg_{{$question->id.'_'.$answer->id}} = d3.select("#question_{{$question->id}}_{{$answer->id}}"),
 											margin = {top: 50, right: 40, bottom: 30, left: 40},
@@ -209,7 +218,7 @@ var answers       = 0;
             @endforeach
 
         @else
-          var data_{{$question->id}} = <?php echo json_encode($question->data_to_graph()); ?>;
+          var data_{{$question->id}} = <?php echo json_encode($question->data_to_graph_facilitator($session->id,$facilitatorData->id)); ?>;
 					var max_value = {{$question->options_columns_number}};
           var svg_{{$question->id}} = d3.select("#question_{{$question->id}}"),
             margin = {top: 50, right: 40, bottom: 30, left: 40},

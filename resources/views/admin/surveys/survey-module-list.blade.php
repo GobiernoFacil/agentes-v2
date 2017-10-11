@@ -51,7 +51,7 @@
 								<div class="col-sm-7">
 									<ul class="list line">
 							    	@foreach($session->facilitators as $facilitator)
-										 @if($facilitator->user->email != 'contacto@prosociedad.org')
+										 @if($facilitator->user->email != 'contacto@prosociedad.org' && $module->title === 'CURSO 1 - Gobierno Abierto y los ODS')
 												<li class="row">
 													<div class="col-sm-2">
 													@if($facilitator->user->image)
@@ -77,7 +77,53 @@
 														@endif
 													</div>
 												</li>
-									 @endif
+											@else
+													@if($facilitator->user->email != 'contacto@prosociedad.org' && $module->title === 'CURSO 2 - Herramientas para la Acción')
+														 <li class="row">
+															 <div class="col-sm-2">
+															 @if($facilitator->user->image)
+																 <img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
+															 @else
+																 <img src='{{url("img/users/default.png")}}' width="100%">
+															 @endif
+																 </div>
+															 <div class="col-sm-6">
+																 <p>{{$facilitator->user->name}}</p>
+																 </div>
+															 <div class="col-sm-4">
+															 @if($questionnaire->admin_facilitator_survey($session->id,$facilitator->user->id))
+																 <a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/c/{$facilitator->user->id}")}}' class="btn xs view">Ver</a>
+															 @else
+																 Sin encuestas
+															 @endif
+															 </div>
+														 </li>
+													@elseif($facilitator->user->email === 'contacto@prosociedad.org' && $module->title === 'CURSO 2 - Herramientas para la Acción')
+
+														<li class="row">
+															<div class="col-sm-2">
+															@if($facilitator->user->image)
+																<img src='{{url("img/users/{$facilitator->user->image->name}")}}' width="100%">
+															@else
+																<img src='{{url("img/users/default.png")}}' width="100%">
+															@endif
+																</div>
+															<div class="col-sm-6">
+																<p>{{$facilitator->user->name}}</p>
+																</div>
+															<div class="col-sm-4">
+																	@if($questionnaire->admin_facilitator_survey($session->id,51))
+																		<a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/c/51")}}' class="btn xs view">Ver</a>
+																	@else
+																		Sin encuestas
+																	@endif
+															</div>
+														</li>
+
+													@endif
+									 		@endif
+
+
 									@endforeach
 									</ul>
 								</div>
