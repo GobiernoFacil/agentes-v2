@@ -36,10 +36,10 @@
     					<span class="col-sm-9">
     						<h3>{{$question->question}}</h3>
                     @if($question->options_rows_number>1)
-                        <small><strong>Respuestas: {{$question->answers_fellows->count()/$question->options_rows_number}}</strong></small>
+                        <small><strong>Respuestas: {{$question->answers_fellows_facilitator($session->id,$facilitatorData->id)->count()/$question->options_rows_number}}</strong></small>
                     @else
 
-        						      <small><strong>Respuestas: {{$question->answers_fellows->count()}}</strong></small>
+        						      <small><strong>Respuestas: {{$question->answers_fellows_facilitator($session->id,$facilitatorData->id)->count()}}</strong></small>
                     @endif
     					</span>
                 @if($question->type ==='radio')
@@ -59,7 +59,7 @@
                   @endif
                 @elseif($question->type==='open')
                   <span class="col-sm-9">
-                        @foreach($question->answers_fellows as $answers)
+                        @foreach($question->answers_fellows_facilitator($session->id,$facilitatorData->id) as $answers)
                         		<p>{{$answers->answer}}</p>
                          @endforeach
                   </span>

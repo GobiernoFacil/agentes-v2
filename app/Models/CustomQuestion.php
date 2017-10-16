@@ -82,4 +82,8 @@ class CustomQuestion extends Model
       }
       return $temp;
     }
+
+    function answers_fellows_facilitator($session_id,$facilitator_id){
+      return CustomFellowAnswer::where('question_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
+    }
 }
