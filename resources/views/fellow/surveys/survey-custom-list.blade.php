@@ -62,7 +62,7 @@
 													@endif
 									    			</div>
 													<div class="col-sm-6">
-														<p><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/{$facilitator->user->name}")}}'>{{$facilitator->user->name}}</a></p>
+														<p>{{$facilitator->user->name}}</p>
 									    			</div>
 													<div class="col-sm-4">
 													@if(!$questionnaire->facilitator_survey($session->id,$user->id,$facilitator->user->id))
@@ -83,10 +83,10 @@
                          @endif
                            </div>
                          <div class="col-sm-6">
-                           <p><a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/Carlos Bauche Madero")}}'>{{$facilitator->user->name}}</a></p>
+                           <p>{{$facilitator->user->name}}</p>
                            </div>
                          <div class="col-sm-4">
-                         @if(!$questionnaire->facilitator_survey($session->id,$user->id,51))
+                         @if(!$questionnaire->facilitator_survey($session->id,$user->id,14))
                            <a href='{{ url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/Carlos Bauche Madero")}}' class="btn xs view">Ir a encuesta</a>
                          @else
                            Completada
