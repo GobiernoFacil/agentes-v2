@@ -112,7 +112,7 @@
 																<p>{{$facilitator->user->name}}</p>
 																</div>
 															<div class="col-sm-4">
-																	@if($questionnaire->admin_facilitator_survey($session->id,51))
+																	@if($questionnaire->admin_facilitator_survey($session->id,14))
 																		<a href='{{ url("dashboard/encuestas/facilitadores-modulos/{$session->id}/c/51")}}' class="btn xs view">Ver</a>
 																	@else
 																		Sin encuestas
