@@ -23,7 +23,7 @@ class FellowDiagnostic extends Controller
         $questionnaire   = CustomQuestionnaire::where('slug',$slug)->firstOrFail();
         $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
         if($answers){
-          return redirect('tablero');
+          return redirect('tablero')->with(['message'=>'Ya has contestado la evaluación ¡Gracias!']);
         }
         return view('fellow.diagnostic.custom-test')->with([
           "user"      => $user,
