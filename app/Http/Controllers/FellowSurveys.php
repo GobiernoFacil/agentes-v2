@@ -134,6 +134,28 @@ class FellowSurveys extends Controller
         'modules' =>$modules
       ]);*/
 
+      $module_survey_2  = Module::where('title','CURSO 2 - Herramientas para la Acción')->first();
+      $user_sur         = FacilitatorModule::where('module_id',$module_survey_2->id)->pluck('user_id');
+      $q_fac            = CustomQuestionnaire::where('type','facilitator')->first();
+      $custom_number_q  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
+
+      $module_survey_3  = Module::where('title','CURSO 3 - Aterrizaje: "Ya tengo mi agenda, y ahora qué..."')->first();
+      $non_email_list   = ['roberto.moreno@inai.org.mx'];
+      $non_user_sur     = User::whereIn('email',$non_email_list)->pluck('id');
+      $user_sur_3       = FacilitatorModule::where('module_id',$module_survey_3->id)->pluck('user_id');
+      $custom_number_q_3  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->whereNotIn('facilitator_id',$non_user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
+
+      if($custom_number_q != sizeof($user_sur) && $custom_number_q_3 != sizeof($user_sur_3)){
+          $modules->push($module_survey_3);
+      }else{
+        if($custom_number_q != sizeof($user_sur) && $custom_number_q_3 == sizeof($user_sur_3)){
+          $modules = $module_survey_2;
+        }else{
+          $modules = $module_survey_3;
+        }
+      }
+
+
       return view('fellow.surveys.survey-custom-list')->with([
         'user'=>$user,
         'modules' =>$modules,

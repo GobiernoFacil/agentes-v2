@@ -74,6 +74,10 @@ class Fellows extends Controller
       $q_fac            = CustomQuestionnaire::where('type','facilitator')->first();
       $custom_number_q  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
 
+      $module_survey_3  = Module::where('title','CURSO 3 - Aterrizaje: "Ya tengo mi agenda, y ahora qué..."')->first();
+      $user_sur_3       = FacilitatorModule::where('module_id',$module_survey_3->id)->pluck('user_id');
+      $custom_number_q_3  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
+
       $today = date("Y-m-d");
       //obtener la ultima actividad
       if($user_log){
@@ -136,7 +140,9 @@ class Fellows extends Controller
         'diagnostic_2'  => $diagnostic_2,
         'questionnaire_2' => $questionnaire_2,
         "user_sur"      => $user_sur,
-        "custom_number_q" => $custom_number_q
+        "custom_number_q" => $custom_number_q,
+        "user_sur_3"      => $user_sur_3,
+        "custom_number_q_3" => $custom_number_q_3
       ]);
     }
 

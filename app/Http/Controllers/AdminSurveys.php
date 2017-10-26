@@ -79,6 +79,9 @@ class AdminSurveys extends Controller
           ->orWhere(function($query){
             $query->where('title','CURSO 2 - Herramientas para la Acción');
           })
+          ->orWhere(function($query){
+            $query->where('title','CURSO 3 - Aterrizaje: "Ya tengo mi agenda, y ahora qué..."');
+          })
           ->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')
           ->get();
           $questionnaire = CustomQuestionnaire::where('type','facilitator')->first();
