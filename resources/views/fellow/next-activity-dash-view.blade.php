@@ -10,7 +10,8 @@
 					     <p class="right">Fecha límite:</p>
 				     </div>
 				      <div class="col-sm-8">
-					      <p><strong><span>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}}</span></strong></p>
+								<?php $stop_date = date('Y-m-d H:i:s', strtotime($activity->end . ' +1 day'));?>
+					      <p><strong><span>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($stop_date))->diffForHumans()}}</span></strong></p>
 				          <p>{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</p>
 				      </div>
 				    </div>
