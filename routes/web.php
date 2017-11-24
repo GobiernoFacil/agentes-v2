@@ -32,8 +32,8 @@ Route::get('convocatoria/metodologia-2017', 'NoticeFront@metodo17');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
 /** se acabó la convocatoria
-//Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
-//Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
+Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
+Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
 ***/
 Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
 Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
@@ -103,9 +103,15 @@ Route::group(['middleware' => ['auth']], function () {
   /* R U T A S  UNICAS DEL A D M I N
   --------------------------------------------------------------------------------*/
   Route::group(['middleware' => 'type:admin' ], function(){
+
     /*@Admin Controller */
     //Dashboard
     Route::get('dashboard', 'Admin@dashboard');
+
+    /******************** notice routes *******************************/
+    /*@AdminNotice Controller */
+    Route::get('dashboard/convocatorias', 'AdminNotice@index');
+    Route::get('dashboard/convocatorias/agregar', 'AdminNotice@add');
     // @Aspirants Controller
     Route::get('dashboard/aspirantes', 'Aspirants@index');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
