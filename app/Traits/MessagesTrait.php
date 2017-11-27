@@ -324,8 +324,8 @@ trait MessagesTrait{
          'public.required' =>'Este campo es requerido',
          'comments.required' =>'Este campo es requerido',
          'filesDataR.required' =>'Este campo es requerido',
-         'filesData.1.mime' =>'Selecciona un archivo valido (DOC, DOCX o PDF)',
-         'filesData.1.max' =>'El tamaño es de 2.5MB',
+         'filesData.*.mimes' =>'Selecciona un archivo valido (DOC, DOCX o PDF)',
+         'filesData.*.max' =>'El tamaño es de 2.5MB',
          'limitNumber.required'=>'Solo se permiten dos archivos como máximo',
 
       ];
