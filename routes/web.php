@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/convocatorias/agregar', 'AdminNotice@save');
     Route::get('dashboard/convocatorias/agregar-archivos/{notice_id}', 'AdminNotice@addFiles');
     Route::post('dashboard/convocatorias/agregar-archivos/{notice_id}', 'AdminNotice@saveFiles');
+    Route::get('dashboard/convocatorias/ver/{notice_id}', 'AdminNotice@view');
     // @Aspirants Controller
     Route::get('dashboard/aspirantes', 'Aspirants@index');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');

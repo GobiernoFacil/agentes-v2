@@ -57,7 +57,7 @@ class AdminNotice extends Controller
       if($request->hasfiles){
         return redirect('dashboard/convocatorias/agregar-archivos/'.$notice->id);
       }else{
-        return redirect('dashboard/convocatorias')->with(['message'=>'Se ha guardado correctamente']);
+        return redirect('dashboard/convocatorias/ver/'.$notice->id)->with(['message'=>'Se ha guardado correctamente']);
       }
 
     }
@@ -88,7 +88,35 @@ class AdminNotice extends Controller
         public function saveFiles(SaveAdminNoticeFiles $request)
         {
           $user    = Auth::user();
+          if($files=$request->file('filesData')){
+              $path = public_path().'/archivos/notices/';
+              foreach($files as $file){
+                        $name=$file->getClientOriginalName();
+                        $identifier = uniqid() . '.' . $file->getClientOriginalExtension();
+                        $file->move($path,$identifier);
+                        $fullpath = $path.'/'.$identifier;
+                        $filesData = NoticeFile::firstOrCreate(['notice_id'=>$request->notice_id,'name'=>$name,'path'=>$fullpath,'comments'=>$request->comments]);
+              }
+            }
 
+            return redirect('dashboard/convocatorias/ver/'.$request->notice_id)->with(['message'=>'Se ha guardado correctamente']);
+
+        }
+
+        /**
+         * Muestra formulario para agregar archivos a convocatoria
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function view($id)
+        {
+            //
+            $user    = Auth::user();
+            $notice  = Notice::where('id',$id)->firstOrFail();
+            return view('admin.notices.notice-view')->with([
+              'user'    => $user,
+              'notice'  => $notice
+            ]);
 
         }
 

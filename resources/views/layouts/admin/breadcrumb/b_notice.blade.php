@@ -13,6 +13,10 @@
 	<li><a href='{{url("dashboard/convocatorias/ver/$notice->id")}}'>{{str_limit($notice->title,50)}}</a></li>
 	<li>Agregar archivos a convocatoria</li>
 	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="notice add-view")
+	<li><a href="{{url('dashboard/convocatorias')}}">Convocatorias</a></li>
+	<li>Convocatoria {{str_limit($notice->title,50)}}</li>
+	@endif
 
 
 
