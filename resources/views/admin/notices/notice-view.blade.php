@@ -116,4 +116,24 @@
 	</div>
 </div>
 
+<!--archivos-->
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Archivos</h2>
+		</div>
+		<div class="col-sm-3">
+			<p class="right"><a href='{{url("dashboard/convocatorias/agregar-archivos/$notice->id")}}' class="btn xs ev">[+] Agregar archivos</a></p>
+		</div>
+		<div class="col-sm-12">
+			@if($notice->files->count() > 0)
+      @include('admin.notices.files-list')
+			@else
+			<p>Sin archivos</p>
+			<a href='{{url("dashboard/convocatorias/agregar-archivos/$notice->id")}}' class="btn xs view">Agregar archivo</a>
+			@endif
+		</div>
+	</div>
+</div>
+
 @endsection

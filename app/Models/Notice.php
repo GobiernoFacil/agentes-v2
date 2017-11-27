@@ -23,4 +23,8 @@ class Notice extends Model
     'end',
     'public'
     ];
+
+    function files(){
+      return $this->hasMany("App\Models\NoticeFile");
+    }
 }

@@ -13,4 +13,8 @@ class NoticeFile extends Model
     'path',
     'comments',
     ];
+
+    function notice(){
+      return $this->belongsTo("App\Models\Notice");
+    }
 }
