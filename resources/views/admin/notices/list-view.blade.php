@@ -22,7 +22,9 @@
 				<thead>
 			    	<tr>
 						<th>Convocatoria</th>
+            <th>Fecha inicio / Fecha final
 						<th>Descripción</th>
+            <th>Publicado</th>
 						<th>Acciones</th>
 			    	</tr>
 				</thead>
@@ -30,7 +32,9 @@
 					@foreach($notices as $notice)
 						<tr>
 							<td><h4><a href='{{url("dashboard/convocatorias/ver/{$notice->id}")}}'>{{$notice->title}}</a></h4></td>
-							<td>{{$notice->description}}</td>
+              <td>{{date("d-m-Y", strtotime($notice->start))}} <br> <strong>{{date('d-m-Y', strtotime($notice->end))}}</strong></td>
+							<td>{{str_limit($notice->description,125)}}</td>
+               <td>{{$notice->public ? "Sí" : "No" }}</td>
 							<td>
 								<a href='{{ url("dashboard/convocatorias/ver/{$notice->id}") }}' class="btn xs view">Ver</a>
 							</td>

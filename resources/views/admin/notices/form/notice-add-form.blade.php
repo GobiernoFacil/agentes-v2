@@ -37,7 +37,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿Esta convocatoria cuenta con archivos para ser descargados por los aspirantes?</strong></label>
-      {{Form::select('hasfiles',[null => "Selecciona una opción", '1' =>'Sí', '0' => 'No'],null, ['class' => 'form-control'])}}
+      {{Form::select('hasfiles',[null => "Selecciona una opción", 1 =>'Sí', 0 => 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('hasfiles'))
       <strong class="danger">{{$errors->first('hasfiles')}}</strong>
       @endif
@@ -163,6 +163,18 @@
       {{Form::textarea('profile_eligibility_particular', null, ["class" => "form-control"])}}
       @if($errors->has('profile_eligibility_particular'))
       <strong class="error">{{$errors->first('profile_eligibility_particular')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+<!-- upload -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Publicar</strong></label>
+      {{Form::select('public',[null => "Selecciona una opción", '1' =>'Sí', '0' => 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('public'))
+      <strong class="danger">{{$errors->first('public')}}</strong>
       @endif
     </p>
   </div>

@@ -52,7 +52,7 @@ class AdminNotice extends Controller
       $notice->user_id = $user->id;
       $notice->save();
       //convocatoria contiene archivos para descargar
-      if($request->hasfiles === 'Sí'){
+      if($request->hasfiles){
         return redirect('dashboard/convocatorias/agregar-archivos/'.$notice->id);
       }else{
         return redirect('dashboard/convocatorias')->with(['message'=>'Se ha guardado correctamente']);
@@ -69,9 +69,12 @@ class AdminNotice extends Controller
     {
         //
         $user    = Auth::user();
-        return view('admin.notices.notice-add')->with([
+        $notice  = Notice::where('id',$id)->firstOrFail();
+        return view('admin.notices.notice-add-file')->with([
           'user'    => $user,
+          'notice'  => $notice
         ]);
+
     }
 
 }

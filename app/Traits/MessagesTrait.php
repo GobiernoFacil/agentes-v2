@@ -321,6 +321,7 @@ trait MessagesTrait{
          'profile_eligibility_general.required' => 'Este campo es requerido',
          'profile_eligibility_description.required' => 'Este campo es requerido',
          'profile_eligibility_particular.required' => 'Este campo es requerido',
+         'public.required' =>'Este campo es requerido',
 
       ];
     }

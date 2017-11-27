@@ -40,7 +40,8 @@ use MessagesTrait;
           'contact'=>'required',
           'start'=>'required',
           'end'=>'required',
-          'hasfiles'=>'required'
+          'hasfiles'=>'required',
+          'public'  => 'required'
       ];
     }
 }

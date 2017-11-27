@@ -21,5 +21,6 @@ class Notice extends Model
     'contact',
     'start',
     'end',
+    'public'
     ];
 }
