@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use File;
 use App\Models\Notice;
 use App\Models\NoticeFile;
 //Request validations
@@ -138,5 +139,23 @@ class AdminNotice extends Controller
           $filename = $data->name.".".$ext;
           return response()->download($file, $filename, $headers);
         }
+
+
+            /**
+             * elimina archivo
+             *
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+            public function delete($id)
+            {
+                //
+                $file       = NoticeFile::where('id',$id)->firstOrFail();
+                $notice_id  = $file->notice_id;
+                File::delete($file->path);
+                $file->delete();
+                return redirect("dashboard/convocatorias/ver/$notice_id")->with('success',"Se ha eliminado correctamente");
+
+            }
 
 }
