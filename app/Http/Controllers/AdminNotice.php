@@ -89,7 +89,7 @@ class AdminNotice extends Controller
         {
           $user    = Auth::user();
           if($files=$request->file('filesData')){
-              $path = public_path().'/archivos/notices/';
+              $path = public_path().'/archivos/notices';
               foreach($files as $file){
                         $name=$file->getClientOriginalName();
                         $identifier = uniqid() . '.' . $file->getClientOriginalExtension();
@@ -118,6 +118,25 @@ class AdminNotice extends Controller
               'notice'  => $notice
             ]);
 
+        }
+
+        /**
+        *descargar archivo
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function download(Request $request){
+          $user = Auth::user();
+          $data = NoticeFile::find($request->file_id);
+          $file = $data->path;
+          $ext  = substr(strrchr($data->name,'.'),1);
+          $mime = mime_content_type ($file);
+          $headers = array(
+            'Content-Type: '.$mime,
+          );
+
+          $filename = $data->name.".".$ext;
+          return response()->download($file, $filename, $headers);
         }
 
 }
