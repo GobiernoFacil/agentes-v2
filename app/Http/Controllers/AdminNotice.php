@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Notice;
+//Request validations
+use App\Http\Requests\SaveAdminNotice;
 class AdminNotice extends Controller
 {
     //
@@ -36,5 +38,15 @@ class AdminNotice extends Controller
         return view('admin.notices.notice-add')->with([
           'user'    => $user,
         ]);
+    }
+
+    /**
+     * Guarda  convocatoria
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function save(SaveAdminNotice $request)
+    {
+
     }
 }

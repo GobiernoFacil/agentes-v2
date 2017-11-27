@@ -1,4 +1,4 @@
-{!! Form::open(['url' => 'dashboard/facilitadores/crear', "class" => "form-horizontal", 'files'=>true]) !!}
+{!! Form::open(['url' => 'dashboard/convocatorias/agregar', "class" => "form-horizontal", 'files'=>true]) !!}
 <!--title-->
 <div class="row">
   <div class="col-sm-12">
@@ -28,6 +28,18 @@
       {{Form::text('end',null, ["class" => "form-control",'id'=>'startE'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+<!-- upload -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>¿Esta convocatoria cuenta con archivos para ser descargados por los aspirantes?</strong></label>
+      {{Form::select('hasfiles',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      @if($errors->has('hasfiles'))
+      <strong class="danger">{{$errors->first('hasfiles')}}</strong>
       @endif
     </p>
   </div>

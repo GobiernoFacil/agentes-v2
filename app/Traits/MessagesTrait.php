@@ -311,6 +311,17 @@ trait MessagesTrait{
          'linkedin.url'      => 'El formato no corresponde con el de una URL válida',
          'facebook.url'      => 'El formato no corresponde con el de una URL válida',
          'other.url'      => 'El formato no corresponde con el de una URL válida',
+         //notice
+         'hasfiles.required' => 'Este campo es requerido',
+         'modality_results.required' => 'Este campo es requerido',
+         'term_process.required' => 'Este campo es requerido',
+         'unforeseen_cases.required' => 'Este campo es requerido',
+         'contact.required' => 'Este campo es requerido',
+         'profile.required' => 'Este campo es requerido',
+         'profile_eligibility_general.required' => 'Este campo es requerido',
+         'profile_eligibility_description.required' => 'Este campo es requerido',
+         'profile_eligibility_particular.required' => 'Este campo es requerido',
+
       ];
     }
 }
