@@ -37,7 +37,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿Esta convocatoria cuenta con archivos para ser descargados por los aspirantes?</strong></label>
-      {{Form::select('hasfiles',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      {{Form::select('hasfiles',[null => "Selecciona una opción", '1' =>'Sí', '0' => 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('hasfiles'))
       <strong class="danger">{{$errors->first('hasfiles')}}</strong>
       @endif

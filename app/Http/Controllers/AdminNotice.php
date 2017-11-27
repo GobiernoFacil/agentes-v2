@@ -47,6 +47,31 @@ class AdminNotice extends Controller
      */
     public function save(SaveAdminNotice $request)
     {
+      $user    = Auth::user();
+      $notice  = new Notice($request->except(['_token','hasfiles']));
+      $notice->user_id = $user->id;
+      $notice->save();
+      //convocatoria contiene archivos para descargar
+      if($request->hasfiles === 'Sí'){
+        return redirect('dashboard/convocatorias/agregar-archivos/'.$notice->id);
+      }else{
+        return redirect('dashboard/convocatorias')->with(['message'=>'Se ha guardado correctamente']);
+      }
 
     }
+
+    /**
+     * Muestra formulario para agregar archivos a convocatoria
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addFiles($id)
+    {
+        //
+        $user    = Auth::user();
+        return view('admin.notices.notice-add')->with([
+          'user'    => $user,
+        ]);
+    }
+
 }
