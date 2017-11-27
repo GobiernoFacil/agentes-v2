@@ -16,13 +16,17 @@
   <div class="col-sm-12">
    <p>
      <label><strong>Archivos</strong></label>
-     <p>Selecciona uno o varios archivos</p>
-     <input type="file" class="form-control" name="files[]" placeholder="address" multiple>
-     @if($errors->has('files'))
-     <strong class="danger">{{$errors->first('files')}}</strong>
+     <p>Selecciona uno o varios archivos (DOC, DOCX o PDF), el tamaño máximo es de 2.5MB</p>
+     <input type="file" class="form-control" name="filesData[]" placeholder="address" multiple>
+     {{var_dump($errors->toArray())}}
+     @if($errors->has('filesData'))
+     <strong class="danger">{{$errors->first('filesData')}}</strong>
      @endif
      @if($errors->has('limitNumber'))
      <strong class="danger">{{$errors->first('limitNumber')}}</strong>
+     @endif
+     @if($errors->has('filesDataR'))
+     <strong class="danger">{{$errors->first('filesDataR')}}</strong>
      @endif
    </p>
  </div>

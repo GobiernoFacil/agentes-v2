@@ -322,6 +322,11 @@ trait MessagesTrait{
          'profile_eligibility_description.required' => 'Este campo es requerido',
          'profile_eligibility_particular.required' => 'Este campo es requerido',
          'public.required' =>'Este campo es requerido',
+         'comments.required' =>'Este campo es requerido',
+         'filesDataR.required' =>'Este campo es requerido',
+         'filesData.1.mime' =>'Selecciona un archivo valido (DOC, DOCX o PDF)',
+         'filesData.1.max' =>'El tamaño es de 2.5MB',
+         'limitNumber.required'=>'Solo se permiten dos archivos como máximo',
 
       ];
     }

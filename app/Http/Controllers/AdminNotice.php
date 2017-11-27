@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Notice;
+use App\Models\NoticeFile;
 //Request validations
 use App\Http\Requests\SaveAdminNotice;
+use App\Http\Requests\SaveAdminNoticeFiles;
 class AdminNotice extends Controller
 {
     //
@@ -76,5 +78,18 @@ class AdminNotice extends Controller
         ]);
 
     }
+
+
+        /**
+         * Guarda  convocatoria
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveFiles(SaveAdminNoticeFiles $request)
+        {
+          $user    = Auth::user();
+
+
+        }
 
 }
