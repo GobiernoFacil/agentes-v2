@@ -28,6 +28,10 @@ class GovernmentFront extends Controller
       public function lecturas(){
         return view('frontend.opengovernment.recursos');
       }
+      //model
+      public function model(){
+        return view('frontend.opengovernment.model');
+      }
       //ejercicios
       public function ejercicios(){
         return view('welcome');
