@@ -1,7 +1,7 @@
 @extends('layouts.frontend.master')
 @section('title', 'Documento Teórico del Modelo de Gobierno Abierto')
 @section('description', 'Documento Teórico del Modelo de Gobierno Abierto')
-@section('body_class', 'abierto lecturas')
+@section('body_class', 'abierto modelo')
 @section('canonical', url('gobierno-abierto/recursos/modelo-gobierno-abierto') )
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_gobiernoabierto')
 
