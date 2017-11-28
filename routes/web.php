@@ -113,6 +113,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/convocatorias', 'AdminNotice@index');
     Route::get('dashboard/convocatorias/agregar', 'AdminNotice@add');
     Route::post('dashboard/convocatorias/agregar', 'AdminNotice@save');
+    Route::get('dashboard/convocatorias/editar/{notice_id}', 'AdminNotice@edit');
+    Route::post('dashboard/convocatorias/editar/{notice_id}', 'AdminNotice@update');
     Route::get('dashboard/convocatorias/agregar-archivos/{notice_id}', 'AdminNotice@addFiles');
     Route::post('dashboard/convocatorias/agregar-archivos/{notice_id}', 'AdminNotice@saveFiles');
     Route::get('dashboard/convocatorias/ver/{notice_id}', 'AdminNotice@view');

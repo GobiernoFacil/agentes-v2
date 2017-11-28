@@ -11,6 +11,7 @@ use App\Models\NoticeFile;
 use App\Http\Requests\SaveAdminNotice;
 use App\Http\Requests\SaveAdminNoticeFiles;
 use App\Http\Requests\UpdateNoticeFile;
+use App\Http\Requests\UpdateAdminNotice;
 class AdminNotice extends Controller
 {
     //
@@ -63,6 +64,35 @@ class AdminNotice extends Controller
       }
 
     }
+
+    /**
+     * actualizar convocatoria
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($notice_id)
+    {
+      $user    = Auth::user();
+      $notice  = Notice::where('id',$notice_id)->firstOrFail();
+      return view('admin.notices.notice-update')->with([
+        'user'    => $user,
+        'notice'  => $notice
+      ]);
+    }
+
+    /**
+     * Guarda  convocatoria
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateAdminNotice $request)
+    {
+      $user    = Auth::user();
+      $data   = $request->except('_token');
+      Notice::where('id',$request->notice_id)->update($data);
+      return redirect('dashboard/convocatorias/ver/'.$request->notice_id)->with(['message'=>'Se ha guardado correctamente']);
+    }
+
 
     /**
      * Muestra formulario para agregar archivos a convocatoria

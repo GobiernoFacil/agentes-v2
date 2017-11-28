@@ -8,6 +8,11 @@
   <li><a href="{{url('dashboard/convocatorias')}}">Convocatorias</a></li>
 	<li>Agregar de convocatoria</li>
 	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="notice update")
+  <li><a href="{{url('dashboard/convocatorias')}}">Convocatorias</a></li>
+	<li><a href='{{url("dashboard/convocatorias/ver/{$notice->id}")}}'>{{str_limit($notice->title,50)}}</a></li>
+	<li>Actualizar convocatoria</li>
+	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="notice add-files")
 	<li><a href="{{url('dashboard/convocatorias')}}">Convocatorias</a></li>
 	<li><a href='{{url("dashboard/convocatorias/ver/$notice->id")}}'>{{str_limit($notice->title,50)}}</a></li>
