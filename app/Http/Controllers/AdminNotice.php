@@ -153,6 +153,20 @@ class AdminNotice extends Controller
         }
 
         /**
+        * elimina convocatoria
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function deleteNotice($notice_id)
+        {
+            //
+            $notice       = Notice::where('id',$notice_id)->firstOrFail();
+            //File::delete($file->path);
+
+        }
+
+        /**
          * Muestra formulario para actualizar archivo de convocatoria
          *
          * @return \Illuminate\Http\Response
