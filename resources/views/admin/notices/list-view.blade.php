@@ -13,6 +13,13 @@
 		<a href="{{ url('dashboard/convocatorias/agregar') }}" class="btn gde"><strong>+</strong> Agregar convocatoria</a>
 	</div>
 </div>
+@if(Session::has('message'))
+<div class="row">
+  <div class="col-sm-12 message success">
+      <p>{{ Session::get('message') }}</p>
+  </div>
+</div>
+@endif
 
 <div class="box">
 	<div class="row">
@@ -37,6 +44,7 @@
                <td>{{$notice->public ? "Sí" : "No" }}</td>
 							<td>
 								<a href='{{ url("dashboard/convocatorias/ver/{$notice->id}") }}' class="btn xs view">Ver</a>
+                <a href ="{{ url('dashboard/convocatorias/eliminar/' . $notice->id)}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 							</td>
 						</tr>
 					@endforeach

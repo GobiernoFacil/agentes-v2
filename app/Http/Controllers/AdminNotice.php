@@ -162,8 +162,13 @@ class AdminNotice extends Controller
         {
             //
             $notice       = Notice::where('id',$notice_id)->firstOrFail();
-            //File::delete($file->path);
-
+            foreach ($notice->files as $file) {
+              # code...
+              File::delete($file->path);
+              $file->delete();
+            }
+            $notice->delete();
+            return redirect('dashboard/convocatorias')->with(['message'=>'Se ha eliminado correctamente']);
         }
 
         /**

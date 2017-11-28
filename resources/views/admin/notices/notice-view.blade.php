@@ -6,6 +6,13 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_notice')
 
 @section('content')
+@if(Session::has('message'))
+<div class="row">
+  <div class="col-sm-12 message success">
+      <p>{{ Session::get('message') }}</p>
+  </div>
+</div>
+@endif
 <div class="row">
 	<div class="col-sm-12 center">
 		<h4 class="center"></h4>
