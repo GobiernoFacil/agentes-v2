@@ -2,7 +2,7 @@
 @section('title', 'Ver convocatoria')
 @section('description', 'Ver convocatoria '.$notice->title)
 @section('body_class', 'notice')
-@section('breadcrumb_type', 'notice add-view')
+@section('breadcrumb_type', 'notice view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_notice')
 
 @section('content')

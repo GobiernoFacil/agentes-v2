@@ -10,6 +10,7 @@ use App\Models\NoticeFile;
 //Request validations
 use App\Http\Requests\SaveAdminNotice;
 use App\Http\Requests\SaveAdminNoticeFiles;
+use App\Http\Requests\UpdateNoticeFile;
 class AdminNotice extends Controller
 {
     //
@@ -105,6 +106,52 @@ class AdminNotice extends Controller
         }
 
         /**
+         * Muestra formulario para actualizar archivo de convocatoria
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateFile($id)
+        {
+            //
+            $user    = Auth::user();
+            $file  = NoticeFile::where('id',$id)->firstOrFail();
+            return view('admin.notices.notice-update-file')->with([
+              'user'    => $user,
+              'file'    => $file
+            ]);
+
+        }
+
+        /**
+         * Muestra formulario para actualizar archivo de convocatoria
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveFile(UpdateNoticeFile $request)
+        {
+            //
+            $user    = Auth::user();
+            $fileDb    = NoticeFile::where('id',$request->file_id)->firstOrFail();
+            $fileDb->comments = $request->comments;
+            $fileDb->save();
+            if($request->file('file')){
+              if($request->file('file')->isValid()){
+                File::delete($fileDb->path);
+                $path = public_path().'/archivos/notices';
+                $name=$request->file('file')->getClientOriginalName();
+                $identifier = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
+                $request->file('file')->move($path,$identifier);
+                $fullpath = $path.'/'.$identifier;
+                $fileDb->name = $name;
+                $fileDb->path = $fullpath;
+                $fileDb->save();
+              }
+          }
+          return redirect('dashboard/convocatorias/ver/'.$fileDb->notice->id)->with(['message'=>'Se ha guardado correctamente']);
+
+        }
+
+        /**
          * Muestra formulario para agregar archivos a convocatoria
          *
          * @return \Illuminate\Http\Response
@@ -141,21 +188,21 @@ class AdminNotice extends Controller
         }
 
 
-            /**
-             * elimina archivo
-             *
-             * @param  int  $id
-             * @return \Illuminate\Http\Response
-             */
-            public function delete($id)
-            {
-                //
-                $file       = NoticeFile::where('id',$id)->firstOrFail();
-                $notice_id  = $file->notice_id;
-                File::delete($file->path);
-                $file->delete();
-                return redirect("dashboard/convocatorias/ver/$notice_id")->with('success',"Se ha eliminado correctamente");
+          /**
+          * elimina archivo
+          *
+          * @param  int  $id
+          * @return \Illuminate\Http\Response
+          */
+          public function delete($id)
+          {
+              //
+              $file       = NoticeFile::where('id',$id)->firstOrFail();
+              $notice_id  = $file->notice_id;
+              File::delete($file->path);
+              $file->delete();
+              return redirect("dashboard/convocatorias/ver/$notice_id")->with('success',"Se ha eliminado correctamente");
 
-            }
+          }
 
 }
