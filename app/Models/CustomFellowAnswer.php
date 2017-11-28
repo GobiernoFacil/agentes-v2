@@ -12,7 +12,10 @@ class CustomFellowAnswer extends Model
       'user_id',
       'questionnaire_id',
       'question_id',
-      'answer'
+      'answer',
+      'answer_id',
+      'facilitator_id',
+      'session_id'
     ];
 
     //modelos relacionados

@@ -38,6 +38,16 @@
 						</td>
 					</tr>
 
+					@foreach($custom as $questionnaire)
+						<tr>
+							<td><h4><a href='{{url("dashboard/encuestas/diagnostico/{$questionnaire->id}")}}'>{{$questionnaire->title}}</a></h4></td>
+							<td>{{$questionnaire->description}}</td>
+							<td>
+								<a href='{{ url("dashboard/encuestas/diagnostico/{$questionnaire->id}") }}' class="btn xs view">Ver</a>
+							</td>
+						</tr>
+					@endforeach
+
 				</tbody>
 			</table>
 		</div>

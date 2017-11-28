@@ -300,12 +300,14 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');
+    Route::get('dashboard/encuestas/diagnostico/{survey_id}', 'AdminSurveys@customSurvey');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows/{fellows_id}', 'AdminSurveys@surveyFellow');
     Route::get('dashboard/encuestas/facilitadores-modulos', 'AdminSurveys@indexModules');
     Route::get('dashboard/encuestas/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminSurveys@surveyFacilitator');
     Route::get('dashboard/encuestas/get_csv/{file_name}', 'AdminSurveys@getCsv');
-     Route::get('dashboard/encuestas/get_csv/fellow/{file_name}', 'AdminSurveys@get_csv');
+    Route::get('dashboard/encuestas/get_csv/fellow/{file_name}', 'AdminSurveys@get_csv');
+    Route::get('dashboard/encuestas/facilitadores-modulos/{session_id}/c/{facilitator_id}', 'AdminSurveys@customFacilitator');
      /*@AdminDiagnostic Controller */
      //Rutas de diagnostico
      Route::get('dashboard/diagnostico', 'AdminDiagnostic@index');
@@ -396,6 +398,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/w/{name}', 'FellowSurveys@welcomeFacilitator');
     Route::get('tablero/encuestas/gracias', 'FellowSurveys@thanks');
     Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}/gracias', 'FellowSurveys@thanksFacilitator');
+    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@customFacilitator');
+    Route::post('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');
     //// noticias
     Route::get('tablero/noticias', 'NewsEventsFellow@index');
     Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');

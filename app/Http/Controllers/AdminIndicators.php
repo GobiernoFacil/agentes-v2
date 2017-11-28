@@ -82,7 +82,7 @@ class AdminIndicators extends Controller
       $today    = date('Y-m-d');
       //a un solo módulo
       $modules_ids = FacilitatorModule::pluck('module_id');
-      $modules     = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();   
+      $modules     = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->where('start','<=',$today)->where('public',1)->whereIn('id',$modules_ids->toArray())->orderBy('start','asc')->get();
       return view('admin.indicators.survey-fac-module-list')->with([
         'user'=>$user,
         'modules' =>$modules

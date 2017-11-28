@@ -1,7 +1,8 @@
-{!! Form::open(['url' => url("tablero/diagnostico/$questionnaire->slug"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/encuestas/facilitadores-sesiones/{$session->slug}/c/{$facilitator->name}"), "class" => "form-horizontal"]) !!}
+{{Form::hidden('session_id',$session->id, ["class" => "form-control"])}}
+{{Form::hidden('facilitator_id',$facilitator->id, ["class" => "form-control"])}}
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">{{$questionnaire->title}}</h2>
     <p>{{$questionnaire->description}}</p>
   </div>
 </div>

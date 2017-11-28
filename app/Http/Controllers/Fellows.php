@@ -69,6 +69,15 @@ class Fellows extends Controller
       $non_user_sur   = User::whereIn('email',$non_email_list)->pluck('id');
       $fac_number    = FacilitatorModule::where('module_id',$module_survey->id)->whereNotIn('user_id',$non_user_sur->toArray())->count();
 
+      $module_survey_2  = Module::where('title','CURSO 2 - Herramientas para la Acción')->first();
+      $user_sur         = FacilitatorModule::where('module_id',$module_survey_2->id)->pluck('user_id');
+      $q_fac            = CustomQuestionnaire::where('type','facilitator')->first();
+      $custom_number_q  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
+
+      $module_survey_3  = Module::where('title','CURSO 3 - Aterrizaje: "Ya tengo mi agenda, y ahora qué..."')->first();
+      $user_sur_3       = FacilitatorModule::where('module_id',$module_survey_3->id)->pluck('user_id');
+      $custom_number_q_3  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
+
       $today = date("Y-m-d");
       //obtener la ultima actividad
       if($user_log){
@@ -105,6 +114,9 @@ class Fellows extends Controller
       //diagnostico
       $questionnaire   = CustomQuestionnaire::where('slug','transversalizacion-de-la-perspectiva-de-genero')->first();
       $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
+      //diagnostico seminario 2
+      $questionnaire_2      = CustomQuestionnaire::where('slug','evaluacion-de-seminario-2')->first();
+      $diagnostic_2         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire_2->id)->first();
 
    return view('fellow.dashboard')->with([
         "user"      		=> $user,
@@ -124,7 +136,13 @@ class Fellows extends Controller
         'noMessages'    => $noMessages,
         'fac_number'    => $fac_number,
         'custom_test'   => $answers,
-        'questionnaire' => $questionnaire
+        'questionnaire' => $questionnaire,
+        'diagnostic_2'  => $diagnostic_2,
+        'questionnaire_2' => $questionnaire_2,
+        "user_sur"      => $user_sur,
+        "custom_number_q" => $custom_number_q,
+        "user_sur_3"      => $user_sur_3,
+        "custom_number_q_3" => $custom_number_q_3
       ]);
     }
 

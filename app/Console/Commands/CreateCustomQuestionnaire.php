@@ -7,7 +7,7 @@ use Excel;
 use File;
 use App\Models\CustomQuestion;
 use App\Models\CustomQuestionnaire;
-use App\Models\Customanswer;
+use App\Models\CustomAnswer;
 use App\User;
 class CreateCustomQuestionnaire extends Command
 {
@@ -49,7 +49,7 @@ class CreateCustomQuestionnaire extends Command
         if(File::exists($path_file) && $user){
           Excel::load($path_file, function($reader)use($user){
             $results = $reader->get(array('questions', 'title','description','type',
-            'observations','required','min_label','max_label','options_columns_number','options_rows_number','answer','value','order'));
+            'observations','required','min_label','max_label','options_columns_number','options_rows_number','answer','value','order','type_questionnaire'));
             if($results->first()->title && $results->first()->description){
               $slug  = str_slug($results->first()->title);
               $check = CustomQuestionnaire::where('slug',$slug)->first();
@@ -58,7 +58,8 @@ class CreateCustomQuestionnaire extends Command
                     ['user_id'=>$user->id,
                      'title'=>$results->first()->title,
                      'description'=>$results->first()->description,
-                     'slug'=>$slug
+                     'slug'=>$slug,
+                     'type'=>$results->first()->type_questionnaire
                      ]);
                   $questionnaire->save();
                   foreach($results as $result){
