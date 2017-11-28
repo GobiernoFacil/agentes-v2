@@ -23,7 +23,7 @@
 		<p>La búsqueda de mecanismos que incorporen la opinión y la decisión de distintas redes de actores en los procesos de decisión y gestión pública coadyuvan, se sugiere desde el <strong>Gobierno Abierto</strong>, a la generación de confianza entre gobernantes y gobernados. El modo particular de entender la gobernanza democrática desde el <strong>Gobierno Abierto</strong> permite, en términos prácticos, incorporar talento, creatividad, ideas y voluntad en la búsqueda de soluciones a los problemas públicos considerados como relevantes dentro de una comunidad política particular. En este ámbito, <strong>Gobierno Abierto</strong> abona a la reconstitución y al fortalecimiento de la legitimidad política de los Estados y de los regímenes democráticos.</p>
 			
 			
-		<p><em>Fragmento extraído del <strong>Modelo de <strong>Gobierno Abierto</strong> del INAI y el SNT</strong>, disponible en: <a href="https://goo.gl/RWxKR8">https://goo.gl/RWxKR8</a></em>
+		<p><em>Fragmento extraído del <strong>Modelo de <strong>Gobierno Abierto</strong> del INAI y el SNT</strong>, disponible en: <a href="{{url('gobierno-abierto/recursos/modelo-gobierno-abierto')}}">Documento Teórico del Modelo de Gobierno Abierto</a></em>
 		</p>
 	</div>
 		<div class="col-sm-4">

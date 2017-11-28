@@ -14,7 +14,7 @@
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 		<ol>
-			<li><h2><a href="{{url('archivos/recursos/ModeloGobiernoAbierto.pdf')}}" download>Documento Teórico del Modelo de Gobierno Abierto</a> <span>[PDF]</span></h2>	 
+			<li><h2><a href="{{url('gobierno-abierto/recursos/modelo-gobierno-abierto')}}">Documento Teórico del Modelo de Gobierno Abierto</a> </h2>	 
 			<p>Sistema Nacional de Transparencia, Acceso a la Información Pública y Protección de Datos Personales, 18 de marzo de 2016. </p>
 			</li>
 			<li>
