@@ -9,7 +9,7 @@
   @if($notice)
     <div class="row">
     	<div class="col-sm-10 col-sm-offset-1">
-    		<h2 class="danger">Convocatoria 2017 Cerrada</h2>
+    		<h2><a href='{{url("convocatoria/aplicar/$notice->slug")}}' class="btn gde process">Aplicar a convocatoria</a></h2>
       	<h1><strong>Convocatoria</strong> {{$notice->title}}</h1>
         <p>{{$notice->description}}</p>
         <!--files-->

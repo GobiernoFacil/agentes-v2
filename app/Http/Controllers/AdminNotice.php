@@ -55,6 +55,7 @@ class AdminNotice extends Controller
       $user    = Auth::user();
       $notice  = new Notice($request->except(['_token','hasfiles']));
       $notice->user_id = $user->id;
+      $notice->slug = str_slug($request->title);
       $notice->save();
       //convocatoria contiene archivos para descargar
       if($request->hasfiles){
@@ -89,6 +90,7 @@ class AdminNotice extends Controller
     {
       $user    = Auth::user();
       $data   = $request->except('_token');
+      $data['slug'] = str_slug($request->title);
       Notice::where('id',$request->notice_id)->update($data);
       return redirect('dashboard/convocatorias/ver/'.$request->notice_id)->with(['message'=>'Se ha guardado correctamente']);
     }

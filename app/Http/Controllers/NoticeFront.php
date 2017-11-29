@@ -42,8 +42,12 @@ class NoticeFront extends Controller
       }
 
       //convocatoria/aplicar
-      public function aplicar(){
-        return view('frontend.convocatoria.aplicar-1');
+      public function aplicar($notice_slug){
+        $today  = date('Y-m-d');
+        $notice  = Notice::where('slug',$notice_slug)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->firstOrFail();
+        return view('frontend.convocatoria.aplicar-1')->with([
+          'notice' =>$notice
+        ]);
       }
 
       //Guardar aspirante

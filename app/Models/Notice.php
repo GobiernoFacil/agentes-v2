@@ -20,7 +20,8 @@ class Notice extends Model
     'contact',
     'start',
     'end',
-    'public'
+    'public',
+    'slug'
     ];
 
     function files(){
@@ -29,7 +30,7 @@ class Notice extends Model
 
     function get_last_notice(){
       $today  = date('Y-m-d');
-      $notice = $this::where('start','<=',$today)->where('end','>=',$today)->first();
+      $notice = $this::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
       return $notice;
 
     }

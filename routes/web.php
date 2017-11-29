@@ -32,10 +32,10 @@ Route::get('convocatoria/metodologia-2017', 'NoticeFront@metodo17');
 Route::get('convocatoria/archivos/{name}', 'NoticeFront@download');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
-/** se acabó la convocatoria
-Route::get('convocatoria/aplicar', 'NoticeFront@aplicar');
-Route::post('convocatoria/aplicar', 'NoticeFront@saveAspirant');
-***/
+/** se acabó la convocatoria***/
+Route::get('convocatoria/aplicar/{notice_slug}', 'NoticeFront@aplicar');
+Route::post('convocatoria/aplicar/{notice_slug}', 'NoticeFront@saveAspirant');
+
 Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
 Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
 Route::get('convocatoria/aplicar/fin', 'NoticeFront@end');
