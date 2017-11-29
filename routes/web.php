@@ -29,6 +29,7 @@ Route::get('redes-sociales', 'Front@redes');
 Route::get('convocatoria', 'NoticeFront@convocatoria');
 Route::get('convocatoria/resultados-2017', 'NoticeFront@resultado17');
 Route::get('convocatoria/metodologia-2017', 'NoticeFront@metodo17');
+Route::get('convocatoria/archivos/{name}', 'NoticeFront@download');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
 /** se acabó la convocatoria

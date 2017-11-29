@@ -10,6 +10,7 @@ use App\Models\Aspirant;
 use App\Models\AspirantActivation;
 use App\Models\AspirantsFile;
 use App\Models\City;
+use App\Models\Notice;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
 use App\Http\Requests\SaveFiles;
@@ -18,14 +19,18 @@ class NoticeFront extends Controller
   /******************* funciones de convocatoria ************************/
       //convocatoria
       public function convocatoria(){
-        return view('frontend.convocatoria.info');
+        $notice  = new Notice;
+        $notice  = $notice->get_last_notice();
+        return view('frontend.convocatoria.notice-front')->with([
+          'notice' =>$notice
+        ]);
       }
-      
+
       //resultados 2017
       public function resultado17(){
         return view('frontend.convocatoria.resultados2017');
       }
-      
+
       //metodología 2017
       public function metodo17(){
         return view('frontend.convocatoria.metodologia');
