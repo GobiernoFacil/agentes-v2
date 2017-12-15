@@ -10,7 +10,7 @@ class Aspirant extends Model
   use Notifiable;
     //
     protected $fillable = [
-        'name', 'surname', 'lastname','email','city','state','degree','origin'
+        'name', 'surname', 'lastname','email','city','state','degree','origin','gender','notice_id'
     ];
 
     //modelos relacionados

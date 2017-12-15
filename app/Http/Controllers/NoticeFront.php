@@ -53,7 +53,10 @@ class NoticeFront extends Controller
       //Guardar aspirante
       public function saveAspirant(SaveAspirant $request){
         $data     = $request->except('email-confirm');
+        $today  = date('Y-m-d');
+        $notice  = Notice::where('slug',$request->notice_slug)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->firstOrFail();
         $aspirant = new Aspirant($data);
+        $aspirant->notice_id = $notice->id;
         $aspirant->is_activated = 0;
         $aspirant->save();
         $link     =  str_random(40);
