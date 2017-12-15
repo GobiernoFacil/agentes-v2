@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableAspirantsAddNoticeId extends Migration
+class CreateTableAspirantNotices extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,11 @@ class AlterTableAspirantsAddNoticeId extends Migration
     public function up()
     {
         //
-        Schema::table('aspirants', function (Blueprint $table) {
-          $table->integer('notice_id')->nullable();
+        Schema::create('aspirant_notices', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('aspirant_id')->nullable();
+            $table->integer('notice_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class AlterTableAspirantsAddNoticeId extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('aspirants');
+        Schemma::dropIfExists('aspirant_notices');
     }
 }

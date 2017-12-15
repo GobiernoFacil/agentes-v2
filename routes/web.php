@@ -38,8 +38,8 @@ Route::post('convocatoria/aplicar/{notice_slug}', 'NoticeFront@saveAspirant');
 
 Route::get('convocatoria/aplicar/registro', 'NoticeFront@aspirantFiles');
 Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
-Route::get('convocatoria/aplicar/fin', 'NoticeFront@end');
-Route::get('convocatoria/aplicar/confirmacion/{token}', 'NoticeFront@aspirantActivation');
+Route::get('convocatoria/registro/fin', 'NoticeFront@end');
+Route::get('convocatoria/aplicar/{notice_slug}/{token}/confirmacion', 'NoticeFront@aspirantActivation');
 Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 Route::get('cities', 'NoticeFront@cities');
 /*@RangeFront Controller */
@@ -474,5 +474,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/diagnostico', 'FacilitatorDiagnostic@index');
     Route::get('tablero-facilitador/diagnostico/{custom_id}', 'FacilitatorDiagnostic@getCustom');
     Route::get('tablero-facilitador/diagnostico/descargar/{type}/{custom_id}', 'FacilitatorDiagnostic@download');
+  });
+
+
+
+  /* R U T A S  UNICAS DEL ASPIRANTE
+  --------------------------------------------------------------------------------*/
+  Route::group(['middleware' => 'type:aspirant' ], function(){
+    /*@AspirantDash Controller */
+    //Dashboard
+    Route::get('tablero-aspirante', 'AspirantDash@dashboard');
   });
 });

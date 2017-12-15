@@ -10,12 +10,20 @@ class Aspirant extends Model
   use Notifiable;
     //
     protected $fillable = [
-        'name', 'surname', 'lastname','email','city','state','degree','origin','gender','notice_id'
+        'name', 'surname', 'lastname','email','city','state','degree','origin','gender'
     ];
 
     //modelos relacionados
   function AspirantsFile(){
     return $this->hasOne("App\Models\AspirantsFile");
+  }
+
+  function notices(){
+    return $this->hasMany("App\Models\AspirantNotice");
+  }
+
+  function notice(){
+    return $this->hasOne("App\Models\AspirantNotice");
   }
 
   function AspirantEvaluation(){

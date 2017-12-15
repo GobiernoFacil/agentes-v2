@@ -18,6 +18,8 @@ class Suscribe extends Controller
         return redirect('tablero-facilitador');
       }elseif($usuario->type ==='fellow'){
         return redirect('tablero');
+      }elseif($usuario->type ==='aspirant'){
+        return redirect('tablero-aspirante');
       }else{
         abort(403, 'Unauthorized action.');
       }
