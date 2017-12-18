@@ -36,7 +36,7 @@
 							<div class="divider"></div>
 						</div>
 						<div class="col-sm-8 col-sm-offset-2 center">
-							<p><a href="{{url('tablero-facilitador/noticias')}}" class="btn view gde ">Ver todas las convocatorias</a></p>
+							<p><a href="{{url('tablero-aspirante/convocatorias')}}" class="btn view gde ">Ver todas las convocatorias</a></p>
 						</div>
 					@else
 					<p>Aún no existen convocatorias.</p>

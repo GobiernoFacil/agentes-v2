@@ -484,9 +484,13 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AspirantDash Controller */
     //Dashboard
     Route::get('tablero-aspirante', 'AspirantDash@dashboard');
-    // Perfil  Facilitador
+    // Perfil  aspirante
     Route::get('tablero-aspirante/perfil', 'AspirantDash@viewProfile');
     Route::get('tablero-aspirante/perfil/editar', 'AspirantDash@editProfile');
     Route::post('tablero-aspirante/perfil/save', 'AspirantDash@saveProfile');
+    //convocatorias
+    /*AspirantNotice*/
+    Route::get('tablero-aspirante/convocatorias', 'AspirantNotice@index');
+
   });
 });
