@@ -11,6 +11,10 @@
 	{
 		$linkDash = "tablero-facilitador";
 	}
+	else if($user->type == "aspirant")
+	{
+		$linkDash = "tablero-aspirante";
+	}
 	else
 	{
 		$linkDash = "sa/dashboard";
@@ -49,6 +53,10 @@
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow aprendizaje' || $__env->yieldContent('body_class') ==  'fellow aprendizaje modulos' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_modulos"></b> Aprendizaje</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/foros')}}"><b class="icon i_foros"></b> Foros</a></li>
+				@endif
+				@if($user->type == "aspirant")
+				<!--aspirant-->
+				<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria'  ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}"><b class="icon i_modulos"></b> Convocatorias</a></li>
 				@endif
 			</ul>
 		</nav>
