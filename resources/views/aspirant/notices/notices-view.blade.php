@@ -1,8 +1,8 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Convocatorias en la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible' )
-@section('description', 'Lista de convocatorias en la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
+@section('title', 'Convocatoria '.$notice->title )
+@section('description', 'Convocatoria '.$notice->title)
 @section('body_class', 'aspirante convocatoria')
-@section('breadcrumb_type', 'notice index')
+@section('breadcrumb_type', 'notice view')
 @section('breadcrumb', 'layouts.aspirant.breadcrumb.b_notices')
 
 @section('content')

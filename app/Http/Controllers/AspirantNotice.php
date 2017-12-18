@@ -8,8 +8,8 @@ use App\Models\Notice;
 class AspirantNotice extends Controller
 {
     //
-    /**
-  * edita perfil del usuario aspirante 
+   /**
+  * Lista de convocatorias 
   *
   * @return \Illuminate\Http\Response
   */
@@ -24,4 +24,21 @@ class AspirantNotice extends Controller
 
         ]);
   }
+
+  /** Ver convocatoria
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function view($notice_slug)
+  {
+    	$user    = Auth::user();
+    	$notice = Notice::where('slug',$notice_slug)->where('public',1)->firstOrfail();
+        return view('aspirant.notices.notices-view')->with([
+          "user"      => $user,
+          "notice"   => $notice
+
+        ]);
+  }
+
+
 }

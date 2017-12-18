@@ -491,6 +491,7 @@ Route::group(['middleware' => ['auth']], function () {
     //convocatorias
     /*AspirantNotice*/
     Route::get('tablero-aspirante/convocatorias', 'AspirantNotice@index');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotice@view');
 
   });
 });
