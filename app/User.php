@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Cache;
 use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
+use App\Models\Aspirant;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
@@ -54,6 +55,11 @@ class User extends Authenticatable
     function facilitatorData(){
       return $this->hasOne("App\Models\FacilitatorData");
     }
+
+    function aspirant($user){
+      return Aspirant::where('email',$this->email)->first();
+    }
+
     function image(){
       return $this->hasOne("App\Models\Image");
     }
