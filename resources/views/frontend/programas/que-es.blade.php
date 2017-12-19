@@ -285,7 +285,7 @@
 					</li>
 					<!--Enlaces-->
 					<li>
-						<h3><a href="{{url('programa-gobierno-abierto/descarga/seminaro-1')}}" style ="border-bottom: 0px;">1er Seminario Internacional “Gobierno Abierto desde lo local para el desarrollo sostenible” del 21 al 23 de septiembre, 2017 en la Ciudad de México</a></h3>
+						<h3><a href="{{url('programa-gobierno-abierto/descarga/seminaro-1')}}" style ="border-bottom: 0px;">1er Seminario Internacional “Gobierno Abierto desde lo local para el desarrollo sostenible” del 21 al 23 de junio, 2017 en la Ciudad de México</a></h3>
 					</li>
 					<li>
 						<h3><a href="{{url('programa-gobierno-abierto/descarga/seminaro-2')}}" style ="border-bottom: 0px;">2ndo Seminario Internacional “Gobierno Abierto desde lo local para el desarrollo sostenible” del 11 al 13 de septiembre, 2017 en la Ciudad de Oaxaca<a></h3>
