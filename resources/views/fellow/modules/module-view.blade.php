@@ -55,7 +55,7 @@
 </div>
 
 
-<!-- sesiones--->
+<!-- sesiones-->
 <div class="row">
 	<div class="col-sm-12">
 		<div class="divider"></div>
@@ -63,7 +63,7 @@
 	</div>
 </div>
 
-<!-- lista de sesiones--->
+<!-- lista de sesiones-->
 @if($module->sessions->count() > 0)
     @foreach($module->sessions as $session)
     <div class="box session_list">

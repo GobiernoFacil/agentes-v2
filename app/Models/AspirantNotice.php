@@ -16,4 +16,8 @@ class AspirantNotice extends Model
     function aspirant(){
       return $this->belongsTo("App\Models\Aspirant");
     }
+
+    function notice(){
+    	return $this->belongsTo("App\Models\Notice");
+    }
 }

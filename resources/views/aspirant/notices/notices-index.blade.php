@@ -10,49 +10,51 @@
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="center">Convocatoria</h3>
-		<h1 class="center">{{$notice->title}}</h1>
-		<p class="center date">{{date("d-m-Y", strtotime($notice->start))}} al {{date('d-m-Y', strtotime($notice->end))}}</p>
+    	<h3 class ="center">Convocatorias</h3>
 		<div class="divider"></div>
 	</div>
 </div>
 
-<!-- header -->
-<div class="row h_tag">
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h time"></b> Duración</h4>
-		<p>{{$notice->number_hours}} horas</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h session"></b> # Sesiones</h4>
-		<p>{{$notice->number_sessions}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h modalidad"></b> Modalidad</h4>
-		<p>{{$notice->modality}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h {{$notice->public ? 'publicado' : 'no_p'}} "></b>Activo</h4>
-		<p> <span class="published {{$notice->public ? 'view' : ''}}">{{$notice->public ? 'Sí' : 'No'}}</span></p>
+<!-- lista de convocatorias-->
+@if($notices->count() > 0)
+    @foreach($notices as $single)
+    <div class="box session_list">
+	  	<div class="row">
+			<!--icono-->
+			<div class="col-sm-1 right">
+				<b class="icon_h session list_s"></b>
+			</div>
+			<div class="col-sm-7">
+				<h2><a href='{{ url("tablero-aspirante/convocatorias/{$single->notice->slug}") }}'>{{$single->notice->title}}</a></h2>
+				<div class="divider"></div>
+					<div class="row">
+						<div class="col-sm-8">
+							<p>{{$single->notice->objective}}</p>
+						</div>
+						<div class="col-sm-4 notes">
+							<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($single->notice->start))}} al {{date('d-m-Y', strtotime($single->notice->end))}}</p>
+						</div>
+					</div>
+				</div>
+				<!-- ver convocatoria-->
+				<div class="col-sm-2">
+					<a class="btn view"  href='{{ url("tablero-aspirante/convocatorias/{$single->notice->slug}") }}'>Ver convocatoria</a>
+				</div>
+
+				<div class="col-sm-2">
+					<a class="btn view "  href='{{ url("tablero-aspirante/convocatorias/{$single->notice->slug}/ver-archivos") }}'>Ver archivos</a>
+				</div>
+			
+			</div>
+		</div>
+    @endforeach
+@else
+<div class="box">
+	<div class="row center">
+		<h2>No existen convocatorias abiertas</h2>
 	</div>
 </div>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="divider top"></div>
-	</div>
-	<div class="col-sm-4">
-		<h3>Objetivo</h3>
-		<p>{{$notice->objective}}</p>
-	</div>
-	<div class="col-sm-4">
-		<h3>Situación didáctica</h3>
-		<p>{{$notice->teaching_situation}}</p>
-	</div>
-	<div class="col-sm-4">
-		<h3>Productos a desarrollar</h3>
-		<p>{{$notice->product_developed}}</p>
-	</div>
-</div>
+@endif
 
 
 @endsection

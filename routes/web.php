@@ -489,9 +489,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/perfil/editar', 'AspirantDash@editProfile');
     Route::post('tablero-aspirante/perfil/save', 'AspirantDash@saveProfile');
     //convocatorias
-    /*AspirantNotice*/
-    Route::get('tablero-aspirante/convocatorias', 'AspirantNotice@index');
-    Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotice@view');
-
+    /*AspirantNotices*/
+    Route::get('tablero-aspirante/convocatorias', 'AspirantNotices@index');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotices@view');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
   });
 });

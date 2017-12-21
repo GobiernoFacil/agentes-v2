@@ -18,8 +18,7 @@ class AspirantDash extends Controller
 
     public function dashboard(){
 	  	$user 		   = Auth::user();
-	  	$today         = date('Y-m-d');
-	    $notices       = Notice::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->limit(3)->get();
+	    $notices       = $user->aspirant($user)->notices;
 	    return view('aspirant.dashboard')->with([
 	      "user"      	  => $user,
 	      "notices"       => $notices,

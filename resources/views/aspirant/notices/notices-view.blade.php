@@ -13,29 +13,10 @@
     	<h3 class ="center">Convocatoria</h3>
 		<h1 class="center">{{$notice->title}}</h1>
 		<p class="center date">{{date("d-m-Y", strtotime($notice->start))}} al {{date('d-m-Y', strtotime($notice->end))}}</p>
-		<div class="divider"></div>
+
 	</div>
 </div>
 
-<!-- header -->
-<div class="row h_tag">
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h time"></b> Duración</h4>
-		<p>{{$notice->number_hours}} horas</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h session"></b> # Sesiones</h4>
-		<p>{{$notice->number_sessions}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h modalidad"></b> Modalidad</h4>
-		<p>{{$notice->modality}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h {{$notice->public ? 'publicado' : 'no_p'}} "></b>Activo</h4>
-		<p> <span class="published {{$notice->public ? 'view' : ''}}">{{$notice->public ? 'Sí' : 'No'}}</span></p>
-	</div>
-</div>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="divider top"></div>
@@ -45,14 +26,50 @@
 		<p>{{$notice->objective}}</p>
 	</div>
 	<div class="col-sm-4">
-		<h3>Situación didáctica</h3>
-		<p>{{$notice->teaching_situation}}</p>
+		<h3>Descripción</h3>
+		<p>{{$notice->description}}</p>
 	</div>
 	<div class="col-sm-4">
-		<h3>Productos a desarrollar</h3>
-		<p>{{$notice->product_developed}}</p>
+		<h3>Modalidad y resultados esperados</h3>
+		<p>{{$notice->modality_results}}</p>
 	</div>
 </div>
 
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="divider top"></div>
+	</div>
+	<div class="col-sm-4">
+		<h3>Perfil de egreso</h3>
+		<p>{{$notice->profile}}</p>
+	</div>
+	<div class="col-sm-4">
+		<h3>Perfil y elegibilidad de los participantes</h3>
+		<p>{{$notice->profile_eligibility_description}}</p>
+	</div>
+	<div class="col-sm-4">
+		<h3>Plazos y procesos de postulación</h3>
+		<p>{{$notice->term_process}}</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="divider top"></div>
+	</div>
+	<div class="col-sm-4">
+		<h3>Perfil de egreso</h3>
+		<p>{{$notice->profile}}</p>
+	</div>
+	<div class="col-sm-4">
+		<h3>Perfil y elegibilidad de los participantes</h3>
+		<p>{{$notice->profile_eligibility_description}}</p>
+	</div>
+	<div class="col-sm-4">
+		<h3>Plazos y procesos de postulación</h3>
+		<p>{{$notice->term_process}}</p>
+	</div>
+</div>
 
 @endsection
