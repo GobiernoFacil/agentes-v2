@@ -11,7 +11,7 @@ class AspirantNotices extends Controller
 {
     //
    /**
-  * Lista de convocatorias 
+  * Lista de convocatorias
   *
   * @return \Illuminate\Http\Response
   */
@@ -34,7 +34,7 @@ class AspirantNotices extends Controller
   {
     	$user    = Auth::user();
     	$notice  = Notice::where('slug',$notice_slug)->where('public',1)->firstOrfail();
-      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspiran($user)->id)->firstOrfail();  
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();  
         return view('aspirant.notices.notices-view')->with([
           "user"      => $user,
           "notice"   => $notice
