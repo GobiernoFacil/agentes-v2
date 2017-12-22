@@ -19,6 +19,12 @@
 
 <div class="row">
 	<div class="col-sm-12">
+    	<h3 class ="right"><a class ="btn view" href='{{url("tablero-aspirante/convocatorias/$notice->slug/ver-archivos")}}'>Ver archivos</a></h3>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
 		<div class="divider top"></div>
 	</div>
 	<div class="col-sm-4">
@@ -59,16 +65,12 @@
 		<div class="divider top"></div>
 	</div>
 	<div class="col-sm-4">
-		<h3>Perfil de egreso</h3>
-		<p>{{$notice->profile}}</p>
+		<h3>Casos no previstos</h3>
+		<p>{{$notice->unforeseen_cases}}</p>
 	</div>
 	<div class="col-sm-4">
-		<h3>Perfil y elegibilidad de los participantes</h3>
-		<p>{{$notice->profile_eligibility_description}}</p>
-	</div>
-	<div class="col-sm-4">
-		<h3>Plazos y procesos de postulación</h3>
-		<p>{{$notice->term_process}}</p>
+		<h3>Contacto</h3>
+		<p>{{$notice->contact}}</p>
 	</div>
 </div>
 
