@@ -494,5 +494,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotices@view');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@saveFiles');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@editFiles');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');
+    Route::get('tablero-aspirante/archivo/download/{name}/{type}', 'AspirantNotices@download');
   });
 });

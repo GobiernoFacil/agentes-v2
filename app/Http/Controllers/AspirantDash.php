@@ -7,6 +7,7 @@ use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\Image;
 use Auth;
+use File;
 // FormValidators
 use App\Http\Requests\UpdateAspirantProfile;
 class AspirantDash extends Controller
@@ -41,7 +42,7 @@ class AspirantDash extends Controller
   }
 
   /**
-  * edita perfil del usuario aspirante 
+  * edita perfil del usuario aspirante
   *
   * @return \Illuminate\Http\Response
   */
@@ -62,7 +63,7 @@ class AspirantDash extends Controller
   */
   public function saveProfile(UpdateAspirantProfile $request)
   {
-	  
+
 	$user = Auth::user();
     $user->name  = $request->name;
 

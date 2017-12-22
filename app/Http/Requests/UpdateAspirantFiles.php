@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class SaveFiles extends FormRequest
+class UpdateAspirantFiles extends FormRequest
 {
 
-  use MessagesTrait;
+use MessagesTrait;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,13 +26,12 @@ class SaveFiles extends FormRequest
     public function rules()
     {
       return [
-        'cv' => 'required|file|mimes:doc,docx,pdf|max:2500',
-        'essay' => 'required|file|mimes:doc,docx,pdf|max:25000',
-        'letter' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
-        'proof' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
-        'privacy' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
+        'cv' => 'file|mimes:doc,docx,pdf|max:2500',
+        'essay' => 'file|mimes:doc,docx,pdf|max:25000',
+        'letter' => 'file|mimes:jpg,png,jpeg,pdf|max:2500',
+        'proof' => 'file|mimes:jpg,png,jpeg,pdf|max:2500',
+        'privacy' => 'file|mimes:jpg,png,jpeg,pdf|max:2500',
         'video' => 'required',
-      //  'aId'=>'required'
       ];
     }
 }

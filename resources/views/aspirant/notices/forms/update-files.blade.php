@@ -1,4 +1,4 @@
-{!! Form::open(['url' => "tablero-aspirante/convocatorias/$notice->slug/agregar-archivos", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
+{!! Form::model($files,['url' => "tablero-aspirante/convocatorias/$notice->slug/actualizar-archivos", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
 
 
 <div class="row">
