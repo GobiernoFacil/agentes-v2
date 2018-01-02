@@ -297,6 +297,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/indicadores/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminIndicators@surveyFacilitator');
     Route::get('dashboard/indicadores/satisfaccion', 'AdminIndicators@surveySatisfaction');
     Route::get('dashboard/indicadores/percepcion-positiva', 'AdminIndicators@perception');
+    Route::get('dashboard/indicadores/agentes-aprobados', 'AdminIndicators@fellowsApproved');
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');
