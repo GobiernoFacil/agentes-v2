@@ -124,8 +124,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/convocatorias/archivos/editar/{file_id}', 'AdminNotice@saveFile');
     Route::get('dashboard/convocatorias/archivos/descargar/{file_id}', 'AdminNotice@download');
     Route::get('dashboard/convocatorias/archivos/eliminar/{file_id}', 'AdminNotice@delete');
-    // @Aspirants Controller
-    Route::get('dashboard/aspirantes', 'Aspirants@index');
+    // @Aspirants Controller old controller
+    // @AdminAspirants new aspirant controller
+
+    //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
+    Route::get('dashboard/aspirantes', 'AdminAspirants@index');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
     Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
