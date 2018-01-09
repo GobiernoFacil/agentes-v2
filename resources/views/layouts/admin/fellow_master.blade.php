@@ -57,6 +57,29 @@
 	<?php $body_class = $__env->yieldContent('body_class');?>
 	@endif
 @endif
+
+<?php
+	if($user->type == "admin")
+	{
+		$linkDash = "dashboard";
+	}
+	else if($user->type == "fellow")
+	{
+		$linkDash = "tablero";
+	}
+	else if($user->type == "facilitator")
+	{
+		$linkDash = "tablero-facilitador";
+	}
+	else if($user->type == "aspirant")
+	{
+		$linkDash = "tablero-aspirante";
+	}
+	else
+	{
+		$linkDash = "sa/dashboard";
+	}
+?>
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
 	<div class="apertus_nav">	
@@ -78,6 +101,9 @@
 			</div>
 		</div>
 		@endif
+		
+		<!--header-->
+		@include('layouts.admin.a_profile_logout')
 		
 		<section>
 			<!--content-->
