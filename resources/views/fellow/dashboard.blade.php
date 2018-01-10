@@ -18,8 +18,8 @@
 	
 	<div class="col-sm-1">
 		<button class="ap-advancer" type="button">
-		<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
-	</button>
+			<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
+		</button>
 	</div>
 	<div class="col-sm-10">
 		<div class="timeline_box">
@@ -32,9 +32,32 @@
 	</div>
 	<div class="col-sm-1 right">
 		<button class="ap-advancer" type="button">
-		<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
-	</button>
+			<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
+		</button>
 	</div>
+	
+	
+	@if($user->log->count()>0)
+		<div class="col-sm-12">
+			@if($session)
+				@include('fellow.session-dash-view')
+			@elseif($activity)
+				@include('fellow.activity-dash-view')
+			@elseif($module_last)
+				@include('fellow.module-dash-view')
+			@endif
+		</div>
+	@else
+		<div class="box session_list">
+			<div class="row">
+				<div class="col-sm-12">
+					<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+				</div>
+				@include('fellow.module-first-dash-view')
+			</div>
+		</div>
+	@endif
+	
 </div>
 <?php /*
 	<div class="col-sm-3">
@@ -209,25 +232,4 @@
 @endsection
 @section('js-content')
 <script src="{{url('js/bower_components/jquery/dist/jquery.min.js')}}"></script>
-<script>
-	$("div.AP_div").each(function(){
-    	$(this).hide();
-		if($(this).attr('id') == 'eval') {
-        	$(this).show();
-    	}
-	});
-	$('a.sh').on( "click", function(e) {
-	    e.preventDefault();
-	    $('a.sh').removeClass('active');
-	    $(this).addClass('active');
-	    var id = $(this).attr('data-info');
-	    $("div.AP_div").each(function(){
-	        $(this).hide();
-	        if($(this).attr('id') == id) {
-	            $(this).show();
-	        }
-	    });
-
-	});
-</script>
 @endsection
