@@ -57,8 +57,67 @@
 			</div>
 		</div>
 	@endif
-	
 </div>
+	
+<div class="row">	
+	<div class = "col-sm-12">
+		<?php $counter = 0;?>
+		@foreach($modules as $module)
+		<?php ++$counter;?>
+		<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
+			<div class="m_header">
+				<div class="row">
+					<div class="col-sm-6">
+						<h4> Semana {{$counter}}</h4>
+					</div>
+					<div class="col-sm-6">
+						<p>Tiempo estimado: </p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+					<div class="col-sm-9">
+						<h3>
+							@if($module->public && $today >= $module->start )
+							<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}'>
+							@endif
+							{{\Illuminate\Support\Str::words($module->title,13,'…')}}
+							@if($module->public && $today >= $module->start )
+							</a>
+							@endif
+						</h3>
+					</div>
+					<div class="col-sm-3">
+						<div class="hours">
+						<p><b class="watch"></b> {{$module->number_hours}} h</p>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<p class="description">{{\Illuminate\Support\Str::words($module->objective,19,'…')}}</p>
+					</div>
+				</div>
+			<div class="footer">
+					<div class="row">
+						<div class="col-sm-3">
+							<p><b class="sessionG"></b> {{$module->number_sessions}}</p>
+						</div>
+						<div class="col-sm-6">
+							<p class="center">{{$module->modality}}</p>
+						</div>
+						<div class="col-sm-3">
+							<p class="right">{!! $module->public && $today >= $module->start ? 'Activo' : '<b class="candado"></b>'!!}	</p>
+						</div>
+					</div>
+				</div>
+			@if($module->public && $today >= $module->start)
+			<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}' class="btn view">Ir al Módulo</a></li>
+			@endif
+		
+		</div>
+		@endforeach
+	</div>
+</div>	
+
 <?php /*
 	<div class="col-sm-3">
 		<div class="box">
