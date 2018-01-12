@@ -1279,8 +1279,8 @@ h3.title {
   font-weight: 500; }
 
 .module {
-  border: 1px solid #b9b9ba;
-  margin-bottom: 25px;
+  border: 1px solid #d7d8db;
+  margin-bottom: 61px;
   padding: 0; }
   .module.disabled {
     background: #f9f8f9; }
@@ -1288,6 +1288,17 @@ h3.title {
       color: #777; }
     .module.disabled .hours p {
       color: #888; }
+  .module .m_header {
+    background: #f2f2f2;
+    padding: 17px 20px;
+    color: #6b6969; }
+    .module .m_header h4 {
+      font-size: 16px;
+      text-transform: uppercase; }
+    .module .m_header p {
+      font-size: 16px;
+      color: #6b6969;
+      margin: 0; }
   .module h3 {
     font-size: 16px;
     padding: 15px 0 0 10px; }
@@ -2073,7 +2084,8 @@ a:visited.link {
     color: white; }
   .box.last_activity {
     background: #f2f2f2;
-    border: 1px solid #bfbebe; }
+    border: 1px solid #bfbebe;
+    margin-bottom: 61px; }
   .box.session_list {
     padding-bottom: 37px; }
     .box.session_list h2 {
