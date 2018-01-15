@@ -119,6 +119,7 @@ class Fellows extends Controller
       $diagnostic_2         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire_2->id)->first();
 
    return view('fellow.dashboard')->with([
+	   "modules"		=> $modules,
         "user"      		=> $user,
         "modules_count" => $modules->count(),
         "module"        =>  $first_module,
