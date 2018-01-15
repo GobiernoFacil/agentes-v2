@@ -39,4 +39,8 @@ class Notice extends Model
       $files  = NoticeFile::where('notice_id',$this->id)->limit(2)->get();
       return $files;
     }
+
+    function aspirants(){
+      return $this->hasMany("App\Models\AspirantNotice",'notice_id');
+    }
 }
