@@ -24,6 +24,13 @@
 			    </tr>
 			  </thead>
 			  <tbody>
+						<tr>
+							<td><h4><a>Porcentaje de agentes de cambio aprobados</a></h4></td>
+							<td>Proporción de agentes de cambio que aprobaron el programa</td>
+							<td>
+								<a href="{{ url('dashboard/indicadores/agentes-aprobados') }}" class="btn xs view">Ver</a>
+							</td>
+						</tr>
 			      <tr>
 			        <td><h4><a>Percepción de facilitadores</a></h4></td>
 			        <td>Proporción de facilitadores evaluados favorablemete por parte de los agentes de cambio</td>

@@ -11,6 +11,7 @@ use App\Models\FacilitatorSurvey;
 use App\Models\FellowSurvey;
 use App\Models\ModuleSession;
 use App\Models\FellowData;
+use App\Models\FellowAverage;
 use App\User;
 use PDF;
 class AdminIndicators extends Controller
@@ -170,6 +171,33 @@ class AdminIndicators extends Controller
         "female"    => $female,
       ]);
     }
+
+    /**
+     * Genera lista con el número de fellows por género
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fellowsApproved()
+    {
+      $user            = Auth::user();
+      $enabled         = User::where('email','!=','andre@fcb.com')->where('type','fellow')->where('enabled',1)->pluck('id');
+      $male            = FellowData::where('gender','Male')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
+      $female          = FellowData::where('gender','Female')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
+      $total_male      = FellowAverage::whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','total')->count();
+      $total_female    = FellowAverage::whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','total')->count();
+      $score_male      = ceil(($total_male*100)/$male->count());
+      $score_female    = ceil(($total_female*100)/$female->count());
+      return view('admin.indicators.approved-fellows')->with([
+        "user"      => $user,
+        "male"      => $male,
+        "female"    => $female,
+        "total_male" => $total_male,
+        "total_female" => $total_female,
+        "score_male"=> $score_male,
+        "score_female"=>$score_female
+      ]);
+    }
+
 
 
 
