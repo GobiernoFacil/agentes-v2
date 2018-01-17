@@ -1087,9 +1087,6 @@ textarea:focus {
 .right {
   text-align: right; }
 
-p strong {
-  color: #187fad; }
-
 ul,
 ol {
   margin-left: 30px; }
@@ -1295,10 +1292,28 @@ h3.title {
     .module .m_header h4 {
       font-size: 16px;
       text-transform: uppercase; }
+      .module .m_header h4 span {
+        font-weight: 300; }
     .module .m_header p {
       font-size: 16px;
       color: #6b6969;
       margin: 0; }
+  .module .m_content {
+    color: #5b5e6d;
+    padding: 35px 30px; }
+    .module .m_content h3 {
+      font-size: 21px;
+      font-weight: 500;
+      padding: 0 0 30px; }
+      .module .m_content h3 a {
+        color: #5b5e6d; }
+        .module .m_content h3 a:hover {
+          border-bottom: 1px dotted #5b5e6d; }
+    .module .m_content h4 {
+      color: #a09f9f;
+      font-size: 15px; }
+    .module .m_content .border_l {
+      border-left: 1px solid #5b5e6d; }
   .module h3 {
     font-size: 16px;
     padding: 15px 0 0 10px; }
@@ -1345,13 +1360,15 @@ b.sessionG {
   height: 16px;
   width: 16px; }
 
-.ap-advancer {
+.ap-advancer,
+.ap-show {
   margin: 60px 0;
   border: 0;
   background: transparent;
   padding: 0;
   border: 0; }
-  .ap-advancer:focus {
+  .ap-advancer:focus,
+  .ap-show:focus {
     outline: 0; }
 
 .ap-timelineicon {
@@ -1406,6 +1423,13 @@ b.sessionG {
       width: 16px;
       top: 19px;
       right: -6px; }
+
+.ap-show {
+  margin: 0 0 0 20px;
+  display: inline-block; }
+  .ap-show svg {
+    height: 20px;
+    transform: rotate(90deg); }
 
 .profile.list {
   margin: 0; }
