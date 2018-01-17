@@ -131,6 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
     Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
