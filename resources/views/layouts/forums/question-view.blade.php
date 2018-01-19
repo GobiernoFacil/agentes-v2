@@ -190,7 +190,7 @@
 		      		
 				</div>
 				<div class="col-sm-10">
-	  				<p>{{$message->message}}</p>
+	  				<p class="f-message">{{$message->message}}</p>
 	  				<p class="author">Por
 		  			@if($message->user->fellowData)
 		  			<!--fellow data -->

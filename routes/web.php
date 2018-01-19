@@ -60,6 +60,7 @@ Route::get('gobierno-abierto/contenido-teorico-del-modelo', 'GovernmentFront@con
 Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
+Route::get('gobierno-abierto/recursos/modelo-gobierno-abierto', 'GovernmentFront@model');
 
 /*@NewsEventFront Controller */
 /*********  Noticias y eventos ******** */
@@ -130,6 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
     Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
@@ -318,6 +320,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/indicadores/facilitadores-modulos/{session_id}/{facilitator_id}', 'AdminIndicators@surveyFacilitator');
     Route::get('dashboard/indicadores/satisfaccion', 'AdminIndicators@surveySatisfaction');
     Route::get('dashboard/indicadores/percepcion-positiva', 'AdminIndicators@perception');
+    Route::get('dashboard/indicadores/agentes-aprobados', 'AdminIndicators@fellowsApproved');
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@index');
