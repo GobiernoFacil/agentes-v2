@@ -1311,7 +1311,27 @@ h3.title {
           border-bottom: 1px dotted #5b5e6d; }
     .module .m_content h4 {
       color: #a09f9f;
+      font-size: 15px;
+      padding-bottom: 20px; }
+    .module .m_content h5 {
+      color: black;
+      margin-left: 30px; }
+    .module .m_content p,
+    .module .m_content li {
+      color: black;
       font-size: 15px; }
+      .module .m_content p span,
+      .module .m_content li span {
+        display: block;
+        color: #6b6969;
+        font-size: 13px; }
+    .module .m_content li {
+      list-style: none; }
+    .module .m_content .ap-acti {
+      margin-left: 0; }
+      .module .m_content .ap-acti li {
+        color: #6b6969;
+        margin-bottom: 10px; }
     .module .m_content .border_l {
       border-left: 1px solid #5b5e6d; }
   .module h3 {
