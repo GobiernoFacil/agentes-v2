@@ -327,6 +327,7 @@ trait MessagesTrait{
          'filesData.*.mimes' =>'Selecciona un archivo valido (DOC, DOCX o PDF)',
          'filesData.*.max' =>'El tamaño es de 2.5MB',
          'limitNumber.required'=>'Solo se permiten dos archivos como máximo',
+         'notice_id.between'   => 'Este campo es requerido',
 
       ];
     }

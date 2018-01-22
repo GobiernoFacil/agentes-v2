@@ -152,6 +152,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');
     Route::post('dashboard/perfil/save', 'Admin@saveProfile');
     /******************** CMS routes *******************************/
+    /*@Programs Controller */
+    //CRUD Programs
+    Route::get('dashboard/programas', 'Programs@index');
+    Route::get('dashboard/programas/agregar', 'Programs@add');
+    Route::post('dashboard/programas/save', 'Programs@save');
+    Route::get('dashboard/programas/editar/{id}', 'Programs@edit');
+    Route::post('dashboard/programas/update/{id}', 'Programs@update');
+    Route::get('dashboard/programas/deshabilitar/{id}', 'Programs@delete');
+    Route::get('dashboard/programas/ver/{id}', 'Programs@view');
     /*@Modules Controller */
     //CRUD Modules
     Route::get('dashboard/modulos', 'Modules@index');
