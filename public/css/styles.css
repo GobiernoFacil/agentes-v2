@@ -1488,13 +1488,14 @@ a.apertus:hover {
 
 .login_c {
   background: #1b4760;
-  padding: 10px 0;
+  min-height: 46px;
   font-size: 13px; }
   .login_c a {
     background: #f15c44;
     color: white;
     display: inline-block;
-    padding: 3px 6px; }
+    line-height: 46px;
+    padding: 0 21px; }
     .login_c a:hover {
       background: #ef472c; }
 
@@ -1505,25 +1506,52 @@ a.apertus:hover {
   margin-bottom: 40px; }
 
 .stats {
-  border-bottom: 3px solid #187fad;
+  border-bottom: 5px solid #187fad;
   margin-bottom: 60px;
   padding: 20px 15px 40px; }
   .stats p {
     font-size: 23px;
     font-weight: 300; }
-  .stats svg path {
-    fill: #444;
-    stroke: #444; }
+  .stats h3 {
+    text-transform: uppercase; }
+    .stats h3 span {
+      font-weight: 500; }
+  .stats svg {
+    margin-bottom: 17px; }
+  .stats .table > thead > tr > th,
+  .stats .table > tbody > tr > td {
+    width: 25%;
+    text-align: center; }
+  .stats .table > thead > tr > th h3 {
+    font-size: 16px;
+    color: #187fad; }
+  .stats .table > tbody > tr.old > td {
+    color: #999; }
 
 .gab {
-  background: #18b73e;
-  color: white;
-  margin-bottom: 30px;
-  padding: 30px 0 40px; }
+  background: #f8f8f8;
+  color: #404040;
+  margin-bottom: 90px;
+  padding: 79px 0 90px; }
   .gab p {
-    font-size: 21px; }
+    font-weight: 300;
+    font-size: 20px; }
+    .gab p strong {
+      color: #404040;
+      font-weight: 500; }
   .gab a {
     color: white; }
+
+.y_17,
+.y_18 {
+  background: #f15c44;
+  display: inline-block;
+  margin-left: 20px;
+  height: 14px;
+  width: 14px; }
+
+.y_18 {
+  background: #20a6e7; }
 
 .error {
   background: #cc0000;
@@ -1628,6 +1656,15 @@ h2.danger {
     margin-top: 20px;
     padding: 15px 21px;
     text-transform: uppercase; }
+    .bgdimg a.btn.blue {
+      background: rgba(24, 127, 173, 0.8); }
+      .bgdimg a.btn.blue:hover {
+        background: #156f97;
+        cursor: pointer; }
+
+.ap_lead {
+  margin-bottom: 70px;
+  text-transform: uppercase; }
 
 a.btn,
 .btn {
