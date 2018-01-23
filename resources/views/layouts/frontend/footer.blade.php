@@ -2,7 +2,7 @@
 <section class="gab">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
+			<div class="col-sm-10 col-sm-offset-1">
 				<h2 class="title">¿QUÉ ES ELPROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y <strong>DESARROLLO SOSTENIBLE</strong>?</h2>
 				<p>El Programa contribuye al fortalecimiento de una buena gobernanza en México a partir de prácticas de <a href="{{url('gobierno-abierto')}}">Gobierno Abierto</a>, <strong>participación ciudadana</strong>, <strong>transparencia</strong> y <strong>anticorrupción</strong> , con esquemas innovadores de desarrollo de capacidades y de vinculación social que permitan el empoderamiento de agentes de cambio, así como el impulso de espacios de diálogo y cocreaciónn a nivel subnacional.</p>
 
