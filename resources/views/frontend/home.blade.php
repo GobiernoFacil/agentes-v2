@@ -7,23 +7,9 @@
 
 
 @section('content')
-<div class="row">
-	<div class="col-sm-10 col-sm-offset-1">
-		<div class="bgdimg">
-			<figure>
-				<img src="{{url('img/home_bgd3.JPG')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
-			</figure>
-			<div class="cta">
-				<div class="col-sm-8 col-sm-offset-2">
-					<h2>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h2>
-					<h1></h1>
-					<a href="{{url('programa-gobierno-abierto')}}" class="btn blue">¿Qué es el Programa de Formación?</a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-</div>
+
+		
+
 
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
