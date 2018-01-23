@@ -3,21 +3,25 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h2 class="title">¿QUÉ ES <strong>GOBIERNO ABIERTO</strong>?</h2>
-				<p>Gobierno Abierto es un enfoque que propone una forma particular de entender los procesos de gobierno, a partir de principios como los de la transparencia y la participación ciudadana.</p>
-					<a href="{{url('gobierno-abierto')}}" class="btn blue">LEER MÁS ></a>
+				<h2 class="title">¿QUÉ ES ELPROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y <strong>DESARROLLO SOSTENIBLE</strong>?</h2>
+				<p>El Programa contribuye al fortalecimiento de una buena gobernanza en México a partir de prácticas de <a href="{{url('gobierno-abierto')}}">Gobierno Abierto</a>, <strong>participación ciudadana</strong>, <strong>transparencia</strong> y <strong>anticorrupción</strong> , con esquemas innovadores de desarrollo de capacidades y de vinculación social que permitan el empoderamiento de agentes de cambio, así como el impulso de espacios de diálogo y cocreaciónn a nivel subnacional.</p>
+
+				<p>Es una iniciativa del <strong>Programa de las Naciones Unidas para el Desarrollo</strong> (PNUD), posible gracias al apoyo de la <strong>Agencia de los Estados Unidos para el Desarrollo Internacional</strong> (USAID por sus siglas en inglés), desarrollada y acompañada por el trabajo conjunto de actores tanto del gobierno como de la sociedad civil: el <strong>Instituto Nacional de Transparencia, Acceso a la información y Protección de Datos Personales</strong> (INAI), <strong>Gestión Social y Cooperación</strong> (GESOC), <strong>Gobierno Fácil</strong> y <strong>ProSociedad</strong>.</p>
+					<a href="{{url('programa-gobierno-abierto')}}" class="btn blue center">LEER MÁS ></a>
 			</div>
 		</div>
 	</div>
 </section>
+
 @endif
 @if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
 <div class="map_container">
 	<section>
 	<div class="container">
 			<div class="col-sm-8 col-sm-offset-2">
-		<h2 class="title"><strong>ALCANCE</strong> DEL PROGRAMA DE GOBIERNO ABIERTO DESDE LO LOCAL PARA EL DESARROLLO SOSTENIBLE</h2>
-		</div>
+				<h2 class="title"><strong>ALCANCE</strong> DEL PROGRAMA DE GOBIERNO ABIERTO DESDE LO LOCAL PARA EL DESARROLLO SOSTENIBLE</h2>
+				<p class="center"><b class="y_17"></b> 2017 <b class="y_18"></b> 2018</p>
+			</div>
 	</div>
 	</section>
   <!-- el mapa! -->
