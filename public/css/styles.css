@@ -1648,7 +1648,8 @@ h2.danger {
       display: block; }
     .bgdimg .cta p {
       font-size: 17px; }
-  .bgdimg a.btn {
+  .bgdimg a.btn,
+  .bgdimg a:visited.btn {
     background: rgba(241, 92, 68, 0.8);
     color: white;
     letter-spacing: 2px;
@@ -1656,9 +1657,11 @@ h2.danger {
     margin-top: 20px;
     padding: 15px 21px;
     text-transform: uppercase; }
-    .bgdimg a.btn.blue {
+    .bgdimg a.btn.blue,
+    .bgdimg a:visited.btn.blue {
       background: rgba(24, 127, 173, 0.8); }
-      .bgdimg a.btn.blue:hover {
+      .bgdimg a.btn.blue:hover,
+      .bgdimg a:visited.btn.blue:hover {
         background: #156f97;
         cursor: pointer; }
 
@@ -1667,17 +1670,21 @@ h2.danger {
   text-transform: uppercase; }
 
 a.btn,
-.btn {
+.btn,
+a:visited.btn {
   display: inline-block;
   background: #f15c44;
+  color: white;
   padding: 10px;
   transition: background 500ms; }
   a.btn:hover,
-  .btn:hover {
+  .btn:hover,
+  a:visited.btn:hover {
     background: #ef472c;
     cursor: pointer; }
   a.btn.gde,
-  .btn.gde {
+  .btn.gde,
+  a:visited.btn.gde {
     background-color: #f15c44;
     border: 0;
     color: white;
@@ -1687,27 +1694,35 @@ a.btn,
     text-transform: uppercase;
     width: 100%; }
     a.btn.gde:hover,
-    .btn.gde:hover {
+    .btn.gde:hover,
+    a:visited.btn.gde:hover {
       background-color: #ef472c; }
     a.btn.gde.download,
-    .btn.gde.download {
+    .btn.gde.download,
+    a:visited.btn.gde.download {
       background-color: #187fad; }
       a.btn.gde.download:hover,
-      .btn.gde.download:hover {
+      .btn.gde.download:hover,
+      a:visited.btn.gde.download:hover {
         background-color: #156f97; }
     a.btn.gde.process,
-    .btn.gde.process {
+    .btn.gde.process,
+    a:visited.btn.gde.process {
       background-color: #f9ad48; }
       a.btn.gde.process:hover,
-      .btn.gde.process:hover {
+      .btn.gde.process:hover,
+      a:visited.btn.gde.process:hover {
         background-color: #f8a22f; }
   a.btn.block,
-  .btn.block {
+  .btn.block,
+  a:visited.btn.block {
     display: block; }
   a.btn.i_download,
   a.btn.i_convoca_w,
   .btn.i_download,
-  .btn.i_convoca_w {
+  .btn.i_convoca_w,
+  a:visited.btn.i_download,
+  a:visited.btn.i_convoca_w {
     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNy4wNDJweCIgaGVpZ2h0PSIyNy41OTRweCIgdmlld0JveD0iMCAwIDI3LjA0MiAyNy41OTQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI3LjA0MiAyNy41OTQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xMy41NDEsMUM2LjYzOSwxLDEuMDQyLDYuNTk4LDEuMDQyLDEzLjVTNi42MzksMjYsMTMuNTQxLDI2YzYuOTA0LDAsMTIuNTAxLTUuNTk4LDEyLjUwMS0xMi41UzIwLjQ0NSwxLDEzLjU0MSwxeiBNMTAuMTg2LDEyLjA3M2MwLjE3My0wLjE3NCwwLjM5OC0wLjI2LDAuNjI2LTAuMjZjMC4yMjcsMCwwLjQ1MSwwLjA4NiwwLjYyNSwwLjI2bDEuMTA4LDEuMTA3VjguNDk4YzAtMC40ODgsMC4zOTYtMC44ODUsMC44ODUtMC44ODVzMC44ODUsMC4zOTYsMC44ODUsMC44ODV2NC43NDJsMS4xNjgtMS4xNjdjMC4xNzQtMC4xNzQsMC4zOTktMC4yNiwwLjYyNy0wLjI2YzAuMjI2LDAsMC40NTMsMC4wODYsMC42MjUsMC4yNmMwLjIxMywwLjIxMywwLjI5NCwwLjUwNiwwLjI0NSwwLjc4MWwtMC4wMDEsMC4wMDJjLTAuMDA0LDAuMDItMC4wMSwwLjAzOS0wLjAxNSwwLjA1OWMtMC4wMDgsMC4wMjktMC4wMTcsMC4wNjEtMC4wMjcsMC4wODljLTAuMDA3LDAuMDItMC4wMTYsMC4wMzktMC4wMjQsMC4wNTljLTAuMDE0LDAuMDMxLTAuMDMsMC4wNjEtMC4wNDcsMC4wOWMtMC4wMSwwLjAxNi0wLjAxOSwwLjAzMS0wLjAyOCwwLjA0NWMtMC4wMywwLjA0NS0wLjA2MywwLjA4OC0wLjEwMywwLjEyN2wtMi42NDIsMi42NDFjLTAuMTc0LDAuMTcyLTAuNCwwLjI2LTAuNjI2LDAuMjZoLTAuMDE0Yy0wLjIyNywwLTAuNDUyLTAuMDg4LTAuNjI1LTAuMjZsLTEuMzgyLTEuMzgzbC0xLjI2LTEuMjU4Yy0wLjAzOS0wLjAzOS0wLjA3My0wLjA4Mi0wLjEwMy0wLjEyN2MtMC4wMS0wLjAxNC0wLjAyLTAuMDI5LTAuMDI5LTAuMDQ1Yy0wLjAxOC0wLjAyOS0wLjAzMi0wLjA1OS0wLjA0Ny0wLjA5Yy0wLjAxLTAuMDItMC4wMTctMC4wMzktMC4wMjQtMC4wNjFjLTAuMDExLTAuMDI5LTAuMDItMC4wNTgtMC4wMjYtMC4wODdjLTAuMDA1LTAuMDItMC4wMTMtMC4wMzktMC4wMTUtMC4wNjFDOS44OTEsMTIuNTc5LDkuOTcyLDEyLjI4NiwxMC4xODYsMTIuMDczeiBNMTguNzQ2LDE5LjQ2M2MwLDAuNTE4LTAuNDIsMC45MzgtMC45MzgsMC45MzhIOS40MTFjLTAuNTE4LDAtMC45MzgtMC40Mi0wLjkzOC0wLjkzOHYtMC4wODJjMC0wLjUxOCwwLjQyLTAuOTM4LDAuOTM4LTAuOTM4aDguMzk3YzAuNTE4LDAsMC45MzgsMC40MiwwLjkzOCwwLjkzOFYxOS40NjN6Ii8+PC9zdmc+");
     background-position: 95% 50%;
     background-repeat: no-repeat;
@@ -1715,18 +1730,24 @@ a.btn,
     a.btn.i_download.blue,
     a.btn.i_convoca_w.blue,
     .btn.i_download.blue,
-    .btn.i_convoca_w.blue {
+    .btn.i_convoca_w.blue,
+    a:visited.btn.i_download.blue,
+    a:visited.btn.i_convoca_w.blue {
       background-color: rgba(24, 127, 173, 0.7); }
       a.btn.i_download.blue:hover,
       a.btn.i_convoca_w.blue:hover,
       .btn.i_download.blue:hover,
-      .btn.i_convoca_w.blue:hover {
+      .btn.i_convoca_w.blue:hover,
+      a:visited.btn.i_download.blue:hover,
+      a:visited.btn.i_convoca_w.blue:hover {
         background-color: rgba(24, 127, 173, 0.9); }
   a.btn.i_convoca_w,
-  .btn.i_convoca_w {
+  .btn.i_convoca_w,
+  a:visited.btn.i_convoca_w {
     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNy4wNDJweCIgaGVpZ2h0PSIyMC4wMDdweCIgdmlld0JveD0iMCA0LjIyMSAyNy4wNDIgMjAuMDA3IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgNC4yMjEgMjcuMDQyIDIwLjAwNyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PGc+PGc+PGc+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTE5Ljk1NCwxMC4yNzRWNS45MzdjMC0wLjIyNi0wLjEyMy0wLjQyNy0wLjMyNC0wLjUzYy0wLjE5Ni0wLjEwMy0wLjQzOC0wLjA4OC0wLjYyNCwwLjA0Yy00LjMxMiwyLjk4MS02Ljc4OCwzLjM2NS04LjQ2MywzLjM2NUg1Ljc1M2MtMS44OTcsMC0zLjQzOSwxLjU0Mi0zLjQzOSwzLjQzOHYxLjI3N2MwLDEuODk2LDEuNTQyLDMuNDM4LDMuNDM5LDMuNDM4aDIuMzJsMi4yNTksNi4wNDdjMC4yNjYsMC4zNiwwLjg0NywwLjEwNSwwLjYxMS0wLjQwMWwtMi4xMTktNS42NDZoMS43MTFjNS44MzYsMCw4LjIyMywzLjA5LDguMzMxLDMuMjMyYzAuMTE5LDAuMTU3LDAuMjk2LDAuMjQ2LDAuNDgxLDAuMjQ2YzAuMDY0LDAsMC4xMjgtMC4wMTEsMC4xODctMC4wM2MwLjI0Ni0wLjA4MywwLjQxMy0wLjMwOSwwLjQxMy0wLjU2OXYtNC4zMzJjMS4xOTMtMC4yNzUsMi4wODMtMS4zNDIsMi4wODMtMi42MThDMjIuMDQyLDExLjYxNSwyMS4xNDcsMTAuNTQ0LDE5Ljk1NCwxMC4yNzRMMTkuOTU0LDEwLjI3NHogTTE4LjYyMiwxOC41MTVjLTEuMzI3LTEuMDktMy45OTMtMi42NzItOC4yMi0yLjY3Mkg4LjgzM3YtNS42OTZoMS41NjhjMS43MDgsMCw0LjI1LTAuMzcxLDguMjU1LTIuOTQxTDE4LjYyMiwxOC41MTV6IE0xOS45NTQsMTQuMjQzIi8+PC9nPjwvZz48Zz48cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjIuOTc3LDExLjM0NGMtMC4xOTIsMC0wLjM3My0wLjExOS0wLjQ0NC0wLjMxMWMtMC4wOS0wLjI0NiwwLjAzNy0wLjUxOCwwLjI4MS0wLjYwN0wyNS42NCw5LjM5YzAuMjQ2LTAuMDg5LDAuNTE3LDAuMDM2LDAuNjA3LDAuMjgycy0wLjAzNiwwLjUxOC0wLjI4MSwwLjYwOGwtMi44MjYsMS4wMzZDMjMuMDg2LDExLjMzNSwyMy4wMzIsMTEuMzQ0LDIyLjk3NywxMS4zNDR6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yNS43OTksMTYuMzI0Yy0wLjA1NiwwLTAuMTEyLTAuMDA5LTAuMTY3LTAuMDNsLTIuODE3LTEuMDU5Yy0wLjI0NS0wLjA5Mi0wLjM2OS0wLjM2NC0wLjI3Ni0wLjYwOWMwLjA5MS0wLjI0NSwwLjM2NC0wLjM2OCwwLjYwOS0wLjI3N2wyLjgxOCwxLjA1OWMwLjI0NCwwLjA5MywwLjM2OCwwLjM2NSwwLjI3NiwwLjYxQzI2LjE3MSwxNi4yMDcsMjUuOTkxLDE2LjMyNCwyNS43OTksMTYuMzI0eiIvPjwvZz48Zz48cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjYuMTg4LDEzLjI5N2MtMC4wMDUsMC0wLjAwOSwwLTAuMDEzLDBsLTMuMDEsMC4wMjNjLTAuMjYyLTAuMDA4LTAuNDY4LTAuMTc1LTAuNDYxLTAuNDM3YzAuMDA3LTAuMjYyLDAuMjI0LTAuNDUxLDAuNDg1LTAuNDM3bDMuMDA5LDAuMDg4YzAuMjYyLDAuMDA2LDAuNDY5LDAuMTMxLDAuNDYyLDAuMzkzQzI2LjY1NCwxMy4xODYsMjYuNDQzLDEzLjI5NywyNi4xODgsMTMuMjk3eiIvPjwvZz48L2c+PGc+PGVsbGlwc2UgZmlsbD0iI0ZGRkZGRiIgY3g9IjIuOTg3IiBjeT0iMTIuODMxIiByeD0iMi4xODQiIHJ5PSIxLjk2MiIvPjwvZz48L2c+PC9zdmc+"); }
   a.btn.btn-login,
-  .btn.btn-login {
+  .btn.btn-login,
+  a:visited.btn.btn-login {
     background: #18b73e;
     border: 0;
     color: white;
@@ -1734,7 +1755,8 @@ a.btn,
     padding: 10px 21px;
     text-transform: uppercase; }
     a.btn.btn-login:hover,
-    .btn.btn-login:hover {
+    .btn.btn-login:hover,
+    a:visited.btn.btn-login:hover {
       background: #128a2f; }
 
 .icon {
