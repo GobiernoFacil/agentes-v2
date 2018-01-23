@@ -113,6 +113,25 @@
 	</div>
 	@endif
 	<main class="main-content">
+		
+		@if($body_class == "home")
+		<div class="bgdimg">
+			<figure>
+				<img src="{{url('img/home_apertus_2018.jpeg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+			</figure>
+			<div class="container">
+				<div class="cta">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
+							<a href="{{url('programa-gobierno-abierto')}}" class="btn blue">Comunicado 2018</a>
+						</div>
+					</div>
+			</div>
+			</div>
+		</div>
+		@endif
+		
 		<!--content-->
 		<div class="container">
 		@yield('content')
