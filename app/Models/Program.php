@@ -16,4 +16,9 @@ class Program extends Model
       'end',
       'public'
     ];
+
+
+    function modules(){
+      return $this->hasMany("App\Models\Module")->orderBy('order','asc');
+    }
 }

@@ -20,8 +20,13 @@ class Module extends Model
         'start',
         'end',
         'public',
-        'user_id'
+        'user_id',
+        'program_id'
     ];
+
+    function program(){
+      return $this->belongsTo("App\Models\Program");
+    }
 
     function sessions(){
       return $this->hasMany("App\Models\ModuleSession")->orderBy('order','asc');
