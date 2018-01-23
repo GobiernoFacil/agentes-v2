@@ -21,4 +21,8 @@ class Program extends Model
     function modules(){
       return $this->hasMany("App\Models\Module")->orderBy('order','asc');
     }
+
+    function notice(){
+      return $this->hasOne("App\Models\NoticeProgram");
+    }
 }

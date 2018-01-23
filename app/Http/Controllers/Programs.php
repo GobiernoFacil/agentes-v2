@@ -11,6 +11,7 @@ use App\Models\NoticeProgram;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveProgram;
+use App\Http\Requests\UpdateProgram;
 class Programs extends Controller
 {
     //Paginación
@@ -41,7 +42,8 @@ class Programs extends Controller
     public function add()
     {
       $user    = Auth::user();
-      $notices = Notice::orderBy('start','asc')->pluck('title','id');
+      $notices_ids = NoticeProgram::pluck('notice_id');
+      $notices = Notice::orderBy('start','asc')->whereNotIn('id',$notices_ids->toArray())->pluck('title','id');
       $notices[0] = "Selecciona una opción";
       return view('admin.programs.program-add')->with([
         "user"      => $user,
@@ -82,5 +84,43 @@ class Programs extends Controller
         "user"      => $user,
         "program"    => $program
       ]);
+    }
+
+    /**
+    * Muestra contenido para actualizar un programa
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function edit($id)
+    {
+      //
+      $user = Auth::user();
+      $program     = Program::where('id',$id)->firstOrFail();
+      $notices_ids = NoticeProgram::pluck('notice_id');
+      $notices = Notice::orderBy('start','asc')->whereNotIn('id',$notices_ids->toArray())->pluck('title','id');
+      $notices[$program->notice_id] = $program->notice->notice_data->title;
+      $notices[0] = "Selecciona una opción";
+      return view('admin.programs.program-update')->with([
+        'user' => $user,
+        'program' =>$program,
+        'notices' => $notices
+      ]);
+    }
+
+    /**
+    * Actualiza programa
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function update(UpdateProgram $request)
+    {
+      //
+      $data   = $request->except('_token');
+      $data['slug']    = str_slug($request->title);
+      Program::where('id',$request->id)->update($data);
+      return redirect("dashboard/programas/ver/$request->id")->with('success',"Se ha actualizado correctamente");
     }
 }

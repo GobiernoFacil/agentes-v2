@@ -13,4 +13,8 @@ class NoticeProgram extends Model
     'notice_id',
     'program_id',
     ];
+
+    function notice_data(){
+      return $this->belongsTo("App\Models\Notice",'notice_id');
+    }
 }
