@@ -32,12 +32,17 @@ var appPNUD = {
 
   },
   // el CSS para cada estado
-  stateStyle : {
-    weight      : 1,
-    opacity     : 0.9,
-    color       : '#fff',
-    fillOpacity : 0.7,         
-    fillColor	: "#f15c44"
+  stateStyle : function(state){
+    console.log(state.properties);
+    var blueStates = [4, 10, 15, 11, 23, 24, 25, 29, 30, 27],
+        fillColor = blueStates.indexOf(state.properties.id) != -1 ? "#20a6e7" : "#f15c44";
+    return {
+      weight      : 1,
+      opacity     : 0.9,
+      color       : '#fff',
+      fillOpacity : 0.7,         
+      fillColor : fillColor //"#f15c44" // 20a6e7
+    }
   },
 
   stateHoverStyle : {
