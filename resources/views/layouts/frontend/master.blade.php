@@ -122,7 +122,7 @@
 			<div class="container">
 				<div class="cta">
 					<div class="row">
-						<div class="col-sm-8 col-sm-offset-2">
+						<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
 							<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
 							<a href="{{url('programa-gobierno-abierto')}}" class="btn blue">Comunicado 2018</a>
 						</div>

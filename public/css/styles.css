@@ -2208,8 +2208,12 @@ footer {
     .bgdimg figure {
       height: 207px;
       overflow: hidden; }
+      .bgdimg figure img {
+        /* Set rules to fill background */
+        min-height: 100%;
+        min-width: 600px; }
     .bgdimg .cta {
-      padding-top: 10px; }
+      padding-top: 30px; }
       .bgdimg .cta h1 {
         font-size: 19px;
         margin-bottom: 13px; }
@@ -2224,6 +2228,13 @@ footer {
         padding: 5px 38px;
         font-size: 15px;
         margin-top: 0; }
+  .stats p.ap_lead {
+    font-size: 17px;
+    margin-bottom: 50px; }
+  .stats svg {
+    width: 30px; }
+  .gab p {
+    font-size: 17px; }
   .icon {
     background-size: 67px;
     font-size: 11px;
@@ -2295,12 +2306,6 @@ footer {
         font-size: 20px; } }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
-  .bgdimg figure {
-    height: 600px; }
-    .bgdimg figure img {
-      width: 948px;
-      height: auto;
-      max-width: 1200px; }
   .bgdimg .cta {
     padding-top: 97px; } }
 
