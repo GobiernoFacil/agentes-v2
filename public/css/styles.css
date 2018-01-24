@@ -1504,6 +1504,8 @@ a.apertus:hover {
   line-height: 1.4;
   text-align: center;
   margin-bottom: 40px; }
+  .home .title a {
+    border-bottom: 1px solid #f15c44; }
 
 .stats {
   border-bottom: 5px solid #187fad;
