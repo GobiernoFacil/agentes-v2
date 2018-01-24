@@ -43,13 +43,13 @@
 	<div class="col-sm-12">
 		<div class="divider"></div>
 		<h2 class="center">Módulos del programa</h2>
-		<p class="center"><a href='{{url("dashboard/programas/agregar-modulo/$program->id")}}' class="btn xs ev">+ Agregar módulo</a></p>
+		<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs ev">+ Agregar módulo</a></p>
 	</div>
 </div>
 
 
 @if($program->modules->count() > 0)
-@foreach ($program->sessions as $session)
+@foreach ($program->modules as $module)
 <div class="box session_list">
 	<div class="row">
 		<!--icono-->
@@ -57,47 +57,31 @@
 			<b class="icon_h session list_s"></b>
 		</div>
 		<div class="col-sm-9">
-			<h3>Sesión {{$session->order}}</h3>
-			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a>  <span class="le_link"><a href="{{ url('dashboard/sesiones/editar/' . $session->id) }}" class="btn xs ev">Actualizar sesión</a></span></h2>
+			<h3>Módulo {{$module->order}}</h3>
+			<h2><a href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>{{$module->title}}</a>  <span class="le_link"><a href='{{ url("dashboard/programas/$program->id/modulos/editar/$module->id") }}' class="btn xs ev">Actualizar módulo</a></span></h2>
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col-sm-9">
-					<p>{{$session->objective}}</p>
+					<p>{{$module->objective}}</p>
 				</div>
 				<div class="col-sm-3 notes">
-					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($session->start))}} al {{date('d-m-Y', strtotime($session->end))}}</p>
+					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
 				</div>
 			</div>
 		</div>
-		<!-- ver sesión-->
+		<!-- ver módulo-->
 		<div class="col-sm-2">
-			<a class="btn view block sessions_l"  href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">Ver sesión</a>
-			<a href ="{{ url('dashboard/sesiones/eliminar/' . $session->id) }}"  id ="{{$session->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+			<a class="btn view block sessions_l"  href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>Ver módulo</a>
+			<a href ='{{ url("dashboard/programas/$program->id/modulos/eliminar/$module->id") }}'  id ="{{$module->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 		</div>
 
 		<div class="footnote">
 			<div class="row">
 				<div class="col-sm-2">
-					<p><b class="icon_h time"></b>{{$session->hours}} h </p>
+					<p><b class="icon_h time"></b>{{$module->number_hour}} {{$module->mesasure === 0 ? "Minutos" : $module->mesasure === 1 ? "Horas" : ""}} </p>
 				</div>
 				<div class="col-sm-2">
-					<p><b class="icon_h modalidad"></b>{{$session->modality}}</p>
-				</div>
-				<div class="col-sm-6">
-					@if($session->facilitators->count() > 0)
-					<p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
-					@foreach ($session->facilitators as $facilitator)
-						@if($facilitator->user->image)
-						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
-						@else
-						@endif
-						 {{$facilitator->user->name}} -  {{$facilitator->user->institution}} <br>
-					@endforeach
-					</p>
-					@endif
-				</div>
-				<div class="col-sm-2">
-					<p class="right">{{$session->activities->count() == 1 ? $session->activities->count(). " actividad" : $session->activities->count(). " actividades"}}  </p>
+					<p><b class="icon_h modalidad"></b>{{$module->modality}}</p>
 				</div>
 			</div>
 		</div>
@@ -108,7 +92,7 @@
 <div class="box">
 	<div class="row center">
 		<h2>Sin módulos</h2>
-		<p><a href='{{url("dashboard/programas/agregar-modulos/$program->id")}}' class="btn xs view">Agregar módulo</a></p>
+		<p><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs view">Agregar módulo</a></p>
 	</div>
 </div>
 @endif

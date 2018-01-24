@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
+use App\Models\Program;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveModule;
@@ -52,11 +53,13 @@ class Modules extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function add()
+  public function add($program_id)
   {
-    $user   = Auth::user();
+    $user     = Auth::user();
+    $program  = Program::where('id',$program_id)->firstOrFail();
     return view('admin.modules.module-add')->with([
       "user"      => $user,
+      "program"   => $program
     ]);
   }
 
@@ -70,30 +73,34 @@ class Modules extends Controller
   {
     //
     $user   = Auth::user();
+    $program  = Program::where('id',$request->program_id)->firstOrFail();
     $data   = $request->except('_token');
     $data['user_id'] = $user->id;
     $data['slug']    = str_slug($request->title);
+    $data['program_id'] = $request->program_id;
     $module = new Module($data);
     $module->save();
-    return redirect("dashboard/modulos/ver/$module->id")->with('success',"Se ha guardado correctamente");
+    return redirect("dashboard/programas/$request->program_id/modulos/ver/$module->id")->with('success',"Se ha guardado correctamente");
   }
 
-  /**
-  * Muestra módulo
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
-  public function view($id)
-  {
-    //
-    $user   = Auth::user();
-    $module = Module::find($id);
-    return view('admin.modules.module-view')->with([
-      "user"      => $user,
-      "module"    => $module
-    ]);
-  }
+    /**
+    * Muestra módulo
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function view($program_id,$module_id)
+    {
+      //
+      $user   = Auth::user();
+      $program  = Program::where('id',$program_id)->firstOrFail();
+      $module = Module::where('id',$module_id)->firstOrFail();
+      return view('admin.modules.module-view')->with([
+        "user"      => $user,
+        "module"    => $module,
+        "program"   => $program
+      ]);
+    }
 
   /**
   * Muestra contenido para actualizar un módulo
@@ -101,14 +108,16 @@ class Modules extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function edit($id)
+  public function edit($program_id,$module_id)
   {
     //
     $user = Auth::user();
-    $module = Module::find($id);
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $module = Module::where('id',$module_id)->firstOrFail();
     return view('admin.modules.module-update')->with([
       'user' => $user,
       'module' =>$module,
+      'program' => $program
     ]);
   }
 
@@ -122,10 +131,12 @@ class Modules extends Controller
   public function update(UpdateModule $request)
   {
     //
+    $program  = Program::where('id',$request->program_id)->firstOrFail();
+    $module = Module::where('id',$request->module_id)->firstOrFail();
     $data   = $request->except('_token');
     $data['slug']    = str_slug($request->title);
-    Module::where('id',$request->id)->update($data);
-    return redirect("dashboard/modulos/ver/$request->id")->with('success',"Se ha actualizado correctamente");
+    Module::where('id',$request->module_id)->update($data);
+    return redirect("dashboard/programas/$program->id/modulos/ver/$request->module_id")->with('success',"Se ha actualizado correctamente");
   }
 
   /**

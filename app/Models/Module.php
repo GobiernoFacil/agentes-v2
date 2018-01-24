@@ -21,7 +21,8 @@ class Module extends Model
         'end',
         'public',
         'user_id',
-        'program_id'
+        'program_id',
+        'measure'
     ];
 
     function program(){

@@ -328,6 +328,7 @@ trait MessagesTrait{
          'filesData.*.max' =>'El tamaño es de 2.5MB',
          'limitNumber.required'=>'Solo se permiten dos archivos como máximo',
          'notice_id.between'   => 'Este campo es requerido',
+         'measure.required'   => 'Este campo es requerido',
 
       ];
     }

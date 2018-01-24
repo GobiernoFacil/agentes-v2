@@ -166,10 +166,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/programas/{program_id}/modulos', 'Modules@index');
     Route::get('dashboard/programas/{program_id}/modulos/agregar', 'Modules@add');
     Route::post('dashboard/programas/{program_id}/modulos/save', 'Modules@save');
-    Route::get('dashboard/programas/{program_id}/modulos/editar/{id}', 'Modules@edit');
-    Route::post('dashboard/programas/{program_id}/modulos/update/{id}', 'Modules@update');
-    Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{id}', 'Modules@delete');
-    Route::get('dashboard/programas/{program_id}/modulos/ver/{id}', 'Modules@view');
+    Route::get('dashboard/programas/{program_id}/modulos/editar/{module_id}', 'Modules@edit');
+    Route::post('dashboard/programas/{program_id}/modulos/update/{module_id}', 'Modules@update');
+    Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{module_id}', 'Modules@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/ver/{module_id}', 'Modules@view');
 
 
     /*

@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Agregar módulo')
-@section('description', 'Agregar nuevo módulo')
+@section('title', 'Agregar módulo a programa '.$program->title)
+@section('description', 'Agregar nuevo módulo a programa '.$program->title)
 @section('body_class', 'modulos')
 @section('breadcrumb_type', 'module add')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar módulo</h1>
+    <h1>Agregar módulo a programa: "{{$program->title}}"</h1>
   </div>
 </div>
 <div class="box">
