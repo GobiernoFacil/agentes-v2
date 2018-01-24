@@ -159,10 +159,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/programas/save', 'Programs@save');
     Route::get('dashboard/programas/editar/{id}', 'Programs@edit');
     Route::post('dashboard/programas/update/{id}', 'Programs@update');
-    Route::get('dashboard/programas/deshabilitar/{id}', 'Programs@delete');
+    Route::get('dashboard/programas/eliminar/{id}', 'Programs@delete');
     Route::get('dashboard/programas/ver/{id}', 'Programs@view');
     /*@Modules Controller */
     //CRUD Modules
+    Route::get('dashboard/programas/{program_id}/modulos', 'Modules@index');
+    Route::get('dashboard/programas/{program_id}/modulos/agregar', 'Modules@add');
+    Route::post('dashboard/programas/{program_id}/modulos/save', 'Modules@save');
+    Route::get('dashboard/programas/{program_id}/modulos/editar/{id}', 'Modules@edit');
+    Route::post('dashboard/programas/{program_id}/modulos/update/{id}', 'Modules@update');
+    Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{id}', 'Modules@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/ver/{id}', 'Modules@view');
+
+
+    /*
     Route::get('dashboard/modulos', 'Modules@index');
     Route::get('dashboard/modulos/agregar', 'Modules@add');
     Route::post('dashboard/modulos/save', 'Modules@save');
@@ -170,6 +180,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/modulos/update/{id}', 'Modules@update');
     Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
     Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
+    */
     /*@ModuleSessions Controller */
     //CRUD sessions
     Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');

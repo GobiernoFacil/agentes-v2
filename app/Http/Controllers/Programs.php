@@ -123,4 +123,20 @@ class Programs extends Controller
       Program::where('id',$request->id)->update($data);
       return redirect("dashboard/programas/ver/$request->id")->with('success',"Se ha actualizado correctamente");
     }
+
+    /**
+    * Deshabilita programa
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function delete($id)
+    {
+      //
+      $program     = Program::where('id',$id)->firstOrFail();
+      foreach($program->modules as $module){
+        $module->title;
+      }
+      $program->notice;
+    }
 }
