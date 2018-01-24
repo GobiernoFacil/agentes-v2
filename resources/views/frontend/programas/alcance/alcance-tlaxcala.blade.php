@@ -1,8 +1,8 @@
 @extends('layouts.frontend.master')
 @section('title', 'Tlaxcala, ejercicio local de Gobierno Abierto')
 @section('description', 'El 9 de marzo de 2015, el estado de Tlaxcala se integró formalmente a los Ejercicios Locales de Gobierno Abierto a través de la firma de la Declaración Conjunta para la Implementación de las Acciones para un Gobierno Abierto')
-@section('body_class', 'programa alcance sinaloa')
-@section('canonical', url('programa-gobierno-abierto/alcance/sinaloa') )
+@section('body_class', 'programa alcance tlaxcala')
+@section('canonical', url('programa-gobierno-abierto/alcance/tlaxcala') )
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
