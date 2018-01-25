@@ -27,8 +27,21 @@ Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
-Route::get('convocatoria/resultados-2017', 'NoticeFront@resultado17');
-Route::get('convocatoria/metodologia-2017', 'NoticeFront@metodo17');
+
+
+/////// convocatoria 2017
+Route::get('convocatoria/2017', 'NoticeFront@convoca17');
+Route::get('convocatoria/resultados-2017', function(){ 
+    return Redirect::to('convocatoria/2017/resultados', 301); 
+});
+Route::get('convocatoria/metodologia-2017', function(){ 
+    return Redirect::to('convocatoria/2017/metodologia', 301); 
+});
+Route::get('convocatoria/2017/resultados', 'NoticeFront@resultado17');
+Route::get('convocatoria/2017/metodologia', 'NoticeFront@metodo17');
+//////////////////////
+
+
 Route::get('convocatoria/archivos/{name}', 'NoticeFront@download');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
