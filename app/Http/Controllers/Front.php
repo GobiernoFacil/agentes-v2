@@ -15,6 +15,16 @@ class Front extends Controller
     public function descripcion(){
       return view('frontend.programas.que-es');
     }
+    
+    //programa 2017
+    public function pro17(){
+      return view('frontend.programas.2017.que-es');
+    }
+    
+    //programa 2018
+    public function pro18(){
+      return view('frontend.programas.2018.que-es');
+    }
 
     //objetivos
     public function antecedentes(){

@@ -44,6 +44,10 @@ Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 Route::get('cities', 'NoticeFront@cities');
 /*@RangeFront Controller */
 /*********  Enlaces programa ******** */
+/*********  programa 2017 ******** */
+Route::get('programa-gobierno-abierto/2017', 'Front@pro17');
+/*********  programa 2018 ******** */
+Route::get('programa-gobierno-abierto/2018', 'Front@pro18');
 Route::get('programa-gobierno-abierto/antecedentes', 'Front@antecedentes');
 Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');
