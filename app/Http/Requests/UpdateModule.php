@@ -25,7 +25,7 @@ class UpdateModule extends FormRequest
      */
     public function rules()
     {
-        $module = Module::find($this->route("id"));
+        $module = Module::find($this->route("module_id"));
         return [
             //
             'title'=> 'required|max:256'.($module->title != $this->title ? '|unique:modules' : ''),
@@ -37,6 +37,7 @@ class UpdateModule extends FormRequest
             'start'=> 'required',
             'end'=> 'required',
             'public'=> 'required',
+            'measure'=> 'required',
         ];
     }
 }

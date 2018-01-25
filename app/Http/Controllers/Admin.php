@@ -38,8 +38,8 @@ class Admin extends Controller
       public function dashboard()
       {
         $user 			  = Auth::user();
-        $aspirants 		  = Aspirant::where('is_activated',1)->count();
-        $testUserId = User::where('email','andre@fcb.com')->get()->pluck('id');
+        $aspirants 		= Aspirant::where('is_activated',1)->count();
+        $testUserId   = User::where('email','andre@fcb.com')->get()->pluck('id');
     		$fellows		  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
 
     		$modules_count 		  = Module::all()->count();

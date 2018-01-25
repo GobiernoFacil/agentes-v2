@@ -16,7 +16,7 @@
 	  	@endif
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
-		<p>Los candidatos seleccionados serán notificadas por vía electrónica y los resultados serán publicados en el sitio <a href="{{url('')}}">{{url('')}}</a>, a más tardar el 19 de mayo de 2017.</p>
+		<p>En breve recibirás un correo con instrucciones para continuar con el proceso de selección.</p>
 
 	</div>
 </div>
