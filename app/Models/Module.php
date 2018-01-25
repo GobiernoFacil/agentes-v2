@@ -22,7 +22,8 @@ class Module extends Model
         'public',
         'user_id',
         'program_id',
-        'measure'
+        'measure',
+        'parent_id'
     ];
 
     function program(){
