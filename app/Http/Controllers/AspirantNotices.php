@@ -13,6 +13,7 @@ use App\Models\Cv;
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
 use App\Http\Requests\SaveApply1;
+use App\Http\Requests\SaveApply2;
 class AspirantNotices extends Controller
 {
     //
@@ -117,6 +118,27 @@ class AspirantNotices extends Controller
           "cv"        => $cv
 
         ]);
+  }
+
+
+  /**  guardar perfil curricular
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function saveCv(SaveApply2 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    //segundo requisito "perfil curricular"
+    $data   = $request->only(['email','age','phone','mobile','semester','status']);
+    CV::where('aspirant_id',$user->aspirant($user)->id)->update($data);
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video");
+
+
   }
 
         /** Ver archivos de convocatoria

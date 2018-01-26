@@ -156,7 +156,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
         <label><strong>Correo</strong></label>
         {{Form::text('email',null,["class" => "form-control"])}}
         @if($errors->has('email'))
-        <strong>{{$errors->first('email')}}</strong>
+        <strong class="danger">{{$errors->first('email')}}</strong>
         @endif
       </p>
     </div>
@@ -168,7 +168,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
         <label><strong>Edad</strong> </label>
         {{Form::text('age',null,["class" => "form-control"])}}
         @if($errors->has('age'))
-        <strong>{{$errors->first('age')}}</strong>
+        <strong class="danger">{{$errors->first('age')}}</strong>
         @endif
       </p>
     </div>
@@ -180,7 +180,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
         <label><strong>Teléfono</strong> </label>
         {{Form::text('phone',null,["class" => "form-control"])}}
         @if($errors->has('phone'))
-        <strong>{{$errors->first('phone')}}</strong>
+        <strong class="danger">{{$errors->first('phone')}}</strong>
         @endif
       </p>
     </div>
@@ -190,7 +190,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
         <label><strong>Celular</strong> </label>
         {{Form::text('mobile',null,["class" => "form-control"])}}
         @if($errors->has('mobile'))
-        <strong>{{$errors->first('mobile')}}</strong>
+        <strong class="danger">{{$errors->first('mobile')}}</strong>
         @endif
       </p>
     </div>
@@ -203,16 +203,16 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
         <label><strong>Semestre</strong></label>
         {{Form::text('semester',$cv->semester,["class" => "form-control"])}}
         @if($errors->has('semester'))
-        <strong>{{$errors->first('semester')}}</strong>
+        <strong class="danger">{{$errors->first('semester')}}</strong>
         @endif
       </p>
     </div>
     <div class = "col-sm-6">
       <p>
         <label><strong>Estatus</strong></label>
-        {{Form::select('status',["ESTUDIANTE" => "ESTUDIANTE", "EGRESADO" => "EGRESADO"],$cv->semester,["class" => "form-control"])}}
+        {{Form::select('status',[null => "SELECCIONA UNA OPCIÓN","ESTUDIANTE" => "ESTUDIANTE", "EGRESADO" => "EGRESADO"],$cv->semester,["class" => "form-control"])}}
         @if($errors->has('status'))
-        <strong>{{$errors->first('status')}}</strong>
+        <strong class="danger">{{$errors->first('status')}}</strong>
         @endif
       </p>
 
@@ -223,7 +223,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 
     <div class="row">
       <div class="col-sm-12">
-        <p>{{Form::submit('Guardar', ['class' => 'btn gde'])}}</p>
+        <p>{{Form::submit('Continuar', ['class' => 'btn gde'])}}</p>
       </div>
     </div>
 </fieldset>

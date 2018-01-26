@@ -331,6 +331,11 @@ trait MessagesTrait{
          'measure.required'   => 'Este campo es requerido',
          'motivesMax.required'   => 'Has sobrepasado el máximo de palabras (400)',
          'motives.required'   => 'Este campo es requerido',
+         'semester.required'  => 'Este campo es requerido',
+         'status.required'  => 'Este campo es requerido',
+         'phone.digits'        => 'Escribe 10 dígitos',
+         'mobile.digits'        => 'Escribe  10 dígitos',
+
       ];
     }
 }
