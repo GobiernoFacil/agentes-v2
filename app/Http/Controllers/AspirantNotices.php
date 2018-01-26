@@ -14,6 +14,7 @@ use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
 use App\Http\Requests\SaveApply1;
 use App\Http\Requests\SaveApply2;
+use App\Http\Requests\SaveApply3;
 class AspirantNotices extends Controller
 {
     //
@@ -139,6 +140,44 @@ class AspirantNotices extends Controller
     return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video");
 
 
+  }
+
+
+  /**  agregar video
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyVideo($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      return view('aspirant.notices.notices-apply-video')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+        ]);
+  }
+
+
+  /**  guarda video paso 3
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applySaveVideo(SaveApply3 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+    $aspirantData->video = $request->video;
+    $aspirantData->save();
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-comprobante-domicilio");
   }
 
         /** Ver archivos de convocatoria
