@@ -11,6 +11,7 @@ use App\Models\AspirantsFile;
 //validations
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
+use App\Http\Requests\SaveApply1;
 class AspirantNotices extends Controller
 {
     //
@@ -38,6 +39,7 @@ class AspirantNotices extends Controller
   {
     	$user    = Auth::user();
       $today   = date('Y-m-d');
+      //valida que exista convocatoria
     	$notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
         return view('aspirant.notices.notices-view')->with([
@@ -45,6 +47,52 @@ class AspirantNotices extends Controller
           "notice"   => $notice
 
         ]);
+  }
+
+
+  /**  comienzo del proceso para postularse a la convocatoria
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function apply($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      return view('aspirant.notices.notices-apply')->with([
+          "user"      => $user,
+          "notice"   => $notice
+
+        ]);
+  }
+
+  /**  guarda primer paso de proceso
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyMotives(SaveApply1 $request)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      $aspirantFile->motives = $request->motives;
+      $aspirantFile->save();
+      return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-perfil-curricular");
+
+
   }
 
         /** Ver archivos de convocatoria
@@ -55,7 +103,9 @@ class AspirantNotices extends Controller
       {
           $user   = Auth::user();
           $today   = date('Y-m-d');
+          //valida que exista convocatoria
           $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+          //valida que exista el aspirante en la convocatoria
           $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
           $files  = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->first();
             return view('aspirant.notices.files-view')->with([

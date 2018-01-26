@@ -523,6 +523,11 @@ Route::group(['middleware' => ['auth']], function () {
     /*AspirantNotices*/
     Route::get('tablero-aspirante/convocatorias', 'AspirantNotices@index');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotices@view');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@apply');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@applyMotives');
+
+
+    
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@saveFiles');

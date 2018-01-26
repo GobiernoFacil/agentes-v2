@@ -19,7 +19,7 @@
 
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="right"><a class ="btn view" href='{{url("tablero-aspirante/convocatorias/$notice->slug/ver-archivos")}}'>Ver archivos</a></h3>
+    	<h3 class ="right"><a class ="btn view" href='{{url("tablero-aspirante/convocatorias/$notice->slug/aplicar")}}'>Aplicar</a></h3>
 	</div>
 </div>
 
