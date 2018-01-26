@@ -539,8 +539,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@apply');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@applyMotives');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@applyCv');
-
-
+    Route::post('tablero-aspirante/idioma/agregar', 'AspirantNotices@addLanguage');
+    Route::post('tablero-aspirante/idioma/eliminar/{id}', 'AspirantNotices@removeLanguage');
+    Route::post('tablero-aspirante/programa/agregar', 'AspirantNotices@addSoftware');
+    Route::post('tablero-aspirante/programa/eliminar/{id}', 'AspirantNotices@removeSoftware');
+    Route::post('tablero-aspirante/experiencia/agregar', 'AspirantNotices@addExperience');
+    Route::post('tablero-aspirante/experiencia/eliminar/{id}', 'AspirantNotices@removeExperience');
+    Route::post('tablero-aspirante/estudios/agregar', 'AspirantNotices@addStudy');
+    Route::post('tablero-aspirante/estudios/eliminar/{id}', 'AspirantNotices@removeStudy');
 
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');

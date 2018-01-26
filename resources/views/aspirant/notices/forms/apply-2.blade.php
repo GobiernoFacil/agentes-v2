@@ -112,7 +112,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
     </select>
   </p>
   <p>
-    <a id="add-language" href="#" class="btn edit">Agregar idioma</a>
+    <a id="add-language" href="#" class="btn gde">Agregar idioma</a>
   </p>
   <div class="separator"></div>
 </fieldset>

@@ -313,4 +313,90 @@ class AspirantNotices extends Controller
         }
 
 
+        public function addLanguage(Request $request){
+          $user = Auth::user();
+          $cv   = $user->aspirant($user)->cv;
+          $language = $cv->languages()->firstOrCreate([
+            'name'  => $request->name,
+            'level' => $request->level
+          ]);
+
+          return response()->json($language);
+        }
+
+        public function removeLanguage($id){
+          $user = Auth::user();
+          $lang = $user->aspirant($user)->cv->languages()->find($id);
+          $r    = $lang->delete();
+
+          return response()->json($r);
+        }
+
+        public function addSoftware(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          $software = $cv->softwares()->firstOrCreate([
+            'name'  => $request->name,
+            'level' => $request->level
+          ]);
+
+          return response()->json($software);
+        }
+
+        public function removeSoftware($id){
+          $user     = Auth::user();
+          $software = $user->aspirant($user)->cv->softwares()->find($id);
+          $r        = $software->delete();
+
+          return response()->json($r);
+        }
+
+        public function addExperience(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          $experience = $cv->experiences()->firstOrCreate([
+            'name'  => $request->name,
+            'company' => $request->company,
+            'sector' => $request->sector,
+            'from' => $request->from,
+            'to' => $request->to,
+            'city' => $request->city,
+            'state' => $request->state,
+            'description' => $request->description
+
+          ]);
+
+          return response()->json($experience);
+        }
+
+        public function removeExperience($id){
+          $user     = Auth::user();
+          $experience = $user->aspirant($user)->cv->experiences()->find($id);
+          $r        = $experience->delete();
+
+          return response()->json($r);
+        }
+
+        public function addStudy(Request $request){
+          $user  = Auth::user();
+          $cv    = $user->aspirant($user)->cv;
+          $study = $cv->academic_trainings()->firstOrCreate([
+            'name'        => $request->name,
+            'institution' => $request->institution,
+            'from'        => $request->from,
+            'to'          => $request->to,
+            'city'        => $request->city,
+          ]);
+
+          return response()->json($study);
+        }
+
+        public function removeStudy($id){
+          $user  = Auth::user();
+          $study = $user->aspirant($user)->cv->academic_trainings()->find($id);
+          $r     = $study->delete();
+
+          return response()->json($r);
+        }
+
 }

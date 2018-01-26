@@ -60,6 +60,15 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 
 var CVID = {{$cv->id}};
+var url_idioma_add      = "{{url("tablero-aspirante/idioma/agregar")}}",
+    url_idioma_delete   = "{{url("tablero-aspirante/idioma/eliminar")}}",
+    url_software_add    = "{{url("tablero-aspirante/programa/agregar")}}",
+    url_software_delete = "{{url("tablero-aspirante/programa/eliminar")}}",
+    url_experiencia_add = "{{url("tablero-aspirante/experiencia/agregar")}}",
+    url_experiencia_delete = "{{url("tablero-aspirante/experiencia/eliminar")}}",
+    url_estudios_add    = "{{url("tablero-aspirante/estudios/agregar")}}",
+    url_estudios_delete = "{{url("tablero-aspirante/estudios/eliminar")}}";
+
 // Laravel.csrfToken
 $(function(){
 
@@ -74,9 +83,9 @@ $(function(){
     e.preventDefault();
     var name  = $("#language").val(),
     level = $("#language_level").val(),
-    url   = "{{url("tablero-estudiante/idioma/agregar")}}";
+    url   = url_idioma_add;
 
-    $.post(url, {name : name, level:level, _token : Laravel.csrfToken}, function(d){
+    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
       console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
@@ -91,9 +100,9 @@ $(function(){
     e.preventDefault();
     var li = $(e.currentTarget).parent(),
     id = li.attr("data-id"),
-    url = "{{url("tablero-estudiante/idioma/eliminar")}}";
+    url = url_idioma_delete;
 
-    $.post(url + "/" + id, {id : id, _token : Laravel.csrfToken}, function(d){
+    $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
       li.remove();
     }, "json");
   });
@@ -104,9 +113,9 @@ $(function(){
     e.preventDefault();
     var name  = $("#software").val(),
     level = $("#software_level").val(),
-    url   = "{{url("tablero-estudiante/programa/agregar")}}";
+    url   = url_software_add;
 
-    $.post(url, {name : name, level:level, _token : Laravel.csrfToken}, function(d){
+    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
       console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
@@ -121,9 +130,9 @@ $(function(){
     e.preventDefault();
     var li = $(e.currentTarget).parent(),
     id = li.attr("data-id"),
-    url = "{{url("tablero-estudiante/programa/eliminar")}}";
+    url = url_software_delete;
 
-    $.post(url + "/" + id, {id : id, _token : Laravel.csrfToken}, function(d){
+    $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
       li.remove();
     }, "json");
   });
@@ -140,9 +149,9 @@ $("#add-experience").on("click", function(e){
       city        = $("#experience_city").val(),
       state       = $("#experience_state").val(),
       description = $("#experience_description").val(),
-      url         = "{{url("tablero-estudiante/experiencia/agregar")}}";
+      url         = url_experiencia_add;
 
-  $.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : Laravel.csrfToken}, function(d){
+  $.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
     var el  = "<li data-id='" + d.id + "'>" +
     d.name + " : " + d.company + "<br>" + d.description
     " <a href='#' class='remove-experience'>[ x ]</a></li>";
@@ -156,9 +165,9 @@ $("#experiencies-list").on("click", ".remove-experience", function(e){
   e.preventDefault();
   var li = $(e.currentTarget).parent(),
   id = li.attr("data-id"),
-  url = "{{url("tablero-estudiante/experiencia/eliminar")}}";
+  url = url_experiencia_delete;
 
-  $.post(url + "/" + id, {id : id, _token : Laravel.csrfToken}, function(d){
+  $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
     li.remove();
   }, "json");
 });
@@ -172,9 +181,9 @@ $("#add-study").on("click", function(e){
       from        = $("#s_from").val(),
       to          = $("#s_to").val(),
       city        = $("#study_city").val(),
-      url         = "{{url("tablero-estudiante/estudios/agregar")}}";
+      url         = url_estudios_add;
 
-  $.post(url, {name : name, institution:institution,from:from,to:to,city:city, _token : Laravel.csrfToken}, function(d){
+  $.post(url, {name : name, institution:institution,from:from,to:to,city:city, _token : "{{ csrf_token() }}"}, function(d){
     var from = d.from.split("-"),
         to   = d.to.split("-"),
         el  = "<li data-id='" + d.id + "'>" +
@@ -190,9 +199,9 @@ $("#studies-list").on("click", ".remove-study", function(e){
   e.preventDefault();
   var li = $(e.currentTarget).parent(),
   id = li.attr("data-id"),
-  url = "{{url("tablero-estudiante/estudios/eliminar")}}";
+  url = url_estudios_delete;
 
-  $.post(url + "/" + id, {id : id, _token : Laravel.csrfToken}, function(d){
+  $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
     li.remove();
   }, "json");
 });
