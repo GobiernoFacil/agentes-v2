@@ -550,6 +550,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@saveCv');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applyVideo');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applySaveVideo');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applyProof');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applySaveProof');
+
 
 
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');

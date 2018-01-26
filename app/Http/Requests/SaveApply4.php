@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class SaveApply3 extends FormRequest
+class SaveApply4 extends FormRequest
 {
   use MessagesTrait;
     /**
@@ -24,8 +24,9 @@ class SaveApply3 extends FormRequest
      */
     public function rules()
     {
-      return [
-          'video'=> 'required',
-      ];
+        return [
+            //
+            'proof' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
+        ];
     }
 }

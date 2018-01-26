@@ -15,6 +15,7 @@ use App\Http\Requests\UpdateAspirantFiles;
 use App\Http\Requests\SaveApply1;
 use App\Http\Requests\SaveApply2;
 use App\Http\Requests\SaveApply3;
+use App\Http\Requests\SaveApply4;
 class AspirantNotices extends Controller
 {
     //
@@ -179,6 +180,51 @@ class AspirantNotices extends Controller
     $aspirantData->save();
     return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-comprobante-domicilio");
   }
+
+
+
+  /**  agregar comprobante
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyProof($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      return view('aspirant.notices.notices-apply-proof')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+        ]);
+  }
+
+
+  /**  guarda comprobante  paso 4
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applySaveProof(SaveApply4 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+    if($request->file('proof')->isValid()){
+        $name = uniqid() . "." . $request->file("proof")->guessExtension();
+        $path = "/files/";
+        $request->file('proof')->move(public_path() . $path, $name);
+        $aspirantData->proof = $name;
+        $aspirantData->save();
+    }
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-aviso-privacidad");
+  }
+
 
         /** Ver archivos de convocatoria
       *
