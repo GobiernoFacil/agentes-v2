@@ -8,6 +8,7 @@ use File;
 use App\Models\Notice;
 use App\Models\AspirantNotice;
 use App\Models\AspirantsFile;
+use App\Models\Cv;
 //validations
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
@@ -93,6 +94,29 @@ class AspirantNotices extends Controller
       return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-perfil-curricular");
 
 
+  }
+
+
+  /**  agregar perfil curricular
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyCv($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      $cv      = Cv::firstOrCreate(['aspirant_id'=>$user->aspirant($user)->id]);
+      return view('aspirant.notices.notices-apply-cv')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "cv"        => $cv
+
+        ]);
   }
 
         /** Ver archivos de convocatoria
