@@ -34,7 +34,7 @@
 			@endif
 			@if($user->type == "aspirant")
 			<!--aspirant-->
-			<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria'  ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}"><b class="icon i_modulos"></b> Convocatorias</a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria'  ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}" data-title="Convocatoria"><b class="icon i_convoca_w"></b></a></li>
 			@endif
 		</ul>
 	</nav>
