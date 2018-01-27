@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cv extends Model
 {
     //
-    protected $fillable = ['aspirant_id', 'age', 'phone', 'mobile', 'email'];
+    protected $fillable = ['aspirant_id', 'age', 'phone', 'mobile', 'email','semester','status'];
       //
 
     public function cv(){

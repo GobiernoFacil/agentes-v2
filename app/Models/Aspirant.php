@@ -39,5 +39,10 @@ class Aspirant extends Model
       $this->notify(new MassiveEmail($token));
   }
 
+  function cv(){
+    return $this->hasOne("App\models\Cv");
+  }
+
+
 
 }

@@ -31,11 +31,11 @@ Route::get('convocatoria', 'NoticeFront@convocatoria');
 
 /////// convocatoria 2017
 Route::get('convocatoria/2017', 'NoticeFront@convoca17');
-Route::get('convocatoria/resultados-2017', function(){ 
-    return Redirect::to('convocatoria/2017/resultados', 301); 
+Route::get('convocatoria/resultados-2017', function(){
+    return Redirect::to('convocatoria/2017/resultados', 301);
 });
-Route::get('convocatoria/metodologia-2017', function(){ 
-    return Redirect::to('convocatoria/2017/metodologia', 301); 
+Route::get('convocatoria/metodologia-2017', function(){
+    return Redirect::to('convocatoria/2017/metodologia', 301);
 });
 Route::get('convocatoria/2017/resultados', 'NoticeFront@resultado17');
 Route::get('convocatoria/2017/metodologia', 'NoticeFront@metodo17');
@@ -536,6 +536,25 @@ Route::group(['middleware' => ['auth']], function () {
     /*AspirantNotices*/
     Route::get('tablero-aspirante/convocatorias', 'AspirantNotices@index');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotices@view');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@apply');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@applyMotives');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@applyCv');
+    Route::post('tablero-aspirante/idioma/agregar', 'AspirantNotices@addLanguage');
+    Route::post('tablero-aspirante/idioma/eliminar/{id}', 'AspirantNotices@removeLanguage');
+    Route::post('tablero-aspirante/programa/agregar', 'AspirantNotices@addSoftware');
+    Route::post('tablero-aspirante/programa/eliminar/{id}', 'AspirantNotices@removeSoftware');
+    Route::post('tablero-aspirante/experiencia/agregar', 'AspirantNotices@addExperience');
+    Route::post('tablero-aspirante/experiencia/eliminar/{id}', 'AspirantNotices@removeExperience');
+    Route::post('tablero-aspirante/estudios/agregar', 'AspirantNotices@addStudy');
+    Route::post('tablero-aspirante/estudios/eliminar/{id}', 'AspirantNotices@removeStudy');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@saveCv');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applyVideo');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applySaveVideo');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applyProof');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applySaveProof');
+
+
+
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@saveFiles');
