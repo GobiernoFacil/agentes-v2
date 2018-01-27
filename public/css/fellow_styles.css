@@ -1146,7 +1146,7 @@ li a:link {
 
 .as_coutdown h3 {
   font-size: 23px; }
-  .as_coutdown h3 span {
+  .as_coutdown h3 .legend {
     font-size: 18px;
     font-weight: 300; }
 
