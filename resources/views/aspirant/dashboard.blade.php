@@ -33,63 +33,21 @@
 
 <div class="row">
 	
-	<div class="col-sm-9">
-		<div class="row">
-			<!--convocatorias-->
-			<div class="col-sm-12">
-				<div class="box news">
-					<h3 class="sa_title">Convocatorias</h3>
-					<p></p>
-					@if($notices->count()>0)
-					<ul class="list line">
-						@foreach($notices as $single)
-							<div class="box session_list">
-									<div class="row">
-								<!--icono-->
-								<div class="col-sm-1 right">
-								  <b class="icon_h session list_s"></b>
-								</div>
-								<div class="col-sm-8">
-								  <h2><a href='{{url("tablero-aspirante/convocatorias/{$single->notice->slug}")}}'>{{$single->notice->title}}</a></h2>
-								  <div class="divider"></div>
-								    <div class="row">
-								      <div class="col-sm-9">
-								        <p>{{$single->notice->description}}</p>
-								      </div>
-								    </div>
-								  </div>
-								  <!-- ver sesión-->
-								  <div class="col-sm-3">
-								    <a class="btn view block sessions_l" href='{{url("tablero-aspirante/convocatorias/{$single->notice->slug}")}}'>Ver convocatoria</a>
-								  </div>
-								          <!-- footnote-->
-								  <div class="footnote">
-								    <div class="row">
-								      <div class="col-sm-4">
-								        <p><b class="icon_h time"></b> Cierra:	<?php $stop_date = date('Y-m-d H:i:s', strtotime($single->notice->end . ' +1 day'));?>
-					     				 <strong><span>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($stop_date))->diffForHumans()}}</span></strong></p>
-								      </div>
-								    </div>
-								  </div>
-									</div>
-								</div>
-						@endforeach
-					</ul>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="divider"></div>
-						</div>
-						<div class="col-sm-8 col-sm-offset-2 center">
-							<p><a href="{{url('tablero-aspirante/convocatorias')}}" class="btn view gde ">Ver todas las convocatorias</a></p>
-						</div>
-					@else
-					<p>Aún no existen convocatorias.</p>
-					@endif
-				</div>
-			</div>
-		</div>
+	<div class="col-sm-12">
+		<ul class="nav_aspira">
+			<li><a class="current">1  MOTIVOS</a> </li>
+			<li><a>2 CURRICULUM</a> </li>
+			<li><a>3 VIDEO</a> </li>
+			<li><a>4 COMPROBANTE</a></li>
+			<li><a>5 AVISO</a></li>
+		</ul>
 	</div>
 	
+	<div class="col-sm-12">
+		<h2>Exposición de motivos</h2>
+		<p>Explica los motivos en donde manifiestes las razones por las cuales estas interesados en participar en el programa de formación.
+(máximo 400 palabras).</p>
+	</div>
 
 </div>
 @endsection
