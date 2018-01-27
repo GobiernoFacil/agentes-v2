@@ -1,4 +1,4 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Tablero de Control')
 @section('description', 'Tablero de control de la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'dashboard')
@@ -6,19 +6,33 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Tablero de control</h1>
+		<h1 class="center">Convocatoria 2018. Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible. </h1>
+		<p class="center">Para aplicar a la convocatoria es necesario que cumplas con los siguientes requisitos.<br>
+			Recuerda que podrás actualizar la información hasta antes del <strong>05 de marzo de 2018</strong>.</p>
+		<div class="divider"></div>
+		<h5 class="center">Tienes:</h5>
+	</div>
+	<div class="as_coutdown">
+	<div class="col-sm-2 col-sm-offset-2">
+		<h3 class="center">39 <span>días</span></h3>
+	</div>
+	<div class="col-sm-2">
+		<h3 class="center">39 <span>horas</span></h3>
+	</div>
+	<div class="col-sm-2">
+		<h3 class="center">39 <span>minutos</span></h3>
+	</div>
+	<div class="col-sm-2">
+		<h3 class="center">39 <span>segundos</span></h3>
+	</div>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider"></div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-sm-3">
-		<div class="box">
-			<p>En este tablero podrás consultar las convocatorias y los procesos de selección del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong> que estás llevando acabo.</p>
-		</div>
-		<div class="box">
-			<p><a href="{{ url('tablero-aspirante/perfil/editar') }}" class="btn view">Editar información de tu perfil</a></p>
-		</div>
-	</div>
+	
 	<div class="col-sm-9">
 		<div class="row">
 			<!--convocatorias-->
