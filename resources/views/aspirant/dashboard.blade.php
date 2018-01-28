@@ -11,13 +11,12 @@
 	<div class="col-sm-12">
 		<h2>Exposición de motivos</h2>
 		@include('aspirant.notices.forms.apply-1')
-
 </div>
 @endsection
 @section('js-content')
 <script>
-	// Set the date we're counting down to
-	var countDownDate = new Date("Jan 30, 2018 15:37:25").getTime();
+	// Set the date we're counting down to	
+	var countDownDate = new Date("{{ date('M j, Y',strtotime($single->notice->end)) }} 23:59:59").getTime();
 </script>
- <script src="{{url('js/countdown.js')}}"></script>
+<script src="{{url('js/countdown.js')}}"></script>
 @endsection
