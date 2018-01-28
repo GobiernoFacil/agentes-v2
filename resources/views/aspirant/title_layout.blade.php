@@ -5,13 +5,11 @@
 
 <div class="row">
 	<div class="col-sm-12">
-		<h1 class="center">{{$notice->title}}. Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible. </h1>
-		<p class="center">Para aplicar a la convocatoria es necesario que cumplas con los siguientes requisitos.<br>
-			Recuerda que podrás actualizar la información hasta antes del <strong>{{ date('j  \d\e F \d\e Y',strtotime($notice->end)) }}</strong>.</p> 
-			
-			 
+		<h1 class="center"><a href="{{url('tablero-aspirante/convocatorias/'. $notice->slug)}}">{{$notice->title}}</a><br> Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible. </h1>
+		<h2>
+		<p class="center">Para aplicar a la convocatoria es necesario que cumplas con los siguientes requisitos.</p> 
 		<div class="divider"></div>
-		<h5 class="center">Tienes:</h5>
+		<h5 class="center">Recuerda que podrás actualizar la información hasta el <strong>{{ date('j  \d\e F \d\e Y',strtotime($notice->end)) }}</strong>.</h5>
 	</div>
 	<div id="as_coutdown" class="as_coutdown">
 	<div class="col-sm-2 col-sm-offset-2">
