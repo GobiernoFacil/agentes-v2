@@ -7,7 +7,7 @@
 				</div>
 				<div class="col-sm-6 right">
 					<p>Forjado Artesanalmente por:<br>
-					<a href="https://www.gobiernofacil.com" class="gobiernofacil">Gobierno Fácil</a></p>
+					<a href="https://gobiernofacil.com" class="gobiernofacil">Gobierno Fácil</a></p>
 				</div>
 			</div>
 	</div>
