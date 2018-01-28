@@ -1,4 +1,4 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Convocatorias en la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible' )
 @section('description', 'Lista de convocatorias en la plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'aspirante convocatoria')
