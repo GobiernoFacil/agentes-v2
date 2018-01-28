@@ -1,4 +1,4 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Tu Perfil')
 @section('description', 'Ver tu perfil')
 @section('body_class', 'profile')
