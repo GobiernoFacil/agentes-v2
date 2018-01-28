@@ -1,11 +1,16 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Aplicar a convocatoria '.$notice->title )
 @section('description', 'Aplicar a convocatoria '.$notice->title)
 @section('body_class', 'aspirante convocatoria')
-@section('breadcrumb_type', 'notice apply')
+@section('breadcrumb_type', 'notice apply cv')
 @section('breadcrumb', 'layouts.aspirant.breadcrumb.b_notices')
 
 @section('content')
+
+
+
+@include('aspirant.title_layout')
+
 
 <!-- title -->
 <div class="row">
