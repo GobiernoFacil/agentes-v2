@@ -48,6 +48,27 @@
 		<p>Explica los motivos en donde manifiestes las razones por las cuales estas interesados en participar en el programa de formación.
 (máximo 400 palabras).</p>
 	</div>
+	
+	<div class="col-sm-12">
+		{!! Form::open(['url' => '', "class" => "form-horizontal"]) !!}
+		<div class="row">
+			<div class="col-sm-12">
+		    	<p>
+				{{Form::textarea('', null, ["class" => "form-control"])}}
+				@if($errors->has(''))
+				<strong class="error">{{$errors->first('')}}</strong>
+				@endif
+		    	</p>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-3 col-sm-offset-9">
+		    <p>{{Form::submit('Siguiente >', ['class' => 'btn gde'])}}</p>
+		  </div>
+		</div>
+		{!! Form::close() !!}
+
+	</div>
 
 </div>
 @endsection
