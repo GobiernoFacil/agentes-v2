@@ -1,10 +1,13 @@
+@if(!empty($single))
+	<?php $notice = $single->notice;?>
+@endif	
+
 {!! Form::open(['url' => "tablero-aspirante/convocatorias/$notice->slug/aplicar", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
 
 
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Exposición de motivos</strong></label>
       <p>Realiza un escrito en donde expongas las razones por las cuales estes
         interesado en participar en el programa de formación de Agentes Locales
         de Cambio, así como las aportaciones que puedes brindar a su contexto
@@ -23,7 +26,7 @@
 
 
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-3 col-sm-offset-9">
     <p>{{Form::submit('Continuar', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
