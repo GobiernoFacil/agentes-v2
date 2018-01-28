@@ -32,7 +32,7 @@
 	</div>
 	<div class="col-sm-12">
 		<ul class="nav_aspira">
-			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar')}}" {!! $__env->yieldContent('body_class') == "dashboard" ? 'class="current"' : '' !!}>1  MOTIVOS</a> </li>
+			<li><a href="{{url('tablero-aspirante')}}" {!! $__env->yieldContent('body_class') == "dashboard" ? 'class="current"' : '' !!}>1  MOTIVOS</a> </li>
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-perfil-curricular')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply cv" ? 'class="current"' : '' !!}>2 CURRICULUM</a> </li>
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-video')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply video" ? 'class="current"' : '' !!}>3 VIDEO</a> </li>
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-comprobante-domicilio')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply comprobante" ? 'class="current"' : '' !!}>4 COMPROBANTE</a></li>
