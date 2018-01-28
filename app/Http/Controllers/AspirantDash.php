@@ -20,9 +20,10 @@ class AspirantDash extends Controller
     public function dashboard(){
 	  	$user 		   = Auth::user();
 	    $notices       = $user->aspirant($user)->notices;
+	    $single       = $notices->first();
 	    return view('aspirant.dashboard')->with([
 	      "user"      	  => $user,
-	      "notices"       => $notices,
+	      "single"        => $single,
 	    ]);
 
     }
