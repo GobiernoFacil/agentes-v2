@@ -7,24 +7,11 @@
 
 @section('content')
 
-
-
 @include('aspirant.title_layout')
 
-
-<!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="center">Aplicar a convocatoria "{{$notice->title}}""</h3>
-		<h1 class="center">{{$notice->title}}</h1>
-	</div>
-</div>
-
-<div class="box">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			@include('aspirant.notices.forms.apply-2')
-		</div>
+		@include('aspirant.notices.forms.apply-2')
 	</div>
 </div>
 @endsection
@@ -212,6 +199,10 @@ $("#studies-list").on("click", ".remove-study", function(e){
 });
 });
 
-
 </script>
+<script>
+	// Set the date we're counting down to	
+	var countDownDate = new Date("{{ date('M j, Y',strtotime($notice->end)) }} 23:59:59").getTime();
+</script>
+<script src="{{url('js/countdown.js')}}"></script>
 @endsection
