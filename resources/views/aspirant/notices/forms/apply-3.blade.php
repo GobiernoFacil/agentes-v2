@@ -3,9 +3,8 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <p>
-      <label><strong>Video Youtube</strong></label>
-      <p>Agrega el url de tu video en Youtube</p>
+	  <h2>Video Youtube</h2>      
+      <p><label>Agrega el url de tu video en Youtube</label></p>
       {{Form::text('video', null, ["class" => "form-control","id"=>"video"])}}
       @if($errors->has('video'))
       <strong class="error">{{$errors->first('video')}}</strong>
@@ -17,7 +16,7 @@
 
 
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-3 col-sm-offset-9">
     <p>{{Form::submit('Continuar', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
