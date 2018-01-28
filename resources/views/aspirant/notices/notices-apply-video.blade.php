@@ -1,25 +1,18 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Aplicar a convocatoria '.$notice->title )
 @section('description', 'Aplicar a convocatoria '.$notice->title)
 @section('body_class', 'aspirante convocatoria')
-@section('breadcrumb_type', 'notice apply')
+@section('breadcrumb_type', 'notice apply video')
 @section('breadcrumb', 'layouts.aspirant.breadcrumb.b_notices')
 
 @section('content')
 
 <!-- title -->
+@include('aspirant.title_layout')
+
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="center">Aplicar a convocatoria "{{$notice->title}}""</h3>
-		<h1 class="center">{{$notice->title}}</h1>
-	</div>
-</div>
-
-<div class="box">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			@include('aspirant.notices.forms.apply-3')
-		</div>
+	   @include('aspirant.notices.forms.apply-3')
 	</div>
 </div>
 @endsection
@@ -54,4 +47,10 @@ function isYoutube(getURL){
 	if(host.search(/youtube\.com/)!==-1) return true;
 }
 </script>
+
+<script>
+	// Set the date we're counting down to	
+	var countDownDate = new Date("{{ date('M j, Y',strtotime($notice->end)) }} 23:59:59").getTime();
+</script>
+<script src="{{url('js/countdown.js')}}"></script>
 @endsection
