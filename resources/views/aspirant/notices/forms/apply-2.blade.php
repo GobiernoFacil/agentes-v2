@@ -55,6 +55,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 				</p>
 		  	</div>
 		  	<div class="col-sm-12">
+					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
 		  </p>
@@ -123,6 +124,8 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-12">
+
+					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 		  		<p>
 		  		  <a id="add-experience" href="#" class="btn gde center">Agregar experiencia [+]</a>
 		  		</p>

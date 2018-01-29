@@ -561,19 +561,24 @@ class AspirantNotices extends Controller
         public function addExperience(Request $request){
           $user     = Auth::user();
           $cv       = $user->aspirant($user)->cv;
-          $experience = $cv->experiences()->firstOrCreate([
-            'name'  => $request->name,
-            'company' => $request->company,
-            'sector' => $request->sector,
-            'from' => $request->from,
-            'to' => $request->to,
-            'city' => $request->city,
-            'state' => $request->state,
-            'description' => $request->description
+          if($cv->experiences()->count() == 3){
+            return response()->json(["status"=>$cv->experiences()->count()]);
+          }else{
+            $experience = $cv->experiences()->firstOrCreate([
+              'name'  => $request->name,
+              'company' => $request->company,
+              'sector' => $request->sector,
+              'from' => $request->from,
+              'to' => $request->to,
+              'city' => $request->city,
+              'state' => $request->state,
+              'description' => $request->description
 
-          ]);
+            ]);
+          }
 
-          return response()->json($experience);
+
+           return response()->json($experience);
         }
 
         public function removeExperience($id){
@@ -587,14 +592,18 @@ class AspirantNotices extends Controller
         public function addStudy(Request $request){
           $user  = Auth::user();
           $cv    = $user->aspirant($user)->cv;
-          $study = $cv->academic_trainings()->firstOrCreate([
-            'name'        => $request->name,
-            'institution' => $request->institution,
-            'from'        => $request->from,
-            'to'          => $request->to,
-            'city'        => $request->city,
-            'state'       => $request->state
-          ]);
+          if($cv->academic_trainings()->count() == 3){
+            return response()->json(["status"=>$cv->academic_trainings()->count()]);
+          }else{
+              $study = $cv->academic_trainings()->firstOrCreate([
+                'name'        => $request->name,
+                'institution' => $request->institution,
+                'from'        => $request->from,
+                'to'          => $request->to,
+                'city'        => $request->city,
+                'state'       => $request->state
+              ]);
+            }
 
           return response()->json($study);
         }

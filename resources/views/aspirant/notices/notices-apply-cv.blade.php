@@ -79,7 +79,6 @@ $(function(){
     url   = url_idioma_add;
 
     $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
       " <a href='#' class='remove-language'>[ x ]</a></li>";
@@ -109,7 +108,6 @@ $(function(){
     url   = url_software_add;
 
     $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
       " <a href='#' class='remove-software'>[ x ]</a></li>";
@@ -145,11 +143,17 @@ $("#add-experience").on("click", function(e){
       url         = url_experiencia_add;
 
   $.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
-    var el  = "<li data-id='" + d.id + "'>" +
-    d.name + " : " + d.company + "<br>" + d.description
-    " <a href='#' class='remove-experience'>[ x ]</a></li>";
-    $("#experiencies-list").append(el);
-  }, "json");
+		if (typeof d.status !== 'undefined') {
+				$("#maxExperience").show();
+
+			}else{
+				var el  = "<li data-id='" + d.id + "'>" +
+				d.name + " : " + d.company + "<br>" + d.description
+				" <a href='#' class='remove-experience'>[ x ]</a></li>";
+				$("#experiencies-list").append(el);
+
+			}
+		}, "json");
 });
 
 // experience "CRUD"
@@ -161,6 +165,7 @@ $("#experiencies-list").on("click", ".remove-experience", function(e){
   url = url_experiencia_delete;
 
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
+		$("#maxExperience").hide();
     li.remove();
   }, "json");
 });
@@ -178,12 +183,17 @@ $("#add-study").on("click", function(e){
       url         = url_estudios_add;
 
   $.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
-    var from = d.from.split("-"),
-        to   = d.to.split("-"),
-        el  = "<li data-id='" + d.id + "'>" +
-    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-    " <a href='#' class='remove-study'>[ x ]</a></li>";
-    $("#studies-list").append(el);
+		if (typeof d.status !== 'undefined') {
+				$("#maxStudy").show();
+
+			}else{
+		    var from = d.from.split("-"),
+		        to   = d.to.split("-"),
+		        el  = "<li data-id='" + d.id + "'>" +
+		    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
+		    " <a href='#' class='remove-study'>[ x ]</a></li>";
+		    $("#studies-list").append(el);
+			}
   }, "json");
 });
 
@@ -196,6 +206,7 @@ $("#studies-list").on("click", ".remove-study", function(e){
   url = url_estudios_delete;
 
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
+		$("#maxStudy").hide();
     li.remove();
   }, "json");
 });
