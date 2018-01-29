@@ -41,14 +41,14 @@ yearSuffix: ''
 };
 $.datepicker.setDefaults($.datepicker.regional['es']);
   $( function() {
-    $( "#s_from" ).datepicker({minDate: new Date()});
-    $( "#s_to" ).datepicker({minDate: new Date()});
+    $( "#s_from" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+    $( "#s_to" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+		$( "#from" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+    $( "#tod" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+		$( "#birthdate" ).datepicker({changeYear:true,yearRange: "-100:+0"});
   } );
 
-  $( function() {
-    $( "#from" ).datepicker({minDate: new Date()});
-    $( "#tod" ).datepicker({minDate: new Date()});
-  } );
+
 
 
 var CVID = {{$cv->id}};
@@ -201,7 +201,7 @@ $("#studies-list").on("click", ".remove-study", function(e){
 
 </script>
 <script>
-	// Set the date we're counting down to	
+	// Set the date we're counting down to
 	var countDownDate = new Date("{{ date('M j, Y',strtotime($notice->end)) }} 23:59:59").getTime();
 </script>
 <script src="{{url('js/countdown.js')}}"></script>

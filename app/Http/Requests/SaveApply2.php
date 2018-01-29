@@ -28,12 +28,9 @@ class SaveApply2 extends FormRequest
 
             //
             return [
-                'email'=> 'required|email',
-                'age'  =>  'required|integer',
+                'birthdate'  =>  'required',
                 'phone'=>  'required|numeric|digits:10',
                 'mobile'=>  'required|numeric|digits:10',
-                'semester' => 'required',
-                'status'  => 'required'
             ];
 
     }

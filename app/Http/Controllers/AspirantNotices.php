@@ -149,7 +149,7 @@ class AspirantNotices extends Controller
     //valida que exista el aspirante en la convocatoria
     $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
     //segundo requisito "perfil curricular"
-    $data   = $request->only(['email','age','phone','mobile','semester','status']);
+    $data   = $request->only(['email','birthdate','phone','mobile',]);
     CV::where('aspirant_id',$user->aspirant($user)->id)->update($data);
     return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video");
 
