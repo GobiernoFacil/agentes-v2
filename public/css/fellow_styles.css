@@ -2497,18 +2497,14 @@ footer {
           color: white;
           position: relative;
           padding: 5px; }
-        .apertus_nav header li a:hover:after {
-          content: attr(data-title);
-          color: white;
-          position: relative;
-          padding: 5px; }
         .apertus_nav header li a .icon {
           width: 50px; }
     .apertus_nav nav {
       display: none;
       position: absolute;
       top: 64px;
-      width: 100%; }
+      width: 100%;
+      z-index: 99; }
   .apertus_content {
     margin-left: 0; }
   .apertus_profile_logout {
@@ -2536,7 +2532,11 @@ footer {
   .apertus {
     background-size: 212px auto;
     height: 51px;
-    width: 212px; } }
+    width: 212px; }
+  footer p {
+    text-align: center; }
+  footer .gobiernofacil {
+    float: none; } }
 
 @media screen and (min-width: 481px) and (max-width: 767px) {
   .mobile {
