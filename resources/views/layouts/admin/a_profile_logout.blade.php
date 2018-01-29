@@ -1,5 +1,5 @@
 <div class="apertus_profile_logout">
-	<a href=""# class="account" >
+	<a class="account" >
 		<img src='{{ $user->image ? url("img/users/" . $user->image->name) : url("img/users/default.png") }}' height="50px">
 	</a>
 	<div class="submenu">
