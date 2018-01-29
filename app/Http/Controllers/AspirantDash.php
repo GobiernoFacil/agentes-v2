@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\Image;
+use App\Models\AspirantsFile;
+
 use Auth;
 use File;
 // FormValidators
@@ -21,9 +23,15 @@ class AspirantDash extends Controller
 	  	$user 		   = Auth::user();
 	    $notices       = $user->aspirant($user)->notices;
 	    $single       = $notices->first();
+	    $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$single->id,
+        'user_id'=>$user->id
+      ]);
 	    return view('aspirant.dashboard')->with([
 	      "user"      	  => $user,
 	      "single"        => $single,
+	      "aspirantFile"  => $aspirantFile
 	    ]);
 
     }
