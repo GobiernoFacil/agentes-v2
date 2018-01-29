@@ -44,6 +44,11 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 				  <input type="text" name="s_to" id="s_to" class="form-control">
 				</p>
 		  	</div>
+				<div class="col-sm-6">
+				<p><label><strong>Estado</strong></label>
+				  <input type="text" name="study_state" id="study_state" class="form-control">
+				</p>
+		  	</div>
 		  	<div class="col-sm-6">
 				<p><label><strong>Ciudad</strong></label>
 				  <input type="text" name="study_city" id="study_city" class="form-control">
