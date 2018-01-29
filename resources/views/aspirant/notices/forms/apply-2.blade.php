@@ -126,7 +126,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	<div class="col-sm-12">
 
 					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
-					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el limite es de 100 y has escrito <span id="nbwords"></span>.</strong>
+					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwords"></span>.</strong>
 		  		<p>
 		  		  <a id="add-experience" href="#" class="btn gde center">Agregar experiencia [+]</a>
 		  		</p>
