@@ -532,6 +532,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/perfil', 'AspirantDash@viewProfile');
     Route::get('tablero-aspirante/perfil/editar', 'AspirantDash@editProfile');
     Route::post('tablero-aspirante/perfil/save', 'AspirantDash@saveProfile');
+    //aviso de privacidad
+    Route::get('tablero-aspirante/aviso-de-privacidad', 'AspirantDash@privacyPolices');
     //convocatorias
     /*AspirantNotices*/
     Route::get('tablero-aspirante/convocatorias', 'AspirantNotices@index');
@@ -552,14 +554,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applySaveVideo');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applyProof');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applySaveProof');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-aviso-privacidad', 'AspirantNotices@applyPrivacy');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-aviso-privacidad', 'AspirantNotices@applySavePrivacy');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/gracias', 'AspirantNotices@thanks');
 
 
-
-    Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
+/*    Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@saveFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@editFiles');
-    Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');*/
     Route::get('tablero-aspirante/archivo/download/{name}/{type}', 'AspirantNotices@download');
   });
 });

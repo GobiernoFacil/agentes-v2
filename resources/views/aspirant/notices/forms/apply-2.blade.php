@@ -56,7 +56,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 		</fieldset>
 	</div>
-	
+
 	<div class="divider"></div>
 
 <!-- experiencies -->
@@ -111,7 +111,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  		  <input type="text" name="experience_city" id="experience_city" class="form-control">
 		  		</p>
 		  	</div>
-		  	
+
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Descripción</strong></label>
 		  		  <textarea type="text" name="experience_description" id="experience_description" class="form-control"></textarea>
@@ -124,13 +124,13 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 		</fieldset>
 	</div>
-	
+
 	<div class="divider"></div>
-	
+
 	<!-- idiomas + Software-->
 	<div class="row">
 		<!-- idiomas -->
-		<div class="col-sm-6">	
+		<div class="col-sm-6">
 			<fieldset>
 			  <h3>Idiomas</h3>
 			  <ul id="languages-list">
@@ -141,7 +141,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			    </li>
 			    @endforeach
 			  </ul>
-			
+
 			  <p><label><strong>Idioma</strong></label> <input type="text" name="language" id="language" class="form-control"></p>
 			  <p><label><strong>Nivel</strong></label>
 			    <select name="language_level" id="language_level" class="form-control">
@@ -157,7 +157,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			</fieldset>
 		</div>
 		<!-- software -->
-		<div class="col-sm-6">	
+		<div class="col-sm-6">
 			<fieldset>
 			  <h3>Software</h3>
 			  <ul id="softwares-list">
@@ -168,7 +168,7 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			    </li>
 			    @endforeach
 			  </ul>
-			
+
 			  <p>
 			    <label><strong>Programa</strong></label>
 			    <input type="text" name="software" id="software" class="form-control">
@@ -205,9 +205,9 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
     <div class="col-sm-12">
       <p>
         <label><strong>Fecha de nacimiento</strong> </label>
-        {{Form::text('age',null,["class" => "form-control"])}}
-        @if($errors->has('age'))
-        <strong class="danger">{{$errors->first('age')}}</strong>
+        {{Form::text('birthdate',null,["class" => "form-control", 'id'=>'birthdate'])}}
+        @if($errors->has('birthdate'))
+        <strong class="danger">{{$errors->first('birthdate')}}</strong>
         @endif
       </p>
     </div>
@@ -234,30 +234,6 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
       </p>
     </div>
   </div>
-
-<?php /* esto hay que eliminarlo,  no lo necesitamos para este caso 
-  <div class ="row">
-    <div class = "col-sm-6">
-      <p>
-        <label><strong>Semestre</strong></label>
-        {{Form::text('semester',$cv->semester,["class" => "form-control"])}}
-        @if($errors->has('semester'))
-        <strong class="danger">{{$errors->first('semester')}}</strong>
-        @endif
-      </p>
-    </div>
-    <div class = "col-sm-6">
-      <p>
-        <label><strong>Estatus</strong></label>
-        {{Form::select('status',[null => "SELECCIONA UNA OPCIÓN","ESTUDIANTE" => "ESTUDIANTE", "EGRESADO" => "EGRESADO"],$cv->semester,["class" => "form-control"])}}
-        @if($errors->has('status'))
-        <strong class="danger">{{$errors->first('status')}}</strong>
-        @endif
-      </p>
-
-    </div>
-  </div>
-*/?>
 
 
     <div class="row">

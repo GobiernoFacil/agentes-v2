@@ -95,4 +95,17 @@ class AspirantDash extends Controller
     }
     return redirect("tablero-aspirante/perfil")->with('success',"Se ha actualizado correctamente");
   }
+
+  /**
+  * politicas de privacidad
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function privacyPolices()
+  {
+      $user = Auth::user();
+        return view('aspirant.privacy-polices')->with([
+          "user"      => $user
+        ]);
+  }
 }

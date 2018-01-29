@@ -1,8 +1,8 @@
 @if(!empty($single))
 	<?php $notice = $single->notice;?>
-@endif	
+@endif
 
-{!! Form::open(['url' => "tablero-aspirante/convocatorias/$notice->slug/aplicar", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
+{!! Form::model($aspirantFile,['url' => "tablero-aspirante/convocatorias/$notice->slug/aplicar", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
 
 
 <div class="row">

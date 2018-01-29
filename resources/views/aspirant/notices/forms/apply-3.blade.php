@@ -1,9 +1,9 @@
-{!! Form::open(['url' => "tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
+{!! Form::model($aspirantFile,['url' => "tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video", "class" => "form-horizontal",'id'=>'filesForm','files'=>true]) !!}
 
 
 <div class="row">
   <div class="col-sm-12">
-	  <h2>Video Youtube</h2>      
+	  <h2>Video Youtube</h2>
       <p><label>Agrega el url de tu video en Youtube</label></p>
       {{Form::text('video', null, ["class" => "form-control","id"=>"video"])}}
       @if($errors->has('video'))

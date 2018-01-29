@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class SaveApply2 extends FormRequest
+class SaveApply5 extends FormRequest
 {
 
   use MessagesTrait;
@@ -25,13 +25,9 @@ class SaveApply2 extends FormRequest
      */
     public function rules()
     {
-
+        return [
             //
-            return [
-                'birthdate'  =>  'required',
-                'phone'=>  'required|numeric|digits:10',
-                'mobile'=>  'required|numeric|digits:10',
-            ];
-
+            'privacy_policies' => 'required',
+        ];
     }
 }
