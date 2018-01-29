@@ -46,12 +46,12 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 				<div class="col-sm-6">
 				<p><label><strong>Estado</strong></label>
-				  <input type="text" name="study_state" id="study_state" class="form-control">
+					{{Form::select('study_state',$states,null, ['class' => 'form-control', 'id'=>'study_state'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-6">
 				<p><label><strong>Ciudad</strong></label>
-				  <input type="text" name="study_city" id="study_city" class="form-control">
+					{{Form::select('study_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'study_city'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-12">
@@ -108,12 +108,12 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Estado</strong></label>
-		  		  <input type="text" name="experience_state" id="experience_state" class="form-control">
+						{{Form::select('experience_state',$states,null, ['class' => 'form-control', 'id'=>'experience_state'])}}
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Ciudad</strong></label>
-		  		  <input type="text" name="experience_city" id="experience_city" class="form-control">
+						{{Form::select('experience_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'experience_city'])}}
 		  		</p>
 		  	</div>
 

@@ -21,7 +21,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
+  <?php echo 'var states     = '.$states_j.';'; ?>
+	<?php echo 'var cities     = '.$cities.';'; ?>
 $.datepicker.regional['es'] = {
 closeText: 'Cerrar',
 prevText: '< Ant',
@@ -173,9 +174,10 @@ $("#add-study").on("click", function(e){
       from        = $("#s_from").val(),
       to          = $("#s_to").val(),
       city        = $("#study_city").val(),
+			state       = $("#study_state").val(),
       url         = url_estudios_add;
 
-  $.post(url, {name : name, institution:institution,from:from,to:to,city:city, _token : "{{ csrf_token() }}"}, function(d){
+  $.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
     var from = d.from.split("-"),
         to   = d.to.split("-"),
         el  = "<li data-id='" + d.id + "'>" +
@@ -198,6 +200,49 @@ $("#studies-list").on("click", ".remove-study", function(e){
   }, "json");
 });
 });
+
+var state_experience = document.getElementById("experience_state");
+var city_experience  = document.getElementById("experience_city");
+
+
+//selecciona un estado y agrega opciones a selector de municipios para experiencia
+state_experience.addEventListener("change", function(){
+	var value = this.value;
+	//filtro de municipios
+	var value = this.value;
+	var n_cities = cities.filter(function (el) {
+	   return (el.state === value);
+	});
+	//agregar opciones
+	var city_experience =document.getElementById('experience_city');
+	city_experience.options.length=0
+	city_experience.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city_experience.options[city_experience.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
+
+var state_study = document.getElementById("study_state");
+var city_study  = document.getElementById("study_city");
+
+
+//selecciona un estado y agrega opciones a selector de municipios para estudio
+state_study.addEventListener("change", function(){
+	var value = this.value;
+	//filtro de municipios
+	var value = this.value;
+	var n_cities = cities.filter(function (el) {
+	   return (el.state === value);
+	});
+	//agregar opciones
+	var city_study =document.getElementById('study_city');
+	city_study.options.length=0
+	city_study.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city_study.options[city_study.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
+
 
 </script>
 <script>

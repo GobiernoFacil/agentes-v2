@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use File;
-use App\Models\Notice;
+
 use App\Models\AspirantNotice;
 use App\Models\AspirantsFile;
+use App\Models\City;
 use App\Models\Cv;
+use App\Models\State;
+use App\Models\Notice;
 //validations
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
@@ -126,11 +129,18 @@ class AspirantNotices extends Controller
         'notice_id'=>$notice->id,
         'user_id'=>$user->id
       ]);
+      $states	    =  State::select('name')->orderBy('name','asc')->distinct('name')->pluck("name","name")->toArray();
+      array_unshift($states, "Selecciona una opción");
+      $cities	    =  City::all();
+      $states_j	  =  State::select('name')->orderBy('name','asc')->get();
       return view('aspirant.notices.notices-apply-cv')->with([
           "user"      => $user,
           "notice"    => $notice,
           "cv"        => $cv,
-          "aspirantFile" => $aspirantFile
+          "aspirantFile" => $aspirantFile,
+          "cities"    => $cities,
+          "states"    => $states,
+          "states_j"  => $states_j
 
         ]);
   }
@@ -583,6 +593,7 @@ class AspirantNotices extends Controller
             'from'        => $request->from,
             'to'          => $request->to,
             'city'        => $request->city,
+            'state'       => $request->state
           ]);
 
           return response()->json($study);
