@@ -147,10 +147,19 @@ $("#add-experience").on("click", function(e){
 				$("#maxExperience").show();
 
 			}else{
-				var el  = "<li data-id='" + d.id + "'>" +
-				d.name + " : " + d.company + "<br>" + d.description
-				" <a href='#' class='remove-experience'>[ x ]</a></li>";
-				$("#experiencies-list").append(el);
+
+				if(typeof d.words !== "undefined"){
+					$("#maxWords").show();
+					$("#nbwords").text(d.words);
+
+				}else{
+
+							var el  = "<li data-id='" + d.id + "'>" +
+							d.name + " : " + d.company + "<br>" + d.description
+							" <a href='#' class='remove-experience'>[ x ]</a></li>";
+							$("#experiencies-list").append(el);
+				}
+
 
 			}
 		}, "json");
@@ -187,12 +196,13 @@ $("#add-study").on("click", function(e){
 				$("#maxStudy").show();
 
 			}else{
-		    var from = d.from.split("-"),
-		        to   = d.to.split("-"),
-		        el  = "<li data-id='" + d.id + "'>" +
-		    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-		    " <a href='#' class='remove-study'>[ x ]</a></li>";
-		    $("#studies-list").append(el);
+
+				    var from = d.from.split("-"),
+				        to   = d.to.split("-"),
+				        el  = "<li data-id='" + d.id + "'>" +
+				    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
+				    " <a href='#' class='remove-study'>[ x ]</a></li>";
+				    $("#studies-list").append(el);
 			}
   }, "json");
 });
