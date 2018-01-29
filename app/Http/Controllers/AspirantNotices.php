@@ -16,6 +16,7 @@ use App\Http\Requests\SaveApply1;
 use App\Http\Requests\SaveApply2;
 use App\Http\Requests\SaveApply3;
 use App\Http\Requests\SaveApply4;
+use App\Http\Requests\SaveApply5;
 class AspirantNotices extends Controller
 {
     //
@@ -67,9 +68,15 @@ class AspirantNotices extends Controller
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       //instrucciones y primer requisito "exposición de motivos"
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
       return view('aspirant.notices.notices-apply')->with([
           "user"      => $user,
-          "notice"   => $notice
+          "notice"   => $notice,
+          "aspirantFile" => $aspirantFile
 
         ]);
   }
@@ -114,10 +121,16 @@ class AspirantNotices extends Controller
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       //instrucciones y primer requisito "exposición de motivos"
       $cv      = Cv::firstOrCreate(['aspirant_id'=>$user->aspirant($user)->id]);
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
       return view('aspirant.notices.notices-apply-cv')->with([
           "user"      => $user,
           "notice"    => $notice,
-          "cv"        => $cv
+          "cv"        => $cv,
+          "aspirantFile" => $aspirantFile
 
         ]);
   }
@@ -156,9 +169,15 @@ class AspirantNotices extends Controller
       $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
       return view('aspirant.notices.notices-apply-video')->with([
           "user"      => $user,
           "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
         ]);
   }
 
@@ -195,9 +214,15 @@ class AspirantNotices extends Controller
       $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
       return view('aspirant.notices.notices-apply-proof')->with([
           "user"      => $user,
           "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
         ]);
   }
 
@@ -219,12 +244,77 @@ class AspirantNotices extends Controller
         $name = uniqid() . "." . $request->file("proof")->guessExtension();
         $path = "/files/";
         $request->file('proof')->move(public_path() . $path, $name);
+        if($aspirantData->proof){
+          File::delete(public_path().$path.$aspirantData->proof);
+        }
         $aspirantData->proof = $name;
         $aspirantData->save();
     }
     return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-aviso-privacidad");
   }
 
+
+  /**  agregar aviso de privacidad
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyPrivacy($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      return view('aspirant.notices.notices-apply-privacy')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
+        ]);
+  }
+
+
+    /**  agregar aviso de privacidad
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function applySavePrivacy(SaveApply5 $request)
+    {
+        $user    = Auth::user();
+        $today   = date('Y-m-d');
+        //valida que exista convocatoria
+        $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        //valida que exista el aspirante en la convocatoria
+        $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+        $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+        $aspirantData->privacy_policies = $request->privacy_policies;
+        $aspirantData->save();
+        return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
+    }
+
+
+    /**  gracias
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function thanks($notice_slug)
+    {
+        $user    = Auth::user();
+        $today   = date('Y-m-d');
+        //valida que exista convocatoria
+        $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        //valida que exista el aspirante en la convocatoria
+        $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+        return view('aspirant.notices.notices-thanks')->with([
+            "user"      => $user,
+            "notice"    => $notice,
+          ]);
+    }
 
         /** Ver archivos de convocatoria
       *
