@@ -83,10 +83,8 @@
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
 	<div class="apertus_nav">	
-		<header>
-			<!--header-->
-			@include('layouts.admin.fellow_header')
-		</header>
+		<!--header-->
+		@include('layouts.admin.fellow_header')
 	</div>
 	
 	<div class="apertus_content">
@@ -102,7 +100,7 @@
 		</div>
 		@endif
 		
-		<!--header-->
+		<!--profile-->
 		@include('layouts.admin.a_profile_logout')
 		
 		<section>
