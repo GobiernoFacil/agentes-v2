@@ -6,25 +6,28 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1 class="center"><a href="{{url('tablero-aspirante/convocatorias/'. $notice->slug)}}">{{$notice->title}}</a><br> Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible. </h1>
-		<h2>
 		<p class="center">Para aplicar a la convocatoria es necesario que cumplas con los siguientes requisitos.</p> 
 		<div class="divider"></div>
 		<h5 class="center">Recuerda que podrás actualizar la información hasta el <strong>{{ date('j  \d\e F \d\e Y',strtotime($notice->end)) }}</strong>.</h5>
 	</div>
+</div>	
+<div class="row">
 	<div id="as_coutdown" class="as_coutdown">
-	<div class="col-sm-2 col-sm-offset-2">
-		<h3 class="center"><span id="days">--</span> <span class="legend">días</span></h3>
-	</div>						    
-	<div class="col-sm-2">		    
-		<h3 class="center"><span id="hours">--</span> <span class="legend">horas</span></h3>
-	</div>						    
-	<div class="col-sm-2">		    
-		<h3 class="center"><span id="minutes">--</span> <span class="legend">minutos</span></h3>
-	</div>						    
-	<div class="col-sm-2">		    
-		<h3 class="center"><span id="seconds">--</span> <span class="legend">segundos</span></h3>
+		<div class="col-sm-2 col-sm-offset-2 col-xs-3">
+			<h3 class="center"><span id="days">--</span> <span class="legend">días</span></h3>
+		</div>						    
+		<div class="col-sm-2 col-xs-3">		    
+			<h3 class="center"><span id="hours">--</span> <span class="legend">horas</span></h3>
+		</div>						    
+		<div class="col-sm-2 col-xs-3">		    
+			<h3 class="center"><span id="minutes">--</span> <span class="legend">minutos</span></h3>
+		</div>						    
+		<div class="col-sm-2 col-xs-3">		    
+			<h3 class="center"><span id="seconds">--</span> <span class="legend">segundos</span></h3>
+		</div>
 	</div>
-	</div>
+</div>
+<div class="row">
 	<div class="col-sm-12">
 		<div class="divider"></div>
 	</div>

@@ -1143,6 +1143,8 @@ li a:link {
         background-color: #f7c162; }
         .apertus_nav header li.active a:hover {
           background-color: #f6b74a; }
+  .apertus_nav nav {
+    display: block; }
 
 .as_coutdown h3 {
   font-size: 23px; }
@@ -2453,9 +2455,75 @@ footer {
   footer a:visited.gobiernofacil {
     border-bottom: 0; }
 
+.hamburger {
+  display: none;
+  background: black;
+  border: 0;
+  color: #fff;
+  height: 64px;
+  line-height: 34px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  width: 60px;
+  padding: 0;
+  vertical-align: top; }
+  .hamburger .cl {
+    display: none;
+    font-size: 3em;
+    line-height: 55px;
+    padding-top: 26px; }
+  .hamburger .op {
+    display: block; }
+  .hamburger.close .op {
+    display: none; }
+  .hamburger.close .cl {
+    display: block; }
+
 /* =Media queries
 -------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
+  .apertus_nav {
+    position: relative;
+    width: 100%; }
+    .apertus_nav header {
+      height: 64px; }
+      .apertus_nav header li a {
+        height: 50px;
+        line-height: 50px;
+        text-align: center; }
+        .apertus_nav header li a:after {
+          content: attr(data-title);
+          color: white;
+          position: relative;
+          padding: 5px; }
+        .apertus_nav header li a .icon {
+          width: 50px; }
+    .apertus_nav nav {
+      display: none;
+      position: absolute;
+      top: 64px;
+      width: 100%;
+      z-index: 99; }
+  .apertus_content {
+    margin-left: 0; }
+  .apertus_profile_logout {
+    right: 7px;
+    top: 7px; }
+  .hamburger {
+    display: inline-block; }
+  a.apertus, a:visited.apertus {
+    display: inline-block; }
+  .as_coutdown h3.center {
+    margin: 0 auto; }
+  .as_coutdown h3 .legend {
+    font-size: 13px;
+    display: block; }
+  .nav_aspira li {
+    margin-bottom: 5px;
+    width: 31.7%; }
+    .nav_aspira li a {
+      font-size: 12px; }
   h1 {
     font-size: 23px; }
   h2 {
@@ -2474,7 +2542,11 @@ footer {
   .apertus {
     background-size: 212px auto;
     height: 51px;
-    width: 212px; } }
+    width: 212px; }
+  footer p {
+    text-align: center; }
+  footer .gobiernofacil {
+    float: none; } }
 
 @media screen and (min-width: 481px) and (max-width: 767px) {
   .mobile {

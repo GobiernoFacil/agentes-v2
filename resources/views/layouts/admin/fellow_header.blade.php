@@ -1,6 +1,6 @@
 <header>
 	<a class="apertus" href="{{url('')}}" title="Ir a sitio público">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
-
+    <button class="hamburger"><span class="op">&#9776;</span><span class="cl">&#735;</span></button>
 	<nav>
 		<ul>
 			<!--dashboard-->
