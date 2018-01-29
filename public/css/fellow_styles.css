@@ -2514,6 +2514,16 @@ footer {
     display: inline-block; }
   a.apertus, a:visited.apertus {
     display: inline-block; }
+  .as_coutdown h3.center {
+    margin: 0 auto; }
+  .as_coutdown h3 .legend {
+    font-size: 13px;
+    display: block; }
+  .nav_aspira li {
+    margin-bottom: 5px;
+    width: 31.7%; }
+    .nav_aspira li a {
+      font-size: 12px; }
   h1 {
     font-size: 23px; }
   h2 {
