@@ -13,13 +13,14 @@
         de Cambio, así como las aportaciones que puedes brindar a su contexto
         local como resultado de su participación en este programa (max 400
         palabras ).</p>
-      {{Form::textarea('motives', $aspirantFile->motives, ["class" => "form-control"])}}
+      {{Form::textarea('motives', $aspirantFile->motives, ["class" => "form-control","id"=>"motives"])}}
       @if($errors->has('motives'))
       <strong class="error">{{$errors->first('motives')}}</strong>
       @endif
       @if($errors->has('motivesMax'))
       <strong class="error">{{$errors->first('motivesMax')}}</strong>
       @endif
+			<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 400 y has escrito <span id="nbwords"></span>.</strong>
     </p>
   </div>
 </div>

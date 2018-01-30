@@ -15,8 +15,19 @@
 @endsection
 @section('js-content')
 <script>
-	// Set the date we're counting down to	
+	// Set the date we're counting down to
 	var countDownDate = new Date("{{ date('M j, Y',strtotime($single->notice->end)) }} 23:59:59").getTime();
+	$('#filesForm').submit(function() {
+		 var words = $("#motives").val();
+		 if(words.split(' ').length <= 400){
+			 return true;
+		 }else{
+			 $("#maxWords").show();
+			 $("#nbwords").text(words.split(' ').length);
+			 return false;
+		 }
+     return true;
+});
 </script>
 <script src="{{url('js/countdown.js')}}"></script>
 @endsection
