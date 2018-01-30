@@ -37,7 +37,7 @@
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-perfil-curricular')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply cv" ? 'class="current"' : '' !!}>2 CURRICULUM</a> </li>
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-video')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply video" ? 'class="current"' : '' !!}>3 VIDEO</a> </li>
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-comprobante-domicilio')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply comprobante" ? 'class="current"' : '' !!}>4 COMPROBANTE</a></li>
-			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply aviso" ? 'class="current"' : '' !!}>5 AVISO</a></li>
+			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-aviso-privacidad')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply aviso" ? 'class="current"' : '' !!}>5 AVISO</a></li>
 		</ul>
 	</div>
 </div>
