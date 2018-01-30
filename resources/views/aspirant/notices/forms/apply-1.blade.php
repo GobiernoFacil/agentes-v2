@@ -13,7 +13,7 @@
         de Cambio, así como las aportaciones que puedes brindar a su contexto
         local como resultado de su participación en este programa (max 400
         palabras ).</p>
-      {{Form::textarea('motives', null, ["class" => "form-control"])}}
+      {{Form::textarea('motives', $aspirantFile->motives, ["class" => "form-control"])}}
       @if($errors->has('motives'))
       <strong class="error">{{$errors->first('motives')}}</strong>
       @endif
