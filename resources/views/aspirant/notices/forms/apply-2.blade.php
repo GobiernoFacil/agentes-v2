@@ -25,36 +25,37 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			<div class="col-sm-6">
 				<p>
 				  <label><strong>Carrera / curso / Grado</strong></label>
-				  <input type="text" name="study" id="study" class="form-control">
+				  <input type="text" name="study" id="study" class="form-control study">
 				</p>
 			</div>
 			<div class="col-sm-6">
 				<p><label><strong>Universidad / Instituto / Escuela</strong></label>
-				  <input type="text" name="institution" id="institution" class="form-control">
+				  <input type="text" name="institution" id="institution" class="form-control study">
 				</p>
 			</div>
 			<div class="col-sm-6">
 				<p><label><strong>Fecha de ingreso</strong></label>
-				  <input type="text" name="s_from" id="s_from" class="form-control">
+				  <input type="text" name="s_from" id="s_from" class="form-control study">
 				</p>
 			</div>
 		  	<div class="col-sm-6">
 				<p>
 				  <label><strong>Fecha de término</strong></label>
-				  <input type="text" name="s_to" id="s_to" class="form-control">
+				  <input type="text" name="s_to" id="s_to" class="form-control study">
 				</p>
 		  	</div>
 				<div class="col-sm-6">
 				<p><label><strong>Estado</strong></label>
-					{{Form::select('study_state',$states,null, ['class' => 'form-control', 'id'=>'study_state'])}}
+					{{Form::select('study_state',$states,null, ['class' => 'form-control study', 'id'=>'study_state'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-6">
 				<p><label><strong>Ciudad</strong></label>
-					{{Form::select('study_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'study_city'])}}
+					{{Form::select('study_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control study', 'id'=>'study_city'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-12">
+					<strong class="danger" id ="fillStudy" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
@@ -83,48 +84,48 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			<div class="col-sm-12">
 		  		<p>
 		  		  <label><strong>Empleo</strong></label>
-		  		  <input type="text" name="experience" id="experience" class="form-control">
+		  		  <input type="text" name="experience" id="experience" class="form-control experience">
 		  		</p>
 			</div>
 			<div class="col-sm-6">
 		  		<p><label><strong>Empresa</strong></label>
-		  		  <input type="text" name="company" id="company" class="form-control">
+		  		  <input type="text" name="company" id="company" class="form-control experience">
 		  		</p>
 			</div>
 			<div class="col-sm-6">
 		  		<p><label><strong>Sector</strong></label>
-		  		  <input type="text" name="sector" id="sector" class="form-control">
+		  		  <input type="text" name="sector" id="sector" class="form-control experience">
 		  		</p>
 			</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Fecha de ingreso</strong></label>
-		  		  <input type="text" name="from" id="from" class="form-control">
+		  		  <input type="text" name="from" id="from" class="form-control experience">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p>
 		  		  <label><strong>Fecha de término</strong></label>
-		  		  <input type="text" name="tod" id="tod" class="form-control">
+		  		  <input type="text" name="tod" id="tod" class="form-control experience">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Estado</strong></label>
-						{{Form::select('experience_state',$states,null, ['class' => 'form-control', 'id'=>'experience_state'])}}
+						{{Form::select('experience_state',$states,null, ['class' => 'form-control experience', 'id'=>'experience_state'])}}
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Ciudad</strong></label>
-						{{Form::select('experience_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'experience_city'])}}
+						{{Form::select('experience_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control experience', 'id'=>'experience_city'])}}
 		  		</p>
 		  	</div>
 
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Descripción</strong></label>
-		  		  <textarea type="text" name="experience_description" id="experience_description" class="form-control"></textarea>
+		  		  <textarea type="text" name="experience_description" id="experience_description" class="form-control experience"></textarea>
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-12">
-
+					<strong class="danger" id ="fillExperience" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwords"></span>.</strong>
 		  		<p>
@@ -151,14 +152,15 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 			    @endforeach
 			  </ul>
 
-			  <p><label><strong>Idioma</strong></label> <input type="text" name="language" id="language" class="form-control"></p>
+			  <p><label><strong>Idioma</strong></label> <input type="text" name="language" id="language" class="form-control language"></p>
 			  <p><label><strong>Nivel</strong></label>
-			    <select name="language_level" id="language_level" class="form-control">
+			    <select name="language_level" id="language_level" class="form-control language">
 			      <option>básico</option>
 			      <option>intermedio</option>
 			      <option>avanzado</option>
 			    </select>
 			  </p>
+				<strong class="danger" id ="fillLanguage" style="display:none;">Llena todos los campos.</strong>
 			  <p>
 			    <a id="add-language" href="#" class="btn gde">Agregar idioma [+]</a>
 			  </p>
@@ -180,15 +182,16 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 
 			  <p>
 			    <label><strong>Programa</strong></label>
-			    <input type="text" name="software" id="software" class="form-control">
+			    <input type="text" name="software" id="software" class="form-control software">
 			  </p>
 			  <p><label><strong>Nivel</strong></label>
-			    <select name="software_level" id="software_level" class="form-control">
+			    <select name="software_level" id="software_level" class="form-control software">
 			      <option>básico</option>
 			      <option>intermedio</option>
 			      <option>avanzado</option>
 			    </select>
 			  </p>
+				<strong class="danger" id ="fillSoftware" style="display:none;">Llena todos los campos.</strong>
 			  <p>
 			    <a id="add-software" href="#" class="btn gde">Agregar programa [+]</a>
 			  </p>

@@ -49,7 +49,17 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		$( "#birthdate" ).datepicker({changeYear:true,yearRange: "-100:+0"});
   } );
 
+	$('#s_from').on('change',function(){
+		var date = new Date($('#s_from').val());
+		$('#s_to').datepicker('destroy');
+		$( "#s_to" ).datepicker({minDate:date,changeYear:true,yearRange: "-100:+0"});
+	});
 
+	$('#from').on('change',function(){
+		var date = new Date($('#from').val());
+		$('#tod').datepicker('destroy');
+		$( "#tod" ).datepicker({minDate:date,changeYear:true,yearRange: "-100:+0"});
+	});
 
 
 var CVID = {{$cv->id}};
@@ -77,13 +87,30 @@ $(function(){
     var name  = $("#language").val(),
     level = $("#language_level").val(),
     url   = url_idioma_add;
+		var values = $(".language").map(function() {
+			return this.value;
+		}).get();
+		var i = values.length,
+				count = 0;
+		while (i--) {
+				if (values[i] === "" || values[i] === '0')
+						count++;
+		}
 
-    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      var el  = "<li data-id='" + d.id + "'>" +
-      d.name + " : " + d.level +
-      " <a href='#' class='remove-language'>[ x ]</a></li>";
-      $("#languages-list").append(el);
-    }, "json");
+			if(count === 0){
+						$('#fillLanguage').hide();
+
+				    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
+				      var el  = "<li data-id='" + d.id + "'>" +
+				      d.name + " : " + d.level +
+				      " <a href='#' class='remove-language'>[ x ]</a></li>";
+				      $("#languages-list").append(el);
+							$("#language").val("");
+					    $("#language_level").val("");
+				    }, "json");
+			}else{
+					$('#fillLanguage').show();
+			}
   });
 
   // LANGUAGE "CRUD"
@@ -106,13 +133,29 @@ $(function(){
     var name  = $("#software").val(),
     level = $("#software_level").val(),
     url   = url_software_add;
+		var values = $(".software").map(function() {
+			return this.value;
+		}).get();
+		var i = values.length,
+				count = 0;
+		while (i--) {
+				if (values[i] === "" || values[i] === '0')
+						count++;
+		}
+		if(count === 0){
+			$("#fillSoftware").hide();
+	    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
+	      var el  = "<li data-id='" + d.id + "'>" +
+	      d.name + " : " + d.level +
+	      " <a href='#' class='remove-software'>[ x ]</a></li>";
+	      $("#softwares-list").append(el);
+				$("#software").val("");
+		    $("#software_level").val("");
+	    }, "json");
 
-    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      var el  = "<li data-id='" + d.id + "'>" +
-      d.name + " : " + d.level +
-      " <a href='#' class='remove-software'>[ x ]</a></li>";
-      $("#softwares-list").append(el);
-    }, "json");
+		}else{
+			$("#fillSoftware").show();
+		}
   });
 
   // SOFTWARE "CRUD"
@@ -142,27 +185,51 @@ $("#add-experience").on("click", function(e){
       description = $("#experience_description").val(),
       url         = url_experiencia_add;
 
-  $.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
-		if (typeof d.status !== 'undefined') {
-				$("#maxExperience").show();
+			var values = $(".experience").map(function() {
+    		return this.value;
+			}).get();
+			var i = values.length,
+					count = 0;
+			while (i--) {
+			    if (values[i] === "" || values[i] === '0')
+			        count++;
+			}
 
-			}else{
-
-				if(typeof d.words !== "undefined"){
-					$("#maxWords").show();
-					$("#nbwords").text(d.words);
+	if(count === 0){
+		$("#fillExperience").hide();
+		$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
+			if (typeof d.status !== 'undefined') {
+					$("#maxExperience").show();
 
 				}else{
 
-							var el  = "<li data-id='" + d.id + "'>" +
-							d.name + " : " + d.company + "<br>" + d.description
-							" <a href='#' class='remove-experience'>[ x ]</a></li>";
-							$("#experiencies-list").append(el);
+					if(typeof d.words !== "undefined"){
+						$("#maxWords").show();
+						$("#nbwords").text(d.words);
+
+					}else{
+
+								var el  = "<li data-id='" + d.id + "'>" +
+								d.name + " : " + d.company + "<br>" + d.description
+								" <a href='#' class='remove-experience'>[ x ]</a></li>";
+								$("#experiencies-list").append(el);
+								$("#experience").val("");
+							  $("#company").val("");
+							  $("#sector").val("");
+							  $("#from").val("");
+							  $("#tod").val("");
+							  $("#experience_city").val("");
+							  $("#experience_state").val("");
+							  $("#experience_description").val("");
+					}
+
+
 				}
+			}, "json");
+	}else{
+		$("#fillExperience").show();
+	}
 
-
-			}
-		}, "json");
 });
 
 // experience "CRUD"
@@ -191,20 +258,42 @@ $("#add-study").on("click", function(e){
 			state       = $("#study_state").val(),
       url         = url_estudios_add;
 
-  $.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
-		if (typeof d.status !== 'undefined') {
-				$("#maxStudy").show();
-
-			}else{
-
-				    var from = d.from.split("-"),
-				        to   = d.to.split("-"),
-				        el  = "<li data-id='" + d.id + "'>" +
-				    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-				    " <a href='#' class='remove-study'>[ x ]</a></li>";
-				    $("#studies-list").append(el);
+			var values = $(".study").map(function() {
+				return this.value;
+			}).get();
+			var i = values.length,
+					count = 0;
+			while (i--) {
+					if (values[i] === "" || values[i] === '0')
+							count++;
 			}
-  }, "json");
+
+		if(count === 0){
+			$("#fillStudy").hide();
+			$.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
+				if (typeof d.status !== 'undefined') {
+						$("#maxStudy").show();
+
+					}else{
+
+						    var from = d.from.split("-"),
+						        to   = d.to.split("-"),
+						        el  = "<li data-id='" + d.id + "'>" +
+						    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
+						    " <a href='#' class='remove-study'>[ x ]</a></li>";
+						    $("#studies-list").append(el);
+								$("#study").val("");
+							  $("#institution").val("");
+							  $("#s_from").val("");
+							  $("#s_to").val("");
+							  $("#study_city").val("");
+								$("#study_state").val("");
+					}
+		  }, "json");
+		}else{
+			$("#fillStudy").show();
+		}
+
 });
 
 // experience "CRUD"
