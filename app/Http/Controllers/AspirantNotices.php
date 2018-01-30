@@ -250,15 +250,17 @@ class AspirantNotices extends Controller
     //valida que exista el aspirante en la convocatoria
     $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
     $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
-    if($request->file('proof')->isValid()){
-        $name = uniqid() . "." . $request->file("proof")->guessExtension();
-        $path = "/files/";
-        $request->file('proof')->move(public_path() . $path, $name);
-        if($aspirantData->proof){
-          File::delete(public_path().$path.$aspirantData->proof);
+    if($request->file('proof')){
+        if($request->file('proof')->isValid()){
+            $name = uniqid() . "." . $request->file("proof")->guessExtension();
+            $path = "/files/";
+            $request->file('proof')->move(public_path() . $path, $name);
+            if($aspirantData->proof){
+              File::delete(public_path().$path.$aspirantData->proof);
+            }
+            $aspirantData->proof = $name;
+            $aspirantData->save();
         }
-        $aspirantData->proof = $name;
-        $aspirantData->save();
     }
     return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-aviso-privacidad");
   }
