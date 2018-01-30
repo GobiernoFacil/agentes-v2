@@ -21,6 +21,10 @@ class Cv extends Model
       return $this->hasMany('App\Models\Experience');
     }
 
+    public function open_experiences(){
+      return $this->hasMany('App\Models\OpenExperience');
+    }
+
     public function further_trainings(){
       return $this->hasMany('App\Models\FurtherTraining');
     }

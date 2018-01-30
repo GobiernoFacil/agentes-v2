@@ -137,6 +137,73 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 
 	<div class="divider"></div>
 
+	<!-- open -->
+		<div class="row">
+			<fieldset>
+				<div class="col-sm-12">
+					<h3>Experiencia de Gobierno Abierto</h3>
+					<p>Muestra evidencia  de tu experiencia en el desarrollo de proyectos relacionados con los principios de Gobierno Abierto y Desarrollo Sostenible</p>
+					<p></p>
+					<ul id="experiencies-list-open">
+					  @foreach($cv->open_experiences as $experience)
+					  <li data-id="{{$experience->id}}">
+					     {{$experience->company}} <br>
+					    {{$experience->description}}
+					    <a href="#" class="remove-experience-open">[ x ]</a>
+					  </li>
+					  @endforeach
+					</ul>
+				</div>
+				<div class="col-sm-6">
+			  		<p><label><strong>Empresa / Organización civil / gobierno</strong></label>
+			  		  <input type="text" name="company_open" id="company_open" class="form-control open">
+			  		</p>
+				</div>
+				<div class="col-sm-6">
+			  		<p><label><strong>Sector</strong></label>
+			  		  <input type="text" name="sector_open" id="sector_open" class="form-control open">
+			  		</p>
+				</div>
+			  	<div class="col-sm-6">
+			  		<p><label><strong>Fecha de ingreso</strong></label>
+			  		  <input type="text" name="from_open" id="from_open" class="form-control open">
+			  		</p>
+			  	</div>
+			  	<div class="col-sm-6">
+			  		<p>
+			  		  <label><strong>Fecha de término</strong></label>
+			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open">
+			  		</p>
+			  	</div>
+			  	<div class="col-sm-6">
+			  		<p><label><strong>Estado</strong></label>
+							{{Form::select('experience_state_open',$states,null, ['class' => 'form-control open', 'id'=>'open_state'])}}
+			  		</p>
+			  	</div>
+			  	<div class="col-sm-6">
+			  		<p><label><strong>Ciudad</strong></label>
+							{{Form::select('experience_city_open',[null=>"Selecciona un estado"],null, ['class' => 'form-control open', 'id'=>'open_city'])}}
+			  		</p>
+			  	</div>
+
+			  	<div class="col-sm-6">
+			  		<p><label><strong>Descripción</strong></label>
+			  		  <textarea type="text" name="description_open" id="description_open" class="form-control open"></textarea>
+			  		</p>
+			  	</div>
+			  	<div class="col-sm-12">
+						<strong class="danger" id ="fillOpen" style="display:none;">Llena todos los campos.</strong>
+						<strong class="danger" id ="maxExperienceOpen" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
+						<strong class="danger" id ="maxWordsOpen" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwordsOpen"></span>.</strong>
+			  		<p>
+			  		  <a id="add-open" href="#" class="btn gde center">Agregar experiencia [+]</a>
+			  		</p>
+			  	</div>
+			</fieldset>
+		</div>
+
+	<div class="divider"></div>
+
 	<!-- idiomas + Software-->
 	<div class="row">
 		<!-- idiomas -->

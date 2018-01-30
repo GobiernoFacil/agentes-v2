@@ -625,4 +625,44 @@ class AspirantNotices extends Controller
           return response()->json($r);
         }
 
+
+        public function addOpen(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          if($cv->open_experiences()->count() == 3){
+            return response()->json(["status"=>$cv->open_experiences()->count()]);
+          }else{
+            $words = explode(' ', $request->description);
+            $nbWords = count($words);
+            if($nbWords <=100){
+                  $experience = $cv->open_experiences()->firstOrCreate([
+                      'company' => $request->company,
+                      'sector' => $request->sector,
+                      'from' => $request->from,
+                      'to' => $request->to,
+                      'city' => $request->city,
+                      'state' => $request->state,
+                      'description' => $request->description
+
+                    ]);
+                  }else{
+
+                    return response()->json(["words"=>$nbWords]);
+
+                  }
+          }
+
+
+           return response()->json($experience);
+        }
+
+
+        public function removeOpen($id){
+          $user     = Auth::user();
+          $experience = $user->aspirant($user)->cv->open_experiences()->find($id);
+          $r        = $experience->delete();
+
+          return response()->json($r);
+        }
+
 }

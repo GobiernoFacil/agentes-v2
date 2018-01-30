@@ -46,6 +46,8 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     $( "#s_to" ).datepicker({changeYear:true,yearRange: "-100:+0"});
 		$( "#from" ).datepicker({changeYear:true,yearRange: "-100:+0"});
     $( "#tod" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+		$( "#from_open" ).datepicker({changeYear:true,yearRange: "-100:+0"});
+    $( "#tod_open" ).datepicker({changeYear:true,yearRange: "-100:+0"});
 		$( "#birthdate" ).datepicker({changeYear:true,yearRange: "-100:+0"});
   } );
 
@@ -61,6 +63,13 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		$( "#tod" ).datepicker({minDate:date,changeYear:true,yearRange: "-100:+0"});
 	});
 
+	$('#from_open').on('change',function(){
+		var date = new Date($('#from_open').val());
+		$('#tod_open').datepicker('destroy');
+		$( "#tod_open" ).datepicker({minDate:date,changeYear:true,yearRange: "-100:+0"});
+	});
+
+
 
 var CVID = {{$cv->id}};
 var url_idioma_add      = "{{url("tablero-aspirante/idioma/agregar")}}",
@@ -70,7 +79,9 @@ var url_idioma_add      = "{{url("tablero-aspirante/idioma/agregar")}}",
     url_experiencia_add = "{{url("tablero-aspirante/experiencia/agregar")}}",
     url_experiencia_delete = "{{url("tablero-aspirante/experiencia/eliminar")}}",
     url_estudios_add    = "{{url("tablero-aspirante/estudios/agregar")}}",
-    url_estudios_delete = "{{url("tablero-aspirante/estudios/eliminar")}}";
+    url_estudios_delete = "{{url("tablero-aspirante/estudios/eliminar")}}",
+		url_open_add    = "{{url("tablero-aspirante/experiencia-abierta/agregar")}}",
+    url_open_delete = "{{url("tablero-aspirante/experiencia-abierta/eliminar")}}";
 
 // Laravel.csrfToken
 $(function(){
@@ -171,6 +182,81 @@ $(function(){
     }, "json");
   });
 
+	// open "CRUD"
+	// ADD
+	$("#add-open").on("click", function(e){
+	  e.preventDefault();
+	  var company     = $("#company_open").val(),
+	      sector      = $("#sector_open").val(),
+	      from        = $("#from_open").val(),
+	      to          = $("#tod_open").val(),
+	      city        = $("#open_city").val(),
+	      state       = $("#open_state").val(),
+	      description = $("#description_open").val(),
+	      url         = url_open_add;
+
+				var values = $(".open").map(function() {
+	    		return this.value;
+				}).get();
+				var i = values.length,
+						count = 0;
+				while (i--) {
+				    if (values[i] === "" || values[i] === '0')
+				        count++;
+				}
+
+		if(count === 0){
+			$("#fillOpen").hide();
+			$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
+				if (typeof d.status !== 'undefined') {
+						$("#maxExperienceOpen").show();
+
+					}else{
+
+						if(typeof d.words !== "undefined"){
+							$("#maxWordsOpen").show();
+							$("#nbwordsOpen").text(d.words);
+
+						}else{
+									$("#maxWordsOpen").hide();
+									var el  = "<li data-id='" + d.id + "'>" +
+									d.company + "<br>" + d.description
+									" <a href='#' class='remove-experience'>[ x ]</a></li>";
+									$("#experiencies-list-open").append(el);
+								  $("#company_open").val("");
+								  $("#sector_open").val("");
+								  $("#from_open").val("");
+								  $("#tod_open").val("");
+								  $("#experience_city_open").val("");
+								  $("#experience_state_open").val("");
+								  $("#description_open").val("");
+						}
+
+
+					}
+				}, "json");
+		}else{
+			$("#fillOpen").show();
+		}
+
+	});
+
+
+	// open "CRUD"
+	// REMOVE
+	$("#experiencies-list-open").on("click", ".remove-experience-open", function(e){
+	  e.preventDefault();
+	  var li = $(e.currentTarget).parent(),
+	  id = li.attr("data-id"),
+	  url = url_open_delete;
+
+	  $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
+			$("#maxExperienceOpen").hide();
+	    li.remove();
+	  }, "json");
+	});
+
+
 // Experiences "CRUD"
 // ADD
 $("#add-experience").on("click", function(e){
@@ -208,7 +294,7 @@ $("#add-experience").on("click", function(e){
 						$("#nbwords").text(d.words);
 
 					}else{
-
+								$("#maxWords").hide();
 								var el  = "<li data-id='" + d.id + "'>" +
 								d.name + " : " + d.company + "<br>" + d.description
 								" <a href='#' class='remove-experience'>[ x ]</a></li>";
@@ -353,6 +439,26 @@ state_study.addEventListener("change", function(){
 	}
 });
 
+var state_open = document.getElementById("open_state");
+var city_open  = document.getElementById("open_city");
+
+
+//selecciona un estado y agrega opciones a selector de municipios para estudio
+state_open.addEventListener("change", function(){
+	var value = this.value;
+	//filtro de municipios
+	var value = this.value;
+	var n_cities = cities.filter(function (el) {
+	   return (el.state === value);
+	});
+	//agregar opciones
+	var city_open =document.getElementById('open_city');
+	city_open.options.length=0
+	city_open.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city_open.options[city_open.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
 
 </script>
 <script>
