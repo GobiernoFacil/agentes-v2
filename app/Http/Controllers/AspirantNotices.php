@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use File;
-use App\Models\Notice;
+
 use App\Models\AspirantNotice;
 use App\Models\AspirantsFile;
+use App\Models\City;
 use App\Models\Cv;
+use App\Models\State;
+use App\Models\Notice;
 //validations
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
@@ -126,11 +129,18 @@ class AspirantNotices extends Controller
         'notice_id'=>$notice->id,
         'user_id'=>$user->id
       ]);
+      $states	    =  State::select('name')->orderBy('name','asc')->distinct('name')->pluck("name","name")->toArray();
+      array_unshift($states, "Selecciona una opción");
+      $cities	    =  City::all();
+      $states_j	  =  State::select('name')->orderBy('name','asc')->get();
       return view('aspirant.notices.notices-apply-cv')->with([
           "user"      => $user,
           "notice"    => $notice,
           "cv"        => $cv,
-          "aspirantFile" => $aspirantFile
+          "aspirantFile" => $aspirantFile,
+          "cities"    => $cities,
+          "states"    => $states,
+          "states_j"  => $states_j
 
         ]);
   }
@@ -551,19 +561,32 @@ class AspirantNotices extends Controller
         public function addExperience(Request $request){
           $user     = Auth::user();
           $cv       = $user->aspirant($user)->cv;
-          $experience = $cv->experiences()->firstOrCreate([
-            'name'  => $request->name,
-            'company' => $request->company,
-            'sector' => $request->sector,
-            'from' => $request->from,
-            'to' => $request->to,
-            'city' => $request->city,
-            'state' => $request->state,
-            'description' => $request->description
+          if($cv->experiences()->count() == 3){
+            return response()->json(["status"=>$cv->experiences()->count()]);
+          }else{
+            $words = explode(' ', $request->description);
+            $nbWords = count($words);
+            if($nbWords <=100){
+                  $experience = $cv->experiences()->firstOrCreate([
+                      'name'  => $request->name,
+                      'company' => $request->company,
+                      'sector' => $request->sector,
+                      'from' => $request->from,
+                      'to' => $request->to,
+                      'city' => $request->city,
+                      'state' => $request->state,
+                      'description' => $request->description
 
-          ]);
+                    ]);
+                  }else{
 
-          return response()->json($experience);
+                    return response()->json(["words"=>$nbWords]);
+
+                  }
+          }
+
+
+           return response()->json($experience);
         }
 
         public function removeExperience($id){
@@ -577,13 +600,19 @@ class AspirantNotices extends Controller
         public function addStudy(Request $request){
           $user  = Auth::user();
           $cv    = $user->aspirant($user)->cv;
-          $study = $cv->academic_trainings()->firstOrCreate([
-            'name'        => $request->name,
-            'institution' => $request->institution,
-            'from'        => $request->from,
-            'to'          => $request->to,
-            'city'        => $request->city,
-          ]);
+          if($cv->academic_trainings()->count() == 200){
+            return response()->json(["status"=>$cv->academic_trainings()->count()]);
+          }else{
+
+                $study = $cv->academic_trainings()->firstOrCreate([
+                  'name'        => $request->name,
+                  'institution' => $request->institution,
+                  'from'        => $request->from,
+                  'to'          => $request->to,
+                  'city'        => $request->city,
+                  'state'       => $request->state
+                ]);
+            }
 
           return response()->json($study);
         }

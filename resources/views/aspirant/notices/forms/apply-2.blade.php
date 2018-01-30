@@ -46,15 +46,16 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 				<div class="col-sm-6">
 				<p><label><strong>Estado</strong></label>
-				  <input type="text" name="study_state" id="study_state" class="form-control">
+					{{Form::select('study_state',$states,null, ['class' => 'form-control', 'id'=>'study_state'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-6">
 				<p><label><strong>Ciudad</strong></label>
-				  <input type="text" name="study_city" id="study_city" class="form-control">
+					{{Form::select('study_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'study_city'])}}
 				</p>
 		  	</div>
 		  	<div class="col-sm-12">
+					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
 		  </p>
@@ -108,12 +109,12 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Estado</strong></label>
-		  		  <input type="text" name="experience_state" id="experience_state" class="form-control">
+						{{Form::select('experience_state',$states,null, ['class' => 'form-control', 'id'=>'experience_state'])}}
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Ciudad</strong></label>
-		  		  <input type="text" name="experience_city" id="experience_city" class="form-control">
+						{{Form::select('experience_city',[null=>"Selecciona un estado"],null, ['class' => 'form-control', 'id'=>'experience_city'])}}
 		  		</p>
 		  	</div>
 
@@ -123,6 +124,9 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-12">
+
+					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
+					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwords"></span>.</strong>
 		  		<p>
 		  		  <a id="add-experience" href="#" class="btn gde center">Agregar experiencia [+]</a>
 		  		</p>

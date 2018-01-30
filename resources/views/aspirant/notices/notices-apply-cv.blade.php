@@ -21,7 +21,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
+  <?php echo 'var states     = '.$states_j.';'; ?>
+	<?php echo 'var cities     = '.$cities.';'; ?>
 $.datepicker.regional['es'] = {
 closeText: 'Cerrar',
 prevText: '< Ant',
@@ -78,7 +79,6 @@ $(function(){
     url   = url_idioma_add;
 
     $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
       " <a href='#' class='remove-language'>[ x ]</a></li>";
@@ -108,7 +108,6 @@ $(function(){
     url   = url_software_add;
 
     $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
-      console.log(d);
       var el  = "<li data-id='" + d.id + "'>" +
       d.name + " : " + d.level +
       " <a href='#' class='remove-software'>[ x ]</a></li>";
@@ -144,11 +143,26 @@ $("#add-experience").on("click", function(e){
       url         = url_experiencia_add;
 
   $.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
-    var el  = "<li data-id='" + d.id + "'>" +
-    d.name + " : " + d.company + "<br>" + d.description
-    " <a href='#' class='remove-experience'>[ x ]</a></li>";
-    $("#experiencies-list").append(el);
-  }, "json");
+		if (typeof d.status !== 'undefined') {
+				$("#maxExperience").show();
+
+			}else{
+
+				if(typeof d.words !== "undefined"){
+					$("#maxWords").show();
+					$("#nbwords").text(d.words);
+
+				}else{
+
+							var el  = "<li data-id='" + d.id + "'>" +
+							d.name + " : " + d.company + "<br>" + d.description
+							" <a href='#' class='remove-experience'>[ x ]</a></li>";
+							$("#experiencies-list").append(el);
+				}
+
+
+			}
+		}, "json");
 });
 
 // experience "CRUD"
@@ -160,6 +174,7 @@ $("#experiencies-list").on("click", ".remove-experience", function(e){
   url = url_experiencia_delete;
 
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
+		$("#maxExperience").hide();
     li.remove();
   }, "json");
 });
@@ -173,15 +188,22 @@ $("#add-study").on("click", function(e){
       from        = $("#s_from").val(),
       to          = $("#s_to").val(),
       city        = $("#study_city").val(),
+			state       = $("#study_state").val(),
       url         = url_estudios_add;
 
-  $.post(url, {name : name, institution:institution,from:from,to:to,city:city, _token : "{{ csrf_token() }}"}, function(d){
-    var from = d.from.split("-"),
-        to   = d.to.split("-"),
-        el  = "<li data-id='" + d.id + "'>" +
-    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-    " <a href='#' class='remove-study'>[ x ]</a></li>";
-    $("#studies-list").append(el);
+  $.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
+		if (typeof d.status !== 'undefined') {
+				$("#maxStudy").show();
+
+			}else{
+
+				    var from = d.from.split("-"),
+				        to   = d.to.split("-"),
+				        el  = "<li data-id='" + d.id + "'>" +
+				    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
+				    " <a href='#' class='remove-study'>[ x ]</a></li>";
+				    $("#studies-list").append(el);
+			}
   }, "json");
 });
 
@@ -194,10 +216,54 @@ $("#studies-list").on("click", ".remove-study", function(e){
   url = url_estudios_delete;
 
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
+		$("#maxStudy").hide();
     li.remove();
   }, "json");
 });
 });
+
+var state_experience = document.getElementById("experience_state");
+var city_experience  = document.getElementById("experience_city");
+
+
+//selecciona un estado y agrega opciones a selector de municipios para experiencia
+state_experience.addEventListener("change", function(){
+	var value = this.value;
+	//filtro de municipios
+	var value = this.value;
+	var n_cities = cities.filter(function (el) {
+	   return (el.state === value);
+	});
+	//agregar opciones
+	var city_experience =document.getElementById('experience_city');
+	city_experience.options.length=0
+	city_experience.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city_experience.options[city_experience.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
+
+var state_study = document.getElementById("study_state");
+var city_study  = document.getElementById("study_city");
+
+
+//selecciona un estado y agrega opciones a selector de municipios para estudio
+state_study.addEventListener("change", function(){
+	var value = this.value;
+	//filtro de municipios
+	var value = this.value;
+	var n_cities = cities.filter(function (el) {
+	   return (el.state === value);
+	});
+	//agregar opciones
+	var city_study =document.getElementById('study_city');
+	city_study.options.length=0
+	city_study.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city_study.options[city_study.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
+
 
 </script>
 <script>

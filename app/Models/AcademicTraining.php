@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademicTraining extends Model
 {
-  protected $fillable = ['cv_id', 'name', 'from', 'to', 'institution', 'city'];
+  protected $fillable = ['cv_id', 'name', 'from', 'to', 'institution', 'city','state'];
     //
 
   public function cv(){
