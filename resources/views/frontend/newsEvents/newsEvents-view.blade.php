@@ -25,7 +25,7 @@
 			<!--author-->
     		<div class="divider"></div>
 			
-    		<p class="author">Por {{$content->user->name}} <span>{{$content->created_at->diffForHumans()}}</span></p>
+    		<p class="author">Por {{$content->user->name}} <span>{{$content->updated_at->diffForHumans()}}</span></p>
 			
     		<div class="divider b"></div>
 		</div>

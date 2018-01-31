@@ -32,7 +32,7 @@ class SaveFiles extends FormRequest
         'proof' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
         'privacy' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2500',
         'video' => 'required',
-        'aId'=>'required'
+      //  'aId'=>'required'
       ];
     }
 }

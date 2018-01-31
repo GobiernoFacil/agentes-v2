@@ -3,29 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use Mail;
 //Models
 use App\Models\Aspirant;
 use App\Models\AspirantActivation;
 use App\Models\AspirantsFile;
+use App\Models\AspirantNotice;
 use App\Models\City;
+use App\Models\Notice;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
 use App\Http\Requests\SaveFiles;
+//Notifications
+use App\Notifications\AspirantConfirmation;
+use App\Notifications\AspirantCredentials;
 class NoticeFront extends Controller
 {
   /******************* funciones de convocatoria ************************/
       //convocatoria
       public function convocatoria(){
-        return view('frontend.convocatoria.info');
+        $notice  = new Notice;
+        $notice  = $notice->get_last_notice();
+        return view('frontend.convocatoria.notice-front')->with([
+          'notice' =>$notice
+        ]);
       }
-      
+
       //resultados 2017
       public function resultado17(){
         return view('frontend.convocatoria.resultados2017');
       }
-      
+
       //metodología 2017
       public function metodo17(){
         return view('frontend.convocatoria.metodologia');
@@ -37,30 +48,38 @@ class NoticeFront extends Controller
       }
 
       //convocatoria/aplicar
-      public function aplicar(){
-        return view('frontend.convocatoria.aplicar-1');
+      public function aplicar($notice_slug){
+        $today  = date('Y-m-d');
+        $notice  = Notice::where('slug',$notice_slug)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->firstOrFail();
+        return view('frontend.convocatoria.aplicar-1')->with([
+          'notice' =>$notice
+        ]);
       }
 
       //Guardar aspirante
       public function saveAspirant(SaveAspirant $request){
         $data     = $request->except('email-confirm');
+        $today  = date('Y-m-d');
+        $notice  = Notice::where('slug',$request->notice_slug)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->firstOrFail();
         $aspirant = new Aspirant($data);
         $aspirant->is_activated = 0;
         $aspirant->save();
+        $aspirant_notice  =  AspirantNotice::firstOrCreate(['aspirant_id'=>$aspirant->id,'notice_id'=>$notice->id]);
         $link     =  str_random(40);
         $activation = new AspirantActivation([
           'aspirant_id' => $aspirant->id,
           'token'       => $link
         ]);
         $activation ->save();
-        $from    = "info@apertus.org.mx";
+    /*    $from    = "info@apertus.org.mx";
         $subject = "Confirma tu dirección correo | Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible";
        //enviar correo para confirmar dirección de correo
         Mail::send('emails.confirmation', ['aspirant' => $aspirant,'link' =>$link], function($message) use ($aspirant,$link,$from, $subject) {
                 $message->from($from, 'no-reply');
                 $message->to($aspirant->email);
                 $message->subject($from);
-        });
+        });*/
+        $aspirant->notify(new AspirantConfirmation($aspirant,$notice));
 
         return view('frontend.convocatoria.aplicar-message');
 
@@ -73,21 +92,37 @@ class NoticeFront extends Controller
 
 
       //activar aspirantes
-      public function aspirantActivation($token){
-        $code  = AspirantActivation::where('token',$token)->first();
-
+      public function aspirantActivation($notice_slug, $token){
+        $notice = Notice::where('slug',$notice_slug)->firstOrFail();
+        $code   = AspirantActivation::where('token',$token)->first();
         if($code){
-          $aspirant = Aspirant::find($code->aspirant_id);
-            if($aspirant->is_activated == 1){
-                session()->flash('aspirant_id', $aspirant->id);
-                return redirect('convocatoria/aplicar/registro')->with('success',"Ya se encuentra validado");
-            }
-            $aspirant->is_activated = 1;
-            $aspirant->save();
-            session()->flash('aspirant_id', $aspirant->id);
-            return redirect('convocatoria/aplicar/registro')->with('success',"Se ha validado tu correo");
+          $aspirant = $code->aspirant;
+          if($aspirant->is_activated == 1){
+                $message = "Ya se encuentra validado";
+          }else{
+                $message = "Se ha validado tu correo";
+                $aspirant->is_activated = 1;
+                $aspirant->save();
+          }
+          session()->flash('aspirant_id', $aspirant->id);
+          //usuarios nuevos
+          $user = User::where('email',$aspirant->email)->first();
+          if(!$user){
+            $password  = str_random(10);
+            $name      = $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname;
+            $new_user  = User::firstOrCreate(['name'=>$name, 'email'=>$aspirant->email,'password'=>bcrypt($password),'type'=>'aspirant']);
+            $new_user->enabled = 1;
+            $new_user->institution = $aspirant->origin;
+            $new_user->save();
+            $aspirant->code->delete();
+            $new_user->notify(new AspirantCredentials($new_user,$password));
+            return redirect('convocatoria/registro/fin')->with('success',"Se ha validado tu correo");
+          }else{
+            return redirect('login')->with('error',"Tu correo se encuentra activo en el sistema");
+          }
+
         }else{
-          return redirect('convocatoria/aplicar')->with('error',"El código de activación es incorrecto");
+          return redirect("convocatoria/aplicar/$notice_slug")->with('error',"El código de activación es incorrecto o ha expirado");
         }
       }
 

@@ -35,6 +35,7 @@ class SaveModule extends FormRequest
             'start'=> 'required',
             'end'=> 'required',
             'public'=> 'required',
+            'measure'=> 'required',
         ];
     }
 }

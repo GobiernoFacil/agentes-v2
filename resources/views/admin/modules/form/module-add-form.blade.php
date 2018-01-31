@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/modulos/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/programas/$program->id/modulos/save"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -40,7 +40,7 @@
 </div>
 <!-- horas y sesiones -->
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <p>
       <label><strong>Número de sesiones</strong> <br>
       {{Form::text('number_sessions',null, ["class" => "form-control"])}} </label>
@@ -49,12 +49,23 @@
       @endif
     </p>
   </div>
+</div>
+<div class="row">
   <div class="col-sm-6">
     <p>
-      <label><strong>Total de horas</strong> <br>
-      {{Form::text('number_hours', null, ["class" => "form-control",'id'=>'startE'])}} </label>
+      <label><strong>Duración</strong> <br>
+      {{Form::text('number_hours', null, ["class" => "form-control"])}} </label>
       @if($errors->has('number_hours'))
       <strong class="danger">{{$errors->first('number_hours')}}</strong>
+      @endif
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>
+      <label><strong>Unidad de medida</strong> <br>
+      {{Form::select('measure',[null=>"Selecciona una opción",0=>"Minutos",1 =>"Horas"], null, ["class" => "form-control"])}} </label>
+      @if($errors->has('measure'))
+      <strong class="danger">{{$errors->first('measure')}}</strong>
       @endif
     </p>
   </div>
