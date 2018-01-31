@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use File;
 
@@ -20,6 +21,8 @@ use App\Http\Requests\SaveApply2;
 use App\Http\Requests\SaveApply3;
 use App\Http\Requests\SaveApply4;
 use App\Http\Requests\SaveApply5;
+//Notifications
+use App\Notifications\SendApplyT;
 class AspirantNotices extends Controller
 {
     //
@@ -306,6 +309,7 @@ class AspirantNotices extends Controller
         $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
         $aspirantData->privacy_policies = $request->privacy_policies;
         $aspirantData->save();
+        $user->notify(new SendApplyT($user,$notice));
         return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
     }
 
