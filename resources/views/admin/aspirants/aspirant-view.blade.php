@@ -24,24 +24,24 @@
 				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
 
 				@if($aspirant->AspirantsFile)
+				@if($aspirant->AspirantsFile->motives)
+				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->essay}/ensayo")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
+				@endif
+
+				@if($aspirant->cv)
+				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn view xs"> Descargar Perfil Curricular</a></li>
+				@endif
+
 				@if($aspirant->AspirantsFile->video)
-				<li><span>Video:</span> {{$aspirant->AspirantsFile->video}}</li>
+				<li><span>Video:</span> <a class ="btn view" href="{{$aspirant->AspirantsFile->video}}" target="_blank">Ir al video</a></li>
 				@endif
-				@if($aspirant->AspirantsFile->cv)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->cv}/CV")}}'  class="btn view xs"> Descargar Perfil Curricular</a></li>
-				@endif
-				@if($aspirant->AspirantsFile->essay)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->essay}/ensayo")}}'  class="btn view xs"> Descargar Ensayo</a></li>
-				@endif
-				@if($aspirant->AspirantsFile->letter)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->letter}/carta")}}'  class="btn view xs"> Descargar Carta Membretada</a></li>
-				@endif
+
 				@if($aspirant->AspirantsFile->proof)
 				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->proof}/comprobante")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
 				@endif
-				@if($aspirant->AspirantsFile->privacy)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->privacy}/privacidad")}}'  class="btn view xs"> Descargar Consentimiento Relativo Al Tratamiento de sus Datos Personales</a></li>
-				@endif
+
+
+				<li><span>Políticas de Privacidad:</span> <strong> {{$aspirant->AspirantsFile->privacy_policies ? "De acuerdo" : "No de acuerdo"}}</strong></li>
 				@endif
 
 			</ul>

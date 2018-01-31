@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\AspirantEvaluation;
+use PDF;
 class AdminAspirants extends Controller
 {
     //
@@ -75,4 +76,28 @@ class AdminAspirants extends Controller
               'generalGrade' => $generalGrade
             ]);
       }
+
+      /**
+       * Muestra aspirantes de convocatoria
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function downloadPdf($notice_id,$aspirant_id,$type)
+      {
+
+        $notice  = Notice::where('id',$notice_id)->firstOrFail();
+        $aspirant = Aspirant::where('id',$aspirant_id)->firstOrFail();
+        if($type==="cv"){
+          $pdf = PDF::loadView('admin.aspirants.pdf.cv-view', compact(['aspirant']));
+          return $pdf->download('cv_'.$aspirant->name.'_'.$aspirant->surname.'_'.$aspirant->lastname.'.pdf');
+        }else{
+
+        }
+      }
+
+
+
+
+
+
 }
