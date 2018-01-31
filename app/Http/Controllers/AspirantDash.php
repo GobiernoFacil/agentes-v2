@@ -26,16 +26,25 @@ class AspirantDash extends Controller
       //convocatoria actual solo una es pública a la vez y entra en el lapso
       $notice = Notice::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
       $single = $notices->first();
-	    $aspirantFile     = AspirantsFile::firstOrCreate([
-        'aspirant_id'=>$user->aspirant($user)->id,
-        'notice_id'=>$notice->id,
-        'user_id'=>$user->id
-      ]);
-	    return view('aspirant.dashboard')->with([
-	      "user"      	  => $user,
-	      "single"        => $single,
-	      "aspirantFile"  => $aspirantFile
-	    ]);
+      if($notice){
+  	    $aspirantFile     = AspirantsFile::firstOrCreate([
+          'aspirant_id'=>$user->aspirant($user)->id,
+          'notice_id'=>$notice->id,
+          'user_id'=>$user->id
+        ]);
+  	    return view('aspirant.dashboard')->with([
+  	      "user"      	  => $user,
+  	      "single"        => $single,
+  	      "aspirantFile"  => $aspirantFile,
+          "notice"        => $notice
+  	    ]);
+      }else{
+        //convocatoria cerrada
+          return view('aspirant.dashboard')->with([
+           "user"      	  => $user,
+            "notice"        => $notice
+         ]);
+      }
 
     }
 
