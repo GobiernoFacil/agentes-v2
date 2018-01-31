@@ -3,24 +3,27 @@
 
   <div class="row">
     <div class="col-sm-12">
-  	  <h2>Aviso de Privacidad</h2>
-        <p><label>Da click para leer el aviso de privacidad</label></p>
-        <p>
-          <a href='{{url("tablero-aspirante/aviso-de-privacidad")}}'  class="btn view xs" target="_blank"> Aviso de Privacidad</a>
+        <p>Lee y acepta el Aviso de Privacidad por medio del cual otorgas el consentimiento relativo al tratamiento de tus datos personales: <br>
+          <a href='{{url("tablero-aspirante/aviso-de-privacidad")}}'  class="btn view xs">  Leer el aviso de privacidad</a>
         </p>
-        {{Form::checkbox('privacy_policies',1,$aspirantFile->privacy_polices, ['class' => ''])}} Acepto
+    </div>
+    <div class="col-sm-12">
+        
+		<div class="box last_activity">
+        {{Form::checkbox('privacy_policies',1,$aspirantFile->privacy_polices, ['class' => '', 'id' => 'check_privacy_policies'])}}  <label for="check_privacy_policies">Acepto el Aviso de Privacidad por medio del cual otorgo el consentimiento relativo al tratamiento de mis datos personales </label>
         @if($errors->has('privacy_policies'))
         <strong class="error">{{$errors->first('privacy_policies')}}</strong>
         @endif
-
+		</div>
+		<div class="divider"></div>
     </div>
-
+	
   </div>
 
 
 
 <div class="row">
-  <div class="col-sm-3 col-sm-offset-9">
+  <div class="col-sm-8 col-sm-offset-2">
     <p>{{Form::submit('Aplicar a la Convocatoria', ['class' => 'btn gde'])}}</p>
   </div>
 </div>
