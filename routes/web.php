@@ -151,10 +151,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
 
-    /*
+    /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
-    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
-    Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
+    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');*/
+
+    /*
     Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
     Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
     Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');

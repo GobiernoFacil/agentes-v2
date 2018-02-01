@@ -15,6 +15,10 @@
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
 			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
 			<p id ="nR" style="display:none;">No existen resultados</p>
+			<div class = "row">
+ 	 		<div class="col-sm-12" id ="search-results" style ="visibility:hidden;">
+ 	 		</div>
+ 	 	</div>
 		</form>
 	</div>
 </div>
@@ -79,4 +83,13 @@
 	</div>
 </div>
 
+@endsection
+
+
+@section('js-content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src ='{{url("js/aspirant-search.js")}}'></script>
+<script>
+  <?php echo 'var aspirants     = '.$allAspirants.';'; ?>
+</script>
 @endsection
