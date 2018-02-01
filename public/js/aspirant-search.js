@@ -1,4 +1,9 @@
-var search  = document.getElementById("search-aspirant");
+var search  = document.getElementById("search-aspirant"),
+    search_state = [],
+    search_city  = [],
+    search_name  = [],
+    search_name_sur = [];
+
 //buscador
 search.addEventListener("keyup",function(){
 	var _query   = this.value.toUpperCase();
@@ -11,6 +16,7 @@ search.addEventListener("focusout",function(){
 	var box = document.getElementById("search-results");
 	setTimeout(function() { box.innerHTML = ''; search.value = '';}, 100);
 });
+
 
 search.addEventListener("keydown",function(){
 	//busqueda estado
@@ -28,7 +34,6 @@ search.addEventListener("keydown",function(){
 	}),
 
   search_words = _query.split(" ");
-		console.log(search_state);
 
 	if(search_words.length === 2){
 		search_name_sur = aspirants.filter(function (el) {
@@ -43,16 +48,8 @@ search.addEventListener("keydown",function(){
 	}
 
 
-
- if(search_state && search_city){
-	 result = search_1.concat(search_state,search_city,search_name_sur);
- }else if(search_city){
-	 result = search_city.concat(search_name,search_name_sur);
- }else{
-	 result = search_name.concat(search_name_sur);
- }
-
-	result = result.filter(function (el,index,self){
+	result = search_state.concat(search_city,search_name,search_name_sur);
+  result = result.filter(function (el,index,self){
 				return self.indexOf(el)===index;
 	});
 	render_search(result);
