@@ -90,8 +90,9 @@ class AdminAspirants extends Controller
         if($type==="cv"){
           $pdf = PDF::loadView('admin.aspirants.pdf.cv-view', compact(['aspirant']));
           return $pdf->download('cv_'.$aspirant->name.'_'.$aspirant->surname.'_'.$aspirant->lastname.'.pdf');
-        }else{
-
+        }elseif($type ==="motivos"){
+          $pdf = PDF::loadView('admin.aspirants.pdf.motives-view', compact(['aspirant']));
+          return $pdf->download('exposicion_motivos_'.$aspirant->name.'_'.$aspirant->surname.'_'.$aspirant->lastname.'.pdf');
         }
       }
 

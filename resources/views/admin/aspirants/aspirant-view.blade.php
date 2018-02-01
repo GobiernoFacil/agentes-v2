@@ -25,7 +25,7 @@
 
 				@if($aspirant->AspirantsFile)
 				@if($aspirant->AspirantsFile->motives)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->essay}/ensayo")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
+				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/motivos")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
 				@endif
 
 				@if($aspirant->cv)
