@@ -277,7 +277,7 @@
 							<li>Cuestionarios de conocimientos 20%</li>
 							<li>Proyecto final 50%</li>
 						</ul>
-						<p>A quienes acrediten el 80% de los puntos a evaluar serán acreedores a un reconocimiento que avale su participación en el programa.</p>
+						<p>A quienes acrediten el 70% de los puntos a evaluar serán acreedores a un reconocimiento que avale su participación en el programa.</p>
 						</div>
 					</li>
 					<!--Enlaces-->
