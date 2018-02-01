@@ -149,6 +149,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
+
+    /*
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
     Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
     Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
@@ -157,7 +160,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
     Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
     Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
-    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');
+    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');*/
+
+
+
+
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/ver/{id}', 'FellowsAdmin@view');

@@ -1,5 +1,5 @@
 @component('mail::message')
-Estimado/a {{$user->name." ".$user->aspirant($user)->surname." ".$user->aspirant($user)->lastname}},<br>
+Estimado/a {{$user->name}},<br>
 
 Muchas gracias por aplicar a la convocatoria "{{$notice->title}}" <br>
 

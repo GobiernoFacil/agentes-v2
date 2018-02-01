@@ -19,12 +19,13 @@
 	</div>
 </div>
 
+<!--
 <div class="row">
 	<div class="col-sm-4 col-sm-offset-8">
 		<a class ="btn view gde" id="typeAspirant" href ="">Aspirantes <span class= "strong" id="typeAspirantText">sin</span> archivos</a>
 	</div>
 </div>
-
+-->
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
