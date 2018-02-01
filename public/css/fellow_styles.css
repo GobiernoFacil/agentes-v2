@@ -1497,6 +1497,19 @@ b.sessionG {
       font-size: 12px;
       text-transform: uppercase; }
 
+.list_soft li {
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  padding-bottom: 5px;
+  margin-bottom: 10px; }
+
+li a.remove-language,
+li a.remove-software {
+  color: red; }
+  li a.remove-language:hover,
+  li a.remove-software:hover {
+    color: #cc0000; }
+
 .list-facilitator {
   list-style: none;
   margin: 0; }

@@ -210,14 +210,14 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		<div class="col-sm-6">
 			<fieldset>
 			  <h3>Idiomas</h3>
-			  <ul id="languages-list">
+			  <ol id="languages-list" class="list_soft">
 			    @foreach($cv->languages as $language)
 			    <li data-id="{{$language->id}}">
-			      {{$language->name}} : {{$language->level}}
+			      <strong>{{$language->name}}</strong>: {{$language->level}}
 			      <a href="#" class="remove-language">[ x ]</a>
 			    </li>
 			    @endforeach
-			  </ul>
+			  </ol>
 
 			  <p><label><strong>Idioma</strong></label> <input type="text" name="language" id="language" class="form-control language"></p>
 			  <p><label><strong>Nivel</strong></label>
@@ -238,14 +238,14 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		<div class="col-sm-6">
 			<fieldset>
 			  <h3>Software</h3>
-			  <ul id="softwares-list">
+			  <ol id="softwares-list" class="list_soft">
 			    @foreach($cv->softwares as $software)
 			    <li data-id="{{$software->id}}">
-			      {{$software->name}} : {{$software->level}}
+			      <strong>{{$software->name}}</strong>: {{$software->level}}
 			      <a href="#" class="remove-software">[ x ]</a>
 			    </li>
 			    @endforeach
-			  </ul>
+			  </ol>
 
 			  <p>
 			    <label><strong>Programa</strong></label>
@@ -272,16 +272,14 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 <fieldset>
   <h3>Datos generales</h3>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <p>
         <label><strong>Correo</strong></label>
         <input type="text" name="email" value="{{$user->email}}" class="form-control" disabled>
       </p>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <p>
         <label><strong>Fecha de nacimiento</strong> </label>
         {{Form::text('birthdate',null,["class" => "form-control", 'id'=>'birthdate'])}}
