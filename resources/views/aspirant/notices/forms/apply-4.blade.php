@@ -4,12 +4,15 @@
   <div class="row">
     <div class="col-sm-12">
   	  <h2>Comprobante de domicilio</h2>
-        <p><label>Adjunta tu comprobante de domicilio, recuerda verificar antes tu documento, el peso máximo 2.5MB en formato: jpg,jpeg o PDF</label></p>
-        {{Form::file('proof', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato jpg, jpeg, png o pdf)
+	  	  <p>Adjunta tu comprobante de domicilio reciente que acredite tu residencia, recuerda verificar antes tu documento, el peso máximo 2.5MB en formato: jpg, jpeg, png o pdf.</p>
+  	  <div class="box last_activity">
+        <p class="center"><label>
+        {{Form::file('proof', ['class' => ''])}} <br>(documento no mayor a 2.5 Mb, formato jpg, jpeg, png o pdf)
+        </label></p>
         @if($errors->has('proof'))
         <strong class="error">{{$errors->first('proof')}}</strong>
         @endif
-
+  	  </div>
     </div>
 
   </div>
