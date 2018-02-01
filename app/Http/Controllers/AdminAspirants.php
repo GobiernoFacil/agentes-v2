@@ -40,10 +40,12 @@ class AdminAspirants extends Controller
         $notice  = Notice::where('id',$notice_id)->firstOrFail();
         $aspirants_ids = $notice->aspirants()->pluck('aspirant_id');
         $aspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->paginate();
-        return view('admin.aspirants.aspirant-list')->with([
+        $allAspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->get();
+         return view('admin.aspirants.aspirant-list')->with([
             'user'      => $user,
             'notice'    => $notice,
-            'aspirants' => $aspirants
+            'aspirants' => $aspirants,
+            'allAspirants' => $allAspirants
           ]);
     }
 

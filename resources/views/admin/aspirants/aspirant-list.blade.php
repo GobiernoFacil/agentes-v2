@@ -80,3 +80,12 @@
 </div>
 
 @endsection
+
+
+@section('js-content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src ='{{url("js/aspirant-search.js")}}'></script>
+<script>
+  <?php echo 'var aspirants     = '.$allAspirants.';'; ?>
+</script>
+@endsection
