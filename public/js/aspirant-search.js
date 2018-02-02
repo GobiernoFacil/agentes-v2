@@ -65,15 +65,15 @@ search.addEventListener("keydown",function(){
 					p       = document.createElement('p');
 					atag    = document.createElement('a');
 					atag.setAttribute('class','selected-search');
-					atag.setAttribute('href','');
+					atag.setAttribute('href',view_aspirant_url+'/'+results[i].id);
 					newText = document.createTextNode(results[i].state+" "+results[i].city+results[i].name+" "+results[i].surname+" "+results[i].lastname);
 					atag.setAttribute('id',results[i].id);
 					atag.appendChild(newText);
-					atag.addEventListener("click",function(e){
+				/*	atag.addEventListener("click",function(e){
 						e.preventDefault();
 						var value = this.id;
 						changeTable(value);
-					});
+					});*/
 					p.appendChild(atag);
 					box.appendChild(p);
 				}
