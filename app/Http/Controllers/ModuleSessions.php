@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 // models
-use App\Models\Module;
-use App\User;
-use App\Models\ModuleSession;
 use App\Models\FacilitatorModule;
+use App\Models\Module;
+use App\Models\ModuleSession;
+use App\Models\Program;
+use App\User;
 // FormValidators
 use App\Http\Requests\SaveSession;
 use App\Http\Requests\UpdateSession;
@@ -51,15 +52,18 @@ class ModuleSessions extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function add($module_id)
+    public function add($program_id, $module_id)
     {
-      $user   = Auth::user();
-      $list   =  ModuleSession::where('module_id',$module_id)->orderBy('order','desc')->pluck('name','id')->toArray();
+      $user    = Auth::user();
+      $program = Program::where('id',$program_id)->firstOrFail();
+      $module  = $program->modules()->find($module_id);
+      $list     = $module->sessions->pluck('name','id')->toArray();
       $list['0'] = 'Sin sesión predecesora';
       return view('admin.modules.sessions.session-add')->with([
         "user"      => $user,
         "module_id" => $module_id,
-        "list"      => $list
+        "list"      => $list,
+        "program_id" => $program->id
       ]);
     }
 
@@ -77,7 +81,7 @@ class ModuleSessions extends Controller
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
       $session = $this->checkOrder($session);
-      return redirect("dashboard/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
+      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
     }
 
@@ -177,14 +181,16 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function view($id)
+    public function view($program_id,$module_id,$session_id)
     {
       //
       $user    = Auth::user();
-      $session = ModuleSession::find($id);
+      $program = Program::where('id',$program_id)->firstOrFail();
+      $module  = $program->modules()->find($module_id);
+      $session = $module->sessions()->find($session_id);
       return view('admin.modules.sessions.session-view')->with([
         "user"      => $user,
-        "session"    => $session
+        "session"   => $session,
       ]);
     }
 
@@ -194,12 +200,14 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function edit($session_id)
+    public function edit($program_id,$module_id,$session_id)
     {
       //
       $user = Auth::user();
-      $session = ModuleSession::find($session_id);
-      $list   =  ModuleSession::where('module_id',$session->module->id)->orderBy('order','desc')->pluck('name','id')->toArray();
+      $program = Program::where('id',$program_id)->firstOrFail();
+      $module  = $program->modules()->find($module_id);
+      $session = $module->sessions()->find($session_id);
+      $list     = $module->sessions()->where('id','!=',$session_id)->pluck('name','id')->toArray();
       $list['0'] = 'Sin sesión predecesora';
       return view('admin.modules.sessions.session-update')->with([
         'user' => $user,
@@ -219,12 +227,14 @@ class ModuleSessions extends Controller
     {
       //
       $data    = $request->except('_token');
-      $sess    = ModuleSession::find($request->session_id);
+      $program = Program::where('id',$request->program_id)->firstOrFail();
+      $module  = $program->modules()->find($request->module_id);
+      $sess    = $module->sessions()->find($request->session_id);
       $data['module_id']    = $sess->module_id;
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
       $this->checkUpdateOrder($session,$request->session_id);
-      return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha actualizado correctamente");
+      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$sess->id")->with('success',"Se ha actualizado correctamente");
     }
 
 
