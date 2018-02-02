@@ -1217,7 +1217,7 @@ li a:link {
 .apertus_profile_logout {
   position: absolute;
   right: 20px;
-  top: 20px; }
+  top: 8px; }
   .apertus_profile_logout:hover .submenu {
     display: block; }
   .apertus_profile_logout img {
@@ -2139,9 +2139,9 @@ a:visited.link {
       color: #0f4e6a; }
 
 .breadcrumb {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 0;
-  margin: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 16px 15px;
+  margin: 0 auto;
   display: block;
   width: 100%; }
   .breadcrumb ul {
@@ -2155,12 +2155,11 @@ a:visited.link {
     .breadcrumb li a {
       color: #777;
       border: 0;
-      font-weight: 700; }
+      font-weight: 500; }
       .breadcrumb li a:hover {
         border-bottom: 1px solid #777; }
     .breadcrumb li:after {
       content: " / "; }
-    .breadcrumb li:first-child:after,
     .breadcrumb li:last-child:after {
       content: ""; }
     .breadcrumb li:first-child {

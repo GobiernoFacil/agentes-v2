@@ -1,6 +1,17 @@
 <ul>
-	<li>Estás en:</li>
-	<li><a href="{{url('tablero-aspirante')}}">Tablero</a></li>
+	<li><a href="{{url('tablero-aspirante')}}">Convocatoria</a></li>
+	@if ($__env->yieldContent('breadcrumb_type') =="notice apply cv")
+	<li>2 Curriculum</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="notice apply video")
+	<li>3 Video</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="notice apply comprobante")
+	<li>4 Comprobante</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="notice apply aviso")
+	<li>5 Aviso</li>
+	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="notice index")
 	<li>Convocatorias</li>
 	@endif

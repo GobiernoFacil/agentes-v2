@@ -90,13 +90,11 @@
 	<div class="apertus_content">
 		@if ($__env->yieldContent('breadcrumb'))
 		<div class="breadcrumb">
-			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
 						@include($__env->yieldContent('breadcrumb'))
 					</div>
 				</div>
-			</div>
 		</div>
 		@endif
 		
