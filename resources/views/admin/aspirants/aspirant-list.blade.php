@@ -7,13 +7,13 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-8">
 		<h1>Lista de aspirantes</h1>
 		<h2>Convocatoria {{$notice->title}}
 	</div>
-	<div class="col-sm-3">
+	<div class="col-sm-4">
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
-			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar Aspirante o Estado" value="{{request('searchBox', '')}}">
+			<input id = "search-aspirant" type="search" name="searchBox" class="form-control" placeholder="Buscar por nombre, apellidos, estado o ciudad" value="{{request('searchBox', '')}}">
 			<p id ="nR" style="display:none;">No existen resultados</p>
 			<div class = "row">
  	 		<div class="col-sm-12" id ="search-results" style ="visibility:hidden;">
@@ -90,6 +90,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src ='{{url("js/aspirant-search.js")}}'></script>
 <script>
-  <?php echo 'var aspirants     = '.$allAspirants.';'; ?>
+  <?php echo 'var aspirants         = '.$allAspirants.';'; ?>
+	<?php echo 'var view_aspirant_url = "'.url("dashboard/aspirantes/convocatoria/$notice->id/ver-aspirante/").'";'; ?>
 </script>
 @endsection

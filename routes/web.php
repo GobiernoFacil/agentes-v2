@@ -196,29 +196,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{module_id}', 'Modules@delete');
     Route::get('dashboard/programas/{program_id}/modulos/ver/{module_id}', 'Modules@view');
 
-
-    /*
-    Route::get('dashboard/modulos', 'Modules@index');
-    Route::get('dashboard/modulos/agregar', 'Modules@add');
-    Route::post('dashboard/modulos/save', 'Modules@save');
-    Route::get('dashboard/modulos/editar/{id}', 'Modules@edit');
-    Route::post('dashboard/modulos/update/{id}', 'Modules@update');
-    Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
-    Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
-    */
     /*@ModuleSessions Controller */
     //CRUD sessions
-    Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
-    Route::get('dashboard/sesiones/agregar/{id}', 'ModuleSessions@add');
-    Route::post('dashboard/sesiones/save/{module_id}', 'ModuleSessions@save');
-    Route::get('dashboard/sesiones/editar/{session_id}', 'ModuleSessions@edit');
-    Route::post('dashboard/sesiones/update/{session_id}', 'ModuleSessions@update');
-    Route::get('dashboard/sesiones/eliminar/{id}', 'ModuleSessions@delete');
-    Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
-    Route::get('dashboard/sesiones/facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
-    Route::post('dashboard/sesiones/facilitadores/buscar', 'ModuleSessions@searchFacilitator');
-    Route::post('dashboard/sesiones/facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
-    Route::get('dashboard/sesiones-asignadas/', 'ModuleSessions@viewAssign');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones', 'ModuleSessions@index');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/agregar', 'ModuleSessions@add');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/save', 'ModuleSessions@save');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/editar/{session_id}', 'ModuleSessions@edit');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/update/{session_id}', 'ModuleSessions@update');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/eliminar/{session_id}', 'ModuleSessions@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/ver/{session_id}', 'ModuleSessions@view');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/buscar/{session_id}', 'ModuleSessions@searchFacilitator');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-asignadas/', 'ModuleSessions@viewAssign');
+
+
     /*@Activities Controller */
     //CRUD activities
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');

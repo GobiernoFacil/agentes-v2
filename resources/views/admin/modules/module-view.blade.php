@@ -76,7 +76,7 @@
 	<div class="col-sm-12">
 		<div class="divider"></div>
 		<h2 class="center">Sesiones del módulo</h2>
-		<p class="center"><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs ev">+ Agregar sesión</a></p>
+		<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/agregar")}}' class="btn xs ev">+ Agregar sesión</a></p>
 	</div>
 </div>
 
@@ -141,7 +141,7 @@
 <div class="box">
 	<div class="row center">
 		<h2>Sin sesiones</h2>
-		<p><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs view">Agregar sesión</a></p>
+		<p><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/agregar")}}' class="btn xs view">Agregar sesión</a></p>
 	</div>
 </div>
 @endif
