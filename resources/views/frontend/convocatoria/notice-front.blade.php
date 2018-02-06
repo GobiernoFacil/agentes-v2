@@ -65,6 +65,7 @@
             <span></span>
             <div class="panel">
             	{!! $notice->profile_eligibility_description !!}
+				<?php /*
 				@if(!empty($notice->profile_eligibility_general) || !empty($notice->profile_eligibility_particular)) 
 				<div class="row">
 				  <div class="col-sm-6">
@@ -81,6 +82,7 @@
 				  </div>
 				</div>
               	@endif
+              	*/?>
             </div>
           </li>
 
