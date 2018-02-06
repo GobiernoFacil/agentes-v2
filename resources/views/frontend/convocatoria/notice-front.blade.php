@@ -12,7 +12,7 @@
     		
       	<h1>{{$notice->title}}</h1>
       
-        {{$notice->description}}
+        {!! $notice->description !!}
         <!--files-->
         <div class="row">
 	        <div class="col-sm-6">
