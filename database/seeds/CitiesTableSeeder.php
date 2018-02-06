@@ -37,10 +37,8 @@ public function save_csv($file_path, $table){
   DB::table($table)->delete();
 
   // genera y configura el lector de CSV
-  $reader = Reader::createFromPath($file_path);
-
-  // guarda los datos del CSV en la tabla
-  $data = $reader->fetchAssoc();
+  $data = Reader::createFromPath($file_path)
+  ->setHeaderOffset(0);
   foreach($data as $row){
     /* small fix for the trusts table */
     if(isset($row['initial_date_date']) && $row['initial_date_date'] =="NULL"){

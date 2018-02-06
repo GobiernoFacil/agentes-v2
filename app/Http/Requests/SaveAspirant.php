@@ -26,14 +26,15 @@ class SaveAspirant extends FormRequest
     {
       return [
         'name'     => 'required',
-        'surname'     => 'required',
-        'lastname'     => 'required',
+        'surname'  => 'required',
+        'lastname' => 'required',
         'email'    => 'required|email|max:255|unique:aspirants',
         'email-confirm'=> 'required|same:email',
         'city'     => 'required',
-        'state'     => 'required',
-        'degree'     => 'required',
-        'origin'    =>'required'
+        'state'    => 'required',
+        'degree'   => 'required',
+        'origin'   =>'required',
+        'gender'   => 'required'
       ];
     }
 }

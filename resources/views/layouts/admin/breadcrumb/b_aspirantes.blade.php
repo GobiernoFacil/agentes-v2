@@ -7,19 +7,27 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="aspirantes ver" || $__env->yieldContent('breadcrumb_type') =="aspirantes evaluar" ||  $__env->yieldContent('breadcrumb_type') =="aspirantes list non" || $__env->yieldContent('breadcrumb_type') =="aspirantes list verified")
 	<li><a href="{{url('dashboard/aspirantes')}}">Lista de Aspirantes</a></li>
 	@endif
-	
+
 	@if ($__env->yieldContent('breadcrumb_type') =="aspirantes list verified")
 	<li>Verificados</li>
 	@endif
-	
+
 	@if ($__env->yieldContent('breadcrumb_type') =="aspirantes list non")
 	<li>No verificados</li>
 	@endif
-	
+
 	@if ($__env->yieldContent('breadcrumb_type') =="aspirantes ver")
 	<li>Ver Aspirante</li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="aspirantes evaluar")
 	<li>Evaluar Aspirante</li>
+	@endif
+
+	@if ($__env->yieldContent('breadcrumb_type') =="aspirant notice list")
+	<li>Aspirantes - Convocatorias</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="aspirants list")
+	<li><a href="{{url('dashboard/aspirantes')}}">Aspirantes - Convocatorias</a></li>
+	<li>Lista de aspirantes</li>
 	@endif
 </ul>

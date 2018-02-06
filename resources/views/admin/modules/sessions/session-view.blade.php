@@ -8,13 +8,13 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h4>Información de sesión del <a href="{{ url('dashboard/modulos/ver/'.$session->module->id) }}" class="link">módulo: {{$session->module->title}}</a></h4>
+		<h4>Información de sesión del <a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/ver/{$session->module->id}") }}' class="link">módulo: {{$session->module->title}}</a></h4>
 	</div>
 	<div class="col-sm-12 center">
 		<h4 class="center"></h4>
 		<div class="divider b"></div>
 		<h2>Sesión {{$session->order}}</h2>
-		<h1 class="center">{{$session->name}} <span class="le_link"><a href="{{ url('dashboard/sesiones/editar/'. $session->id ) }}" class="btn view">Editar sesión</a></span></h1>
+		<h1 class="center">{{$session->name}} <span class="le_link"><a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/editar/$session->id")}}' class="btn view">Editar sesión</a></span></h1>
 		<div class="divider"></div>
 	</div>
 </div>
@@ -46,7 +46,7 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="title">Objetivo <span class="le_link right"><a href="{{ url('dashboard/sesiones/editar/'. $session->id ) }}" class="btn view">Editar objetivo</a></span></h2>
+			<h2 class="title">Objetivo <span class="le_link right"><a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/editar/$session->id")}}' class="btn view">Editar objetivo</a></span></h2>
 			<p>{{$session->objective}}</p>
 			<h2 class="title">Objetivos particulares</h2>
 				@if($session->topics->count() > 0)

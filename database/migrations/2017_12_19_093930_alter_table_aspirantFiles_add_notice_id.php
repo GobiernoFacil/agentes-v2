@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeTableAspirantFiles extends Migration
+class AlterTableAspirantFilesAddNoticeId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class ChangeTableAspirantFiles extends Migration
      */
     public function up()
     {
-
         //
         Schema::table('aspirantsFiles', function (Blueprint $table) {
-            $table->integer('hasVideo')->nullable();
-            $table->integer('hasLetter')->nullable();
-            $table->integer('hasEssay')->nullable();
-            $table->integer('hasCv')->nullable();
-            $table->integer('hasPrivacy')->nullable();
-            $table->integer('hasProof')->nullable();
+          $table->integer('notice_id');
         });
+
     }
 
     /**
@@ -33,6 +28,6 @@ class ChangeTableAspirantFiles extends Migration
     public function down()
     {
         //
-      Schema::dropIfExists('aspirantsFiles');
+        Schemma::dropIfExists('aspirantsFiles');
     }
 }

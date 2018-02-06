@@ -10,12 +10,20 @@ class Aspirant extends Model
   use Notifiable;
     //
     protected $fillable = [
-        'name', 'surname', 'lastname','email','city','state','degree','origin'
+        'name', 'surname', 'lastname','email','city','state','degree','origin','gender'
     ];
 
     //modelos relacionados
   function AspirantsFile(){
     return $this->hasOne("App\Models\AspirantsFile");
+  }
+
+  function notices(){
+    return $this->hasMany("App\Models\AspirantNotice")->orderBy('created_at','asc');;
+  }
+
+  function notice(){
+    return $this->hasOne("App\Models\AspirantNotice");
   }
 
   function AspirantEvaluation(){
@@ -30,6 +38,11 @@ class Aspirant extends Model
   {
       $this->notify(new MassiveEmail($token));
   }
+
+  function cv(){
+    return $this->hasOne("App\models\Cv");
+  }
+
 
 
 }

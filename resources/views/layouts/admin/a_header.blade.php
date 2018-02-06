@@ -1,5 +1,5 @@
 <?php
-	if($user->type == "admin") 
+	if($user->type == "admin")
 	{
 		$linkDash = "dashboard";
 	}
@@ -11,7 +11,11 @@
 	{
 		$linkDash = "tablero-facilitador";
 	}
-	else 
+	else if($user->type == "aspirant")
+	{
+		$linkDash = "tablero-aspirante";
+	}
+	else
 	{
 		$linkDash = "sa/dashboard";
 	}
@@ -28,9 +32,12 @@
 				@if($user->type == "admin")
 				<!--admin-->
 				<li class="{{ $__env->yieldContent('body_class') == 'fellows' ? "active" : ''}}"><a href="{{url('dashboard/fellows')}}"><b class="icon i_aspirantes"></b> Fellows</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'modulos' || $__env->yieldContent('body_class') == 'modulos view' ? "active" : ''}}"><a href="{{url('dashboard/programas')}}"><b class="icon i_modulos"></b> Programas</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}"><b class="icon i_facilitador"></b> FACILITADORES</a></li>	
+				<!--
 				<li class="{{ $__env->yieldContent('body_class') == 'modulos' || $__env->yieldContent('body_class') == 'modulos view' ? "active" : ''}}"><a href="{{url('dashboard/modulos')}}"><b class="icon i_modulos"></b> MÓDULOS</a></li>
-				<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}"><b class="icon i_facilitador"></b> FACILITADORES</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/foros')}}"><b class="icon i_foros"></b> Foros</a></li>
+				<li class="{{ $__env->yieldContent('body_class') == 'notice' ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}"><b class="icon i_foros"></b> Convocatorias</a></li>-->
 				@endif
 				@if($user->type == "superAdmin")
 				<!--superadmin-->
@@ -48,6 +55,10 @@
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow aprendizaje' || $__env->yieldContent('body_class') ==  'fellow aprendizaje modulos' ? "active" : ''}}"><a href="{{url( $linkDash . '/aprendizaje')}}"><b class="icon i_modulos"></b> Aprendizaje</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 				<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/foros')}}"><b class="icon i_foros"></b> Foros</a></li>
+				@endif
+				@if($user->type == "aspirant")
+				<!--aspirant-->
+				<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria'  ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}"><b class="icon i_modulos"></b> Convocatorias</a></li>
 				@endif
 			</ul>
 		</nav>

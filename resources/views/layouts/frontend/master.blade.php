@@ -114,23 +114,47 @@
 	@endif
 	<main class="main-content">
 		
-		@if($body_class == "home")
-		<div class="bgdimg">
-			<figure>
-				<img src="{{url('img/home_apertus_2018.jpeg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
-			</figure>
-			<div class="container">
-				<div class="cta">
-					<div class="row">
-						<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
-							<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
-							<a href="{{url('noticias-eventos/en-10-entidades-federativas-arrancara-el-proyecto-gobierno-abierto-desde-lo-local-para-el-desarrollo-sostenible-durante-2018')}}" class="btn blue">Comunicado 2018</a>
-						</div>
+		@if(!empty($body_class))
+			<?php $body_class = $body_class;?>
+			@if($body_class == "home")
+				<div class="bgdimg">
+					<figure>
+						<img src="{{url('img/home_apertus_2018.jpeg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+					</figure>
+					<div class="container">
+						<div class="cta">
+							<div class="row">
+								<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
+									<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
+									<a href="{{url('noticias-eventos/en-10-entidades-federativas-arrancara-el-proyecto-gobierno-abierto-desde-lo-local-para-el-desarrollo-sostenible-durante-2018')}}" class="btn blue">Comunicado 2018</a>
+								</div>
+							</div>
 					</div>
-			</div>
-			</div>
-		</div>
+					</div>
+				</div>
+			@endif
+		@else
+			@if ($__env->yieldContent('body_class'))
+			<?php $body_class = $__env->yieldContent('body_class');?>
+				<div class="bgdimg">
+					<figure>
+						<img src="{{url('img/home_apertus_2018.jpeg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+					</figure>
+					<div class="container">
+						<div class="cta">
+							<div class="row">
+								<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
+									<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
+									<a href="{{url('noticias-eventos/en-10-entidades-federativas-arrancara-el-proyecto-gobierno-abierto-desde-lo-local-para-el-desarrollo-sostenible-durante-2018')}}" class="btn blue">Comunicado 2018</a>
+								</div>
+							</div>
+					</div>
+					</div>
+				</div>
+			@endif
 		@endif
+		
+		
 		
 		<!--content-->
 		<div class="container">

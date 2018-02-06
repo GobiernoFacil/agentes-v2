@@ -9,7 +9,7 @@
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-		<h1 class="center">{{$module->title}} <span class="le_link"><a href="{{url('dashboard/modulos/editar/' . $module->id)}}" class="btn view">Editar Módulo</a></span></h1>
+		<h1 class="center">{{$module->title}} <span class="le_link"><a href='{{url("dashboard/programas/{$program->id}/modulos/editar/$module->id")}}' class="btn view">Editar Módulo</a></span></h1>
 		<p class="center date">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
 		<div class="divider"></div>
 	</div>
@@ -76,7 +76,7 @@
 	<div class="col-sm-12">
 		<div class="divider"></div>
 		<h2 class="center">Sesiones del módulo</h2>
-		<p class="center"><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs ev">+ Agregar sesión</a></p>
+		<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/agregar")}}' class="btn xs ev">+ Agregar sesión</a></p>
 	</div>
 </div>
 
@@ -141,7 +141,7 @@
 <div class="box">
 	<div class="row center">
 		<h2>Sin sesiones</h2>
-		<p><a href='{{url("dashboard/sesiones/agregar/$module->id")}}' class="btn xs view">Agregar sesión</a></p>
+		<p><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/agregar")}}' class="btn xs view">Agregar sesión</a></p>
 	</div>
 </div>
 @endif
