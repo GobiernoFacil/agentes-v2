@@ -28,11 +28,12 @@ class NoticeFront extends Controller
         $notice  = new Notice;
         $notice  = $notice->get_last_notice();
         return view('frontend.convocatoria.notice-front')->with([
-          'notice' =>$notice
+          'notice' =>$notice,
         ]);
       }
-	  
-	  //faqs 
+
+
+	  //faqs
       public function faqs(){
         return view('frontend.convocatoria.faqs');
       }
@@ -41,7 +42,7 @@ class NoticeFront extends Controller
       public function convoca17(){
         return view('frontend.convocatoria.2017');
       }
-      
+
       //resultados 2017
       public function resultado17(){
         return view('frontend.convocatoria.resultados2017');
@@ -61,8 +62,10 @@ class NoticeFront extends Controller
       public function aplicar($notice_slug){
         $today  = date('Y-m-d');
         $notice  = Notice::where('slug',$notice_slug)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->firstOrFail();
+        $cities	    =  City::all();
         return view('frontend.convocatoria.aplicar-1')->with([
-          'notice' =>$notice
+          'notice' =>$notice,
+          'cities' => $cities
         ]);
       }
 
@@ -198,7 +201,11 @@ class NoticeFront extends Controller
        * @return \Illuminate\Http\Response
        */
       public function cities(Request $request){
-        $cities = City::where('state', 'like', $request->input('state') . '%')->orderBy('city', 'asc')->get();
+        if($request->input('state')==='Estado de México'){
+          $cities = City::where('state', 'México' . '%')->orderBy('city', 'asc')->get();
+        }else{
+          $cities = City::where('state', 'like', $request->input('state') . '%')->orderBy('city', 'asc')->get();
+        }
         return response()->json($cities);
       }
 

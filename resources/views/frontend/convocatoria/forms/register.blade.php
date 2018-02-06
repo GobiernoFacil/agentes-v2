@@ -88,7 +88,7 @@
 	<div class="col-sm-6">
 		<p>
 		  <label><strong>Estado</strong></label>
-		  {{Form::select('state',[null => "Selecciona una opción", 'Campeche' =>'Campeche', 'Durango'=>'Durango', 'Estado de México'=>'Estado de México', 'Guanajuato'=>'Guanajuato','Quintana Roo'=>'Quintana Roo','San Luis Potosí'=>'San Luis Potosí','Sinaloa'=>'Sinaloa','Tlaxcala'=>'Tlaxcala','Veracruz'=>'Veracruz','Tabasco'=>'Tabasco'],null, ['class' => 'form-control','id'=>'state'])}}
+		  {{Form::select('state',[null => "Selecciona una opción", 'Campeche' =>'Campeche', 'Durango'=>'Durango', 'México'=>'Estado de México', 'Guanajuato'=>'Guanajuato','Quintana Roo'=>'Quintana Roo','San Luis Potosí'=>'San Luis Potosí','Sinaloa'=>'Sinaloa','Tlaxcala'=>'Tlaxcala','Veracruz de Ignacio de la Llave'=>'Veracruz','Tabasco'=>'Tabasco'],null, ['class' => 'form-control','id'=>'state'])}}
 		  @if($errors->has('state'))
 		    <strong class="error">{{$errors->first('state')}}</strong>
 		  @endif
