@@ -31,7 +31,11 @@ class NoticeFront extends Controller
           'notice' =>$notice
         ]);
       }
-
+	  
+	  //faqs 
+      public function faqs(){
+        return view('frontend.convocatoria.faqs');
+      }
       
       //convocatoria 2017
       public function convoca17(){
