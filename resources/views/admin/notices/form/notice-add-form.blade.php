@@ -49,7 +49,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Descripción</strong></label>
-      {{Form::textarea('description', null, ["class" => "form-control"])}}
+      {{Form::textarea('description', null, ["class" => "form-control content"])}}
       @if($errors->has('description'))
       <strong class="error">{{$errors->first('description')}}</strong>
       @endif
@@ -61,7 +61,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Objetivo</strong></label>
-      {{Form::textarea('objective', null, ["class" => "form-control"])}}
+      {{Form::textarea('objective', null, ["class" => "form-control content"])}}
       @if($errors->has('objective'))
       <strong class="error">{{$errors->first('objective')}}</strong>
       @endif
@@ -73,7 +73,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Modalidad y resultados esperados</strong></label>
-      {{Form::textarea('modality_results', null, ["class" => "form-control"])}}
+      {{Form::textarea('modality_results', null, ["class" => "form-control content"])}}
       @if($errors->has('modality_results'))
       <strong class="error">{{$errors->first('modality_results')}}</strong>
       @endif
@@ -86,7 +86,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Plazo y proceso de postulación</strong></label>
-      {{Form::textarea('term_process', null, ["class" => "form-control"])}}
+      {{Form::textarea('term_process', null, ["class" => "form-control content"])}}
       @if($errors->has('term_process'))
       <strong class="error">{{$errors->first('term_process')}}</strong>
       @endif
@@ -99,7 +99,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Casos no previstos</strong></label>
-      {{Form::textarea('unforeseen_cases', null, ["class" => "form-control"])}}
+      {{Form::textarea('unforeseen_cases', null, ["class" => "form-control content"])}}
       @if($errors->has('unforeseen_cases'))
       <strong class="error">{{$errors->first('unforeseen_cases')}}</strong>
       @endif
@@ -111,7 +111,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Contacto</strong></label>
-      {{Form::textarea('contact', null, ["class" => "form-control"])}}
+      {{Form::textarea('contact', null, ["class" => "form-control content"])}}
       @if($errors->has('contact'))
       <strong class="error">{{$errors->first('contact')}}</strong>
       @endif
@@ -123,7 +123,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Perfil de egreso</strong></label>
-      {{Form::textarea('profile', null, ["class" => "form-control"])}}
+      {{Form::textarea('profile', null, ["class" => "form-control content"])}}
       @if($errors->has('profile'))
       <strong class="error">{{$errors->first('profile')}}</strong>
       @endif
@@ -136,7 +136,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Descripción</strong></label>
-      {{Form::textarea('profile_eligibility_description', null, ["class" => "form-control"])}}
+      {{Form::textarea('profile_eligibility_description', null, ["class" => "form-control content"])}}
       @if($errors->has('profile_eligibility_description'))
       <strong class="error">{{$errors->first('profile_eligibility_description')}}</strong>
       @endif
@@ -148,7 +148,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Criterios generales</strong></label>
-      {{Form::textarea('profile_eligibility_general', null, ["class" => "form-control"])}}
+      {{Form::textarea('profile_eligibility_general', null, ["class" => "form-control content"])}}
       @if($errors->has('profile_eligibility_general'))
       <strong class="error">{{$errors->first('profile_eligibility_general')}}</strong>
       @endif
@@ -160,7 +160,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Criterios particulares</strong></label>
-      {{Form::textarea('profile_eligibility_particular', null, ["class" => "form-control"])}}
+      {{Form::textarea('profile_eligibility_particular', null, ["class" => "form-control content"])}}
       @if($errors->has('profile_eligibility_particular'))
       <strong class="error">{{$errors->first('profile_eligibility_particular')}}</strong>
       @endif
