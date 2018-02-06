@@ -27,6 +27,7 @@ Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
+Route::get('convocatoria/preguntas-frecuentes', 'NoticeFront@faqs');
 
 
 /////// convocatoria 2017

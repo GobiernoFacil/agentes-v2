@@ -12,7 +12,7 @@
     		
       	<h1>{{$notice->title}}</h1>
       
-        <p>{{$notice->description}}</p>
+        {!! $notice->description !!}
         <!--files-->
         <div class="row">
 	        <div class="col-sm-6">
@@ -40,7 +40,7 @@
             <h3>Objetivo</h3>
             <span></span>
             <div class="panel">
-            <p>{{$notice->objective}}</p>
+            	{!! $notice->objective !!}
             </div>
           </li>
 
@@ -48,7 +48,7 @@
             <h3>Modalidad y resultados esperados</h3>
             <span></span>
             <div class="panel">
-            <p>{{$notice->modality_results}}</p>
+            	{!! $notice->modality_results !!}
             </div>
           </li>
           <!--perfil de egreso-->
@@ -56,7 +56,7 @@
             <h3>Perfil de egreso</h3>
             <span></span>
             <div class="panel">
-            <p>{{$notice->profile}}</p>
+            	{!!$notice->profile!!}
             </div>
           </li>
 
@@ -64,21 +64,25 @@
             <h3>Perfil y elegibilidad de los participantes</h3>
             <span></span>
             <div class="panel">
-            <p>{{$notice->profile_eligibility_description}}</p>
-              <div class="row">
-                <div class="col-sm-6">
-                <h4>Criterios Generales</h4>
-                <ol>
-                  <li>{{$notice->profile_eligibility_general}}</li>
-                </ol>
-                  </div>
-                  <div class="col-sm-6">
-                <h4>Criterios Particulares</h4>
-                <ol>
-                  <li>{{$notice->profile_eligibility_particular}}</li>
-                </ol>
-                </div>
-              </div>
+            	{!! $notice->profile_eligibility_description !!}
+				<?php /*
+				@if(!empty($notice->profile_eligibility_general) || !empty($notice->profile_eligibility_particular)) 
+				<div class="row">
+				  <div class="col-sm-6">
+				  <h4>Criterios Generales</h4>
+				  <ol>
+				    <li>{!! $notice->profile_eligibility_general !!}</li>
+				  </ol>
+				    </div>
+				    <div class="col-sm-6">
+				  <h4>Criterios Particulares</h4>
+				  <ol>
+				    <li>{!! $notice->profile_eligibility_particular !!}</li>
+				  </ol>
+				  </div>
+				</div>
+              	@endif
+              	*/?>
             </div>
           </li>
 
@@ -86,7 +90,7 @@
           <h3>Plazos y proceso de postulación</h3>
           <span></span>
           <div class="panel">
-            <p>{{$notice->term_process}}</p>
+            {!! $notice->term_process !!}
           </div>
         </li>
 
@@ -94,7 +98,7 @@
           <h3>Casos no previstos</h3>
           <span></span>
           <div class="panel">
-            <p>{{$notice->unforeseen_cases}}</p>
+            {!! $notice->unforeseen_cases !!}
           </div>
         </li>
 
@@ -102,7 +106,7 @@
           <h3>Contacto</h3>
           <span></span>
           <div class="panel">
-            <p>{{$notice->contact}}</p>
+            {!! $notice->contact !!}
           </div>
         </li>
         </ol>

@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1><strong>Aplica</strong> a la Convocatoria {{$notice->title}}</h1>
+		<h1><strong>Aplica</strong> a {{$notice->title}}</h1>
 		@if(Session::has('success'))
 		<div class="message success">
 	      {{ Session::get('success') }}
@@ -21,7 +21,7 @@
 		  	@endif
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
-		<p>{{$notice->description}}</p>
+		{!! $notice->description !!}
 		<h2>Paso 1 de 2</h2>
 		<p>Todos los campos son obligatorios.</p>
 		@include('frontend.convocatoria.forms.register')
