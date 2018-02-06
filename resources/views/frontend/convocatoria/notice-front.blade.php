@@ -10,18 +10,21 @@
     <div class="row">
     	<div class="col-sm-10 col-sm-offset-1">
     		
-      	<h1><strong>Convocatoria</strong> {{$notice->title}}</h1>
-      	<h2><a href='{{url("convocatoria/aplicar/$notice->slug")}}' class="btn gde process">Aplicar a convocatoria</a></h2>
+      	<h1>{{$notice->title}}</h1>
+      
         <p>{{$notice->description}}</p>
         <!--files-->
         <div class="row">
-          @if($notice->files_front()->count()>0)
-              @foreach($notice->files_front() as $file)
-      				<div class="col-sm-6">
-      					<p><a href='{{url("convocatoria/archivos/$file->name")}}' class="btn gde download i_download">{{$file->comments}}</a></p>
-      				</div>
-              @endforeach
-          @endif
+	        <div class="col-sm-6">
+			@if($notice->files_front()->count()>0)
+			    @foreach($notice->files_front() as $file)
+					<p><a href='{{url("convocatoria/archivos/$file->name")}}' class="btn gde download i_download">{{$file->comments}}</a></p>
+			    @endforeach
+			@endif
+          	</div>
+          	<div class="col-sm-6">
+	        	<a href='{{url("convocatoria/aplicar/$notice->slug")}}' class="btn gde i_convoca_w">Aplicar a convocatoria</a>
+          	</div>
           <!-- aspirantes de convocatoria seleccionados
           <div class="col-sm-4">
             <p><a href="{{url('convocatoria/resultados-2017')}}" class="btn gde process">Candidatos Seleccionados</a></p>
