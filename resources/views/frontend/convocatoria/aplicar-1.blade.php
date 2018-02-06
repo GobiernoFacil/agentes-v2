@@ -31,39 +31,26 @@
 
 @section('js-content')
 <script type="text/javascript">
-var state  = document.getElementById('state'),
-cities = document.getElementById('city');
-// [ actualiza la lista de ciudades ]
-state.onchange = function(e){
 
-  if(!this.value){
-    cities.innerHTML = "";
-    return;
-  }
+<?php echo 'var cities     = '.$cities.';'; ?>
+var state = document.getElementById("state");
+var city  = document.getElementById("city");
 
-  var request = new XMLHttpRequest();
-  request.open('GET', '/cities?state=' + this.value, true);
 
-  request.onload = function(){
-    if (request.status >= 200 && request.status < 400) {
-      var data = JSON.parse(request.responseText);
-      cities.innerHTML = "";
-      data.forEach(function(city){
-        var opt = document.createElement('option');
-        opt.value = city.city;
-        opt.innerHTML = city.city;
-        cities.appendChild(opt);
-      });
-    }
-    else{
-      // nope
-    }
-  };
+//selecciona un estado y agrega opciones a selector de municipios para experiencia
+state.addEventListener("change", function(){
+	var value = this.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+	var n_cities = cities.filter(function (el) {
+	   return (el.state.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase() === value);
+	});
+	//agregar opciones
+	var city =document.getElementById('city');
+	city.options.length=0
+	city.options[0] = new Option("Selecciona una opción",0,1,1);
+	for (i=n_cities.length-1; i >= 0; i--){
+		  city.options[city.options.length]=new Option(n_cities[i].city,n_cities[i].city);
+	}
+});
 
-  request.onerror = function(){
-    // nope
-  };
-  request.send();
-}
 </script>
 @endsection
