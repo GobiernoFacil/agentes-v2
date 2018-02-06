@@ -13,6 +13,7 @@ use App\Models\AspirantsFile;
 use App\Models\AspirantNotice;
 use App\Models\City;
 use App\Models\Notice;
+use App\Models\NoticeFile;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveAspirant;
@@ -37,7 +38,7 @@ class NoticeFront extends Controller
       public function faqs(){
         return view('frontend.convocatoria.faqs');
       }
-      
+
       //convocatoria 2017
       public function convoca17(){
         return view('frontend.convocatoria.2017');
@@ -207,6 +208,23 @@ class NoticeFront extends Controller
           $cities = City::where('state', 'like', $request->input('state') . '%')->orderBy('city', 'asc')->get();
         }
         return response()->json($cities);
+      }
+
+
+      /**
+       * Descarga archivo
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function download($name)
+      {
+
+        $file     = NoticeFile::where('name',$name)->firstOrFail();
+        $fileData = pathinfo($file->path);
+        $headers = array(
+          'Content-Type: '.$fileData['extension'],
+        );
+        return response()->download($fileData['dirname'].'/'.$fileData['basename'], $file->name, $headers);
       }
 
 }
