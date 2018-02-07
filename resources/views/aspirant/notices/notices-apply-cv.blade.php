@@ -412,7 +412,7 @@ state_experience.addEventListener("change", function(){
 	//agregar opciones
 	var city_experience =document.getElementById('experience_city');
 	city_experience.options.length=0
-	city_experience.options[0] = new Option("Selecciona una opción",0,1,1);
+	city_experience.options[0] = new Option("Selecciona una opción","",1,1);
 	for (i=n_cities.length-1; i >= 0; i--){
 		  city_experience.options[city_experience.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
@@ -433,7 +433,7 @@ state_study.addEventListener("change", function(){
 	//agregar opciones
 	var city_study =document.getElementById('study_city');
 	city_study.options.length=0
-	city_study.options[0] = new Option("Selecciona una opción",0,1,1);
+	city_study.options[0] = new Option("Selecciona una opción","",1,1);
 	for (i=n_cities.length-1; i >= 0; i--){
 		  city_study.options[city_study.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
@@ -454,7 +454,7 @@ state_open.addEventListener("change", function(){
 	//agregar opciones
 	var city_open =document.getElementById('open_city');
 	city_open.options.length=0
-	city_open.options[0] = new Option("Selecciona una opción",0,1,1);
+	city_open.options[0] = new Option("Selecciona una opción","",1,1);
 	for (i=n_cities.length-1; i >= 0; i--){
 		  city_open.options[city_open.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
