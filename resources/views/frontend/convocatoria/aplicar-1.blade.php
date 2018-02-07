@@ -46,7 +46,7 @@ state.addEventListener("change", function(){
 	//agregar opciones
 	var city =document.getElementById('city');
 	city.options.length=0
-	city.options[0] = new Option("Selecciona una opción",0,1,1);
+	city.options[0] = new Option("Selecciona una opción","",1,1);
 	for (i=n_cities.length-1; i >= 0; i--){
 		  city.options[city.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
