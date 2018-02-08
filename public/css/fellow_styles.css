@@ -1504,11 +1504,21 @@ b.sessionG {
   margin-bottom: 10px; }
 
 li a.remove-language,
-li a.remove-software {
+li a.remove-software,
+li a.remove-experience,
+li a.remove-study,
+li a.remove-experience-open {
   color: red; }
   li a.remove-language:hover,
-  li a.remove-software:hover {
+  li a.remove-software:hover,
+  li a.remove-experience:hover,
+  li a.remove-study:hover,
+  li a.remove-experience-open:hover {
     color: #cc0000; }
+
+.from_to {
+  color: #999;
+  display: block; }
 
 .list-facilitator {
   list-style: none;

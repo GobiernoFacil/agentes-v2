@@ -12,13 +12,15 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		<fieldset>
 			<div class="col-sm-12">
 				<h3>Experiencia académica</h3>
-				<ul id="studies-list">
+				<ol id="studies-list" class="list_soft">
 				  @foreach($cv->academic_trainings as $study)
 				  <li data-id="{{$study->id}}">
-				    {{$study->name}} : {{$study->institution}} <br>
-				    {{ date('m/Y', strtotime($study->from)) }} - {{ date('m/Y', strtotime($study->to)) }}
-				    <a href="#" class="remove-study">[ x ]</a>
-				  </li>
+				  	<h4>{{$study->institution}} <a href="#" class="remove-study">[ x ]</a></h4>
+				  	<span class="from_to"> {{ date('Y(F)', strtotime($study->from)) }} - {{ date('Y(F)', strtotime($study->to)) }}</span>
+				    <strong>{{$study->name}}</strong>
+				   <span class="from_to">{{$study->city}}, {{$study->state}}</span>
+				    
+				  </ol>
 				  @endforeach
 				</ul>
 			</div>
@@ -71,15 +73,17 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 		<fieldset>
 			<div class="col-sm-12">
 				<h3>Experiencia laboral</h3>
-				<ul id="experiencies-list">
+				<ol id="experiencies-list" class="list_soft">
 				  @foreach($cv->experiences as $experience)
 				  <li data-id="{{$experience->id}}">
-				    {{$experience->name}} : {{$experience->company}} <br>
+				  	<h4>{{$experience->company}} <a href="#" class="remove-experience">[ x ]</a></h4>
+				  	<span class="from_to"> {{ date('Y(F)', strtotime($experience->from)) }} - {{ date('Y(F)', strtotime($experience->to)) }}</span>
+				    <strong>{{$experience->name}}</strong> <br>
 				    {{$experience->description}}
-				    <a href="#" class="remove-experience">[ x ]</a>
+				     <span class="from_to">{{$experience->city}}, {{$experience->state}}</span>
 				  </li>
 				  @endforeach
-				</ul>
+				</ol>
 			</div>
 			<div class="col-sm-12">
 		  		<p>
@@ -144,15 +148,16 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 					<h3>Experiencia de Gobierno Abierto</h3>
 					<p>Muestra evidencia  de tu experiencia en el desarrollo de proyectos relacionados con los principios de Gobierno Abierto y Desarrollo Sostenible</p>
 					<p></p>
-					<ul id="experiencies-list-open">
+					<ol id="experiencies-list-open" class="list_soft">
 					  @foreach($cv->open_experiences as $experience)
 					  <li data-id="{{$experience->id}}">
-					     {{$experience->company}} <br>
+					    <h4>{{$experience->company}} <a href="#" class="remove-experience-open">[ x ]</a></h4>
+						<span class="from_to"> {{ date('Y(F)', strtotime($experience->from)) }} - {{ date('Y(F)', strtotime($experience->to)) }}</span>
 					    {{$experience->description}}
-					    <a href="#" class="remove-experience-open">[ x ]</a>
+				     <span class="from_to">{{$experience->city}}, {{$experience->state}}</span>
 					  </li>
 					  @endforeach
-					</ul>
+					</ol>
 				</div>
 				<div class="col-sm-6">
 			  		<p><label><strong>Empresa / Organización civil / gobierno</strong></label>
