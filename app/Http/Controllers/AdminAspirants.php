@@ -80,7 +80,7 @@ class AdminAspirants extends Controller
       }
 
       /**
-       * Muestra aspirantes de convocatoria
+       * Descarga de pdfs
        *
        * @return \Illuminate\Http\Response
        */

@@ -40,7 +40,7 @@ class Aspirant extends Model
   }
 
   function cv(){
-    return $this->hasOne("App\models\Cv");
+    return $this->hasOne("App\Models\Cv");
   }
 
 
