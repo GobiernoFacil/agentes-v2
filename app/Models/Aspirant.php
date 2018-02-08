@@ -32,7 +32,7 @@ class Aspirant extends Model
   }
 
   function check_address_proof(){
-    return $this->AspirantEvaluation()->where('address_proof',1);
+    return $this->AspirantEvaluation()->where('address_proof','!=',null);
   }
 
   function code(){

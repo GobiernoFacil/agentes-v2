@@ -8,6 +8,7 @@ use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\AspirantEvaluation;
 use PDF;
+use App\Http\Requests\SaveAspirantEvaluation1;
 class AdminAspirants extends Controller
 {
     //
@@ -134,6 +135,23 @@ class AdminAspirants extends Controller
               'aspirant' => $aspirant,
               'aspirantEvaluation' => $aspirantEvaluation,
             ]);
+      }
+
+      /**
+       * Evaluar comprobante de domicilio
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function saveEvaluate(SaveAspirantEvaluation1 $request)
+      {
+          //
+          $user    = Auth::user();
+          $notice  = Notice::where('id',$request->notice_id)->firstOrFail();
+          $aspirant = Aspirant::where('id',$request->aspirant_id)->firstOrFail();
+          $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id,'user_id'=>$user->id]);
+          $aspirantEvaluation->address_proof = current(array_slice($request->address_proof, 0, 1));
+          $aspirantEvaluation->save();
+          return redirect("dashboard/aspirantes/convocatoria/$notice->id/ver-aspirante/$aspirant->id");
       }
 
 

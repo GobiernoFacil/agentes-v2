@@ -337,6 +337,7 @@ trait MessagesTrait{
          'mobile.digits'        => 'Escribe  10 dígitos',
          'privacy_policies.required'        => 'Este campo es requerido',
          'birthdate.required'        => 'Este campo es requerido',
+         'address_proof.required'        => 'Este campo es requerido',
 
       ];
     }

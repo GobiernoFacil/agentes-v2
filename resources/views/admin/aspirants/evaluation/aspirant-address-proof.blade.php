@@ -40,7 +40,16 @@
 	</div>
 @endif
 
+@endsection
 
-
-
+@section('js-content')
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+$(document).ready(function() {
+  $('.address_proof').click(function(event) {
+     $('.address_proof').not(this).attr('checked', false);
+     $(this).attr('checked', true);
+   });
+});
+</script>
 @endsection
