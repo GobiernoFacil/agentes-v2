@@ -40,7 +40,7 @@
 		      <th>Ciudad / Estado</th>
 		      <th>Procedencia</th>
 		      <th>Registro</th>
-		      <th>Archivos</th>
+		      <th>Comprobante de domicilio</th>
 		      <th>Puntaje</th>
 		      <th>Acciones</th>
 		    </tr>
@@ -54,11 +54,11 @@
 		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
 				<td>{{$aspirant->origin}}</td>
 		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
-		        <td>{{$aspirant->AspirantsFile ? "Sí" : "No" }}</td>
-		        @if($aspirant->aspirantEvaluation)
-						<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
-							@if($aspirantE)
-			        <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
+						<td>{{$aspirant->check_address_proof->count() > 0 ? "Verificado" : "Sin verificar" }}</td>
+						 @if($aspirant->AspirantEvaluation)
+								<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
+								@if($aspirantE)
+				        <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
 							@else
 								<?php $aspirantE = $aspirant->aspirantEvaluation->where('institution',$user->institution)->first();?>
 								@if($aspirantE)
@@ -72,9 +72,12 @@
 		        @endif
 		        <td>
 		          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-		          <a href="{{ url('dashboard/aspirantes/evaluar-archivos/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $aspirant->id) }}"  id ="{{$aspirant->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a></td>-->
-		    </tr>
+							@if($aspirant->check_address_proof->count() > 0)
+		          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-datos/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+							@else
+							<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+							@endif
+		     </tr>
 		    @endforeach
 		  </tbody>
 		</table>

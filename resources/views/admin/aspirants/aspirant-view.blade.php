@@ -37,7 +37,7 @@
 				@endif
 
 				@if($aspirant->AspirantsFile->proof)
-				<li class="download"><a href='{{url("dashboard/archivo/download/{$aspirant->AspirantsFile->proof}/comprobante")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
+				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/comprobante/{$aspirant->AspirantsFile->proof}")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
 				@endif
 
 

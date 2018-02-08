@@ -151,6 +151,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/comprobante/{name}', 'AdminAspirants@download');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@evaluate');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-datos/{aspirant_id}', 'AdminAspirants@evaluateData');
 
     /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');

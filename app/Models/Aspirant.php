@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\MassiveEmail;
+
 class Aspirant extends Model
 {
   use Notifiable;
@@ -28,6 +29,10 @@ class Aspirant extends Model
 
   function AspirantEvaluation(){
     return $this->hasMany("App\Models\AspirantEvaluation");
+  }
+
+  function check_address_proof(){
+    return $this->AspirantEvaluation()->where('address_proof',1);
   }
 
   function code(){

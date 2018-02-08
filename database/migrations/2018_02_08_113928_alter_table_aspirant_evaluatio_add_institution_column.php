@@ -15,7 +15,8 @@ class AlterTableAspirantEvaluatioAddInstitutionColumn extends Migration
     {
         //
         Schema::table('aspirantEvaluation', function (Blueprint $table) {
-            $table->string('institution')->nullable()->change();
+            $table->string('institution')->nullable();
+            $table->integer('address_proof')->nullable();
         });
     }
 

@@ -39,7 +39,7 @@ class AdminAspirants extends Controller
         $user    = Auth::user();
         $notice  = Notice::where('id',$notice_id)->firstOrFail();
         $aspirants_ids = $notice->aspirants()->pluck('aspirant_id');
-        $aspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->paginate();
+        $aspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->orderBy('created_at','asc')->paginate();
         $allAspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->get();
          return view('admin.aspirants.aspirant-list')->with([
             'user'      => $user,
@@ -96,6 +96,44 @@ class AdminAspirants extends Controller
           $pdf = PDF::loadView('admin.aspirants.pdf.motives-view', compact(['aspirant']));
           return $pdf->download('exposicion_motivos_'.$aspirant->name.'_'.$aspirant->surname.'_'.$aspirant->lastname.'.pdf');
         }
+      }
+      /**
+       * Descarga comprobante
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function download($notices_id,$name){
+        $user = Auth::user();
+        $file = public_path(). "/files/".$name;
+        $ext  = substr(strrchr($file,'.'),1);
+        $mime = mime_content_type ($file);
+        $headers = array(
+          'Content-Type: '.$mime,
+        );
+        $filename = "comprobante.".$ext;
+        return response()->download($file, $filename, $headers);
+      }
+
+
+      /**
+       * Evaluar comprobante de domicilio
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function evaluate($notice_id,$aspirant_id)
+      {
+          //
+          $user    = Auth::user();
+          $notice  = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirant = Aspirant::where('id',$aspirant_id)->firstOrFail();
+          $aspirantEvaluation = AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+
+          return view('admin.aspirants.evaluation.aspirant-address-proof')->with([
+              'user'      => $user,
+              'notice'    => $notice,
+              'aspirant' => $aspirant,
+              'aspirantEvaluation' => $aspirantEvaluation,
+            ]);
       }
 
 
