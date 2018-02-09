@@ -389,7 +389,6 @@ $("#studies-list").on("click", ".remove-study", function(e){
   var li = $(e.currentTarget).parent(),
   id = li.attr("data-id"),
   url = url_estudios_delete;
-
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
 		$("#maxStudy").hide();
     li.remove();
