@@ -361,12 +361,14 @@ $("#add-study").on("click", function(e){
 						$("#maxStudy").show();
 
 					}else{
-
-						    var from = d.from.split("-"),
-						        to   = d.to.split("-"),
-						        el  = "<li data-id='" + d.id + "'>" +
-						    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-						    " <a href='#' class='remove-study'>[ x ]</a></li>";
+						console.log(d);
+						    var from = d.from.split("/"),
+						        to   = d.to.split("/"),
+						        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
+										"<span class='from_to'>"+ from[0]+"("+from[1]+")"+"-"+ to[0]+"("+to[1]+")"+"</span>"+ "<br>" +
+						        "<strong>"+d.name+"</strong>" + "<br>" +
+									  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
+						        "</li>";
 						    $("#studies-list").append(el);
 								$("#study").val("");
 							  $("#institution").val("");

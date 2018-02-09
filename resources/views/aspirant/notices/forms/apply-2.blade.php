@@ -19,10 +19,9 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 				  	<span class="from_to"> {{ date('Y(F)', strtotime($study->from)) }} - {{ date('Y(F)', strtotime($study->to)) }}</span>
 				    <strong>{{$study->name}}</strong>
 				   <span class="from_to">{{$study->city}}, {{$study->state}}</span>
-
-				  </ol>
+				 	</li>
 				  @endforeach
-				</ul>
+				  </ol>
 			</div>
 			<div class="col-sm-6">
 				<p>
