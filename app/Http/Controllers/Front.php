@@ -68,11 +68,11 @@ class Front extends Controller
         return redirect('/');
       }
 
-      $mime = mime_content_type($path);
+      $fileData = pathinfo($path);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
-      return response()->download($path, $name, $headers);
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $name, $headers);
     }
 
 }
