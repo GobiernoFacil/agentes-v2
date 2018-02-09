@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\AspirantEvaluation;
+use App\Models\AspirantsFile;
 use PDF;
 use App\Http\Requests\SaveAspirantEvaluation1;
 class AdminAspirants extends Controller
@@ -39,8 +40,13 @@ class AdminAspirants extends Controller
         //
         $user    = Auth::user();
         $notice  = Notice::where('id',$notice_id)->firstOrFail();
-        $aspirants_ids = $notice->aspirants()->pluck('aspirant_id');
-        $aspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->orderBy('created_at','asc')->paginate();
+        //aspirantes de la convocatoria
+        $aspirants_ids   = $notice->aspirants()->pluck('aspirant_id');
+        //aspirantes evaluados (comprobante de domicilio)
+        $aspirants_proof = $notice->aspirant_to_check_proof()->pluck('aspirant_id');
+        //aspirantes sin comprobante
+        $aspirants_files = AspirantsFile::whereNull('proof')->where('notice_id',$notice->id)->pluck('aspirant_id');
+        $aspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->whereNotIn('id',$aspirants_proof->toArray())->whereNotIn('id',$aspirants_files->toArray())->orderBy('created_at','asc')->paginate();
         $allAspirants = Aspirant::whereIn('id',$aspirants_ids->toArray())->get();
          return view('admin.aspirants.aspirant-list')->with([
             'user'      => $user,

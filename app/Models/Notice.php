@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AspirantEvaluation;
 class Notice extends Model
 {
     //
@@ -42,5 +44,9 @@ class Notice extends Model
 
     function aspirants(){
       return $this->hasMany("App\Models\AspirantNotice",'notice_id');
+    }
+
+    function aspirant_to_check_proof(){
+      return AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id);
     }
 }
