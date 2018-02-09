@@ -30,13 +30,13 @@
 	<h1>El aspirante no cuenta con un comprobante de domicilio</h1>
 	<div class="box">
 		<p>{{ $aspirant->name }} {{ $aspirant->surname }} {{ $aspirant->lastname }} , no puede ser evaluado ya que su documentación no es válida.</p>
-		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id")}}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
+		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
 	</div>
 	@endif
 @else
 	<h1>El aspirante ya ha sido validado</h1>
 	<div class="box">
-		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id")}}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
+		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
 	</div>
 @endif
 
