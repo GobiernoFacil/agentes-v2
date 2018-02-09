@@ -223,7 +223,7 @@ $(function(){
 							        to   = d.to.split("/"),
 											el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience-open'>[ x ]</a></h4>"+
 									"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
-									"<strong>"+d.name+"</strong><br>"+
+									"<strong>"+d.sector+"</strong><br>"+
 									d.description+
 									"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
 									$("#experiencies-list-open").append(el);
