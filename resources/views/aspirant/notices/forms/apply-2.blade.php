@@ -3,7 +3,9 @@
 <p>Por favor llena los siguientes campos para crear tu perfil curricular, recuerda mostrar evidencia de tu
 experiencia en el desarrollo de proyectos relacionados con los principios de
 Gobierno Abierto y Desarrollo Sostenible.</p>
-
+<?php
+use Jenssegers\Date\Date;
+?>
 
 <div class="divider"></div>
 <form id="extra-stuff" class="form-horizontal">
@@ -16,7 +18,11 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 				  @foreach($cv->academic_trainings as $study)
 				  <li data-id="{{$study->id}}" id ="experience_{{$study->id}}">
 				  	<h4 data-id="{{$study->id}}">{{$study->institution}} <a href="#" class="remove-study">[ x ]</a></h4>
-				  	<span class="from_to"> {{ date('Y(F)', strtotime($study->from)) }} - {{ date('Y(F)', strtotime($study->to)) }}</span>
+						<?php
+						$date_from =  Date::createFromFormat('Y-m-d',$study->from);
+						$date_to   =  Date::createFromFormat('Y-m-d',$study->to);
+						?>
+				  	<span class="from_to"> {{ $date_from->format('Y(F)') }} - {{ $date_to->format('Y(F)') }}</span>
 				    <strong>{{$study->name}}</strong>
 				   <span class="from_to">{{$study->city}}, {{$study->state}}</span>
 				 	</li>
@@ -76,7 +82,11 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 				  @foreach($cv->experiences as $experience)
 				  <li data-id="{{$experience->id}}">
 				  	<h4 data-id="{{$experience->id}}">{{$experience->company}} <a href="#" class="remove-experience">[ x ]</a></h4>
-				  	<span class="from_to"> {{ date('Y(F)', strtotime($experience->from)) }} - {{ date('Y(F)', strtotime($experience->to)) }}</span>
+						<?php
+						$date_from =  Date::createFromFormat('Y-m-d',$experience->from);
+						$date_to   =  Date::createFromFormat('Y-m-d',$experience->to);
+						?>
+				  	<span class="from_to"> {{ $date_from->format('Y(F)') }} - {{ $date_to->format('Y(F)') }}</span>
 				    <strong>{{$experience->name}}</strong> <br>
 				    {{$experience->description}}
 				     <span class="from_to">{{$experience->city}}, {{$experience->state}}</span>
@@ -151,7 +161,11 @@ Gobierno Abierto y Desarrollo Sostenible.</p>
 					  @foreach($cv->open_experiences as $experience)
 					  <li data-id="{{$experience->id}}">
 					    <h4 data-id="{{$experience->id}}">{{$experience->company}} <a href="#" class="remove-experience-open">[ x ]</a></h4>
-						<span class="from_to"> {{ date('Y(F)', strtotime($experience->from)) }} - {{ date('Y(F)', strtotime($experience->to)) }}</span>
+							<?php
+							$date_from =  Date::createFromFormat('Y-m-d',$experience->from);
+							$date_to   =  Date::createFromFormat('Y-m-d',$experience->to);
+							?>
+						<span class="from_to">  {{ $date_from->format('Y(F)') }} -  {{ $date_to->format('Y(F)') }}</span>
 					    {{$experience->description}}
 				     <span class="from_to">{{$experience->city}}, {{$experience->state}}</span>
 					  </li>
