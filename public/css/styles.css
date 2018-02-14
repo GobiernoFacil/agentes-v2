@@ -1526,6 +1526,9 @@ a.apertus:hover {
     color: #187fad; }
   .stats .table > tbody > tr.old > td {
     color: #999; }
+  .stats .table td h3 a {
+    font-size: 16px;
+    border-bottom: 1px solid #f15c44; }
 
 .gab {
   background: #f8f8f8;
