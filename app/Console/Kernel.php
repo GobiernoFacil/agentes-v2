@@ -44,15 +44,15 @@ class Kernel extends ConsoleKernel
       //           ->cron('30 12 01 */5 *');
         /*         $schedule->command('command:aspirant-count')
                           ->dailyAt('16:30');*/
-      $schedule->command('command:update-averages')
+    /*  $schedule->command('command:update-averages')
               ->dailyAt('10:00')
               ->emailOutputTo('carlos@gobiernofacil.com');
-    /*  $schedule->command('command:create-csv-fac-survey')
+      $schedule->command('command:create-csv-fac-survey')
                       ->dailyAt('17:00')
-                      ->emailOutputTo('carlos@gobiernofacil.com');*/
+                      ->emailOutputTo('carlos@gobiernofacil.com');
                       $schedule->command('command:create-diagnostic-files')
                               ->dailyAt('08:00')
-                              ->emailOutputTo('carlos@gobiernofacil.com');
+                              ->emailOutputTo('carlos@gobiernofacil.com');*/
     }
 
     /**
