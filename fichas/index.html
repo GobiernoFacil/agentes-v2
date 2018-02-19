@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<form>
+		<p><select id="card-selector-app-select"></select></p>
+	</form>
+	<div id="card-selector-app-container">
+		<h1> {{ state }}</h1>
+		<ul>
+			<li v-for="val in values">
+				<p>nombre: {{val.name}}</p>
+				<p>fuente: {{val.source}}</p>
+				<p>año: {{val.year}}</p>
+				<p>valor: {{val.value}}</p>
+				<p>valor nacional: {{val.national}}</p>
+				
+			</li>
+		</ul>
+	</div>
+
+<script src="underscore-min.js"></script>
+<script src="d3.min.js"></script>
+<script src="vue.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
