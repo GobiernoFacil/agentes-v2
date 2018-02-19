@@ -6,7 +6,217 @@
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
+<form>
+		<p><select id="card-selector-app-select"></select></p>
+	</form>
+<div id="card-selector-app-container">
 <div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<h1>@{{ state }}</h1>
+	</div>
+	<div class="col-sm-6 col-sm-offset-6">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Capital de la entidad federativa'">
+				<p>Capital: <strong>@{{val.value}}</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-if="val.name == 'Poblacion total'">
+				<p>Población: <strong>@{{val.value}} habitantes</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-if="val.name == 'Porcentaje de poblacion femenina'">
+				<p>Población Femenina: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-if="val.name == 'Porcentaje de poblacion indigena'">
+				<p>Población Indígena: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			
+		</div>
+	</div>
+	<!--pobreza-->
+	<div class="col-sm-10 col-sm-offset-1">
+		<h2>Pobreza</h2>
+	</div>
+	<div class="col-sm-6 col-sm-offset-6">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Porcentaje de poblacion en situacion de pobreza'">
+				<p>Porcentaje de población en situación de pobreza: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-if="val.name == 'Porcentaje de población en situación de pobreza extrema'">
+				<p>Porcentaje de población en situación de pobreza extrema: <strong>@{{val.value * 100}}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-if="val.name == 'Porcentaje de población en situación de pobreza moderada'">
+				<p>Porcentaje de población en situación de pobreza moderada: <strong>@{{val.value * 100}}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			
+		</div>
+	</div>
+	
+	<!--Salud-->
+	<div class="col-sm-10 col-sm-offset-1">
+		<h2>Salud</h2>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Esperanza de vida (años)'" class="row">
+				<div class="col-sm-8">
+				<p>Esperanza de vida (años) <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div> 
+			</div>
+			<div v-if="val.name == 'Razón de mortalidad materna (por cada 100 mil nacidos vivos)'" class="row">
+				<div class="col-sm-8">
+				<p>Razón de mortalidad materna (por cada 100 mil nacidos vivos): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de mortalidad infantil (por cada mil nacidos vivos)'" class="row">
+				<div class="col-sm-8">
+				<p>Tasa de mortalidad infantil (por cada mil nacidos vivos): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--Educación-->
+	<div class="col-sm-10 col-sm-offset-1">
+		<h2>Educación</h2>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Años promedio de escolarización'" class="row">
+				<div class="col-sm-8">
+				<p>Años promedio de escolarización <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div> 
+			</div>
+			<div v-if="val.name == 'Asistencia escolar (población de 6 a 12 años)'" class="row">
+				<div class="col-sm-8">
+				<p>Asistencia escolar (población de 6 a 12 años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de analfabetización (población de 15 y más años)'" class="row">
+				<div class="col-sm-8">
+				<p>Tasa de analfabetización (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de analfabetización mujeres (población de 15 y más años)'" class="row">
+				<div class="col-sm-8">
+				<p>Tasa de analfabetización mujeres (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				
+			</div>
+			<div v-if="val.name == 'Tasa de analfabetización hombres (población de 15 y más años)'" class="row">
+				<div class="col-sm-8">
+				<p>Tasa de analfabetización hombres (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><strong>@{{val.value}}</strong></p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<!--Competitividad-->
+	<div class="col-sm-10 col-sm-offset-1">
+		<h2>Competitividad</h2>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Producto Interno Bruto Estatal (millones de pesos a precios de 2013)'" class="row">
+				<div class="col-sm-6">
+				<p>Producto Interno Bruto Estatal (millones de pesos a precios de 2013) <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p class="right"><strong>@{{Format(val.value)}}</strong></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p><span class="ap_nacional block">@{{Format(val.national)}}</span></p>
+				</div> 
+			</div>
+			<div v-if="val.name == 'PIBE per cápita (pesos a precios de 2013)'" class="row">
+				<div class="col-sm-6">
+				<p>PIBE per cápita (pesos a precios de 2013): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p class="right"><strong>@{{Format(val.value)}}</strong></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p><span class="ap_nacional block">@{{Format(val.national)}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Crecimiento (variación real)'" class="row">
+				<div class="col-sm-6">
+				<p>Crecimiento (variación real): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p class="right"><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de desocupación'" class="row">
+				<div class="col-sm-6">
+				<p>Tasa de desocupación: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p class="right"><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de informalidad laboral'" class="row">
+				<div class="col-sm-6">
+				<p>Tasa de informalidad laboral: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p class="right"><strong>@{{val.value}}</strong></p>
+				</div>
+				<div class="col-sm-3"> 
+					<p><span class="ap_nacional block">@{{val.national}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php /*
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1><strong>Campeche</strong>, ejercicio local de gobierno abierto</h1>
 		<h2>¿Quiénes conforman el ejercicio?</h2>
@@ -54,5 +264,31 @@
 
 	</div>
 </div>
+*/?>
 
+	<div class="col-sm-10 col-sm-offset-1">
+		<ul>
+			<li v-for="val in values">
+				<p>nombre: @{{val.name}}</p>
+				<p>fuente: @{{val.source}}</p>
+				<p>año: @{{val.year}}</p>
+				<p>valor: @{{val.value}}</p>
+				<p>valor nacional: @{{val.national}}</p>
+				
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+
+@endsection
+
+@section('js-content')
+<script src="{{ url('js/bower_components/underscore/underscore-min.js') }}"></script>
+<script src="{{ url('js/bower_components/d3/d3.min.js') }}"></script>
+<script src="{{ url('js/vue.min.js') }}"></script>
+<script src="{{ url('js/indicadores/main.js')}}"></script>
+<script>
+  var Format         = d3.format(",");
+  </script>
 @endsection
