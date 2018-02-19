@@ -20,13 +20,13 @@
 				<p>Capital: <strong>@{{val.value}}</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Poblacion total'">
-				<p>Población: <strong>@{{val.value}} habitantes</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Población: <strong>@{{Format(val.value)}} habitantes</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Porcentaje de poblacion femenina'">
 				<p>Población Femenina: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Porcentaje de poblacion indigena'">
-				<p>Población Indígena: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{FormatDe(val.national * 100)}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Población Indígena: <strong>@{{ FormatDe(val.value * 100)}}</strong>% <span class="ap_nacional">@{{FormatDe(val.national * 100)}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			
 		</div>
@@ -38,13 +38,13 @@
 	<div class="col-sm-6 col-sm-offset-6">
 		<div v-for="val in values">
 			<div v-if="val.name == 'Porcentaje de poblacion en situacion de pobreza'">
-				<p>Porcentaje de población en situación de pobreza: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Porcentaje de población en situación de pobreza: <strong>@{{ FormatDe(val.value * 100) }}</strong>% <span class="ap_nacional">@{{ FormatDe(val.national * 100) }} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Porcentaje de población en situación de pobreza extrema'">
-				<p>Porcentaje de población en situación de pobreza extrema: <strong>@{{val.value * 100}}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Porcentaje de población en situación de pobreza extrema: <strong>@{{ FormatDe(val.value * 100) }}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Porcentaje de población en situación de pobreza moderada'">
-				<p>Porcentaje de población en situación de pobreza moderada: <strong>@{{val.value * 100}}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Porcentaje de población en situación de pobreza moderada: <strong>@{{ FormatDe(val.value * 100) }}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			
 		</div>
@@ -229,10 +229,10 @@
 				<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
-					<p class="right"><strong>@{{Format(val.value * 100)}}%</strong></p>
+					<p class="right"><strong>@{{FormatDe(val.value * 100)}}%</strong></p>
 				</div>
 				<div class="col-sm-2"> 
-					<p><span class="ap_nacional block">@{{Format(val.national*100)}}%</span></p>
+					<p><span class="ap_nacional block">@{{FormatDe(val.national*100)}}%</span></p>
 				</div> 
 			</div>
 			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (violencia emocional)'" class="row">
@@ -240,7 +240,7 @@
 				<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2">
-					<p class="right">@{{val.value * 100}}%</p>
+					<p class="right">@{{FormatDe(val.value * 100)}}%</p>
 				</div>
 				<div class="col-sm-5"> 
 					<div class="ap_bar">
@@ -253,7 +253,7 @@
 					<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2">
-					<p class="right">@{{val.value * 100}}%</p>
+					<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 				</div>
 				<div class="col-sm-5"> 
 					<div class="ap_bar">
@@ -266,7 +266,7 @@
 					<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2">
-					<p class="right">@{{val.value * 100}}%</p>
+					<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 				</div>
 				<div class="col-sm-5"> 
 					<div class="ap_bar">
@@ -279,7 +279,7 @@
 					<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2">
-					<p class="right">@{{val.value * 100}}%</p>
+					<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 				</div>
 				<div class="col-sm-5"> 
 					<div class="ap_bar">
@@ -339,7 +339,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -367,7 +367,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -396,7 +396,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -480,7 +480,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -538,7 +538,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -567,7 +567,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -595,21 +595,21 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{val.value}}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
-							<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+							<span  v-bind:style='"width:" + val.value  + "%"'></span>
 						</div>
 					</div>
 					</div>
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right"><span class="ap_nacional">@{{FormatDe(val.national * 100)}}%</span></p>
+						<p class="right"><span class="ap_nacional">@{{ val.national}}%</span></p>
 					</div>
 					<div class="col-sm-9">
 						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
+							<span  v-bind:style='"width:" + val.national  + "%"'></span>
 						</div>
 					</div>
 					</div>
@@ -624,7 +624,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100)}}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -653,7 +653,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -682,7 +682,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -709,24 +709,9 @@
 				</div>
 				<div class="col-sm-7">
 					<div class="row">
-					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
-					</div>
-					<div class="col-sm-9"> 
-						<div class="ap_bar">
-							<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+						<div class="col-sm-3">
+							<p class="right"><strong>@{{val.value}}</strong></p>
 						</div>
-					</div>
-					</div>
-					<div class="row">
-					<div class="col-sm-3">
-						<p class="right"><span class="ap_nacional">@{{FormatDe(val.national * 100)}}%</span></p>
-					</div>
-					<div class="col-sm-9">
-						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
-						</div>
-					</div>
 					</div>
 				</div>
 			</div>
@@ -738,24 +723,9 @@
 				</div>
 				<div class="col-sm-7">
 					<div class="row">
-					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
-					</div>
-					<div class="col-sm-9"> 
-						<div class="ap_bar">
-							<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+						<div class="col-sm-3">
+							<p class="right"><strong>@{{val.value}}</strong></p>
 						</div>
-					</div>
-					</div>
-					<div class="row">
-					<div class="col-sm-3">
-						<p class="right"><span class="ap_nacional">@{{FormatDe(val.national * 100)}}%</span></p>
-					</div>
-					<div class="col-sm-9">
-						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
-						</div>
-					</div>
 					</div>
 				</div>
 			</div>
@@ -767,7 +737,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -828,7 +798,7 @@
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
-							<span  v-bind:style='"width:" + (val.value * 100) / val.national + "%"'></span>
+							<span  v-bind:style='"width:" + (val.value * 100) / 70000 + "%"'></span>
 						</div>
 					</div>
 					</div>
@@ -838,7 +808,7 @@
 					</div>
 					<div class="col-sm-9">
 						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100) / val.national   + "%"'></span>
+							<span  v-bind:style='"width:" + (val.national * 100) / 70000   + "%"'></span>
 						</div>
 					</div>
 					</div>
@@ -860,16 +830,6 @@
 						</div>
 					</div>
 					</div>
-					<div class="row">
-					<div class="col-sm-3">
-						<p class="right"><span class="ap_nacional">@{{FormatDe(val.national * 100)}}%</span></p>
-					</div>
-					<div class="col-sm-9">
-						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
-						</div>
-					</div>
-					</div>
 				</div>
 			</div>
 			
@@ -880,7 +840,7 @@
 				<div class="col-sm-7">
 					<div class="row">
 					<div class="col-sm-3">
-						<p class="right">@{{val.value * 100}}%</p>
+						<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
 					</div>
 					<div class="col-sm-9"> 
 						<div class="ap_bar">
@@ -888,16 +848,7 @@
 						</div>
 					</div>
 					</div>
-					<div class="row">
-					<div class="col-sm-3">
-						<p class="right"><span class="ap_nacional">@{{FormatDe(val.national * 100)}}%</span></p>
-					</div>
-					<div class="col-sm-9">
-						<div class="ap_bar national">
-							<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
-						</div>
-					</div>
-					</div>
+					
 				</div>
 			</div>
 			
