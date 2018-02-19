@@ -42,11 +42,45 @@ class Notice extends Model
       return $files;
     }
 
+    //aspirantes que tienen validacion de correo, solo id's
     function aspirants(){
       return $this->hasMany("App\Models\AspirantNotice",'notice_id');
     }
 
-    function aspirant_to_check_proof(){
-      return AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id);
+    function aspirants_without_proof(){
+       $aspirants               = $this->aspirants->pluck('aspirant_id')->toArray();
+       $aspirants_id            = AspirantsFile::whereNull('proof')->whereIn('aspirant_id',$aspirants)->pluck('aspirant_id')->toArray();
+       $all_aspirants_files_ids = AspirantsFile::where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+       if($all_aspirants_files_ids){
+         $aspirants = array_diff($aspirants,$all_aspirants_files_ids);
+       }
+       if($aspirants_id){
+         $aspirants = array_merge($aspirants,$aspirants_id);
+       }
+
+       return Aspirant::whereIn('id',$aspirants);
+    }
+
+    function aspirants_without_proof_evaluation(){
+      $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      $aWp_ids      = $this->aspirants_without_proof()->pluck('id')->toArray();
+      $all_ids      = $this->all_aspirants_data()->pluck('id')->toArray();
+      if($aspirants_id){
+        $all_ids = array_diff($all_ids,$aspirants_id);
+      }
+      if($aWp_ids){
+        $all_ids = array_diff($all_ids,$aWp_ids);
+      }
+      return Aspirant::whereIn('id',$all_ids);
+    }
+
+    function aspirants_rejected_proof(){
+      $aspirants_id = AspirantEvaluation::where('address_proof',0)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants_id);
+    }
+
+    function all_aspirants_data(){
+      $aspirants = $this->aspirants->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants);
     }
 }

@@ -9,7 +9,13 @@
 <div class="row">
 	<div class="col-sm-8">
 		<h1>Lista de aspirantes</h1>
-		<h2>Convocatoria {{$notice->title}}
+		<h2>Convocatoria "{{$notice->title}}" </h2>
+		@if($aWpE->count() != 0)
+			<p id = "evaluate_message">Aspirantes que requieren evaluación</p>
+		@else
+			<p id = "proof_message">Aspirantes con comprobante de domicilio sin verificar</p>
+		@endif
+
 	</div>
 	<div class="col-sm-4">
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
@@ -33,59 +39,63 @@
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div class="box">
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th>Nombre / email</th>
-		      <th>Ciudad / Estado</th>
-		      <th>Procedencia</th>
-		      <th>Registro</th>
-		      <th>Comprobante de domicilio</th>
-		      <th>Puntaje</th>
-		      <th>Acciones</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    @foreach ($aspirants as $aspirant)
-		      <tr>
-		        <td><h4><a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
-		        {{$aspirant->email}}
-		        </td>
-		        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
-				<td>{{$aspirant->origin}}</td>
-		        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
-						<td>{{$aspirant->check_address_proof->count() > 0 ? "Verificado" : "Sin verificar" }}</td>
-						 @if($aspirant->AspirantEvaluation)
-								<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
-								@if($aspirantE)
-				        <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
-							@else
-								<?php $aspirantE = $aspirant->aspirantEvaluation->where('institution',$user->institution)->first();?>
-								@if($aspirantE)
-							  <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
-								@else
-								<td>Sin calificación</td>
-								@endif
-							@endif
-		        @else
-		        <td>Sin calificación</td>
-		        @endif
-		        <td>
-		          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-							@if($aspirant->check_address_proof->count() > 0)
-		          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-datos/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-							@else
-							<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-							@endif
-		     </tr>
-		    @endforeach
-		  </tbody>
-		</table>
-		{{ $aspirants->links() }}
+
+		@if($aWpE->count() > 0)
+								<table class="table">
+								  <thead>
+								    <tr>
+								      <th>Nombre / email</th>
+								      <th>Ciudad / Estado</th>
+								      <th>Procedencia</th>
+								      <th>Registro</th>
+								      <th>Comprobante de domicilio</th>
+								      <th>Puntaje</th>
+								      <th>Acciones</th>
+								    </tr>
+								  </thead>
+												<tbody>
+										    @foreach ($aWpE as $aspirant)
+										      <tr>
+										        <td><h4><a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
+										        {{$aspirant->email}}
+										        </td>
+										        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
+												<td>{{$aspirant->origin}}</td>
+										        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+														<td>{{$aspirant->check_address_proof->count() > 0 ? "Verificado" : "Sin verificar" }}</td>
+														 @if($aspirant->AspirantEvaluation)
+																<?php $aspirantE = $aspirant->aspirantEvaluation->where('user_id',$user->id)->first();?>
+																@if($aspirantE)
+												        <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
+															@else
+																<?php $aspirantE = $aspirant->aspirantEvaluation->where('institution',$user->institution)->first();?>
+																@if($aspirantE)
+															  <td> {{$aspirantE->grade ? ($aspirantE->grade*10).'%' : "Sin Calificación"}}</td>
+																@else
+																<td>Sin calificación</td>
+																@endif
+															@endif
+										        @else
+										        <td>Sin calificación</td>
+										        @endif
+										        <td>
+										          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
+															@if($aWpE->count() != 0)
+										          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-datos/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+															@else
+															<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+															@endif
+										     </tr>
+										    @endforeach
+										  </tbody>
+								</table>
+				@else
+									<p><strong>Sin aspirantes con comprobante de domicilio por evaluar</strong></p>
+				@endif
+		{{ $aWpE->links() }}
 		</div>
 	</div>
 </div>
-
 @endsection
 
 
@@ -93,7 +103,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src ='{{url("js/aspirant-search.js")}}'></script>
 <script>
-  <?php echo 'var aspirants         = '.$allAspirants.';'; ?>
+  <?php echo 'var aspirants         = '.$aspirants.';'; ?>
 	<?php echo 'var view_aspirant_url = "'.url("dashboard/aspirantes/convocatoria/$notice->id/ver-aspirante/").'";'; ?>
 </script>
 @endsection
