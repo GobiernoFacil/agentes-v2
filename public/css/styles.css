@@ -2053,6 +2053,8 @@ sup {
   background: #f2f2f2;
   height: 30px;
   width: 100%; }
+  .ap_bar.national span {
+    background: #999; }
   .ap_bar span {
     background: purple;
     color: white;
