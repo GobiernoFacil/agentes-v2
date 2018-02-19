@@ -2034,6 +2034,21 @@ sup {
   .lecturas li h2 span {
     font-weight: 300; }
 
+.ap_nacional {
+  background: #999;
+  display: inline-block;
+  color: white;
+  padding: 3px;
+  margin-left: 20px; }
+  .ap_nacional.block {
+    display: block;
+    text-align: center; }
+
+.ap_source {
+  color: #999;
+  display: block;
+  font-size: 12px; }
+
 /* =contacto
 -------------------------------------------------------------- */
 .box_contact {
