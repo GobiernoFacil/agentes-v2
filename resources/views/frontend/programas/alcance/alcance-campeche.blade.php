@@ -26,7 +26,7 @@
 				<p>Población Femenina: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			<div v-if="val.name == 'Porcentaje de poblacion indigena'">
-				<p>Población Indígena: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>Población Indígena: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{FormatDe(val.national * 100)}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 			</div>
 			
 		</div>
@@ -58,7 +58,7 @@
 		<div v-for="val in values">
 			<div v-if="val.name == 'Esperanza de vida (años)'" class="row">
 				<div class="col-sm-8">
-				<p>Esperanza de vida (años) <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p class="ap_icon esperanza">@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -69,7 +69,7 @@
 			</div>
 			<div v-if="val.name == 'Razón de mortalidad materna (por cada 100 mil nacidos vivos)'" class="row">
 				<div class="col-sm-8">
-				<p>Razón de mortalidad materna (por cada 100 mil nacidos vivos): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p class="ap_icon">@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -80,7 +80,7 @@
 			</div>
 			<div v-if="val.name == 'Tasa de mortalidad infantil (por cada mil nacidos vivos)'" class="row">
 				<div class="col-sm-8">
-				<p>Tasa de mortalidad infantil (por cada mil nacidos vivos): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p class="ap_icon infantil">@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -112,7 +112,7 @@
 			</div>
 			<div v-if="val.name == 'Asistencia escolar (población de 6 a 12 años)'" class="row">
 				<div class="col-sm-8">
-				<p>Asistencia escolar (población de 6 a 12 años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -123,7 +123,7 @@
 			</div>
 			<div v-if="val.name == 'Tasa de analfabetización (población de 15 y más años)'" class="row">
 				<div class="col-sm-8">
-				<p>Tasa de analfabetización (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -134,7 +134,7 @@
 			</div>
 			<div v-if="val.name == 'Tasa de analfabetización mujeres (población de 15 y más años)'" class="row">
 				<div class="col-sm-8">
-				<p>Tasa de analfabetización mujeres (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -143,7 +143,7 @@
 			</div>
 			<div v-if="val.name == 'Tasa de analfabetización hombres (población de 15 y más años)'" class="row">
 				<div class="col-sm-8">
-				<p>Tasa de analfabetización hombres (población de 15 y más años): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
 				<div class="col-sm-2"> 
 					<p><strong>@{{val.value}}</strong></p>
@@ -152,6 +152,7 @@
 			</div>
 		</div>
 	</div>
+	
 	
 	<!--Competitividad-->
 	<div class="col-sm-10 col-sm-offset-1">
@@ -216,6 +217,81 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--Género-->
+	<div class="col-sm-10 col-sm-offset-1">
+		<h2>Género</h2>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div v-for="val in values">
+			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (total)'" class="row">  
+				<div class="col-sm-6">
+				<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p class="right"><strong>@{{Format(val.value * 100)}}%</strong></p>
+				</div>
+				<div class="col-sm-2"> 
+					<p><span class="ap_nacional block">@{{Format(val.national*100)}}%</span></p>
+				</div> 
+			</div>
+			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (violencia emocional)'" class="row">
+				<div class="col-sm-5">
+				<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2">
+					<p class="right">@{{val.value * 100}}%</p>
+				</div>
+				<div class="col-sm-5"> 
+					<div class="ap_bar">
+						<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+					</div>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (violencia económica)'" class="row">
+				<div class="col-sm-5">
+					<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2">
+					<p class="right">@{{val.value * 100}}%</p>
+				</div>
+				<div class="col-sm-5"> 
+					<div class="ap_bar">
+						<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+					</div>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (violencia física)'" class="row">
+				<div class="col-sm-5">
+					<p>@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2">
+					<p class="right">@{{val.value * 100}}%</p>
+				</div>
+				<div class="col-sm-5"> 
+					<div class="ap_bar">
+						<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+					</div>
+				</div>
+			</div>
+			<div v-if="val.name == 'Tasa de prevalencia de violencia de pareja contra la mujer (violencia sexual)'" class="row">
+				<div class="col-sm-5">
+					<p>@{{val.name}}: <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				</div>
+				<div class="col-sm-2">
+					<p class="right">@{{val.value * 100}}%</p>
+				</div>
+				<div class="col-sm-5"> 
+					<div class="ap_bar">
+						<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
 	<?php /*
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1><strong>Campeche</strong>, ejercicio local de gobierno abierto</h1>
@@ -289,6 +365,7 @@
 <script src="{{ url('js/vue.min.js') }}"></script>
 <script src="{{ url('js/indicadores/main.js')}}"></script>
 <script>
-  var Format         = d3.format(",");
+  var Format         = d3.format(",2");
+  var FormatDe       = d3.format(",.2f");
   </script>
 @endsection
