@@ -40,17 +40,18 @@ class AdminAspirants extends Controller
         //
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
-        $aWp       = $notice->aspirants_without_proof()->get();
+        $aWp       = $notice->aspirants_without_proof()->paginate();
         $aWpE      = $notice->aspirants_without_proof_evaluation()->paginate();
-        $aRp       = $notice->aspirants_rejected_proof()->get();
+        $aRp       = $notice->aspirants_rejected_proof()->paginate();
+        $aAe       = $notice->aspirants_already_evaluated()->paginate();
         $aspirants = $notice->all_aspirants_data()->get();
-        $aspirants_id = AspirantEvaluation::whereNull('address_proof')->where('notice_id',$notice->id)->pluck('aspirant_id')->toArray();
         return view('admin.aspirants.aspirant-list')->with([
           'user' =>$user,
           'notice' => $notice,
           'aWp'  => $aWp,
           'aWpE' => $aWpE,
           'aRp'  => $aRp,
+          'aAe'  => $aAe,
           'aspirants' =>$aspirants
         ]);
 

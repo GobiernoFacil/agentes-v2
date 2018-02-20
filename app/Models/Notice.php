@@ -83,4 +83,9 @@ class Notice extends Model
       $aspirants = $this->aspirants->pluck('aspirant_id')->toArray();
       return Aspirant::whereIn('id',$aspirants);
     }
+
+    function aspirants_already_evaluated(){
+      $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants_id);
+    }
 }
