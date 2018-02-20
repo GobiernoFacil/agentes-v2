@@ -1,4 +1,4 @@
-@extends('layouts.admin.a_master')
+@extends('layouts.admin.fellow_master')
 @section('title', 'Convocatoria '.$notice->title )
 @section('description', 'Convocatoria '.$notice->title)
 @section('body_class', 'aspirante convocatoria')
@@ -10,16 +10,15 @@
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="center">Convocatoria</h3>
 		<h1 class="center">{{$notice->title}}</h1>
-		<p class="center date">{{date("d-m-Y", strtotime($notice->start))}} al {{date('d-m-Y', strtotime($notice->end))}}</p>
+		<p class="center date">Del {{date("d-m-Y", strtotime($notice->start))}} al {{date('d-m-Y', strtotime($notice->end))}}</p>
 
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-sm-12">
-    	<h3 class ="right"><a class ="btn view" href='{{url("tablero-aspirante/convocatorias/$notice->slug/ver-archivos")}}'>Ver archivos</a></h3>
+    	<h3 class ="right"><a class ="btn view" href='{{url("tablero-aspirante")}}'>Aplicar</a></h3>
 	</div>
 </div>
 

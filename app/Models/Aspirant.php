@@ -19,7 +19,7 @@ class Aspirant extends Model
   }
 
   function notices(){
-    return $this->hasMany("App\Models\AspirantNotice");
+    return $this->hasMany("App\Models\AspirantNotice")->orderBy('created_at','asc');;
   }
 
   function notice(){
@@ -38,6 +38,11 @@ class Aspirant extends Model
   {
       $this->notify(new MassiveEmail($token));
   }
+
+  function cv(){
+    return $this->hasOne("App\Models\Cv");
+  }
+
 
 
 }

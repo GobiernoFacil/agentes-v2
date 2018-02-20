@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 use File;
-use App\Models\Notice;
+
 use App\Models\AspirantNotice;
 use App\Models\AspirantsFile;
+use App\Models\City;
+use App\Models\Cv;
+use App\Models\State;
+use App\Models\Notice;
 //validations
 use App\Http\Requests\SaveFiles;
 use App\Http\Requests\UpdateAspirantFiles;
+use App\Http\Requests\SaveApply1;
+use App\Http\Requests\SaveApply2;
+use App\Http\Requests\SaveApply3;
+use App\Http\Requests\SaveApply4;
+use App\Http\Requests\SaveApply5;
+//Notifications
+use App\Notifications\SendApplyT;
 class AspirantNotices extends Controller
 {
     //
@@ -38,6 +50,7 @@ class AspirantNotices extends Controller
   {
     	$user    = Auth::user();
       $today   = date('Y-m-d');
+      //valida que exista convocatoria
     	$notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
         return view('aspirant.notices.notices-view')->with([
@@ -47,6 +60,278 @@ class AspirantNotices extends Controller
         ]);
   }
 
+
+  /**  comienzo del proceso para postularse a la convocatoria
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function apply($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      return view('aspirant.notices.notices-apply')->with([
+          "user"      => $user,
+          "notice"   => $notice,
+          "aspirantFile" => $aspirantFile
+
+        ]);
+  }
+
+  /**  guarda primer paso de proceso
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyMotives(SaveApply1 $request)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      $aspirantFile->motives = $request->motives;
+      $aspirantFile->save();
+      return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-perfil-curricular");
+
+
+  }
+
+
+  /**  agregar perfil curricular
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyCv($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      //instrucciones y primer requisito "exposición de motivos"
+      $cv      = Cv::firstOrCreate(['aspirant_id'=>$user->aspirant($user)->id]);
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      $states	    =  State::select('name')->orderBy('name','asc')->distinct('name')->pluck("name","name")->toArray();
+      array_unshift($states, "Selecciona una opción");
+      $cities	    =  City::all();
+      $states_j	  =  State::select('name')->orderBy('name','asc')->get();
+      return view('aspirant.notices.notices-apply-cv')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "cv"        => $cv,
+          "aspirantFile" => $aspirantFile,
+          "cities"    => $cities,
+          "states"    => $states,
+          "states_j"  => $states_j
+
+        ]);
+  }
+
+
+  /**  guardar perfil curricular
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function saveCv(SaveApply2 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    //segundo requisito "perfil curricular"
+    $data   = $request->only(['email','birthdate','phone','mobile',]);
+    CV::where('aspirant_id',$user->aspirant($user)->id)->update($data);
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-video");
+
+
+  }
+
+
+  /**  agregar video
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyVideo($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      return view('aspirant.notices.notices-apply-video')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
+        ]);
+  }
+
+
+  /**  guarda video paso 3
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applySaveVideo(SaveApply3 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+    $aspirantData->video = $request->video;
+    $aspirantData->save();
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-comprobante-domicilio");
+  }
+
+
+
+  /**  agregar comprobante
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyProof($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      return view('aspirant.notices.notices-apply-proof')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
+        ]);
+  }
+
+
+  /**  guarda comprobante  paso 4
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applySaveProof(SaveApply4 $request)
+  {
+    $user    = Auth::user();
+    $today   = date('Y-m-d');
+    //valida que exista convocatoria
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    //valida que exista el aspirante en la convocatoria
+    $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+    $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+    if($request->file('proof')){
+        if($request->file('proof')->isValid()){
+            $name = uniqid() . "." . $request->file("proof")->guessExtension();
+            $path = "/files/";
+            $request->file('proof')->move(public_path() . $path, $name);
+            if($aspirantData->proof){
+              File::delete(public_path().$path.$aspirantData->proof);
+            }
+            $aspirantData->proof = $name;
+            $aspirantData->save();
+        }
+    }
+    return redirect("tablero-aspirante/convocatorias/$notice->slug/aplicar/agregar-aviso-privacidad");
+  }
+
+
+  /**  agregar aviso de privacidad
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function applyPrivacy($notice_slug)
+  {
+      $user    = Auth::user();
+      $today   = date('Y-m-d');
+      //valida que exista convocatoria
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      //valida que exista el aspirante en la convocatoria
+      $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+      $aspirantFile     = AspirantsFile::firstOrCreate([
+        'aspirant_id'=>$user->aspirant($user)->id,
+        'notice_id'=>$notice->id,
+        'user_id'=>$user->id
+      ]);
+      return view('aspirant.notices.notices-apply-privacy')->with([
+          "user"      => $user,
+          "notice"    => $notice,
+          "aspirantFile" => $aspirantFile
+        ]);
+  }
+
+
+    /**  agregar aviso de privacidad
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function applySavePrivacy(SaveApply5 $request)
+    {
+        $user    = Auth::user();
+        $today   = date('Y-m-d');
+        //valida que exista convocatoria
+        $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        //valida que exista el aspirante en la convocatoria
+        $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+        $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
+        $aspirantData->privacy_policies = $request->privacy_policies;
+        $aspirantData->save();
+        $user->notify(new SendApplyT($user,$notice));
+        return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
+    }
+
+
+    /**  gracias
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function thanks($notice_slug)
+    {
+        $user    = Auth::user();
+        $today   = date('Y-m-d');
+        //valida que exista convocatoria
+        $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        //valida que exista el aspirante en la convocatoria
+        $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
+        return view('aspirant.notices.notices-thanks')->with([
+            "user"      => $user,
+            "notice"    => $notice,
+          ]);
+    }
+
         /** Ver archivos de convocatoria
       *
       * @return \Illuminate\Http\Response
@@ -55,7 +340,9 @@ class AspirantNotices extends Controller
       {
           $user   = Auth::user();
           $today   = date('Y-m-d');
+          //valida que exista convocatoria
           $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+          //valida que exista el aspirante en la convocatoria
           $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
           $files  = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->first();
             return view('aspirant.notices.files-view')->with([
@@ -238,5 +525,150 @@ class AspirantNotices extends Controller
           return response()->download($file, $filename, $headers);
         }
 
+
+        public function addLanguage(Request $request){
+          $user = Auth::user();
+          $cv   = $user->aspirant($user)->cv;
+          $language = $cv->languages()->firstOrCreate([
+            'name'  => $request->name,
+            'level' => $request->level
+          ]);
+
+          return response()->json($language);
+        }
+
+        public function removeLanguage($id){
+          $user = Auth::user();
+          $lang = $user->aspirant($user)->cv->languages()->find($id);
+          $r    = $lang->delete();
+
+          return response()->json($r);
+        }
+
+        public function addSoftware(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          $software = $cv->softwares()->firstOrCreate([
+            'name'  => $request->name,
+            'level' => $request->level
+          ]);
+
+          return response()->json($software);
+        }
+
+        public function removeSoftware($id){
+          $user     = Auth::user();
+          $software = $user->aspirant($user)->cv->softwares()->find($id);
+          $r        = $software->delete();
+
+          return response()->json($r);
+        }
+
+        public function addExperience(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          if($cv->experiences()->count() == 3){
+            return response()->json(["status"=>$cv->experiences()->count()]);
+          }else{
+            $words = explode(' ', $request->description);
+            $nbWords = count($words);
+            if($nbWords <=100){
+                  $experience = $cv->experiences()->firstOrCreate([
+                      'name'  => $request->name,
+                      'company' => $request->company,
+                      'sector' => $request->sector,
+                      'from' => $request->from,
+                      'to' => $request->to,
+                      'city' => $request->city,
+                      'state' => $request->state,
+                      'description' => $request->description
+
+                    ]);
+                  }else{
+
+                    return response()->json(["words"=>$nbWords]);
+
+                  }
+          }
+
+
+           return response()->json($experience);
+        }
+
+        public function removeExperience($id){
+          $user     = Auth::user();
+          $experience = $user->aspirant($user)->cv->experiences()->find($id);
+          $r        = $experience->delete();
+
+          return response()->json($r);
+        }
+
+        public function addStudy(Request $request){
+          $user  = Auth::user();
+          $cv    = $user->aspirant($user)->cv;
+          if($cv->academic_trainings()->count() == 200){
+            return response()->json(["status"=>$cv->academic_trainings()->count()]);
+          }else{
+
+                $study = $cv->academic_trainings()->firstOrCreate([
+                  'name'        => $request->name,
+                  'institution' => $request->institution,
+                  'from'        => $request->from,
+                  'to'          => $request->to,
+                  'city'        => $request->city,
+                  'state'       => $request->state
+                ]);
+            }
+
+          return response()->json($study);
+        }
+
+        public function removeStudy($id){
+          $user  = Auth::user();
+          $study = $user->aspirant($user)->cv->academic_trainings()->find($id);
+          $r     = $study->delete();
+
+          return response()->json($r);
+        }
+
+
+        public function addOpen(Request $request){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          if($cv->open_experiences()->count() == 3){
+            return response()->json(["status"=>$cv->open_experiences()->count()]);
+          }else{
+            $words = explode(' ', $request->description);
+            $nbWords = count($words);
+            if($nbWords <=100){
+                  $experience = $cv->open_experiences()->firstOrCreate([
+                      'company' => $request->company,
+                      'sector' => $request->sector,
+                      'from' => $request->from,
+                      'to' => $request->to,
+                      'city' => $request->city,
+                      'state' => $request->state,
+                      'description' => $request->description
+
+                    ]);
+                  }else{
+
+                    return response()->json(["words"=>$nbWords]);
+
+                  }
+          }
+
+
+           return response()->json($experience);
+        }
+
+
+        public function removeOpen($id){
+          $user     = Auth::user();
+          $experience = $user->aspirant($user)->cv->open_experiences()->find($id);
+          $r        = $experience->delete();
+
+          return response()->json($r);
+        }
 
 }

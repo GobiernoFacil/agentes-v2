@@ -15,12 +15,12 @@ class Front extends Controller
     public function descripcion(){
       return view('frontend.programas.que-es');
     }
-    
+
     //programa 2017
     public function pro17(){
       return view('frontend.programas.2017.que-es');
     }
-    
+
     //programa 2018
     public function pro18(){
       return view('frontend.programas.2018.que-es');
@@ -68,11 +68,11 @@ class Front extends Controller
         return redirect('/');
       }
 
-      $mime = mime_content_type ($path);
+      $fileData = pathinfo($path);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
-      return response()->download($path, $name, $headers);
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $name, $headers);
     }
 
 }

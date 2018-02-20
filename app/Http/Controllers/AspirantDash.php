@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\Image;
+use App\Models\AspirantsFile;
+
 use Auth;
 use File;
 // FormValidators
@@ -20,10 +22,29 @@ class AspirantDash extends Controller
     public function dashboard(){
 	  	$user 		   = Auth::user();
 	    $notices       = $user->aspirant($user)->notices;
-	    return view('aspirant.dashboard')->with([
-	      "user"      	  => $user,
-	      "notices"       => $notices,
-	    ]);
+      $today  = date('Y-m-d');
+      //convocatoria actual solo una es pública a la vez y entra en el lapso
+      $notice = Notice::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
+      $single = $notices->first();
+      if($notice){
+  	    $aspirantFile     = AspirantsFile::firstOrCreate([
+          'aspirant_id'=>$user->aspirant($user)->id,
+          'notice_id'=>$notice->id,
+          'user_id'=>$user->id
+        ]);
+  	    return view('aspirant.dashboard')->with([
+  	      "user"      	  => $user,
+  	      "single"        => $single,
+  	      "aspirantFile"  => $aspirantFile,
+          "notice"        => $notice
+  	    ]);
+      }else{
+        //convocatoria cerrada
+          return view('aspirant.dashboard')->with([
+           "user"      	  => $user,
+            "notice"        => $notice
+         ]);
+      }
 
     }
 
@@ -93,5 +114,18 @@ class AspirantDash extends Controller
       $image->save();
     }
     return redirect("tablero-aspirante/perfil")->with('success',"Se ha actualizado correctamente");
+  }
+
+  /**
+  * politicas de privacidad
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function privacyPolices()
+  {
+      $user = Auth::user();
+        return view('aspirant.privacy-polices')->with([
+          "user"      => $user
+        ]);
   }
 }

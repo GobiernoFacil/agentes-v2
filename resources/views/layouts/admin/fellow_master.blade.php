@@ -83,26 +83,22 @@
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
 	<div class="apertus_nav">	
-		<header>
-			<!--header-->
-			@include('layouts.admin.fellow_header')
-		</header>
+		<!--header-->
+		@include('layouts.admin.fellow_header')
 	</div>
 	
 	<div class="apertus_content">
 		@if ($__env->yieldContent('breadcrumb'))
 		<div class="breadcrumb">
-			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
 						@include($__env->yieldContent('breadcrumb'))
 					</div>
 				</div>
-			</div>
 		</div>
 		@endif
 		
-		<!--header-->
+		<!--profile-->
 		@include('layouts.admin.a_profile_logout')
 		
 		<section>

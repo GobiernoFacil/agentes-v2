@@ -1,10 +1,13 @@
 <header>
 	<a class="apertus" href="{{url('')}}" title="Ir a sitio público">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
-
+    <button class="hamburger"><span class="op">&#9776;</span><span class="cl">&#735;</span></button>
 	<nav>
 		<ul>
 			<!--dashboard-->
+			@if($user->type == "aspirant")
+			@else
 			<li class="{{ $__env->yieldContent('body_class') == 'dashboard' || $__env->yieldContent('body_class') == 'dashboard fellow' ? "active" : ''}}"><a href="{{url($linkDash)}}" data-title="Tablero"><b class="icon {{ $user->type == 'fellow' ? 'i_modulos' : 'i_tablero' }}"></b></a></li>
+			@endif
 			@if($user->type == "admin")
 			<!--admin-->
 			<li class="{{ $__env->yieldContent('body_class') == 'fellows' ? "active" : ''}}"><a href="{{url('dashboard/fellows')}}"><b class="icon i_aspirantes"></b> Fellows</a></li>
@@ -34,7 +37,7 @@
 			@endif
 			@if($user->type == "aspirant")
 			<!--aspirant-->
-			<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria'  ? "active" : ''}}"><a href="{{url( $linkDash . '/convocatorias')}}"><b class="icon i_modulos"></b> Convocatorias</a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'aspirante convocatoria' ||  $__env->yieldContent('body_class') == 'dashboard' ? "active" : ''}}"><a href="{{url( $linkDash )}}" data-title="Convocatoria"><b class="icon i_convoca_w"></b></a></li>
 			@endif
 		</ul>
 	</nav>

@@ -27,8 +27,22 @@ Route::get('redes-sociales', 'Front@redes');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
-Route::get('convocatoria/resultados-2017', 'NoticeFront@resultado17');
-Route::get('convocatoria/metodologia-2017', 'NoticeFront@metodo17');
+Route::get('convocatoria/preguntas-frecuentes', 'NoticeFront@faqs');
+
+
+/////// convocatoria 2017
+Route::get('convocatoria/2017', 'NoticeFront@convoca17');
+Route::get('convocatoria/resultados-2017', function(){
+    return Redirect::to('convocatoria/2017/resultados', 301);
+});
+Route::get('convocatoria/metodologia-2017', function(){
+    return Redirect::to('convocatoria/2017/metodologia', 301);
+});
+Route::get('convocatoria/2017/resultados', 'NoticeFront@resultado17');
+Route::get('convocatoria/2017/metodologia', 'NoticeFront@metodo17');
+//////////////////////
+
+
 Route::get('convocatoria/archivos/{name}', 'NoticeFront@download');
 //Route::get('convocatoria/proceso-de-seleccion', 'NoticeFront@bases'); oculto por acuerdo del equipo
 
@@ -136,15 +150,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
+
+    /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
-    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');
-    Route::get('dashboard/aspirantes/ver/{id}', 'Aspirants@view');
+    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');*/
+
+    /*
     Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
     Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
     Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
     Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
     Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
-    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');
+    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');*/
+
+
+
+
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/ver/{id}', 'FellowsAdmin@view');
@@ -175,29 +197,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{module_id}', 'Modules@delete');
     Route::get('dashboard/programas/{program_id}/modulos/ver/{module_id}', 'Modules@view');
 
-
-    /*
-    Route::get('dashboard/modulos', 'Modules@index');
-    Route::get('dashboard/modulos/agregar', 'Modules@add');
-    Route::post('dashboard/modulos/save', 'Modules@save');
-    Route::get('dashboard/modulos/editar/{id}', 'Modules@edit');
-    Route::post('dashboard/modulos/update/{id}', 'Modules@update');
-    Route::get('dashboard/modulos/deshabilitar/{id}', 'Modules@delete');
-    Route::get('dashboard/modulos/ver/{id}', 'Modules@view');
-    */
     /*@ModuleSessions Controller */
     //CRUD sessions
-    Route::get('dashboard/sesiones/{id}', 'ModuleSessions@index');
-    Route::get('dashboard/sesiones/agregar/{id}', 'ModuleSessions@add');
-    Route::post('dashboard/sesiones/save/{module_id}', 'ModuleSessions@save');
-    Route::get('dashboard/sesiones/editar/{session_id}', 'ModuleSessions@edit');
-    Route::post('dashboard/sesiones/update/{session_id}', 'ModuleSessions@update');
-    Route::get('dashboard/sesiones/eliminar/{id}', 'ModuleSessions@delete');
-    Route::get('dashboard/sesiones/ver/{id}', 'ModuleSessions@view');
-    Route::get('dashboard/sesiones/facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
-    Route::post('dashboard/sesiones/facilitadores/buscar', 'ModuleSessions@searchFacilitator');
-    Route::post('dashboard/sesiones/facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
-    Route::get('dashboard/sesiones-asignadas/', 'ModuleSessions@viewAssign');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones', 'ModuleSessions@index');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/agregar', 'ModuleSessions@add');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/save', 'ModuleSessions@save');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/editar/{session_id}', 'ModuleSessions@edit');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/update/{session_id}', 'ModuleSessions@update');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/eliminar/{session_id}', 'ModuleSessions@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/ver/{session_id}', 'ModuleSessions@view');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/buscar/{session_id}', 'ModuleSessions@searchFacilitator');
+    Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-asignadas/', 'ModuleSessions@viewAssign');
+
+
     /*@Activities Controller */
     //CRUD activities
     Route::get('dashboard/sesiones/actividades/ver/{id}', 'Activities@view');
@@ -519,15 +533,40 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/perfil', 'AspirantDash@viewProfile');
     Route::get('tablero-aspirante/perfil/editar', 'AspirantDash@editProfile');
     Route::post('tablero-aspirante/perfil/save', 'AspirantDash@saveProfile');
+    //aviso de privacidad
+    Route::get('tablero-aspirante/aviso-de-privacidad', 'AspirantDash@privacyPolices');
     //convocatorias
     /*AspirantNotices*/
     Route::get('tablero-aspirante/convocatorias', 'AspirantNotices@index');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}', 'AspirantNotices@view');
-    Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@apply');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar', 'AspirantNotices@applyMotives');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@applyCv');
+    Route::post('tablero-aspirante/idioma/agregar', 'AspirantNotices@addLanguage');
+    Route::post('tablero-aspirante/idioma/eliminar/{id}', 'AspirantNotices@removeLanguage');
+    Route::post('tablero-aspirante/programa/agregar', 'AspirantNotices@addSoftware');
+    Route::post('tablero-aspirante/programa/eliminar/{id}', 'AspirantNotices@removeSoftware');
+    Route::post('tablero-aspirante/experiencia/agregar', 'AspirantNotices@addExperience');
+    Route::post('tablero-aspirante/experiencia/eliminar/{id}', 'AspirantNotices@removeExperience');
+    Route::post('tablero-aspirante/estudios/agregar', 'AspirantNotices@addStudy');
+    Route::post('tablero-aspirante/estudios/eliminar/{id}', 'AspirantNotices@removeStudy');
+    Route::post('tablero-aspirante/experiencia-abierta/agregar', 'AspirantNotices@addOpen');
+    Route::post('tablero-aspirante/experiencia-abierta/eliminar/{id}', 'AspirantNotices@removeOpen');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-perfil-curricular', 'AspirantNotices@saveCv');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applyVideo');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-video', 'AspirantNotices@applySaveVideo');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applyProof');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-comprobante-domicilio', 'AspirantNotices@applySaveProof');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-aviso-privacidad', 'AspirantNotices@applyPrivacy');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/aplicar/agregar-aviso-privacidad', 'AspirantNotices@applySavePrivacy');
+    Route::get('tablero-aspirante/convocatorias/{notice_slug}/gracias', 'AspirantNotices@thanks');
+
+
+/*    Route::get('tablero-aspirante/convocatorias/{notice_slug}/ver-archivos', 'AspirantNotices@viewFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@addFiles');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/agregar-archivos', 'AspirantNotices@saveFiles');
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@editFiles');
-    Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');
+    Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');*/
     Route::get('tablero-aspirante/archivo/download/{name}/{type}', 'AspirantNotices@download');
   });
 });

@@ -179,6 +179,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Carbon' => 'Carbon\Carbon',
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Date' => Jenssegers\Date\Date::class,
 
     ],
 
