@@ -149,6 +149,11 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos', 'AdminAspirants@aspirantWithOutProof');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos-validos', 'AdminAspirants@aspirantRejected');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivos-evaluados', 'AdminAspirants@aspirantAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivo-por-evaluar', 'AdminAspirants@aspirantToEvaluate');
+
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/comprobante/{name}', 'AdminAspirants@download');

@@ -73,9 +73,6 @@ var with_out  = document.getElementById("aspirants_without_proof"),
       cell5.appendChild(aView);
       cell5.appendChild(aEvaluate);
 
-
-
-
       }
       $("#table_box").show();
 

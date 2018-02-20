@@ -40,22 +40,154 @@ class AdminAspirants extends Controller
         //
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
-        $aWp       = $notice->aspirants_without_proof()->paginate();
-        $aWpE      = $notice->aspirants_without_proof_evaluation()->paginate();
-        $aRp       = $notice->aspirants_rejected_proof()->paginate();
-        $aAe       = $notice->aspirants_already_evaluated()->paginate();
+        $list      = $notice->all_aspirants_data()->paginate();
+        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
         $aspirants = $notice->all_aspirants_data()->get();
+        $type_list     = 0;
         return view('admin.aspirants.aspirant-list')->with([
           'user' =>$user,
           'notice' => $notice,
-          'aWp'  => $aWp,
-          'aWpE' => $aWpE,
-          'aRp'  => $aRp,
-          'aAe'  => $aAe,
-          'aspirants' =>$aspirants
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count
         ]);
 
     }
+
+    /**
+     * Muestra aspirantes de convocatoria sin comprobante de domicilio
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aspirantWithOutProof($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $list      = $notice->aspirants_without_proof()->paginate();
+        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
+        $aspirants = $notice->all_aspirants_data()->get();
+        $type_list     = 1;
+        return view('admin.aspirants.aspirant-list')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count
+        ]);
+
+    }
+
+    /**
+     * Muestra aspirantes de convocatoria con comprobante de domicilio valido
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aspirantRejected($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $list      = $notice->aspirants_rejected_proof()->paginate();
+        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
+        $aspirants = $notice->all_aspirants_data()->get();
+        $type_list     = 2;
+        return view('admin.aspirants.aspirant-list')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count
+        ]);
+
+    }
+
+    /**
+     * Muestra aspirantes de convocatoria con comprobante evaluado
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aspirantAlreadyEvaluated($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $list      = $notice->aspirants_already_evaluated()->paginate();
+        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
+        $aspirants  = $notice->all_aspirants_data()->get();
+        $type_list  = 3;
+        return view('admin.aspirants.aspirant-list')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count
+        ]);
+
+    }
+
+    /**
+     * Muestra aspirantes de convocatoria con comprobante por evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aspirantToEvaluate($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $list      = $notice->aspirants_without_proof_evaluation()->paginate();
+        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
+        $aspirants  = $notice->all_aspirants_data()->get();
+        $type_list  = 3;
+        return view('admin.aspirants.aspirant-list')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count
+        ]);
+
+    }
+
+
+
+
 
       /**
        * Muestra aspirantes de convocatoria
