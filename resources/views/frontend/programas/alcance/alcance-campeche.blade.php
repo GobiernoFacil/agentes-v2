@@ -6,9 +6,78 @@
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
-<form>
+  <form>
 		<p><select id="card-selector-app-select"></select></p>
 	</form>
+
+
+
+
+
+
+
+	<!-- NAVEGACIÓN DE EJEMPLO 
+		/*
+		 *
+		 *
+		 *
+		-->
+
+	<!-- LOS TABS PRINCIPALES -->
+	<ul>
+		<li><a href="#" class="main-tab active" data-container="ejercicio-local-content">Ejercicio local</a></li>
+		<li><a href="#" class="main-tab" data-container="ficha-estatal-content">Ficha estatal</a></li>
+		<li><a href="#" class="main-tab" data-container="objetivos-content">Objetivos de desarrollo</a></li>
+		<li><a href="#" class="main-tab" data-container="indicadores-content">Indicadores</a></li>
+	</ul>
+
+	<div id="ejercicio-local-content" class="main-docker"> ejercicio local </div>
+
+	<div id="ficha-estatal-content" class="main-docker" style="display: none">
+		<!-- LOS TABS SECUNDARIOS -->
+	  <ul>
+	  	<li><a href="#" class="second-tab active" data-container="pobreza-content">1. pobreza</a></li>
+	  	<li><a href="#" class="second-tab" data-container="salud-content">2. salud</a></li>
+	  	<li><a href="#" class="second-tab" data-container="educacion-content">3. educación</a></li>
+	  	<li><a href="#" class="second-tab" data-container="competitividad-content">4. competitividad</a></li>
+	  	<li><a href="#" class="second-tab" data-container="genero-content">5. género</a></li>
+	  	<li><a href="#" class="second-tab" data-container="gobierno-content">6. gobierno</a></li>
+	  </ul>
+
+
+	  <!-- EL CONTENIDO SECUNDARIO -->
+	  <div class="second-docker" id="pobreza-content"> pobreza content </div>
+	  <div class="second-docker" style="display: none" id="salud-content"> salud content </div>
+	  <div class="second-docker" style="display: none" id="educacion-content"> educación content </div>
+	  <div class="second-docker" style="display: none" id="competitividad-content"> competitividad content </div>
+	  <div class="second-docker" style="display: none" id="genero-content"> género content </div>
+	  <div class="second-docker" style="display: none" id="gobierno-content"> gobierno content </div>
+
+	</div>
+
+	<div id="objetivos-content" class="main-docker" style="display: none"> objetivos de desarrollo </div>
+
+	<div id="indicadores-content" class="main-docker" style="display: none"> indicadores </div>
+
+
+
+	
+	<!-- TERMINA NAVEGACIÓN DE EJEMPLO -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div id="card-selector-app-container">
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">

@@ -86,9 +86,59 @@ var dictionary = "/data/diccionario.csv",
     		});
 
     	}
-    };
+    },
+
+    /*
+     * La maroma de la navegación por tabs 
+     *
+     */
+
+    activeClass        = "active",
+    mainTabClass       = "main-tab",
+    secondTabClass     = "second-tab",
+    mainContentClass   = "main-docker",
+    secondContentClass = "second-docker",
+
+    navAPP = {
+        initialize : function(){
+          navAPP.enableTabs(mainTabClass, mainContentClass);
+          navAPP.enableTabs(secondTabClass, secondContentClass);
+        },
+
+        enableTabs : function(tclass, cclass){
+          var tabs = document.querySelectorAll("." + tclass),
+              divs = document.querySelectorAll("." + cclass);
+
+          for(var i = 0; i < tabs.length; i++){
+            tabs[i].addEventListener("click", function(e){
+              e.preventDefault();
+              var _div = e.target.getAttribute("data-container"),
+                   div = document.getElementById(_div);
+
+              navAPP._removeActiveClass(tabs);
+              e.target.classList.add(activeClass);
+
+              navAPP._hideItems(divs);
+              div.style.display = "block";
+            });
+          }
+        },
+
+        _removeActiveClass : function(items){
+          for(var j = 0; j < items.length; j++){
+            items[j].classList.remove(activeClass);
+          }
+        },
+
+        _hideItems : function(items){
+          for(var j = 0; j < items.length; j++){
+            items[j].style.display = "none";
+          }
+        }
+    }
 
 
 cardAPP.initialize(dictionary, cards);
+navAPP.initialize();
 
 
