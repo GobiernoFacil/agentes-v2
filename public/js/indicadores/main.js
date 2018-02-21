@@ -112,7 +112,10 @@ var dictionary   = "/data/diccionario.csv",
     	renderCard : function(){
     		cardAPP.vueTemplate =  new Vue({
     			el: '#' + container,
-    			data: cardAPP.data
+    			data: cardAPP.data,
+          mounted : function(){
+            navAPP.initialize();
+          }
     		});
 
         graphAPP.initialize(cardAPP.data);
@@ -133,15 +136,21 @@ var dictionary   = "/data/diccionario.csv",
         initialize : function(){
           navAPP.enableTabs(mainTabClass, mainContentClass);
           navAPP.enableTabs(secondTabClass, secondContentClass);
+
         },
 
         enableTabs : function(tclass, cclass){
           var tabs = document.querySelectorAll("." + tclass),
               divs = document.querySelectorAll("." + cclass);
 
+          //console.log(tabs, divs);
+
           for(var i = 0; i < tabs.length; i++){
             tabs[i].addEventListener("click", function(e){
               e.preventDefault();
+
+              console.log("meh");
+
               var _div = e.target.getAttribute("data-container"),
                    div = document.getElementById(_div);
 
@@ -218,9 +227,7 @@ var dictionary   = "/data/diccionario.csv",
     };
 
 
-
-
 cardAPP.initialize(dictionary, cards);
-navAPP.initialize();
+
 
 
