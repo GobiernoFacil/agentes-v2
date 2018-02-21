@@ -1,5 +1,25 @@
-var dictionary = "/data/diccionario.csv",
-    cards      = "/data/datos.csv",
+var dictionary   = "/data/diccionario.csv",
+    cards        = "/data/datos.csv",
+    mapColor     = "grey",
+    stateUrlToId = [
+      {estado : "campeche",idLocal : "1", id : "04"},
+      {estado : "chihuahua",idLocal : null, id : "08"},
+      {estado : "durango",idLocal : "2", id : "10"},
+      {estado : "estado-de-mexico",idLocal : "4", id : "15"},
+      {estado : "guanajuato",idLocal : "3", id : "11"},
+      {estado : "morelos",idLocal : null, id : "17"},
+      {estado : "nuevo-leon",idLocal : null, id : "19"},
+      {estado : "oaxaca",idLocal : null, id : "20"},
+      {estado : "quintana-roo",idLocal : "5", id : "23"},
+      {estado : "san-luis-potosi",idLocal : "6", id : "24"},
+      {estado : "sinaloa",idLocal : "7", id : "25"},
+      {estado : "sonora",idLocal : null, id : "26"},
+      {estado : "tabasco",idLocal : "8", id : "27"},
+      {estado : "tlaxcala",idLocal : "9", id : "29"},
+      {estado : "veracruz",idLocal : "10", id : "30"},
+    ],
+    currentID  = _.findWhere(stateUrlToId, {estado : currentState}).idLocal,
+    currentLoc = _.findWhere(stateUrlToId, {estado : currentState}).id,
     nationalID = "11",
     container  = "card-selector-app-container",
     selector   = "card-selector-app-select",
@@ -10,7 +30,13 @@ var dictionary = "/data/diccionario.csv",
     	vueTemplate : null,
     	initialize : function(dictionary, cards){
     		cardAPP.getDictionary(dictionary, cards);
+        cardAPP.colorizeMap();
     	}, 
+
+      colorizeMap : function(){
+        var geom = document.getElementById(currentLoc);
+        geom.style.fill = mapColor;
+      },
 
     	getDictionary : function(dictionary, cards){
     		d3.csv(dictionary, function(error, data){
@@ -22,8 +48,8 @@ var dictionary = "/data/diccionario.csv",
     	getCards : function(cards){
     		d3.csv(cards, function(error, data){
     			cardAPP.cards = data;
-    			cardAPP.makeSelector(data);
-    			cardAPP.makeItems();
+    			// cardAPP.makeSelector(data);
+    			cardAPP.makeItems(currentID);
     		});
     	},
 
@@ -33,7 +59,6 @@ var dictionary = "/data/diccionario.csv",
     		    row      = _.findWhere(cardAPP.cards, {ID : current}),
     		    national = _.findWhere(cardAPP.cards, {ID : nationalID}),
     		    item     = {};
-
 
     		item.state  = row.Estado;
     		item.values = cardAPP.dictionary.map(function(el){
@@ -98,7 +123,6 @@ var dictionary = "/data/diccionario.csv",
     secondTabClass     = "second-tab",
     mainContentClass   = "main-docker",
     secondContentClass = "second-docker",
-
     navAPP = {
         initialize : function(){
           navAPP.enableTabs(mainTabClass, mainContentClass);

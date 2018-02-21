@@ -6,9 +6,16 @@
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
+  <!--
   <form>
 		<p><select id="card-selector-app-select"></select></p>
 	</form>
+-->
+
+
+	<div>
+		@include('layouts.mapas.mapa-mexico')
+	</div>
 
 
 
@@ -1187,9 +1194,10 @@
 <script src="{{ url('js/bower_components/underscore/underscore-min.js') }}"></script>
 <script src="{{ url('js/bower_components/d3/d3.min.js') }}"></script>
 <script src="{{ url('js/vue.min.js') }}"></script>
-<script src="{{ url('js/indicadores/main.js')}}"></script>
 <script>
-  var Format         = d3.format(",2");
-  var FormatDe       = d3.format(",.2f");
+  var Format       = d3.format(",2"),
+      FormatDe     = d3.format(",.2f"),
+      currentState = "{{$state}}";
   </script>
+  <script src="{{ url('js/indicadores/main.js')}}"></script>
 @endsection
