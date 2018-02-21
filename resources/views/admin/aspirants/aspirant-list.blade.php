@@ -145,7 +145,11 @@
 													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+																		@if($aspirant->AspirantsFile)
+																			@if($aspirant->AspirantsFile->proof)
+																			<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+																			@endif
+																		@endif
 																	</td>
 													     </tr>
 													    @endforeach
@@ -161,7 +165,7 @@
 		@if($list->count() == 0)
 			<p><strong>Sin aspirantes</strong></p>
 		@endif
-		
+
 		@if($aWpE_count <= 0)
 		<div class="box" id ="table_box">
 			 <div id ="noMoretoDisplay">
