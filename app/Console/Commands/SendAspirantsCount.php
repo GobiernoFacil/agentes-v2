@@ -109,7 +109,7 @@ class SendAspirantsCount extends Command
       $subject = "Conteo de aspirantes - convocatoria".$notice->title;
       Mail::send('emails.send_count', [], function($message) use ($from, $subject) {
               $message->from($from, 'no-reply');
-              $message->to('carlos@gobiernofacil.com');
+              $message->to('hugo@gobiernofacil.com');
               $message->subject($from);
               $message->attach('csv/aspirants_count.xlsx');
       });
