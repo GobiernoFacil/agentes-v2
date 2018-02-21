@@ -7,6 +7,7 @@ use Mail;
 use Excel;
 use App\Models\Aspirant;
 use App\Models\AspirantsFile;
+use App\Models\Notice;
 class SendAspirantsCount extends Command
 {
     /**
@@ -21,7 +22,7 @@ class SendAspirantsCount extends Command
      *
      * @var string
      */
-    protected $description = 'Envia archivo excel con conteo de aspirantes que han o no subido archivos por entidad';
+    protected $description = 'Envia archivo excel con conteo de aspirantes para la convocatoria actual';
 
     /**
      * Create a new command instance.
@@ -41,12 +42,13 @@ class SendAspirantsCount extends Command
     public function handle()
     {
         //
-        $states = Aspirant::select('state')->distinct()->get();
-        $aspirants_id = Aspirant::all()->pluck('id');
-        $aspirantsFile_id = AspirantsFile::all()->pluck('aspirant_id');
-        $headers    = ["Estado","Con Archivos","Sin Archivos","Total"];
+        $notice  = new Notice;
+        $notice  = $notice->get_last_notice();
+        $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
+        $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
+        $headers    = ["Estado","Verificados","Sin verificar","Aplicación completada", "Aplicación sin completar"];
 
-        Excel::create('aspirants_count', function($excel)use($aspirants_id,$aspirantsFile_id,$states,$headers) {
+        Excel::create('aspirants_count', function($excel)use($aspirants_id,$notice,$states,$headers) {
           // Set the title
           $excel->setTitle('Cuenta de aspirantes por entidad');
           // Chain the setters
@@ -54,34 +56,60 @@ class SendAspirantsCount extends Command
                 ->setCompany('Gobierno Fácil');
           // Call them separately
           $excel->setDescription('Cuenta de aspirantes por entidad');
-          $excel->sheet('Aspirantes', function($sheet)use($aspirants_id,$aspirantsFile_id,$states,$headers){
+          $excel->sheet('Aspirantes', function($sheet)use($aspirants_id,$states,$headers){
             $sheet->row(1, $headers);
             $sheet->row(1, function($row) {
               $row->setBackground('#000000');
               $row->setFontColor('#ffffff');
             });
-            $countC = 0;
-            $countS = 0;
-            $countT = 0;
+            $totalCaW= 0;
+            $totalCaWn = 0;
             foreach ($states as $state) {
-              $data  = Aspirant::where('state',$state->state)->whereIn('id',$aspirantsFile_id)->get();
-              $countC = $countC + $data->count();
-              $dataNot  = Aspirant::where('state',$state->state)->where('is_activated',1)->whereNotIn('id',$aspirantsFile_id)->get();
-              $countS = $countS + $dataNot->count();
-              $countT = $countT + ($data->count()+$dataNot->count());
-              $arr = [$state->state,$data->count(),$dataNot->count(),($data->count()+$dataNot->count())];
+              $active    = Aspirant::where('state',$state->state)->where('is_activated',1)->whereIn('id',$aspirants_id->toArray())->get();
+              $noActive  = Aspirant::where('state',$state->state)->where('is_activated',0)->whereIn('id',$aspirants_id->toArray())->get();
+              $count_aspirant_with_data = 0;
+              $count_aspirant_without_data = 0;
+              foreach ($active as $aspirant) {
+                 if($aspirant->AspirantsFile){
+                   if($aspirant->AspirantsFile->video && $aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_polices && $aspirant->AspirantsFile->motives){
+                     if($aspirant->cv){
+                        if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
+                          $count_aspirant_with_data++;
+                        }else{
+                          $count_aspirant_without_data++;
+                        }
+
+                     }else{
+                       $count_aspirant_without_data++;
+                     }
+
+                   }else{
+                     $count_aspirant_without_data++;
+                   }
+                 }else{
+                   $count_aspirant_without_data++;
+                 }
+
+              }
+              $totalCaW = $totalCaW + $count_aspirant_with_data;
+              $totalCaWn = $totalCaWn + $count_aspirant_without_data;
+              $arr = [$state->state,$active->count(),$noActive->count(),$count_aspirant_with_data,$count_aspirant_without_data];
               $sheet->appendRow($arr);
             }
-            $arr = ['Total',$countC,$countS,$countT];
+            $tActive = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id->toArray())->count();
+            $tnActive = Aspirant::where('is_activated',0)->whereIn('id',$aspirants_id->toArray())->count();
+            $arr = ['Total',$tActive,$tnActive,$totalCaW,$totalCaWn];
+            $sheet->appendRow($arr);
+            $arr=['','Total aspirantes',($tActive+$tnActive)];
             $sheet->appendRow($arr);
           });
 
       })->store('xlsx','csv');
       $from    = "info@apertus.org.mx";
-      $subject = "Conteo de aspirantes";
+      $subject = "Conteo de aspirantes - convocatoria".$notice->title;
       Mail::send('emails.send_count', [], function($message) use ($from, $subject) {
               $message->from($from, 'no-reply');
-              $message->to('hugo@gobiernofacil.com');
+              $message->to('carlos@gobiernofacil.com');
               $message->subject($from);
               $message->attach('csv/aspirants_count.xlsx');
       });
