@@ -222,7 +222,7 @@ var dictionary   = "/data/diccionario.csv",
            // aquí se definen las propiedades del texto
            .attr("dy", "0.35em")
            .attr("text-anchor", "middle")
-           .text(function(d) { return d.data; });
+           .text(function(d) { return d.data + '%'; });
       }
     };
 
