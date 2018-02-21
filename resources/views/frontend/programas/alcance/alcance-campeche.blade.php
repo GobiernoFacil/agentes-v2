@@ -83,7 +83,12 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<h1>@{{ state }}</h1>
 	</div>
-	<div class="col-sm-6 col-sm-offset-6">
+	<div class="col-sm-6">
+		<div class="ap_map">
+		@include('layouts.mapas.mapa-mexico')
+		</div>
+	</div>
+	<div class="col-sm-6">
 		<div v-for="val in values">
 			<div v-if="val.name == 'Capital de la entidad federativa'">
 				<p>Capital: <strong>@{{val.value}}</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>

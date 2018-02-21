@@ -2049,6 +2049,11 @@ sup {
   display: block;
   font-size: 12px; }
 
+.ap_map svg {
+  width: 100%; }
+  .ap_map svg path {
+    stroke: #555; }
+
 .iga .ap_bar span {
   background: #18b73e; }
 
