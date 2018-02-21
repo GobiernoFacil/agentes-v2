@@ -53,7 +53,11 @@
 
 
 	  <!-- EL CONTENIDO SECUNDARIO -->
-	  <div class="second-docker" id="pobreza-content"> pobreza content </div>
+	  <div class="second-docker" id="pobreza-content">
+	    <p>pobreza content</p>
+	    <svg id="pie-chart" width="200" height="200"></svg>
+	    <svg id="stack-chart" width="200" height="400"></svg>
+	  </div>
 	  <div class="second-docker" style="display: none" id="salud-content"> salud content </div>
 	  <div class="second-docker" style="display: none" id="educacion-content"> educación content </div>
 	  <div class="second-docker" style="display: none" id="competitividad-content"> competitividad content </div>

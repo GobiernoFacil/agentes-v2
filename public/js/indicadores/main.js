@@ -1,3 +1,8 @@
+    /*
+     * La maroma del template
+     *
+     */
+
 var dictionary   = "/data/diccionario.csv",
     cards        = "/data/datos.csv",
     mapColor     = "grey",
@@ -110,6 +115,7 @@ var dictionary   = "/data/diccionario.csv",
     			data: cardAPP.data
     		});
 
+        graphAPP.initialize(cardAPP.data);
     	}
     },
 
@@ -159,7 +165,59 @@ var dictionary   = "/data/diccionario.csv",
             items[j].style.display = "none";
           }
         }
-    }
+    },
+
+
+    /*
+     * La maroma de la gráfica
+     *
+     */
+
+    poverty        = "Porcentaje de poblacion en situacion de pobreza",
+    extremePoverty = "Porcentaje de población en situación de pobreza extrema",
+    mediumPoverty  = "Porcentaje de población en situación de pobreza moderada",
+    pieChartID     = "pie-chart",
+    stackChartID   = "stack-chart",
+    pieColors      = ["#ff7c80", "#fcb6bb"],
+
+    graphAPP = {
+      initialize : function(data){
+        //console.log(data);
+        graphAPP.data   = data;
+        graphAPP.pov    = _.findWhere(cardAPP.data.values, {name : poverty});
+        graphAPP.exPov  = _.findWhere(cardAPP.data.values, {name : extremePoverty});
+        graphAPP.medPov = _.findWhere(cardAPP.data.values, {name : mediumPoverty});
+
+        graphAPP.setupPie();
+      },
+
+      setupPie : function(){
+
+        var svg    = d3.select("#" + pieChartID),
+            width  = +svg.attr("width"),
+            height = +svg.attr("height"),
+            radius = Math.min(width, height) / 2,
+            g      = svg.append("g").attr("transform", "translate(" + width/2 + ", " + height/2 + ")"),
+            pov    = graphAPP.pov.value*100,
+            notPov = 100-pov,
+            color  = d3.scale.ordinal().range(pieColors),
+            data   = [pov, notPov],
+            pie    = d3.layout.pie().sort(null).value(function(d) { return d; }),
+            path   = d3.svg.arc().outerRadius(radius - 10).innerRadius(0),
+            label  = d3.svg.arc().outerRadius(radius - 40).innerRadius(radius - 40),
+            arc    = g.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc");
+
+        arc.append("path").attr("d", path).attr("fill", function(d){return color(d.data)});
+        arc.append("text")
+           .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+           // aquí se definen las propiedades del texto
+           .attr("dy", "0.35em")
+           .attr("text-anchor", "middle")
+           .text(function(d) { return d.data; });
+      }
+    };
+
+
 
 
 cardAPP.initialize(dictionary, cards);
