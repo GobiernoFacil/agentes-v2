@@ -199,7 +199,7 @@
 						<tbody>
 							<tr>
 								<td><h3>2018</h3></td>
-								<td><h3><span>Convocatoria por abrir</span></h3></td>
+								<td><h3><span><a href="{{url('convocatoria')}}">Convocatoria abierta hasta 25 de marzo de 2018</a></span></h3></td>
 								<td><h3>40</h3></td>
 								<td><h3>10</h3></td>
 							</tr>
