@@ -115,7 +115,7 @@
 	<div class="col-sm-3">
 		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
 	</div>
-	
+
 </div>
 <p><strong>Aspirantes por evaluar</strong></p>
 @endif
@@ -156,9 +156,12 @@
 		<div id ="pagination_links">
 		  {{ $list->links() }}
 	  </div>
-
-
 		</div>
+
+		@if($list->count() == 0)
+			<p><strong>Sin aspirantes</strong></p>
+		@endif
+		
 		@if($aWpE_count <= 0)
 		<div class="box" id ="table_box">
 			 <div id ="noMoretoDisplay">
