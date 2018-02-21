@@ -1,5 +1,5 @@
 <div class="col-sm-10 col-sm-offset-1">
-		<h1><strong>Durango</strong>, ejercicio local de gobierno abierto</h1>
+		<h2><strong>Durango</strong>, ejercicio local de gobierno abierto</h2>
 </div>		
 <div class="col-sm-8 col-sm-offset-2">
 	<h2>¿Quiénes conforman el ejercicio?</h2>
