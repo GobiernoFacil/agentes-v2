@@ -5,7 +5,7 @@
 
 var dictionary   = "/data/diccionario.csv",
     cards        = "/data/datos.csv",
-    mapColor     = "grey",
+    mapColor     = "#20a6e7",
     stateUrlToId = [
       {estado : "campeche",idLocal : "1", id : "04"},
       {estado : "chihuahua",idLocal : null, id : "08"},
