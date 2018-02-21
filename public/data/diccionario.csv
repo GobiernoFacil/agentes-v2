@@ -1,0 +1,62 @@
+ID,Nombre,Fuente,Año
+A,Indice de Gobierno Abierto 2017,Metrica de Gobierno Abierto 2017 - INAI/CIDE,2017
+B,Subindice de Transparencia 2017,Metrica de Gobierno Abierto 2017 - INAI/CIDE,2017
+C,Subindice de Participacion 2017,Metrica de Gobierno Abierto 2017 - INAI/CIDE,2017
+D,Posicion (Rank) de la entidad federativa en el Indice Estatal de Capacidades para el Desarrollo Social,IDES 2017 - GESOC,2017
+E,Calificacion de la entidad federativa en el Indice Estatal de Capacidades para el Desarrollo Social,IDES 2017 - GESOC,2017
+F,Nivel de capacidad institucional para la implementacion de la politica social estatal,IDES 2017 - GESOC,2017
+G,Porcentaje de cumplimiento de la categoria Planeacion Programatica Presupuestal,IDES 2017 - GESOC,2017
+H,Porcentaje de cumplimiento de la categoria Gestion Eficiente,IDES 2017 - GESOC,2017
+I,Porcentaje de cumplimiento de la categoria Monitoreo y Evaluacion,IDES 2017 - GESOC,2017
+J,Porcentaje de cumplimiento de la categoria Apertura y Participacion Ciudadana,IDES 2017 - GESOC,2017
+K,Capital de la entidad federativa,Cuentame 2016 - INEGI,2016
+L,Numero de municipios,INEGI,2015
+M,Poblacion total,Proyecciones CONAPO/INEGI,2015
+N,Porcentaje de poblacion femenina,Proyecciones CONAPO/INEGI,2015
+O,Porcentaje de poblacion indigena,CDI,2015
+P,Porcentaje de poblacion en situacion de pobreza,Coneval,2016
+Q,Porcentaje de población en situación de pobreza extrema,Coneval,2016
+R,Porcentaje de población en situación de pobreza moderada,Coneval,2016
+S,Esperanza de vida (años),Banco de información estatal INEGI,2015
+T,Razón de mortalidad materna (por cada 100 mil nacidos vivos),SS/INEGI,2015
+U,Tasa de mortalidad infantil (por cada mil nacidos vivos),INEGI,2015
+V,Años promedio de escolarización,INEGI,2015
+W,Asistencia escolar (población de 6 a 12 años),INEGI,2015
+X,Tasa de analfabetización (población de 15 y más años),INEGI,2015
+Y,Tasa de analfabetización mujeres (población de 15 y más años),INEGI,2015
+Z,Tasa de analfabetización hombres (población de 15 y más años),INEGI,2015
+AA,Producto Interno Bruto Estatal (millones de pesos a precios de 2013),INEGI,2016
+AB,PIBE per cápita (pesos a precios de 2013),INEGI/CONAPO,2016
+AC,Crecimiento (variación real),INEGI,2016
+AD,Tasa de desocupación,INEGI,2017
+AE,Tasa de informalidad laboral,INEGI,2017
+AF,Tasa de prevalencia de violencia de pareja contra la mujer (total),INEGI,2016
+AG,Tasa de prevalencia de violencia de pareja contra la mujer (violencia emocional),INEGI,2016
+AH,Tasa de prevalencia de violencia de pareja contra la mujer (violencia económica),INEGI,2016
+AI,Tasa de prevalencia de violencia de pareja contra la mujer (violencia física),INEGI,2016
+AJ,Tasa de prevalencia de violencia de pareja contra la mujer (violencia sexual),INEGI,2016
+AK,Gobernador,Consulta propia sitios web oficiales,2017
+AL,Periodo de gobierno gobernador,Consulta propia sitios web oficiales,2017
+AM,Partido o coalicion del gobernador,Consulta propia sitios web oficiales,2017
+AN,Numero de diputados locales,Consulta propia sitios web oficiales,2017
+ODS1,Porcentaje de la poblacion con ingreso inferior a la línea de bienestar mínimo,Coneval,2016
+ODS2,Porcentaje de la poblacion con carencia por acceso a alimentacion,Coneval,2016
+ODS3,Porcentaje de la poblacion con acceso a servicios de salud,INEGI,2015
+ODS4a,Eficiencia terminal primaria,SEP,2014
+ODS4b,Eficiencia terminal secundaria,SEP,2014
+ODS5a,Porcentaje de presidentas municipales,Inmujeres/INEGI,2015
+ODS5b,Tasa de participación economica de mujeres,Inmujeres/INEGI,2015
+ODS6,Porcentaje de viviendas con acceso a red de agua potable,INEGI,2015
+ODS7,Porcentaje de viviendas con acceso a electricidad,INEGI,2015
+ODS8,Tasa de crecimiento del PIB per capita anual,INEGI,2014
+ODS9,Porcentaje de viviendas que cuentan con internet,INEGI,2015
+ODS10,Indice de Gini,Coneval,2014
+ODS11,Porcentaje de viviendas que desechan sus residuos por recoleccion,INEGI,2015
+ODS12,Porcentaje de viviendas que separan sus residuos,INEGI,2015
+ODS13a,Declaratorias de emergencia,Semarnat,2015
+ODS13b,Declaratorias de desastre natural,Semarnat,2015
+ODS15,Porcentaje de superficie estatal cubierta por regiones terrestres prioritarias,Semarnat,2014
+ODS16a,Tasa de homicidios dolosos (por 100 mil habitantes),SESNSP,2015
+ODS16b,Tasa de Incidencia de Corrupción,INEGI,2015
+ODS17a,Ingresos propios como proporcion del PIB,INAFED,2014
+ODS17b,Dependencia de aportaciones federales,INAFED,2014
