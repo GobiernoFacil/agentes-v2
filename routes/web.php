@@ -60,6 +60,7 @@ Route::get('cities', 'NoticeFront@cities');
 /*********  Enlaces programa ******** */
 /*********  programa 2017 ******** */
 Route::get('programa-gobierno-abierto/2017', 'Front@pro17');
+Route::get('programa-gobierno-abierto/2017/testimonios', 'Front@testimony17');
 /*********  programa 2018 ******** */
 Route::get('programa-gobierno-abierto/2018', 'Front@pro18');
 Route::get('programa-gobierno-abierto/antecedentes', 'Front@antecedentes');
