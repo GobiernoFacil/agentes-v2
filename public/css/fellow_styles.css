@@ -1487,6 +1487,25 @@ b.sessionG {
     height: 20px;
     transform: rotate(90deg); }
 
+.ap_when {
+  border-top: 2px solid #ebebeb;
+  border-bottom: 2px solid #ebebeb;
+  padding: 10px 0; }
+  .ap_when p {
+    font-size: 14px;
+    margin: 0; }
+    .ap_when p b {
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%;
+      display: inline-block;
+      height: 13px;
+      margin-right: 5px;
+      width: 13px; }
+  .ap_when .danger {
+    background: red; }
+
 .profile.list {
   margin: 0; }
   .profile.list li {
