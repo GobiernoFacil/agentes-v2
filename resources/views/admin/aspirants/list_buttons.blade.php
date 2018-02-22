@@ -37,7 +37,7 @@
 @elseif($type_list === 2)
 <div class="row">
 	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aWp_count}})</a>
+		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aspirants->count()}})</a>
 	</div>
 
 	<div class="col-sm-3">

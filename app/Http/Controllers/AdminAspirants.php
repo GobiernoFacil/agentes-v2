@@ -290,7 +290,7 @@ class AdminAspirants extends Controller
           $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id,'user_id'=>$user->id]);
           $aspirantEvaluation->address_proof = current(array_slice($request->address_proof, 0, 1));
           $aspirantEvaluation->save();
-          return redirect("dashboard/aspirantes/convocatoria/$notice->id/ver-aspirante/$aspirant->id");
+          return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
       }
 
 
