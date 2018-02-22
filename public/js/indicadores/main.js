@@ -188,6 +188,7 @@ var dictionary   = "/data/diccionario.csv",
     pieChartID     = "pie-chart",
     stackChartID   = "stack-chart",
     pieColors      = ["#ff7c80", "#fcb6bb"],
+    stackMargins   = {top: 20, right: 260, bottom: 0, left: 70},
 
     graphAPP = {
       initialize : function(data){
@@ -198,6 +199,7 @@ var dictionary   = "/data/diccionario.csv",
         graphAPP.medPov = _.findWhere(cardAPP.data.values, {name : mediumPoverty});
 
         graphAPP.setupPie();
+        graphAPP.setupStack();
       },
 
       setupPie : function(){
@@ -223,6 +225,24 @@ var dictionary   = "/data/diccionario.csv",
            .attr("dy", "0.35em")
            .attr("text-anchor", "middle")
            .text(function(d) { return d.data; });
+      },
+
+      setupStack : function(){
+        var svg    = d3.select("#" + stackChartID), 
+            width  = +svg.attr("width"),
+            height = +svg.attr("height"),
+            marginTop
+            scale  = d3.scale.linear()
+                      .domain([0, 100])
+                      .range([0, height]),
+            bar1   = svg.append("rect")
+                      .attr("width", 50)
+                      .attr("height", scale(50.4))
+                      .attr("fill", pieColors[0]),
+            bar2   = svg.append("rect")
+                      .attr("width", 50)
+                      .attr("height", scale(40.4))
+                      .attr("fill", pieColors[1]);
       }
     };
 
