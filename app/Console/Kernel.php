@@ -27,7 +27,8 @@ class Kernel extends ConsoleKernel
         Commands\CreateFacGraphs::Class,
         Commands\CreateCustomQuestionnaire::Class,
         Commands\CreateDiagnosticFiles::Class,
-        Commands\AddGenderToFellows::Class
+        Commands\AddGenderToFellows::Class,
+        Commands\SendAspirantReminder::Class
     ];
 
     /**
