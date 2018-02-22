@@ -5,7 +5,7 @@
 
 var dictionary   = "/data/diccionario.csv",
     cards        = "/data/datos.csv",
-    mapColor     = "grey",
+    mapColor     = "#20a6e7",
     stateUrlToId = [
       {estado : "campeche",idLocal : "1", id : "04"},
       {estado : "chihuahua",idLocal : null, id : "08"},
@@ -224,7 +224,7 @@ var dictionary   = "/data/diccionario.csv",
            // aquí se definen las propiedades del texto
            .attr("dy", "0.35em")
            .attr("text-anchor", "middle")
-           .text(function(d) { return d.data; });
+           .text(function(d) { return d.data + '%'; });
       },
 
       setupStack : function(){
