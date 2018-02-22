@@ -84,7 +84,7 @@
 <body class="{{empty($body_class) ? "" : $body_class}}">
 	<div class="apertus_nav">	
 		<!--header-->
-		@include('layouts.admin.fellow_header')
+		@include('layouts.admin.a_header')
 	</div>
 	
 	<div class="apertus_content">
