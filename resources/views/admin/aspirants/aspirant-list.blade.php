@@ -24,101 +24,7 @@
 	</div>
 </div>
 
-@if($type_list === 0)
-<div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Aspirantes <span class= "strong">con comprobante no válido ({{$aRp_count}})</span></a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
-	</div>
-</div>
-<p><strong>Todos los aspirantes</strong></p>
-@elseif($type_list === 1)
-<div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Aspirantes <span class= "strong">con comprobante no válido ({{$aRp_count}})</span></a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
-	</div>
-</div>
-<p><strong>Aspirantes sin archivos</strong></p>
-@elseif($type_list === 2)
-<div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
-	</div>
-</div>
-<p><strong>Aspirantes con comprobante de domicilio no válido</strong></p>
-@elseif($type_list === 3)
-<div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Aspirantes <span class= "strong">con comprobante no válido ({{$aRp_count}})</span></a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
-	</div>
-</div>
-<p><strong>Aspirantes evaluados</strong></p>
-@elseif($type_list === 4)
-<div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
-	</div>
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Aspirantes <span class= "strong">con comprobante no válido ({{$aRp_count}})</span></a>
-	</div>
-
-
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
-	</div>
-
-</div>
-<p><strong>Aspirantes por evaluar</strong></p>
-@endif
+@include('admin.aspirants.list_buttons')
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
@@ -170,7 +76,7 @@
 		<div class="box" id ="table_box">
 			 <div id ="noMoretoDisplay">
 					<p><strong>Sin aspirantes con comprobante de domicilio por evaluar</strong></p>
-					<a class ="btn view" href='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver/evaluar-aspirantes")}}'>Evaluar aplicación de aspirantes</a>
+					<a class ="btn view" href='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")}}'>Evaluar aplicación de aspirantes</a>
 			</div>
 		</div>
 		@endif
