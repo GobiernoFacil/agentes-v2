@@ -7,6 +7,13 @@
 
 @section('content')
 
+<div class="ap_when">
+	<p><b class="danger"></b><strong>Fecha límite</strong>: Debes cumplir con esta tarea el {{date("d-m-Y", strtotime($module->end))}}, 11:59 pm, hora de la Ciudad de México ({{ \Carbon\Carbon::createFromTimeStamp(strtotime($module->end))->diffForHumans()}}) </p>
+</div>
+
+{{$module}}
+
+
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
