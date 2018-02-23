@@ -8,6 +8,7 @@ use App\Models\Notice;
 use App\Models\Aspirant;
 use App\Models\AspirantEvaluation;
 use App\Models\AspirantsFile;
+use App\Models\AspirantInstitution;
 use PDF;
 use App\Http\Requests\SaveAspirantEvaluation1;
 class AdminAspirants extends Controller
@@ -304,6 +305,19 @@ class AdminAspirants extends Controller
           //
           $user      = Auth::user();
           $notice    = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirants = $notice->all_aspirants_data()->get();
+          $list      = $notice->aspirants_per_institution_to_evaluate()->paginate();
+          $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+          $type_list = 1;
+          return view('admin.aspirants.aspirant-list-per-institution')->with([
+            'user' =>$user,
+            'notice' => $notice,
+            'aspirants' =>$aspirants,
+            'list' =>$list,
+            'type_list' => $type_list,
+            'asToE_count' => $asToE_count,
+          ]);
+
 
 
       }

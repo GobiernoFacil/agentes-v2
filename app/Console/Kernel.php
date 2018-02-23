@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         Commands\CreateCustomQuestionnaire::Class,
         Commands\CreateDiagnosticFiles::Class,
         Commands\AddGenderToFellows::Class,
-        Commands\AssingAspirants::Class
+        Commands\AssignAspirants::Class
     ];
 
     /**
@@ -54,8 +54,8 @@ class Kernel extends ConsoleKernel
                       $schedule->command('command:create-diagnostic-files')
                               ->dailyAt('08:00')
                               ->emailOutputTo('carlos@gobiernofacil.com');
-                              $schedule->command('command:assing-aspirant-to')
-                                      ->dailyAt('10:00')
+                              $schedule->command('command:assign-aspirant-to')
+                                      ->dailyAt('10:00');
     }
 
     /**
