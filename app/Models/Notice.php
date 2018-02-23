@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\AspirantEvaluation;
+use Auth;
 class Notice extends Model
 {
     //
@@ -40,6 +41,10 @@ class Notice extends Model
     function files_front(){
       $files  = NoticeFile::where('notice_id',$this->id)->limit(2)->get();
       return $files;
+    }
+
+    function aspirant_institution(){
+      return $this->hasMany("App\Models\AspirantInstitution",'notice_id');
     }
 
     //aspirantes que tienen validacion de correo, solo id's
@@ -92,5 +97,11 @@ class Notice extends Model
     function aspirants_approved_proof(){
       $aspirants_id = AspirantEvaluation::where('address_proof',1)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
       return Aspirant::whereIn('id',$aspirants_id);
+    }
+
+    function aspirants_per_institution_to_evaluate(){
+      $user      = Auth::user();
+      $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants);
     }
 }
