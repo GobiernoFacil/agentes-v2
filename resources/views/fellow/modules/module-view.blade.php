@@ -56,6 +56,14 @@
     			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
     			<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a> 
     		</span>
+    		@if($activity->type == "evaluation")
+    		<span class="col-sm-3">
+    			<p class="right"> Fecha límite:
+    			 <strong>{{date("d-m-Y", strtotime($activity->end))}}</strong><br>
+    			 <span class="notes">({{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}})</span>
+    			</p>
+    		</span>
+    		@endif
     	</li>
     	@endforeach
     </ul>
