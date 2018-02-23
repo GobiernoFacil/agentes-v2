@@ -43,12 +43,6 @@
 	@endif
 </div>
 
-
-
-
-
-
-
 <!-- lista de sesiones-->
 @if($module->sessions->count() > 0)
 <div class="box session_list last_activity ap_week">
@@ -59,7 +53,8 @@
     	@foreach ($session->activities as $activity)
     	<li class="row">
     		<span class="col-sm-9">
-    		<b></b> <a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a> 
+    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+    			<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a> 
     		</span>
     	</li>
     	@endforeach
