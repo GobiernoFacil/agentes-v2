@@ -73,7 +73,7 @@
 		</div>
 		<div class="col-sm-4 col-sm-offset-1">
 			<svg id="pie-chart" width="200" height="200"></svg>
-			<svg id="stack-chart" width="200" height="400"></svg>
+			<svg id="stack-chart" width="450" height="220"></svg>
 		</div>
 		<div class="col-sm-6">
 			<div v-for="val in values">

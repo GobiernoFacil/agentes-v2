@@ -182,6 +182,7 @@ var dictionary   = "/data/diccionario.csv",
      *
      */
 
+    Format         = d3.format(".3n"),
     poverty        = "Porcentaje de poblacion en situacion de pobreza",
     extremePoverty = "Porcentaje de población en situación de pobreza extrema",
     mediumPoverty  = "Porcentaje de población en situación de pobreza moderada",
@@ -199,7 +200,7 @@ var dictionary   = "/data/diccionario.csv",
         graphAPP.medPov = _.findWhere(cardAPP.data.values, {name : mediumPoverty});
 
         graphAPP.setupPie();
-        graphAPP.setupStack();
+        graphAPP.setupStack(+graphAPP.pov.value * 100, +graphAPP.medPov.value * 100, +graphAPP.exPov.value * 100);
       },
 
       setupPie : function(){
@@ -224,25 +225,59 @@ var dictionary   = "/data/diccionario.csv",
            // aquí se definen las propiedades del texto
            .attr("dy", "0.35em")
            .attr("text-anchor", "middle")
-           .text(function(d) { return d.data + '%'; });
+           .text(function(d) { return Format(d.data) + '%'; });
       },
 
-      setupStack : function(){
+      setupStack : function(val1, val2, val3){
+
         var svg    = d3.select("#" + stackChartID), 
             width  = +svg.attr("width"),
+            _width = width - stackMargins.left - stackMargins.right,
             height = +svg.attr("height"),
-            marginTop
+            range  = height - stackMargins.top - stackMargins.bottom,
             scale  = d3.scale.linear()
                       .domain([0, 100])
-                      .range([0, height]),
+                      .range([0, range]),
+            // bar1 y bar2, las barritas de color
             bar1   = svg.append("rect")
-                      .attr("width", 50)
-                      .attr("height", scale(50.4))
-                      .attr("fill", pieColors[0]),
+                      .attr("width", _width)
+                      .attr("height", scale(val1))
+                      .attr("transform", "translate(" + stackMargins.left +", "+ (range - scale(val1)) + ")")
+                      .attr("fill", pieColors[1]),
             bar2   = svg.append("rect")
-                      .attr("width", 50)
-                      .attr("height", scale(40.4))
-                      .attr("fill", pieColors[1]);
+                      .attr("width", _width)
+                      .attr("height", scale(val2))
+                      .attr("transform", "translate(" + stackMargins.left +", "+ (range - scale(val2)) + ")")
+                      .attr("fill", pieColors[0]),
+            // text1 y text2 los valores en porentaje
+            text1  = svg.append("text")
+                      .attr("transform", "translate(" + (stackMargins.left + (_width/2)) +", "+ (range - scale(val1)- 20) + ")")
+                      .attr("dy", "0.35em")
+                      .attr("text-anchor", "middle")
+                      .attr("style", "fill: black")
+                      .text(Format(val3) + '%'),
+            text2  = svg.append("text")
+                      .attr("transform", "translate(" + (stackMargins.left + (_width/2)) +", "+ (range - scale(val2) + (scale(val2)/2)) + ")")
+                      .attr("dy", "0.35em")
+                      .attr("text-anchor", "middle")
+                      .text(Format(val2) + '%'),
+
+            // text3 y text 4 los letreros de pobreza
+            text3  = svg.append("text")
+                      .attr("transform", "translate(" + (stackMargins.left + (_width + 15)) +", "+ (range - scale(val1)- 20) + ")")
+                      .attr("dy", "0.35em")
+                      .attr("style", "fill: black")
+                      //.attr("text-anchor", "middle")
+                      .text("Pobreza extrema"),
+            text4  = svg.append("text")
+                      .attr("transform", "translate(" + (stackMargins.left + (_width + 15)) +", "+ (range - scale(val2) + (scale(val2) - 5)) + ")")
+                      .attr("dy", "0.35em")
+                      //.attr("text-anchor", "middle")
+                      .attr("style", "fill: black")
+                      .text("Pobreza moderada");
+
+            console.log(val1, val2, val3);
+
       }
     };
 
