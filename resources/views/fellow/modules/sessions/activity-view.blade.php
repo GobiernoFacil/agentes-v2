@@ -34,13 +34,14 @@
 		      {{ Session::get('error') }}
 		  	</div>
 		  	@endif
-		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('tablero/aprendizaje/'.$session->module->slug.'/'. $session->slug) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('tablero/aprendizaje/'.$session->module->slug) }}" class="link">módulo: {{$session->module->title}}</a></h4>
+		<!--- session name-->	
+		<h4>{{$session->name}}</h4>
+		<!--- activity title-->
 		<div class="divider b"></div>
-		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span></h1>
+		<h1><strong>{{$type}}:</strong> {{$activity->name}} </h1>
+		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
 		<div class="divider"></div>
-		@if(!empty($activity->end))
-		<h2>Fecha límite: {{ date("j / m / Y", strtotime($activity->end))}}</h2>
-		@endif
+		
 	</div>
 </div>
 
@@ -54,15 +55,10 @@
 	@endif
 @endif
 
-<div class="box">
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<ul class="profile list row">
-				<li class="col-sm-12"><span>Descripción:</span>{{$activity->description}}</li>
-				<li class="col-sm-6"><span>Rol Facilitador:</span>{{$activity->facilitator_role}}</li>
-				<li class="col-sm-6"><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
-			</ul>
-		</div>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<p>{{$activity->description}}</p>
+	</div>
 
 	</div>
 	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
@@ -84,7 +80,6 @@
 			</div>
 	</div>
 	@endif
-</div>
 
 @if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico' && $activity->quizInfo)
 	@if(!$score)
@@ -156,16 +151,12 @@
 
 @if($activity->activityRequirements->count() > 0)
 <!-- recursos-->
-<div class="box">
-	<div class="row">
-		<div class="col-sm-9">
-			<h2 class="title">Recursos</h2>
-  		</div>
-  		<div class="col-sm-12">
-  			@include('admin.modules.activities.activities-requirements-list')
-  		</div>
+<div class="row">
+  	<div class="col-sm-12">
+	  	<div class="divider"></div>
+  		@include('admin.modules.activities.activities-requirements-list')
   	</div>
-</div>
+ </div>
 @endif
 
 @if($activity->activityFiles->count() > 0)
@@ -173,8 +164,18 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="title">Archivos</h2>
-			@include('admin.modules.activities.activities-files-list')
+			@foreach ($activity->activityFiles as $file)
+			<object data="{{url('archivos/ConvocatoriaFellowship.pdf')}}" type="application/pdf" width="100%" height="600px">
+				<p<a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}">{{$file->name}}</a></p>
+			</object>	
+			<h4><a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}">{{$file->name}}</a></h4>
+			<p></p>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<p><a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}" class="btn view block sessions_l">Descargar</a></p>
+				</div>
+			</div>
+			@endforeach
 		</div>
 	</div>
 </div>
