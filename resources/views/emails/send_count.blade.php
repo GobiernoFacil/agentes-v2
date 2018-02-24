@@ -1,3 +1,3 @@
-<h1>Conteo de aspirantes con y sin archivos</h1>
+<h1>Conteo de aspirantes verificados y sin verificar</h1>
 
 <p>¡Saludos!</p>

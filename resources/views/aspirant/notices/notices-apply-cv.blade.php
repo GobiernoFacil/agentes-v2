@@ -219,9 +219,13 @@ $(function(){
 
 						}else{
 									$("#maxWordsOpen").hide();
-									var el  = "<li data-id='" + d.id + "'>" +
-									d.company + "<br>" + d.description
-									" <a href='#' class='remove-experience'>[ x ]</a></li>";
+									var from = d.from.split("/"),
+							        to   = d.to.split("/"),
+											el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience-open'>[ x ]</a></h4>"+
+									"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+									"<strong>"+d.sector+"</strong><br>"+
+									d.description+
+									"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
 									$("#experiencies-list-open").append(el);
 								  $("#company_open").val("");
 								  $("#sector_open").val("");
@@ -252,7 +256,7 @@ $(function(){
 
 	  $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
 			$("#maxExperienceOpen").hide();
-	    li.remove();
+	    li.parent().remove();
 	  }, "json");
 	});
 
@@ -295,9 +299,13 @@ $("#add-experience").on("click", function(e){
 
 					}else{
 								$("#maxWords").hide();
-								var el  = "<li data-id='" + d.id + "'>" +
-								d.name + " : " + d.company + "<br>" + d.description
-								" <a href='#' class='remove-experience'>[ x ]</a></li>";
+								var from = d.from.split("/"),
+						        to   = d.to.split("/"),
+										el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience'>[ x ]</a></h4>"+
+								"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+								"<strong>"+d.name+"</strong><br>"+
+								d.description+
+								"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
 								$("#experiencies-list").append(el);
 								$("#experience").val("");
 							  $("#company").val("");
@@ -328,7 +336,7 @@ $("#experiencies-list").on("click", ".remove-experience", function(e){
 
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
 		$("#maxExperience").hide();
-    li.remove();
+    li.parent().remove();
   }, "json");
 });
 
@@ -361,12 +369,13 @@ $("#add-study").on("click", function(e){
 						$("#maxStudy").show();
 
 					}else{
-
-						    var from = d.from.split("-"),
-						        to   = d.to.split("-"),
-						        el  = "<li data-id='" + d.id + "'>" +
-						    d.name + " : " + d.institution + "<br>" + from[1] + "/" + from[0] + " - " + to[1] + "/" + to[0] +
-						    " <a href='#' class='remove-study'>[ x ]</a></li>";
+						    var from = d.from.split("/"),
+						        to   = d.to.split("/"),
+						        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
+										"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+						        "<strong>"+d.name+"</strong>" + "<br>" +
+									  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
+						        "</li>";
 						    $("#studies-list").append(el);
 								$("#study").val("");
 							  $("#institution").val("");
@@ -389,10 +398,9 @@ $("#studies-list").on("click", ".remove-study", function(e){
   var li = $(e.currentTarget).parent(),
   id = li.attr("data-id"),
   url = url_estudios_delete;
-
   $.post(url + "/" + id, {id : id, _token : "{{ csrf_token() }}"}, function(d){
 		$("#maxStudy").hide();
-    li.remove();
+    li.parent().remove();
   }, "json");
 });
 });
