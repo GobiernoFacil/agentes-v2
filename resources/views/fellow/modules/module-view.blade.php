@@ -47,7 +47,7 @@
 @if($module->sessions->count() > 0)
 <div class="box session_list last_activity ap_week">
     @foreach($module->sessions as $session)
-    <h2><a href='{{ url("tablero/aprendizaje/{$module->slug}/{$session->slug}") }}'>{{$session->name}}</a></h2>
+    <h2>{{$session->name}}</h2>
     @if($session->activities->count() > 0)
     <ul class="ap_list">
     	@foreach ($session->activities as $activity)
