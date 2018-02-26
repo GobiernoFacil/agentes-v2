@@ -309,7 +309,9 @@ class AspirantNotices extends Controller
         $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
         $aspirantData->privacy_policies = $request->privacy_policies;
         $aspirantData->save();
+        if($this->checkData()){
         $user->notify(new SendApplyT($user,$notice));
+        }
         return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
     }
 
@@ -668,6 +670,18 @@ class AspirantNotices extends Controller
           $r        = $experience->delete();
 
           return response()->json($r);
+        }
+        //checa que el aspirante tenga todos los datos
+        function checkData(){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          $files    = $user->aspirant($user)->AspirantsFile;
+          if($files->motives && $files->video && $files->privacy_policies && $files->proof && $cv->experiences()->count() > 1 && $cv->open_experiences()->count() > 1 && $cv->academic_trainings()->count() > 1){
+            return true;
+          }else{
+            return false;
+          }
+
         }
 
 }
