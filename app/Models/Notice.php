@@ -101,7 +101,21 @@ class Notice extends Model
 
     function aspirants_per_institution_to_evaluate(){
       $user      = Auth::user();
-      $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
+      $aspirant_already   = $this->aspirants_app_already_evaluated()->pluck('id')->toArray();
+      $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants);
+    }
+
+    function aspirants_app_already_evaluated(){
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->pluck('aspirant_id')->toArray();
+      return Aspirant::whereIn('id',$aspirants);
+    }
+
+    function aspirants_per_institution_evaluated(){
+      $user      = Auth::user();
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
       return Aspirant::whereIn('id',$aspirants);
     }
 }
