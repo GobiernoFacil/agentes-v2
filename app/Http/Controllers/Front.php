@@ -20,6 +20,11 @@ class Front extends Controller
     public function pro17(){
       return view('frontend.programas.2017.que-es');
     }
+    
+    //testimonios 2017
+    public function testimony17(){
+      return view('frontend.programas.2017.testimonio');
+    }
 
     //programa 2018
     public function pro18(){

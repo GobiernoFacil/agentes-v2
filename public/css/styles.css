@@ -1637,7 +1637,7 @@ h2.danger {
     .bgdimg .cta h1 {
       font-size: 45px;
       border-bottom: 2px solid #187fad;
-      margin-bottom: 85px; }
+      margin-bottom: 48px; }
     .bgdimg .cta h2 {
       font-size: 29px; }
     .bgdimg .cta h2,
@@ -1659,6 +1659,9 @@ h2.danger {
     margin-top: 20px;
     padding: 15px 21px;
     text-transform: uppercase; }
+    .bgdimg a.btn span,
+    .bgdimg a:visited.btn span {
+      font-size: 15px; }
     .bgdimg a.btn.blue,
     .bgdimg a:visited.btn.blue {
       background-color: rgba(24, 127, 173, 0.8); }
@@ -2471,8 +2474,10 @@ footer {
         padding-bottom: 10px; }
       .bgdimg .cta a.btn {
         padding: 5px 38px;
-        font-size: 15px;
+        font-size: 14px;
         margin-top: 0; }
+        .bgdimg .cta a.btn span {
+          font-size: 12px; }
   .stats p.ap_lead {
     font-size: 17px;
     margin-bottom: 50px; }

@@ -22,9 +22,9 @@
 			<li><a href="{{ url('programa-gobierno-abierto/alcance/quintana-roo')}}">Quintana Roo</a></li>
 			<li><a href="{{ url('programa-gobierno-abierto/alcance/san-luis-potosi')}}">San Luis Potosí</a></li>
 			<li><a href="{{ url('programa-gobierno-abierto/alcance/sinaloa')}}">Sinaloa</a></li>
+			<li><a href="{{ url('programa-gobierno-abierto/alcance/tabasco')}}">Tabasco</a></li>
 			<li><a href="{{ url('programa-gobierno-abierto/alcance/tlaxcala')}}">Tlaxcala</a></li>
 			<li><a href="{{ url('programa-gobierno-abierto/alcance/veracruz')}}">Veracruz</a></li>
-			<li><a href="{{ url('programa-gobierno-abierto/alcance/tabasco')}}">Tabasco</a></li>
 		</ol>
 	</div>
 	<div class="col-sm-4">

@@ -1010,7 +1010,7 @@
 	<!--IDES 2017 - GESOC-->
 	<div id="ides-content" class="main-docker" style="display: none">
 		<div class="col-sm-10 col-sm-offset-1">
-			<h2>IDES 2017 - GESOC</h2>
+			<h2>ÍNDICE ESTATAL DE CAPACIDADES PARA EL DESARROLLO SOCIAL (IDES) 2017 – GESOC</h2>
 		</div>
 		<div class="col-sm-8 col-sm-offset-2">
 			<div v-for="val in values" class="ides">
