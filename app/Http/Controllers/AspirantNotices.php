@@ -506,23 +506,22 @@ class AspirantNotices extends Controller
         public function download($name,$type){
           $user = Auth::user();
           $file = public_path(). "/files/".$name;
-          $ext  = substr(strrchr($file,'.'),1);
-          $mime = mime_content_type ($file);
+          $fileData = pathinfo($file);
           $headers = array(
-            'Content-Type: '.$mime,
+            'Content-Type: '.$fileData['extension'],
           );
           if($type =='CV'){
-            $filename = 'CV'.".".$ext;
+            $filename = 'CV'.".".$fileData['extension'];
           }else if($type =='carta'){
-              $filename = 'carta'.".".$ext;
+              $filename = 'carta'.".".$fileData['extension'];
           }else if($type =='comprobante'){
-              $filename = 'comprobante'.".".$ext;
+              $filename = 'comprobante'.".".$fileData['extension'];
           }else if($type =='privacidad'){
-              $filename = 'privacidad'.".".$ext;
+              $filename = 'privacidad'.".".$fileData['extension'];
           }else{
-            $filename = 'Ensayo'.".".$ext;
+            $filename = 'Ensayo'.".".$fileData['extension'];
           }
-          return response()->download($file, $filename, $headers);
+          return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
         }
 
 
