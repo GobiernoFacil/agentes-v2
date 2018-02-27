@@ -42,13 +42,13 @@ use Jenssegers\Date\Date;
 			</div>
 			<div class="col-sm-6">
 				<p><label><strong>Fecha de ingreso</strong></label>
-				  <input type="text" name="s_from" id="s_from" class="form-control study">
+				  <input type="text" name="s_from" id="s_from" class="form-control study" placeholder="YYYY/MM/DD">
 				</p>
 			</div>
 		  	<div class="col-sm-6">
 				<p>
 				  <label><strong>Fecha de término</strong></label>
-				  <input type="text" name="s_to" id="s_to" class="form-control study">
+				  <input type="text" name="s_to" id="s_to" class="form-control study" placeholder="YYYY/MM/DD">
 				</p>
 		  	</div>
 				<div class="col-sm-6">
@@ -112,13 +112,13 @@ use Jenssegers\Date\Date;
 			</div>
 		  	<div class="col-sm-6">
 		  		<p><label><strong>Fecha de ingreso</strong></label>
-		  		  <input type="text" name="from" id="from" class="form-control experience">
+		  		  <input type="text" name="from" id="from" class="form-control experience" placeholder="YYYY/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p>
 		  		  <label><strong>Fecha de término</strong></label>
-		  		  <input type="text" name="tod" id="tod" class="form-control experience">
+		  		  <input type="text" name="tod" id="tod" class="form-control experience" placeholder="YYYY/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
@@ -184,13 +184,13 @@ use Jenssegers\Date\Date;
 				</div>
 			  	<div class="col-sm-6">
 			  		<p><label><strong>Fecha de ingreso</strong></label>
-			  		  <input type="text" name="from_open" id="from_open" class="form-control open">
+			  		  <input type="text" name="from_open" id="from_open" class="form-control open" placeholder="YYYY/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
 			  		<p>
 			  		  <label><strong>Fecha de término</strong></label>
-			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open">
+			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open" placeholder="YYYY/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
