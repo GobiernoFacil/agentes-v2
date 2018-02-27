@@ -56,7 +56,7 @@
 @endif
 
 <div class="row">
-	<div class="col-sm-10 col-sm-offset-1">
+	<div class="col-sm-12">
 		<p>{{$activity->description}}</p>
 	</div>
 
@@ -150,13 +150,16 @@
 @endif
 
 @if($activity->activityRequirements->count() > 0)
-<!-- recursos-->
-<div class="row">
-  	<div class="col-sm-12">
-	  	<div class="divider"></div>
-  		@include('admin.modules.activities.activities-requirements-list')
-  	</div>
- </div>
+	@if($activity->type == 'video')
+	@else
+	<!-- recursos-->
+	<div class="row">
+	  	<div class="col-sm-12">
+		  	<div class="divider"></div>
+	  		@include('admin.modules.activities.activities-requirements-list')
+	  	</div>
+	 </div>
+	 @endif
 @endif
 
 @if($activity->activityFiles->count() > 0)
@@ -166,13 +169,13 @@
 		<div class="col-sm-12">
 			@foreach ($activity->activityFiles as $file)
 			<object data="{{url('archivos/ConvocatoriaFellowship.pdf')}}" type="application/pdf" width="100%" height="600px">
-				<p<a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}">{{$file->name}}</a></p>
+				<p<a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
 			</object>	
-			<h4><a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}">{{$file->name}}</a></h4>
+			<h4><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
 			<p></p>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-4">
-					<p><a href="{{url('tablero/aprendizaje/actividades/archivos/descargar/$file->id')}}" class="btn view block sessions_l">Descargar</a></p>
+					<p><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}' class="btn view block sessions_l">Descargar</a></p>
 				</div>
 			</div>
 			@endforeach
