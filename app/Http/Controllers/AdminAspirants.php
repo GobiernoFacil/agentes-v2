@@ -9,6 +9,7 @@ use App\Models\Aspirant;
 use App\Models\AspirantEvaluation;
 use App\Models\AspirantsFile;
 use App\Models\AspirantInstitution;
+use App\Models\AspirantGlobalGrade;
 use PDF;
 use App\Http\Requests\SaveAspirantEvaluation1;
 use App\Http\Requests\SaveAspirantEvaluation2;
@@ -430,13 +431,24 @@ class AdminAspirants extends Controller
           $ev->save();
           $data       = $request->except(['_token']);
           AspirantEvaluation::where('id',$ev->id)->update($data);
+          $this->updateGrade($aspirant,$notice);
           return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")->with(['message'=>'Se ha guardado correctamente']);
-
-
 
       }
 
-
+      /**
+       * funcion para actualizar calificaciones globales
+       *
+       *
+       */
+       function updateGrade($aspirant,$notice){
+         $allGrades = AspirantEvaluation::where('notice_id',$notice->id)->where('aspirant_id',$aspirant->id)->get();
+         $grade     = $allGrades->sum('grade')/$allGrades->count();
+         $global    = AspirantGlobalGrade::firstOrCreate(['notice_id'=>$notice->id,'aspirant_id'=>$aspirant->id]);
+         $global->grade = $grade;
+         $global->save();
+         return true;
+       }
 
 
 }

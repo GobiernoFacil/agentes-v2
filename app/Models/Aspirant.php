@@ -48,6 +48,10 @@ class Aspirant extends Model
     return $this->hasOne("App\Models\Cv");
   }
 
+  function global_grade(){
+    return $this->hasOne("App\Models\AspirantGlobalGrade");
+  }
+
 
 
 }
