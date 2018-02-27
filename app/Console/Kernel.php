@@ -43,8 +43,14 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
       //  $schedule->command('command:delete-expired-codes')
       //           ->cron('30 12 01 */5 *');
-      $schedule->command('command:aspirant-count')
+      $schedule->command('command:aspirant-count 0')
                           ->dailyAt('06:00');
+      $schedule->command('command:aspirant-count 1')
+                          ->weekly()
+                          ->fridays()->at('06:00');
+      $schedule->command('command:aspirant-count 1')
+                          ->weekly()
+                          ->mondays()->at('20:00');
     /*  $schedule->command('command:update-averages')
               ->dailyAt('10:00')
               ->emailOutputTo('carlos@gobiernofacil.com');
