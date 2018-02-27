@@ -4,8 +4,11 @@
 @section('body_class', 'fellow aprendizaje modulos')
 @section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
+@section('subnav', 'layouts.fellow.subnav.activity')
+
 
 @section('content')
+
 <?php $today = date("Y-m-d");?>
 <div class="row">
 	<div class="col-sm-12">
