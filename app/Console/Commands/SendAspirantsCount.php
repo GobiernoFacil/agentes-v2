@@ -112,6 +112,7 @@ class SendAspirantsCount extends Command
 
       }elseif($this->argument('type')){
         $emails  = ['maria.montiel@inai.org.mx',
+                    'mariana.garcia@undp.org',
                     'dionisio.zabaleta@inai.org.mx',
                     'alfredo.elizondo@gesoc.org.mx',
                     'adrian.santos@undp.org',
