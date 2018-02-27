@@ -1151,6 +1151,16 @@ li a:link {
   .apertus_nav nav {
     display: block; }
 
+.subnav {
+  border-bottom: 2px solid #ebebeb;
+  padding-left: 15px;
+  padding-right: 15px; }
+  .subnav a {
+    line-height: 45px;
+    border-right: 2px solid #ebebeb;
+    display: inline-block;
+    padding: 0 15px; }
+
 .as_coutdown h3 {
   font-size: 23px; }
   .as_coutdown h3 .legend {
