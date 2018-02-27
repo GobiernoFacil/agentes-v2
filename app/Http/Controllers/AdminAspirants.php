@@ -11,6 +11,7 @@ use App\Models\AspirantsFile;
 use App\Models\AspirantInstitution;
 use PDF;
 use App\Http\Requests\SaveAspirantEvaluation1;
+use App\Http\Requests\SaveAspirantEvaluation2;
 class AdminAspirants extends Controller
 {
     //
@@ -308,6 +309,8 @@ class AdminAspirants extends Controller
           $aspirants = $notice->all_aspirants_data()->get();
           $list      = $notice->aspirants_per_institution_to_evaluate()->paginate();
           $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+          $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
+          $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
           $type_list = 1;
           return view('admin.aspirants.aspirant-list-per-institution')->with([
             'user' =>$user,
@@ -316,6 +319,8 @@ class AdminAspirants extends Controller
             'list' =>$list,
             'type_list' => $type_list,
             'asToE_count' => $asToE_count,
+            'aAe_count'  =>$aAe_count,
+            'aIaE_count' =>$aIaE_count
           ]);
 
 
@@ -332,6 +337,22 @@ class AdminAspirants extends Controller
           //
           $user      = Auth::user();
           $notice    = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirants = $notice->all_aspirants_data()->get();
+          $list      = $notice->aspirants_per_institution_evaluated()->paginate();
+          $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+          $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
+          $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
+          $type_list = 2;
+          return view('admin.aspirants.aspirant-list-per-institution')->with([
+            'user' =>$user,
+            'notice' => $notice,
+            'aspirants' =>$aspirants,
+            'list' =>$list,
+            'type_list' => $type_list,
+            'asToE_count' => $asToE_count,
+            'aAe_count'  =>$aAe_count,
+            'aIaE_count' =>$aIaE_count
+          ]);
 
 
       }
@@ -346,6 +367,22 @@ class AdminAspirants extends Controller
           //
           $user      = Auth::user();
           $notice    = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirants = $notice->all_aspirants_data()->get();
+          $list      = $notice->aspirants_app_already_evaluated()->paginate();
+          $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+          $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
+          $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
+          $type_list = 0;
+          return view('admin.aspirants.aspirant-list-per-institution')->with([
+            'user' =>$user,
+            'notice' => $notice,
+            'aspirants' =>$aspirants,
+            'list' =>$list,
+            'type_list' => $type_list,
+            'asToE_count' => $asToE_count,
+            'aAe_count'  =>$aAe_count,
+            'aIaE_count' =>$aIaE_count
+          ]);
 
 
       }
@@ -360,12 +397,44 @@ class AdminAspirants extends Controller
           //
           $user      = Auth::user();
           $notice    = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirant  = Aspirant::where('id',$aspirant_id)->firstOrFail();
+          $ev        = $aspirant->aspirantEvaluation->where('institution',$user->institution)->first();
+          return view('admin.aspirants.evaluation.aspirant-evaluation')->with([
+            'user' =>$user,
+            'notice' => $notice,
+            'aspirant' =>$aspirant,
+            'ev' => $ev
+          ]);
 
 
       }
 
 
 
+
+      /**
+       * Muestra formulario para evaluar a aspirante
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function saveEvaluateData(SaveAspirantEvaluation2 $request)
+      {
+          //
+          $user      = Auth::user();
+          $notice    = Notice::where('id',$request->notice_id)->firstOrFail();
+          $aspirant  = Aspirant::where('id',$request->aspirant_id)->firstOrFail();
+          $ev        = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
+                                                          'notice_id'=>$request->notice_id,
+                                                          'institution'=>$user->institution]);
+          $ev->grade  = ($request->essayGrade + $request->videoGrade + $request->experienceGrade)/3;
+          $ev->save();
+          $data       = $request->except(['_token']);
+          AspirantEvaluation::where('id',$ev->id)->update($data);
+          return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")->with(['message'=>'Se ha guardado correctamente']);
+
+
+
+      }
 
 
 

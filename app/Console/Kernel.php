@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         Commands\CreateCustomQuestionnaire::Class,
         Commands\CreateDiagnosticFiles::Class,
         Commands\AddGenderToFellows::Class,
-        Commands\AssignAspirants::Class
+        Commands\AssignAspirants::Class,
         Commands\SendAspirantReminder::Class
     ];
 
