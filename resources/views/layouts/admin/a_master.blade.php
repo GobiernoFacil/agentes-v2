@@ -98,6 +98,16 @@
 		</div>
 		@endif
 		
+		@if ($__env->yieldContent('subnav'))
+		<div class="subnav">
+				<div class="row">
+					<div class="col-sm-12">
+						@include($__env->yieldContent('subnav'))
+					</div>
+				</div>
+		</div>
+		@endif
+		
 		<!--profile-->
 		@include('layouts.admin.a_profile_logout')
 		
