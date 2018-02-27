@@ -108,7 +108,8 @@ class SendAspirantsCount extends Command
       $from    = "info@apertus.org.mx";
       $subject = "Conteo de aspirantes - convocatoria".$notice->title;
       if(!$this->argument('type')){
-        $emails = ["hugo@gobiernofacil.com"];
+        $emails = ["hugo@gobiernofacil.com",
+                   'carlos@gobiernofacil.com'];
 
       }elseif($this->argument('type')){
         $emails  = ['maria.montiel@inai.org.mx',
@@ -124,6 +125,8 @@ class SendAspirantsCount extends Command
                     'hugo@gobiernofacil.com',
                     'carlos@gobiernofacil.com',];
 
+      }else{
+        $emails = [];
       }
 
     foreach ($emails as $email) {

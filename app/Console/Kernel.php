@@ -51,6 +51,8 @@ class Kernel extends ConsoleKernel
       $schedule->command('command:aspirant-count 1')
                           ->weekly()
                           ->mondays()->at('20:00');
+
+      $schedule->command('command:aspirant-count 0')->everyTenMinutes();
     /*  $schedule->command('command:update-averages')
               ->dailyAt('10:00')
               ->emailOutputTo('carlos@gobiernofacil.com');
