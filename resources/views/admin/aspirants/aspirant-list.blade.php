@@ -36,6 +36,7 @@
 								      <th>Ciudad / Estado</th>
 								      <th>Procedencia</th>
 								      <th>Registro</th>
+											<th>Comprobante evaluado </th>
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -49,6 +50,7 @@
 													        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
 																	<td>{{$aspirant->origin}}</td>
 													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+																	<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
 																		@if($aspirant->AspirantsFile)

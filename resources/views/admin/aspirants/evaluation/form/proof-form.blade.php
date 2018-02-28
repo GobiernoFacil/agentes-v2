@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-comprobante/$aspirant->id"), "class" => "form-horizontal"]) !!}
+{!! Form::model($aspirantEvaluation,['url' => url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-comprobante/$aspirant->id"), "class" => "form-horizontal"]) !!}
 
   <div class="row">
     <div class="col-sm-12">
@@ -13,8 +13,8 @@
     		<li>
         		<p>¿Es un comprobante válido?</p>
     			<p>
-    				<label>Sí {{Form::radio('address_proof[0]','1', null,['class' => 'form-control address_proof'])}}</label>
-    				<label>No {{Form::radio('address_proof[1]','0', null,['class' => 'form-control address_proof'])}}
+    				<label>Sí {{Form::radio('address_proof[0]','1', $aspirantEvaluation->address_proof ? true:false,['class' => 'form-control address_proof'])}}</label>
+    				<label>No {{Form::radio('address_proof[1]','0', !$aspirantEvaluation->address_proof ? true:false,['class' => 'form-control address_proof'])}}
     			</p>
     			@if($errors->has('address_proof'))</label>
     				<strong class="danger">{{$errors->first('address_proof')}}</strong>
