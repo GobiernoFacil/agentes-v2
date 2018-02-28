@@ -205,20 +205,13 @@ class AdminAspirants extends Controller
           $aspirant = Aspirant::where('id',$aspirant_id)->firstOrFail();
           $aspirantEvaluation = AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
           $allEva             = $aspirant->aspirantEvaluation;
-          $generalGrade = 0;
-          if($allEva->count()>0){
-            foreach ($allEva as $eva) {
-              $generalGrade = $eva->grade + $generalGrade;
-            }
-            $generalGrade = ($generalGrade/2)*10;
-          }
+
           return view('admin.aspirants.aspirant-view')->with([
               'user'      => $user,
               'notice'    => $notice,
               'aspirant' => $aspirant,
               'aspirantEvaluation' => $aspirantEvaluation,
-              'allEva' => $allEva,
-              'generalGrade' => $generalGrade
+              'allEva' => $allEva
             ]);
       }
 

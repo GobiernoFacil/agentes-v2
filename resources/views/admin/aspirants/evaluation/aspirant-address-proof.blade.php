@@ -7,7 +7,6 @@
 
 @section('content')
 
-@if($aspirant->check_address_proof->count() <= 0)
 	@if($aspirant->AspirantsFile)
 		@if($aspirant->AspirantsFile->proof)
 		<div class="row">
@@ -42,12 +41,6 @@
 		</div>
 
 	@endif
-@else
-	<h1>El aspirante ya ha sido validado</h1>
-	<div class="box">
-		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
-	</div>
-@endif
 
 @endsection
 

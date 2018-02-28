@@ -52,6 +52,10 @@ class Aspirant extends Model
     return $this->hasOne("App\Models\AspirantGlobalGrade");
   }
 
+  function has_proof_evaluated($notice){
+    return AspirantEvaluation::where('address_proof','!=',null)->where('notice_id',$notice->id)->where('aspirant_id',$this->id)->first();
+  }
+
 
 
 }
