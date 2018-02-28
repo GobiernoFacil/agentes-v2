@@ -41,14 +41,14 @@ use Jenssegers\Date\Date;
 				</p>
 			</div>
 			<div class="col-sm-6">
-				<p><label><strong>Fecha de ingreso</strong></label>
-				  <input type="text" name="s_from" id="s_from" class="form-control study" placeholder="YYYY/MM/DD">
+				<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+				  <input type="text" name="s_from" id="s_from" class="form-control study" placeholder="AAAA/MM/DD">
 				</p>
 			</div>
 		  	<div class="col-sm-6">
 				<p>
-				  <label><strong>Fecha de término</strong></label>
-				  <input type="text" name="s_to" id="s_to" class="form-control study" placeholder="YYYY/MM/DD">
+				  <label><strong>Fecha de término (año/mes/día)</strong></label>
+				  <input type="text" name="s_to" id="s_to" class="form-control study" placeholder="AAAA/MM/DD">
 				</p>
 		  	</div>
 				<div class="col-sm-6">
@@ -112,14 +112,14 @@ use Jenssegers\Date\Date;
 		  		</p>
 			</div>
 		  	<div class="col-sm-6">
-		  		<p><label><strong>Fecha de ingreso</strong></label>
-		  		  <input type="text" name="from" id="from" class="form-control experience" placeholder="YYYY/MM/DD">
+		  		<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+		  		  <input type="text" name="from" id="from" class="form-control experience" placeholder="AAAA/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p>
-		  		  <label><strong>Fecha de término</strong></label>
-		  		  <input type="text" name="tod" id="tod" class="form-control experience" placeholder="YYYY/MM/DD">
+		  		  <label><strong>Fecha de término (año/mes/día)</strong></label>
+		  		  <input type="text" name="tod" id="tod" class="form-control experience" placeholder="AAAA/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
@@ -184,14 +184,14 @@ use Jenssegers\Date\Date;
 			  		</p>
 				</div>
 			  	<div class="col-sm-6">
-			  		<p><label><strong>Fecha de ingreso</strong></label>
-			  		  <input type="text" name="from_open" id="from_open" class="form-control open" placeholder="YYYY/MM/DD">
+			  		<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+			  		  <input type="text" name="from_open" id="from_open" class="form-control open" placeholder="AAAA/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
 			  		<p>
-			  		  <label><strong>Fecha de término</strong></label>
-			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open" placeholder="YYYY/MM/DD">
+			  		  <label><strong>Fecha de término (año/mes/día)</strong></label>
+			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open" placeholder="AAAA/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
@@ -300,7 +300,7 @@ use Jenssegers\Date\Date;
 
     <div class="col-sm-6">
       <p>
-        <label><strong>Fecha de nacimiento</strong> </label>
+        <label><strong>Fecha de nacimiento (año/mes/día)</strong> </label>
         {{Form::text('birthdate',null,["class" => "form-control", 'id'=>'birthdate'])}}
         @if($errors->has('birthdate'))
         <strong class="danger">{{$errors->first('birthdate')}}</strong>
