@@ -64,7 +64,7 @@ use Jenssegers\Date\Date;
 		  	<div class="col-sm-12">
 					<strong class="danger" id ="fillStudy" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
-					<strong class="danger" id ="dateStudy" style="display:none;">Rectifica la fecha de ingreso y término, deben de estar en el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
+					<strong class="danger" id ="dateStudy" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
 		  </p>
@@ -142,6 +142,7 @@ use Jenssegers\Date\Date;
 					<strong class="danger" id ="fillExperience" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwords"></span>.</strong>
+					<strong class="danger" id ="dateExperience" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 		  		<p>
 		  		  <a id="add-experience" href="#" class="btn gde center">Agregar experiencia [+]</a>
 		  		</p>
@@ -214,6 +215,7 @@ use Jenssegers\Date\Date;
 						<strong class="danger" id ="fillOpen" style="display:none;">Llena todos los campos.</strong>
 						<strong class="danger" id ="maxExperienceOpen" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 						<strong class="danger" id ="maxWordsOpen" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwordsOpen"></span>.</strong>
+						<strong class="danger" id ="dateExperienceOpen" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 			  		<p>
 			  		  <a id="add-open" href="#" class="btn gde center">Agregar experiencia [+]</a>
 			  		</p>
