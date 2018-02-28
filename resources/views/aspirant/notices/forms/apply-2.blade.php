@@ -64,6 +64,7 @@ use Jenssegers\Date\Date;
 		  	<div class="col-sm-12">
 					<strong class="danger" id ="fillStudy" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
+					<strong class="danger" id ="dateStudy" style="display:none;">Rectifica la fecha de ingreso y término, deben de estar en el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
 		  </p>

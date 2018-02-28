@@ -155,6 +155,7 @@ $(function(){
 		}
 		if(count === 0){
 			$("#fillSoftware").hide();
+
 	    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
 	      var el  = "<li data-id='" + d.id + "'>" +
 	      d.name + " : " + d.level +
@@ -364,27 +365,34 @@ $("#add-study").on("click", function(e){
 
 		if(count === 0){
 			$("#fillStudy").hide();
-			$.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
-				if (typeof d.status !== 'undefined') {
-						$("#maxStudy").show();
+			console.log(isValidDate(from));
+			console.log(isValidDate(to));
+			if(isValidDate(from) && isValidDate(to)){
+				   $("#dateStudy").hide();
+						$.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
+							if (typeof d.status !== 'undefined') {
+									$("#maxStudy").show();
 
+								}else{
+									    var from = d.from.split("/"),
+									        to   = d.to.split("/"),
+									        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
+													"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+									        "<strong>"+d.name+"</strong>" + "<br>" +
+												  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
+									        "</li>";
+									    $("#studies-list").append(el);
+											$("#study").val("");
+										  $("#institution").val("");
+										  $("#s_from").val("");
+										  $("#s_to").val("");
+										  $("#study_city").val("");
+											$("#study_state").val("");
+								}
+					  }, "json");
 					}else{
-						    var from = d.from.split("/"),
-						        to   = d.to.split("/"),
-						        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
-										"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
-						        "<strong>"+d.name+"</strong>" + "<br>" +
-									  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
-						        "</li>";
-						    $("#studies-list").append(el);
-								$("#study").val("");
-							  $("#institution").val("");
-							  $("#s_from").val("");
-							  $("#s_to").val("");
-							  $("#study_city").val("");
-								$("#study_state").val("");
+						$("#dateStudy").show();
 					}
-		  }, "json");
 		}else{
 			$("#fillStudy").show();
 		}
@@ -477,6 +485,32 @@ state_open.addEventListener("change", function(){
 		  city_open.options[city_open.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
 });
+
+function isValidDate(dateString)
+{
+    // First check for the pattern
+    if(!/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString))
+        return false;
+
+    // Parse the date parts to integers
+    var parts = dateString.split("/");
+    var day = parseInt(parts[1], 10);
+    var month = parseInt(parts[0], 10);
+    var year = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+};
 
 </script>
 <script>
