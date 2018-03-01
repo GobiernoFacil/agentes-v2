@@ -5,7 +5,7 @@
 @section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
 @section('subnav', 'layouts.fellow.subnav.activity')
-
+@section('subnav_week', 1)
 
 @section('content')
 
@@ -57,6 +57,10 @@
 	</div>
 	@endif
 @endif
+
+
+
+
 
 <div class="row">
 	<div class="col-sm-12">
