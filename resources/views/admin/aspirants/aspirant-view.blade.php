@@ -101,8 +101,5 @@
 		@endforeach
 	</div>
 </div>
-@else
-<li class="right"><span>Sin evaluar</span>
-<a href="{{ url('dashboard/aspirantes/evaluar-archivos/' . $aspirant->id) }}" class="btn xs view">Evaluar</a></li>
 @endif
 @endsection
