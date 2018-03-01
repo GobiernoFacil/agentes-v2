@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
+		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >no</span> válidos ({{$aWp_count}})</a>
 	</div>
 
 	<div class="col-sm-3">
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
+		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >no</span> válidos ({{$aWp_count}})</a>
 	</div>
 
 	<div class="col-sm-3">
@@ -78,7 +78,7 @@
 	</div>
 
 	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >sin</span> archivos ({{$aWp_count}})</a>
+		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >no</span> válidos ({{$aWp_count}})</a>
 	</div>
 
 	<div class="col-sm-3">

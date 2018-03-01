@@ -80,7 +80,6 @@ class AdminAspirants extends Controller
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
         $aspirants = $notice->all_aspirants_data()->get();
-        var_dump($aspirants->count());
         $type_list     = 1;
         return view('admin.aspirants.aspirant-list')->with([
           'user' =>$user,

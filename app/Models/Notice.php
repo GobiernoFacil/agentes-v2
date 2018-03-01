@@ -49,7 +49,9 @@ class Notice extends Model
 
     //aspirantes que tienen validacion de correo, solo id's
     function aspirants(){
+
       return $this->hasMany("App\Models\AspirantNotice",'notice_id');
+
     }
 
     function aspirants_without_proof(){
@@ -82,47 +84,46 @@ class Notice extends Model
       if($aWp_ids){
         $all_ids = array_diff($all_ids,$aWp_ids);
       }
-      return Aspirant::whereIn('id',$all_ids);
+      return Aspirant::where('is_activated',1)->whereIn('id',$all_ids);
     }
 
     function aspirants_rejected_proof(){
       $aspirants_id = AspirantEvaluation::where('address_proof',0)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants_id);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
     }
 
     function all_aspirants_data(){
       $aspirants = $this->aspirants->pluck('aspirant_id')->toArray();
-      var_dump(sizeof($aspirants));
-      return Aspirant::whereIn('id',$aspirants);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 
     function aspirants_already_evaluated(){
       $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants_id);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
     }
 
     function aspirants_approved_proof(){
       $aspirants_id = AspirantEvaluation::where('address_proof',1)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants_id);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
     }
 
     function aspirants_per_institution_to_evaluate(){
       $user      = Auth::user();
       $aspirant_already   = $this->aspirants_app_already_evaluated()->pluck('id')->toArray();
       $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 
     function aspirants_app_already_evaluated(){
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 
     function aspirants_per_institution_evaluated(){
       $user      = Auth::user();
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
-      return Aspirant::whereIn('id',$aspirants);
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 }
