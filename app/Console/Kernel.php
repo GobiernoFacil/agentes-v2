@@ -44,13 +44,13 @@ class Kernel extends ConsoleKernel
       //  $schedule->command('command:delete-expired-codes')
       //           ->cron('30 12 01 */5 *');
       $schedule->command('command:aspirant-count 0')
-                          ->dailyAt('18:00');
+                          ->dailyAt('20:00');
       $schedule->command('command:aspirant-count 1')
                           ->weekly()
-                          ->fridays()->at('06:00');
+                          ->fridays()->at('08:00');
       $schedule->command('command:aspirant-count 1')
                           ->weekly()
-                          ->mondays()->at('18:00');
+                          ->mondays()->at('20:00');
 
     /*  $schedule->command('command:update-averages')
               ->dailyAt('10:00')
