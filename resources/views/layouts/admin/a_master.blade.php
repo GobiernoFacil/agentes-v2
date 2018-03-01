@@ -111,7 +111,12 @@
 		<!--profile-->
 		@include('layouts.admin.a_profile_logout')
 		
-		<section>
+		@if ($__env->yieldContent('subnav_week'))
+		<section class="ap_week_p">
+			@include('layouts.fellow.subnav.week')
+		@else
+		<section>		
+		@endif
 			<!--content-->
 			<div class="container">
 			@yield('content')
