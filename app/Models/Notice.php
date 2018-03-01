@@ -53,23 +53,29 @@ class Notice extends Model
     }
 
     function aspirants_without_proof(){
-       $aspirants               = $this->aspirants->pluck('aspirant_id')->toArray();
-       $aspirants_id            = AspirantsFile::whereNull('proof')->whereIn('aspirant_id',$aspirants)->pluck('aspirant_id')->toArray();
-       $all_aspirants_files_ids = AspirantsFile::where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-       if($all_aspirants_files_ids){
-         $aspirants = array_diff($aspirants,$all_aspirants_files_ids);
-       }
-       if($aspirants_id){
-         $aspirants = array_merge($aspirants,$aspirants_id);
+       $aspirants_id            = AspirantsFile::where('notice_id',$this->id)->whereNull('proof')->pluck('aspirant_id')->toArray();
+       $aspirants_without_pr    = AspirantsFile::where('notice_id',$this->id)->whereNull('privacy_policies')->
+       orWhere(function($query){
+         $query->where('privacy_policies',0)->where('notice_id',$this->id)->get();
+       })->pluck('aspirant_id')->toArray();
+       if($aspirants_id && $aspirants_without_pr){
+         $aspirants = array_unique(array_merge($aspirants_id,$aspirants_without_pr));
+       }elseif($aspirants_id){
+         $aspirants = $aspirants_id;
+       }elseif($aspirants_without_pr){
+         $aspirants = $aspirants_without_pr;
+       }else{
+         $aspirants = [];
        }
 
-       return Aspirant::whereIn('id',$aspirants);
+       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 
     function aspirants_without_proof_evaluation(){
       $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
       $aWp_ids      = $this->aspirants_without_proof()->pluck('id')->toArray();
       $all_ids      = $this->all_aspirants_data()->pluck('id')->toArray();
+
       if($aspirants_id){
         $all_ids = array_diff($all_ids,$aspirants_id);
       }
@@ -86,6 +92,7 @@ class Notice extends Model
 
     function all_aspirants_data(){
       $aspirants = $this->aspirants->pluck('aspirant_id')->toArray();
+      var_dump(sizeof($aspirants));
       return Aspirant::whereIn('id',$aspirants);
     }
 

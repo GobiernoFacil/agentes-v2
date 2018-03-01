@@ -37,6 +37,7 @@
 								      <th>Procedencia</th>
 								      <th>Registro</th>
 											<th>Comprobante evaluado </th>
+											<th>Políticas de Privacidad</th>
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -51,10 +52,11 @@
 																	<td>{{$aspirant->origin}}</td>
 													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 																	<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
+																	<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
 																		@if($aspirant->AspirantsFile)
-																			@if($aspirant->AspirantsFile->proof)
+																			@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
 																			<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
 																			@endif
 																		@endif

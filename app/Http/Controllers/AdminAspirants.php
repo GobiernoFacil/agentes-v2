@@ -43,7 +43,7 @@ class AdminAspirants extends Controller
         //
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
-        $list      = $notice->all_aspirants_data()->paginate();
+        $list      = $notice->all_aspirants_data()->orderBy('name','asc')->paginate();
         $aWp_count = $notice->aspirants_without_proof()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
@@ -74,12 +74,13 @@ class AdminAspirants extends Controller
         //
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
-        $list      = $notice->aspirants_without_proof()->paginate();
+        $list      = $notice->aspirants_without_proof()->orderBy('name','asc')->paginate();
         $aWp_count = $notice->aspirants_without_proof()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
         $aspirants = $notice->all_aspirants_data()->get();
+        var_dump($aspirants->count());
         $type_list     = 1;
         return view('admin.aspirants.aspirant-list')->with([
           'user' =>$user,
