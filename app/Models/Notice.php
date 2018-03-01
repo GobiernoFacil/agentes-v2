@@ -84,6 +84,7 @@ class Notice extends Model
       if($aWp_ids){
         $all_ids = array_diff($all_ids,$aWp_ids);
       }
+      var_dump($all_ids);
       return Aspirant::where('is_activated',1)->whereIn('id',$all_ids);
     }
 
