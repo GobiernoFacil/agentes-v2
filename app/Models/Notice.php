@@ -60,13 +60,24 @@ class Notice extends Model
        orWhere(function($query){
          $query->where('privacy_policies',0)->where('notice_id',$this->id)->get();
        })->pluck('aspirant_id')->toArray();
-       if($aspirants_id && $aspirants_without_pr){
+       $aspirants_files_id      = AspirantsFile::where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+       $aspirant_with_no_files  = Aspirant::where('is_activated',1)->whereIn('id',$this->aspirants()->pluck('aspirant_id')->toArray())->whereNotIn('id',$aspirants_files_id)->pluck('id')->toArray();
+       if($aspirants_id && $aspirants_without_pr && $aspirant_with_no_files){
          $aspirants = array_unique(array_merge($aspirants_id,$aspirants_without_pr));
-       }elseif($aspirants_id){
-         $aspirants = $aspirants_id;
-       }elseif($aspirants_without_pr){
-         $aspirants = $aspirants_without_pr;
-       }else{
+         $aspirants = array_unique(array_merge($aspirant_with_no_files,$aspirants));
+       }elseif($aspirants_id && $aspirants_without_pr){
+         $aspirants = array_unique(array_merge($aspirants_id,$aspirants_without_pr));
+       }elseif($aspirants_without_pr && $aspirant_with_no_files){
+         $aspirants = array_unique(array_merge($aspirants_without_pr,$aspirant_with_no_files));
+       }elseif($aspirants_id && $aspirant_with_no_files){
+        $aspirants = array_unique(array_merge($aspirants_id,$aspirant_with_no_files));
+      }elseif($aspirants_id){
+          $aspirants = $aspirants_id;
+      }elseif($aspirants_without_pr){
+        $aspirants = $aspirants_without_pr;
+      }elseif($aspirant_with_no_files){
+        $aspirants = $aspirant_with_no_files;
+      }else{
          $aspirants = [];
        }
 
@@ -77,14 +88,13 @@ class Notice extends Model
       $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
       $aWp_ids      = $this->aspirants_without_proof()->pluck('id')->toArray();
       $all_ids      = $this->all_aspirants_data()->pluck('id')->toArray();
-
       if($aspirants_id){
         $all_ids = array_diff($all_ids,$aspirants_id);
       }
       if($aWp_ids){
         $all_ids = array_diff($all_ids,$aWp_ids);
       }
-      var_dump($all_ids);
+
       return Aspirant::where('is_activated',1)->whereIn('id',$all_ids);
     }
 
