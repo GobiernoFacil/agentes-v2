@@ -52,17 +52,21 @@ class SendAspirantReminder extends Command
               if($aspirant->cv){
                  if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
                  }else{
+                   $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
                    $aspirant->notify(new SendReminder($aspirant,$notice));
                  }
 
               }else{
+                $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
                 $aspirant->notify(new SendReminder($aspirant,$notice));
               }
 
             }else{
+              $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
               $aspirant->notify(new SendReminder($aspirant,$notice));
             }
           }else{
+            $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
             $aspirant->notify(new SendReminder($aspirant,$notice));
           }
         }
