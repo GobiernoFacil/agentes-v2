@@ -33,7 +33,7 @@
 		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
 	</div>
 </div>
-<p><strong>Aspirantes no válidos, no cuentan con comprobante o no aceptaron las políticas</strong></p>
+<p><strong>Aspirantes no válidos, no cuentan con los requisitos para ver evaluados.</strong></p>
 @elseif($type_list === 2)
 <div class="row">
 	<div class="col-sm-3">
@@ -70,7 +70,7 @@
 		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
 	</div>
 </div>
-<p><strong>Aspirantes con correo validado y comprobante de domicilio evaluado</strong></p>
+<p><strong>Aspirantes con comprobante de domicilio evaluado</strong></p>
 @elseif($type_list === 4)
 <div class="row">
 	<div class="col-sm-3">
