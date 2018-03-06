@@ -44,4 +44,35 @@
 			<li><a href="{{url('tablero-aspirante/convocatorias/' .$notice->slug. '/aplicar/agregar-aviso-privacidad')}}" {!! $__env->yieldContent('breadcrumb_type') == "notice apply aviso" ? 'class="current"' : '' !!}>5 AVISO</a></li>
 		</ul>
 	</div>
+
+	<div class="col-sm-12">
+		<?php $aspirant = $user->aspirant($user); ?>
+		@if($aspirant->AspirantsFile)
+		 @if(!$aspirant->AspirantsFile->video || !$aspirant->AspirantsFile->proof || !$aspirant->AspirantsFile->privacy_policies || !$aspirant->AspirantsFile->motives || $aspirant->cv->open_experiences()->count() <= 0 || $aspirant->cv->experiences()->count() <= 0 || $aspirant->cv->academic_trainings()->count() <= 0)
+		  	<p> Aún no completas tu aplicación, revisa las siguientes secciones: </p>
+			<ul>
+				@if(!$aspirant->AspirantsFile->motives)
+				<li>Motivos</li>
+				@endif
+				@if(!$aspirant->cv)
+				<li>Perfil Curricular</li>
+				@elseif($aspirant->cv->open_experiences()->count() <= 0 || $aspirant->cv->experiences()->count() <= 0 || $aspirant->cv->academic_trainings()->count() <= 0)
+					<li>Perfil Curricular</li>
+				@endif
+				@if(!$aspirant->AspirantsFile->video)
+				<li>Video</li>
+				@endif
+				@if(!$aspirant->AspirantsFile->proof)
+				<li>Comprobante de domicilio</li>
+				@endif
+				@if(!$aspirant->AspirantsFile->privacy_policies)
+				<li>Aviso de privacidad</li>
+				@endif
+			</ul>
+
+			@endif
+		@endif
+	</div>
+
+
 </div>
