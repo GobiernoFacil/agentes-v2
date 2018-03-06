@@ -44,7 +44,7 @@ class AdminAspirants extends Controller
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->all_aspirants_data()->orderBy('name','asc')->paginate();
-        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWp_count = $notice->aspirants_without_data()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
@@ -74,8 +74,8 @@ class AdminAspirants extends Controller
         //
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
-        $list      = $notice->aspirants_without_proof()->orderBy('name','asc')->paginate();
-        $aWp_count = $notice->aspirants_without_proof()->count();
+        $list      = $notice->aspirants_without_data()->orderBy('name','asc')->paginate();
+        $aWp_count = $notice->aspirants_without_data()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
@@ -106,7 +106,7 @@ class AdminAspirants extends Controller
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->aspirants_rejected_proof()->paginate();
-        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWp_count = $notice->aspirants_without_data()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
@@ -137,7 +137,7 @@ class AdminAspirants extends Controller
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->aspirants_already_evaluated()->paginate();
-        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWp_count = $notice->aspirants_without_data()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
@@ -168,7 +168,7 @@ class AdminAspirants extends Controller
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->aspirants_without_proof_evaluation()->paginate();
-        $aWp_count = $notice->aspirants_without_proof()->count();
+        $aWp_count = $notice->aspirants_without_data()->count();
         $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();

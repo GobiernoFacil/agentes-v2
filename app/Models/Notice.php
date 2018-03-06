@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\AspirantEvaluation;
 use Auth;
+use App\User;
 class Notice extends Model
 {
     //
@@ -54,31 +55,11 @@ class Notice extends Model
 
     }
 
-    function aspirants_without_proof(){
-       $aspirants_id            = AspirantsFile::where('notice_id',$this->id)->whereNull('proof')->pluck('aspirant_id')->toArray();
-       $aspirants_without_pr    = AspirantsFile::where('notice_id',$this->id)->whereNull('privacy_policies')->
-       orWhere(function($query){
-         $query->where('privacy_policies',0)->where('notice_id',$this->id)->get();
-       })->pluck('aspirant_id')->toArray();
-       $aspirants_files_id      = AspirantsFile::where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-       $aspirant_with_no_files  = Aspirant::where('is_activated',1)->whereIn('id',$this->aspirants()->pluck('aspirant_id')->toArray())->whereNotIn('id',$aspirants_files_id)->pluck('id')->toArray();
-       if($aspirants_id && $aspirants_without_pr && $aspirant_with_no_files){
-         $aspirants = array_unique(array_merge($aspirants_id,$aspirants_without_pr));
-         $aspirants = array_unique(array_merge($aspirant_with_no_files,$aspirants));
-       }elseif($aspirants_id && $aspirants_without_pr){
-         $aspirants = array_unique(array_merge($aspirants_id,$aspirants_without_pr));
-       }elseif($aspirants_without_pr && $aspirant_with_no_files){
-         $aspirants = array_unique(array_merge($aspirants_without_pr,$aspirant_with_no_files));
-       }elseif($aspirants_id && $aspirant_with_no_files){
-        $aspirants = array_unique(array_merge($aspirants_id,$aspirant_with_no_files));
-      }elseif($aspirants_id){
-          $aspirants = $aspirants_id;
-      }elseif($aspirants_without_pr){
-        $aspirants = $aspirants_without_pr;
-      }elseif($aspirant_with_no_files){
-        $aspirants = $aspirant_with_no_files;
-      }else{
-         $aspirants = [];
+    function aspirants_without_data(){
+       $aspirants    =  $this->all_aspirants_data()->pluck('id');
+       $with_all     =  $this->get_aspirants_with_full_data()->pluck('id');
+       if($with_all){
+         $aspirants = array_diff($aspirants->toArray(),$with_all->toArray());
        }
 
        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
@@ -86,13 +67,9 @@ class Notice extends Model
 
     function aspirants_without_proof_evaluation(){
       $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
-      $aWp_ids      = $this->aspirants_without_proof()->pluck('id')->toArray();
-      $all_ids      = $this->all_aspirants_data()->pluck('id')->toArray();
+      $all_ids      = $this->get_aspirants_with_full_data()->pluck('id')->toArray();
       if($aspirants_id){
         $all_ids = array_diff($all_ids,$aspirants_id);
-      }
-      if($aWp_ids){
-        $all_ids = array_diff($all_ids,$aWp_ids);
       }
 
       return Aspirant::where('is_activated',1)->whereIn('id',$all_ids);
@@ -137,4 +114,23 @@ class Notice extends Model
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
+
+    function get_aspirants_with_full_data(){
+      $aspirants  = $this->all_aspirants_data()->get();
+      $temp_array = [];
+      foreach ($aspirants as $aspirant) {
+        if($aspirant->AspirantsFile){
+          if($aspirant->AspirantsFile->video && $aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies && $aspirant->AspirantsFile->motives){
+            if($aspirant->cv){
+               if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
+                 array_push($temp_array,$aspirant->id);
+               }
+            }
+          }
+        }
+      }
+      return Aspirant::where('is_activated',1)->whereIn('id',$temp_array);
+    }
+
+
 }
