@@ -262,7 +262,7 @@ class AdminAspirants extends Controller
           $user    = Auth::user();
           $notice  = Notice::where('id',$notice_id)->firstOrFail();
           $aspirant = Aspirant::where('id',$aspirant_id)->firstOrFail();
-          $aspirantEvaluation = AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+          $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=>$notice_id]);
 
           return view('admin.aspirants.evaluation.aspirant-address-proof')->with([
               'user'      => $user,
