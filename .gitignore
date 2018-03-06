@@ -6,6 +6,7 @@
 Homestead.json
 Homestead.yaml
 .env
+composer.lock
 public/css/src_sass
 public/css/fonts
 *.DS_Store
@@ -25,4 +26,3 @@ csv/survey_fac_answers/*
 csv/survey_fellow_answers/*
 csv/reports/*
 csv/aspirants_count.xslx
-composer.lock
