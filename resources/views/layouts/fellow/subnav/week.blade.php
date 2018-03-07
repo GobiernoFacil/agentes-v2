@@ -1,4 +1,4 @@
-<nav class="nav_week">
+<nav class="nav_week open">
 	<!-- lista de sesiones-->
 	@if($activity->session->module->sessions->count() > 0)
 	<div class="ap_week">
