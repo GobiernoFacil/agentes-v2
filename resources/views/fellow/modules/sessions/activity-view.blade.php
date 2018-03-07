@@ -37,14 +37,14 @@
 		      {{ Session::get('error') }}
 		  	</div>
 		  	@endif
-		<!--- session name-->	
+		<!--- session name-->
 		<h4>{{$session->name}}</h4>
 		<!--- activity title-->
 		<div class="divider b"></div>
 		<h1><strong>{{$type}}:</strong> {{$activity->name}} </h1>
 		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
 		<div class="divider"></div>
-		
+
 	</div>
 </div>
 
@@ -175,9 +175,9 @@
 	<div class="row">
 		<div class="col-sm-12">
 			@foreach ($activity->activityFiles as $file)
-			<object data="{{url('archivos/ConvocatoriaFellowship.pdf')}}" type="application/pdf" width="100%" height="600px">
+			<object data='{{url("tablero/aprendizaje/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
 				<p<a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
-			</object>	
+			</object>
 			<h4><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
 			<p></p>
 			<div class="row">
@@ -205,7 +205,7 @@
 				var match = url.match(regExp);
 				if (match && match[2].length == 11) {
 					return match[2];
-				} 
+				}
 				else {
 					return 'error';
     			}
@@ -214,7 +214,7 @@
 			var ytId = getId('{{$activity->videos->link}}');
 
 			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
-		</script>	
+		</script>
 	@endif
 @endif
 

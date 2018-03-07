@@ -425,6 +425,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/archivos/{activity_slug}/save', 'FellowFiles@save');
 	//Descargar archivo en actividades
     Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
+    //ver pdf
+    Route::get('tablero/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');
