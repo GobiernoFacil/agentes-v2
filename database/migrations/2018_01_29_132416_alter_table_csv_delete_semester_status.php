@@ -27,6 +27,6 @@ class AlterTableCsvDeleteSemesterStatus extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('cvs');
+        Schema::dropIfExists('cvs');
     }
 }

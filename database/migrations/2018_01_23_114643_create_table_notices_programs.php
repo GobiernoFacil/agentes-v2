@@ -30,6 +30,6 @@ class CreateTableNoticesPrograms extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('notice_programs');
+        Schema::dropIfExists('notice_programs');
     }
 }

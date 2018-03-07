@@ -28,6 +28,6 @@ class AlterTableAspirantFilesAddNoticeId extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('aspirantsFiles');
+        Schema::dropIfExists('aspirantsFiles');
     }
 }

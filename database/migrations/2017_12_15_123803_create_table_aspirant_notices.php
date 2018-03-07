@@ -30,6 +30,6 @@ class CreateTableAspirantNotices extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('aspirant_notices');
+        Schema::dropIfExists('aspirant_notices');
     }
 }
