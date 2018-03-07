@@ -19,28 +19,24 @@
 		<h1>{{$module->title}}</h1>
 		<p class="ap_objective"><strong>Objetivo:</strong> {{$module->objective}}</p>
 	</div>
-	@if($module->sessions->count() > 0)
 	<div class="col-sm-3">
 		<p><strong>Facilitadores:</strong></p>
 	</div>
 	<div class="col-sm-9">
-		@foreach($module->sessions as $session)
-		 	@if($session->facilitators->count() > 0)
-				@foreach ($session->facilitators as $facilitator)
+		@if($module->unique_facilitators->count() > 0)
+				@foreach ($module->unique_facilitators as $facilitator)
 					<div class="ap_facilitator_list" data-name="{{$facilitator->user->name}}">
 						<figure>
 							@if($facilitator->user->image)
 							<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="45px">
 							@else
 							<img src='{{url("img/users/default.png")}}' height="45px">
-							@endif		
-						</figure>		
+							@endif
+						</figure>
 					</div>
 				@endforeach
-			@endif
-		@endforeach
+		 @endif
 	</div>
-	@endif
 </div>
 
 <!-- lista de sesiones-->
@@ -54,7 +50,7 @@
     	<li class="row">
     		<span class="col-sm-9">
     			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
-    			<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a> 
+    			<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a>
     		</span>
     		@if($activity->type == "evaluation")
     		<span class="col-sm-3">
@@ -68,7 +64,7 @@
     	@endforeach
     </ul>
     @endif
-    
+
     @endforeach
 </div>
 @else

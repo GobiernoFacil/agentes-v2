@@ -38,6 +38,10 @@ class Module extends Model
       return $this->hasMany("App\Models\FacilitatorModule");
     }
 
+    function unique_facilitators(){
+      return $this->hasMany("App\Models\FacilitatorModule")->select('user_id')->groupBy('user_id');
+    }
+
 
     function check_last_activity($module_id){
       $today = date('Y-m-d');
