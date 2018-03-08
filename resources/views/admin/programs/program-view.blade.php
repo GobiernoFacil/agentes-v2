@@ -39,7 +39,7 @@
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
 					<div class="box">
-						<ul>
+						<ul class="list_line">
 							<li class="row">
 								<span class="col-sm-3">
 								Duración
