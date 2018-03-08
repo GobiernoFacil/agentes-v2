@@ -150,8 +150,23 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos', 'AdminAspirants@aspirantWithOutProof');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos-validos', 'AdminAspirants@aspirantRejected');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivos-evaluados', 'AdminAspirants@aspirantAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivo-por-evaluar', 'AdminAspirants@aspirantToEvaluate');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-por-evaluar', 'AdminAspirants@aspirantAppToEvaluate');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-evaluada', 'AdminAspirants@aspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada', 'AdminAspirants@allAspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@evaluateData');
+    Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@saveEvaluateData');
+
+
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/comprobante/{name}', 'AdminAspirants@download');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@evaluate');
+    Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@saveEvaluate');
+
 
     /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
     Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
@@ -410,6 +425,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/archivos/{activity_slug}/save', 'FellowFiles@save');
 	//Descargar archivo en actividades
     Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
+    //ver pdf
+    Route::get('tablero/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');

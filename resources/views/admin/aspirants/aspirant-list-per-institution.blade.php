@@ -8,7 +8,11 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-8">
-		<h1>Lista de aspirantes</h1>
+		@if($type_list != 0)
+			<h1>Tu lista de aspirantes</h1>
+		@else
+			<h1>Todos los aspirantes evaluados</h1>
+		@endif
 		<h2>Convocatoria "{{$notice->title}}" </h2>
 
 	</div>
@@ -24,7 +28,7 @@
 	</div>
 </div>
 
-@include('admin.aspirants.list_buttons')
+@include('admin.aspirants.list_institutions_buttons')
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
@@ -36,8 +40,11 @@
 								      <th>Ciudad / Estado</th>
 								      <th>Procedencia</th>
 								      <th>Registro</th>
-											<th>Comprobante evaluado </th>
-											<th>Políticas de Privacidad</th>
+											@if($type_list != 0)
+											<th>Tu calificación</th>
+											@else
+											<th>Calificación</th>
+											@endif
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -51,15 +58,14 @@
 													        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
 																	<td>{{$aspirant->origin}}</td>
 													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
-																	<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
-																	<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
+																	@if($type_list != 0)
+																	<td>{{$aspirant->AspirantEvaluation()->where('institution',$user->institution)->whereNotNull('grade')->first() ? number_format($aspirant->AspirantEvaluation()->where('institution',$user->institution)->first()->grade,2) : "Sin calificación"}}</td>
+																	@else
+																	<td>{{$aspirant->global_grade ? number_format($aspirant->global_grade->grade,2) : "Sin calificación"}}</td>
+																	@endif
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-																		@if($aspirant->AspirantsFile)
-																			@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
-																			<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-																			@endif
-																		@endif
+																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-aplicacion/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
 																	</td>
 													     </tr>
 													    @endforeach
@@ -76,14 +82,7 @@
 			<p><strong>Sin aspirantes</strong></p>
 		@endif
 
-		@if($aWpE_count <= 0)
-		<div class="box" id ="table_box">
-			 <div id ="noMoretoDisplay">
-					<p><strong>Sin aspirantes con comprobante de domicilio por evaluar</strong></p>
-					<a class ="btn view" href='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")}}'>Evaluar aplicación de aspirantes</a>
-			</div>
-		</div>
-		@endif
+
 	</div>
 </div>
 @endsection

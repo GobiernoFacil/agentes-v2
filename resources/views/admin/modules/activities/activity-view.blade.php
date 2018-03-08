@@ -69,6 +69,7 @@
 
 @endif
 
+<?php /*
 <div class="box">
 	<div class="row">
 		<div class="col-sm-9">
@@ -88,11 +89,13 @@
 	</div>
 </div>
 
+*/?>
+
 <!--archivos-->
 <div class="box">
 	<div class="row">
 		<div class="col-sm-9">
-			<h2 class="title">Archivos</h2>
+			<h2 class="title">Archivos de apoyo</h2>
 		</div>
 		<div class="col-sm-3">
 			<p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
@@ -133,7 +136,7 @@
 				var match = url.match(regExp);
 				if (match && match[2].length == 11) {
 					return match[2];
-				} 
+				}
 				else {
 					return 'error';
     			}
@@ -142,7 +145,7 @@
 			var ytId = getId('{{$activity->videos->link}}');
 
 			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
-		</script>	
+		</script>
 	@endif
 @endif
 

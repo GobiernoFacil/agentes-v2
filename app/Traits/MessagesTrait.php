@@ -337,6 +337,17 @@ trait MessagesTrait{
          'mobile.digits'        => 'Escribe  10 dígitos',
          'privacy_policies.required'        => 'Este campo es requerido',
          'birthdate.required'        => 'Este campo es requerido',
+         'address_proof.required'        => 'Este campo es requerido',
+         'videoGrade.required'   => 'Este campo es requerido',
+         'experienceGrade.required'   => 'Este campo es requerido',
+         'essayGrade.required'   => 'Este campo es requerido',
+         'videoGrade.numeric'   => 'Escribe un número',
+         'experienceGrade.numeric'   => 'Escribe un número',
+         'essayGrade.numeric'   => 'Escribe un número',
+         'experienceGrade.between'   => 'Escribe un valor entre 0 y 10',
+         'videoGrade.between'   => 'Escribe un valor entre 0 y 10',
+         'essayGrade.between'   => 'Escribe un valor entre 0 y 10',
+
 
       ];
     }

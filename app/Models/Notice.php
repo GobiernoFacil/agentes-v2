@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AspirantEvaluation;
+use Auth;
+use App\User;
 class Notice extends Model
 {
     //
@@ -40,7 +44,93 @@ class Notice extends Model
       return $files;
     }
 
-    function aspirants(){
-      return $this->hasMany("App\Models\AspirantNotice",'notice_id');
+    function aspirant_institution(){
+      return $this->hasMany("App\Models\AspirantInstitution",'notice_id');
     }
+
+    //aspirantes que tienen validacion de correo, solo id's
+    function aspirants(){
+
+      return $this->hasMany("App\Models\AspirantNotice",'notice_id');
+
+    }
+
+    function aspirants_without_data(){
+       $aspirants    =  $this->all_aspirants_data()->pluck('id');
+       $with_all     =  $this->get_aspirants_with_full_data()->pluck('id');
+       if($with_all){
+         $aspirants = array_diff($aspirants->toArray(),$with_all->toArray());
+       }
+
+       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
+    function aspirants_without_proof_evaluation(){
+      $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      $all_ids      = $this->get_aspirants_with_full_data()->pluck('id')->toArray();
+      if($aspirants_id){
+        $all_ids = array_diff($all_ids,$aspirants_id);
+      }
+
+      return Aspirant::where('is_activated',1)->whereIn('id',$all_ids);
+    }
+
+    function aspirants_rejected_proof(){
+      $aspirants_id = AspirantEvaluation::where('address_proof',0)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
+    }
+
+    function all_aspirants_data(){
+      $aspirants = $this->aspirants->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
+    function aspirants_already_evaluated(){
+      $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
+    }
+
+    function aspirants_approved_proof(){
+      $aspirants_id = AspirantEvaluation::where('address_proof',1)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
+    }
+
+    function aspirants_per_institution_to_evaluate(){
+      $user      = Auth::user();
+      $aspirant_already   = $this->aspirants_app_already_evaluated()->pluck('id')->toArray();
+      $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
+    function aspirants_app_already_evaluated(){
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
+    function aspirants_per_institution_evaluated(){
+      $user      = Auth::user();
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->where('institution',$user->institution)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
+    function get_aspirants_with_full_data(){
+      $aspirants  = $this->all_aspirants_data()->get();
+      $temp_array = [];
+      foreach ($aspirants as $aspirant) {
+        if($aspirant->AspirantsFile){
+          if($aspirant->AspirantsFile->video && $aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies && $aspirant->AspirantsFile->motives){
+            if($aspirant->cv){
+               if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
+                 array_push($temp_array,$aspirant->id);
+               }
+            }
+          }
+        }
+      }
+      return Aspirant::where('is_activated',1)->whereIn('id',$temp_array);
+    }
+
+
 }

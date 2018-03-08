@@ -91,7 +91,7 @@
 		</div>
 		<div class="col-sm-9">
 			<h3>Sesión {{$session->order}}</h3>
-			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a>  <span class="le_link"><a href="{{ url('dashboard/sesiones/editar/' . $session->id) }}" class="btn xs ev">Actualizar sesión</a></span></h2>
+			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a>  <span class="le_link"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/editar/$session->id")}}' class="btn xs ev">Actualizar sesión</a></span></h2>
 			<div class="divider"></div>
 			<div class="row">
 				<div class="col-sm-9">
@@ -104,8 +104,8 @@
 		</div>
 		<!-- ver sesión-->
 		<div class="col-sm-2">
-			<a class="btn view block sessions_l"  href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">Ver sesión</a>
-			<a href ="{{ url('dashboard/sesiones/eliminar/' . $session->id) }}"  id ="{{$session->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+			<a class="btn view block sessions_l"  href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/ver/$session->id")}}'>Ver sesión</a>
+			<a href ='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/eliminar/$session->id")}}'  id ="{{$session->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 		</div>
 
 		<div class="footnote">
