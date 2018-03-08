@@ -51,18 +51,7 @@
     </p>
   </div>
 </div>
-<!-- horas y sesiones -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Número de sesiones</strong> <br>
-      {{Form::text('number_sessions',$module->number_sessions, ["class" => "form-control"])}} </label>
-      @if($errors->has('number_sessions'))
-      <strong class="danger">{{$errors->first('number_sessions')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
+<!-- horas  -->
 <div class="row">
   <div class="col-sm-6">
     <p>
@@ -98,20 +87,8 @@
   </div>
 </div>
 
-<!-- situación  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Situación Didáctica</strong> <br>
-      {{Form::textarea('teaching_situation',$module->teaching_situation, ["class" => "form-control"])}} </label>
-      @if($errors->has('teaching_situation'))
-      <strong class="danger">{{$errors->first('teaching_situation')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 
-<!-- objectivo  -->
+<!-- objetivo  -->
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -124,20 +101,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Productos a desarrollar</strong> <br>
-      {{Form::textarea('product_developed',$module->product_developed, ["class" => "form-control"])}} </label>
-      @if($errors->has('product_developed'))
-      <strong class="danger">{{$errors->first('product_developed')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 
-<!-- modalidad -->
-
+<!-- publicar -->
 <div class="row">
   <div class="col-sm-12">
     <p>
