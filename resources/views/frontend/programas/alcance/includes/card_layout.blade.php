@@ -912,6 +912,7 @@
 				</div>
 				
 			</div>
+			<p class="ap_info right"><b></b> Nacional</p>
 		</div>
 	</div>
 	
