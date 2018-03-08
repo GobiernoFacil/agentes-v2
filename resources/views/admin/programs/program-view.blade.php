@@ -13,12 +13,12 @@
 			</div>
 		</div>
 		
-		<ul class="row">
+		<ul class="row sub_nav_program">
 			<li class="col-sm-4">
-				<a>Acerca del programa</a>
+				<a href="#" class="current">Acerca del programa</a>
 			</li>
 			<li class="col-sm-4">
-				<a>Contenido</a>
+				<a href="#">Contenido</a>
 			</li>
 			<li class="col-sm-4">
 				<a href="{{url('dashboard/programas/editar/' . $program->id)}}" class="btn view">Editar Programa</a>
