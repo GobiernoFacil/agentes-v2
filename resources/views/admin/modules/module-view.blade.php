@@ -6,72 +6,64 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')
 
+
+<div class="ap_when">
+	<p><b class="danger"></b><strong>Fecha límite</strong>: Los fellows deben cumplir con esta tarea el {{date("d-m-Y", strtotime($module->end))}}, 11:59 pm, hora de la Ciudad de México ({{ \Carbon\Carbon::createFromTimeStamp(strtotime($module->end))->diffForHumans()}}) </p>
+</div>
+
 <!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-		<h1 class="center">{{$module->title}} <span class="le_link"><a href='{{url("dashboard/programas/{$program->id}/modulos/editar/$module->id")}}' class="btn view">Editar Módulo</a></span></h1>
-		<p class="center date">{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
-		<div class="divider"></div>
-	</div>
-</div>
-<!-- header -->
-<div class="row h_tag">
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h time"></b> Duración</h4>
-		<p>{{$module->number_hours}} horas</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h session"></b> # Sesiones</h4>
-		<p>{{$module->number_sessions}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h modalidad"></b> Modalidad</h4>
-		<p>{{$module->modality}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h {{$module->public ? 'publicado' : 'no_p'}} "></b>Publicado</h4>
-		<p> <span class="published {{$module->public ? 'view' : ''}}">{{$module->public ? 'Sí' : 'No'}}</span></p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
+		<h1>{{$module->title}} <span class="le_link"><a href='{{url("dashboard/programas/{$program->id}/modulos/editar/$module->id")}}' class="btn view">Editar Módulo</a></span></h1>
 		<div class="divider top"></div>
 	</div>
-	<div class="col-sm-4">
-		<h3>Objetivo</h3>
-		<p>{{$module->objective}}</p>
+	<!-- header -->
+	<div class="row h_tag">
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h time"></b> Duración</h4>
+			<p>{{$module->number_hours}} horas</p>
+		</div>
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h modalidad"></b> Modalidad</h4>
+			<p>{{$module->modality}}</p>
+		</div>
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h {{$module->public ? 'publicado' : 'no_p'}} "></b>Publicado</h4>
+			<p> <span class="published {{$module->public ? 'view' : ''}}">{{$module->public ? 'Sí' : 'No'}}</span></p>
+		</div>
 	</div>
-	<div class="col-sm-4">
-		<h3>Situación didáctica</h3>
-		<p>{{$module->teaching_situation}}</p>
+	<div class="col-sm-12">
+		<div class="divider"></div>
+		<p class="ap_objective"><strong>Objetivo:</strong> {{$module->objective}}</p>
 	</div>
-	<div class="col-sm-4">
-		<h3>Productos a desarrollar</h3>
-		<p>{{$module->product_developed}}</p>
+	
+	<!--facilitadores-->
+	<div class="col-sm-3">
+		<p><strong>Facilitadores:</strong></p>
+	</div>
+
+	<div class="col-sm-9">
+		@if($module->unique_facilitators->count() > 0)
+			@foreach ($module->unique_facilitators as $facilitator)
+				<div class="ap_facilitator_list" data-name="{{$facilitator->user->name}}">
+					<figure>
+						@if($facilitator->user->image)
+						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="45px">
+						@else
+						<img src='{{url("img/users/default.png")}}' height="45px">
+						@endif
+					</figure>
+				</div>
+			@endforeach
+		@else
+			<p>Aún no han sido asignados facilitadores</p>
+		@endif
 	</div>
 </div>
 
-<?php /* DELETE ASAP
-<div class="box">
-	<div class="row">
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li><span>Fecha inicio:</span> {{date("d-m-Y", strtotime($module->start))}}</li>
-				<li><span>Fecha final:</span> {{date('d-m-Y', strtotime($module->end))}}</li>
-        <li><span>Objetivo:</span>{{$module->objective}}</li>
-        <li><span>Situación didáctica:</span></li>
-        <li><span>Productos a desarrollar:</span></li>
-			</ul>
-		</div>
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li class="right"><span>Agregar sesión</span>
-				<a href='{{ url("dashboard/sesiones/agregar/$module->id") }}' class="btn xs view">Agregar</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-*/?>
+
+<!---------------------------------------------- sesiones--->
+
 <div class="row">
 	<div class="col-sm-12">
 		<div class="divider"></div>
@@ -80,6 +72,41 @@
 	</div>
 </div>
 
+<!-- lista de sesiones-->
+@if($module->sessions->count() > 0)
+<div class="box session_list last_activity ap_week">
+    @foreach($module->sessions as $session)
+    <h2>{{$session->name}}</h2>
+    @if($session->activities->count() > 0)
+    <ul class="ap_list">
+    	@foreach ($session->activities as $activity)
+    	<li class="row">
+    		<span class="col-sm-9">
+    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+    			<a href="{{ url('dashboard/sesiones/actividades/ver/'. $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a>
+    		</span>
+    		@if($activity->type == "evaluation")
+    		<span class="col-sm-3">
+    			<p class="right"> Fecha límite:
+    			 <strong>{{date("d-m-Y", strtotime($activity->end))}}</strong><br>
+    			 <span class="notes">({{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}})</span>
+    			</p>
+    		</span>
+    		@endif
+    	</li>
+    	@endforeach
+    </ul>
+    @endif
+
+    @endforeach
+</div>
+@else
+<div class="box">
+	<div class="row center">
+		<h2>Sin sesiones</h2>
+	</div>
+</div>
+@endif
 
 @if($module->sessions->count() > 0)
 @foreach ($module->sessions as $session)
