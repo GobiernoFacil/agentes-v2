@@ -17,7 +17,10 @@
 	</div>
 </div>
 <!--lista de actividades-->
+<div class="row">
+	<div class="col-sm-11 col-sm-offset-1">
 @if($session->activities->count() > 0)
+<h3>Actividades</h3>
 <ul class="ap_list">
 	@foreach ($session->activities as $activity)
 	<li class="row">
@@ -52,3 +55,33 @@
 <p class="center">No hay actividades en esta sesión. <br><a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs view">[+] Agregar actividad a {{$session->name}}</a></p>
 <div class="divider bottom"></div>
 @endif
+
+<!--- facilitadores--->
+<div class="row">
+	@if($session->facilitators->count() > 0)
+	<div class="col-sm-9">
+		<h3>Facilitadores de la sesión</h3>
+	</div>
+	<div class="col-sm-3">
+		<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar más facilitadores</a>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider"></div>
+	</div>
+	<div class="col-sm-12">
+			@include('admin.modules.sessions.sessions-facilitators-list')
+	</div>
+	@else
+	<div class="col-sm-12">
+		<h3>Facilitadores de la sesión</h3>
+		<p>Sin facilitadores asignados</p>
+		<p class="center">
+		<a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/asignar/{$session->id}") }}' class="btn xs view">[+] Asignar facilitadores a {{$session->name}}</a>
+		</p>
+		<div class="divider bottom"></div>
+	</div>
+	@endif
+</div>
+
+	</div>
+</div>
