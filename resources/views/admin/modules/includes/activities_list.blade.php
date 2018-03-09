@@ -24,7 +24,7 @@
 <ul class="ap_list">
 	@foreach ($session->activities as $activity)
 	<li class="row">
-		<span class="col-sm-7">
+		<span class="{{ $activity->type == 'evaluation' ? 'col-sm-7' : 'col-sm-9' }}">
 			<!--tipo de actividad-->
 			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 			<!-- actividad-->
