@@ -42,7 +42,7 @@
 		<div class="col-sm-12">
 			<h2 class="title">Facilitadores de la sesión</h2>
 			<p>Sin facilitadores asignados</p>
-			<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar facilitadores</a>
+			<a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/asignar/{$session->id}") }}' class="btn xs ev">Asignar facilitadores</a>
 		</div>
 		@endif
  	</div>
