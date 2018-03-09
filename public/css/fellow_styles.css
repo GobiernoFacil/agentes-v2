@@ -1612,7 +1612,7 @@ b.sessionG {
 
 .box.session_list.ap_week li a {
   color: #7a7a7c;
-  font-size: 145x;
+  font-size: 14px;
   float: left;
   width: 95%; }
   .box.session_list.ap_week li a:hover {
@@ -1628,6 +1628,18 @@ b.sessionG {
 .box.session_list.ap_week.admin .divider {
   border-width: 2px;
   margin: 0; }
+  .box.session_list.ap_week.admin .divider.bottom {
+    border-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    margin-top: 15px;
+    padding: 10px 0 30px; }
+
+.box.session_list.ap_week.admin a.btn.ev, .box.session_list.ap_week.admin .btn.ev, .box.session_list.ap_week.admin a:visited.btn.ev,
+.box.session_list.ap_week.admin a.btn.view, .box.session_list.ap_week.admin .btn.view, .box.session_list.ap_week.admin a:visited.btn.view,
+.box.session_list.ap_week.admin a.btn.danger, .box.session_list.ap_week.admin .btn.danger, .box.session_list.ap_week.admin a:visited.btn.danger {
+  color: white;
+  float: none;
+  width: auto; }
 
 .ap_week b {
   border: 2px solid #7a7a7c;
