@@ -26,18 +26,15 @@ class UpdateModule extends FormRequest
     public function rules()
     {
         $module = Module::find($this->route("module_id"));
+        $date = strtotime($this->start);
+        $date = strtotime("+8 day", $date);
         return [
             //
             'title'=> 'required|max:256'.($module->title != $this->title ? '|unique:modules' : ''),
-            'number_sessions'=> 'required|numeric',
-            'number_hours'=> 'required|numeric',
             'modality'=> 'required',
-            'teaching_situation'=> 'required',
-            'product_developed'=> 'required',
             'start'=> 'required',
-            'end'=> 'required',
+            'end'=> 'required|before:'.date('Y-m-d',$date),
             'public'=> 'required',
-            'measure'=> 'required',
         ];
     }
 }

@@ -275,7 +275,7 @@ class Activities extends Controller
         {
             //
             $activity = Activity::where('id',$id)->firstOrFail();
-            $session_id = $activity->session_id;
+            $session = $activity->session;
             foreach ($activity->activityFiles as $file) {
               File::delete($file->path."/".$file->identifier);
               $file->delete();
@@ -301,7 +301,7 @@ class Activities extends Controller
               $activity->quizInfo->delete();
             }
             $activity->delete();
-            return redirect("dashboard/sesiones/ver/$session_id")->with('success',"Se ha eliminado correctamente");
+            return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha eliminado correctamente");
         }
 
 }
