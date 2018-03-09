@@ -15,7 +15,7 @@ class SendAspirantsCount extends Command
      *
      * @var string
      */
-    protected $signature = 'command:aspirant-count';
+    protected $signature = 'command:aspirant-count {type}';
 
     /**
      * The console command description.
@@ -107,11 +107,37 @@ class SendAspirantsCount extends Command
       })->store('xlsx','csv');
       $from    = "info@apertus.org.mx";
       $subject = "Conteo de aspirantes - convocatoria".$notice->title;
-      Mail::send('emails.send_count', [], function($message) use ($from, $subject) {
+      if(!$this->argument('type')){
+       $emails = ["hugo@gobiernofacil.com",
+                   'carlos@gobiernofacil.com'];
+
+      }elseif($this->argument('type')){
+        $emails  = ['maria.montiel@inai.org.mx',
+                    'mariana.garcia@undp.org',
+                    'dionisio.zabaleta@inai.org.mx',
+                    'alfredo.elizondo@gesoc.org.mx',
+                    'adrian.santos@undp.org',
+                    'magdalena.rodriguez@prosociedad.org',
+                    'carlos.bauche@prosociedad.org',
+                    'german@prosociedad.org',
+                    'rmhender@gmail.com',
+                    'ana.deltoro@undp.org',
+                    'hugo@gobiernofacil.com',
+                    'carlos@gobiernofacil.com',];
+
+      }else{
+        $emails = [];
+      }
+
+    foreach ($emails as $email) {
+      Mail::send('emails.send_count', [], function($message) use ($from, $subject,$email) {
               $message->from($from, 'no-reply');
-              $message->to('hugo@gobiernofacil.com');
+              $message->to($email);
               $message->subject($from);
               $message->attach('csv/aspirants_count.xlsx');
       });
+      $this->info('Correo: '.$email.' enviado.');
+    }
+
     }
 }

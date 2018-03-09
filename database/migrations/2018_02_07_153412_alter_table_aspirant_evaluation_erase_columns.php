@@ -30,6 +30,6 @@ class AlterTableAspirantEvaluationEraseColumns extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('aspirantEvaluation');
+        Schema::dropIfExists('aspirantEvaluation');
     }
 }

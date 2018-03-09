@@ -32,6 +32,6 @@ class CreateTableNoticesFiles extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('notice_files');
+        Schema::dropIfExists('notice_files');
     }
 }

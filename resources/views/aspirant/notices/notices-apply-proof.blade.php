@@ -18,8 +18,21 @@
 @endsection
 @section('js-content')
 <script>
-	// Set the date we're counting down to	
+	// Set the date we're counting down to
 	var countDownDate = new Date("{{ date('M j, Y',strtotime($notice->end)) }} 23:59:59").getTime();
+
 </script>
 <script src="{{url('js/countdown.js')}}"></script>
+<script>
+var update_b = document.getElementById('update_b');
+update_b.addEventListener('click',function(e){
+		 e.preventDefault();
+		 $('#updateBoxB').hide();
+		 $('#inputFile').show();
+		 console.log("click");
+
+});
+
+
+</script>
 @endsection

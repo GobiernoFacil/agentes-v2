@@ -155,6 +155,7 @@ $(function(){
 		}
 		if(count === 0){
 			$("#fillSoftware").hide();
+
 	    $.post(url, {name : name, level:level, _token : "{{ csrf_token() }}"}, function(d){
 	      var el  = "<li data-id='" + d.id + "'>" +
 	      d.name + " : " + d.level +
@@ -207,38 +208,41 @@ $(function(){
 
 		if(count === 0){
 			$("#fillOpen").hide();
-			$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
-				if (typeof d.status !== 'undefined') {
-						$("#maxExperienceOpen").show();
+			if(isValidDate(from) && isValidDate(to)){
+				  $("#dateExperienceOpen").hide();
+					$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
+						if (typeof d.status !== 'undefined') {
+								$("#maxExperienceOpen").show();
 
-					}else{
+							}else{
 
-						if(typeof d.words !== "undefined"){
-							$("#maxWordsOpen").show();
-							$("#nbwordsOpen").text(d.words);
+								if(typeof d.words !== "undefined"){
+									$("#maxWordsOpen").show();
+									$("#nbwordsOpen").text(d.words);
 
-						}else{
-									$("#maxWordsOpen").hide();
-									var from = d.from.split("/"),
-							        to   = d.to.split("/"),
-											el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience-open'>[ x ]</a></h4>"+
-									"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
-									"<strong>"+d.sector+"</strong><br>"+
-									d.description+
-									"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
-									$("#experiencies-list-open").append(el);
-								  $("#company_open").val("");
-								  $("#sector_open").val("");
-								  $("#from_open").val("");
-								  $("#tod_open").val("");
-								  $("#experience_city_open").val("");
-								  $("#experience_state_open").val("");
-								  $("#description_open").val("");
-						}
-
-
-					}
-				}, "json");
+								}else{
+											$("#maxWordsOpen").hide();
+											var from = d.from.split("/"),
+									        to   = d.to.split("/"),
+													el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience-open'>[ x ]</a></h4>"+
+											"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+											"<strong>"+d.sector+"</strong><br>"+
+											d.description+
+											"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
+											$("#experiencies-list-open").append(el);
+										  $("#company_open").val("");
+										  $("#sector_open").val("");
+										  $("#from_open").val("");
+										  $("#tod_open").val("");
+										  $("#experience_city_open").val("");
+										  $("#experience_state_open").val("");
+										  $("#description_open").val("");
+								}
+							}
+						}, "json");
+				}else {
+					$("#dateExperienceOpen").show();
+				}
 		}else{
 			$("#fillOpen").show();
 		}
@@ -287,39 +291,42 @@ $("#add-experience").on("click", function(e){
 
 	if(count === 0){
 		$("#fillExperience").hide();
-		$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
-			if (typeof d.status !== 'undefined') {
-					$("#maxExperience").show();
+		if(isValidDate(from) && isValidDate(to)){
+			    $('#dateExperience').hide();
+					$.post(url, {name : name, company:company,sector:sector,from:from,to:to,city:city,state:state,description:description, _token : "{{ csrf_token() }}"}, function(d){
+						if (typeof d.status !== 'undefined') {
+								$("#maxExperience").show();
 
-				}else{
+							}else{
 
-					if(typeof d.words !== "undefined"){
-						$("#maxWords").show();
-						$("#nbwords").text(d.words);
+								if(typeof d.words !== "undefined"){
+									$("#maxWords").show();
+									$("#nbwords").text(d.words);
 
-					}else{
-								$("#maxWords").hide();
-								var from = d.from.split("/"),
-						        to   = d.to.split("/"),
-										el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience'>[ x ]</a></h4>"+
-								"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
-								"<strong>"+d.name+"</strong><br>"+
-								d.description+
-								"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
-								$("#experiencies-list").append(el);
-								$("#experience").val("");
-							  $("#company").val("");
-							  $("#sector").val("");
-							  $("#from").val("");
-							  $("#tod").val("");
-							  $("#experience_city").val("");
-							  $("#experience_state").val("");
-							  $("#experience_description").val("");
-					}
-
-
-				}
-			}, "json");
+								}else{
+											$("#maxWords").hide();
+											var from = d.from.split("/"),
+									        to   = d.to.split("/"),
+													el  = "<li data-id='" + d.id + "'><h4 data-id='"+d.id+"'>"+d.company+"<a href='#' class='remove-experience'>[ x ]</a></h4>"+
+											"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+											"<strong>"+d.name+"</strong><br>"+
+											d.description+
+											"<span class='from_to'>"+d.city+","+d.state+"</span>"+ "<br></li>"
+											$("#experiencies-list").append(el);
+											$("#experience").val("");
+										  $("#company").val("");
+										  $("#sector").val("");
+										  $("#from").val("");
+										  $("#tod").val("");
+										  $("#experience_city").val("");
+										  $("#experience_state").val("");
+										  $("#experience_description").val("");
+								}
+							}
+						}, "json");
+			}else {
+				$('#dateExperience').show();
+			}
 	}else{
 		$("#fillExperience").show();
 	}
@@ -364,27 +371,32 @@ $("#add-study").on("click", function(e){
 
 		if(count === 0){
 			$("#fillStudy").hide();
-			$.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
-				if (typeof d.status !== 'undefined') {
-						$("#maxStudy").show();
+			if(isValidDate(from) && isValidDate(to)){
+				   $("#dateStudy").hide();
+						$.post(url, {name : name, institution:institution,from:from,to:to,city:city,state:state, _token : "{{ csrf_token() }}"}, function(d){
+							if (typeof d.status !== 'undefined') {
+									$("#maxStudy").show();
 
+								}else{
+									    var from = d.from.split("/"),
+									        to   = d.to.split("/"),
+									        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
+													"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
+									        "<strong>"+d.name+"</strong>" + "<br>" +
+												  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
+									        "</li>";
+									    $("#studies-list").append(el);
+											$("#study").val("");
+										  $("#institution").val("");
+										  $("#s_from").val("");
+										  $("#s_to").val("");
+										  $("#study_city").val("");
+											$("#study_state").val("");
+								}
+					  }, "json");
 					}else{
-						    var from = d.from.split("/"),
-						        to   = d.to.split("/"),
-						        el  = "<li data-id='" + d.id + "'>" + "<h4 data-id='" + d.id + "'>"+d.institution+"<a href='#' class='remove-study'>[ x ]</a></h4>" +
-										"<span class='from_to'>"+ d.from+" - "+ d.to +"</span>"+ "<br>" +
-						        "<strong>"+d.name+"</strong>" + "<br>" +
-									  "<span class='from_to'>"+ d.city+","+d.state+"</span>"+ "<br>" +
-						        "</li>";
-						    $("#studies-list").append(el);
-								$("#study").val("");
-							  $("#institution").val("");
-							  $("#s_from").val("");
-							  $("#s_to").val("");
-							  $("#study_city").val("");
-								$("#study_state").val("");
+						$("#dateStudy").show();
 					}
-		  }, "json");
 		}else{
 			$("#fillStudy").show();
 		}
@@ -477,6 +489,32 @@ state_open.addEventListener("change", function(){
 		  city_open.options[city_open.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}
 });
+
+function isValidDate(dateString)
+{
+    // First check for the pattern
+    if(!/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString))
+        return false;
+
+    // Parse the date parts to integers
+    var parts = dateString.split("/");
+    var day = parseInt(parts[2], 10);
+    var month = parseInt(parts[1], 10);
+    var year = parseInt(parts[0], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+};
 
 </script>
 <script>

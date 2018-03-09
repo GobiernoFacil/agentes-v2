@@ -22,7 +22,7 @@
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 		{!! $notice->description !!}
-		<h2>Paso 1 de 2</h2>
+		<h2>Registra tu información</h2>
 		<p>Todos los campos son obligatorios.</p>
 		@include('frontend.convocatoria.forms.register')
 	</div>

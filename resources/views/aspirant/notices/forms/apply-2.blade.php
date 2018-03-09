@@ -41,14 +41,14 @@ use Jenssegers\Date\Date;
 				</p>
 			</div>
 			<div class="col-sm-6">
-				<p><label><strong>Fecha de ingreso</strong></label>
-				  <input type="text" name="s_from" id="s_from" class="form-control study">
+				<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+				  <input type="text" name="s_from" id="s_from" class="form-control study" placeholder="AAAA/MM/DD">
 				</p>
 			</div>
 		  	<div class="col-sm-6">
 				<p>
-				  <label><strong>Fecha de término</strong></label>
-				  <input type="text" name="s_to" id="s_to" class="form-control study">
+				  <label><strong>Fecha de término (año/mes/día)</strong></label>
+				  <input type="text" name="s_to" id="s_to" class="form-control study" placeholder="AAAA/MM/DD">
 				</p>
 		  	</div>
 				<div class="col-sm-6">
@@ -64,6 +64,7 @@ use Jenssegers\Date\Date;
 		  	<div class="col-sm-12">
 					<strong class="danger" id ="fillStudy" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxStudy" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
+					<strong class="danger" id ="dateStudy" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 		  <p>
 		    <a id="add-study" href="#" class="btn gde center">Agregar experiencia académica [+]</a>
 		  </p>
@@ -111,14 +112,14 @@ use Jenssegers\Date\Date;
 		  		</p>
 			</div>
 		  	<div class="col-sm-6">
-		  		<p><label><strong>Fecha de ingreso</strong></label>
-		  		  <input type="text" name="from" id="from" class="form-control experience">
+		  		<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+		  		  <input type="text" name="from" id="from" class="form-control experience" placeholder="AAAA/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
 		  		<p>
-		  		  <label><strong>Fecha de término</strong></label>
-		  		  <input type="text" name="tod" id="tod" class="form-control experience">
+		  		  <label><strong>Fecha de término (año/mes/día)</strong></label>
+		  		  <input type="text" name="tod" id="tod" class="form-control experience" placeholder="AAAA/MM/DD">
 		  		</p>
 		  	</div>
 		  	<div class="col-sm-6">
@@ -141,6 +142,7 @@ use Jenssegers\Date\Date;
 					<strong class="danger" id ="fillExperience" style="display:none;">Llena todos los campos.</strong>
 					<strong class="danger" id ="maxExperience" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 					<strong class="danger" id ="maxWords" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwords"></span>.</strong>
+					<strong class="danger" id ="dateExperience" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 		  		<p>
 		  		  <a id="add-experience" href="#" class="btn gde center">Agregar experiencia [+]</a>
 		  		</p>
@@ -183,14 +185,14 @@ use Jenssegers\Date\Date;
 			  		</p>
 				</div>
 			  	<div class="col-sm-6">
-			  		<p><label><strong>Fecha de ingreso</strong></label>
-			  		  <input type="text" name="from_open" id="from_open" class="form-control open">
+			  		<p><label><strong>Fecha de ingreso (año/mes/día)</strong></label>
+			  		  <input type="text" name="from_open" id="from_open" class="form-control open" placeholder="AAAA/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
 			  		<p>
-			  		  <label><strong>Fecha de término</strong></label>
-			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open">
+			  		  <label><strong>Fecha de término (año/mes/día)</strong></label>
+			  		  <input type="text" name="tod_open" id="tod_open" class="form-control open" placeholder="AAAA/MM/DD">
 			  		</p>
 			  	</div>
 			  	<div class="col-sm-6">
@@ -213,6 +215,7 @@ use Jenssegers\Date\Date;
 						<strong class="danger" id ="fillOpen" style="display:none;">Llena todos los campos.</strong>
 						<strong class="danger" id ="maxExperienceOpen" style="display:none;">Has alcanzado el límite de experiencias, elimina una si deseas agregar otra.</strong>
 						<strong class="danger" id ="maxWordsOpen" style="display:none;">Has alcanzado el límite de palabras, el límite es de 100 y has escrito <span id="nbwordsOpen"></span>.</strong>
+						<strong class="danger" id ="dateExperienceOpen" style="display:none;">Escribe una fecha de ingreso y término válida, deben de tener el formato "YYYY-MM-DD" por ejemplo 2018/02/10.</strong>
 			  		<p>
 			  		  <a id="add-open" href="#" class="btn gde center">Agregar experiencia [+]</a>
 			  		</p>
@@ -299,7 +302,7 @@ use Jenssegers\Date\Date;
 
     <div class="col-sm-6">
       <p>
-        <label><strong>Fecha de nacimiento</strong> </label>
+        <label><strong>Fecha de nacimiento (año/mes/día)</strong> </label>
         {{Form::text('birthdate',null,["class" => "form-control", 'id'=>'birthdate'])}}
         @if($errors->has('birthdate'))
         <strong class="danger">{{$errors->first('birthdate')}}</strong>

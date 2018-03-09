@@ -28,6 +28,6 @@ class AddPublicToPrograms extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('programs');
+        Schema::dropIfExists('programs');
     }
 }

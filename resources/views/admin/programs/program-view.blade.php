@@ -6,94 +6,131 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')
 
-<!-- title -->
-<div class="row">
-	<div class="col-sm-12">
-		<h1 class="center">{{$program->title}} <span class="le_link"><a href="{{url('dashboard/programas/editar/' . $program->id)}}" class="btn view">Editar Programa</a></span></h1>
-		<p class="center date">{{date("d-m-Y", strtotime($program->start))}} al {{date('d-m-Y', strtotime($program->end))}}</p>
-		<div class="divider"></div>
-	</div>
-</div>
-<!-- header -->
-<div class="row h_tag">
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h time"></b> Duración</h4>
-		<p>{{$program->number_hours}} horas</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h session"></b> # Módulos</h4>
-		<p>{{$program->modules->count()}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h {{$program->public ? 'publicado' : 'no_p'}} "></b>Publicado</h4>
-		<p> <span class="published {{$program->public ? 'view' : ''}}">{{$program->public ? 'Sí' : 'No'}}</span></p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="divider top"></div>
-	</div>
-	<div class="col-sm-4">
-		<h3>Descripción</h3>
-		<p>{{$program->description}}</p>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-12">
-		<div class="divider"></div>
-		<h2 class="center">Módulos del programa</h2>
-		<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs ev">+ Agregar módulo</a></p>
-	</div>
-</div>
-
-
-@if($program->modules->count() > 0)
-@foreach ($program->modules as $module)
-<div class="box session_list">
-	<div class="row">
-		<!--icono-->
-		<div class="col-sm-1 right">
-			<b class="icon_h session list_s"></b>
+		<!-- title -->
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="center">{{$program->title}}</h1>
+			</div>
 		</div>
-		<div class="col-sm-9">
-			<h3>Módulo {{$module->order}}</h3>
-			<h2><a href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>{{$module->title}}</a>  <span class="le_link"><a href='{{ url("dashboard/programas/$program->id/modulos/editar/$module->id") }}' class="btn xs ev">Actualizar módulo</a></span></h2>
-			<div class="divider"></div>
+		
+		<ul class="row sub_nav_program">
+			<li class="col-sm-4">
+				<a href="#" class="current" id="about_box_btn">Acerca del programa</a>
+			</li>
+			<li class="col-sm-4">
+				<a href="#" id="content_box_btn">Contenido</a>
+			</li>
+			<li class="col-sm-4">
+				<a href="{{url('dashboard/programas/editar/' . $program->id)}}" class="btn view">Editar Programa</a>
+			</li>
+		</ul>
+	</div><!-- cierra  container del master layout -->
+</section><!-- cierra section del master layout -->
+
+<section class="gray">
+	<div class="container">
+		
+		<!-- about box -->
+		<div class="about_box">
 			<div class="row">
-				<div class="col-sm-9">
-					<p>{{$module->objective}}</p>
+				<div class="col-sm-12">
+					<h2 class="center">Acerca del programa</h2>
+					<p>{{$program->description}}</p>
 				</div>
-				<div class="col-sm-3 notes">
-					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</p>
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="box">
+						<ul class="list_line">
+							<li class="row">
+								<span class="col-sm-3">
+								Duración
+								</span>
+								<span class="col-sm-9">
+								{{$program->number_hours ? $program->number_hours . 'horas' : '' }} del {{date("d-m-Y", strtotime($program->start))}} al {{date('d-m-Y', strtotime($program->end))}}
+								</span>
+							</li>
+							<li class="row">
+								<span class="col-sm-3">
+								Semanas
+								</span>
+								<span class="col-sm-9">
+								{{$program->modules->count()}}
+								</span>
+							</li>
+							<li class="row">
+								<span class="col-sm-3">
+								Publicado
+								</span>
+								<span class="col-sm-9">
+									<span class="published {{$program->public ? 'view' : ''}}">{{$program->public ? 'Sí' : 'No'}}</span>
+								</span>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!-- ver módulo-->
-		<div class="col-sm-2">
-			<a class="btn view block sessions_l"  href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>Ver módulo</a>
-			<a href ='{{ url("dashboard/programas/$program->id/modulos/eliminar/$module->id") }}'  id ="{{$module->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
-		</div>
-
-		<div class="footnote">
+		<!--ends about box -->
+		
+		
+		<!--content_box -->
+		<div class="content_box" style="display: none">
 			<div class="row">
-				<div class="col-sm-2">
-					<p><b class="icon_h time"></b>{{$module->number_hour}} {{$module->mesasure === 0 ? "Minutos" : $module->mesasure === 1 ? "Horas" : ""}} </p>
-				</div>
-				<div class="col-sm-2">
-					<p><b class="icon_h modalidad"></b>{{$module->modality}}</p>
+				<div class="col-sm-12">
+					<h2 class="center">Contenido</h2>
+					<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs ev">+ Agregar módulo</a></p>
+					@if($program->modules->count() > 0)
+						@foreach ($program->modules as $module)
+							@include('admin.programs.program_layout.module_list')
+						@endforeach
+					@else
+					<div class="box">
+						<div class="row center">
+							<h2>Sin módulos</h2>
+							<p><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs view">Agregar módulo</a></p>
+						</div>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-@endforeach
-@else
-<div class="box">
-	<div class="row center">
-		<h2>Sin módulos</h2>
-		<p><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs view">Agregar módulo</a></p>
-	</div>
-</div>
-@endif
+		<!--ends content_box -->
+
+
+
+		<script>
+			(function(){
+				var about_box       = "about_box",
+				    content_box     = "content_box",
+				    current         = "current",
+				    about_box_btn   = "about_box_btn",
+				    content_box_btn = "content_box_btn",
+				    about_div       = document.querySelector("." + about_box),
+				    content_div     = document.querySelector("." + content_box),
+				    about_btn       = document.getElementById(about_box_btn),
+				    content_btn     = document.getElementById(content_box_btn);
+
+
+				about_btn.addEventListener("click", function(e){
+					e.preventDefault();
+
+					content_div.style.display = "none";
+					about_div.style.display = "block";
+					content_btn.classList.remove(current);
+					if(!about_btn.classList.contains(current)) about_btn.classList.add(current);
+				});
+
+				content_btn.addEventListener("click", function(e){
+					e.preventDefault();
+
+					about_div.style.display = "none";
+					content_div.style.display = "block";
+					about_btn.classList.remove(current);
+					if(!content_btn.classList.contains(current)) content_btn.classList.add(current);
+				});
+
+
+			})();
+		</script>
+
+
 @endsection
