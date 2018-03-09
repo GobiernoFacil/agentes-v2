@@ -89,6 +89,7 @@ trait MessagesTrait{
          'product_developed.required'=> 'El producto a desarrollar es requerido',
          'start.required'=> 'La fecha inicio es requerida',
          'end.required'=> 'La fecha final es requerida',
+         'end.before'=> 'La fecha no puede ser mayor a una semana',
          'public.required'=> 'Este campo es requerido',
          //sesiones
          'name.unique' => 'El nombre debe de ser único',
