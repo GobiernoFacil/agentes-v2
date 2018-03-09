@@ -11,7 +11,7 @@
     <h1>Asignar facilitadores</h1>
   </div>
   <div class="col-sm-3">
-    <form  role="form" method="GET" action="{{ url('dashboard/sesiones/facilitador/buscar') }}" id="search-input">
+    <form  role="form" method="GET" action='{{url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/buscar/$session->id")}}' id="search-input">
       <input id = "search-fac" type="search" name="searchBox" class="form-control" placeholder="Buscar Facilitador" value="{{request('searchBox', '')}}">
       <p id ="nR" style="display:none;">No existen resultados</p>
     </form>
@@ -54,7 +54,7 @@
 <script src="{{url('js/app-search-facilitator.js')}}"></script>
 <script>
 var CONFIG = {
-	search_url:    "{{url('dashboard/sesiones/facilitadores/buscar')}}",
+	search_url:    '{{url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/buscar/$session->id")}}',
 	general_aspirant_url :    "{{url('dashboard/facilitadores/ver')}}",
 	token      : document.querySelector('input[name="_token"]').value
 };

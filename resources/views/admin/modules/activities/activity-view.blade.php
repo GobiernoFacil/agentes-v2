@@ -6,55 +6,76 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
+
+<?php $today = date("Y-m-d");?>
+<!--- type-->
 <div class="row">
 	<div class="col-sm-12">
 		<?php switch($activity->type) {
 			case "lecture":
-			$type = "Lectura";
-			break;
+				$type = "Lectura";
+				break;
 			case "video":
-			$type = "Video";
-			break;
+				$type = "Video";
+				break;
 			case "evaluation":
-			$type = "Evaluación";
-			break;
+				$type = "Evaluación";
+				break;
 			default:
-			$type = "Lectura";
+			 $type = "Lectura";
 		}
 		?>
-		<h4>Actividad #{{$activity->order}} de la <a href="{{ url('/dashboard/sesiones/ver/'. $session->id) }}" class="link">sesión {{$session->order}}</a> del <a href="{{ url('dashboard/modulos/ver/'.$session->module->id) }}" class="link">módulo: {{$session->module->title}}</a></h4>
+		@if(Session::has('success'))
+		<div class="message success">
+	      {{ Session::get('success') }}
+	  	</div>
+	  	@endif
+
+			@if(Session::has('error'))
+			<div class="message error">
+		      {{ Session::get('error') }}
+		  	</div>
+		  	@endif
+		<!--- session name-->
+		<h4>{{$session->name}}</h4>
+		<!--- activity title-->
 		<div class="divider b"></div>
-		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span> <span class="le_link right"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span></h1>
+		<h1><strong>{{$type}}:</strong> {{$activity->name}} <span class="le_link"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span </h1>
+		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
+		<div class="divider"></div>
+
 	</div>
 </div>
+
+
+
 @if($activity->type == 'video')
+<!---------------------------------------------------------------------------------- videos--------------------------------------------->
 	@if($activity->videos)
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="divider"></div>
 			<div id="ytVideo"></div>
 		</div>
 	</div>
 	@endif
 @endif
-<div class="box">
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<ul class="profile list row">
-				<li class="col-sm-12"><span>Descripción:</span>{{$activity->description}}</li>
-				<li class="col-sm-6"><span>Rol Facilitador:</span>{{$activity->facilitator_role}}</li>
-				<li class="col-sm-6"><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
-			</ul>
-		</div>
 
+
+<!--- description-->
+<div class="row">
+	<div class="col-sm-12">
+		<p>{{$activity->description}}</p>
 	</div>
 </div>
+
 @if($activity->slug ==='examen-diagnostico')
-@include('admin.modules.activities.diagnostic-view')
+<!---------------------------------------------------------------------------------- examen de diagnostico ------------------------------------>
+	@include('admin.modules.activities.diagnostic-view')
 @endif
 
 @if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico')
-@include('admin.modules.activities.evaluation-view')
+<!---------------------------------------------------------------------------------- evaluación ------------------------------------>
+	@include('admin.modules.activities.evaluation-view')
 @elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
@@ -66,67 +87,38 @@
 		</div>
 	</div>
 </div>
-
 @endif
 
-<?php /*
-<div class="box">
-	<div class="row">
-		<div class="col-sm-9">
-			<h2 class="title">Recursos</h2>
-		</div>
-		<div class="col-sm-3">
-			<p class="right"><a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs ev">[+] Agregar recurso</a></p>
-		</div>
-		<div class="col-sm-12">
-			@if($activity->activityRequirements->count() > 0)
-			@include('admin.modules.activities.activities-requirements-list')
-			@else
-			<p>Sin recurso</p>
-			<a href='{{url("dashboard/sesiones/actividades/requerimientos/agregar/$activity->id")}}' class="btn xs view">Agregar recurso</a>
-			@endif
-		</div>
-	</div>
-</div>
-
-*/?>
-
-<!--archivos-->
-<div class="box">
-	<div class="row">
-		<div class="col-sm-9">
-			<h2 class="title">Archivos de apoyo</h2>
-		</div>
-		<div class="col-sm-3">
-			<p class="right"><a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs ev">[+] Agregar archivo</a></p>
-		</div>
-		<div class="col-sm-12">
-			@if($activity->activityFiles->count() > 0)
-			@include('admin.modules.activities.activities-files-list')
-			@else
-			<p>Sin archivos</p>
-			<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
-			@endif
-		</div>
-	</div>
-</div>
 
 <div class="divider"></div>
-@if($activity->forum)
+@if(!empty($activity->forum))
+<!---------------------------------------------------------------------------------- foro ------------------------------------>
 @include('layouts.forums.list-at-activity')
-@else
+@endif
+
+
+@if($activity->activityFiles->count() > 0)
+<!---------------------------------------------------------------------------------- lecturas con archivos ------------------------------------>
 <div class="box">
 	<div class="row">
-		<div class="col-sm-9">
-			<h2 class="title">Foro</h2>
-		</div>
 		<div class="col-sm-12">
-			<p>Sin Foro</p>
+			@foreach ($activity->activityFiles as $file)
+			<object data='{{url("dashboard/sesiones/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
+				
+				
+				<p<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
+			</object>
+			@endforeach
+			@include('admin.modules.activities.activities-files-list')
 		</div>
 	</div>
 </div>
+@else
+<div class="box last_activity">
+	<p>Sin archivo</p>
+	<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
+</div>
 @endif
-
 
 @if($activity->type == 'video')
 	@if($activity->videos)
@@ -148,6 +140,5 @@
 		</script>
 	@endif
 @endif
-
 
 @endsection

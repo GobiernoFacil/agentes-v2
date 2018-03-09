@@ -28,11 +28,11 @@ class SaveSession extends FormRequest
             //
             'name'=> 'required|max:256|unique:module_sessions',
             'parent_id'=> 'required',
-            'hours'=> 'required|numeric',
+        /*    'hours'=> 'required|numeric',
             'modality'=> 'required',
             'objective'=> 'required',
             'start'=> 'required',
-            'end'=> 'required',
+            'end'=> 'required',*/
         ];
     }
 }
