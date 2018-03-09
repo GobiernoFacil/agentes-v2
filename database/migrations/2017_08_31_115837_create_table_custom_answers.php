@@ -30,6 +30,6 @@ class CreateTableCustomAnswers extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('custom_answers');
+        Schema::dropIfExists('custom_answers');
     }
 }

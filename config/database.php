@@ -49,8 +49,6 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
-            ///mamp
-          //  'unix_socket'   => env('USE_MAMP', ''),
             'prefix' => '',
             'strict' => true,
             'engine' => null,

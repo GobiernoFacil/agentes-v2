@@ -107,8 +107,9 @@
 </div>
 <div class="row">
 	<div class="col-sm-6 col-sm-offset-3">
-
+		
 		<p>{{Form::submit('Aplicar', ['class' => 'btn gde i_convoca_w'])}}</p>
+		<p>Al aplicar, recibirás un correo para confirmar tu cuenta y continuar tu aplicación.</p>
 	</div>
 </div>
 {!! Form::close() !!}

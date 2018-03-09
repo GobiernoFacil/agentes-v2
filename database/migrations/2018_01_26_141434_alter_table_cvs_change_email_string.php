@@ -27,6 +27,6 @@ class AlterTableCvsChangeEmailString extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('cvs');
+        Schema::dropIfExists('cvs');
     }
 }

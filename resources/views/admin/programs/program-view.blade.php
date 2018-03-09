@@ -15,10 +15,10 @@
 		
 		<ul class="row sub_nav_program">
 			<li class="col-sm-4">
-				<a href="#" class="current">Acerca del programa</a>
+				<a href="#" class="current" id="about_box_btn">Acerca del programa</a>
 			</li>
 			<li class="col-sm-4">
-				<a href="#">Contenido</a>
+				<a href="#" id="content_box_btn">Contenido</a>
 			</li>
 			<li class="col-sm-4">
 				<a href="{{url('dashboard/programas/editar/' . $program->id)}}" class="btn view">Editar Programa</a>
@@ -30,7 +30,7 @@
 <section class="gray">
 	<div class="container">
 		
-		<!--about box--->
+		<!-- about box -->
 		<div class="about_box">
 			<div class="row">
 				<div class="col-sm-12">
@@ -69,11 +69,11 @@
 				</div>
 			</div>
 		</div>
-		<!--ends about box--->
+		<!--ends about box -->
 		
 		
-		<!--content_box--->
-		<div class="content_box">
+		<!--content_box -->
+		<div class="content_box" style="display: none">
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="center">Contenido</h2>
@@ -93,7 +93,44 @@
 				</div>
 			</div>
 		</div>
-		<!--ends content_box--->
+		<!--ends content_box -->
+
+
+
+		<script>
+			(function(){
+				var about_box       = "about_box",
+				    content_box     = "content_box",
+				    current         = "current",
+				    about_box_btn   = "about_box_btn",
+				    content_box_btn = "content_box_btn",
+				    about_div       = document.querySelector("." + about_box),
+				    content_div     = document.querySelector("." + content_box),
+				    about_btn       = document.getElementById(about_box_btn),
+				    content_btn     = document.getElementById(content_box_btn);
+
+
+				about_btn.addEventListener("click", function(e){
+					e.preventDefault();
+
+					content_div.style.display = "none";
+					about_div.style.display = "block";
+					content_btn.classList.remove(current);
+					if(!about_btn.classList.contains(current)) about_btn.classList.add(current);
+				});
+
+				content_btn.addEventListener("click", function(e){
+					e.preventDefault();
+
+					about_div.style.display = "none";
+					content_div.style.display = "block";
+					about_btn.classList.remove(current);
+					if(!content_btn.classList.contains(current)) content_btn.classList.add(current);
+				});
+
+
+			})();
+		</script>
 
 
 @endsection

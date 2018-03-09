@@ -309,7 +309,9 @@ class AspirantNotices extends Controller
         $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
         $aspirantData->privacy_policies = $request->privacy_policies;
         $aspirantData->save();
+        if($this->checkData()){
         $user->notify(new SendApplyT($user,$notice));
+        }
         return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
     }
 
@@ -506,23 +508,22 @@ class AspirantNotices extends Controller
         public function download($name,$type){
           $user = Auth::user();
           $file = public_path(). "/files/".$name;
-          $ext  = substr(strrchr($file,'.'),1);
-          $mime = mime_content_type ($file);
+          $fileData = pathinfo($file);
           $headers = array(
-            'Content-Type: '.$mime,
+            'Content-Type: '.$fileData['extension'],
           );
           if($type =='CV'){
-            $filename = 'CV'.".".$ext;
+            $filename = 'CV'.".".$fileData['extension'];
           }else if($type =='carta'){
-              $filename = 'carta'.".".$ext;
+              $filename = 'carta'.".".$fileData['extension'];
           }else if($type =='comprobante'){
-              $filename = 'comprobante'.".".$ext;
+              $filename = 'comprobante'.".".$fileData['extension'];
           }else if($type =='privacidad'){
-              $filename = 'privacidad'.".".$ext;
+              $filename = 'privacidad'.".".$fileData['extension'];
           }else{
-            $filename = 'Ensayo'.".".$ext;
+            $filename = 'Ensayo'.".".$fileData['extension'];
           }
-          return response()->download($file, $filename, $headers);
+          return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
         }
 
 
@@ -669,6 +670,18 @@ class AspirantNotices extends Controller
           $r        = $experience->delete();
 
           return response()->json($r);
+        }
+        //checa que el aspirante tenga todos los datos
+        function checkData(){
+          $user     = Auth::user();
+          $cv       = $user->aspirant($user)->cv;
+          $files    = $user->aspirant($user)->AspirantsFile;
+          if($files->motives && $files->video && $files->privacy_policies && $files->proof && $cv->experiences()->count() > 1 && $cv->open_experiences()->count() > 1 && $cv->academic_trainings()->count() > 1){
+            return true;
+          }else{
+            return false;
+          }
+
         }
 
 }

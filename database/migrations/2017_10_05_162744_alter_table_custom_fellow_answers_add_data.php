@@ -27,6 +27,6 @@ class AlterTableCustomFellowAnswersAddData extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('custom_fellow_answers');
+        Schema::dropIfExists('custom_fellow_answers');
     }
 }

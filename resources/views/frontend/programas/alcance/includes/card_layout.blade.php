@@ -86,8 +86,8 @@
 				<div v-if="val.name == 'Porcentaje de población en situación de pobreza moderada'">
 					<p>Porcentaje de población en situación de pobreza moderada: <strong>@{{ FormatDe(val.value * 100) }}</strong>%  <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 				</div>
-				
 			</div>
+			<p class="ap_info"><b></b> Nacional</p>
 		</div>
 	    
 	  </div>
@@ -132,6 +132,7 @@
 		  			</div>
 		  		</div>
 		  	</div>
+		  	 <p class="ap_info"><b></b> Nacional</p>
 		  </div>		  
 	  </div>
 	  <!--Educación-->
@@ -193,6 +194,7 @@
 	  				
 	  			</div>
 	  		</div>
+		  	 <p class="ap_info"><b></b> Nacional</p>
 	  	</div>	  
 	  </div>
 	  <!--Competitividad-->
@@ -215,7 +217,7 @@
 	  			</div>
 	  			<div v-if="val.name == 'PIBE per cápita (pesos a precios de 2013)'" class="row">
 	  				<div class="col-sm-6">
-	  				<p>PIBE per cápita (pesos a precios de 2013): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+	  				<p>PIB per cápita (pesos a precios de 2013): <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 	  				</div>
 	  				<div class="col-sm-3"> 
 	  					<p class="right"><strong>@{{Format(val.value)}}</strong></p>
@@ -237,7 +239,7 @@
 	  			</div>
 	  			<div v-if="val.name == 'Tasa de desocupación'" class="row">
 	  				<div class="col-sm-6">
-	  					<p class="ap_icon pib">@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+	  					<p class="ap_icon tasa">@{{val.name}} <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
 	  				</div>
 	  				<div class="col-sm-3"> 
 	  					<p class="right"><strong>@{{val.value}}</strong></p>
@@ -258,6 +260,7 @@
 	  				</div>
 	  			</div>
 	  		</div>
+		  	 <p class="ap_info"><b></b> Nacional</p>
 	  	</div>
 	  </div>
 	  <!--Género-->
@@ -332,6 +335,7 @@
 	  				
 	  			</div>
 	  		</div>
+		  	 <p class="ap_info"><b></b> Nacional</p>
 	  	</div>	  
 	  </div>
 	  <!--Gobierno-->
@@ -368,7 +372,8 @@
 	  			</div>
 	  		</div>
 	  </div>
-
+	  
+	 
 	</div>
 	
 	
@@ -907,6 +912,7 @@
 				</div>
 				
 			</div>
+			<p class="ap_info right"><b></b> Nacional</p>
 		</div>
 	</div>
 	

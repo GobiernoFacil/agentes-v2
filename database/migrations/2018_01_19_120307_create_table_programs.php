@@ -34,6 +34,6 @@ class CreateTablePrograms extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('programs');
+        Schema::dropIfExists('programs');
     }
 }

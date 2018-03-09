@@ -27,6 +27,6 @@ class AlterTableNoticesAddSlug extends Migration
     public function down()
     {
         //
-        Schemma::dropIfExists('notices');
+        Schema::dropIfExists('notices');
     }
 }
