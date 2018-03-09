@@ -49,15 +49,18 @@ class Fellows extends Controller
     public function dashboard()
     {
       $user 			    = Auth::user();
+      //program
+      $program        = $user->actual_program();
       //modulos
-      $modules        = Module::all();
-      $first_module   = Module::orderBy('start','asc')->first();
-      $all_modules    = Module::orderBy('start','asc')->get();
       $module_last    = null;
       $session        = null;
       $activity       = null;
       //última actividad
-      $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
+      if($program){
+        $user_log       = $user->log()->where('program_id',$program->id)->orderBy('created_at','desc')->first();
+      }else{
+        $user_log   = null;
+      }
       //noticias y eventos
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
       //foros
@@ -80,6 +83,8 @@ class Fellows extends Controller
       }
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
+      //////////   REVISAR ASAP ///////////////////////////////
+
       //lista de evaluaciones proximas sin contestar
       $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
       $quiz_ids        = FellowScore::where('user_id',$user->id)->pluck('questionInfo_id');
@@ -101,17 +106,16 @@ class Fellows extends Controller
       $con  = new Conversation();
       $noMessages = $con->get_no_messages($user->id);
 
+    //////////----------------------------------------------------------- ///////////////////////////////
+
+
 
    return view('fellow.dashboard')->with([
-	   "modules"		=> $modules,
         "user"      		=> $user,
-        "modules_count" => $modules->count(),
-        "module"        =>  $first_module,
         "session"       => $session,
         "module_last"   => $module_last,
         "activity"      => $activity,
         "newsEvent"     => $newsEvent,
-        "all_modules"   => $all_modules,
         "forums"        => $forums,
         "messagesF"     => $messages,
         "today"			    => $today,
@@ -119,6 +123,7 @@ class Fellows extends Controller
         "noForum"       => $noForum,
         'retro'         => $retroFiles,
         'noMessages'    => $noMessages,
+        "program"       => $program
       ]);
     }
 

@@ -15,7 +15,7 @@ class FellowProgram extends Model
       return $this->belongsTo("App\User");
     }
 
-    function program(){
+    function program_data(){
       return $this->hasOne("App\Models\Program",'program_id');
     }
 }
