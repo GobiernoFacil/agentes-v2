@@ -132,30 +132,6 @@
     </p>
   </div>
 </div>
-<!-- rol facilitador  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Rol del Facilitador</strong> <br>
-      {{Form::textarea('facilitator_role',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('facilitator_role'))
-      <strong class="danger">{{$errors->first('facilitator_role')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-<!-- rol facilitador  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Rol Participantes</strong> <br>
-      {{Form::textarea('competitor_role',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('competitor_role'))
-      <strong class="danger">{{$errors->first('competitor_role')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 <div id="webinar" style="{{old('type') ==='webinar' || $activity->type==='webinar'  ? '' : 'display:none;'}}">
 <div class="divider"></div>
 <div class="row">
