@@ -74,4 +74,33 @@
 @endsection
 @section('js-content')
 <script src="{{url('js/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script>
+(function(){
+	var open_class = "ap-show",
+	    close_class = "ap-show",
+	    buttons = document.querySelectorAll("button"),
+	    i;
+
+	for(i = 0; i < buttons.length; i++){
+		buttons[i].addEventListener("click", function(e){
+			e.preventDefault();
+			var _id       = this.getAttribute("data-div"),
+			    content   = document.getElementById(_id),
+			    is_hidden = content.style.display == "none";
+
+
+			if(is_hidden){
+				content.style.display = "block";
+				this.classList.remove(close_class);
+				this.classList.add(open_class);
+			}
+			else{
+				content.style.display = "none";
+				this.classList.add(close_class);
+				this.classList.remove(open_class);
+			}
+		});
+	}
+})();
+</script>
 @endsection
