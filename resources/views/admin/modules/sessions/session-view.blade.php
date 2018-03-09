@@ -58,23 +58,6 @@
 					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar objetivos particulares de la sesión</a>
 				@endif
 		</div>
-		<?php /* delete ASAP
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li class="right"><span>Agregar actividad</span>
-				<a href='{{ url("dashboard/sesiones/actividades/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
-				<li class="right"><span>Asignar Facilitador</span>
-				<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs view">Asignar</a></li>
-				<li class="right"><span>Agregar temática</span>
-				<a href='{{ url("dashboard/sesiones/tematicas/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
-				<li class="right"><span>Agregar Mecanismos de Monitoreo y Evaluación</span>
-				<a href='{{url("dashboard/sesiones/mecanismos-monitoreo/agregar/$session->id")}}' class="btn xs view">Agregar</a></li>
-				<!--
-				<li class="right"><span>Agregar requisitos previos</span>
-				<a href='{{ url("dashboard/sesiones/requisitos/agregar/$session->id") }}' class="btn xs view">Agregar</a></li>
-			  -->
-			</ul>
-		</div>*/?>
 	</div>
 </div>
 
@@ -109,11 +92,8 @@
   	<div class="row">
 	  	@if($session->activities->count() > 0)
   		<div class="col-sm-9">
-  			<h2 class="title">Actividades</h2>
+  			<h2 class="title">Actividad</h2>
   		</div>
-		<div class="col-sm-3">
-			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar más actividades</a>
-		</div>
 		<div class="col-sm-12">
 			<div class="divider"></div>
 		</div>
@@ -122,9 +102,9 @@
 	  	</div>
 		@else
 		<div class="col-sm-12">
-  			<h2 class="title">Actividades</h2>
-			<p><span>Sin actividades</span></p>
-			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar actividades</a>
+  			<h2 class="title">Actividad</h2>
+			<p><span>Sin actividad</span></p>
+			<a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">Agregar actividad</a>
 		</div>
 		@endif
 	</div>
