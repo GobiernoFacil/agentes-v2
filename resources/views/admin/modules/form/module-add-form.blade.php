@@ -31,7 +31,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',null, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('end',null, ["class" => "form-control",'id'=>'startE','disabled' => 'disabled'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
       @endif
@@ -53,28 +53,6 @@
   </div>
 </div>
 
-
-<!-- horas -->
-<div class="row">
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Duración</strong> <br>
-      {{Form::text('number_hours', null, ["class" => "form-control"])}} </label>
-      @if($errors->has('number_hours'))
-      <strong class="danger">{{$errors->first('number_hours')}}</strong>
-      @endif
-    </p>
-  </div>
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Unidad de medida</strong> <br>
-      {{Form::select('measure',[null=>"Selecciona una opción",0=>"Minutos",1 =>"Horas"], null, ["class" => "form-control"])}} </label>
-      @if($errors->has('measure'))
-      <strong class="danger">{{$errors->first('measure')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 
 <!-- modalidad -->
 

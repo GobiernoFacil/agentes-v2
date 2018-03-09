@@ -51,7 +51,8 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
   $('#startD').on('change',function(){
     var date = new Date($('#startD').val());
     $('#startE').datepicker('destroy');
-    $( "#startE" ).datepicker({minDate:date});
+    date.setDate(date.getDate()+7);
+    $( "#startE" ).datepicker().datepicker('setDate', date);
   });
   </script>
 @endsection

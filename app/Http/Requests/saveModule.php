@@ -28,14 +28,12 @@ class SaveModule extends FormRequest
             //
             'title'=> 'required|max:256|unique:modules',
             'number_sessions'=> 'required|numeric',
-            'number_hours'=> 'required|numeric',
             'modality'=> 'required',
             'teaching_situation'=> 'required',
             'product_developed'=> 'required',
             'start'=> 'required',
             'end'=> 'required',
             'public'=> 'required',
-            'measure'=> 'required',
         ];
     }
 }

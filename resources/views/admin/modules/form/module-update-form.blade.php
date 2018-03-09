@@ -31,7 +31,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',$module->end, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('end',$module->end, ["class" => "form-control",'id'=>'startE','disabled' => 'disabled'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
       @endif
