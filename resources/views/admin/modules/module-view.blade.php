@@ -63,7 +63,6 @@
 
 
 <!---------------------------------------------- sesiones--->
-
 <div class="row">
 	<div class="col-sm-12">
 		<div class="divider"></div>
@@ -74,111 +73,11 @@
 
 <!-- lista de sesiones-->
 @if($module->sessions->count() > 0)
-<div class="box session_list last_activity ap_week">
+<div class="box session_list last_activity ap_week admin">
     @foreach($module->sessions as $session)
-	<div class="row">
-		<!---title-->
-		<div class="col-sm-9">
-			<h2>{{$session->name}}  <span class="le_link"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/editar/$session->id")}}' class="btn xs ev">Actualizar sesión</a></span></h2>
-		</div>
-		<!---actions-->
-		<div class="col-sm-3">
-			<p class="right">
-			<a class="btn view xs"  href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/ver/$session->id")}}'>Ver sesión</a>
-			<a href ='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/eliminar/$session->id")}}'  id ="{{$session->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
-			</p>
-		</div>
-		<div class="col-sm-12">
-			<div class="divider"></div>
-		</div>
-    </div>
-    @if($session->activities->count() > 0)
-    <ul class="ap_list">
-    	@foreach ($session->activities as $activity)
-    	<li class="row">
-    		<span class="col-sm-9">
-    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
-    			<a href="{{ url('dashboard/sesiones/actividades/ver/'. $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} min.</span></a>
-    		</span>
-    		@if($activity->type == "evaluation")
-    		<span class="col-sm-3">
-    			<p class="right"> Fecha límite:
-    			 <strong>{{date("d-m-Y", strtotime($activity->end))}}</strong><br>
-    			 <span class="notes">({{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}})</span>
-    			</p>
-    		</span>
-    		@endif
-    	</li>
-    	@endforeach
-    </ul>
-    @endif
-
+		@include('admin.modules.includes.activities_list')		
     @endforeach
 </div>
-@else
-<div class="box">
-	<div class="row center">
-		<h2>Sin sesiones</h2>
-	</div>
-</div>
-@endif
-
-@if($module->sessions->count() > 0)
-@foreach ($module->sessions as $session)
-<div class="box session_list">
-	<div class="row">
-		<!--icono-->
-		<div class="col-sm-1 right">
-			<b class="icon_h session list_s"></b>
-		</div>
-		<div class="col-sm-9">
-			<h3>Sesión {{$session->order}}</h3>
-			<h2><a href="{{ url('dashboard/sesiones/ver/' . $session->id) }}">{{$session->name}}</a>  <span class="le_link"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/editar/$session->id")}}' class="btn xs ev">Actualizar sesión</a></span></h2>
-			<div class="divider"></div>
-			<div class="row">
-				<div class="col-sm-9">
-					<p>{{$session->objective}}</p>
-				</div>
-				<div class="col-sm-3 notes">
-					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($session->start))}} al {{date('d-m-Y', strtotime($session->end))}}</p>
-				</div>
-			</div>
-		</div>
-		<!-- ver sesión-->
-		<div class="col-sm-2">
-			<a class="btn view block sessions_l"  href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/ver/$session->id")}}'>Ver sesión</a>
-			<a href ='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/eliminar/$session->id")}}'  id ="{{$session->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
-		</div>
-
-		<div class="footnote">
-			<div class="row">
-				<div class="col-sm-2">
-					<p><b class="icon_h time"></b>{{$session->hours}} h </p>
-				</div>
-				<div class="col-sm-2">
-					<p><b class="icon_h modalidad"></b>{{$session->modality}}</p>
-				</div>
-				<div class="col-sm-6">
-					@if($session->facilitators->count() > 0)
-					<p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
-					@foreach ($session->facilitators as $facilitator)
-						@if($facilitator->user->image)
-						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="30px">
-						@else
-						@endif
-						 {{$facilitator->user->name}} -  {{$facilitator->user->institution}} <br>
-					@endforeach
-					</p>
-					@endif
-				</div>
-				<div class="col-sm-2">
-					<p class="right">{{$session->activities->count() == 1 ? $session->activities->count(). " actividad" : $session->activities->count(). " actividades"}}  </p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-@endforeach
 @else
 <div class="box">
 	<div class="row center">
@@ -187,4 +86,6 @@
 	</div>
 </div>
 @endif
+
+
 @endsection
