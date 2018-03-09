@@ -1598,12 +1598,17 @@ b.sessionG {
 
 .box.session_list.ap_week h2 {
   font: 700 18px "overpass", Helvetica, Arial, sans-serif;
-  border-bottom: 1px solid rgba(122, 122, 124, 0.5); }
-  .box.session_list.ap_week h2 a {
-    color: #333333; }
-    .box.session_list.ap_week h2 a:hover {
-      color: #20a6e7;
-      text-decoration: underline; }
+  border-bottom: 1px solid rgba(122, 122, 124, 0.5);
+  /*
+		a {
+			color: #333333;
+			&:hover {
+				color: $nav_blue;
+				text-decoration: underline;
+			}
+		}*/ }
+  .box.session_list.ap_week h2 a.btn.ev, .box.session_list.ap_week h2 .btn.ev, .box.session_list.ap_week h2 a:visited.btn.ev {
+    color: white; }
 
 .box.session_list.ap_week li a {
   color: #7a7a7c;
@@ -1616,6 +1621,13 @@ b.sessionG {
 
 .box.session_list.ap_week .notes {
   font-size: 10px; }
+
+.box.session_list.ap_week.admin h2 {
+  border-bottom: 0; }
+
+.box.session_list.ap_week.admin .divider {
+  border-width: 2px;
+  margin: 0; }
 
 .ap_week b {
   border: 2px solid #7a7a7c;
