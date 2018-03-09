@@ -14,6 +14,7 @@ use App\Models\FellowFile;
 use App\Models\FacilitatorSurvey;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
+use App\Models\Program;
 
 class User extends Authenticatable
 {
@@ -171,6 +172,17 @@ class User extends Authenticatable
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    function programs(){
+      return $this->hasMany("App\Models\FellowProgram");
+    }
+
+    function actual_program(){
+      $programs = $this->programs()->pluck('program_id');
+      $today  = date('Y-m-d');
+      return Program::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->whereIn('id',$programs->toArray())->first();
+
     }
 
 }
