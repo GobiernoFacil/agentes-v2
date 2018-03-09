@@ -76,7 +76,22 @@
 @if($module->sessions->count() > 0)
 <div class="box session_list last_activity ap_week">
     @foreach($module->sessions as $session)
-    <h2>{{$session->name}}</h2>
+	<div class="row">
+		<!---title-->
+		<div class="col-sm-9">
+			<h2>{{$session->name}}  <span class="le_link"><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/editar/$session->id")}}' class="btn xs ev">Actualizar sesión</a></span></h2>
+		</div>
+		<!---actions-->
+		<div class="col-sm-3">
+			<p class="right">
+			<a class="btn view xs"  href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/ver/$session->id")}}'>Ver sesión</a>
+			<a href ='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/eliminar/$session->id")}}'  id ="{{$session->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+			</p>
+		</div>
+		<div class="col-sm-12">
+			<div class="divider"></div>
+		</div>
+    </div>
     @if($session->activities->count() > 0)
     <ul class="ap_list">
     	@foreach ($session->activities as $activity)
