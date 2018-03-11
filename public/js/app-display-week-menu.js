@@ -11,10 +11,14 @@
 		if(menuDiv.style.display == "none"){
 			menuDiv.style.display = "block";
 			menuDiv.classList.add("open");
+			togglBtn.classList.remove("show");
+			togglBtn.classList.add("hide");
 		}
 		else{
 			menuDiv.style.display = "none";
 			menuDiv.classList.remove("open");
+			togglBtn.classList.remove("hide");
+			togglBtn.classList.add("show");
 		}
 	});
 	   
