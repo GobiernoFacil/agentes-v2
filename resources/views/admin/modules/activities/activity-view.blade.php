@@ -4,6 +4,9 @@
 @section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session view activity')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
+@section('subnav', 'layouts.fellow.subnav.activity')
+
+@section('subnav_week', 1)
 
 @section('content')
 
@@ -140,5 +143,18 @@
 		</script>
 	@endif
 @endif
+@endsection
 
+@section('js-content')
+<script>
+	var module     = {!! json_encode($activity->session->module) !!},
+	    sessions   = {!! json_encode($activity->session->module->sessions) !!},
+	    activities = [];
+
+	    @foreach($activity->session->module->sessions as $session)
+	    activities.push({!! json_encode($session->activities) !!});
+	    @endforeach
+</script>
+
+<script src="{{url('js/app-display-week-menu.js')}}"></script> 
 @endsection
