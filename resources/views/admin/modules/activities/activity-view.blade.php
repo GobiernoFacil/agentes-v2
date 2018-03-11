@@ -46,7 +46,6 @@
 		<h1><strong>{{$type}}:</strong> {{$activity->name}} <span class="le_link"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span </h1>
 		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
 		<div class="divider"></div>
-
 	</div>
 </div>
 
@@ -93,7 +92,6 @@
 @endif
 
 
-<div class="divider"></div>
 @if(!empty($activity->forum))
 <!---------------------------------------------------------------------------------- foro ------------------------------------>
 @include('layouts.forums.list-at-activity')
@@ -117,10 +115,13 @@
 	</div>
 </div>
 @else
-<div class="box last_activity">
-	<p>Sin archivo</p>
-	<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
-</div>
+	@if($activity->type == 'lecture')
+	
+	<div class="box last_activity">
+		<p>Sin archivo</p>
+		<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
+	</div>
+	@endif
 @endif
 
 @if($activity->type == 'video')
@@ -143,6 +144,15 @@
 		</script>
 	@endif
 @endif
+
+
+<div class="subnav bottom">
+	<div class="center">
+		<a href=""><strong>&lt;</strong> Anterior</a>
+		<a href="">Siguiente <strong>&gt;</strong></a>
+	</div>
+</div>
+
 @endsection
 
 @section('js-content')
