@@ -1,4 +1,4 @@
-<nav class="nav_week" id="week-menu-shalala" style="display: none">
+<nav class="nav_week open" id="week-menu-shalala">
 	<!-- lista de sesiones-->
 	@if($activity->session->module->sessions->count() > 0)
 	<div class="ap_week">
