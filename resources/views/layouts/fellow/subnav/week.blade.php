@@ -10,7 +10,11 @@
 				<li class="row">
 					<span class="col-sm-9">
 						<b class="{{$_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+						@if($user->type == "admin")
+						<a href="{{ url('dashboard/sesiones/actividades/ver/'. $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a> 						
+						@else
 						<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a> 
+						@endif
 					</span>
 					<span class="col-sm-3">
 						<span class="notes">{{$_activity->duration}} min.</span>
