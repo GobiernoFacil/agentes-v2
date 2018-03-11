@@ -1175,6 +1175,13 @@ li a:link {
   .subnav .right a {
     border-left: 2px solid #ebebeb;
     border-right: 0; }
+  .subnav.bottom {
+    border: 0;
+    margin-top: 50px; }
+    .subnav.bottom a {
+      border-top: 2px solid #ebebeb;
+      border-bottom: 2px solid #ebebeb;
+      border-left: 2px solid #ebebeb; }
 
 .nav_week {
   background: #f2f2f2;
