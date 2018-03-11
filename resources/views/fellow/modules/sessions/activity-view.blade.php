@@ -218,4 +218,38 @@
 	@endif
 @endif
 
+
+<script>
+(function(){
+	var togglBtnId = "display-week-menu",
+	    menuDivId  = "week-menu-shalala",
+	    togglBtn   = document.getElementById(togglBtnId), 
+	    menuDiv    = document.getElementById(menuDivId),
+	    module     = {!! json_encode($activity->session->module) !!},
+	    sessions   = {!! json_encode($activity->session->module->sessions) !!},
+	    activities = [];
+
+	    @foreach($activity->session->module->sessions as $session)
+	    activities.push({!! json_encode($session->activities) !!});
+	    @endforeach
+
+
+	togglBtn.addEventListener("click", function(e){
+		e.preventDefault();
+		//console.log("yoooo");
+
+		if(menuDiv.style.display == "none"){
+			menuDiv.style.display = "block";
+			menuDiv.classList.add("open");
+		}
+		else{
+			menuDiv.style.display = "none";
+			menuDiv.classList.remove("open");
+		}
+	});
+	   
+})();
+
+</script>
+
 @endsection

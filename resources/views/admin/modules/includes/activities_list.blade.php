@@ -6,7 +6,7 @@
 	<!---actions-->
 	<div class="col-sm-3">
 		<p class="right">
-			
+
 		<a class="btn ev xs"  href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/ver/$session->id")}}'>Ver sesión</a>
 		<a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/editar/$session->id")}}' class="btn xs view">Actualizar sesión</a>
 		<a href ='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/eliminar/$session->id")}}'  id ="{{$session->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
@@ -51,7 +51,7 @@
 </ul>
 <p class="center"><a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs view">[+] Agregar actividad a {{$session->name}}</a></p>
 <div class="divider bottom"></div>
-@else 
+@else
 <p class="center">No hay actividades en esta sesión. <br><a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs view">[+] Agregar actividad a {{$session->name}}</a></p>
 <div class="divider bottom"></div>
 @endif
@@ -63,7 +63,7 @@
 		<h3>Facilitadores de la sesión</h3>
 	</div>
 	<div class="col-sm-3">
-		<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs ev">Asignar más facilitadores</a>
+		<a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/asignar/{$session->id}") }}'  class="btn xs ev">Asignar más facilitadores</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="divider"></div>
