@@ -4,7 +4,7 @@
 @section('body_class', 'fellow aprendizaje modulos')
 @section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_modules')
-@section('subnav', 'layouts.fellow.subnav.activity')
+@section('subnav', 1)
 @section('subnav_week', 1)
 
 @section('content')

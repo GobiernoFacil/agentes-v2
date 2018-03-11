@@ -4,8 +4,8 @@
 @section('body_class', 'modulos')
 @section('breadcrumb_type', 'module session view activity')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
-@section('subnav', 'layouts.fellow.subnav.activity')
 
+@section('subnav', 1)
 @section('subnav_week', 1)
 
 @section('content')
