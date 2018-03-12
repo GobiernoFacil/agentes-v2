@@ -141,8 +141,17 @@ class Activities extends Controller
         {
             //
             $user     = Auth::user();
-            $activity = activity::find($id);
+            $activity = activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+            $module   = $session->module->sessions;
+            $next     = $session->module->sessions()->where('parent_id',$session->id)->first();
+            $prev     = $session->module->sessions()->where('order','<=',($session->order-1))->first();
+            if($prev){
+                $prev = $prev->activities->first();
+            }
+            if($next){
+                $next = $next->activities->first();
+            }
             $forum    = $activity->forum;
             if($activity->forum){
               $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
@@ -157,7 +166,9 @@ class Activities extends Controller
               "activity"    => $activity,
               "session"		=> $session,
               "forum"		=> $forum,
-              "forums"		=> $forums
+              "forums"		=> $forums,
+              "next"    => $next,
+              "prev"    =>$prev
             ]);
         }
 
