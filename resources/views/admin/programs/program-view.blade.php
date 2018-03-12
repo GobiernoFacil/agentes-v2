@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Ver programa '. $program->title)
 @section('description', 'Ver programa')
-@section('body_class', 'program view')
+@section('body_class', 'program')
 @section('breadcrumb_type', 'program view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 @section('content')

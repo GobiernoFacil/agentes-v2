@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar programa')
 @section('description', 'Agregar nuevo programa')
-@section('body_class', 'programs')
+@section('body_class', 'program')
 @section('breadcrumb_type', 'program add')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 

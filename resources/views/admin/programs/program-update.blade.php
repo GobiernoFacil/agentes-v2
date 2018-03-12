@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Actualizar programa')
 @section('description', 'Actualizar programa '.$program->title)
-@section('body_class', 'programs')
+@section('body_class', 'program')
 @section('breadcrumb_type', 'program update')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
