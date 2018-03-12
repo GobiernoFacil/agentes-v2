@@ -8,9 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-8">
-		<h1>Lista de aspirantes</h1>
-		<h2>Convocatoria "{{$notice->title}}" </h2>
-
+		<h1>Lista de aspirantes de <strong>{{$notice->title}}</strong></h1>
 	</div>
 	<div class="col-sm-4">
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
