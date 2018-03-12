@@ -2276,7 +2276,7 @@ a:visited.btn {
   a.btn.ev,
   .btn.ev,
   a:visited.btn.ev {
-    color: white;
+    color: white !important;
     background-color: #187fad; }
     a.btn.ev:hover,
     .btn.ev:hover,
