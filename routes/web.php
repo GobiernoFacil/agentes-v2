@@ -251,6 +251,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     Route::post('dashboard/sesiones/actividades/archivos/update/{file_id}', 'ActivitiesFiles@update');
     Route::get('dashboard/sesiones/actividades/archivos/eliminar/{file_id}', 'ActivitiesFiles@delete');
+    //ver pdf
+    Route::get('dashboard/sesiones/actividades/archivos/ver-pdf/{file_id}', 'ActivitiesFiles@watchPdf');
+
+
+
+
     /*@ActivityRequirements Controller */
     //CRUD activitiesRequirements
     Route::get('dashboard/sesiones/actividades/requerimientos/{id}', 'ActivityRequirements@index');
