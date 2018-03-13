@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Aspirant;
 use App\Models\AspirantNotice;
+use App\Models\FellowProgram;
 use App\Models\Module;
 use App\Models\Notice;
 use App\Models\Program;
@@ -47,14 +48,32 @@ class AttachPreDataToProgram extends Command
         //
         $aspirants_attached = AspirantNotice::pluck('aspirant_id')->toArray();
         $aspirants_to_attach = Aspirant::whereNotIn('id',$aspirants_attached)->get();
-        
+        $notice   = Notice::where('title','Convocatoria 2017')->first();
         $all = Aspirant::all();
         foreach ($aspirants_to_attach as $aspirant) {
-          $this->info($aspirant->id);
-          # code...
+          AspirantNotice::firstOrCreate([
+            'aspirant_id' => $aspirant->id,
+            'notice_id'   => $notice->id
+          ]);
         }
-        var_dump(sizeof($aspirants_attached));
-        var_dump($aspirants_to_attach->count());
-        var_dump($all->count());
+
+        $program = $notice->program;
+        $modules = Module::whereNull('program_id')->pluck('id')->toArray();
+        Module::whereIn('id', $modules)
+          ->update(['program_id' => $program->id]);
+        $fellows_assi = FellowProgram::pluck('user_id')->toArray();
+        $fellows = User::where('type','fellow')->whereNotIn('id',$fellows_assi)->get();
+        foreach ($fellows as $fellow){
+           FellowProgram::firstOrCreate([
+             'user_id' => $fellow->id,
+             'program_id'=> $program->id
+           ]);
+           }
+        
+        $this->info('Attached');
+
+
+
+
     }
 }
