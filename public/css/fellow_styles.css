@@ -368,6 +368,9 @@ form {
     padding: 5px;
     width: 100%; }
 
+.ap_textareacontent {
+  white-space: pre-wrap; }
+
 input[type="text"],
 input[type="password"],
 input[type="search"],
