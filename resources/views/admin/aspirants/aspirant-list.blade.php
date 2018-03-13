@@ -27,7 +27,7 @@
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
 		<div id="table_box" style ="{{$list->count() > 0 ? '' : 'display:none;'}}">
-			<table class="table" 	 id="table">
+			<table class="table" id="table">
 				<thead>
 					<tr>
 						<th>Nombre / email</th>
@@ -37,6 +37,7 @@
 						<th>Comprobante evaluado </th>
 						<th>Políticas de Privacidad</th>
 						<th>Acciones</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody id = "body_table">
@@ -59,10 +60,11 @@
 							<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
 					        <!--acciones-->
 					        <td>
-					        <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
+					        <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a></td>
+					        <td>
 					        @if($aspirant->AspirantsFile)
 								@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
-								<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+								<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Revisar comprobante</a>
 								@endif
 							@endif
 							</td>
