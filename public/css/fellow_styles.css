@@ -2489,6 +2489,9 @@ a:visited.link {
 .aspirantes h2 {
   margin-bottom: 30px; }
 
+.aspirantes form h2 {
+  font-weight: 500; }
+
 #bar svg,
 #bar2 svg {
   margin: 30px auto;
