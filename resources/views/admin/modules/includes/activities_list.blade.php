@@ -28,7 +28,7 @@
 			<!--tipo de actividad-->
 			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 			<!-- actividad-->
-			<a href="{{ url('dashboard/sesiones/actividades/ver/'. $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} h.</span></a>
+			<a href="{{ url('dashboard/sesiones/actividades/ver/'. $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure ? ' horas':' minutos'}}.</span></a>
 		</span>
 		@if($activity->type == "evaluation")
 		<!-- si es evaluación-->

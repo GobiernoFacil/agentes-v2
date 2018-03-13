@@ -44,7 +44,7 @@
 		<!--- activity title-->
 		<div class="divider b"></div>
 		<h1><strong>{{$type}}:</strong> {{$activity->name}} <span class="le_link"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span </h1>
-		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
+		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} {{$activity->measure ? ' hrs.' : ' min.'}}</span></p>
 		<div class="divider"></div>
 	</div>
 </div>

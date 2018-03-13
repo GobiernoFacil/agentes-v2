@@ -34,7 +34,7 @@
 						<th>Ciudad / Estado</th>
 						<th>Procedencia</th>
 						<th>Registro</th>
-						<th>Comprobante evaluado </th>
+						<th>Comprobante válido </th>
 						<th>Políticas de Privacidad</th>
 						<th>Acciones</th>
 						<th></th>
@@ -55,18 +55,16 @@
 							<!--registro-->
 					        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 					        <!--evaluado-->
-							<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
+							<td>{{$aspirant->has_proof_evaluated($notice) ? $aspirant->has_proof_evaluated($notice)->address_proof ? 'Válido' : 'No Válido' : 'No cumple requisitos' }}</td>
 							<!--privacy-->
 							<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
 					        <!--acciones-->
 					        <td>
 					        <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a></td>
 					        <td>
-					        @if($aspirant->AspirantsFile)
-								@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
-								<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Revisar comprobante</a>
-								@endif
-							@endif
+					        @if($aspirant->check_aplication_data())
+											<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Revisar comprobante</a>
+									@endif
 							</td>
 					    </tr>
 					    @endforeach
@@ -82,7 +80,7 @@
 			<p><strong>Sin aspirantes {{ $type_list === 4 ? 'con comprobante de domicilio por revisar' : ''}}</strong></p>
 		@endif
 	</div>
-	
+
 	<div class="col-sm-12">
 		@if($aWpE_count <= 0)
 		<div id="table_box">

@@ -170,7 +170,7 @@ class Modules extends Controller
 
   protected function checkOrder($data){
     //primer módulo
-    if($data->parent_id==='0'){
+    if(!$data->parent_id){
        $order        =  1;
        $data->order  =  $order;
        $data->parent_id = null;
