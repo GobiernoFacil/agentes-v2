@@ -1,10 +1,16 @@
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-4">
+		<p><span class="notes">Aspirantes</span> <br>
 	<a class ="btn view {{ $type_list === 0 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos <strong>({{$aspirants->count()}})</strong></a>
-	<a class ="btn view {{ $type_list === 1 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>No válidos <strong>({{$aWp_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 1 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes no válidos <strong>({{$aWp_count}})</strong></a>
+		</p>
+	</div>
+	<div class="col-sm-8">
+		<p><span class="notes">Revisar comprobante de domicilio</span><br>
 	<a class ="btn view {{ $type_list === 2 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Comprobante no válido <strong>({{$aRp_count}})</strong></a>
-	<a class ="btn view {{ $type_list === 3 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Evaluados <strong>({{$aAe_count}})</strong></a>
-	<a class ="btn view {{ $type_list === 4 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Por evaluar <strong>({{$aWpE_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 3 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Comprobante evaluado <strong>({{$aAe_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 4 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Comprobante por evaluar <strong>({{$aWpE_count}})</strong></a>
+		</p>
 	</div>
 </div>
 
