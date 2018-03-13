@@ -22,7 +22,7 @@
 	</div>
 </div>
 
-@include('admin.aspirants.list_buttons')
+@include('admin.aspirants.includes.list_buttons')
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">

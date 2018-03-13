@@ -1,3 +1,6 @@
+
+
+
 @if($type_list === 0)
 <div class="row">
 	<div class="col-sm-6">

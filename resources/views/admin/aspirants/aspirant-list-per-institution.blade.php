@@ -8,13 +8,13 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-8">
+		<h1>
 		@if($type_list != 0)
-			<h1>Tu lista de aspirantes</h1>
+			Tu lista de aspirantes a evaluar
 		@else
-			<h1>Todos los aspirantes evaluados</h1>
+		  Lista de aspirantes a evaluar
 		@endif
-		<h2>Convocatoria "{{$notice->title}}" </h2>
-
+		de  <strong>{{$notice->title}}</strong> </h1>
 	</div>
 	<div class="col-sm-4">
 		<form  role="form" method="GET" action="{{ url('dashboard/aspirantes') }}" id="search-input">
@@ -26,9 +26,12 @@
  	 	</div>
 		</form>
 	</div>
+	<div class="col-sm-12">
+				<div class="divider"></div>
+	</div>
 </div>
 
-@include('admin.aspirants.list_institutions_buttons')
+@include('admin.aspirants.includes.list_institutions_buttons')
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
