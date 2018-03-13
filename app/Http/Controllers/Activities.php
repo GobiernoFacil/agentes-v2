@@ -159,7 +159,6 @@ class Activities extends Controller
             }
       		/*	$forum    = Forum::where('activity_id',$activity->id)->firstOrFail();
       			$forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
-
              return view('admin.modules.activities.activity-view')->with([
               "user"      	=> $user,
               "activity"    => $activity,
