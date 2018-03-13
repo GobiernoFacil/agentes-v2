@@ -38,11 +38,11 @@
 					@foreach($notices as $notice)
 						<tr>
 							<td><h4><a href='{{url("dashboard/convocatorias/ver/{$notice->id}")}}'>{{$notice->title}}</a></h4></td>
-							<td><p class="center">{{ $notice->all_aspirants_data()->count() }}</p></td> 
-							<td><p class="center">{{ $notice->aspirants_without_data()->count() }}</p></td>
-							<td><p class="center">{{ $notice->aspirants_already_evaluated()->count() }}</p> </td>
-							<td><p class="center">{{ $notice->aspirants_app_already_evaluated()->count() }}</p></td>
-							<td><p><a href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/ver") }}' class="btn xs view">Validar domicilio</a></p>
+							<td><p class="center"><a class="t_link" href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/ver") }}'>{{ $notice->all_aspirants_data()->count() }}</p></td> 
+							<td><p class="center"><a class="t_link" href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/aspirantes-sin-archivos") }}'>{{ $notice->aspirants_without_data()->count() }}</p></td>
+							<td><p class="center"><a class="t_link" href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/aspirantes-con-archivos-evaluados") }}'>{{ $notice->aspirants_already_evaluated()->count() }}</p> </td>
+							<td><p class="center"><a class="t_link" href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/todos-los-aspirantes-con-aplicacion-evaluada") }}'>{{ $notice->aspirants_app_already_evaluated()->count() }}</p></td>
+							<td><p><a href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/aspirantes-con-archivo-por-evaluar") }}' class="btn xs view">Validar domicilio</a></p>
 							</td>
 							<td><p><a href='{{ url("dashboard/aspirantes/convocatoria/{$notice->id}/aspirantes-con-aplicacion-por-evaluar") }}' class="btn xs ev">Evaluar aspirantes</a></p>
 							</td>
