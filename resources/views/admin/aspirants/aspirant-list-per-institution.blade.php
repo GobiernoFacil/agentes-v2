@@ -33,7 +33,7 @@
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
-		<div class="box" id ="table_box" style ="{{$list->count() > 0 ? '' : 'display:none;'}}">
+		<div id="table_box" style ="{{$list->count() > 0 ? '' : 'display:none;'}}">
 								<table class="table" 	 id="table">
 								  <thead>
 								    <tr>
