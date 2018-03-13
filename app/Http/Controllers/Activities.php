@@ -143,7 +143,6 @@ class Activities extends Controller
             $user     = Auth::user();
             $activity = activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
-            $module   = $session->module->sessions;
             $next     = $session->module->sessions()->where('parent_id',$session->id)->first();
             $prev     = $session->module->sessions()->where('order','<=',($session->order-1))->first();
             if($prev){
