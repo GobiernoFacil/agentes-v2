@@ -1,22 +1,14 @@
 <div class="row">
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos los  <span class= "strong" >aspirantes</span> ({{$aspirants->count()}})</a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>Aspirantes <span class= "strong" >no</span> válidos ({{$aWp_count}})</a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Aspirantes <span class= "strong">con comprobante no válido ({{$aRp_count}})</span></a>
-	</div>
-	
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Aspirantes <span class= "strong">evaluados ({{$aAe_count}})</span></a>
-	</div>
-	<div class="col-sm-3">
-		<a class ="btn view gde"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Aspirantes por <span class= "strong" >evaluar ({{$aWpE_count}})</span></a>
+	<div class="col-sm-12">
+	<a class ="btn view {{ $type_list === 0 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/ver")}}'>Todos <strong>({{$aspirants->count()}})</strong></a>
+	<a class ="btn view {{ $type_list === 1 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos")}}'>No válidos <strong>({{$aWp_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 2 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-sin-archivos-validos")}}'>Comprobante no válido <strong>({{$aRp_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 3 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados")}}'>Evaluados <strong>({{$aAe_count}})</strong></a>
+	<a class ="btn view {{ $type_list === 4 ? "active" : ''}}"  href ='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar")}}'>Por evaluar <strong>({{$aWpE_count}})</strong></a>
 	</div>
 </div>
 
+<div class="divider"></div>
 @if($type_list === 0)
 <h2><strong>Todos los aspirantes con correo validado</strong></h2>
 @elseif($type_list === 1)
