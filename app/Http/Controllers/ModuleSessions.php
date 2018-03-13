@@ -96,7 +96,7 @@ class ModuleSessions extends Controller
 
     protected function checkOrder($data){
       //primera sesión
-      if($data->parent_id==='0'){
+      if(!$data->parent_id){
          $order        =  1;
          $data->order  =  $order;
          $data->parent_id = null;
