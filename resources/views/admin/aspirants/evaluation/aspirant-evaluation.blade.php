@@ -57,7 +57,7 @@
 var url  = '<?php echo $aspirant->AspirantsFile->video;?>';
 $(document).ready(function() {
   var videoId = getId(url);
-  var iframeMarkup = '<iframe width="560" height="315" src="//www.youtube.com/embed/'
+  var iframeMarkup = '<iframe width="100%" height="450" src="//www.youtube.com/embed/'
     + videoId + '" frameborder="0" allowfullscreen></iframe>';
    $('#videoB').html(iframeMarkup);
    console.log(iframeMarkup);
