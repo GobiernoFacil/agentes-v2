@@ -55,7 +55,7 @@
 							<!--registro-->
 					        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 					        <!--evaluado-->
-							<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
+							<td>{{$aspirant->has_proof_evaluated($notice) ? $aspirant->has_proof_evaluated($notice)->address_proof ? 'Válido' : 'No Válido' : 'No cumple requisitos' }}</td>
 							<!--privacy-->
 							<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
 					        <!--acciones-->
