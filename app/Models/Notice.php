@@ -28,6 +28,10 @@ class Notice extends Model
     'slug'
     ];
 
+    function program(){
+      return $this->hasOne("App\Models\Program",'notice_id');
+    }
+
     function files(){
       return $this->hasMany("App\Models\NoticeFile");
     }

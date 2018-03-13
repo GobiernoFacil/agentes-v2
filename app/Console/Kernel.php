@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
         Commands\CreateDiagnosticFiles::Class,
         Commands\AddGenderToFellows::Class,
         Commands\AssignAspirants::Class,
-        Commands\SendAspirantReminder::Class
+        Commands\SendAspirantReminder::Class,
+        Commands\AttachPreDataToProgram::Class
     ];
 
     /**
