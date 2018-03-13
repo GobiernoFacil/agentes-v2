@@ -23,7 +23,7 @@
 				<h4 class="center"><span class="notes">Estado</span> <br>  {{ $aspirant->state }} </h4>
 			</div>
 			<div class="col-sm-3">
-				<h4 class="right"><span class="notes">Ciudad</span> <br>  {{ $aspirant->city }} </h4>
+				<h4 class="right"><span class="notes">Municipio</span> <br>  {{ $aspirant->city }} </h4>
 			</div>
 		</div>
 		<div class="row">
@@ -34,7 +34,7 @@
 				<h4><span class="notes">Procedencia</span> <br>  {{ $aspirant->origin }} </h4>
 			</div>
 			<div class="col-sm-4">
-				<h4><span class="notes">Género</span> <br>  {{ $aspirant->gender == "male" ? "Masculino" : ''}} {{ $aspirant->gender == "female" ? "Masculino" : ''}} </h4>
+				<h4><span class="notes">Género</span> <br>  {{ $aspirant->gender == "male" ? "Masculino" : ''}} {{ $aspirant->gender == "female" ? "Femenino" : ''}} </h4>
 			</div>
 			
 			<div class="col-sm-12">

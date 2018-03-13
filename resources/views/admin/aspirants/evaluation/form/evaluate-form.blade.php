@@ -38,72 +38,84 @@
         			@endif
           </p>
     </div>
+    <div class="col-sm-12 modulos">
+	    <div class="divider top"></div>
+    </div>
 </div>
 
 <!--evaluar cv-->
-<div class="row">
-    <div class="col-sm-12">
-    	<h2 class="sa_title">Evaluar Perfil Curricular </h2>
-    </div>
-    <div class="col-sm-6">
-    	<h3>Perfil Curricular</h3>
+<section>
+	<div class="row">
+	    <div class="col-sm-12">
+	    	<h2 class="sa_title">Evaluar Perfil Curricular </h2>
+	    </div>
+	    <div class="col-sm-6">
+	    	<h3>Perfil Curricular</h3>
+		</div>
+		<div class="col-sm-6">
+	    	<p><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn gde download"> Descargar Perfil Curricular</a></p>
+	    </div>
 	</div>
-	<div class="col-sm-6">
-    	<p><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn gde download"> Descargar Perfil Curricular</a></p>
-    </div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-    	<div class="divider"></div>
-    </div>
-	  <div class="col-sm-6">
-      <p>
-          <label><strong>Comentarios (opcional)</strong> <br>
-         {{Form::textarea('experienceComments',null, ["class" => "form-control"])}}</label>
-          @if($errors->has('experienceComments'))
-            <strong class="danger">{{$errors->first('experienceComments')}}</strong>
-          @endif
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p>
-          <label><strong>Calificación (0 a 10)</strong> <br>
-         {{Form::text('experienceGrade',null, ["class" => "form-control"])}}</label>
-          @if($errors->has('experienceGrade'))
-            <strong class="danger">{{$errors->first('experienceGrade')}}</strong>
-          @endif
-      </p>
-    </div>    
-</div>
+	<div class="row">
+		<div class="col-sm-12">
+	    	<div class="divider"></div>
+	    </div>
+		  <div class="col-sm-6">
+	      <p>
+	          <label><strong>Comentarios (opcional)</strong> <br>
+	         {{Form::textarea('experienceComments',null, ["class" => "form-control"])}}</label>
+	          @if($errors->has('experienceComments'))
+	            <strong class="danger">{{$errors->first('experienceComments')}}</strong>
+	          @endif
+	      </p>
+	    </div>
+	    <div class="col-sm-6">
+	      <p>
+	          <label><strong>Calificación (0 a 10)</strong> <br>
+	         {{Form::text('experienceGrade',null, ["class" => "form-control"])}}</label>
+	          @if($errors->has('experienceGrade'))
+	            <strong class="danger">{{$errors->first('experienceGrade')}}</strong>
+	          @endif
+	      </p>
+	    </div>    
+	    <div class="col-sm-12 modulos">
+	    	<div class="divider top"></div>
+		</div>
+	</div>
+</section>
 
 <!--evaluar video-->
-<div class="row">
-  <div class="col-sm-12">
-    <h2 class="sa_title">Evaluar Video</h2>
-    <div id='videoB'></div>
-  </div>
-</div>
-<div class="row">
-	<div class="col-sm-6">
-    	<p>
-        <label><strong>Comentarios (opcional)</strong> <br>
-       {{Form::textarea('videoComments',null, ["class" => "form-control"])}}</label>
-        @if($errors->has('videoComments'))
-          <strong class="danger">{{$errors->first('videoComments')}}</strong>
-        @endif
-    	</p>
-  	</div>
-  	<div class="col-sm-6">
-    	<p>
-        <label><strong>Calificación (0 a 10)</strong> <br>
-       {{Form::text('videoGrade',null, ["class" => "form-control"])}}</label>
-        @if($errors->has('videoGrade'))
-          <strong class="danger">{{$errors->first('videoGrade')}}</strong>
-        @endif
-    	</p>
-	</div> 
-</div>
-
+<section>
+	<div class="row">
+	  <div class="col-sm-12">
+	    <h2 class="sa_title">Evaluar Video</h2>
+	    <div id='videoB'></div>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+	    	<p>
+	        <label><strong>Comentarios (opcional)</strong> <br>
+	       {{Form::textarea('videoComments',null, ["class" => "form-control"])}}</label>
+	        @if($errors->has('videoComments'))
+	          <strong class="danger">{{$errors->first('videoComments')}}</strong>
+	        @endif
+	    	</p>
+	  	</div>
+	  	<div class="col-sm-6">
+	    	<p>
+	        <label><strong>Calificación (0 a 10)</strong> <br>
+	       {{Form::text('videoGrade',null, ["class" => "form-control"])}}</label>
+	        @if($errors->has('videoGrade'))
+	          <strong class="danger">{{$errors->first('videoGrade')}}</strong>
+	        @endif
+	    	</p>
+		</div> 
+		<div class="col-sm-12 modulos">
+	    	<div class="divider top"></div>
+    	</div>
+	</div>
+</section>
 
 <div class="row">
   <div class="col-sm-12">
