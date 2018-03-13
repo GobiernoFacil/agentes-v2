@@ -12,7 +12,7 @@
 				<h1 class="center">{{$program->title}}</h1>
 			</div>
 		</div>
-		
+
 		<ul class="row sub_nav_program">
 			<li class="col-sm-4">
 				<a href="#" class="current" id="about_box_btn">Acerca del programa</a>
@@ -29,7 +29,7 @@
 
 <section class="gray">
 	<div class="container">
-		
+
 		<!-- about box -->
 		<div class="about_box">
 			<div class="row">
@@ -70,8 +70,8 @@
 			</div>
 		</div>
 		<!--ends about box -->
-		
-		
+
+
 		<!--content_box -->
 		<div class="content_box" style="display: none">
 			<div class="row">
