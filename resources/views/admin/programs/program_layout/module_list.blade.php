@@ -42,7 +42,7 @@
 							@if($module->get_evaluation_activity())
 							<li>module->get_evaluation_activity()->title</li>
 							@else
-							<li><strong>Sin actividad evaluación</strong></li>
+							<li><strong>Sin actividad obligatoria</strong></li>
 							@endif
 						</ul>
 					</div>

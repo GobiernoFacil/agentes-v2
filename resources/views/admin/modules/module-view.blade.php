@@ -21,7 +21,7 @@
 	<div class="row h_tag">
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h time"></b> Duración</h4>
-			<p>{{$module->number_hours}} horas</p>
+			<p>{{$module->duration_hours()}} horas</p>
 		</div>
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h modalidad"></b> Modalidad</h4>
@@ -36,7 +36,7 @@
 		<div class="divider"></div>
 		<p class="ap_objective"><strong>Objetivo:</strong> {{$module->objective}}</p>
 	</div>
-	
+
 	<!--facilitadores-->
 	<div class="col-sm-3">
 		<p><strong>Facilitadores:</strong></p>
@@ -75,7 +75,7 @@
 @if($module->sessions->count() > 0)
 <div class="box session_list last_activity ap_week admin">
     @foreach($module->sessions as $session)
-		@include('admin.modules.includes.activities_list')		
+		@include('admin.modules.includes.activities_list')
     @endforeach
 </div>
 @else
