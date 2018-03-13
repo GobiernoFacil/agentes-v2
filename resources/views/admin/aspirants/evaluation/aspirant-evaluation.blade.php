@@ -11,11 +11,34 @@
 	@if($aspirant->AspirantsFile)
 		@if($aspirant->AspirantsFile->proof)
 		<div class="row">
-			<div class="col-sm-9">
-				<h1>Evaluar aspirante  <strong>{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</strong></h1>
+			<div class="col-sm-12">
+				<h1>Evaluar aspirante</h1>
+				<div class="divider"></div>
+			</div>
+			<div class="col-sm-6">
+				<h2><span class="notes">Aspirante</span> <br> <strong>{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</strong></h2>
+			</div>
+			
+			<div class="col-sm-3">
+				<h4 class="center"><span class="notes">Estado</span> <br>  {{ $aspirant->state }} </h4>
 			</div>
 			<div class="col-sm-3">
-				<h4 class="right">{{ $aspirant->city }}, {{ $aspirant->state }} </h4>
+				<h4 class="right"><span class="notes">Ciudad</span> <br>  {{ $aspirant->city }} </h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<h4><span class="notes">Grado de estudios</span> <br>  {{ $aspirant->degree }} </h4>
+			</div>
+			<div class="col-sm-4">
+				<h4><span class="notes">Procedencia</span> <br>  {{ $aspirant->origin }} </h4>
+			</div>
+			<div class="col-sm-4">
+				<h4><span class="notes">Género</span> <br>  {{ $aspirant->gender == "male" ? "Masculino" : ''}} {{ $aspirant->gender == "female" ? "Masculino" : ''}} </h4>
+			</div>
+			
+			<div class="col-sm-12">
+				<div class="divider bottom"></div>
 			</div>
 		</div>
 
