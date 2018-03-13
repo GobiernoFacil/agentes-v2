@@ -26,59 +26,68 @@
 
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
-		<div class="box" id ="table_box" style ="{{$list->count() > 0 ? '' : 'display:none;'}}">
-								<table class="table" 	 id="table">
-								  <thead>
-								    <tr>
-								      <th>Nombre / email</th>
-								      <th>Ciudad / Estado</th>
-								      <th>Procedencia</th>
-								      <th>Registro</th>
-											<th>Comprobante evaluado </th>
-											<th>Políticas de Privacidad</th>
-								      <th>Acciones</th>
-								    </tr>
-								  </thead>
-												<tbody id = "body_table">
-													@if($list->count() > 0)
-													    @foreach ($list as $aspirant)
-													      <tr>
-													        <td><h4><a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
-													        {{$aspirant->email}}
-													        </td>
-													        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
-																	<td>{{$aspirant->origin}}</td>
-													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
-																	<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
-																	<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
-													        <td>
-													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-																		@if($aspirant->AspirantsFile)
-																			@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
-																			<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-																			@endif
-																		@endif
-																	</td>
-													     </tr>
-													    @endforeach
-													@endif
-										  </tbody>
-								</table>
-
-		<div id ="pagination_links">
-		  {{ $list->links() }}
-	  </div>
+		<div id="table_box" style ="{{$list->count() > 0 ? '' : 'display:none;'}}">
+			<table class="table" 	 id="table">
+				<thead>
+					<tr>
+						<th>Nombre / email</th>
+						<th>Ciudad / Estado</th>
+						<th>Procedencia</th>
+						<th>Registro</th>
+						<th>Comprobante evaluado </th>
+						<th>Políticas de Privacidad</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody id = "body_table">
+					@if($list->count() > 0)
+					    @foreach ($list as $aspirant)
+					    <tr>
+						    <!--nombre-->
+					    	<td><h4><a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}">{{$aspirant->name.' '.$aspirant->surname." ".$aspirant->lastname}}</a></h4>
+					        {{$aspirant->email}}
+					        </td>
+					        <!--ciudad-->
+					        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
+					        <!--procedencia-->
+							<td>{{$aspirant->origin}}</td>
+							<!--registro-->
+					        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+					        <!--evaluado-->
+							<td>{{$aspirant->has_proof_evaluated($notice) ? 'Si' : 'No' }}</td>
+							<!--privacy-->
+							<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
+					        <!--acciones-->
+					        <td>
+					        <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
+					        @if($aspirant->AspirantsFile)
+								@if($aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies)
+								<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-comprobante/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+								@endif
+							@endif
+							</td>
+					    </tr>
+					    @endforeach
+					@endif
+				</tbody>
+			</table>
+			<div id ="pagination_links">
+			{{ $list->links() }}
+	  		</div>
 		</div>
 
 		@if($list->count() == 0)
-			<p><strong>Sin aspirantes</strong></p>
+			<p><strong>Sin aspirantes {{ $type_list === 4 ? 'con comprobante de domicilio por revisar' : ''}}</strong></p>
 		@endif
-
+	</div>
+	
+	<div class="col-sm-12">
 		@if($aWpE_count <= 0)
-		<div class="box" id ="table_box">
-			 <div id ="noMoretoDisplay">
-					<p><strong>Sin aspirantes con comprobante de domicilio por evaluar</strong></p>
-					<a class ="btn view" href='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")}}'>Evaluar aplicación de aspirantes</a>
+		<div id="table_box">
+			<div class="divider"></div>
+			 <div id="noMoretoDisplay">
+				<h2 class="center"><strong>Sin aspirantes con comprobante de domicilio por evaluar</strong></h2>
+				<p class="center"><a class ="btn view gde" href='{{url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-aplicacion-por-evaluar")}}'>Evaluar aplicación de aspirantes</a></p>
 			</div>
 		</div>
 		@endif
