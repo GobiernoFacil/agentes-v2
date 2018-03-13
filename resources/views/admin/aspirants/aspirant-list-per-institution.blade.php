@@ -26,9 +26,7 @@
  	 	</div>
 		</form>
 	</div>
-	<div class="col-sm-12">
-				<div class="divider"></div>
-	</div>
+
 </div>
 
 @include('admin.aspirants.includes.list_institutions_buttons')
