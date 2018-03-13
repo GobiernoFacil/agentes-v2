@@ -1,7 +1,7 @@
 {!! Form::model($aspirantEvaluation,['url' => url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-comprobante/$aspirant->id"), "class" => "form-horizontal"]) !!}
 <div class="row">
 	<div class="col-sm-12">
-    	<h2 class="sa_title">Revisar si comprobante de domicilio corresponde a: <strong>{{ $aspirant->city }}, {{ $aspirant->state }}</strong> </h2>
+    	<h2 class="sa_title">Revisar si comprobante de domicilio corresponde a <strong>{{ $aspirant->city }}, {{ $aspirant->state }}</strong> </h2>
 		
     </div>
     <div class="col-sm-4">
