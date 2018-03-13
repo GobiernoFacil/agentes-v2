@@ -6,26 +6,29 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
 
 @section('content')
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Revisar comprobante de domicilio</h1>
+		<div class="divider"></div>
+	</div>
+</div>
 
-	@if($aspirant->AspirantsFile)
-		@if($aspirant->AspirantsFile->proof)
-		<div class="row">
-			<div class="col-sm-9">
-				<h1>Aspirante  <strong>{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</strong></h1>
-			</div>
-			<div class="col-sm-3">
-				<h4 class="right">{{ $aspirant->city }}, {{ $aspirant->state }} </h4>
-			</div>
+@if($aspirant->AspirantsFile)
+	@if($aspirant->AspirantsFile->proof)
+	<div class="row">
+		<div class="col-sm-7 col-sm-offset-1">
+			<h2><span class="notes">Aspirante:</span> <br> <strong>{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</strong></h2>
 		</div>
-
-		<div class="row">
-			<div class="box">
-				<div class="col-sm-10 col-sm-offset-1">
-				@include('admin.aspirants.evaluation.form.proof-form')
-				</div>
-				<div class="clearfix"></div>
-			</div>
+		<div class="col-sm-3">
+			<h3><span class="notes">Domicilio:</span> <br>{{ $aspirant->city }}, {{ $aspirant->state }}</h3>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+		@include('admin.aspirants.evaluation.form.proof-form')
+		</div>
+		<div class="clearfix"></div>
+	</div>
 		@else
 		<h1>El aspirante no cuenta con un comprobante de domicilio válido</h1>
 		<div class="box">
