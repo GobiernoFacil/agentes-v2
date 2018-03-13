@@ -6,7 +6,15 @@
 	@endif
 	<a href="#" id="display-week-menu" class="btn_sessions hide"><b></b> Sesiones</a>
 </div>
-<div class="right">
-	<a href=""><strong>&lt;</strong> Anterior</a>
-	<a href="">Siguiente <strong>&gt;</strong></a>
-</div>
+@if($user->type == "admin")
+	<div class="right">
+		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev->id") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next->id") : ''}}>Siguiente <strong>&gt;</strong></a>
+	</div>
+@else
+	<div class="right">
+		<a href=""><strong>&lt;</strong> Anterior</a>
+		<a href="">Siguiente <strong>&gt;</strong></a>
+	</div>
+
+@endif

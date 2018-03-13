@@ -105,8 +105,8 @@
 		<div class="col-sm-12">
 			@foreach ($activity->activityFiles as $file)
 			<object data='{{url("dashboard/sesiones/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
-				
-				
+
+
 				<p<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
 			</object>
 			@endforeach
@@ -116,7 +116,7 @@
 </div>
 @else
 	@if($activity->type == 'lecture')
-	
+
 	<div class="box last_activity">
 		<p>Sin archivo</p>
 		<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
@@ -148,8 +148,8 @@
 
 <div class="subnav bottom">
 	<div class="center">
-		<a href=""><strong>&lt;</strong> Anterior</a>
-		<a href="">Siguiente <strong>&gt;</strong></a>
+		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev->id") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next->id") : ''}}>Siguiente <strong>&gt;</strong></a>
 	</div>
 </div>
 
@@ -166,5 +166,5 @@
 	    @endforeach
 </script>
 
-<script src="{{url('js/app-display-week-menu.js')}}"></script> 
+<script src="{{url('js/app-display-week-menu.js')}}"></script>
 @endsection
