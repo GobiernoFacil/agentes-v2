@@ -137,5 +137,11 @@ class Module extends Model
       return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->first();
     }
 
+    function all_activities(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions);
+
+    }
+
 
 }

@@ -15,6 +15,7 @@ use App\Models\FacilitatorSurvey;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
 use App\Models\Program;
+use App\Models\QuizInfo;
 
 class User extends Authenticatable
 {
@@ -183,6 +184,28 @@ class User extends Authenticatable
       $today  = date('Y-m-d');
       return Program::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->whereIn('id',$programs->toArray())->first();
 
+    }
+
+    function get_total_score($program_id){
+      $program      = Program::where('id',$program_id)->first();
+      $activities   = $program->get_all_activities()->pluck('id')->toArray();
+      $total        = $program->get_all_activities()->count();
+      $quiz_id      = QuizInfo::whereIn('activity_id',$activities)->pluck('id')->toArray();
+      $fellowScores = FellowScore::where('user_id',$this->id)->whereIn('questionInfo_id',$quiz_id)->get();
+      $fileScores   = FilesEvaluation::whereIn('activity_id',$activities)->where('fellow_id',$this->id)->get();
+      $score  = 0;
+      foreach ($fellowScores as $fscore) {
+          $score = $score + $fscore->score;
+      }
+      foreach ($fileScores as $ffscore){
+          $score = $score + $ffscore->score;
+      }
+      if($total!= 0){
+        $average = $score/$total;
+      }else{
+        $average = 0;
+      }
+      return $average;
     }
 
 }
