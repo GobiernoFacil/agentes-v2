@@ -1,5 +1,5 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Lista de Aspirantes')
+@section('title', 'Aspirante de ' . $notice->title .': ' . $aspirant->name .' ' . $aspirant->surname.' '.$aspirant->lastname)
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
 @section('breadcrumb_type', 'aspirantes ver')
@@ -29,32 +29,10 @@
 			<li><span>Nivel de estudios:</span> {{$aspirant->degree}}</li>
 			<li><span>Procedencia:</span> {{$aspirant->origin ? $aspirant->origin : "Sin información"}}</li>
 			<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
-
-			@if($aspirant->AspirantsFile)
-			@if($aspirant->AspirantsFile->motives)
-			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/motivos")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
-			@endif
-
-			@if($aspirant->cv)
-			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn view xs"> Descargar Perfil Curricular</a></li>
-			@endif
-
-			@if($aspirant->AspirantsFile->video)
-			<li><span>Video:</span> <a class ="btn view" href="{{$aspirant->AspirantsFile->video}}" target="_blank">Ir al video</a></li>
-			@endif
-
-			@if($aspirant->AspirantsFile->proof)
-			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/comprobante/{$aspirant->AspirantsFile->proof}")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
-			@endif
-
-
-			<li><span>Políticas de Privacidad:</span> <strong> {{$aspirant->AspirantsFile->privacy_policies ? "De acuerdo" : "No de acuerdo"}}</strong></li>
-			@endif
-
 		</ul>
 	</div>
-		<div class="col-sm-6">
-			<ul class="profile list">
+	<div class="col-sm-6">
+		<ul class="profile list">
 				@if($aspirantEvaluation)
 					@if($aspirantEvaluation->address_proof)
 						@if($aspirantEvaluation->grade)
@@ -83,7 +61,34 @@
 												<p class="right"><span>No cuenta con comprobante de domicilio</p>
 									@endif
 				@endif
-			</ul>
+		</ul>
+		<div class="divider"></div>
+		<ul class="profile list">
+			@if($aspirant->AspirantsFile)
+			@if($aspirant->AspirantsFile->motives)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/motivos")}}'  class="btn download gde"> Descargar exposición de motivos</a></li>
+			@endif
+
+			@if($aspirant->cv)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn download gde"> Descargar Perfil Curricular</a></li>
+			@endif
+
+			@if($aspirant->AspirantsFile->video)
+			<li><span>Video:</span> <a class ="btn view" href="{{$aspirant->AspirantsFile->video}}" target="_blank">Ir al video</a></li>
+			@endif
+
+			@if($aspirant->AspirantsFile->proof)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/comprobante/{$aspirant->AspirantsFile->proof}")}}'  class="btn download gde"> Descargar Comprobante de Domicilio</a></li>
+			@endif
+
+
+			<li><span>Políticas de Privacidad:</span> <strong> {{$aspirant->AspirantsFile->privacy_policies ? "De acuerdo" : "No de acuerdo"}}</strong></li>
+			@endif
+
+		</ul>
+	</div>
+		<div class="col-sm-6">
+			
 		</div>
 	</div>
 
@@ -91,16 +96,37 @@
 @if($allEva->count() > 0)
 <div class="box">
 	<div class="row">
-		@foreach($allEva as $eva)
-		<div class="col-sm-6">
-			<ul class="profile list">
-				@if($eva->grade)
-				<li><span>Institución:</span> {{($eva->institution)}}</li>
-				<li><span>Evaluación:</span> {{number_format(($eva->grade*10),2).'%'}}</li>
-				@endif
-			</ul>
+		<div class="col-sm-12">
+			<h2>Evaluado por:</h2>
 		</div>
-		@endforeach
+		
+		<div class="col-sm-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Institución</th>
+						<th>Exposición de motivos</th>
+						<th>Perfil curricular</th>
+						<th>Video</th>
+						<th>Evaluación</th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach($allEva as $eva)
+				<tr>
+					@if($eva->grade)
+					<td>{{($eva->institution)}}</td>
+					<td>{{number_format(($eva->experienceGrade*10),2).'%'}}</td>
+					<td>{{number_format(($eva->essayGrade*10),2).'%'}}</td>
+					<td>{{number_format(($eva->videoGrade*10),2).'%'}}</td>
+					<td>{{number_format(($eva->grade*10),2).'%'}}</td>
+					@endif
+				</tr>
+				@endforeach
+				</tbody>
+			</table>
+		</div>
+		
 	</div>
 </div>
 @endif
