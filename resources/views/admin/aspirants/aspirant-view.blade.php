@@ -9,43 +9,50 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Perfil de Aspirante</h1>
+		<div class="divider"></div>
+	</div>
+	<div class="col-sm-6">
+		<h2>{{$aspirant->name." ".$aspirant->surname." ".$aspirant->lastname}}</h2>
+		<p> {{$aspirant->city}}, {{$aspirant->state}}</p>
+	</div>
+	<div class="col-sm-6">
+		<h2 class="right">Evaluación General: <br> {{$aspirant->global_grade ? number_format(($aspirant->global_grade->grade*10),2).'%' : "Sin evaluaciones"}}</h2>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider"></div>
 	</div>
 </div>
-<div class="box">
-	<div class="row">
-		<div class="col-sm-6">
-			<ul class="profile list">
-				<li><span>Nombre:</span> <h2>{{$aspirant->name." ".$aspirant->surname." ".$aspirant->lastname}}</h2></li>
-				<li><span>Email:</span> {{$aspirant->email}}</li>
-				<li><span>Nivel de estudios:</span> {{$aspirant->degree}}</li>
-				<li><span>Procedencia:</span> {{$aspirant->origin ? $aspirant->origin : "Sin información"}}</li>
-				<li><span>Ciudad:</span> {{$aspirant->city}}</li>
-				<li><span>Estado:</span> {{$aspirant->state}}</li>
-				<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
+<div class="row">
+	<div class="col-sm-6">
+		<ul class="profile list">
+			<li><span>Email:</span> {{$aspirant->email}}</li>
+			<li><span>Nivel de estudios:</span> {{$aspirant->degree}}</li>
+			<li><span>Procedencia:</span> {{$aspirant->origin ? $aspirant->origin : "Sin información"}}</li>
+			<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
 
-				@if($aspirant->AspirantsFile)
-				@if($aspirant->AspirantsFile->motives)
-				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/motivos")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
-				@endif
+			@if($aspirant->AspirantsFile)
+			@if($aspirant->AspirantsFile->motives)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/motivos")}}'  class="btn view xs"> Descargar exposición de motivos</a></li>
+			@endif
 
-				@if($aspirant->cv)
-				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn view xs"> Descargar Perfil Curricular</a></li>
-				@endif
+			@if($aspirant->cv)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/download/$aspirant->id/cv")}}'  class="btn view xs"> Descargar Perfil Curricular</a></li>
+			@endif
 
-				@if($aspirant->AspirantsFile->video)
-				<li><span>Video:</span> <a class ="btn view" href="{{$aspirant->AspirantsFile->video}}" target="_blank">Ir al video</a></li>
-				@endif
+			@if($aspirant->AspirantsFile->video)
+			<li><span>Video:</span> <a class ="btn view" href="{{$aspirant->AspirantsFile->video}}" target="_blank">Ir al video</a></li>
+			@endif
 
-				@if($aspirant->AspirantsFile->proof)
-				<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/comprobante/{$aspirant->AspirantsFile->proof}")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
-				@endif
+			@if($aspirant->AspirantsFile->proof)
+			<li class="download"><a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/comprobante/{$aspirant->AspirantsFile->proof}")}}'  class="btn view xs"> Descargar Comprobante de Domicilio</a></li>
+			@endif
 
 
-				<li><span>Políticas de Privacidad:</span> <strong> {{$aspirant->AspirantsFile->privacy_policies ? "De acuerdo" : "No de acuerdo"}}</strong></li>
-				@endif
+			<li><span>Políticas de Privacidad:</span> <strong> {{$aspirant->AspirantsFile->privacy_policies ? "De acuerdo" : "No de acuerdo"}}</strong></li>
+			@endif
 
-			</ul>
-		</div>
+		</ul>
+	</div>
 		<div class="col-sm-6">
 			<ul class="profile list">
 				@if($aspirantEvaluation)
@@ -79,13 +86,8 @@
 			</ul>
 		</div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-12">
-		<h1>Evaluación General: {{$aspirant->global_grade ? number_format(($aspirant->global_grade->grade*10),2).'%' : "Sin evaluaciones"}}</h1>
-	</div>
-</div>
+
 @if($allEva->count() > 0)
 <div class="box">
 	<div class="row">
