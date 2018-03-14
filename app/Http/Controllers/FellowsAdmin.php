@@ -68,11 +68,13 @@ class FellowsAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function view($id)
+    public function view($program_id,$fellow_id)
     {
         //
         $user = Auth::user();
-        $fellow = User::where('id',$id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+        $program = Program::where('id',$program_id)->firstOrFail();
+        $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
+        $fellow = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
         $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
         $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
         $total = Activity::where('type','evaluation')->count();

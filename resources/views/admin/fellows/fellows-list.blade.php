@@ -44,7 +44,7 @@
 						@endif
 			        </div>
 			        <div class="col-sm-10">
-			        <h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
+			        <h4><a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/$fellow->id")}}'>{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 					{{$fellow->email}}<br>
 					{{$fellow->fellowData->origin}}
 			        </div>
@@ -56,7 +56,7 @@
 				</td>
 
 		        <td>
-		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver perfil</a>
+		          <a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/$fellow->id")}}' class="btn xs view">Ver perfil</a>
 		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $fellow->id) }}"  id ="{{$fellow->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 		         </td>
 		    </tr>
