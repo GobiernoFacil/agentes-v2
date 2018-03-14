@@ -283,7 +283,7 @@ class AdminAspirants extends Controller
           $user    = Auth::user();
           $notice  = Notice::where('id',$request->notice_id)->firstOrFail();
           $aspirant = Aspirant::where('id',$request->aspirant_id)->firstOrFail();
-          $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id,'user_id'=>$user->id]);
+          $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id]);
           $aspirantEvaluation->address_proof = current(array_slice($request->address_proof, 0, 1));
           $aspirantEvaluation->save();
           return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
@@ -435,7 +435,7 @@ class AdminAspirants extends Controller
        *
        */
        function updateGrade($aspirant,$notice){
-         $allGrades = AspirantEvaluation::where('notice_id',$notice->id)->where('aspirant_id',$aspirant->id)->get();
+         $allGrades = AspirantEvaluation::whereNotNull('grade')->where('notice_id',$notice->id)->where('aspirant_id',$aspirant->id)->get();
          $grade     = $allGrades->sum('grade')/$allGrades->count();
          $global    = AspirantGlobalGrade::firstOrCreate(['notice_id'=>$notice->id,'aspirant_id'=>$aspirant->id]);
          $global->grade = $grade;
