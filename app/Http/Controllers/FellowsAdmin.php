@@ -44,18 +44,21 @@ class FellowsAdmin extends Controller
         ]);
       }
     /**
-     * Lista de aspirantes
+     * Lista de fellows por programa
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($program_id)
     {
+
       $user = Auth::user();
+      $program = Program::where('id',$program_id)->firstOrFail();
       $testUserId = User::where('email','andre@fcb.com')->get()->pluck('id');
-	    $fellows	= User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->paginate($this->pageSize);
+      $fellows    = $program->get_all_fellows()->paginate($this->pageSize);
       return view('admin.fellows.fellows-list')->with([
         'user' 		=> $user,
         'fellows' 	=>$fellows,
+        'program' => $program
       ]);
     }
 
