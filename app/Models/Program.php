@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Activity;
+use App\Models\ModuleSession;
+
 use App\User;
 
 class Program extends Model
@@ -34,6 +37,13 @@ class Program extends Model
     function get_all_fellows(){
       $fellows = $this->fellows->pluck('user_id')->toArray();
       return User::where('enabled',1)->where('type','fellow')->whereIn('id',$fellows);
+
+    }
+
+    function get_all_activities(){
+      $modules  = $this->modules->pluck('id')->toArray();
+      $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions);
 
     }
 }

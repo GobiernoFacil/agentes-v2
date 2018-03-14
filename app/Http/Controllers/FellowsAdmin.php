@@ -74,23 +74,8 @@ class FellowsAdmin extends Controller
         $user = Auth::user();
         $program = Program::where('id',$program_id)->firstOrFail();
         $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
-        $fellow = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
-        $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
-        $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
-        $total = Activity::where('type','evaluation')->count();
-        $score  = 0;
-        foreach ($fellowScores as $fscore) {
-            $score = $score + $fscore->score;
-        }
-        foreach ($fileScores as $ffscore){
-            $score = $score + $ffscore->score;
-        }
-
-        if($total!= 0){
-          $average = $score/$total;
-        }else{
-          $average = 0;
-        }
+        $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+        $average = $fellow->get_total_score($program->id);
 
         return view('admin.fellows.fellow-view')->with([
           'user' 	=> $user,

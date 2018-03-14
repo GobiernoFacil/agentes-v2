@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Lista de Aspirantes')
-@section('description', 'Lista de Aspirantes')
+@section('title', 'Ver fellow '. $fellow->name)
+@section('description', 'Ver fellow '. $fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname)
 @section('body_class', 'fellows')
 @section('breadcrumb_type', 'fellow ver')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_fellows')
