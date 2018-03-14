@@ -16,7 +16,7 @@
 				<div class="divider"></div>
 			</div>
 			<div class="col-sm-6">
-				<h2><span class="notes">Aspirante</span> <br> <strong>{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</strong></h2>
+				<h2 class="ap_link"><span class="notes">Aspirante</span> <br> <a href="{{ url('dashboard/aspirantes/convocatoria/' . $notice->id. '/ver-aspirante/' . $aspirant->id) }}">{{ $aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname }}</a></h2>
 			</div>
 			
 			<div class="col-sm-3">

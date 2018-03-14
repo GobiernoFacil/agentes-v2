@@ -2200,6 +2200,10 @@ a.apertus:hover {
   -moz-opacity: 0.8;
   opacity: 0.8; }
 
+.ap_link {
+  display: inline-block;
+  border-bottom: 1px solid #f15c44; }
+
 .score li {
   list-style: none; }
   .score li .score_a {
