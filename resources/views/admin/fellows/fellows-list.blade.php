@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Lista de Fellows')
-@section('description', 'Lista de Fellows')
+@section('title', 'Lista de Fellows en el programa "'.$program->title.'"')
+@section('description', 'Lista de Fellows en el programa "'.$program->title.'"')
 @section('body_class', 'fellows')
 @section('breadcrumb_type', 'fellows list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_fellows')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de Fellows </h1>
+		<h1>Lista de Fellows en el programa "{{$program->title}}"</h1>
 	</div>
 	<div class="col-sm-3">
 		<form  role="form" method="GET" action="{{ url('dashboard/fellows') }}" id="search-input">
@@ -44,7 +44,7 @@
 						@endif
 			        </div>
 			        <div class="col-sm-10">
-			        <h4><a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}">{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
+			        <h4><a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/$fellow->id")}}'>{{$fellow->name.' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
 					{{$fellow->email}}<br>
 					{{$fellow->fellowData->origin}}
 			        </div>
@@ -54,9 +54,9 @@
 				<td>
 					<a href="{{ url('dashboard/fellows/calificaciones/ver/' . $fellow->id) }}"><span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></a>
 				</td>
-		        
+
 		        <td>
-		          <a href="{{ url('dashboard/fellows/ver/' . $fellow->id) }}" class="btn xs view">Ver perfil</a>
+		          <a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/$fellow->id")}}' class="btn xs view">Ver perfil</a>
 		         <!-- <a href ="{{ url('dashboard/aspirantes/eliminar' . $fellow->id) }}"  id ="{{$fellow->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 		         </td>
 		    </tr>
@@ -68,7 +68,7 @@
 		</div>
 	</div>
 </div>
-@else 
+@else
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12 center">
