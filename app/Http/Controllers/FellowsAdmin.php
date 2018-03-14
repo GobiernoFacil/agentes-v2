@@ -18,6 +18,7 @@ use App\Models\FellowScore;
 use App\Models\QuizInfo;
 use App\Models\FilesEvaluation;
 use App\Models\Activity;
+use App\Models\Program;
 // FormValidators
 use App\Http\Requests\SaveEvaluation;
 use App\Http\Requests\SaveFilesEvaluation;
@@ -27,6 +28,21 @@ class FellowsAdmin extends Controller
 
   //Paginación
   public $pageSize = 10;
+
+      /**
+       * Lista de programas
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function indexProgram()
+      {
+        $user = Auth::user();
+        $programs = Program::orderBy('start','asc')->paginate();
+        return view('admin.fellows.fellows-program-list')->with([
+          'user' 		=> $user,
+          'programs'=>$programs
+        ]);
+      }
     /**
      * Lista de aspirantes
      *

@@ -25,4 +25,8 @@ class Program extends Model
     function notice(){
       return $this->hasOne("App\Models\NoticeProgram");
     }
+
+    function fellows(){
+      return $this->hasMany("App\Models\FellowProgram");
+    }
 }
