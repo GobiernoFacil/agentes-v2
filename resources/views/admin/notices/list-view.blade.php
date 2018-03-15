@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Convocatorias en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Convocatorias en Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
-@section('body_class', '')
+@section('body_class', 'notice')
 @section('breadcrumb_type', 'notice list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_notice')
 @section('content')
@@ -21,9 +21,8 @@
 </div>
 @endif
 
-<div class="box">
-	<div class="row">
-		<div class="col-sm-12">
+<div class="row">
+	<div class="col-sm-12">
       @if($notices->count()>0)
 			<table class="table">
 				<thead>
@@ -54,7 +53,6 @@
       @else
       <p><strong>Sin convocatorias</strong></p>
       @endif
-		</div>
 	</div>
 </div>
 @endsection
