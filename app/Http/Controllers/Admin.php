@@ -18,6 +18,7 @@ use App\Models\Module;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\NewsEvent;
+use App\Models\Program;
 
 // FormValidators
 use App\Http\Requests\SaveAdmin;
@@ -37,11 +38,11 @@ class Admin extends Controller
        */
       public function dashboard()
       {
-        $user 			  = Auth::user();
-        $aspirants 		= Aspirant::where('is_activated',1)->count();
+        $user 		  = Auth::user();
+        $aspirants 	  = Aspirant::where('is_activated',1)->count();
         $testUserId   = User::where('email','andre@fcb.com')->get()->pluck('id');
-    		$fellows		  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
-
+    	$fellows	  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
+		$programs 	  = Program::all()->count();
     		$modules_count 		  = Module::all()->count();
         $listId = FacilitatorModule::all()->pluck('user_id');
         $adm_count = User::whereIn('id',$listId->toArray())->where('type','!=','facilitator')->where('enabled',1)->count();
@@ -69,7 +70,8 @@ class Admin extends Controller
 		  'fellows'			    => $fellows,
 		  'news'			    => $news,
 		  'conversations_count' => $conversations_count,
-		  'sessions_count'		=> $sessions_count
+		  'sessions_count'		=> $sessions_count,
+		  'programs'			=> $programs
          ]);
       }
 
