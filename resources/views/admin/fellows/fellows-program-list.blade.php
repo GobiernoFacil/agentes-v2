@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de programas con fellows')
 @section('description', 'Lista de programas con fellows')
-@section('body_class', 'program')
+@section('body_class', 'fellows')
 @section('breadcrumb_type', 'programs list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
@@ -10,16 +10,13 @@
 
 @if($programs->count() > 0)
 <div class="row">
-
-
 	<div class="col-sm-9">
-		<h1>Programas</h1>
-    <p>Selecciona un programa para ver sus fellows.</p>
+		<h1>Fellows por programa</h1>
+		<p>Selecciona un programa para ver sus fellows.</p>
 	</div>
 </div>
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
-		<div class="box">
 
 		<table class="table">
 		  <thead>
@@ -52,7 +49,6 @@
 		</table>
 
 		{{ $programs->links() }}
-		</div>
 	</div>
 </div>
 
