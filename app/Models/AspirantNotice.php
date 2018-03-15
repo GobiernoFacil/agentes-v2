@@ -20,4 +20,6 @@ class AspirantNotice extends Model
     function notice(){
     	return $this->belongsTo("App\Models\Notice");
     }
+
+    
 }

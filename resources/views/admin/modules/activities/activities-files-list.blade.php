@@ -21,7 +21,7 @@
 				@endif
 				</td>
 				<td>{{$file->description}}</td>
-				<td>
+				<td class="right">
 					@if($user->type=="admin")
 					<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}' class="btn xs ev">Descargar</a>
 					<a href="{{ url('dashboard/sesiones/actividades/archivos/editar/' . $file->id) }}" class="btn xs view">Actualizar</a>

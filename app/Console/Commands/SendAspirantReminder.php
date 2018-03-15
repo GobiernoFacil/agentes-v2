@@ -47,25 +47,7 @@ class SendAspirantReminder extends Command
         $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
         $active  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id->toArray())->get();
         foreach ($active as $aspirant) {
-          if($aspirant->AspirantsFile){
-            if($aspirant->AspirantsFile->video && $aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies && $aspirant->AspirantsFile->motives){
-              if($aspirant->cv){
-                 if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
-                 }else{
-                   $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
-                   $aspirant->notify(new SendReminder($aspirant,$notice));
-                 }
-
-              }else{
-                $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
-                $aspirant->notify(new SendReminder($aspirant,$notice));
-              }
-
-            }else{
-              $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
-              $aspirant->notify(new SendReminder($aspirant,$notice));
-            }
-          }else{
+          if(!$aspirant->check_aplication_data()){
             $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
             $aspirant->notify(new SendReminder($aspirant,$notice));
           }

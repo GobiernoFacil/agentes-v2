@@ -1,5 +1,5 @@
 
-{!! Form::open(['url' => url('dashboard/sesiones/facilitadores/save').'/'.$session->id, "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/save/$session->id"), "class" => "form-horizontal"]) !!}
 
 @if($facilitators->count()>0)
 <ol>

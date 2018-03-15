@@ -7,27 +7,29 @@ use Auth;
 use Hash;
 use File;
 //Modelos
-use App\User;
-use App\Models\Module;
-use App\Models\Conversation;
-use App\Models\Log;
-use App\Models\ModuleSession;
+
 use App\Models\Activity;
-use App\Models\NewsEvent;
+use App\Models\Conversation;
+use App\Models\ConversationLog;
+use App\Models\CustomFellowAnswer;
+use App\Models\CustomQuestionnaire;
 use App\Models\FacilitatorModule;
 use App\Models\Forum;
-use App\Models\ForumConversation;
-use App\Models\ForumMessage;
 use App\Models\FellowData;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
+use App\Models\FellowProgram;
 use App\Models\FilesEvaluation;
+use App\Models\ForumConversation;
+use App\Models\ForumMessage;
 use App\Models\Image;
-use App\Models\RetroLog;
-use App\Models\ConversationLog;
+use App\Models\Log;
+use App\Models\Module;
+use App\Models\ModuleSession;
+use App\Models\NewsEvent;
 use App\Models\QuizInfo;
-use App\Models\CustomFellowAnswer;
-use App\Models\CustomQuestionnaire;
+use App\Models\RetroLog;
+use App\User;
 use Carbon\Carbon;
 //Requests
 use App\Http\Requests\UpdateAdminProfile;
@@ -47,15 +49,18 @@ class Fellows extends Controller
     public function dashboard()
     {
       $user 			    = Auth::user();
+      //program
+      $program        = $user->actual_program();
       //modulos
-      $modules        = Module::all();
-      $first_module   = Module::orderBy('start','asc')->first();
-      $all_modules    = Module::orderBy('start','asc')->get();
       $module_last    = null;
       $session        = null;
       $activity       = null;
       //última actividad
-      $user_log       = Log::where('user_id',$user->id)->orderBy('created_at','desc')->first();
+      if($program){
+        $user_log       = $user->log()->where('program_id',$program->id)->orderBy('created_at','desc')->first();
+      }else{
+        $user_log   = null;
+      }
       //noticias y eventos
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
       //foros
@@ -63,20 +68,7 @@ class Fellows extends Controller
       $forums_id      = ForumConversation::where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
       //conversaciones
       $messages       = ForumMessage::select('conversation_id')->where('user_id',$user->id)->whereNotIn('conversation_id',$forums_id->toArray())->groupBy('conversation_id')->get();
-      //encuestas
-      $module_survey  = Module::where('title','CURSO 1 - Gobierno Abierto y los ODS')->first();
-      $non_email_list = ['contacto@prosociedad.org'];
-      $non_user_sur   = User::whereIn('email',$non_email_list)->pluck('id');
-      $fac_number    = FacilitatorModule::where('module_id',$module_survey->id)->whereNotIn('user_id',$non_user_sur->toArray())->count();
 
-      $module_survey_2  = Module::where('title','CURSO 2 - Herramientas para la Acción')->first();
-      $user_sur         = FacilitatorModule::where('module_id',$module_survey_2->id)->pluck('user_id');
-      $q_fac            = CustomQuestionnaire::where('type','facilitator')->first();
-      $custom_number_q  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
-
-      $module_survey_3  = Module::where('title','CURSO 3 - Aterrizaje: "Ya tengo mi agenda, y ahora qué..."')->first();
-      $user_sur_3       = FacilitatorModule::where('module_id',$module_survey_3->id)->pluck('user_id');
-      $custom_number_q_3  = CustomFellowAnswer::where('questionnaire_id',$q_fac->id)->where('user_id',$user->id)->whereIn('facilitator_id',$user_sur->toArray())->distinct('facilitator_id')->count('facilitator_id');
 
       $today = date("Y-m-d");
       //obtener la ultima actividad
@@ -91,6 +83,8 @@ class Fellows extends Controller
       }
       $time = strtotime($today);
       $final = date("Y-m-d", strtotime("+1 month", $time));
+      //////////   REVISAR ASAP ///////////////////////////////
+
       //lista de evaluaciones proximas sin contestar
       $sess_id         = ModuleSession::where('start','<=',$final)->pluck('id');
       $quiz_ids        = FellowScore::where('user_id',$user->id)->pluck('questionInfo_id');
@@ -111,23 +105,17 @@ class Fellows extends Controller
       //Lista de mensajes sin contestar
       $con  = new Conversation();
       $noMessages = $con->get_no_messages($user->id);
-      //diagnostico
-      $questionnaire   = CustomQuestionnaire::where('slug','transversalizacion-de-la-perspectiva-de-genero')->first();
-      $answers         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire->id)->first();
-      //diagnostico seminario 2
-      $questionnaire_2      = CustomQuestionnaire::where('slug','evaluacion-de-seminario-2')->first();
-      $diagnostic_2         = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$questionnaire_2->id)->first();
+
+    //////////----------------------------------------------------------- ///////////////////////////////
+
+
 
    return view('fellow.dashboard')->with([
-	   "modules"		=> $modules,
         "user"      		=> $user,
-        "modules_count" => $modules->count(),
-        "module"        =>  $first_module,
         "session"       => $session,
         "module_last"   => $module_last,
         "activity"      => $activity,
         "newsEvent"     => $newsEvent,
-        "all_modules"   => $all_modules,
         "forums"        => $forums,
         "messagesF"     => $messages,
         "today"			    => $today,
@@ -135,15 +123,7 @@ class Fellows extends Controller
         "noForum"       => $noForum,
         'retro'         => $retroFiles,
         'noMessages'    => $noMessages,
-        'fac_number'    => $fac_number,
-        'custom_test'   => $answers,
-        'questionnaire' => $questionnaire,
-        'diagnostic_2'  => $diagnostic_2,
-        'questionnaire_2' => $questionnaire_2,
-        "user_sur"      => $user_sur,
-        "custom_number_q" => $custom_number_q,
-        "user_sur_3"      => $user_sur_3,
-        "custom_number_q_3" => $custom_number_q_3
+        "program"       => $program
       ]);
     }
 

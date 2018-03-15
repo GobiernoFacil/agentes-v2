@@ -62,8 +62,7 @@ protected $fillable = [
   }
 
   function check_participation($fellow_id,$forum_id){
-    $participation = ForumLog::where('forum_id',$forum_id)->where('user_id',$fellow_id)->where('type','fellow')->first();
-    if($participation){
+    if(ForumLog::where('forum_id',$forum_id)->where('user_id',$fellow_id)->where('type','fellow')->first()){
       return true;
     }else{
       return false;

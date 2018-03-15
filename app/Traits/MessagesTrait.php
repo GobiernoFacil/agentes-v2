@@ -89,6 +89,7 @@ trait MessagesTrait{
          'product_developed.required'=> 'El producto a desarrollar es requerido',
          'start.required'=> 'La fecha inicio es requerida',
          'end.required'=> 'La fecha final es requerida',
+         'end.before'=> 'La fecha no puede ser mayor a una semana',
          'public.required'=> 'Este campo es requerido',
          //sesiones
          'name.unique' => 'El nombre debe de ser único',
@@ -337,6 +338,17 @@ trait MessagesTrait{
          'mobile.digits'        => 'Escribe  10 dígitos',
          'privacy_policies.required'        => 'Este campo es requerido',
          'birthdate.required'        => 'Este campo es requerido',
+         'address_proof.required'        => 'Este campo es requerido',
+         'videoGrade.required'   => 'Este campo es requerido',
+         'experienceGrade.required'   => 'Este campo es requerido',
+         'essayGrade.required'   => 'Este campo es requerido',
+         'videoGrade.numeric'   => 'Escribe un número',
+         'experienceGrade.numeric'   => 'Escribe un número',
+         'essayGrade.numeric'   => 'Escribe un número',
+         'experienceGrade.between'   => 'Escribe un valor entre 0 y 10',
+         'videoGrade.between'   => 'Escribe un valor entre 0 y 10',
+         'essayGrade.between'   => 'Escribe un valor entre 0 y 10',
+
 
       ];
     }

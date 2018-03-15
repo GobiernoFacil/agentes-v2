@@ -38,6 +38,10 @@ class Module extends Model
       return $this->hasMany("App\Models\FacilitatorModule");
     }
 
+    function unique_facilitators(){
+      return $this->hasMany("App\Models\FacilitatorModule")->select('user_id')->groupBy('user_id');
+    }
+
 
     function check_last_activity($module_id){
       $today = date('Y-m-d');
@@ -89,6 +93,54 @@ class Module extends Model
          //no se toma en cuenta
          return false;
        }
+    }
+
+    function duration_hours(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      $hours   = Activity::whereIn('session_id',$sessions)->where('measure',1)->sum('duration');
+      $minutes = Activity::whereIn('session_id',$sessions)->where('measure',0)->sum('duration');
+      $conver  = $minutes/60;
+      return $hours+$conver;
+    }
+
+    function duration_minutes(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      $hours   = Activity::whereIn('session_id',$sessions)->where('measure',1)->sum('duration');
+      $minutes = Activity::whereIn('session_id',$sessions)->where('measure',0)->sum('duration');
+      $conver  = $hours*60;
+      return $minutes+$conver;
+    }
+
+    function duration_activities($type,$measure){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      $hours   = Activity::whereIn('session_id',$sessions)->where('measure',1)->where('type',$type)->sum('duration');
+      $minutes = Activity::whereIn('session_id',$sessions)->where('measure',0)->where('type',$type)->sum('duration');
+      if($measure){
+        //horas
+        $conver  = $minutes/60;
+        $time    = $hours+$conver;
+      }else{
+        //minutos
+        $conver  = $hours*60;
+        $time    = $minutes+$conver;
+      }
+      return $time;
+    }
+
+    function count_activities($type){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type',$type)->count();
+    }
+
+    function get_evaluation_activity(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->first();
+    }
+
+    function all_activities(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions);
+
     }
 
 

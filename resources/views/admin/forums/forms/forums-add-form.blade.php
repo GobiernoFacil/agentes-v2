@@ -18,6 +18,35 @@
   </div>
 </div>
 
+<!-- tipo -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Tipo de foro</strong> <br>
+      {{Form::select('type',$types,null, ['class' => 'form-control', 'id'=>'types'])}}
+      @if($errors->has('type'))
+      <strong class="danger">{{$errors->first('type')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
+@if($states)
+  <!-- state -->
+  <div class="row">
+    <div class="col-sm-12" style ="display:none;" id = 'state_div'>
+      <p>
+        <label><strong>Estado</strong> <br>
+        {{Form::select('state',$states,0, ['class' => 'form-control'])}}
+        @if($errors->has('state'))
+        <strong class="danger">{{$errors->first('state')}}</strong>
+        @endif
+      </p>
+    </div>
+  </div>
+@endif
+
+
 <!-- expert -->
 <div class="row">
   <div class="col-sm-12">
@@ -26,18 +55,6 @@
       {{Form::select('session_id',$sessions,0, ['class' => 'form-control','id'=>"session"])}}
       @if($errors->has('session_id'))
       <strong class="danger">{{$errors->first('session_id')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-<!-- expert -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Actividad</strong></label>
-      {{Form::select('activity_id',$activities,0, ['class' => 'form-control','id'=>"activity"])}}
-      @if($errors->has('activity_id'))
-      <strong class="danger">{{$errors->first('activity_id')}}</strong>
       @endif
     </p>
   </div>

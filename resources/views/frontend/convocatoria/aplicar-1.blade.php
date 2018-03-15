@@ -47,6 +47,7 @@ state.addEventListener("change", function(){
 	var city =document.getElementById('city');
 	city.options.length=0
 	city.options[0] = new Option("Selecciona una opción","",1,1);
+	console.log(n_cities);
 	for (i=n_cities.length-1; i >= 0; i--){
 		  city.options[city.options.length]=new Option(n_cities[i].city,n_cities[i].city);
 	}

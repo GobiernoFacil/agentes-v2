@@ -31,13 +31,12 @@ class SaveActivity extends FormRequest
               'name'=> 'required|max:256|unique:activities',
               'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
-              'facilitator_role'=> 'required',
               'description'=> 'required',
-              'competitor_role'=> 'required',
               'type'=>'required',
               'start'=>'required',
               'time'=>'required',
               'link'=>'required',
+              'measure'=> 'required',
               'hasforum'=>'required'
           ];
         }elseif($this->type==='video'){
@@ -46,11 +45,10 @@ class SaveActivity extends FormRequest
               'name'=> 'required|max:256|unique:activities',
               'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
-              'facilitator_role'=> 'required',
               'description'=> 'required',
-              'competitor_role'=> 'required',
               'type'=>'required',
               'link_video'=>'required',
+              'measure'=> 'required',
               'hasforum'=>'required'
           ];
 
@@ -59,9 +57,8 @@ class SaveActivity extends FormRequest
           'name'=> 'required|max:256|unique:activities',
           'order'=> 'required|numeric|integer',
           'duration'=> 'required|numeric',
-          'facilitator_role'=> 'required',
+          'measure'=> 'required',
           'description'=> 'required',
-          'competitor_role'=> 'required',
           'type'=>'required',
           'hasforum'=>'required',
           'end'=>'required',
@@ -72,10 +69,9 @@ class SaveActivity extends FormRequest
             //
             'name'=> 'required|max:256|unique:activities',
             'order'=> 'required|numeric|integer',
+            'measure'=> 'required',
             'duration'=> 'required|numeric',
-            'facilitator_role'=> 'required',
             'description'=> 'required',
-            'competitor_role'=> 'required',
             'type'=>'required',
             'hasforum'=>'required'
         ];

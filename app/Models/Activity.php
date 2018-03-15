@@ -22,7 +22,8 @@ class Activity extends Model
       'evaluation',
       'hasfiles',
       'hasforum',
-      'end'
+      'end',
+      'measure'
     ];
 
     //modelos relacionados

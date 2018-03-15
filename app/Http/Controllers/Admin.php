@@ -18,6 +18,7 @@ use App\Models\Module;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\NewsEvent;
+use App\Models\Program;
 
 // FormValidators
 use App\Http\Requests\SaveAdmin;
@@ -37,11 +38,11 @@ class Admin extends Controller
        */
       public function dashboard()
       {
-        $user 			  = Auth::user();
-        $aspirants 		= Aspirant::where('is_activated',1)->count();
+        $user 		  = Auth::user();
+        $aspirants 	  = Aspirant::where('is_activated',1)->count();
         $testUserId   = User::where('email','andre@fcb.com')->get()->pluck('id');
-    		$fellows		  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
-
+    	$fellows	  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
+		$programs 	  = Program::all()->count();
     		$modules_count 		  = Module::all()->count();
         $listId = FacilitatorModule::all()->pluck('user_id');
         $adm_count = User::whereIn('id',$listId->toArray())->where('type','!=','facilitator')->where('enabled',1)->count();
@@ -60,6 +61,17 @@ class Admin extends Controller
           $query->where('to_id',$user->id)->whereNotIn('id',$conversation_id->toArray());
         })
         ->count();
+        
+        $edomex_number = Aspirant::where('is_activated',1)->where('state','México')->count();
+        $campeche_number = Aspirant::where('is_activated',1)->where('state','Campeche')->count();
+        $durango_number = Aspirant::where('is_activated',1)->where('state','Durango')->count();
+        $guanajuato_number = Aspirant::where('is_activated',1)->where('state','Guanajuato')->count();
+        $quintana_number = Aspirant::where('is_activated',1)->where('state','Quintana Roo')->count();
+        $sanluis_number = Aspirant::where('is_activated',1)->where('state','San Luis Potosí')->count();
+        $sinaloa_number = Aspirant::where('is_activated',1)->where('state','Sinaloa')->count();
+        $tabasco_number = Aspirant::where('is_activated',1)->where('state','Tabasco')->count();
+        $tlaxcala_number = Aspirant::where('is_activated',1)->where('state','Tlaxcala')->count();
+        $veracruz_number = Aspirant::where('is_activated',1)->where('state','Veracruz de Ignacio de la Llave ')->count();
 
         return view('admin.dashboard')->with([
           "user"      			=> $user,
@@ -69,7 +81,18 @@ class Admin extends Controller
 		  'fellows'			    => $fellows,
 		  'news'			    => $news,
 		  'conversations_count' => $conversations_count,
-		  'sessions_count'		=> $sessions_count
+		  'sessions_count'		=> $sessions_count,
+		  'programs'			=> $programs,
+		  'edomex_number' 		  => $edomex_number,
+		  'campeche_number' 		  => $campeche_number,
+		  'durango_number' 		  => $durango_number,
+		  'guanajuato_number' 		  => $guanajuato_number,
+		  'quintana_number' 		  => $quintana_number,	
+		  'sanluis_number' 		  => $sanluis_number,
+		  'sinaloa_number' 		  => $sinaloa_number,		  
+		  'tabasco_number' 		  => $tabasco_number,		  
+		  'tlaxcala_number' 		  => $tlaxcala_number,		  
+		  'veracruz_number' 		  => $veracruz_number,		  
          ]);
       }
 
