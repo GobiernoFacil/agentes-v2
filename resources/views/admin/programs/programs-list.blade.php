@@ -18,8 +18,7 @@
 </div>
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
-		<div class="box">
-			 			<p class="right"><a href="{{ url('dashboard/programas/agregar') }}" class="btn ev">[+] Agregar programa</a></p>
+		<p class="right"><a href="{{ url('dashboard/programas/agregar') }}" class="btn ev">[+] Agregar programa</a></p>
 
 		<table class="table">
 		  <thead>
@@ -50,7 +49,6 @@
 		</table>
 
 		{{ $programs->links() }}
-		</div>
 	</div>
 </div>
 
