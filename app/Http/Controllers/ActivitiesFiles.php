@@ -210,9 +210,9 @@ class ActivitiesFiles extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function watchPdf(Request $request){
+    public function watchPdf($id){
       $user = Auth::user();
-      $data = ActivitiesFile::find($request->id);
+      $data = ActivitiesFile::find($id);
       $file = $data->path.'/'.$data->identifier;
       $fileData = pathinfo($file);
       $headers = array(

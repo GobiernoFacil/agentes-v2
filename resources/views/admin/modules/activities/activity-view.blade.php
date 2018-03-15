@@ -110,6 +110,7 @@
 				<p<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
 			</object>
 			@endforeach
+
 			@include('admin.modules.activities.activities-files-list')
 		</div>
 	</div>
