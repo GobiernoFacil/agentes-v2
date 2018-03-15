@@ -140,16 +140,19 @@ class FellowsAdmin extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function participationSheet($id)
+     public function participationSheet($program_id,$fellow_id)
      {
-         $user     = Auth::user();
-         $fellow   = User::find($id);
-         $modules  = Module::orderBy('start','asc')->paginate($this->pageSize);;
+       $user     = Auth::user();
+       $program = Program::where('id',$program_id)->firstOrFail();
+       $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
+       $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+       $modules = $program->modules()->paginate($this->pageSize);
          return view('admin.fellows.participation-sheet')->with(
           [
             'user'=>$user,
             'fellow'  => $fellow,
-            'modules' =>$modules
+            'modules' =>$modules,
+            'program' => $program
           ]
          );
      }

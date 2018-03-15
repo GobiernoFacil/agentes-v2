@@ -7,7 +7,9 @@ use App\Models\Aspirant;
 use App\Models\AspirantNotice;
 use App\Models\FellowAverage;
 use App\Models\FellowProgram;
+use App\Models\Forum;
 use App\Models\Module;
+use App\Models\ModuleSession;
 use App\Models\Notice;
 use App\Models\Program;
 use App\User;
@@ -75,6 +77,29 @@ class AttachPreDataToProgram extends Command
                $average->save();
            }
         }
+
+        $forums = Forum::whereNull('program_id')->get();
+        foreach ($forums as $forum) {
+          if($forum->state_name){
+              if($forum->state_name === 'General'){
+                $forum->type = 'general';
+
+              }else{
+                $forum->type = 'state';
+              }
+
+          }
+
+          if($forum->session_id){
+            $session = ModuleSession::where('id',$forum->session_id)->first();
+            $forum->module_id = $session->module_id;
+            $forum->type  = 'activity';
+          }
+          $forum->program_id = $program->id;
+          $forum->save();
+        }
+
+
 
         $this->info('Attached');
 

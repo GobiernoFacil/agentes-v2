@@ -168,27 +168,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@saveEvaluate');
 
 
-    /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
-    Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
-    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');*/
-
-    /*
-    Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
-    Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
-    Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
-    Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
-    Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
-    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');*/
-
-
-
-
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@indexProgram');
     Route::get('dashboard/fellows/programa/{program_id}', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/programa/{program_id}/ver-fellow/{fellow_id}', 'FellowsAdmin@view');
     Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{fellow_id}', 'FellowsAdmin@viewSheet');
-    Route::get('dashboard/fellows/participaciones/ver/{id}', 'FellowsAdmin@participationSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-participaciones/{fellow_id}', 'FellowsAdmin@participationSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
