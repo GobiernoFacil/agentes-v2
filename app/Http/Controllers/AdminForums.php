@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Auth;
 
 use App\Models\Activity;
+use App\Models\Aspirant;
 use App\Models\FacilitatorModule;
 use App\Models\FellowData;
 use App\Models\Forum;
@@ -92,18 +93,21 @@ class AdminForums extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function add()
+  public function add($program_id)
   {
       //
       $user       = Auth::user();
-      $sessions   = ModuleSession::orderBy('name','asc')->pluck('name','id')->toArray();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $sessions   = $program->get_all_sessions()->orderBy('name','asc')->pluck('name','id')->toArray();
+      $states     = $program->get_available_states();
+      $types      = $program->get_available_types();
       $sessions['0'] = 'Selecciona una opción';
-      //$activities = Activity::orderBy('name','asc')->pluck('name','id')->toArray();
-      $activities['0']= 'Selecciona una sesión';
       return view('admin.forums.forums-add')->with([
         "user"      => $user,
-        "sessions"      => $sessions,
-        "activities"      => $activities
+        "sessions"  => $sessions,
+        "program"   => $program,
+        'states'    => $states,
+        'types'     => $types
       ]);
   }
   /**
