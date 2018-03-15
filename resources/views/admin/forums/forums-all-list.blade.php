@@ -1,5 +1,5 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Foros' )
+@section('title', 'Foros del programa '.$program->title )
 @section('description','Foros del Programa de Gobierno Abierto desde lo local' )
 @section('body_class', 'foros')
 @section('breadcrumb_type', 'forums list')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Foros</h1>
+		<h1>Foros del programa "{{$program->title}}"</h1>
 	</div>
 	<div class="col-sm-3">
 		<p class="right"><a href="{{ url('dashboard/foros/agregar') }}" class="btn ev">[+] Agregar foro</a></p>

@@ -46,4 +46,14 @@ class Program extends Model
       return  Activity::whereIn('session_id',$sessions);
 
     }
+    function get_all_eva_activities(){
+      $modules  = $this->modules->pluck('id')->toArray();
+      $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      return  Activity::where('type','evaluation')->whereIn('session_id',$sessions);
+
+    }
+
+    function forums(){
+      return $this->hasMany('App\Models\Forum','program_id');
+    }
 }

@@ -80,7 +80,8 @@ class FellowsAdmin extends Controller
         return view('admin.fellows.fellow-view')->with([
           'user' 	=> $user,
           'fellow' 	=> $fellow,
-          'average' => $average
+          'average' => $average,
+          'program' => $program
         ]);
     }
 
@@ -116,33 +117,19 @@ class FellowsAdmin extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function viewSheet($id)
+     public function viewSheet($program_id,$fellow_id)
      {
          $user     = Auth::user();
-         $fellow   = User::find($id);
-         $modules  = Module::orderBy('start','asc')->get();
-         $fellowScores = FellowScore::where('user_id',$fellow->id)->get();
-         $fileScores = FilesEvaluation::where('fellow_id',$fellow->id)->get();
-         $total = Activity::where('type','evaluation')->count();
-         $score  = 0;
-         foreach ($fellowScores as $fscore) {
-             $score = $score + $fscore->score;
-         }
-         foreach ($fileScores as $ffscore){
-             $score = $score + $ffscore->score;
-         }
-
-         if($total!= 0){
-           $average = $score/$total;
-         }else{
-           $average = 0;
-         }
+         $program = Program::where('id',$program_id)->firstOrFail();
+         $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
+         $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+         $modules  = $program->modules;
          return view('admin.fellows.evaluation-sheet')->with(
           [
             'user'=>$user,
             'modules' =>$modules,
-            'average' => $average,
-            'fellow'  => $fellow
+            'fellow'  => $fellow,
+            'program' => $program
           ]
          );
      }
@@ -153,16 +140,19 @@ class FellowsAdmin extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function participationSheet($id)
+     public function participationSheet($program_id,$fellow_id)
      {
-         $user     = Auth::user();
-         $fellow   = User::find($id);
-         $modules  = Module::orderBy('start','asc')->paginate($this->pageSize);;
+       $user     = Auth::user();
+       $program = Program::where('id',$program_id)->firstOrFail();
+       $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
+       $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+       $modules = $program->modules()->paginate($this->pageSize);
          return view('admin.fellows.participation-sheet')->with(
           [
             'user'=>$user,
             'fellow'  => $fellow,
-            'modules' =>$modules
+            'modules' =>$modules,
+            'program' => $program
           ]
          );
      }

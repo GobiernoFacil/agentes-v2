@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Auth;
+
+use App\Models\Activity;
+use App\Models\FacilitatorModule;
+use App\Models\FellowData;
 use App\Models\Forum;
+use App\Models\ForumLog;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ModuleSession;
-use App\Models\Activity;
-use App\Models\ForumLog;
+use App\Models\Program;
 use App\User;
-use App\Models\FacilitatorModule;
-use App\Models\FellowData;
 use App\Notifications\SendForumNotice;
 // FormValidators
 use App\Http\Requests\SaveAdminForum;
@@ -32,29 +34,33 @@ class AdminForums extends Controller
   public function all()
   {
     $user     = Auth::user();
-    $forums   = Forum::orderBy('created_at','desc')->paginate($this->pageSize);
-    return view('admin.forums.forums-all-list')->with([
+    $programs = Program::orderBy('start','desc')->paginate($this->pageSize);
+    return view('admin.forums.forums-program-list')->with([
       "user"      => $user,
-      "forums" => $forums,
+      "programs"  => $programs
     ]);
+
 
   }
 
 
   /**
-   * Muestra lista de preguntas por sesión
+   * Muestra lista de foros
    *
    * @return \Illuminate\Http\Response
    */
-  public function index($id)
+  public function index($program_id)
   {
     $user     = Auth::user();
-    $forum    = Forum::find($id);
-    $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
-    return view('admin.forums.forums-list')->with([
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $forums   = $program->forums()->paginate($this->pageSize);
+
+  /*   $forum    = Forum::find($id);
+    $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
+    return view('admin.forums.forums-all-list')->with([
       "user"      => $user,
-      "forums" => $forums,
-      "forum"  =>$forum,
+      "forums"    => $forums,
+      "program"   => $program
     ]);
 
   }
@@ -65,14 +71,19 @@ class AdminForums extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function view($id)
+  public function view($program_id,$forum_id)
   {
     //
-    $user   = Auth::user();
-    $forum  = Forum::where('id',$id)->firstOrFail();
-    return view('admin.forums.forum-view')->with([
+    $user    = Auth::user();
+    $program = Program::where('id',$program_id)->firstOrFail();
+    $forum   = $program->forums()->where('id',$forum_id)->firstOrFail();
+    $forums  = $forum->forum_conversations()->paginate($this->pageSize);
+
+    return view('admin.forums.forums-list')->with([
       "user"      => $user,
-      "forum"    => $forum
+      "forum"    => $forum,
+      'forums'   => $forums,
+      'program'  => $program
     ]);
   }
 
@@ -249,11 +260,13 @@ class AdminForums extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function viewQuestion($id)
+  public function viewQuestion($program_id,$forum_id,$question_id)
   {
     //
     $user   = Auth::user();
-    $question  = ForumConversation::where('id',$id)->firstOrFail();
+    $program = Program::where('id',$program_id)->firstOrFail();
+    $forum   = $program->forums()->where('id',$forum_id)->firstOrFail();
+    $question  = ForumConversation::where('id',$question_id)->firstOrFail();
     return view('admin.forums.forum-question-view')->with([
       "user"      => $user,
       "question"    => $question

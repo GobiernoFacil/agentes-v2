@@ -168,27 +168,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@saveEvaluate');
 
 
-    /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
-    Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
-    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');*/
-
-    /*
-    Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
-    Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
-    Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
-    Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
-    Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
-    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');*/
-
-
-
-
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@indexProgram');
     Route::get('dashboard/fellows/programa/{program_id}', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/programa/{program_id}/ver-fellow/{fellow_id}', 'FellowsAdmin@view');
-    Route::get('dashboard/fellows/calificaciones/ver/{id}', 'FellowsAdmin@viewSheet');
-    Route::get('dashboard/fellows/participaciones/ver/{id}', 'FellowsAdmin@participationSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{fellow_id}', 'FellowsAdmin@viewSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-participaciones/{fellow_id}', 'FellowsAdmin@participationSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
@@ -316,12 +301,13 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminForums Controller */
     // Rutas CRUD forums
     Route::get('dashboard/foros', 'AdminForums@all');
-    Route::get('dashboard/foros/ver/{id}', 'AdminForums@index');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros', 'AdminForums@index');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foro/{forum_id}', 'AdminForums@view');
     Route::get('dashboard/foros/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/save', 'AdminForums@save');
     Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
     Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
-    Route::get('dashboard/foros/pregunta/ver/{id}', 'AdminForums@viewQuestion');
+    Route::get('dashboard/foros/programa/{program_id}/foro/{forum_id}/ver-pregunta/{question_id}', 'AdminForums@viewQuestion');
     Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
     Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');

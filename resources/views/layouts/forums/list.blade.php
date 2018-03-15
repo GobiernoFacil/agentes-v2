@@ -2,6 +2,9 @@
 <!-- título-->
 	<div class="col-sm-9">
 		<h1>{{$forum->topic}}</h1>
+		@if($user->type==='admin')
+		<h2>{{$program->title}}</h2>
+		@endif
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
@@ -62,30 +65,30 @@
 					</div>
 					<div class="col-sm-9">
 						@if($user->type =="admin")
-						<h2><a href='{{ url("dashboard/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
+						<h2><a href='{{ url("dashboard/foros/programa/$program->id/foro/$forum->id/ver-pregunta/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
 						@if($user->type =="facilitator")
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
-						
+
  						@if($conversation->user->fellowData)
  						<!--fellow data -->
- 						<p class="author">Por 
+ 						<p class="author">Por
 	 						@if($user->type =="admin")
 	 						<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}">{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}</a>
 	 						@endif
 	 						@if($user->type =="facilitator")
-	 						{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}} 
+	 						{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}
 	 						@endif
 	 						<span>{{$conversation->created_at->diffForHumans()}}</span></p>
  						@elseif($conversation->user->facilitatorData)
  						<!--facilitator data -->
- 						<p class="author">Por 
+ 						<p class="author">Por
 	 						@if($user->type =="admin")
 	 						<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}">{{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} </a>
 	 						@endif
 	 						@if($user->type =="facilitator")
-	 						{{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}} 
+	 						{{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}}
 	 						@endif
 	 						<span>{{$conversation->created_at->diffForHumans()}}</span></p>
  						@else

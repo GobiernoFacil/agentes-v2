@@ -12,6 +12,7 @@ use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
 use App\Models\FacilitatorSurvey;
+use App\Models\Forum;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
 use App\Models\Program;
@@ -138,12 +139,13 @@ class User extends Authenticatable
       return FellowFile::where('activity_id',$activity_id)->where('user_id',$user_id)->first();
     }
 
-    function total_participations($user_id){
-      return ForumLog::where('user_id',$user_id)->where('type','fellow')->count();
+    function total_participations($program_id){
+      $forums   = Forum::where('program_id',$program_id)->where('type','activity')->pluck('id')->toArray();
+      return      ForumLog::whereIn('forum_id',$forums)->where('user_id',$this->id)->where('type','fellow')->distinct('forum_id')->count('forum_id');
     }
 
-    function total_average($user_id){
-      return FellowAverage::where('user_id',$user_id)->where('type','total')->first();
+    function total_average($program_id){
+      return FellowAverage::where('user_id',$this->id)->where('program_id',$program_id)->where('type','total')->first();
     }
     function module_average($user_id,$module_id){
       return FellowAverage::where('user_id',$user_id)->where('module_id',$module_id)->first();
@@ -188,8 +190,8 @@ class User extends Authenticatable
 
     function get_total_score($program_id){
       $program      = Program::where('id',$program_id)->first();
-      $activities   = $program->get_all_activities()->pluck('id')->toArray();
-      $total        = $program->get_all_activities()->count();
+      $activities   = $program->get_all_eva_activities()->pluck('id')->toArray();
+      $total        = $program->get_all_eva_activities()->count();
       $quiz_id      = QuizInfo::whereIn('activity_id',$activities)->pluck('id')->toArray();
       $fellowScores = FellowScore::where('user_id',$this->id)->whereIn('questionInfo_id',$quiz_id)->get();
       $fileScores   = FilesEvaluation::whereIn('activity_id',$activities)->where('fellow_id',$this->id)->get();

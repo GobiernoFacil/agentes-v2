@@ -8,6 +8,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Participaciones de {{$fellow->name.' '.$fellow->fellowdata->surname.' '.$fellow->fellowdata->lastname}}</h1>
+		<h2>Programa {{$program->title}}</h2>
 		{{ $modules->links() }}
 		<?php $count_modules = 1; ?>
 		@foreach ($modules as $module)
