@@ -20,28 +20,25 @@
 			@if($user->type == "admin")
 				<h2><a href="{{ url('dashboard/foros/ver/'.$forum->id) }}">{{$forum->topic}}</a></h2>
 				<!--<a href ="{{ url('dashboard/foros/eliminar/' . $forum->id) }}"  id ="{{$forum->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
-				@if($forum->session)
+				@if($forum->type ==='activity')
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
-				@else
-					@if($forum->slug ==='foro-general')
+				@elseif($forum->type ==='general')
 					<p><span class="type general">General</span></p>
-					@else
+				@elseif($forum->type ==='state')
 					<p><span class="type state">Estado</span></p>
-					@endif
 				@endif
 			@endif
 			@if($user->type == "fellow")
-				@if($forum->session)
+				@if($forum->type ==='activity')
 				<h2><a href="{{ url('tablero-facilitador/foros/' .$forum->id) }}">{{$forum->topic}}</a></h2>
 				<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
-				@else
+				@elseif($forum->type ==='general')
 				<h2><a href='{{url("tablero-facilitador/foros/{$forum->id}")}}'>{{$forum->topic}}</a></h2>
-					@if($forum->slug ==='foro-general')
-					<p><span class="type general">General</span></p>
-					@else
-					<p><span class="type state">Estado</span></p>
-					@endif
+				<p><span class="type general">General</span></p>
+				@elseif($forum->type ==='state')
+				<h2><a href='{{url("tablero-facilitador/foros/{$forum->id}")}}'>{{$forum->topic}}</a></h2>
+				<p><span class="type state">Estado</span></p>
 				@endif
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>

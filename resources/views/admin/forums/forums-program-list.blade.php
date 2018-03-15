@@ -34,7 +34,7 @@
 		  <tbody>
 		    @foreach ($programs as $program)
 		      <tr>
-		        <td><h4><a href="{{ url('dashboard/foros/programa/' . $program->id) }}">{{$program->title}}</a></h4></td>
+		        <td><h4><a href='{{url("dashboard/foros/programa/$program->id/ver-foros") }}'>{{$program->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($program->start))}} <br> <strong>{{date('d-m-Y', strtotime($program->end))}}</strong></td>
 				    <td>{{$program->forums->count()}}</td>
             <?php $today  = date('Y-m-d');?>
@@ -44,7 +44,7 @@
               <td>No</td>
             @endif
 		        <td>
-		          <a href="{{ url('dashboard/foros/programa/' . $program->id) }}" class="btn xs ev">Ver</a>
+		          <a href='{{url("dashboard/foros/programa/$program->id/ver-foros") }}' class="btn xs ev">Ver</a>
             </td>
 		    </tr>
 		    @endforeach

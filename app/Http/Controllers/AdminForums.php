@@ -45,19 +45,22 @@ class AdminForums extends Controller
 
 
   /**
-   * Muestra lista de preguntas por sesión
+   * Muestra lista de foros
    *
    * @return \Illuminate\Http\Response
    */
-  public function index($id)
+  public function index($program_id)
   {
     $user     = Auth::user();
-    $forum    = Forum::find($id);
-    $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
-    return view('admin.forums.forums-list')->with([
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $forums   = $program->forums()->paginate($this->pageSize);
+
+  /*   $forum    = Forum::find($id);
+    $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
+    return view('admin.forums.forums-all-list')->with([
       "user"      => $user,
-      "forums" => $forums,
-      "forum"  =>$forum,
+      "forums"    => $forums,
+      "program"   => $program
     ]);
 
   }
