@@ -35,7 +35,7 @@
 </div>
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Calificaciones</h1>
+		<h1>Calificaciones en el programa "{{$program->title}}"</h1>
 	</div>
 </div>
 
@@ -43,11 +43,11 @@
 	<div class="row">
 		<div class="col-sm-6  center">
 			<h3 class="title">Promedio general</h3>
-			<h2><span class="score_a block">{{$fellow->total_average($fellow->id) ? number_format($fellow->total_average($fellow->id)->average,2) : 'Sin promedio'}}</span></h2>
+			<h2><span class="score_a block">{{$fellow->total_average($program->id) ? number_format($fellow->total_average($program->id)->average,2) : 'Sin promedio'}}</span></h2>
 	   </div>
 		 <!-- ver sesión-->
 		 <div class="col-sm-6">
-			 <a class="btn view block sessions_l"  href="{{ url('dashboard/fellows/calificaciones/ver/' . $fellow->id) }}">Ir a calificaciones</a>
+			 <a class="btn view block sessions_l"  href='{{url("dashboard/fellows/programa/$program->id/ver-calificaciones/$fellow->id")}}'>Ir a calificaciones</a>
 		 </div>
 		 <div class="col-sm-12">
 			 <div class="divider b"></div>

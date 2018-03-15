@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Aspirant;
 use App\Models\AspirantNotice;
+use App\Models\FellowAverage;
 use App\Models\FellowProgram;
 use App\Models\Module;
 use App\Models\Notice;
@@ -68,8 +69,13 @@ class AttachPreDataToProgram extends Command
              'user_id' => $fellow->id,
              'program_id'=> $program->id
            ]);
+           $fellowAverages = FellowAverage::where('user_id',$fellow->id)->get();
+           foreach ($fellowAverages as $average) {
+               $average->program_id = $program->id;
+               $average->save();
            }
-        
+        }
+
         $this->info('Attached');
 
 
