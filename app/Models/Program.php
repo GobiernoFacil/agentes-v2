@@ -52,4 +52,8 @@ class Program extends Model
       return  Activity::where('type','evaluation')->whereIn('session_id',$sessions);
 
     }
+
+    function forums(){
+      return $this->hasMany('App\Models\Forum','program_id');
+    }
 }

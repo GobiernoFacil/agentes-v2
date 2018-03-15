@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Auth;
+
+use App\Models\Activity;
+use App\Models\FacilitatorModule;
+use App\Models\FellowData;
 use App\Models\Forum;
+use App\Models\ForumLog;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ModuleSession;
-use App\Models\Activity;
-use App\Models\ForumLog;
+use App\Models\Program;
 use App\User;
-use App\Models\FacilitatorModule;
-use App\Models\FellowData;
 use App\Notifications\SendForumNotice;
 // FormValidators
 use App\Http\Requests\SaveAdminForum;
@@ -32,11 +34,12 @@ class AdminForums extends Controller
   public function all()
   {
     $user     = Auth::user();
-    $forums   = Forum::orderBy('created_at','desc')->paginate($this->pageSize);
-    return view('admin.forums.forums-all-list')->with([
+    $programs = Program::orderBy('start','desc')->paginate($this->pageSize);
+    return view('admin.forums.forums-program-list')->with([
       "user"      => $user,
-      "forums" => $forums,
+      "programs"  => $programs
     ]);
+
 
   }
 
