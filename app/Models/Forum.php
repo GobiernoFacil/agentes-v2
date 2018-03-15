@@ -36,7 +36,7 @@ class Forum extends Model
     }
 
     function forum_conversations(){
-      return $this->hasMany("App\Models\ForumConversation");
+      return $this->hasMany("App\Models\ForumConversation")->orderBy('created_at','desc');
     }
 
     function all_nonactive_forums_fellow($fellow_id){

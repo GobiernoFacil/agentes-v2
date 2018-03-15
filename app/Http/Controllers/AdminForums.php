@@ -71,14 +71,18 @@ class AdminForums extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function view($id)
+  public function view($program_id,$forum_id)
   {
     //
-    $user   = Auth::user();
-    $forum  = Forum::where('id',$id)->firstOrFail();
-    return view('admin.forums.forum-view')->with([
+    $user    = Auth::user();
+    $program = Program::where('id',$program_id)->firstOrFail();
+    $forum   = $program->forums()->where('id',$forum_id)->firstOrFail();
+    $forums  = $forum->forum_conversations()->paginate($this->pageSize);
+
+    return view('admin.forums.forums-list')->with([
       "user"      => $user,
-      "forum"    => $forum
+      "forum"    => $forum,
+      'forums'   => $forums
     ]);
   }
 

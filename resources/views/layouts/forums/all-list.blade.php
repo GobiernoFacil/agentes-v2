@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-sm-11 col-xs-10">
 			@if($user->type == "admin")
-				<h2><a href="{{ url('dashboard/foros/ver/'.$forum->id) }}">{{$forum->topic}}</a></h2>
+				<h2><a href='{{ url("dashboard/foros/programa/$program->id/ver-foro/$forum->id") }}'>{{$forum->topic}}</a></h2>
 				<!--<a href ="{{ url('dashboard/foros/eliminar/' . $forum->id) }}"  id ="{{$forum->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 				@if($forum->type ==='activity')
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
