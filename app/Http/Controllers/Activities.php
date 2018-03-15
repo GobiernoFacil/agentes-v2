@@ -141,8 +141,16 @@ class Activities extends Controller
         {
             //
             $user     = Auth::user();
-            $activity = activity::find($id);
+            $activity = activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+            $next     = $session->module->sessions()->where('parent_id',$session->id)->first();
+            $prev     = $session->module->sessions()->where('order','<=',($session->order-1))->first();
+            if($prev){
+                $prev = $prev->activities->first();
+            }
+            if($next){
+                $next = $next->activities->first();
+            }
             $forum    = $activity->forum;
             if($activity->forum){
               $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
@@ -151,13 +159,14 @@ class Activities extends Controller
             }
       		/*	$forum    = Forum::where('activity_id',$activity->id)->firstOrFail();
       			$forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
-
              return view('admin.modules.activities.activity-view')->with([
               "user"      	=> $user,
               "activity"    => $activity,
               "session"		=> $session,
               "forum"		=> $forum,
-              "forums"		=> $forums
+              "forums"		=> $forums,
+              "next"    => $next,
+              "prev"    =>$prev
             ]);
         }
 
@@ -275,7 +284,7 @@ class Activities extends Controller
         {
             //
             $activity = Activity::where('id',$id)->firstOrFail();
-            $session_id = $activity->session_id;
+            $session = $activity->session;
             foreach ($activity->activityFiles as $file) {
               File::delete($file->path."/".$file->identifier);
               $file->delete();
@@ -301,7 +310,7 @@ class Activities extends Controller
               $activity->quizInfo->delete();
             }
             $activity->delete();
-            return redirect("dashboard/sesiones/ver/$session_id")->with('success',"Se ha eliminado correctamente");
+            return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha eliminado correctamente");
         }
 
 }

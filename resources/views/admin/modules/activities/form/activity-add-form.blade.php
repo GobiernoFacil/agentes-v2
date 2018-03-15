@@ -35,7 +35,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo de Actividad</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video','webinar'=>'Webinar','evaluation'=>'Evaluación','face'=>'Presencial'],null, ['class' => 'form-control', 'id'=>'type'])}}
+      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video','evaluation'=>'Evaluación'],null, ['class' => 'form-control', 'id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
@@ -94,7 +94,7 @@
 </div>
 <!-- horas y # sesión -->
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <p>
       <label><strong>Número de actividad</strong> <br>
       {{Form::text('order',null, ["class" => "form-control"])}} </label>
@@ -103,12 +103,21 @@
       @endif
     </p>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <p>
       <label><strong>Duración</strong> <br>
       {{Form::text('duration', null, ["class" => "form-control"])}} </label>
       @if($errors->has('duration'))
       <strong class="danger">{{$errors->first('duration')}}</strong>
+      @endif
+    </p>
+  </div>
+  <div class="col-sm-4">
+    <p>
+      <label><strong>Unidad de medida</strong> <br>
+      {{Form::select('measure',[null=>"Selecciona una opción",0=>"Minutos",1 =>"Horas"], null, ["class" => "form-control"])}} </label>
+      @if($errors->has('measure'))
+      <strong class="danger">{{$errors->first('measure')}}</strong>
       @endif
     </p>
   </div>
@@ -126,32 +135,6 @@
     </p>
   </div>
 </div>
-<!-- rol facilitador  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Rol del Facilitador</strong> <br>
-      {{Form::textarea('facilitator_role',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('facilitator_role'))
-      <strong class="danger">{{$errors->first('facilitator_role')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-<!-- rol facilitador  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Rol Participantes</strong> <br>
-      {{Form::textarea('competitor_role',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('competitor_role'))
-      <strong class="danger">{{$errors->first('competitor_role')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-
-
 
 
 <div id="webinar" style="{{old('type') ==='webinar' ? '' : 'display:none;'}}">

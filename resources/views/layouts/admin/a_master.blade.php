@@ -35,7 +35,7 @@
 	<!--css-custom-->
 	
 	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
-	<link rel="stylesheet" href="{{url('css/admin_styles.css')}}">
+	<link rel="stylesheet" href="{{url('css/fellow_styles.css')}}">
 
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -57,34 +57,75 @@
 	<?php $body_class = $__env->yieldContent('body_class');?>
 	@endif
 @endif
+
+<?php
+	if($user->type == "admin")
+	{
+		$linkDash = "dashboard";
+	}
+	else if($user->type == "fellow")
+	{
+		$linkDash = "tablero";
+	}
+	else if($user->type == "facilitator")
+	{
+		$linkDash = "tablero-facilitador";
+	}
+	else if($user->type == "aspirant")
+	{
+		$linkDash = "tablero-aspirante";
+	}
+	else
+	{
+		$linkDash = "sa/dashboard";
+	}
+?>
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
-	<header>
-	<!--header-->
-	@include('layouts.admin.a_header')
-	</header>
-	
-	@if ($__env->yieldContent('breadcrumb'))
-	<div class="breadcrumb">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					@include($__env->yieldContent('breadcrumb'))
-				</div>
-			</div>
-		</div>
+	<div class="apertus_nav">	
+		<!--header-->
+		@include('layouts.admin.a_header')
 	</div>
-	@endif
 	
-	<section>
-		<!--content-->
-		<div class="container">
-		@yield('content')
+	<div class="apertus_content">
+		@if ($__env->yieldContent('breadcrumb'))
+		<div class="breadcrumb">
+				<div class="row">
+					<div class="col-sm-12">
+						@include($__env->yieldContent('breadcrumb'))
+					</div>
+				</div>
 		</div>
-	</section>
-	
-	<!--footer-->
-	@include('layouts.admin.a_footer')
+		@endif
+		
+		@if ($__env->yieldContent('subnav'))
+		<div class="subnav">
+				<div class="row">
+					<div class="col-sm-12">
+						@include('layouts.fellow.subnav.activity')
+					</div>
+				</div>
+		</div>
+		@endif
+		
+		<!--profile-->
+		@include('layouts.admin.a_profile_logout')
+		
+		@if ($__env->yieldContent('subnav_week'))
+		<section class="ap_week_p">
+			@include('layouts.fellow.subnav.week')
+		@else
+		<section>		
+		@endif
+			<!--content-->
+			<div class="container">
+			@yield('content')
+			</div>
+		</section>
+		
+		<!--footer-->
+		@include('layouts.admin.a_footer')
+	</div>
 
 	<!--js content -->
 	@yield('js-content')	

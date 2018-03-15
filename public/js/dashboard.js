@@ -27,6 +27,10 @@ var svg = d3.select("#bar").append("svg")
   data.forEach(function(d) {
     d.total = +d.total;
   });
+  
+data.sort(function(x, y){
+   return d3.descending(x.total, y.total);
+})
 
   // Scale the range of the data in the domains
   x.domain(data.map(function(d) { return d.estado; }));

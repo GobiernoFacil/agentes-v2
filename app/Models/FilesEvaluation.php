@@ -8,7 +8,7 @@ class FilesEvaluation extends Model
 {
     //
     public $table = 'file_evaluations';
-
+    //user_id = quien evalua, fellow_id = fellow
     protected $fillable = [
         'user_id', 'activity_id','fellow_id','name','score','path','url','comments'
     ];

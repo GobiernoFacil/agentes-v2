@@ -28,7 +28,9 @@ class Kernel extends ConsoleKernel
         Commands\CreateCustomQuestionnaire::Class,
         Commands\CreateDiagnosticFiles::Class,
         Commands\AddGenderToFellows::Class,
-        Commands\SendAspirantReminder::Class
+        Commands\AssignAspirants::Class,
+        Commands\SendAspirantReminder::Class,
+        Commands\AttachPreDataToProgram::Class
     ];
 
     /**
@@ -43,28 +45,19 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
       //  $schedule->command('command:delete-expired-codes')
       //           ->cron('30 12 01 */5 *');
-      $schedule->command('command:aspirant-count 0')
-                          ->dailyAt('20:00');
-      $schedule->command('command:aspirant-count 1')
-                          ->weekly()
-                          ->fridays()->at('08:00');
-      $schedule->command('command:aspirant-count 1')
-                          ->weekly()
-                          ->mondays()->at('20:00');
-      $schedule->command('command:send-aspirants-reminder')
-                          ->weekly()
-                          ->fridays()->at('08:00')
-                          ->emailOutputTo('carlos@gobiernofacil.com');
-
-    /*  $schedule->command('command:update-averages')
+        /*         $schedule->command('command:aspirant-count')
+                          ->dailyAt('16:30');*/
+      $schedule->command('command:update-averages')
               ->dailyAt('10:00')
               ->emailOutputTo('carlos@gobiernofacil.com');
-      $schedule->command('command:create-csv-fac-survey')
+    /*  $schedule->command('command:create-csv-fac-survey')
                       ->dailyAt('17:00')
-                      ->emailOutputTo('carlos@gobiernofacil.com');
+                      ->emailOutputTo('carlos@gobiernofacil.com');*/
                       $schedule->command('command:create-diagnostic-files')
                               ->dailyAt('08:00')
-                              ->emailOutputTo('carlos@gobiernofacil.com');*/
+                              ->emailOutputTo('carlos@gobiernofacil.com');
+                              $schedule->command('command:assign-aspirant-to')
+                                      ->dailyAt('10:00');
     }
 
     /**

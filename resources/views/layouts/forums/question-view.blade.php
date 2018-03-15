@@ -2,14 +2,12 @@
 	<!--foro-->
 	<div class="col-sm-12 forum_list">
 		<h3>{{$question->forum->topic}}</h3>
-		@if($question->forum->session)
+		@if($question->forum->type ==='activity')
 		<p><span class="type module_session">{{$question->forum->session->module->title}} / {{$question->forum->session->name}}</span></p>
-		@else
-			@if($question->forum->slug ==='foro-general')
+		@elseif($question->forum->type ==='general')
 			<p><span class="type general">General</span></p>
-			@else
+		@elseif($question->forum->type ==='state')
 			<p><span class="type state">Estado</span></p>
-			@endif
 		@endif
 		<div class="divider b"></div>
 	</div>
@@ -69,6 +67,7 @@
 	<!--pregunta-->
 	<div class="col-sm-8 forum_list">
     	<h1>{{$question->topic}} </h1>
+			<h2>
     	<p class="author">Por
     	@if($question->user->fellowData)
     	<!--fellow data -->
@@ -90,7 +89,7 @@
 	 			<!--si dashboard facilitador-->
 	 			{{$question->user->name." ".$question->user->facilitatorData->surname." ".$question->user->facilitatorData->lastname}}
 	 		@endif
-		
+
 		@else
 		<!--super user data -->
 		{{$question->user->name}}
@@ -187,7 +186,7 @@
 						@endif
 						<img src='{{url("img/users/default.png")}}' width="100%"></a>
 					@endif
-		      		
+
 				</div>
 				<div class="col-sm-10">
 	  				<p class="f-message">{{$message->message}}</p>

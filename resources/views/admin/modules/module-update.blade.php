@@ -1,9 +1,9 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Agregar módulo')
 @section('description', 'Agregar nuevo módulo')
-@section('body_class', '')
-@section('breadcrumb_type', '')
-@section('breadcrumb', '')
+@section('body_class', 'program')
+@section('breadcrumb_type', 'module edit')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
 @section('content')
 <div class="row">
@@ -45,13 +45,29 @@ yearSuffix: ''
 $.datepicker.setDefaults($.datepicker.regional['es']);
   $( function() {
     $( "#startD" ).datepicker({minDate: new Date()});
-    $( "#startE" ).datepicker({minDate: new Date()});
   } );
 
   $('#startD').on('change',function(){
     var date = new Date($('#startD').val());
     $('#startE').datepicker('destroy');
-    $( "#startE" ).datepicker({minDate:date});
+    date.setDate(date.getDate()+7);
+    if(date.getMonth()+1 < 10){
+      if(date.getDate()< 10){
+        $( "#startE").val(date.getFullYear()+'/0'+(date.getMonth()+1)+'/0'+date.getDate());
+        $( "#startE").attr('val',date.getFullYear()+'/0'+(date.getMonth()+1)+'/0'+date.getDate());
+      }else{
+        $( "#startE").val(date.getFullYear()+'/0'+(date.getMonth()+1)+'/'+date.getDate());
+        $( "#startE").attr('val',date.getFullYear()+'/0'+(date.getMonth()+1)+'/'+date.getDate());
+      }
+    }else{
+      if(date.getDate()< 10){
+        $( "#startE").val(date.getFullYear()+'/'+(date.getMonth()+1)+'/0'+date.getDate());
+        $( "#startE").attr('val',date.getFullYear()+'/'+(date.getMonth()+1)+'/0'+date.getDate());
+      }else{
+        $( "#startE").val(date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate());
+        $( "#startE").attr('val',date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate());
+      }
+    }
   });
   </script>
 @endsection

@@ -96,7 +96,7 @@ class ModuleSessions extends Controller
 
     protected function checkOrder($data){
       //primera sesión
-      if($data->parent_id==='0'){
+      if(!$data->parent_id){
          $order        =  1;
          $data->order  =  $order;
          $data->parent_id = null;
@@ -435,7 +435,7 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function assign($session_id)
+    public function assign($program_id,$module_id,$session_id)
     {
       //
       $user = Auth::user();
@@ -470,7 +470,7 @@ class ModuleSessions extends Controller
           ]);
         }
       }
-      return redirect("dashboard/sesiones/ver/$request->session_id")->with('success',"Se ha guardado correctamente");
+      return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
     }
 
     /**

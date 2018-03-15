@@ -150,29 +150,30 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::get('dashboard/aspirantes', 'Aspirants@index'); old aspirant list
     Route::get('dashboard/aspirantes', 'AdminAspirants@index');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver', 'AdminAspirants@aspirantList');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos', 'AdminAspirants@aspirantWithOutProof');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos-validos', 'AdminAspirants@aspirantRejected');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivos-evaluados', 'AdminAspirants@aspirantAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivo-por-evaluar', 'AdminAspirants@aspirantToEvaluate');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-por-evaluar', 'AdminAspirants@aspirantAppToEvaluate');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-evaluada', 'AdminAspirants@aspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada', 'AdminAspirants@allAspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@evaluateData');
+    Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@saveEvaluateData');
+
+
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/ver-aspirante/{aspirant_id}', 'AdminAspirants@viewAspirant');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/download/{aspirant_id}/{type}', 'AdminAspirants@downloadPdf');
-
-    /*eliminadas - todos los aspirantes ahora deben  verificar antes de aplicar
-    Route::get('dashboard/aspirantes/verificados', 'Aspirants@verify');
-    Route::get('dashboard/aspirantes/sin-verificar', 'Aspirants@NoVerify');*/
-
-    /*
-    Route::get('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@evaluateFiles');
-    Route::post('dashboard/aspirantes/evaluar-archivos/{id}', 'Aspirants@SaveEvaluationFiles');
-    Route::get('dashboard/aspirantes/evaluar/{id}', 'Aspirants@evaluation');
-    Route::post('dashboard/aspirantes/evaluar/{id}', 'Aspirants@SaveEvaluation');
-    Route::get('dashboard/archivo/download/{file}/{type}', 'Aspirants@download');
-    Route::post('dashboard/aspirantes/buscar', 'Aspirants@search');*/
-
-
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/comprobante/{name}', 'AdminAspirants@download');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@evaluate');
+    Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@saveEvaluate');
 
 
     /// fellows
-    Route::get('dashboard/fellows', 'FellowsAdmin@index');
-    Route::get('dashboard/fellows/ver/{id}', 'FellowsAdmin@view');
-    Route::get('dashboard/fellows/calificaciones/ver/{id}', 'FellowsAdmin@viewSheet');
-    Route::get('dashboard/fellows/participaciones/ver/{id}', 'FellowsAdmin@participationSheet');
+    Route::get('dashboard/fellows', 'FellowsAdmin@indexProgram');
+    Route::get('dashboard/fellows/programa/{program_id}', 'FellowsAdmin@index');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-fellow/{fellow_id}', 'FellowsAdmin@view');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{fellow_id}', 'FellowsAdmin@viewSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-participaciones/{fellow_id}', 'FellowsAdmin@participationSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
@@ -236,6 +237,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/sesiones/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     Route::post('dashboard/sesiones/actividades/archivos/update/{file_id}', 'ActivitiesFiles@update');
     Route::get('dashboard/sesiones/actividades/archivos/eliminar/{file_id}', 'ActivitiesFiles@delete');
+    //ver pdf
+    Route::get('dashboard/sesiones/actividades/archivos/ver-pdf/{file_id}', 'ActivitiesFiles@watchPdf');
+
+
+
+
     /*@ActivityRequirements Controller */
     //CRUD activitiesRequirements
     Route::get('dashboard/sesiones/actividades/requerimientos/{id}', 'ActivityRequirements@index');
@@ -294,12 +301,13 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminForums Controller */
     // Rutas CRUD forums
     Route::get('dashboard/foros', 'AdminForums@all');
-    Route::get('dashboard/foros/ver/{id}', 'AdminForums@index');
-    Route::get('dashboard/foros/agregar', 'AdminForums@add');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros', 'AdminForums@index');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foro/{forum_id}', 'AdminForums@view');
+    Route::get('dashboard/foros/programa/{program_id}/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/save', 'AdminForums@save');
     Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
     Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
-    Route::get('dashboard/foros/pregunta/ver/{id}', 'AdminForums@viewQuestion');
+    Route::get('dashboard/foros/programa/{program_id}/foro/{forum_id}/ver-pregunta/{question_id}', 'AdminForums@viewQuestion');
     Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
     Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
@@ -410,6 +418,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/archivos/{activity_slug}/save', 'FellowFiles@save');
 	//Descargar archivo en actividades
     Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
+    //ver pdf
+    Route::get('tablero/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
     /*@Messages Controller */
     // Rutas mensajes
     Route::get('tablero/mensajes', 'Messages@index');

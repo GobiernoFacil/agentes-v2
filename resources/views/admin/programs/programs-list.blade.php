@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de programas')
 @section('description', 'Lista de programas')
-@section('body_class', 'programs')
+@section('body_class', 'program')
 @section('breadcrumb_type', 'programs list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
 
@@ -18,16 +18,16 @@
 </div>
 <div class="row" id ="aspirants">
 	<div class="col-sm-12">
-		<div class="box">
-			 			<p class="right"><a href="{{ url('dashboard/programas/agregar') }}" class="btn ev">[+] Agregar programa</a></p>
+		<p class="right"><a href="{{ url('dashboard/programas/agregar') }}" class="btn ev">[+] Agregar programa</a></p>
 
 		<table class="table">
 		  <thead>
 		    <tr>
 		      <th>Nombre</th>
 		      <th>Fecha Inicio / Fecha Final</th>
+		      <th>Fellows</th>
 		      <th>Módulos</th>
-          <th>Publicado</th>
+			  <th>Publicado</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
@@ -36,7 +36,8 @@
 		      <tr>
 		        <td><h4><a href="{{ url('dashboard/programas/ver/' . $program->id) }}">{{$program->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($program->start))}} <br> <strong>{{date('d-m-Y', strtotime($program->end))}}</strong></td>
-				    <td>{{$program->modules->count()}}</td>
+				<td>{{$program->fellows->count()}}</td>
+				<td>{{$program->modules->count()}}</td>
 		        <td>{{$program->public ? "Sí" : "No" }}</td>
 		        <td>
 		          <a href="{{ url('dashboard/programas/ver/' . $program->id) }}" class="btn xs ev">Ver</a>
@@ -48,7 +49,6 @@
 		</table>
 
 		{{ $programs->links() }}
-		</div>
 	</div>
 </div>
 

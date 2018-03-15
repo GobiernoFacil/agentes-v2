@@ -31,7 +31,7 @@
   <div class="col-sm-6">
     <p>
       <label><strong>Fecha final</strong> <br>
-      {{Form::text('end',$module->end, ["class" => "form-control",'id'=>'startE'])}} </label>
+      {{Form::text('end',$module->end, ["class" => "form-control",'id'=>'startE','readonly'])}} </label>
       @if($errors->has('end'))
       <strong class="danger">{{$errors->first('end')}}</strong>
       @endif
@@ -51,38 +51,7 @@
     </p>
   </div>
 </div>
-<!-- horas y sesiones -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Número de sesiones</strong> <br>
-      {{Form::text('number_sessions',$module->number_sessions, ["class" => "form-control"])}} </label>
-      @if($errors->has('number_sessions'))
-      <strong class="danger">{{$errors->first('number_sessions')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Duración</strong> <br>
-      {{Form::text('number_hours', $module->number_hour, ["class" => "form-control"])}} </label>
-      @if($errors->has('number_hours'))
-      <strong class="danger">{{$errors->first('number_hours')}}</strong>
-      @endif
-    </p>
-  </div>
-  <div class="col-sm-6">
-    <p>
-      <label><strong>Unidad de medida</strong> <br>
-      {{Form::select('measure',[null=>"Selecciona una opción",0=>"Minutos",1 =>"Horas"], $module->measure, ["class" => "form-control"])}} </label>
-      @if($errors->has('measure'))
-      <strong class="danger">{{$errors->first('measure')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
+
 
 <!-- modalidad -->
 
@@ -98,20 +67,8 @@
   </div>
 </div>
 
-<!-- situación  -->
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Situación Didáctica</strong> <br>
-      {{Form::textarea('teaching_situation',$module->teaching_situation, ["class" => "form-control"])}} </label>
-      @if($errors->has('teaching_situation'))
-      <strong class="danger">{{$errors->first('teaching_situation')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 
-<!-- objectivo  -->
+<!-- objetivo  -->
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -124,20 +81,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12">
-    <p>
-      <label><strong>Productos a desarrollar</strong> <br>
-      {{Form::textarea('product_developed',$module->product_developed, ["class" => "form-control"])}} </label>
-      @if($errors->has('product_developed'))
-      <strong class="danger">{{$errors->first('product_developed')}}</strong>
-      @endif
-    </p>
-  </div>
-</div>
 
-<!-- modalidad -->
-
+<!-- publicar -->
 <div class="row">
   <div class="col-sm-12">
     <p>

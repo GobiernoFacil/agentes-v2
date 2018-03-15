@@ -196,14 +196,30 @@ class ActivitiesFiles extends Controller
       $user = Auth::user();
       $data = ActivitiesFile::find($request->id);
       $file = $data->path.'/'.$data->identifier;
-      $ext  = substr(strrchr($data->identifier,'.'),1);
-      $mime = mime_content_type ($file);
+      $fileData = pathinfo($file);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
+    }
 
-      $filename = $data->name.".".$ext;
-      return response()->download($file, $filename, $headers);
+
+    /**
+    *descargar archivo
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function watchPdf($id){
+      $user = Auth::user();
+      $data = ActivitiesFile::find($id);
+      $file = $data->path.'/'.$data->identifier;
+      $fileData = pathinfo($file);
+      $headers = array(
+        'Content-Type: '.$fileData['extension'],
+      );
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->file($fileData['dirname'].'/'.$fileData['basename'], $headers);
     }
 
     /**
