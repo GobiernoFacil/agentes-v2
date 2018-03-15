@@ -12,6 +12,24 @@
 </div>
 
 <div class="row">
+	<div class="col-sm-12">
+ 				<div class="box">
+ 					<h2>Aspirantes por Estado</h2>
+ 					<ul class="inline">
+ 						<li>Campeche: <strong>{{$campeche_number}}</strong></li>
+ 						<li>Durango: <strong>{{$durango_number}}</strong></li>
+ 						<li>Estado de México: <strong>{{$edomex_number}}</strong></li>
+ 						<li>Guanajuato: <strong>{{$guanajuato_number}}</strong></li>
+ 						<li>Quintana Roo: <strong>{{$quintana_number}}</strong></li>
+ 						<li>San Luis Potosí: <strong>{{$sanluis_number}}</strong></li>
+ 						<li>Sinaloa: <strong>{{$sinaloa_number}}</strong></li>
+ 						<li>Tabasco: <strong>{{$tabasco_number}}</strong></li>
+ 						<li>Tlaxcala: <strong>{{$tlaxcala_number}}</strong></li>
+ 						<li>Veracruz: <strong>{{$veracruz_number}}</strong></li>
+ 					</ul>
+ 					<div id="bar"></div>					
+ 				</div>
+ 	</div>
 	<div class="col-sm-6">
 		<div class="module">
 			<div class="m_header">
@@ -204,4 +222,54 @@
 		
 		</div>
 </div>
+@endsection
+
+@section('js-content')
+<!-- load the d3.js library -->    	
+<script src="{{ url('js/d3/d3.v4.min.js')}}"></script>
+<script>
+	var data = [
+	{
+		"estado": "Campeche",
+		"total" : {{$campeche_number}}
+	},
+	{
+		"estado": "Durango",
+		"total" : {{$durango_number}}
+	},
+	{
+		"estado": "Estado de México",
+		"total" : {{$edomex_number}}
+	},
+	{
+		"estado": "Guanajuato",
+		"total" : {{$guanajuato_number}}
+	},
+	{
+		"estado": "Quintana Roo",
+		"total" : {{$quintana_number}}
+	},
+	{
+		"estado": "San Luis Potosí",
+		"total" : {{$sanluis_number}}
+	},
+	{
+		"estado": "Sinaloa",
+		"total" : {{$sinaloa_number}}
+	},
+	{
+		"estado": "Tabasco",
+		"total" : {{$tabasco_number}}
+	},
+	{
+		"estado": "Tlaxcala",
+		"total" : {{$tlaxcala_number}}
+	},
+	{
+		"estado": "Veracruz",
+		"total" : {{$veracruz_number}}
+	},
+	];
+</script>
+<script src="{{ url('js/dashboard.js') }}"></script>
 @endsection
