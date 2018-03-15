@@ -11,7 +11,7 @@
 		<h1>Foros del programa "{{$program->title}}"</h1>
 	</div>
 	<div class="col-sm-3">
-		<p class="right"><a href="{{ url('dashboard/foros/agregar') }}" class="btn ev">[+] Agregar foro</a></p>
+		<p class="right"><a href='{{ url("dashboard/foros/programa/$program->id/agregar") }}' class="btn ev">[+] Agregar foro</a></p>
 	</div>
 </div>
 
