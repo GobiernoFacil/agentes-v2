@@ -61,6 +61,17 @@ class Admin extends Controller
           $query->where('to_id',$user->id)->whereNotIn('id',$conversation_id->toArray());
         })
         ->count();
+        
+        $edomex_number = Aspirant::where('is_activated',1)->where('state','México')->count();
+        $campeche_number = Aspirant::where('is_activated',1)->where('state','Campeche')->count();
+        $durango_number = Aspirant::where('is_activated',1)->where('state','Durango')->count();
+        $guanajuato_number = Aspirant::where('is_activated',1)->where('state','Guanajuato')->count();
+        $quintana_number = Aspirant::where('is_activated',1)->where('state','Quintana Roo')->count();
+        $sanluis_number = Aspirant::where('is_activated',1)->where('state','San Luis Potosí')->count();
+        $sinaloa_number = Aspirant::where('is_activated',1)->where('state','Sinaloa')->count();
+        $tabasco_number = Aspirant::where('is_activated',1)->where('state','Tabasco')->count();
+        $tlaxcala_number = Aspirant::where('is_activated',1)->where('state','Tlaxcala')->count();
+        $veracruz_number = Aspirant::where('is_activated',1)->where('state','Veracruz de Ignacio de la Llave ')->count();
 
         return view('admin.dashboard')->with([
           "user"      			=> $user,
@@ -71,7 +82,17 @@ class Admin extends Controller
 		  'news'			    => $news,
 		  'conversations_count' => $conversations_count,
 		  'sessions_count'		=> $sessions_count,
-		  'programs'			=> $programs
+		  'programs'			=> $programs,
+		  'edomex_number' 		  => $edomex_number,
+		  'campeche_number' 		  => $campeche_number,
+		  'durango_number' 		  => $durango_number,
+		  'guanajuato_number' 		  => $guanajuato_number,
+		  'quintana_number' 		  => $quintana_number,	
+		  'sanluis_number' 		  => $sanluis_number,
+		  'sinaloa_number' 		  => $sinaloa_number,		  
+		  'tabasco_number' 		  => $tabasco_number,		  
+		  'tlaxcala_number' 		  => $tlaxcala_number,		  
+		  'veracruz_number' 		  => $veracruz_number,		  
          ]);
       }
 
