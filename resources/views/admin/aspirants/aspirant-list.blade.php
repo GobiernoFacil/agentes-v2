@@ -55,7 +55,15 @@
 							<!--registro-->
 					        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
 					        <!--evaluado-->
-							<td>{{$aspirant->has_proof_evaluated($notice) ? $aspirant->has_proof_evaluated($notice)->address_proof ? 'Válido' : 'No Válido' : 'No cumple requisitos' }}</td>
+									@if($type_list===4)
+										<td>Sin evaluar</td>
+									@else
+										@if(!$aspirant->check_aplication_data())
+											<td>No cumple requisitos</td>
+									  @else
+										<td>{{$aspirant->has_proof_evaluated($notice) ? $aspirant->has_proof_evaluated($notice)->address_proof ? 'Válido' : 'No Válido' : 'No ha sido evaluado' }}</td>
+										@endif
+									@endif
 							<!--privacy-->
 							<td>{{$aspirant->AspirantsFile ? $aspirant->AspirantsFile->privacy_policies ? 'Aceptadas':'No' : 'No' }}</td>
 					        <!--acciones-->
