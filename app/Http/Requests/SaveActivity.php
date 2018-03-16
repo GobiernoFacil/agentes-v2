@@ -29,7 +29,6 @@ class SaveActivity extends FormRequest
           return [
               //
               'name'=> 'required|max:256|unique:activities',
-              'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
               'description'=> 'required',
               'type'=>'required',
@@ -43,7 +42,6 @@ class SaveActivity extends FormRequest
           return [
               //
               'name'=> 'required|max:256|unique:activities',
-              'order'=> 'required|numeric|integer',
               'duration'=> 'required|numeric',
               'description'=> 'required',
               'type'=>'required',
@@ -55,7 +53,6 @@ class SaveActivity extends FormRequest
         }elseif($this->type==='evaluation'){
           return [
           'name'=> 'required|max:256|unique:activities',
-          'order'=> 'required|numeric|integer',
           'duration'=> 'required|numeric',
           'measure'=> 'required',
           'description'=> 'required',
@@ -68,7 +65,6 @@ class SaveActivity extends FormRequest
           return [
             //
             'name'=> 'required|max:256|unique:activities',
-            'order'=> 'required|numeric|integer',
             'measure'=> 'required',
             'duration'=> 'required|numeric',
             'description'=> 'required',

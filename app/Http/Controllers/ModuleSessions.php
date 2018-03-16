@@ -449,6 +449,25 @@ class ModuleSessions extends Controller
 
     }
 
+
+    /**
+    * remover facilitador a sesión
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function remove($program_id,$module_id,$session_id,$facilitator_id)
+    {
+      //
+      $user = Auth::user();
+      $program = Program::where('id',$program_id)->firstOrFail();
+      $module  = $program->modules()->where('id',$module_id)->firstOrFail();
+      $session = $module->sessions()->where('id',$session_id)->firstOrFail();
+      $session->facilitators()->where('user_id',$facilitator_id)->where('session_id',$session_id)->where('module_id',$module_id)->delete();
+      return redirect("dashboard/programas/$program->id/modulos/$module->id}/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
+
+    }
+
     /**
     * guardar asignacion de facilitadores a módulo
     *

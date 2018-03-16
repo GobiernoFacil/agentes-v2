@@ -91,16 +91,7 @@
 </div>
 <!-- horas y # sesión -->
 <div class="row">
-  <div class="col-sm-4">
-    <p>
-      <label><strong>Número de actividad</strong> <br>
-      {{Form::text('order',null, ["class" => "form-control"])}} </label>
-      @if($errors->has('order'))
-      <strong class="danger">{{$errors->first('order')}}</strong>
-      @endif
-    </p>
-  </div>
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <p>
       <label><strong>Duración</strong> <br>
       {{Form::text('duration', null, ["class" => "form-control"])}} </label>
@@ -109,7 +100,7 @@
       @endif
     </p>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <p>
       <label><strong>Unidad de medida</strong> <br>
       {{Form::select('measure',[null=>"Selecciona una opción",0=>"Minutos",1 =>"Horas"], null, ["class" => "form-control"])}} </label>

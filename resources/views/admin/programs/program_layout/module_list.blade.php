@@ -40,7 +40,7 @@
 						<h5>Evaluación</h5>
 						<ul>
 							@if($module->get_evaluation_activity())
-							<li>{{$module->get_evaluation_activity()->title}}</li>
+							<li>{{$module->get_evaluation_activity()->name}}</li>
 							@else
 							<li><strong>Sin actividad obligatoria</strong></li>
 							@endif

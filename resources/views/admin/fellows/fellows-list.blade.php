@@ -72,7 +72,7 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12 center">
-			<h2>Aún no hay fellows, estamos actualizando la db, regresa el 9 de junio.</h2>
+			<h2>Aún no hay fellows.</h2>
 			<h3>:)</h3>
 		</div>
 	</div>
