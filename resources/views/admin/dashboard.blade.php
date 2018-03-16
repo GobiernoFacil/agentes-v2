@@ -27,7 +27,7 @@
  						<li>Tlaxcala: <strong>{{$tlaxcala_number}}</strong></li>
  						<li>Veracruz: <strong>{{$veracruz_number}}</strong></li>
  					</ul>
- 					<div id="bar"></div>					
+ 					<div id="bar"></div>
  				</div>
  	</div>
 	<div class="col-sm-6">
@@ -38,7 +38,7 @@
 						<h4>Programas</h4>
 					</div>
 					<div class="col-sm-6">
-						
+
 					</div>
 				</div>
 			</div>
@@ -55,8 +55,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="col-sm-6">
 		<div class="module">
 			<div class="m_header">
@@ -65,7 +65,7 @@
 						<h4>Aspirantes</h4>
 					</div>
 					<div class="col-sm-6">
-						
+
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 						<h4>Facilitadores</h4>
 					</div>
 					<div class="col-sm-6">
-						
+
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 						<h4>Tus sesiones</h4>
 					</div>
 					<div class="col-sm-6">
-						
+
 					</div>
 				</div>
 			</div>
@@ -174,7 +174,7 @@
 					<a href="{{url('dashboard/modulos/agregar')}}" class="btn gde download">[+] Agregar Módulo</a>
 				</div>
 			</div>-->
-			
+
 			<!--mensajes
 			<div class="col-sm-6">
 				<div class="box center">
@@ -183,7 +183,7 @@
 					<a href="{{ url('dashboard/mensajes') }}" class="btn gde">Lista de Mensajes</a>
 				</div>
 			</div>-->
-			
+
 			<!-- noticias -->
 			<div class="module">
 			<div class="m_header">
@@ -192,7 +192,7 @@
 						<h4>Noticias, eventos y avisos</h4>
 					</div>
 					<div class="col-sm-6">
-						
+
 					</div>
 				</div>
 			</div>
@@ -219,13 +219,13 @@
 				</div>
 			</div>
 		</div>
-		
+
 		</div>
 </div>
 @endsection
 
 @section('js-content')
-<!-- load the d3.js library -->    	
+<!-- load the d3.js library -->
 <script src="{{ url('js/d3/d3.v4.min.js')}}"></script>
 <script>
 	var data = [
