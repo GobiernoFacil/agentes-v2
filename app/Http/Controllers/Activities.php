@@ -113,6 +113,9 @@ class Activities extends Controller
               }
               $forum->session_id = $session->id;
               $forum->activity_id = $activity->id;
+              $forum->module_id    = $session->module->id;
+              $forum->program_id   = $session->module->program->id;
+              $forum->type       = 'activity';
               $forum->user_id    = $user->id;
               $forum->description = $activity->description;
               $forum->save();
@@ -143,14 +146,9 @@ class Activities extends Controller
             $user     = Auth::user();
             $activity = activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
-            $next     = $session->module->sessions()->where('parent_id',$session->id)->first();
-            $prev     = $session->module->sessions()->where('order','<=',($session->order-1))->first();
-            if($prev){
-                $prev = $prev->activities->first();
-            }
-            if($next){
-                $next = $next->activities->first();
-            }
+            $pagination = $activity->get_pagination();
+            $prev     = $pagination[0];
+            $next     = $pagination[1];
             $forum    = $activity->forum;
             if($activity->forum){
               $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);

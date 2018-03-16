@@ -149,8 +149,8 @@
 
 <div class="subnav bottom">
 	<div class="center">
-		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev->id") : ''}}><strong>&lt;</strong> Anterior</a>
-		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next->id") : ''}}>Siguiente <strong>&gt;</strong></a>
+		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next") : ''}}>Siguiente <strong>&gt;</strong></a>
 	</div>
 </div>
 
