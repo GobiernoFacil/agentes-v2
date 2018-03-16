@@ -241,13 +241,12 @@ class AdminAspirants extends Controller
       public function download($notices_id,$name){
         $user = Auth::user();
         $file = public_path(). "/files/".$name;
-        $ext  = substr(strrchr($file,'.'),1);
-        $mime = mime_content_type ($file);
+        $fileData = pathinfo($file);
         $headers = array(
-          'Content-Type: '.$mime,
+          'Content-Type: '.$fileData['extension'],
         );
-        $filename = "comprobante.".$ext;
-        return response()->download($file, $filename, $headers);
+        $filename = "comprobante.".$fileData['extension'];
+        return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
       }
 
 
