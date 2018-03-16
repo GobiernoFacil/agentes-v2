@@ -59,9 +59,9 @@ class Activity extends Model
 
 
   function get_pagination(){
-    $program  = $this->session->module->program;
+    $module  = $this->session->module;
     $sessions_with_activities =  Activity::select('session_id')->distinct('session_id')->pluck('session_id')->toArray();
-    $sessions_with_activities =  $program->get_all_sessions()->whereIn('id',$sessions_with_activities)->orderBy('order','asc')->pluck('id')->toArray();
+    $sessions_with_activities =  $module->sessions()->whereIn('id',$sessions_with_activities)->orderBy('order','asc')->pluck('id')->toArray();
     $index = array_search($this->session->id, $sessions_with_activities);
     if($index !== FALSE)
     {
