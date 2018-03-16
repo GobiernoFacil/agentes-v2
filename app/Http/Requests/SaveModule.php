@@ -33,7 +33,7 @@ class SaveModule extends FormRequest
             'start'=> 'required',
             'end'=> 'required|before:'.date('Y-m-d',$date),
             'public'=> 'required',
-        ];/*
+        ];*/
         return [];
     }
 }
