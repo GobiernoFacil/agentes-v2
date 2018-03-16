@@ -96,7 +96,7 @@
                 <div class="divider"></div>
                 <li class="row">
                   <div class="col-sm-9">
-                    <h3>Software</h3>
+                    <h3>Idiomas </h3>
                         @foreach($aspirant->cv->languages as $language)
                         <ul>
                           <li><strong>Idioma: </strong>{{$language->name}}</li>
@@ -110,10 +110,10 @@
                 <div class="divider"></div>
                 <li class="row">
                   <div class="col-sm-9">
-                    <h3>Idiomas</h3>
+                    <h3>Software</h3>
                         @foreach($aspirant->cv->softwares as $software)
                         <ul>
-                          <li><strong>Idioma: </strong>{{$software->name}}</li>
+                          <li><strong>Programa: </strong>{{$software->name}}</li>
                           <li><strong>Nivel: </strong>{{$software->level}}</li>
                         </ul>
                         @endforeach
