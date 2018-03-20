@@ -1718,6 +1718,33 @@ a:visited.btn {
       .btn.gde.process:hover,
       a:visited.btn.gde.process:hover {
         background-color: #f8a22f; }
+    a.btn.gde.view,
+    .btn.gde.view,
+    a:visited.btn.gde.view {
+      background-color: #18b73e;
+      position: relative; }
+      a.btn.gde.view:hover,
+      .btn.gde.view:hover,
+      a:visited.btn.gde.view:hover {
+        background-color: #15a036; }
+      a.btn.gde.view.faqs:after,
+      .btn.gde.view.faqs:after,
+      a:visited.btn.gde.view.faqs:after {
+        content: "?";
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%;
+        background: white;
+        color: #18b73e;
+        height: 25px;
+        font-weight: 700;
+        font-size: 20px;
+        position: absolute;
+        right: 10px;
+        text-align: center;
+        width: 25px;
+        vertical-align: top; }
   a.btn.block,
   .btn.block,
   a:visited.btn.block {

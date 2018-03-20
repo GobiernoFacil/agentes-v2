@@ -16,14 +16,17 @@
         
 			<!--files-->
 			<div class="row">
-	        	<div class="col-sm-6">
+	        	<div class="col-sm-4">
 				@if($notice->files_front()->count()>0)
 			    	@foreach($notice->files_front() as $file)
 					<p><a href='{{url("convocatoria/archivos/$file->name")}}' class="btn gde download i_download">{{$file->comments}}</a></p>
 					@endforeach
 					@endif
           		</div>
-		  		<div class="col-sm-6">
+		  		<div class="col-sm-4">
+	        		<a href='{{url("convocatoria/preguntas-frecuentes")}}' class="btn gde view faqs">Preguntas Frecuentes</a>
+          		</div>
+		  		<div class="col-sm-4">
 	        		<a href='{{url("convocatoria/aplicar/$notice->slug")}}' class="btn gde i_convoca_w">Aplicar a convocatoria</a>
           		</div>
 		  		<!-- aspirantes de convocatoria seleccionados
