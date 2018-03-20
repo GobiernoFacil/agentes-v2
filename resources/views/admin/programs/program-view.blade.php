@@ -86,7 +86,6 @@
 					<div class="box">
 						<div class="row center">
 							<h2>Sin módulos</h2>
-							<p><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs view">Agregar módulo</a></p>
 						</div>
 					</div>
 					@endif

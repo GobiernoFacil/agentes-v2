@@ -21,7 +21,7 @@
 	<div class="row h_tag">
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h time"></b> Duración</h4>
-			<p>{{$module->duration_hours()}} horas</p>
+			<p>{{$module->duration_hours() ? $module->duration_hours().' horas':'No aplica'}}</p>
 		</div>
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h modalidad"></b> Modalidad</h4>
@@ -82,7 +82,6 @@
 <div class="box">
 	<div class="row center">
 		<h2>Sin sesiones</h2>
-		<p><a href='{{url("dashboard/programas/$program->id/modulos/$module->id/sesiones/agregar")}}' class="btn xs view">Agregar sesión</a></p>
 	</div>
 </div>
 @endif

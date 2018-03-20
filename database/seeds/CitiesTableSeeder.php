@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use League\Csv\Reader;
-
+use App\Models\State;
+use App\Models\City;
 class CitiesTableSeeder extends Seeder
 {
   /**
@@ -15,59 +16,47 @@ class CitiesTableSeeder extends Seeder
   {
     Model::unguard();
 
-      $this->call('CitiesTableSeederC');
+    /*  $this->call('CitiesTableSeederC');
       $this->command->info('cities table seeded!');
 
       Model::reguard();
-      //
+      //*/
+      $table      = "cities";
+      $file_path  = base_path() . "/csv/ciudades.json";
+      DB::table($table)->truncate();
+      $contents = File::get($file_path);
+      $jsonIterator = new RecursiveIteratorIterator(
+                      new RecursiveArrayIterator(json_decode($contents, TRUE)),
+                          RecursiveIteratorIterator::SELF_FIRST);
+
+      $temp = [];
+      $count = 0;
+      foreach ($jsonIterator as $key => $val) {
+          if(is_array($val)) {
+                if($temp){
+                       $city = new City($temp);
+                       $city->save();
+                       $temp = [];
+                       $count++;
+                  }
+          }else {
+                if($key==='name'){
+                    $temp['city'] = $val;
+                }elseif($key==='state'){
+                    $state = $this->get_state($val);
+                    $temp['state'] = $state;
+                }
+            }
+        }
+
+      $this->command->info($count.' registers - Cities table seeded!');
   }
-}
 
-/**
-* Define the method to load the CSV for each table
-*
-*/
-trait LoadCSV{
-public function save_csv($file_path, $table){
-  // recomendación de la librería de CSV para mac OSX
-  if (! ini_get("auto_detect_line_endings")){
-    ini_set("auto_detect_line_endings", '1');
+
+  function get_state($id){
+     $states = State::orderBy('name','asc')->pluck('name');
+     return $states[$id-1];
   }
-  // elimina todo lo que hay en la tabla
-  DB::table($table)->delete();
 
-  // genera y configura el lector de CSV
-  $data = Reader::createFromPath($file_path)
-  ->setHeaderOffset(0);
-  foreach($data as $row){
-    /* small fix for the trusts table */
-    if(isset($row['initial_date_date']) && $row['initial_date_date'] =="NULL"){
-      $row['initial_date_date'] = "0000-00-00";
-    }
-    /***/
-    DB::table($table)->insert($row);
-  }
-}
-}
 
-/**
-* The cities table
-*
-*/
-class CitiesTableSeederC extends Seeder{
-use LoadCSV;
-public function run(){
-  $this->save_csv(base_path() . "/csv/cities.csv", "cities");
-}
-}
-
-/**
-* The countries table
-*
-*/
-class CountriesTableSeeder extends Seeder{
-use LoadCSV;
-public function run(){
-  $this->save_csv(base_path() . "/csv/countries.csv", "countries");
-}
 }

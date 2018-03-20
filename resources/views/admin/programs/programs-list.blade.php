@@ -25,6 +25,7 @@
 		    <tr>
 		      <th>Nombre</th>
 		      <th>Fecha Inicio / Fecha Final</th>
+					<th>Aspirantes</th>
 		      <th>Fellows</th>
 		      <th>Módulos</th>
 			  <th>Publicado</th>
@@ -36,8 +37,9 @@
 		      <tr>
 		        <td><h4><a href="{{ url('dashboard/programas/ver/' . $program->id) }}">{{$program->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($program->start))}} <br> <strong>{{date('d-m-Y', strtotime($program->end))}}</strong></td>
-				<td>{{$program->fellows->count()}}</td>
-				<td>{{$program->modules->count()}}</td>
+						<td><h5><a href='{{url("dashboard/aspirantes/convocatoria/{$program->notice->notice_id}/ver")}}'>{{$program->notice->notice_data->all_aspirants_data()->count()}}</a></h5></td>
+						<td><h5><a href='{{url("dashboard/fellows/programa/$program->id")}}'>{{$program->fellows->count()}}</a></h5></td>
+						<td><h5><a href='{{url("dashboard/programas/ver/$program->id")}}'>{{$program->modules->count()}}</a></h5></td>
 		        <td>{{$program->public ? "Sí" : "No" }}</td>
 		        <td>
 		          <a href="{{ url('dashboard/programas/ver/' . $program->id) }}" class="btn xs ev">Ver</a>

@@ -209,6 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/eliminar/{session_id}', 'ModuleSessions@delete');
     Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones/ver/{session_id}', 'ModuleSessions@view');
     Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/asignar/{session_id}', 'ModuleSessions@assign');
+    Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/remover/{session_id}/{facilitator_id}', 'ModuleSessions@remove');
     Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/buscar/{session_id}', 'ModuleSessions@searchFacilitator');
     Route::post('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-facilitadores/save/{session_id}', 'ModuleSessions@saveAssign');
     Route::get('dashboard/programas/{program_id}/modulos/{module_id}/sesiones-asignadas/', 'ModuleSessions@viewAssign');

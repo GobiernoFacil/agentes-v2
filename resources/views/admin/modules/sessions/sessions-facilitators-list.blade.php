@@ -14,7 +14,7 @@
 				<p>{{$facilitator->user->institution}}<br>
 					@if($user->type == "admin")
 					<a href='{{ url("dashboard/facilitadores/ver/" .$facilitator->user->id) }}' class="btn xs view">Ver</a>
-					<a href='{{ url("dashboard/sesiones/facilitadores/asignar/$session->id") }}' class="btn xs danger">Remover</a>
+					<a href='{{ url("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones-facilitadores/remover/$session->id/{$facilitator->user->id}") }}' class="btn xs danger">Remover</a>
 					<!-- <a href ="{{ url('dashboard/requerimientos/eliminar' . $facilitator->id) }}"  id ="{{$facilitator->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 					@endif
 					@if($user->type == "fellow")
@@ -24,7 +24,7 @@
 						@if($user->id !== $facilitator->user->id)
 						<a href="{{ url('tablero-facilitador/facilitadores/ver/' . $facilitator->user->id) }}" class="btn xs ev">Ver</a>
 						@else
-						<a href="{{ url('tablero-facilitador/perfil')}}" class="btn xs ev">Ver tu perfil</a>					
+						<a href="{{ url('tablero-facilitador/perfil')}}" class="btn xs ev">Ver tu perfil</a>
 						@endif
 			 		@endif
 				</p>

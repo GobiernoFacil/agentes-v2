@@ -8,8 +8,8 @@
 </div>
 @if($user->type == "admin")
 	<div class="right">
-		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev->id") : ''}}><strong>&lt;</strong> Anterior</a>
-		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next->id") : ''}}>Siguiente <strong>&gt;</strong></a>
+		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next") : ''}}>Siguiente <strong>&gt;</strong></a>
 	</div>
 @else
 	<div class="right">
