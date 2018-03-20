@@ -134,6 +134,7 @@ class AdminAspirants extends Controller
     public function aspirantAlreadyEvaluated($notice_id)
     {
         //
+    
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->aspirants_already_evaluated()->paginate();

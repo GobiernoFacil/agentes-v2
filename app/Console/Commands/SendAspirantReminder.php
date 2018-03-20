@@ -48,7 +48,7 @@ class SendAspirantReminder extends Command
         $active  = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id->toArray())->get();
         foreach ($active as $aspirant) {
           if(!$aspirant->check_aplication_data()){
-            $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notify');
+            $this->info("Aspirante: ".$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname.' - Correo: '.$aspirant->email.' notified');
             $aspirant->notify(new SendReminder($aspirant,$notice));
           }
         }
