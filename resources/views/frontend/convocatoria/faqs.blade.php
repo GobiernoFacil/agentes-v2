@@ -11,7 +11,7 @@
 		<h1>Preguntas Frecuentes <a href="{{ url('convocatoria')}}">Convocatoria 2018</a></h1>
 		<ol class="toggle-view">
 			<li><h3>¿Cuál es la edad límite para participar?																				   </h3>
-Se aceptarán postulaciones de personas que tengan de 18 años en adelante. Sin embargo, se dará preferencia a las personas que se encuentren dentro del rango de 25 a 40 años señalado en la Convocatoria.</li>
+Se aceptarán postulaciones de personas que tengan de 18 años en adelante.</li>
 
 			<li><h3>¿Puedo participar en la Convocatoria si no soy mexicana o mexicano?														   </h3>
 No, el programa es únicamente para las personas que puedan acreditar nacionalidad mexicana.</li>
