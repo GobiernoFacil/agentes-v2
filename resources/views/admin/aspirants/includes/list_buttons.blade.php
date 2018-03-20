@@ -23,6 +23,7 @@
 <h2><strong>Aspirantes evaluados con comprobante de domicilio no válido</strong></h2>
 @elseif($type_list === 3)
 <h2><strong>Aspirantes con comprobante de domicilio evaluado</strong></h2>
+{{Form::select('state',$states,null, ['class' => 'form-control','id'=>'state'])}}
 @elseif($type_list === 4)
 <h2><strong>Aspirantes con comprobante de domicilio por evaluar</strong></h2>
 @endif

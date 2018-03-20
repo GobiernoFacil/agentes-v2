@@ -89,6 +89,11 @@ class Notice extends Model
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
 
+    function aspirants_already_evaluated_by_state($state){
+      $aspirants = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants);
+    }
+
     function aspirants_already_evaluated(){
       $aspirants_id = AspirantEvaluation::whereNotNull('address_proof')->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
