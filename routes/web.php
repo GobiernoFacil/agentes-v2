@@ -158,6 +158,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-por-evaluar', 'AdminAspirants@aspirantAppToEvaluate');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-evaluada', 'AdminAspirants@aspirantAppAlreadyEvaluated');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada', 'AdminAspirants@allAspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada/{state}', 'AdminAspirants@allAspirantAppAlreadyEvaluatedState');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@evaluateData');
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@saveEvaluateData');
 

@@ -15,6 +15,7 @@
 
 @if($type_list === 0)
 <h2><strong>Todos los aspirantes</strong></h2>
+{{Form::select('state',$states,null, ['class' => 'form-control','id'=>'state'])}}
 @elseif($type_list === 1)
 <h2><strong>Tus aspirantes por evaluar</strong></h2>
 @elseif($type_list === 2)
