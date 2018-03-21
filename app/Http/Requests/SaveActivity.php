@@ -36,7 +36,8 @@ class SaveActivity extends FormRequest
               'time'=>'required',
               'link'=>'required',
               'measure'=> 'required',
-              'hasforum'=>'required'
+              'hasforum'=>'required',
+              'order'=> 'required|numeric|integer',
           ];
         }elseif($this->type==='video'){
           return [
@@ -47,7 +48,8 @@ class SaveActivity extends FormRequest
               'type'=>'required',
               'link_video'=>'required',
               'measure'=> 'required',
-              'hasforum'=>'required'
+              'hasforum'=>'required',
+              'order'=> 'required|numeric|integer',
           ];
 
         }elseif($this->type==='evaluation'){
@@ -59,7 +61,8 @@ class SaveActivity extends FormRequest
           'type'=>'required',
           'hasforum'=>'required',
           'end'=>'required',
-          'files'=>'required'
+          'files'=>'required',
+          'order'=> 'required|numeric|integer',
         ];
         }else{
           return [
@@ -69,7 +72,8 @@ class SaveActivity extends FormRequest
             'duration'=> 'required|numeric',
             'description'=> 'required',
             'type'=>'required',
-            'hasforum'=>'required'
+            'hasforum'=>'required',
+            'order'=> 'required|numeric|integer',
         ];
       }
     }
