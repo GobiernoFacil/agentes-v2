@@ -96,8 +96,8 @@
 <div class="row">
   <div class="col-sm-4">
    <p>
-     <label><strong>Número de actividad</strong> <br>
-     {{Form::text('order',null, ["class" => "form-control"])}} </label>
+     <label><strong>Orden de actividad</strong> <br>
+     {{Form::select('order',$activities, null, ["class" => "form-control"])}} </label>
      @if($errors->has('order'))
      <strong class="danger">{{$errors->first('order')}}</strong>
      @endif

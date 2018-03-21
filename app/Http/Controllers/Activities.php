@@ -50,11 +50,15 @@ class Activities extends Controller
         public function add($session_id)
         {
             //
-            $user      = Auth::user();
-            $session   = ModuleSession::where('id',$session_id)->firstOrFail();
+            $user       = Auth::user();
+            $session    = ModuleSession::where('id',$session_id)->firstOrFail();
+            $activities =  $session->activities()->orderBy('order','asc')->pluck('name','order')->toArray();
+            $activities['first'] = 'Primera actividad';
+            $activities['last'] = 'Última actividad';
             return view('admin.modules.activities.activity-add')->with([
               "user"      => $user,
-              "session" => $session
+              "session"   => $session,
+              "activities" => $activities
             ]);
         }
 
@@ -69,8 +73,10 @@ class Activities extends Controller
             //
             $user      = Auth::user();
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
-            $activity  = new Activity($request->except(['_token','time','start','link']));
-            if($request->files ==='Sí'){
+            $activity  = new Activity($request->except(['_token','time','start','link','order']));
+            $activity->order = $activity->reorder_add($request,$session);
+
+           if($request->files ==='Sí'){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);

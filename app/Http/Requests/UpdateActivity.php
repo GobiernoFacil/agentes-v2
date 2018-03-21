@@ -35,7 +35,7 @@ use MessagesTrait;
               'measure'=> 'required',
               'description'=> 'required',
               'type'=>'required',
-              'order'=> 'required|numeric|integer',
+              'order'=> 'required',
               'start'=>'required',
               'time'=>'required',
               'link'=>'required',
@@ -51,7 +51,7 @@ use MessagesTrait;
               'type'=>'required',
               'link_video'=>'required',
               'hasforum'=>'required',
-              'order'=> 'required|numeric|integer',
+              'order'=> 'required',
           ];
         }elseif($this->type==='evaluation'){
           return [
@@ -64,7 +64,7 @@ use MessagesTrait;
               'hasforum'=>'required',
               'files'=>'required',
               'end'=>'required',
-              'order'=> 'required|numeric|integer',
+              'order'=> 'required',
           ];
         }else{
 
@@ -76,7 +76,7 @@ use MessagesTrait;
             'description'=> 'required',
             'type'=>'required',
             'hasforum'=>'required',
-            'order'=> 'required|numeric|integer',
+            'order'=> 'required',
         ];
       }
     }

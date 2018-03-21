@@ -87,4 +87,41 @@ class Activity extends Model
 
   }
 
+  function reorder_add($request,$session){
+    $activities  = $session->activities;
+    if($request->order ==='first'){
+      $order = 2;
+      foreach ($activities as $activity) {
+        $activity->order = $order++;
+        $activity->save();
+      }
+      return 1;
+
+    }elseif($request->order ==='last'){
+      $order_act =1;
+      $order =1;
+      foreach ($activities as $activity) {
+        $activity->order = $order++;
+        $activity->save();
+        $order_act = $activity->order;
+      }
+      return $order_act+1;
+
+    }else{
+      $order = $request->order+1;
+      $order_act =$request->order+1;
+      var_dump($order_act);
+      foreach ($activities as $activity) {
+        if($activity->order>=$order_act){
+          $activity->order++;
+          $activity->save();
+        }
+      }
+
+      return $order_act;
+
+    }
+    return 0;
+  }
+
 }
