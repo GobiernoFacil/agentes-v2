@@ -184,10 +184,15 @@ class Activities extends Controller
         {
             //
             $user      = Auth::user();
-            $activity   = Activity::where('id',$id)->firstOrFail();
+            $activity  = Activity::where('id',$id)->firstOrFail();
+            $session   = $activity->session;
+            $activities =  $session->activities()->where('id','!=',$id)->pluck('name','order')->toArray();
+            $activities['first'] = 'Primera actividad';
+            $activities['last'] = 'Última actividad';
             return view('admin.modules.activities.activity-update')->with([
               "user"      => $user,
-              "activity" => $activity
+              "activity" => $activity,
+              "activities" => $activities
             ]);
         }
 

@@ -94,7 +94,7 @@
   <div class="col-sm-4">
    <p>
      <label><strong>Número de actividad</strong> <br>
-     {{Form::text('order',null, ["class" => "form-control"])}} </label>
+     {{Form::select('order',$activities, $activity->order === 1 ? 'first' : isset($activities[$activity->order-1]) ? $activities[$activity->order-1] : 'last', ["class" => "form-control"])}} </label>
      @if($errors->has('order'))
      <strong class="danger">{{$errors->first('order')}}</strong>
      @endif
