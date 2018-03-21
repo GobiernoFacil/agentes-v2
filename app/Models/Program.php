@@ -67,6 +67,7 @@ class Program extends Model
     function get_available_types(){
       //tipos para foros
       $type   = [];
+      $types['activity'] = 'Actividad';
       $states    = $this->get_available_states();
       if($states){
         $types['state'] = 'Estado';
@@ -78,7 +79,7 @@ class Program extends Model
         $types['support'] = 'Soporte Técnico';
       }
 
-      $types['activity'] = 'Sesión';
+
       $types['0'] = 'Selecciona una opción';
 
       return $types;
@@ -89,7 +90,8 @@ class Program extends Model
       $notice  = $this->notice->notice_data;
       $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
       $state_names_already = Forum::where('program_id',$this->id)->pluck('state_name')->toArray();
-      $states = Aspirant::select('state')->whereNotIn('state',$state_names_already)->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+      $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+      $states = array_diff($states,$state_names_already);
       if(!$states){
         return false;
       }

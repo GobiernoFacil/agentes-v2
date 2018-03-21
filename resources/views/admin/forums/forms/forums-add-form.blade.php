@@ -31,7 +31,7 @@
   </div>
 </div>
 
-@if($states)
+
   <!-- state -->
   <div class="row">
     <div class="col-sm-12" style ="display:none;" id = 'state_div'>
@@ -44,12 +44,12 @@
       </p>
     </div>
   </div>
-@endif
+
 
 
 <!-- expert -->
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-12"  id = 'session_div'>
     <p>
       <label><strong>Sesión</strong></label>
       {{Form::select('session_id',$sessions,0, ['class' => 'form-control','id'=>"session"])}}
@@ -59,6 +59,19 @@
     </p>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12"  style ="display:none;" id = 'activity_div'>
+    <p>
+      <label><strong>Actividad</strong></label>
+      {{Form::select('activity_id',$sessions,0, ['class' => 'form-control','id'=>"activity"])}}
+      @if($errors->has('activity_id'))
+      <strong class="danger">{{$errors->first('activity_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
 
 <!-- situación  -->
 <div class="row">
