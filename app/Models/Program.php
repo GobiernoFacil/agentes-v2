@@ -80,7 +80,7 @@ class Program extends Model
       }
 
 
-      $types['0'] = 'Selecciona una opción';
+      $types[null] = 'Selecciona una opción';
 
       return $types;
     }
@@ -95,7 +95,7 @@ class Program extends Model
       if(!$states){
         return false;
       }
-      $states['0'] = 'Selecciona una opción';
+      $states[null] = 'Selecciona una opción';
       return $states;
     }
 }

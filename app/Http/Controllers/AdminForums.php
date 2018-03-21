@@ -101,7 +101,7 @@ class AdminForums extends Controller
       $sessions   = $program->get_all_sessions()->orderBy('name','asc')->pluck('name','id')->toArray();
       $states     = $program->get_available_states();
       $types      = $program->get_available_types();
-      $sessions['0'] = 'Selecciona una opción';
+      $sessions[null] = 'Selecciona una opción';
       return view('admin.forums.forums-add')->with([
         "user"      => $user,
         "sessions"  => $sessions,
@@ -119,15 +119,13 @@ class AdminForums extends Controller
   public function save(SaveAdminForum $request)
   {
     $user      = Auth::user();
-    $forum     = new Forum($request->only(['topic','description']));
+    $forum     = new Forum($request->only(['topic','description','type','session_id','activity_id']));
     $forum->user_id = $user->id;
     $forum->slug    = str_slug($request->topic);
-    if($request->session_id!='0'){
-      $forum->session_id = $request->session_id;
-    }else{
-      $activity = Activity::where('id',$request->activity_id)->firstOrFail();
-      $forum->session_id = $activity->session->id;
-      $forum->activity_id = $activity->id;
+    $forum->program_id = $request->program_id;
+    if($request->type ==='activity'){
+      $session = ModuleSession::where('id',$request->session_id)->first();
+      $forum->module_id = $session->module->id;
     }
     $forum->save();
     //forum log
@@ -137,8 +135,8 @@ class AdminForums extends Controller
     $log->action  = 'create-forum';
     $log->forum_id = $forum->id;
     $log->save();
-    $this->send_to($forum,null,'create');
-    return redirect("dashboard/foros/ver/$forum->id")->with('message','Foro creado correctamente');
+  //  $this->send_to($forum,null,'create');
+    return redirect("dashboard/foros/programa/$request->program_id/ver-foro/$forum->id")->with('message','Foro creado correctamente');
   }
   /**
    * Agregar mensaje a foro
