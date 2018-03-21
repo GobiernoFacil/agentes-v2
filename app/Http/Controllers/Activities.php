@@ -215,6 +215,9 @@ class Activities extends Controller
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);
+            if($last->order != $request->order){
+              $data['order'] = $last->reorder_add($request,$last->session);
+            }
             Activity::where('id',$request->id)->update($data);
             //activity video data
             if($request->type==='video'){

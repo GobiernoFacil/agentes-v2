@@ -126,7 +126,6 @@ class Activity extends Model
     }else{
       $order = $request->order+1;
       $order_act =$request->order+1;
-      var_dump($order_act);
       foreach ($activities as $activity) {
         if($activity->order>=$order_act){
           $activity->order++;
