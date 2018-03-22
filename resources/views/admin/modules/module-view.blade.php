@@ -21,7 +21,7 @@
 	<div class="row h_tag">
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h time"></b> Duración</h4>
-			<p>{{$module->duration_hours() ? $module->duration_hours().' horas':'No aplica'}}</p>
+			<p>{{$module->duration_hours() ? $module->duration_hours() > 1 ? number_format($module->duration_hours(),2).' h':$module->duration_minutes().' min' :'No aplica'}}</p>
 		</div>
 		<div class="col-sm-4 center">
 			<h4><b class="icon_h modalidad"></b> Modalidad</h4>
