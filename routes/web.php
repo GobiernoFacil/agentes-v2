@@ -309,10 +309,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/foros/programa/{program_id}/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/programa/{program_id}/save', 'AdminForums@save');
     Route::get('dashboard/foros/programa/{program_id}/pregunta/agregar/{forum_id}', 'AdminForums@addQuestion');
-    Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
+    Route::post('dashboard/foros/programa/{program_id}/pregunta/save/{forum_id}', 'AdminForums@saveQuestion');
     Route::get('dashboard/foros/programa/{program_id}/foro/{forum_id}/ver-pregunta/{question_id}', 'AdminForums@viewQuestion');
-    Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
-    Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
+    Route::get('dashboard/foros/programa/{program_id}/pregunta/mensajes/agregar/{question_id}', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/programa/{program_id}/pregunta/mensajes/save/{question_id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
     Route::get('dashboard/foros/session', 'AdminForums@session');
     /*@AdminEvaluations Controller */

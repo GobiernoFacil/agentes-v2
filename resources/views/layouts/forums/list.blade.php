@@ -125,7 +125,7 @@
   		</div>
   		<div class="col-sm-6 col-sm-offset-3">
   			@if($user->type =="admin")
-  			<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+  			<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
   			@endif
   			@if($user->type =="facilitator")
   			<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>

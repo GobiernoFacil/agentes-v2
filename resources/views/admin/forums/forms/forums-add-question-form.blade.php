@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/pregunta/foros/save/{$forum->id}"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/foros/programa/$program->id/pregunta/save/{$forum->id}"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -15,7 +15,7 @@
       <strong class="danger">{{$errors->first('topic')}}</strong>
       @endif
       @if($errors->has('similar_slug'))
-      <strong class="danger">Escriba una pregunta o tema único</strong>
+      <strong class="danger">Ya existe un tema similar, por favor, selecciona uno diferente</strong>
       @endif
     </p>
   </div>
