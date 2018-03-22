@@ -24,20 +24,35 @@ class SaveAdminForum extends FormRequest
      */
     public function rules()
     {
-      if($this->session_id !='0' || $this->activity_id!='0'){
-      return [
-          //
-          'topic'     => 'required|max:256|unique:forums',
-          'description' => 'required',
-      ];
+
+      if($this->type){
+        if($this->type === 'state'){
+          return [
+            'topic'     => 'required|max:256|unique:forums',
+            'description' => 'required',
+            'state'      => 'required'
+          ];
+        }elseif ($this->type === 'activity') {
+          return [
+            'topic'     => 'required|max:256|unique:forums',
+            'description' => 'required',
+            'session_id'      => 'required',
+            'activity_id'      => 'required'
+          ];
+        }else{
+          return [
+            'topic'     => 'required|max:256|unique:forums',
+            'description' => 'required',
+          ];
+        }
+
       }else{
         return [
-            //
-            'topic'     => 'required|max:256|unique:forums',
-            'session_id' => 'required',
-            'activity_id' => 'different:session_id',
-            'description' => 'different:activity_id'
+          'topic'     => 'required|max:256|unique:forums',
+          'description' => 'required',
+          'type'      => 'required'
         ];
       }
+
     }
 }

@@ -154,9 +154,32 @@ class Modules extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function delete($id)
+  public function delete($program_id,$module_id)
   {
     //
+    //
+    $program = Program::where('id',$program_id)->firstOrFail();
+    $module  = $program->modules()->where('id',$module_id)->firstOrFail();
+    $sessions = $module->sessions();
+    foreach ($sessions as $session) {
+      //eliminar actividades
+         foreach ($session->activities as $activity) {
+           foreach ($activity->activityFiles as $file) {
+             File::delete($file->path."/".$file->identifier);
+             $file->delete();
+           }
+
+           if($activity->videos){
+             $activity->videos->delete();
+           }
+           $activity->delete();
+         }
+    //eliminar facilitadores asignados
+      $session->facilitators()->delete();
+      $session->delete();
+    }
+    $module->delete();
+    return redirect("dashboard/programas/ver/$program->id")->with(['success'=>'Se ha eliminado correctamente']);
   }
 
   /**

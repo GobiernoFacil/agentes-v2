@@ -1,12 +1,12 @@
 <div class="row">
 <!-- título-->
 	<div class="col-sm-9">
-		<h1>{{$forum->topic}}</h1>		
+		<h1>{{$forum->topic}}</h1>
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
 		@if($user->type =="admin")
-		<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("dashboard/foros/programa/{$session->module->program->id}/pregunta/agregar/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
@@ -17,11 +17,11 @@
 	</div>
 	<!-- descripción-->
 	<div class="col-sm-12 forum_list">
-		
+
 		<p class="author"><span>Creado {{$forum->created_at->diffForHumans()}}</span></p>
 		<div class="divider top"></div>
 	</div>
-	
+
 </div>
 
 @if($forums->count()>0)
@@ -40,7 +40,7 @@
 					</div>
 					<div class="col-sm-9">
 						@if($user->type =="admin")
-						<h2><a href='{{ url("dashboard/sesiones/actividades/foro/pregunta/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
+						<h2><a href='{{ url("dashboard/foros/programa/{$session->module->program->id}/foro/$forum->id/ver-pregunta/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
 						@if($user->type =="facilitator")
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
@@ -62,7 +62,7 @@
 					<div class="col-sm-2">
 						<h3 class="count_messages">{{$conversation->messages->count()}}</h3>
 					</div>
-				</div>				 
+				</div>
 			@endforeach
 			{{ $forums->links() }}
 		</div>
@@ -71,7 +71,7 @@
 		</div>
 		<div class="col-sm-8 col-sm-offset-2 center">
 		@if($user->type =="admin")
-		<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("dashboard/foros/programa/{$session->module->program->id}/pregunta/agregar/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
@@ -80,7 +80,7 @@
 		<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		</div>
-		
+
 	</div>
 </div>
 @else
@@ -91,7 +91,7 @@
   		</div>
   		<div class="col-sm-6 col-sm-offset-3">
   			@if($user->type =="admin")
-  			<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+  			<a href='{{ url("dashboard/foros/programa/{$session->module->program->id}/pregunta/agregar/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
   			@endif
   			@if($user->type =="facilitator")
   			<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>

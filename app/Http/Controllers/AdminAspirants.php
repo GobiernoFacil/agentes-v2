@@ -143,6 +143,9 @@ class AdminAspirants extends Controller
         $aRp_count  = $notice->aspirants_rejected_proof()->count();
         $aAe_count  = $notice->aspirants_already_evaluated()->count();
         $aspirants  = $notice->all_aspirants_data()->get();
+        $aspirants_id = $aspirants->pluck('id');
+        $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+        $states[null] = "Selecciona un estado";
         $type_list  = 3;
         return view('admin.aspirants.aspirant-list')->with([
           'user' =>$user,
@@ -153,7 +156,44 @@ class AdminAspirants extends Controller
           'aWp_count' => $aWp_count,
           'aWpE_count'=> $aWpE_count,
           'aRp_count' => $aRp_count,
-          'aAe_count' => $aAe_count
+          'aAe_count' => $aAe_count,
+          'states'    => $states
+        ]);
+
+    }
+
+
+    /**
+     * Muestra aspirantes de convocatoria con comprobante evaluado
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aspirantAlreadyEvaluatedState($notice_id, $state)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $list      = $notice->aspirants_already_evaluated_by_state($state)->paginate();
+        $aWp_count = $notice->aspirants_without_data()->count();
+        $aWpE_count = $notice->aspirants_without_proof_evaluation()->count();
+        $aRp_count  = $notice->aspirants_rejected_proof()->count();
+        $aAe_count  = $notice->aspirants_already_evaluated()->count();
+        $aspirants  = $notice->all_aspirants_data()->get();
+        $aspirants_id = $aspirants->pluck('id');
+        $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+        $states[null] = "Selecciona un estado";
+        $type_list  = 3;
+        return view('admin.aspirants.aspirant-list')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'aWp_count' => $aWp_count,
+          'aWpE_count'=> $aWpE_count,
+          'aRp_count' => $aRp_count,
+          'aAe_count' => $aAe_count,
+          'states'    => $states
         ]);
 
     }
@@ -366,6 +406,9 @@ class AdminAspirants extends Controller
           $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
           $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
           $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
+          $aspirants_id = $aspirants->pluck('id');
+          $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+          $states[null] = "Selecciona un estado";
           $type_list = 0;
           return view('admin.aspirants.aspirant-list-per-institution')->with([
             'user' =>$user,
@@ -375,7 +418,42 @@ class AdminAspirants extends Controller
             'type_list' => $type_list,
             'asToE_count' => $asToE_count,
             'aAe_count'  =>$aAe_count,
-            'aIaE_count' =>$aIaE_count
+            'aIaE_count' =>$aIaE_count,
+            'states'     => $states
+          ]);
+
+
+      }
+
+      /**
+       * Muestra todos los aspirantes de convocatoria con aplicacion evaluada por estado
+       *
+       * @return \Illuminate\Http\Response
+       */
+      public function allAspirantAppAlreadyEvaluatedState($notice_id,$state)
+      {
+          //
+          $user      = Auth::user();
+          $notice    = Notice::where('id',$notice_id)->firstOrFail();
+          $aspirants = $notice->all_aspirants_data()->get();
+          $list      = $notice->aspirants_app_already_evaluated_by_state($state)->paginate();
+          $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+          $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
+          $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
+          $aspirants_id = $aspirants->pluck('id');
+          $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+          $states[null] = "Selecciona un estado";
+          $type_list = 0;
+          return view('admin.aspirants.aspirant-list-per-institution')->with([
+            'user' =>$user,
+            'notice' => $notice,
+            'aspirants' =>$aspirants,
+            'list' =>$list,
+            'type_list' => $type_list,
+            'asToE_count' => $asToE_count,
+            'aAe_count'  =>$aAe_count,
+            'aIaE_count' =>$aIaE_count,
+            'states'     => $states
           ]);
 
 

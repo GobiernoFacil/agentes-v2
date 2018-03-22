@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/foros/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/foros/programa/$program->id/save"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -31,34 +31,46 @@
   </div>
 </div>
 
-@if($states)
+
   <!-- state -->
   <div class="row">
-    <div class="col-sm-12" style ="display:none;" id = 'state_div'>
+    <div class="col-sm-12" style ="{{$errors->has('state')  ? ' ' : old('state') ? '' :'display:none;'}}" id = 'state_div'>
       <p>
         <label><strong>Estado</strong> <br>
-        {{Form::select('state',$states,0, ['class' => 'form-control'])}}
+        {{Form::select('state',$states,null, ['class' => 'form-control'])}}
         @if($errors->has('state'))
         <strong class="danger">{{$errors->first('state')}}</strong>
         @endif
       </p>
     </div>
   </div>
-@endif
 
 
 <!-- expert -->
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-12" style ="{{$errors->has('session_id') ?  ' ' : old('session_id') ?  ' ' :'display:none;'}}" id = 'session_div'>
     <p>
       <label><strong>Sesión</strong></label>
-      {{Form::select('session_id',$sessions,0, ['class' => 'form-control','id'=>"session"])}}
+      {{Form::select('session_id',$sessions,null, ['class' => 'form-control','id'=>"session"])}}
       @if($errors->has('session_id'))
       <strong class="danger">{{$errors->first('session_id')}}</strong>
       @endif
     </p>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12"  style ="{{$errors->has('activity_id')  ? ' ' : old('activity_id') ? '' :'display:none;'}}" id = 'activity_div'>
+    <p>
+      <label><strong>Actividad</strong></label>
+      {{Form::select('activity_id',$sessions,null, ['class' => 'form-control','id'=>"activity"])}}
+      @if($errors->has('activity_id'))
+      <strong class="danger">{{$errors->first('activity_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
 
 <!-- situación  -->
 <div class="row">

@@ -24,7 +24,7 @@ class SaveModule extends FormRequest
      */
     public function rules()
     {
-       /*$date = strtotime($this->start);
+       $date = strtotime($this->start);
        $date = strtotime("+8 day", $date);
         return [
             //
@@ -33,7 +33,6 @@ class SaveModule extends FormRequest
             'start'=> 'required',
             'end'=> 'required|before:'.date('Y-m-d',$date),
             'public'=> 'required',
-        ];*/
-        return [];
+        ];
     }
 }

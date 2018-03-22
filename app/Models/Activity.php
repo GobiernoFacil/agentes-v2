@@ -59,32 +59,84 @@ class Activity extends Model
 
 
   function get_pagination(){
+    $control_same_session_next = true;
+    $control_same_session_prev = true;
+    $prev = false;
+    $next = false;
     $module  = $this->session->module;
     $sessions_with_activities =  Activity::select('session_id')->distinct('session_id')->pluck('session_id')->toArray();
     $sessions_with_activities =  $module->sessions()->whereIn('id',$sessions_with_activities)->orderBy('order','asc')->pluck('id')->toArray();
     $index = array_search($this->session->id, $sessions_with_activities);
+
+    if($this->session->activities()->where('order','>=',$this->order+1)->first()){
+      $next =$this->session->activities()->where('order','>=',$this->order+1)->first()->id;
+    }else{
+      $control_same_session_next = false;
+    }
+    if($this->session->activities()->where('order','<=',$this->order-1)->orderBy('order','desc')->first()){
+      $prev =$this->where('session_id',$this->session_id)->where('order','<=',$this->order-1)->orderBy('order','desc')->first()->id;
+    }else{
+      $control_same_session_prev = false;
+    }
+
+
     if($index !== FALSE)
     {
-      if($index+1 < sizeof($sessions_with_activities)){
-        $next = $sessions_with_activities[$index + 1];
-        $sess = ModuleSession::find($next);
-        $next = $sess->activities()->first()->id;
-      }else{
-        $next = false;
-      }
-
-      if($index-1 >= 0){
-        $prev = $sessions_with_activities[$index - 1];
-        $sess = ModuleSession::find($prev);
-        $prev = $sess->activities()->first()->id;
-      }else{
-        $prev = false;
-      }
-
-
+        if(!$control_same_session_next){
+          //cambio de sesión next
+          if($index+1 < sizeof($sessions_with_activities)){
+            $next = $sessions_with_activities[$index + 1];
+            $sess = ModuleSession::find($next);
+            $next = $sess->activities()->first()->id;
+          }
+        }
+      if(!$control_same_session_prev){
+          //cambio de sesión prev
+          if($index-1 >= 0){
+            $prev = $sessions_with_activities[$index - 1];
+            $sess = ModuleSession::find($prev);
+            $prev = $this->where('session_id',$sess->id)->orderBy('order','desc')->first()->id;
+          }
+        }
     }
     return array($prev,$next);
 
+  }
+
+  function reorder_add($request,$session){
+    $activities  = $session->activities;
+    if($request->order ==='first'){
+      $order = 2;
+      foreach ($activities as $activity) {
+        $activity->order = $order++;
+        $activity->save();
+      }
+      return 1;
+
+    }elseif($request->order ==='last'){
+      $order_act =1;
+      $order =1;
+      foreach ($activities as $activity) {
+        $activity->order = $order++;
+        $activity->save();
+        $order_act = $activity->order;
+      }
+      return $order_act+1;
+
+    }else{
+      $order = $request->order+1;
+      $order_act =$request->order+1;
+      foreach ($activities as $activity) {
+        if($activity->order>=$order_act){
+          $activity->order++;
+          $activity->save();
+        }
+      }
+
+      return $order_act;
+
+    }
+    return 0;
   }
 
 }
