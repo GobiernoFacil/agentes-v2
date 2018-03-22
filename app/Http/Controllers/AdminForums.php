@@ -101,7 +101,7 @@ class AdminForums extends Controller
       $sessions   = $program->get_all_sessions()->orderBy('name','asc')->pluck('name','id')->toArray();
       $states     = $program->get_available_states();
       $types      = $program->get_available_types();
-      $sessions['0'] = 'Selecciona una opción';
+      $sessions[null] = 'Selecciona una opción';
       return view('admin.forums.forums-add')->with([
         "user"      => $user,
         "sessions"  => $sessions,
@@ -119,15 +119,13 @@ class AdminForums extends Controller
   public function save(SaveAdminForum $request)
   {
     $user      = Auth::user();
-    $forum     = new Forum($request->only(['topic','description']));
+    $forum     = new Forum($request->only(['topic','description','type','session_id','activity_id']));
     $forum->user_id = $user->id;
     $forum->slug    = str_slug($request->topic);
-    if($request->session_id!='0'){
-      $forum->session_id = $request->session_id;
-    }else{
-      $activity = Activity::where('id',$request->activity_id)->firstOrFail();
-      $forum->session_id = $activity->session->id;
-      $forum->activity_id = $activity->id;
+    $forum->program_id = $request->program_id;
+    if($request->type ==='activity'){
+      $session = ModuleSession::where('id',$request->session_id)->first();
+      $forum->module_id = $session->module->id;
     }
     $forum->save();
     //forum log
@@ -137,22 +135,24 @@ class AdminForums extends Controller
     $log->action  = 'create-forum';
     $log->forum_id = $forum->id;
     $log->save();
-    $this->send_to($forum,null,'create');
-    return redirect("dashboard/foros/ver/$forum->id")->with('message','Foro creado correctamente');
+  //  $this->send_to($forum,null,'create');
+    return redirect("dashboard/foros/programa/$request->program_id/ver-foro/$forum->id")->with('message','Foro creado correctamente');
   }
   /**
    * Agregar mensaje a foro
    *
    * @return \Illuminate\Http\Response
    */
-  public function addMessage($id)
+  public function addMessage($program_id,$question_id)
   {
       //
       $user      = Auth::user();
-      $forum   = ForumConversation::where('id',$id)->firstOrFail();
+      $program   = Program::where('id',$program_id)->firstOrFail();
+      $forum     = ForumConversation::where('id',$question_id)->firstOrFail();
       return view('admin.forums.forum-add-message')->with([
         "user"      => $user,
-        "forum" => $forum
+        "forum"     => $forum,
+        "program"   => $program
       ]);
   }
 
@@ -165,7 +165,7 @@ class AdminForums extends Controller
   public function saveMessage(SaveMessageForum $request)
   {
     $user      = Auth::user();
-    $conversation     = ForumConversation::where('id',$request->id)->firstOrFail();
+    $conversation     = ForumConversation::where('id',$request->question_id)->firstOrFail();
     $message   = new ForumMessage($request->only(['message']));
     $message->user_id = $user->id;
     $message->conversation_id = $conversation->id;
@@ -179,8 +179,8 @@ class AdminForums extends Controller
     $log->forum_id = $conversation->forum->id;
     $log->message_id = $message->id;
     $log->save();
-    $this->send_to($conversation->forum,$conversation,'message');
-    return redirect("dashboard/foros/pregunta/ver/{$conversation->id}")->with('message','Mensaje creado correctamente');
+  //  $this->send_to($conversation->forum,$conversation,'message');
+    return redirect("dashboard/foros/programa/$request->program_id/foro/{$conversation->forum->id}/ver-pregunta/$request->question_id")->with('message','Mensaje creado correctamente');
   }
 
   /**
@@ -220,14 +220,17 @@ class AdminForums extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function addQuestion($id)
+  public function addQuestion($program_id,$forum_id)
   {
       //
       $user      = Auth::user();
-      $forum   = Forum::where('id',$id)->firstOrFail();
+      $program   = Program::where('id',$program_id)->firstOrFail();
+      $forum     = $program->forums()->where('id',$forum_id)->firstOrFail();
+
       return view('admin.forums.forums-add-question')->with([
         "user"      => $user,
-        "forum" => $forum
+        "forum"     => $forum,
+        "program"   =>$program
       ]);
   }
 
@@ -240,9 +243,10 @@ class AdminForums extends Controller
   public function saveQuestion(SaveForumConversation $request)
   {
     $user      = Auth::user();
-    $forum       = Forum::where('id',$request->id)->first();
+    $program   = Program::where('id',$request->program_id)->firstOrFail();
+    $forum     = $program->forums()->where('id',$request->forum_id)->firstOrFail();
     $forumConversation     = new ForumConversation($request->only(['topic','description']));
-    $forumConversation->forum_id = $request->id;
+    $forumConversation->forum_id = $request->forum_id;
     $forumConversation->user_id = $user->id;
     $forumConversation->slug    = str_slug($request->topic);
     $forumConversation->save();
@@ -254,8 +258,8 @@ class AdminForums extends Controller
     $log->conversation_id = $forumConversation->id;
     $log->forum_id = $forum->id;
     $log->save();
-    $this->send_to($forum,$forumConversation,'question');
-    return redirect("dashboard/foros/ver/{$forum->id}")->with('message','Pregunta creada correctamente');
+    //$this->send_to($forum,$forumConversation,'question');
+    return redirect("dashboard/foros/programa/$request->program_id/ver-foro/{$forum->id}")->with('message','Pregunta creada correctamente');
   }
 
   /**
@@ -273,7 +277,8 @@ class AdminForums extends Controller
     $question  = ForumConversation::where('id',$question_id)->firstOrFail();
     return view('admin.forums.forum-question-view')->with([
       "user"      => $user,
-      "question"    => $question
+      "question"    => $question,
+      "program"   => $program
     ]);
   }
 

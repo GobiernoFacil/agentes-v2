@@ -110,5 +110,15 @@
 <script>
   <?php echo 'var aspirants         = '.$aspirants.';'; ?>
 	<?php echo 'var view_aspirant_url = "'.url("dashboard/aspirantes/convocatoria/$notice->id/ver-aspirante/").'";'; ?>
+
+	@if($type_list === 3)
+		<?php echo 'var  url_state        ="'.url("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivos-evaluados/").'";'; ?>
+		$('#state').change(function(){
+	      var state  = $(this).val();
+				window.location.href = url_state+"/"+state;
+		});
+	@endif
+
+
 </script>
 @endsection

@@ -17,6 +17,11 @@ class Forum extends Model
       'topic',
       'description',
       'slug',
+      'type',
+      'program_id',
+      'session_id',
+      'activity_id',
+      'module_id'
     ];
 
     function session(){

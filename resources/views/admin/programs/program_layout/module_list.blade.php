@@ -5,7 +5,7 @@
 				<h4>Semana {{$module->order}} {!! $module->modality == "Presencial" ?  '<span>('.$module->modality.')</span>' : '' !!}</h4>
 			</div>
 			<div class="col-sm-6">
-				<p class="right">Tiempo estimado: <strong>{{$module->duration_hours()}} h</strong></p>
+				<p class="right">Tiempo estimado: <strong>{{$module->duration_hours() > 1 ? number_format($module->duration_hours(),2).' h':$module->duration_minutes().' min' }} </strong></p>
 			</div>
 		</div>
 	</div>
@@ -26,10 +26,13 @@
 			<div class="col-sm-3">
 				<ul class="ap-acti">
 					@if($module->count_activities('video'))
-					<li><b class="sessionG"></b> {{$module->count_activities('video')}} {{$module->count_activities('video') > 1 ? 'videos' : 'video'}}: <strong>{{$module->duration_activities('video',1)}} horas</strong></li>
+					<li><b class="sessionG"></b> {{$module->count_activities('video')}} {{$module->count_activities('video') > 1 ? 'videos' : 'video'}}: <strong>
+						{{$module->duration_activities('video',1)  > 1 ? number_format($module->duration_activities('video',1),2).' horas' :$module->duration_activities('video',0).' min' }}</strong></li>
 					@endif
 					@if($module->count_activities('lecture'))
-					<li><b class="sessionG"></b> {{$module->count_activities('lecture')}} {{$module->count_activities('lecture') > 1 ? 'lecturas' : 'lectura'}}: <strong>{{$module->duration_activities('lecture',1)}} horas</strong></li>
+					<li><b class="sessionG"></b>
+						{{$module->count_activities('lecture')}} {{$module->count_activities('lecture') > 1 ? 'lecturas' : 'lectura'}}:
+						<strong>{{$module->duration_activities('lecture',1)  > 1 ? number_format($module->duration_activities('lecture',1),2).' horas' :$module->duration_activities('lecture',0).' min' }} </strong></li>
 					@endif
 				</ul>
 			</div>

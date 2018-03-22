@@ -153,10 +153,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos', 'AdminAspirants@aspirantWithOutProof');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-sin-archivos-validos', 'AdminAspirants@aspirantRejected');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivos-evaluados', 'AdminAspirants@aspirantAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivos-evaluados/{state}', 'AdminAspirants@aspirantAlreadyEvaluatedState');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-archivo-por-evaluar', 'AdminAspirants@aspirantToEvaluate');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-por-evaluar', 'AdminAspirants@aspirantAppToEvaluate');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/aspirantes-con-aplicacion-evaluada', 'AdminAspirants@aspirantAppAlreadyEvaluated');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada', 'AdminAspirants@allAspirantAppAlreadyEvaluated');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/todos-los-aspirantes-con-aplicacion-evaluada/{state}', 'AdminAspirants@allAspirantAppAlreadyEvaluatedState');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@evaluateData');
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-aplicacion/{aspirant_id}', 'AdminAspirants@saveEvaluateData');
 
@@ -196,7 +198,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/programas/{program_id}/modulos/save', 'Modules@save');
     Route::get('dashboard/programas/{program_id}/modulos/editar/{module_id}', 'Modules@edit');
     Route::post('dashboard/programas/{program_id}/modulos/update/{module_id}', 'Modules@update');
-    Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{module_id}', 'Modules@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/eliminar/{module_id}', 'Modules@delete');
     Route::get('dashboard/programas/{program_id}/modulos/ver/{module_id}', 'Modules@view');
 
     /*@ModuleSessions Controller */
@@ -305,12 +307,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/foros/programa/{program_id}/ver-foros', 'AdminForums@index');
     Route::get('dashboard/foros/programa/{program_id}/ver-foro/{forum_id}', 'AdminForums@view');
     Route::get('dashboard/foros/programa/{program_id}/agregar', 'AdminForums@add');
-    Route::post('dashboard/foros/save', 'AdminForums@save');
-    Route::get('dashboard/pregunta/foros/agregar/{id}', 'AdminForums@addQuestion');
-    Route::post('dashboard/pregunta/foros/save/{id}', 'AdminForums@saveQuestion');
+    Route::post('dashboard/foros/programa/{program_id}/save', 'AdminForums@save');
+    Route::get('dashboard/foros/programa/{program_id}/pregunta/agregar/{forum_id}', 'AdminForums@addQuestion');
+    Route::post('dashboard/foros/programa/{program_id}/pregunta/save/{forum_id}', 'AdminForums@saveQuestion');
     Route::get('dashboard/foros/programa/{program_id}/foro/{forum_id}/ver-pregunta/{question_id}', 'AdminForums@viewQuestion');
-    Route::get('dashboard/foros/pregunta/mensajes/agregar/{id}', 'AdminForums@addMessage');
-    Route::post('dashboard/foros/pregunta/mensajes/save/{id}', 'AdminForums@saveMessage');
+    Route::get('dashboard/foros/programa/{program_id}/pregunta/mensajes/agregar/{question_id}', 'AdminForums@addMessage');
+    Route::post('dashboard/foros/programa/{program_id}/pregunta/mensajes/save/{question_id}', 'AdminForums@saveMessage');
     Route::get('dashboard/foros/eliminar/{id}', 'AdminForums@delete');
     Route::get('dashboard/foros/session', 'AdminForums@session');
     /*@AdminEvaluations Controller */

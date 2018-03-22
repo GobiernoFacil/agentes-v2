@@ -50,11 +50,15 @@ class Activities extends Controller
         public function add($session_id)
         {
             //
-            $user      = Auth::user();
-            $session   = ModuleSession::where('id',$session_id)->firstOrFail();
+            $user       = Auth::user();
+            $session    = ModuleSession::where('id',$session_id)->firstOrFail();
+            $activities =  $session->activities()->orderBy('order','asc')->pluck('name','order')->toArray();
+            $activities['first'] = 'Primera actividad';
+            $activities['last'] = 'Última actividad';
             return view('admin.modules.activities.activity-add')->with([
               "user"      => $user,
-              "session" => $session
+              "session"   => $session,
+              "activities" => $activities
             ]);
         }
 
@@ -69,8 +73,10 @@ class Activities extends Controller
             //
             $user      = Auth::user();
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
-            $activity  = new Activity($request->except(['_token','time','start','link']));
-            if($request->files ==='Sí'){
+            $activity  = new Activity($request->except(['_token','time','start','link','order']));
+            $activity->order = $activity->reorder_add($request,$session);
+
+           if($request->files ==='Sí'){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);
@@ -178,10 +184,15 @@ class Activities extends Controller
         {
             //
             $user      = Auth::user();
-            $activity   = Activity::where('id',$id)->firstOrFail();
+            $activity  = Activity::where('id',$id)->firstOrFail();
+            $session   = $activity->session;
+            $activities =  $session->activities()->where('id','!=',$id)->pluck('name','order')->toArray();
+            $activities['first'] = 'Primera actividad';
+            $activities['last'] = 'Última actividad';
             return view('admin.modules.activities.activity-update')->with([
               "user"      => $user,
-              "activity" => $activity
+              "activity" => $activity,
+              "activities" => $activities
             ]);
         }
 
@@ -204,6 +215,9 @@ class Activities extends Controller
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);
+            if($last->order != $request->order){
+              $data['order'] = $last->reorder_add($request,$last->session);
+            }
             Activity::where('id',$request->id)->update($data);
             //activity video data
             if($request->type==='video'){

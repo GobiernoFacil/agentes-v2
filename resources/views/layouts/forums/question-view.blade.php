@@ -227,7 +227,7 @@
     <div class="row">
       	<div class="col-sm-6 col-sm-offset-3 center">
 	      	@if($user->type == "admin")
-		  	<a href='{{ url("dashboard/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
+		  	<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
 		  	@endif
 	    	@if($user->type == "fellow")
 			<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
@@ -242,7 +242,7 @@
     <div class="col-sm-8 col-sm-offset-2 center">
       <h2>No existen respuestas.</h2>
       @if($user->type == "admin")
-      <a href='{{ url("dashboard/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
+      <a href='{{ url("dashboard/foros/programa/$program->id/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
       @endif
       @if($user->type == "fellow")
       <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>

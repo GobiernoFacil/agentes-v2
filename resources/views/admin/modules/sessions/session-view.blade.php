@@ -51,7 +51,11 @@
 	  	@if($session->activities->count() > 0)
   		<div class="col-sm-9">
   			<h2 class="title">Actividad</h2>
-  		</div>
+
+			 </div>
+			<div class="col-sm-3">
+			 <a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs ev">[+] Agregar actividad</a>
+			 </div>
 		<div class="col-sm-12">
 			<div class="divider"></div>
 		</div>
