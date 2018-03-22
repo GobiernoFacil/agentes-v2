@@ -45,19 +45,29 @@ class Kernel extends ConsoleKernel
           //          ->hourly();
         //  $schedule->command('command:delete-expired-codes')
         //           ->cron('30 12 01 */5 *');
-        $schedule->command('command:aspirant-count 0')
-                            ->dailyAt('20:00');
-        $schedule->command('command:aspirant-count 1')
-                            ->weekly()
-                            ->fridays()->at('08:00');
-        $schedule->command('command:aspirant-count 1')
-                            ->weekly()
-                            ->mondays()->at('20:00');
-        $schedule->command('command:send-aspirants-reminder')
-                            ->weekly()
-                            ->fridays()->at('08:00')
-                            ->emailOutputTo('carlos@gobiernofacil.com');
-      /*  $schedule->command('command:update-averages')
+
+
+        $today   = date('Y-m-d');
+        if($today <= '2018-03-25'){
+          $schedule->command('command:send-aspirants-reminder')
+                              ->dailyAt('09:00')
+                              ->emailOutputTo('carlos@gobiernofacil.com');
+          $schedule->command('command:aspirant-count 0')
+                              ->dailyAt('20:00');
+          $schedule->command('command:aspirant-count 1')
+                              ->weekly()
+                              ->fridays()->at('08:00');
+          $schedule->command('command:aspirant-count 1')
+                              ->weekly()
+                              ->mondays()->at('20:00');
+        }
+      /*
+      $schedule->command('command:send-aspirants-reminder')
+                          ->weekly()
+                          ->fridays()->at('08:00')
+                          ->emailOutputTo('carlos@gobiernofacil.com');
+
+      $schedule->command('command:update-averages')
                 ->dailyAt('10:00')
                 ->emailOutputTo('carlos@gobiernofacil.com');
         $schedule->command('command:create-csv-fac-survey')

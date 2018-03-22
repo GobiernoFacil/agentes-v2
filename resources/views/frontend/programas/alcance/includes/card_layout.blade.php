@@ -15,17 +15,69 @@
 		<div class="col-sm-5">
 			<div v-for="val in values">
 				<div v-if="val.name == 'Capital de la entidad federativa'">
-					<p>Capital: <strong>@{{val.value}}</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+					<p>Capital: <strong>@{{val.value}}</strong></p>
 				</div>
 				<div v-if="val.name == 'Poblacion total'">
-					<p>Población: <strong>@{{Format(val.value)}} habitantes</strong> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+					<p>Población: <strong>@{{Format(val.value)}} habitantes</strong> </p>
 				</div>
-				<div v-if="val.name == 'Porcentaje de poblacion femenina'">
-					<p>Población Femenina: <strong>@{{val.value * 100}}</strong>% <span class="ap_nacional">@{{val.national * 100}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+			</div>
+			<div v-for="val in values">
+				<div v-if="val.name == 'Indice de Gobierno Abierto 2017'">
+					<p>Indice de Gobierno Abierto 2017 <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+					<div class="row">
+						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-3">
+							<p class="right">@{{ FormatDe(val.value * 100) }}%</p>
+						</div>
+						<div class="col-sm-9 ides"> 
+							<div class="ap_bar">
+								<span  v-bind:style='"width:" + (val.value * 100)  + "%"'></span>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-sm-3">
+							<p class="right"><span class="ap_nacional">@{{val.national * 100}}%</span></p>
+						</div>
+						<div class="col-sm-9">
+							<div class="ap_bar national">
+								<span  v-bind:style='"width:" + (val.national * 100)  + "%"'></span>
+							</div>
+						</div>
+						</div>
+					</div>
+					</div>
 				</div>
-				<div v-if="val.name == 'Porcentaje de poblacion indigena'">
-					<p>Población Indígena: <strong>@{{ FormatDe(val.value * 100)}}</strong>% <span class="ap_nacional">@{{FormatDe(val.national * 100)}} %</span> <span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+				<div v-if="val.name == 'Tasa de Incidencia de Corrupción'">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-2">
+							<p class="ap_icon im_ods i_ods16"> @{{val.name}}<span class="ap_source">Fuente: @{{val.source}}, @{{val.year}}</span></p>
+						</div>
 					
+						<div class="col-sm-10">
+						<div class="row">
+						<div class="col-sm-3">
+							<p class="right">@{{Format(val.value)}}</p>
+						</div>
+						<div class="col-sm-9 ides"> 
+							<div class="ap_bar">
+								<span  v-bind:style='"width:" + (val.value * 100) / 70000 + "%"'></span>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-sm-3">
+							<p class="right"><span class="ap_nacional">@{{ Format(val.national) }}</span></p>
+						</div>
+						<div class="col-sm-9">
+							<div class="ap_bar national">
+								<span  v-bind:style='"width:" + (val.national * 100) / 70000   + "%"'></span>
+							</div>
+						</div>
+						</div>
+					</div>
+					</div>
 					<p class="ap_info"><b></b> Nacional</p>
 				</div>
 					
@@ -1010,6 +1062,7 @@
 				
 				
 			</div>
+			<p class="ap_info right"><b></b> Nacional</p>
 		</div>
 	</div>
 	
