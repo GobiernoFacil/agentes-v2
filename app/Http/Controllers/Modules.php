@@ -160,7 +160,7 @@ class Modules extends Controller
     //
     $program = Program::where('id',$program_id)->firstOrFail();
     $module  = $program->modules()->where('id',$module_id)->firstOrFail();
-    $sessions = $module->sessions();
+    $sessions = $module->sessions;
     foreach ($sessions as $session) {
       //eliminar actividades
          foreach ($session->activities as $activity) {
@@ -172,13 +172,13 @@ class Modules extends Controller
            if($activity->videos){
              $activity->videos->delete();
            }
-           $activity->delete();
+         $activity->delete();
          }
     //eliminar facilitadores asignados
-      $session->facilitators()->delete();
+   $session->facilitators()->delete();
       //delete forum
-      $session->all_forum()->delete();
-      $session->delete();
+    $session->all_forum()->delete();
+    $session->delete();
     }
     $module->delete();
     return redirect("dashboard/programas/ver/$program->id")->with(['success'=>'Se ha eliminado correctamente']);
