@@ -68,6 +68,11 @@ class Program extends Model
       return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');
     }
 
+    function get_all_fellow_sessions(){
+      $modules = $this->fellow_modules()->pluck('id')->toArray();
+      return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');
+    }
+
     function get_available_types(){
       //tipos para foros
       $type   = [];

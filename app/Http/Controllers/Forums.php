@@ -33,23 +33,17 @@ class Forums extends Controller
      */
     public function all()
     {
-      $user     = Auth::user();
+      $user       = Auth::user();
       $today = date("Y-m-d");
-      $sessions_id = ModuleSession::where('start','<=',$today)->pluck('id');
-      $forums   = Forum::where('state_name',$user->fellowData->state)
-      ->orWhere(function($query)use($sessions_id){
-        $query->where('state_name',null)->where('session_id',null);
-      })
-      ->orWhere(function($query){
-        $query->where('state_name','General');
-      })
-      ->orWhere(function($query)use($sessions_id){
-        $query->whereIn('session_id',$sessions_id->toArray());
-      })
-      ->orderBy('created_at','desc')->paginate($this->pageSize);
+      $program     = $user->actual_program();
+      $sessions_id = $program->get_all_fellow_sessions()->where('start','<=',$today)->pluck('id');
+      $forums      = $program->forums()->orWhere(function($query)use($sessions_id){
+        $query->whereIn('session_id',$sessions_id);
+      })->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-all-list')->with([
         "user"      => $user,
-        "forums" => $forums,
+        "forums"    => $forums,
+        "program"   => $program
       ]);
 
     }
