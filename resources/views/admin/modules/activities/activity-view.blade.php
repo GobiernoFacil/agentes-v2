@@ -66,7 +66,7 @@
 <!--- description-->
 <div class="row">
 	<div class="col-sm-12">
-		<p>{{$activity->description}}</p>
+		<p class="ap_textareacontent">{{$activity->description}}</p>
 	</div>
 </div>
 
