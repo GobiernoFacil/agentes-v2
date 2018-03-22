@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use File;
 // models
 use App\Models\FacilitatorModule;
 use App\Models\Module;
@@ -330,50 +331,49 @@ class ModuleSessions extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function delete($id)
+    public function delete($program_id,$module_id,$session_id)
     {
       //
-      $session = ModuleSession::where('id',$id)->firstOrFail();
-      $module_id = $session->module_id;
-      foreach ($session->topics as $topic) {
-        # code...
-        $topic->delete();
-      }
+      $program = Program::where('id',$program_id)->firstOrFail();
+      $module  = $program->modules()->where('id',$module_id)->firstOrFail();
+      $session = $module->sessions()->where('id',$session_id)->firstOrFail();
+   //eliminar actividades
       foreach ($session->activities as $activity) {
         foreach ($activity->activityFiles as $file) {
           File::delete($file->path."/".$file->identifier);
           $file->delete();
         }
 
-        foreach ($activity->activityRequirements as $requirement) {
-          $requirement->delete();
-        }
         if($activity->videos){
           $activity->videos->delete();
         }
         $activity->delete();
       }
-      if($session->monitoring){
-        $session->monitoring->delete();
-      }
+
+      //eliminar facilitadores asignados
       $session->facilitators()->delete();
+      $order = $session->order;
+      $temp  = $order;
+      $last_parent_id = null;
       $session->delete();
-      $numbers = ModuleSession::where('module_id',$session->module_id)->orderBy('order','asc')->get();
-      $new_order = 1;
-       foreach ($numbers as $number) {
-         if($new_order>1){
-           $number->order =$new_order;
-           $number->parent_id = $last_session->id;
-           $number->save();
-           $last_session = $number;
-         }else{
-           $number->order =$new_order;
-           $number->save();
-           $last_session = $number;
-         }
-         $new_order++;
-       }
-       return redirect("dashboard/modulos/ver/$module_id")->with('success',"Se ha eliminado correctamente");
+          var_dump($order);
+           foreach ($program->get_all_sessions()->get() as $session) {
+             var_dump($session->order.' '.$session->id.' parent_id '.$session->parent_id);
+           }
+     foreach ($program->get_all_sessions()->get() as $session) {
+          if($order < $session->order){
+            $session->order = $temp;
+            $session->parent_id = $last_parent_id;
+            $temp++;
+            $session->save();
+            $last_parent_id = $session->id;
+          }
+        if($order != $session->order){
+            $last_parent_id = $session->id;
+        }
+      }
+
+       return redirect("dashboard/programas/$program->id/modulos/ver/$module_id")->with('success',"Se ha eliminado correctamente");
     }
     /**
     * Actualiza orden de sesiones

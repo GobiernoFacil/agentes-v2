@@ -9,7 +9,7 @@
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
 		@if($user->type =="admin")
-		<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
@@ -18,14 +18,14 @@
 	<!-- descripción-->
 	<div class="col-sm-12 forum_list">
 		<div class="divider top"></div>
-		@if($forum->session)
+		@if($forum->type === 'activity')
 		<p><span class="type module_session">{{$forum->session->module->title}} / {{$forum->session->name}}</span></p>
-		@else
-			@if($forum->slug ==='foro-general')
+		@elseif($forum->type ==='general')
 			<p><span class="type general">General</span></p>
-			@else
+		@elseif($forum->type ==='state')
 			<p><span class="type state">Estado</span></p>
-			@endif
+		@else
+		 	<p><span class="type general">Soporte técnico</span></p>
 		@endif
 		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		<div class="divider top"></div>
@@ -108,7 +108,7 @@
 		</div>
 		<div class="col-sm-8 col-sm-offset-2 center">
 		@if($user->type =="admin")
-		<a href='{{ url("dashboard/pregunta/foros/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/agregar/{$forum->id}") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="facilitator")
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>

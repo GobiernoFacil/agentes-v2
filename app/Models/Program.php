@@ -61,7 +61,7 @@ class Program extends Model
 
     function get_all_sessions(){
       $modules = $this->modules()->pluck('id')->toArray();
-      return ModuleSession::whereIn('module_id',$modules);
+      return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');
     }
 
     function get_available_types(){

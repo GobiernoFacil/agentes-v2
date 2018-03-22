@@ -218,11 +218,13 @@ class AdminForums extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function addQuestion($id)
+  public function addQuestion($program_id,$forum_id)
   {
       //
       $user      = Auth::user();
-      $forum   = Forum::where('id',$id)->firstOrFail();
+      $program   = Program::where('id',$program_id)->firstOrFail(); 
+      $forum     = Forum::where('id',$id)->firstOrFail();
+
       return view('admin.forums.forums-add-question')->with([
         "user"      => $user,
         "forum" => $forum
