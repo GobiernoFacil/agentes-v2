@@ -183,9 +183,9 @@ class User extends Authenticatable
 
     function actual_program(){
       $programs = $this->programs()->pluck('program_id');
-      $today  = date('Y-m-d');
-      return Program::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->whereIn('id',$programs->toArray())->first();
-
+    //  $today  = date('Y-m-d');
+    //  return Program::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->whereIn('id',$programs->toArray())->first();
+      return Program::where('public',1)->whereIn('id',$programs->toArray())->orderBy('start','asc')->first();
     }
 
     function get_total_score($program_id){

@@ -25,7 +25,7 @@
 		<div class="col-sm-10">
 			<div class="timeline_box">
 				<ul class="timeline">
-				@foreach($program->modules as $module)
+				@foreach($program->fellow_modules as $module)
 				<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
 				@endforeach
 				</ul>

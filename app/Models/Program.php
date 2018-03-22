@@ -28,6 +28,10 @@ class Program extends Model
       return $this->hasMany("App\Models\Module")->orderBy('order','asc');
     }
 
+    function fellow_modules(){
+      return $this->hasMany("App\Models\Module")->where('public',1)->orderBy('order','asc');
+    }
+
     function notice(){
       return $this->hasOne("App\Models\NoticeProgram");
     }
