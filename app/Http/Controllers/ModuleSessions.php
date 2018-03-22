@@ -356,10 +356,6 @@ class ModuleSessions extends Controller
       $temp  = $order;
       $last_parent_id = null;
       $session->delete();
-          var_dump($order);
-           foreach ($program->get_all_sessions()->get() as $session) {
-             var_dump($session->order.' '.$session->id.' parent_id '.$session->parent_id);
-           }
      foreach ($program->get_all_sessions()->get() as $session) {
           if($order < $session->order){
             $session->order = $temp;

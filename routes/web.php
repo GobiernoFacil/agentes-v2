@@ -198,7 +198,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/programas/{program_id}/modulos/save', 'Modules@save');
     Route::get('dashboard/programas/{program_id}/modulos/editar/{module_id}', 'Modules@edit');
     Route::post('dashboard/programas/{program_id}/modulos/update/{module_id}', 'Modules@update');
-    Route::get('dashboard/programas/{program_id}/modulos/deshabilitar/{module_id}', 'Modules@delete');
+    Route::get('dashboard/programas/{program_id}/modulos/eliminar/{module_id}', 'Modules@delete');
     Route::get('dashboard/programas/{program_id}/modulos/ver/{module_id}', 'Modules@view');
 
     /*@ModuleSessions Controller */
