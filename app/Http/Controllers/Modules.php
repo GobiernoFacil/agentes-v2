@@ -176,6 +176,8 @@ class Modules extends Controller
          }
     //eliminar facilitadores asignados
       $session->facilitators()->delete();
+      //delete forum
+      $session->all_forum()->delete();
       $session->delete();
     }
     $module->delete();
