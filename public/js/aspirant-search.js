@@ -14,7 +14,7 @@ search.addEventListener("keyup",function(){
 });
 search.addEventListener("focusout",function(){
 	var box = document.getElementById("search-results");
-	setTimeout(function() { box.innerHTML = ''; search.value = '';}, 100);
+	setTimeout(function() { box.innerHTML = ''; search.value = '';}, 600);
 });
 
 
