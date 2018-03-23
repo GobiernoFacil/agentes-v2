@@ -63,6 +63,19 @@ class Program extends Model
       return $this->hasMany('App\Models\Forum','program_id');
     }
 
+    function fellow_forums($user){
+
+      $today = date("Y-m-d");
+      $sessions_id = $this->get_all_fellow_sessions()->where('start','<=',$today)->pluck('id');
+      $forums = $this->forums()->pluck('id')->toArray();
+      return Forum::where('state_name',$user->fellowData->state)->orWhere(function($query)use($sessions_id){
+        $query->whereIn('session_id',$sessions_id);
+      })
+      ->orWhere(function($query){
+        $query->whereIn('type',['general','support']);
+      })->whereIn('id',$forums);
+    }
+
     function get_all_sessions(){
       $modules = $this->modules()->pluck('id')->toArray();
       return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');

@@ -34,12 +34,8 @@ class Forums extends Controller
     public function all()
     {
       $user       = Auth::user();
-      $today = date("Y-m-d");
       $program     = $user->actual_program();
-      $sessions_id = $program->get_all_fellow_sessions()->where('start','<=',$today)->pluck('id');
-      $forums      = $program->forums()->orWhere(function($query)use($sessions_id){
-        $query->whereIn('session_id',$sessions_id);
-      })->paginate($this->pageSize);
+      $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-all-list')->with([
         "user"      => $user,
         "forums"    => $forums,

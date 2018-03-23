@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
         $today   = date('Y-m-d');
         if($today <= '2018-03-25'){
           $schedule->command('command:send-aspirants-reminder')
-                              ->dailyAt('09:00')
+                              ->dailyAt('07:00')
                               ->emailOutputTo('carlos@gobiernofacil.com');
           $schedule->command('command:aspirant-count 0')
                               ->dailyAt('20:00');

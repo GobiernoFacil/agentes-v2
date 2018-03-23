@@ -309,8 +309,8 @@ class AspirantNotices extends Controller
         $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
         $aspirantData->privacy_policies = $request->privacy_policies;
         $aspirantData->save();
-        if($this->checkData()){
-        $user->notify(new SendApplyT($user,$notice));
+        if($user->aspirant($user)->check_aplication_data()){
+          $user->notify(new SendApplyT($user,$notice));
         }
         return redirect("tablero-aspirante/convocatorias/$notice->slug/gracias");
     }
