@@ -15,7 +15,7 @@ class AssignAspirants extends Command
      *
      * @var string
      */
-    protected $signature = 'command:assign-aspirant-to';
+    protected $signature = 'command:assign-aspirant-to {type} {notice_id=false}';
 
     /**
      * The console command description.
@@ -43,8 +43,36 @@ class AssignAspirants extends Command
     {
         //
         $today  = Carbon::now();
-        $daysAgo = $today->subDays(3)->format('Y-m-d');
-        $notice = Notice::where('end',$daysAgo)->where('public',1)->first();
+        if($this->argument('type') == 0){
+          //automatico
+          $daysAgo = $today->subDays(3)->format('Y-m-d');
+          $notice = Notice::where('end',$daysAgo)->where('public',1)->first();
+        }elseif($this->argument('type') == 1){
+          //desde cmd
+          $notices  = Notice::orderBy('start','asc')->get();
+          $message  = '';
+          $count    = 1;
+          $arr      = [];
+          foreach ($notices as $notice) {
+            $message = $message.' '.$count.'-'.$notice->title."\n";
+            $arr[$count] = $notice->id;
+            $count++;
+          }
+          $notice_id = $this->ask('Which notice? '."\n".$message);
+          if((int)$notice_id > sizeof($arr) || !(int)$notice_id){
+            return $this->warn('Selecciona un valor válido' );
+          }
+
+          $notice_id  = $arr[$notice_id];
+          $notice = Notice::where('id',$notice_id)->first();
+
+        }elseif($this->argument('type') == 2){
+          //llamada desde código
+          $notice = Notice::where('id',$this->argument('notice_id'))->first();
+        }else{
+          //none
+          $notice = false;
+        }
         if($notice){
           $aspirants = $notice->aspirants_approved_proof()->get();
           $users_in  = User::select('institution')->where('type','admin')->where('enabled',1)->distinct('institution')->orderBy('institution','asc')->get();
