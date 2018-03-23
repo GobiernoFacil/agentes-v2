@@ -33,22 +33,23 @@
 	</div>
 	<div class="col-sm-6">
 		<ul class="profile list">
-				@if($aspirantEvaluation)
-					@if($aspirantEvaluation->address_proof)
-						@if($aspirantEvaluation->grade)
-						<h3>Evaluación de {{$user->institution}}</h3>
-						<li><span>Valoración Perfil Curricular:</span> {{($aspirantEvaluation->experienceGrade*10).'%'}}</li>
-						<li><span>Valoración exposición de motivos:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
-						<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>
-						<li><span>Tu evaluación:</span> {{number_format(($aspirantEvaluation->grade*10),2).'%'}}</li>
-						@else
-							<li class="right"><span><strong>Sin evaluar</strong></span>
-							<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+				@if($proof)
+					@if($proof->address_proof)
+						@if($aspirantEvaluation)
+							<h3>Evaluación de {{$user->institution}}</h3>
+							<li><span>Valoración Perfil Curricular:</span> {{($aspirantEvaluation->experienceGrade*10).'%'}}</li>
+							<li><span>Valoración exposición de motivos:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
+							<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>
+							<li><span>Tu evaluación:</span> {{number_format(($aspirantEvaluation->grade*10),2).'%'}}</li>
+							@else
+								<li class="right"><span><strong>Sin evaluar</strong></span>
+								<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
 						@endif
 					@else
-						<li class="right"><span><strong>No cuenta con comprobante de domicilio válido o no ha sido evaluado</strong></span>
+						<li class="right"><span><strong>No cuenta con comprobante de domicilio válido</strong></span>
 						<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-comprobante/$aspirant->id")}}' class="btn xs view">Revisar</a></li>
 					@endif
+
 				@else
 									@if($aspirant->AspirantsFile)
 											@if($aspirant->AspirantsFile->proof)
@@ -88,7 +89,7 @@
 		</ul>
 	</div>
 		<div class="col-sm-6">
-			
+
 		</div>
 	</div>
 
@@ -99,7 +100,7 @@
 		<div class="col-sm-12">
 			<h2>Evaluado por:</h2>
 		</div>
-		
+
 		<div class="col-sm-12">
 			<table class="table">
 				<thead>
@@ -126,7 +127,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 	</div>
 </div>
 @endif

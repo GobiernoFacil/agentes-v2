@@ -242,18 +242,20 @@ class AdminAspirants extends Controller
       public function viewAspirant($notice_id,$aspirant_id)
       {
           //
-          $user    = Auth::user();
-          $notice  = Notice::where('id',$notice_id)->firstOrFail();
+          $user     = Auth::user();
+          $notice   = Notice::where('id',$notice_id)->firstOrFail();
           $aspirant = Aspirant::where('id',$aspirant_id)->firstOrFail();
           $aspirantEvaluation = AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+          $proof    = $aspirant->check_address_proof()->first();
           $allEva             = $aspirant->aspirantEvaluation;
 
           return view('admin.aspirants.aspirant-view')->with([
               'user'      => $user,
               'notice'    => $notice,
-              'aspirant' => $aspirant,
+              'aspirant'  => $aspirant,
               'aspirantEvaluation' => $aspirantEvaluation,
-              'allEva' => $allEva
+              'allEva'    => $allEva,
+              'proof'     => $proof
             ]);
       }
 
@@ -327,8 +329,11 @@ class AdminAspirants extends Controller
           $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id]);
           $aspirantEvaluation->address_proof = current(array_slice($request->address_proof, 0, 1));
           $aspirantEvaluation->save();
-          Artisan::call('command:assign-aspirant-to',['type'=>'2',"notice_id"=>$notice->id]);
-          return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
+          //asignar aspirantes a instituciones
+          if($notice->aspirants_without_proof_evaluation()->count() ==0){
+            Artisan::queue('command:assign-aspirant-to',['type'=>'2',"notice_id"=>$notice->id]);
+          }
+         return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
       }
 
 
