@@ -30,7 +30,8 @@ class Kernel extends ConsoleKernel
         Commands\AddGenderToFellows::Class,
         Commands\AssignAspirants::Class,
         Commands\SendAspirantReminder::Class,
-        Commands\AttachPreDataToProgram::Class
+        Commands\AttachPreDataToProgram::Class,
+        Commands\AllowAspirantsUpload::Class
     ];
 
     /**
