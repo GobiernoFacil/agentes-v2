@@ -16,11 +16,12 @@ class SendReminder extends Notification
      *
      * @return void
      */
-    public function __construct($user,$notice)
+    public function __construct($user,$notice,$ext_time)
     {
         //
         $this->user = $user;
         $this->notice = $notice;
+        $this->ext_time = $ext_time;
     }
 
     /**
@@ -43,10 +44,18 @@ class SendReminder extends Notification
     public function toMail($notifiable)
     {
       $url = url("/login");
-      return (new MailMessage)
-              ->from('info@apertus.org.mx')
-              ->subject('no-reply')
-              ->markdown('vendor.notifications.aspirant_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
+      if(!$this->ext_time){
+        return (new MailMessage)
+                ->from('info@apertus.org.mx')
+                ->subject('no-reply')
+                ->markdown('vendor.notifications.aspirant_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
+      }else{
+        return (new MailMessage)
+                ->from('info@apertus.org.mx')
+                ->subject('no-reply')
+                ->markdown('vendor.notifications.aspirant_ext_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
+      }
+
     }
 
     /**

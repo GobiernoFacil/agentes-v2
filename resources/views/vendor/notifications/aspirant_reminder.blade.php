@@ -2,7 +2,7 @@
 
 Estimado/a {{$user->name." ".$user->surname." ".$user->lastname}},<br>
 
-Le enviamos un atento recordatorio para que complete su postulación al “Programa de Formación de Agentes de Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible” terminando su registro en la plataforma. De lo contrario su postulación no podrá ser evaluada.<br>
+Le enviamos un atento recordatorio para que complete su postulación al “Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible” terminando su registro en la plataforma. De lo contrario su postulación no podrá ser evaluada.<br>
 <?php
 use Jenssegers\Date\Date;
 $date =  Date::createFromFormat('Y-m-d',$notice->end);
