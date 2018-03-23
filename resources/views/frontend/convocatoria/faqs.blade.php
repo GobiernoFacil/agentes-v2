@@ -29,7 +29,7 @@ El programa tiene una duración total de 7 meses y será impartido entre junio y
 La modalidad del programa de formación es principalmente en línea en la plataforma Apertus www.apertus.org.mx. Se realizarán también al menos dos seminarios presenciales en estados de la República Mexicana.</li>
 
 			<li><h3>¿En dónde debe realizarse la postulación para el programa de formación?													   </h3>
-La postulación y registro al programa de formación se realiza única y exclusivamente en línea a través del formato de registro disponible en el portal Apertus en la siguiente liga: http://apertus.org.mx/convocatoria/2018 Ningún documento será recibido por una vía distinta. </li>
+La postulación y registro al programa de formación se realiza única y exclusivamente en línea a través del formato de registro disponible en el portal Apertus en la siguiente liga: http://apertus.org.mx/convocatoria Ningún documento será recibido por una vía distinta. </li>
 
 			<li><h3>¿Se puede realizar la postulación por partes?																			   </h3>
 Sí, al regístrate en la plataforma se genera un nombre de usuario y contraseña con el que puedes ingresar después para completar la carga de información. La fecha límite para la recepción de postulaciones es el 25 de marzo de 2018.</li>
