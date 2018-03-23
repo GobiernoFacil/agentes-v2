@@ -38,25 +38,35 @@
 			</div>
 			<div class="col-sm-9">
 				<div class="row">
+					@if($module->get_all_evaluation_activity()->count()>0)
+						@foreach($module->get_all_evaluation_activity() as $evAct)
+							<div class="col-sm-6 border_l">
+								<h4>Actividad obligatoria</h4>
+								<h5>Evaluación</h5>
+								<ul>
+									<li>{{$evAct->name}}</li>
+								</ul>
+							</div>
+							<div class="col-sm-3">
+								<h4>Fechas</h4>
+								<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
+							</div>
+						@endforeach
+					@else
 					<div class="col-sm-6 border_l">
 						<h4>Actividad obligatoria</h4>
 						<h5>Evaluación</h5>
 						<ul>
-							@if($module->get_evaluation_activity())
-							<li>{{$module->get_evaluation_activity()->name}}</li>
-							@else
-							<li><strong>Sin actividad obligatoria</strong></li>
-							@endif
+							<li><strong>Sin actividades obligatorias</strong></li>
 						</ul>
 					</div>
 					<div class="col-sm-3">
 						<h4>Fechas</h4>
-						@if($module->get_evaluation_activity())
-						<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($module->get_evaluation_activity()->end))}}</p>
-						@else
-						<li><strong>Sin fechas</strong></li>
-						@endif
+						<p>Sin fechas</p>
 					</div>
+
+					@endif
+
 					<div class="col-sm-3">
 						<a class="btn view block sessions_l"  href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>Ver módulo</a>
 			<a href ='{{ url("dashboard/programas/$program->id/modulos/eliminar/$module->id") }}'  id ="{{$module->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
