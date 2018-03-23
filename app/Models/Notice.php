@@ -116,7 +116,13 @@ class Notice extends Model
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
-      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));;
+      if($im_aspi){
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+      }
+
+
     }
 
     function aspirants_app_already_evaluated_by_state($state){

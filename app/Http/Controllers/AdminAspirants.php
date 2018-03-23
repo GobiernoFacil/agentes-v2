@@ -13,6 +13,7 @@ use App\Models\AspirantGlobalGrade;
 use PDF;
 use App\Http\Requests\SaveAspirantEvaluation1;
 use App\Http\Requests\SaveAspirantEvaluation2;
+use Artisan;
 class AdminAspirants extends Controller
 {
     //
@@ -134,7 +135,7 @@ class AdminAspirants extends Controller
     public function aspirantAlreadyEvaluated($notice_id)
     {
         //
-    
+
         $user      = Auth::user();
         $notice    = Notice::where('id',$notice_id)->firstOrFail();
         $list      = $notice->aspirants_already_evaluated()->paginate();
@@ -326,6 +327,7 @@ class AdminAspirants extends Controller
           $aspirantEvaluation = AspirantEvaluation::firstOrCreate(['aspirant_id'=>$aspirant->id,'institution'=>$user->institution,'notice_id'=> $request->notice_id]);
           $aspirantEvaluation->address_proof = current(array_slice($request->address_proof, 0, 1));
           $aspirantEvaluation->save();
+          Artisan::call('command:assign-aspirant-to',['type'=>'2',"notice_id"=>$notice->id]);
           return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
       }
 
@@ -342,7 +344,7 @@ class AdminAspirants extends Controller
           $notice    = Notice::where('id',$notice_id)->firstOrFail();
           $aspirants = $notice->all_aspirants_data()->get();
           $list      = $notice->aspirants_per_institution_to_evaluate()->paginate();
-          $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
+           $asToE_count = $notice->aspirants_per_institution_to_evaluate()->count();
           $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
           $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
           $type_list = 1;
