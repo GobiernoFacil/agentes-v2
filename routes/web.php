@@ -29,7 +29,8 @@ Route::get('redes-sociales', 'Front@redes');
 Route::get('convocatoria', 'NoticeFront@convocatoria');
 Route::get('convocatoria/preguntas-frecuentes', 'NoticeFront@faqs');
 
-
+///////convocatorias cerradas
+Route::get('convocatoria/cerrada/{notice_slug}', 'NoticeFront@closed');
 /////// convocatoria 2017
 Route::get('convocatoria/2017', 'NoticeFront@convoca17');
 Route::get('convocatoria/resultados-2017', function(){

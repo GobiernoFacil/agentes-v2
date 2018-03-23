@@ -26,10 +26,12 @@ class NoticeFront extends Controller
   /******************* funciones de convocatoria ************************/
       //convocatoria
       public function convocatoria(){
-        $notice  = new Notice;
-        $notice  = $notice->get_last_notice();
+        $notice_a  = new Notice;
+        $notice  = $notice_a->get_last_notice();
+        $closed  = $notice_a->get_closed();
         return view('frontend.convocatoria.notice-front')->with([
           'notice' =>$notice,
+          'closed' => $closed
         ]);
       }
 
@@ -57,6 +59,14 @@ class NoticeFront extends Controller
       //convocatoria/bases
       public function bases(){
         return view('frontend.convocatoria.bases');
+      }
+
+      //convocatoria cerradas
+      public function closed($notice_slug){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->firstOrFail();
+        return view('frontend.convocatoria.closed')->with([
+          'notice'=>$notice
+        ]);
       }
 
       //convocatoria/aplicar

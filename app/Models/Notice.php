@@ -45,6 +45,13 @@ class Notice extends Model
 
     }
 
+    function get_closed(){
+      $today  = date('Y-m-d');
+      $notice = $this::where('end','<',$today)->where('public',1)->get();
+      return $notice;
+
+    }
+
     function files_front(){
       $files  = NoticeFile::where('notice_id',$this->id)->limit(2)->get();
       return $files;
