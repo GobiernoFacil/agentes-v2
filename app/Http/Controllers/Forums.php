@@ -15,6 +15,7 @@ use App\Models\ForumConversation;
 use App\Models\ForumLog;
 use App\Models\Module;
 use App\Models\ModuleSession;
+use App\Models\Program;
 use App\User;
 use App\Notifications\SendForumNotice;
 // FormValidators
@@ -50,28 +51,20 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($session_slug,$forum_slug)
+    public function index($program_slug,$session_slug,$forum_slug)
     {
       $user     = Auth::user();
+      $program  = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
       $today = date("Y-m-d");
-      $session  = ModuleSession::where('slug',$session_slug)->where('start','<=',$today)->firstOrFail();
-      $forum    = Forum::where('slug',$forum_slug)->first();
-      if(!$forum){
-        $auser = User::where('institution','Gobierno Fácil')->first();
-        $forum = new Forum();
-        $forum->session_id = $session->id;
-        $forum->user_id    = $auser->id;
-        $forum->topic      = "Foro de la sesión: ".$session->name;
-        $forum->description = "En este foro podrás resolver tus dudas acerca de la sesión.";
-        $forum->slug       = str_slug("Foro de la sesión: ".$session->name);
-        $forum->save();
-      }
+      $session  = $program->get_all_sessions()->where('slug',$session_slug)->where('start','<=',$today)->firstOrFail();
+      $forum    = Forum::where('slug',$forum_slug)->firstOrFail();
       $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-list')->with([
         "user"      => $user,
         "forums" => $forums,
         "forum"  =>$forum,
-        "session" => $session
+        "session" => $session,
+        "program" => $program
       ]);
 
     }
@@ -288,30 +281,30 @@ class Forums extends Controller
       }
 
       /**
-       * foro por estado
+       * foro por estado, general o soporte
        *
        * @param  \Illuminate\Http\Request  $request
        * @return \Illuminate\Http\Response
        */
-      public function stateForum($state_name)
+      public function stateForum($program_slug,$slug)
       {
         $user      = Auth::user();
-        if($user->fellowData->state == $state_name || $state_name =="foro-general"){
-          if($state_name=='foro-general'){
-            $state_name= 'General';
-          }
-          $forum  = Forum::where('state_name',$state_name)->firstOrFail();
-          $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
-          return view('fellow.modules.sessions.forums.forums-list')->with([
+        $program   = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
+        $forum     = Forum::where('program_id',$program->id)->where('slug',$slug)->firstOrFail();
+        if($forum->type==='state'){
+            if($user->fellowData->state != $forum->state_name){
+              return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+            }
+        }elseif($forum->type==='activity'){
+              return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+        }
+        $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+         return view('fellow.modules.sessions.forums.forums-list')->with([
             "user"      => $user,
             "forum"    => $forum,
             "forums"    => $forums,
             "session"   => null
           ]);
-        }else{
-          return redirect('tablero');
-        }
-
       }
 
       protected function send_to($forum,$conversation,$type){

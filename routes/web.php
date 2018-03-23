@@ -436,20 +436,25 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Forums Controller */
     // Rutas foros
     Route::get('tablero/foros', 'Forums@all');
-    Route::get('tablero/foros/{session_slug}/{forum_slug}', 'Forums@index');
-  //  Route::get('tablero/foros/{module_slug}/{session_slug}/crear', 'Forums@add');
-  //  Route::post('tablero/foros/{module_slug}/{session_slug}/save', 'Forums@save');
-    Route::get('tablero/foros/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
-    Route::get('tablero/foros/{session_slug}/pregunta/crear', 'Forums@addQuestion');
-    Route::get('tablero/foros/pregunta/estado/{state_name}/crear', 'Forums@addStateQuestion');
-    Route::post('tablero/foros/{session_slug}/pregunta/save', 'Forums@saveQuestion');
-    Route::get('tablero/foros/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
-    Route::get('tablero/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
-    Route::post('tablero/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
-    Route::get('tablero/foros/{state_name}', 'Forums@stateForum');
+    //foro actividad
+    Route::get('tablero/foros/{program_slug}/{session_slug}/{forum_slug}', 'Forums@index');
+    Route::get('tablero/foros/{program_slug}/{session_slug}/pregunta/crear', 'Forums@addQuestion');
+    Route::post('tablero/foros/{program_slug}/{session_slug}/pregunta/save', 'Forums@saveQuestion');
+    Route::get('tablero/foros/{program_slug}/{session_slug}/pregunta/{question_slug}/ver', 'Forums@viewQuestion');
+    //foro estado
+    Route::get('tablero/foros/{program_slug}/{state_name}', 'Forums@stateForum');
+    Route::get('tablero/foros/{program_slug}/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
+    Route::get('tablero/foros/{program_slug}/pregunta/estado/{state_name}/crear', 'Forums@addStateQuestion');
+
+    Route::get('tablero/foros/{program_slug}/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
+    Route::get('tablero/foros/{program_slug}/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
+    Route::post('tablero/foros/{program_slug}/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
+    //ver usuarios en foros
     Route::get('tablero/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
     Route::get('tablero/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
+    //fellow participaciones
     Route::get('tablero/participaciones', 'Forums@participations');
+
     /*@FellowEvaluations*/
     // Rutas calificaciones y evaluaciones
     Route::get('tablero/calificaciones', 'FellowEvaluations@index');
