@@ -117,7 +117,7 @@ class Notice extends Model
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
-      if($im_aspi){
+      if($im_aspi != ''){
         return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
       }else{
         return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
@@ -130,7 +130,12 @@ class Notice extends Model
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
-      return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));;
+      if($im_aspi != ''){
+              return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+            return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants);
+      }
+
     }
 
     function aspirants_per_institution_evaluated(){
@@ -138,7 +143,11 @@ class Notice extends Model
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->where('institution',$user->institution)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
-      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      if($im_aspi != ''){
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+      }
     }
 
     function get_aspirants_with_full_data(){
