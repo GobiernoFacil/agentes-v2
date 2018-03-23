@@ -12,7 +12,11 @@
 		use Jenssegers\Date\Date;
 		$date =  Date::createFromFormat('Y-m-d',$notice->end);
 		?>
-		<h5 class="center">Recuerda que podrás actualizar la información hasta el <strong>{{ $date->format('j  \d\e F \d\e Y') }}</strong>.</h5>
+		@if(!$notice->allow_upload)
+			<h5 class="center">Recuerda que podrás actualizar la información hasta el <strong>{{ $date->format('j  \d\e F \d\e Y') }}</strong>.</h5>
+		@else
+			<h5 class="center"><strong>Se ha habilitado la carga de archivos por tiempo limitado.</strong></h5>
+		@endif
 	</div>
 </div>
 <div class="row">

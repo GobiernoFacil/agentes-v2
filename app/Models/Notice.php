@@ -26,7 +26,8 @@ class Notice extends Model
     'start',
     'end',
     'public',
-    'slug'
+    'slug',
+    'allow_upload'
     ];
 
     function program(){

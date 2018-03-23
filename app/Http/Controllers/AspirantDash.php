@@ -21,12 +21,13 @@ class AspirantDash extends Controller
 
     public function dashboard(){
 	  	$user 		   = Auth::user();
-	    $notices       = $user->aspirant($user)->notices;
+	    $notices       = $user->aspirant($user)->notices()->pluck('notice_id')->toArray();
       $today  = date('Y-m-d');
       //convocatoria actual solo una es pública a la vez y entra en el lapso
-      $notice = Notice::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
-      $single = $notices->first();
+      $notice = Notice::whereIn('id',$notices)->where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
+      $single = $user->aspirant($user)->notices->first();
       if($notice){
+        //convocatoria abierta
   	    $aspirantFile     = AspirantsFile::firstOrCreate([
           'aspirant_id'=>$user->aspirant($user)->id,
           'notice_id'=>$notice->id,
@@ -39,11 +40,28 @@ class AspirantDash extends Controller
           "notice"        => $notice
   	    ]);
       }else{
-        //convocatoria cerrada
+         $notice = Notice::whereIn('id',$notices)->where('public',1)->where('allow_upload',1)->first();
+         if($notice){
+           //convocatoria abierta para seguir actualizando
+          $aspirantFile     = AspirantsFile::firstOrCreate([
+             'aspirant_id'=>$user->aspirant($user)->id,
+             'notice_id'=>$notice->id,
+             'user_id'=>$user->id
+           ]);
           return view('aspirant.dashboard')->with([
-           "user"      	  => $user,
-            "notice"        => $notice
-         ]);
+            "user"      	  => $user,
+            "single"        => $single,
+            "aspirantFile"  => $aspirantFile,
+             "notice"        => $notice
+          ]);
+         }else{
+           //convocatoria cerrada
+             return view('aspirant.dashboard')->with([
+              "user"      	  => $user,
+               "notice"        => $notice
+            ]);
+         }
+
       }
 
     }

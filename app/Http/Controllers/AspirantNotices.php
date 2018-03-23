@@ -51,7 +51,10 @@ class AspirantNotices extends Controller
     	$user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-    	$notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    	$notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
         return view('aspirant.notices.notices-view')->with([
           "user"      => $user,
@@ -70,7 +73,11 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
+
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       //instrucciones y primer requisito "exposición de motivos"
@@ -96,7 +103,10 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       //instrucciones y primer requisito "exposición de motivos"
@@ -122,7 +132,10 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       //instrucciones y primer requisito "exposición de motivos"
@@ -158,7 +171,10 @@ class AspirantNotices extends Controller
     $user    = Auth::user();
     $today   = date('Y-m-d');
     //valida que exista convocatoria
-    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+    if(!$notice){
+      $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+    }
     //valida que exista el aspirante en la convocatoria
     $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
     //segundo requisito "perfil curricular"
@@ -179,7 +195,10 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       $aspirantFile     = AspirantsFile::firstOrCreate([
@@ -204,7 +223,10 @@ class AspirantNotices extends Controller
     $user    = Auth::user();
     $today   = date('Y-m-d');
     //valida que exista convocatoria
-    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+    if(!$notice){
+      $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+    }
     //valida que exista el aspirante en la convocatoria
     $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
     $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
@@ -224,7 +246,10 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       $aspirantFile     = AspirantsFile::firstOrCreate([
@@ -249,7 +274,10 @@ class AspirantNotices extends Controller
     $user    = Auth::user();
     $today   = date('Y-m-d');
     //valida que exista convocatoria
-    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+    $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+    if(!$notice){
+      $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+    }
     //valida que exista el aspirante en la convocatoria
     $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
     $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
@@ -278,7 +306,10 @@ class AspirantNotices extends Controller
       $user    = Auth::user();
       $today   = date('Y-m-d');
       //valida que exista convocatoria
-      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       //valida que exista el aspirante en la convocatoria
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       $aspirantFile     = AspirantsFile::firstOrCreate([
@@ -303,7 +334,10 @@ class AspirantNotices extends Controller
         $user    = Auth::user();
         $today   = date('Y-m-d');
         //valida que exista convocatoria
-        $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        $notice  = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+        if(!$notice){
+          $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+        }
         //valida que exista el aspirante en la convocatoria
         $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
         $aspirantData = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->firstOrfail();
@@ -325,7 +359,10 @@ class AspirantNotices extends Controller
         $user    = Auth::user();
         $today   = date('Y-m-d');
         //valida que exista convocatoria
-        $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+        $notice  = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+        if(!$notice){
+          $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+        }
         //valida que exista el aspirante en la convocatoria
         $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
         return view('aspirant.notices.notices-thanks')->with([
@@ -343,7 +380,10 @@ class AspirantNotices extends Controller
           $user   = Auth::user();
           $today   = date('Y-m-d');
           //valida que exista convocatoria
-          $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+          $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+          if(!$notice){
+            $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+          }
           //valida que exista el aspirante en la convocatoria
           $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
           $files  = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->first();
@@ -363,7 +403,10 @@ class AspirantNotices extends Controller
       {
           $user   = Auth::user();
           $today   = date('Y-m-d');
-          $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+          $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+          if(!$notice){
+            $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+          }
           $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
             return view('aspirant.notices.files-add')->with([
               "user"      => $user,
@@ -380,7 +423,10 @@ class AspirantNotices extends Controller
       {
          $user   = Auth::user();
          $today   = date('Y-m-d');
-         $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+         $notice = Notice::where('slug',$notice_slug)->where('end','>=',$today)->where('public',1)->first();
+         if(!$notice){
+           $notice = Notice::where('slug',$notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+         }
          $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
          $files  = AspirantsFile::where('user_id',$user->id)->where('notice_id',$notice->id)->first();
            return view('aspirant.notices.files-update')->with([
@@ -399,7 +445,10 @@ class AspirantNotices extends Controller
     {
       $user   = Auth::user();
       $today   = date('Y-m-d');
-      $notice = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+      $notice = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+      if(!$notice){
+        $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+      }
       $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
       $aspirantFile    = AspirantsFile::where('aspirant_id',$user->aspirant($user)->id)->where('notice_id',$notice->id)->where('user_id',$user->id)->firstOrfail();
       if($request->file('cv')){
@@ -461,7 +510,10 @@ class AspirantNotices extends Controller
     {
        $user   = Auth::user();
        $today   = date('Y-m-d');
-       $notice = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->firstOrfail();
+       $notice = Notice::where('slug',$request->notice_slug)->where('end','>=',$today)->where('public',1)->first();
+       if(!$notice){
+         $notice = Notice::where('slug',$request->notice_slug)->where('public',1)->where('allow_upload',1)->firstOrfail();
+       }
        $aspirant_notice = AspirantNotice::where('aspirant_id',$user->aspirant($user)->id)->firstOrfail();
        $aspirantFile     = AspirantsFile::firstOrCreate([
          'aspirant_id'=>$user->aspirant($user)->id,
