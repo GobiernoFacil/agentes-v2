@@ -47,12 +47,12 @@ class SendReminder extends Notification
       if(!$this->ext_time){
         return (new MailMessage)
                 ->from('info@apertus.org.mx')
-                ->subject('no-reply')
+                ->subject('Recordatorio para que complete su postulación')
                 ->markdown('vendor.notifications.aspirant_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
       }else{
         return (new MailMessage)
                 ->from('info@apertus.org.mx')
-                ->subject('no-reply')
+                ->subject('Recordatorio para que complete su postulación')
                 ->markdown('vendor.notifications.aspirant_ext_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
       }
 
