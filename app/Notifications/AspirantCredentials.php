@@ -45,7 +45,7 @@ class AspirantCredentials extends Notification
       $url = url("login");
       return (new MailMessage)
           ->from('info@apertus.org.mx')
-          ->subject('no-reply')
+          ->subject('Información de tu cuenta')
           ->markdown('vendor.notifications.aspirant_credentials', ['url' => $url,'user'=>$this->user,'password'=>$this->password]);
     }
 
