@@ -45,7 +45,7 @@ class SendApplyT extends Notification
       $url = url("/login");
       return (new MailMessage)
               ->from('info@apertus.org.mx')
-              ->subject('no-reply')
+              ->subject('Postulación completa :)')
               ->markdown('vendor.notifications.send_apply_thanks', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
     }
 
