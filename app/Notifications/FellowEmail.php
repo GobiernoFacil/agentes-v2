@@ -45,7 +45,7 @@ class FellowEmail extends Notification
       $url = url("/login");
       return (new MailMessage)
                   ->from('info@apertus.org.mx')
-                  ->subject('no-reply')
+                  ->subject('Bienvenido al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
                   ->markdown('vendor.notifications.fellowEmail', ['url' => $url,'user'=>$this->user,'password'=>$this->password]);
     }
 
