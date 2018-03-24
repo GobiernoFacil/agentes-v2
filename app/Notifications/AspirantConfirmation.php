@@ -45,7 +45,7 @@ class AspirantConfirmation extends Notification
       $url = url("convocatoria/aplicar/{$this->notice->slug}/{$this->aspirant->code->token}/confirmacion");
       return (new MailMessage)
           ->from('info@apertus.org.mx')
-          ->subject('no-reply')
+          ->subject('Confirma tu correo')
           ->markdown('vendor.notifications.aspirant_confirmation', ['url' => $url,'aspirant'=>$this->aspirant, 'notice'=>$this->notice]);
     }
 
