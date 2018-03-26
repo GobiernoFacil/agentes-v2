@@ -126,7 +126,7 @@
 							<div class="row">
 								<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
 									<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
-									<a href="{{url('convocatoria')}}" class="btn blue i_convoca_w"><strong>Convocatoria 2018</strong><br> <span>abierta del 6 de febrero al 25 de marzo</span></a>
+									<a href="{{url('convocatoria')}}" class="btn blue i_convoca_w"><strong>Convocatoria 2018</strong> Cerrada</a>
 									<a href="{{url('programa-gobierno-abierto/2017/testimonios')}}" class="btn">Testimonios del Programa de Formación 2017</a>
 								</div>
 							</div>
