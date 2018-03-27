@@ -61,7 +61,7 @@ class Aspirant extends Model
     if($this->AspirantsFile){
       if($this->AspirantsFile->video && $this->AspirantsFile->proof && $this->AspirantsFile->privacy_policies && $this->AspirantsFile->motives){
         if($this->cv){
-            if($this->cv->open_experiences()->count()>0 && $this->cv->experiences()->count()>0 && $this->cv->academic_trainings()->count()>0){
+            if($this->cv->experiences()->count()>0 && $this->cv->academic_trainings()->count()>0){
               return true;
             }else{
               return false;
