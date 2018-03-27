@@ -52,7 +52,7 @@ class SendReminder extends Notification
       }else{
         return (new MailMessage)
                 ->from('info@apertus.org.mx')
-                ->subject('Recordatorio para que complete su postulación')
+                ->subject('Aviso de extensión de tiempo para que complete su postulación')
                 ->markdown('vendor.notifications.aspirant_ext_reminder', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
       }
 
