@@ -44,6 +44,9 @@ class SendAspirantsCount extends Command
         //
         $notice  = new Notice;
         $notice  = $notice->get_last_notice();
+        if(!$notice){
+            $notice = Notice::where('allow_upload',1)->where('public',1)->first();
+        }
         $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
         $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
         $headers    = ["Estado","Verificados","Sin verificar","Aplicación completada", "Aplicación sin completar"];
