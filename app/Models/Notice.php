@@ -164,7 +164,7 @@ class Notice extends Model
         if($aspirant->AspirantsFile){
           if($aspirant->AspirantsFile->video && $aspirant->AspirantsFile->proof && $aspirant->AspirantsFile->privacy_policies && $aspirant->AspirantsFile->motives){
             if($aspirant->cv){
-               if($aspirant->cv->open_experiences()->count()>0 && $aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
+               if($aspirant->cv->experiences()->count()>0 && $aspirant->cv->academic_trainings()->count()>0){
                  array_push($temp_array,$aspirant->id);
                }
             }
