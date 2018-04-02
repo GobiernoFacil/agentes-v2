@@ -5,7 +5,7 @@
 				<h4>Semana {{$counter}} {!! $module->modality == "Presencial" ?  '<span>('.$module->modality.')</span>' : '' !!}</h4>
 			</div>
 			<div class="col-sm-6">
-				<p class="right">Tiempo estimado: <strong>{{$module->number_hours}} h</strong>
+				<p class="right">Tiempo estimado: <strong>{{$module->duration_hours() < 1 ? $module->duration_minutes().' min.' : $module->duration_hours().' h'}} </strong>
 				<button class="ap-show" type="button" data-div="content-{{$module->id}}">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 				</button>
@@ -43,7 +43,7 @@
 					</div>
 					<div class="col-sm-3">
 						<h4>Calificación</h4>
-						
+
 					</div>
 					<div class="col-sm-3">
 						<h4>Fecha límite</h4>
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
