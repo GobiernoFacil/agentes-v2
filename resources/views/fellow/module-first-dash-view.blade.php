@@ -2,7 +2,7 @@
 <div class="col-sm-1 right">
   <b class="icon_h session list_s"></b>
 </div>
-<?php $module = $program->modules()->orderBy('start','asc')->first(); ?>
+<?php $module = $program->fellow_modules()->orderBy('start','asc')->first(); ?>
 <div class="col-sm-8">
   <h3>Módulo 1</h3>
   <h2><a href='{{url("tablero/aprendizaje/$module->slug")}}'>{{$module->title}}</a></h2>
