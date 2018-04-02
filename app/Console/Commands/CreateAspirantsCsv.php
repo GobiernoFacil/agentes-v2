@@ -43,7 +43,7 @@ class CreateAspirantsCsv extends Command
         //
         $notices  = Notice::where('public',1)->orderBy('start','asc')->get();
         $path = base_path().'/csv';
-        $headers = ["Institución","Aspirante","Apellidos","Estado","Municipio"];
+        $headers = ["Institución","Aspirante","Apellidos","Estado","Municipio","Sector de procedencia"];
         $message  = '';
         $count    = 1;
         $arr      = [];
@@ -101,7 +101,7 @@ class CreateAspirantsCsv extends Command
                             break;
                           }
                           $aspirant = Aspirant::where('id',$aspirant_allow_ids[$last_iteration])->first();
-                          $sheet->appendRow([$institutions[$i],$aspirant->name,$aspirant->surname.' '.$aspirant->lastname,$aspirant->state,$aspirant->city]);
+                          $sheet->appendRow([$institutions[$i],$aspirant->name,$aspirant->surname.' '.$aspirant->lastname,$aspirant->state,$aspirant->city,$aspirant->origin]);
                           $control++;
                           $last_iteration++;
 
