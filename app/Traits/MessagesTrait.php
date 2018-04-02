@@ -123,7 +123,7 @@ trait MessagesTrait{
          'image.max' =>'El archivo no puede ser mayor a 2.5MB',
          //activity file
          'file.required' => 'Este campo es requerido',
-         'file.mimes' => 'Debe ser un archivo de tipo doc,docx o pdf',
+         'file.mimes' => 'Debe ser un archivo de tipo pdf',
          'file.max' => 'Debe pesar 2.5 MB como máximo.',
          'parent_id.required' => 'Este campo es requerido',
          //file fellow
