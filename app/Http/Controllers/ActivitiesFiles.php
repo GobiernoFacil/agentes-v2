@@ -205,12 +205,31 @@ class ActivitiesFiles extends Controller
     }
 
 
+
+
     /**
     *descargar archivo
     *
     * @return \Illuminate\Http\Response
     */
     public function watchPdf($id){
+      $user = Auth::user();
+      $data = ActivitiesFile::find($id);
+      $file = $data->path.'/'.$data->identifier;
+      $fileData = pathinfo($file);
+      $headers = array(
+        'Content-Type: '.$fileData['extension'],
+      );
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->file($fileData['dirname'].'/'.$fileData['basename'], $headers);
+    }
+
+    /**
+    *descargar archivo
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function watchPdfFellow($program_slug,$id){
       $user = Auth::user();
       $data = ActivitiesFile::find($id);
       $file = $data->path.'/'.$data->identifier;

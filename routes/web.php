@@ -424,7 +424,7 @@ Route::group(['middleware' => ['auth']], function () {
       	//Descargar archivo en actividades
           Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
           //ver pdf
-          Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
+          Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdfFellow');
           /*@Messages Controller */
           // Rutas mensajes
           Route::get('tablero/{program_slug}/mensajes', 'Messages@index');

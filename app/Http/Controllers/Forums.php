@@ -75,7 +75,7 @@ class Forums extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function view($session_slug,$forum_slug)
+    public function view($program_slug,$session_slug,$forum_slug)
     {
       //
       $user   = Auth::user();
@@ -92,7 +92,7 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add($module_slug,$session_slug)
+    public function add($program_slug,$module_slug,$session_slug)
     {
         //
         $user      = Auth::user();
@@ -126,7 +126,7 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addQuestion($session_slug)
+    public function addQuestion($program_slug,$session_slug)
     {
         //
         $user      = Auth::user();
@@ -142,7 +142,7 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addStateQuestion($state_name)
+    public function addStateQuestion($program_slug,$state_name)
     {
         //
         $user      = Auth::user();
@@ -213,7 +213,7 @@ class Forums extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function viewQuestion($session_slug,$question_slug)
+    public function viewQuestion($program_slug,$session_slug,$question_slug)
     {
       //
       $user   = Auth::user();
@@ -231,7 +231,7 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addMessage($forum_slug)
+    public function addMessage($program_slug,$forum_slug)
     {
         //
         $user      = Auth::user();
@@ -307,7 +307,7 @@ class Forums extends Controller
           ]);
       }
 
-      protected function send_to($forum,$conversation,$type){
+      protected function send_to($program_slug,$forum,$conversation,$type){
           if(!$forum->state_name && $type!="create"){
             //usuarios en el foro
             $user_ids = ForumLog::where('forum_id',$forum->id)->pluck('user_id');
@@ -427,7 +427,7 @@ class Forums extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-      public function participations()
+      public function participations($program_slug)
       {
         //
         $user   = Auth::user();

@@ -21,7 +21,7 @@ class FellowFiles extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add($activity_slug)
+    public function add($program_slug,$activity_slug)
     {
         //
         $user      = Auth::user();

@@ -46,12 +46,12 @@ class SessionFellow extends Controller
       ]);
     }
 
-    public function activity($module_slug,$slug,$id)
+    public function activity($program_slug,$module_slug,$session_slug,$activity_slug)
     {
       //
       $user      = Auth::user();
-      $session   = ModuleSession::where('slug',$slug)->first();
-      $activity  = Activity::where('id',$id)->first();
+      $session   = ModuleSession::where('slug',$session_slug)->first();
+      $activity  = Activity::where('slug',$activity_slug)->first();
       $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
       $forum    = $activity->forum;
       //forums
