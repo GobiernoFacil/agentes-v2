@@ -50,10 +50,12 @@ class ModulesFellow extends Controller
       $log->module_id = $module->id;
       $log->activity_id = null;
       $log->save();
+      $last_activity = Log::where('user_id',$user->id)->where('type','activity')->first();
       return view('fellow.modules.module-view')->with([
         "user"      => $user,
         "module"    => $module,
-        "today" =>$today
+        "today" =>$today,
+        "last_activity" => $last_activity
       ]);
     }
 }

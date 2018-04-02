@@ -56,6 +56,14 @@
     			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
     			<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
     		</span>
+				@if($last_activity)
+					@if($last_activity->activity_id == $activity->id)
+					<span class="col-sm-3">
+	    			<a class ="btn xs view" href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">Continuar </a>
+	    		</span>
+					@endif
+				@endif
+
     		@if($activity->type == "evaluation")
     		<span class="col-sm-3">
     			<p class="right"> Fecha límite:

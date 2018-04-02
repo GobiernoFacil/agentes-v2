@@ -70,6 +70,11 @@ class SessionFellow extends Controller
       $log->module_id = null;
       $log->activity_id = $activity->id;
       $log->save();
+      $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'activity']);
+      $log->session_id = null;
+      $log->module_id = null;
+      $log->activity_id = $activity->id;
+      $log->save();
       return view('fellow.modules.sessions.activity-view')->with([
         "user"      => $user,
         "session"   => $session,
