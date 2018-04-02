@@ -20,7 +20,7 @@
 				<!-- title-->
 				<h3>
 					@if($module->public)
-					<a href='{{ url("tablero/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
+					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
 					@else
 					{{$module->title}}
 					@endif

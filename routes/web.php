@@ -403,92 +403,95 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/perfil/save', 'Fellows@saveProfile');
     Route::get('tablero/perfil/archivos', 'Fellows@viewFiles');
     Route::get('tablero/perfil/archivos/descargar/{file_id}', 'Fellows@download');
-    /*@ModulesFellow Controller */
-    // Rutas módulos
-    Route::get('tablero/aprendizaje', 'ModulesFellow@index');
-    Route::get('tablero/aprendizaje/{slug}', 'ModulesFellow@view');
-    /*@SessionFellow Controller */
-    // Rutas módulos
-    Route::get('tablero/aprendizaje/{module_slug}/{slug}', 'SessionFellow@view');
-    Route::get('tablero/aprendizaje/{module_slug}/{slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
-    // Rutas actividades
-    Route::get('tablero/aprendizaje/{module_slug}/{slug}/{id}', 'SessionFellow@activity');
-    // Rutas diagnostico
-    Route::get('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
-    Route::post('tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
-    /*@FellowFiles */
-    //Rutas archivos
-    Route::get('tablero/archivos/{activity_slug}/agregar', 'FellowFiles@add');
-    Route::post('tablero/archivos/{activity_slug}/save', 'FellowFiles@save');
-	//Descargar archivo en actividades
-    Route::get('tablero/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
-    //ver pdf
-    Route::get('tablero/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
-    /*@Messages Controller */
-    // Rutas mensajes
-    Route::get('tablero/mensajes', 'Messages@index');
-    Route::get('tablero/mensajes-archivados', 'Messages@indexStorage');
-    Route::get('tablero/mensajes/agregar', 'Messages@add');
-    Route::get('tablero/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
-    Route::post('tablero/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
-    Route::post('tablero/mensajes/save', 'Messages@save');
-    Route::get('tablero/mensajes/ver/{conversation_id}', 'Messages@view');
-    Route::get('tablero/mensajes/conversacion/storage/{conversation_id}', 'Messages@storage');
-    /*@Forums Controller */
-    // Rutas foros
-    Route::get('tablero/foros', 'Forums@all');
-    //foro actividad
-    Route::get('tablero/foros/{program_slug}/{session_slug}/{forum_slug}', 'Forums@index');
-    Route::get('tablero/foros/{program_slug}/{session_slug}/pregunta/crear', 'Forums@addQuestion');
-    Route::post('tablero/foros/{program_slug}/{session_slug}/pregunta/save', 'Forums@saveQuestion');
-    Route::get('tablero/foros/{program_slug}/{session_slug}/pregunta/{question_slug}/ver', 'Forums@viewQuestion');
-    //foro estado
-    Route::get('tablero/foros/{program_slug}/{state_name}', 'Forums@stateForum');
-    Route::get('tablero/foros/{program_slug}/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
-    Route::get('tablero/foros/{program_slug}/pregunta/estado/{state_name}/crear', 'Forums@addStateQuestion');
+    Route::group(['middleware' => 'program'], function(){
+          /*@ModulesFellow Controller */
+          // Rutas módulos
+          Route::get('tablero/{program_slug}/aprendizaje', 'ModulesFellow@index');
+          Route::get('tablero/{program_slug}/aprendizaje/{module_slug}', 'ModulesFellow@view');
+          /*@SessionFellow Controller */
+          // Rutas módulos
+          Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}', 'SessionFellow@view');
+          Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
+          // Rutas actividades
+          Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/{activity_slug}', 'SessionFellow@activity');
+          // Rutas diagnostico
+          Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
+          Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
+          /*@FellowFiles */
+          //Rutas archivos
+          Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');
+          Route::post('tablero/{program_slug}/archivos/{activity_slug}/save', 'FellowFiles@save');
+      	//Descargar archivo en actividades
+          Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
+          //ver pdf
+          Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/ver-pdf/{id}', 'ActivitiesFiles@watchPdf');
+          /*@Messages Controller */
+          // Rutas mensajes
+          Route::get('tablero/{program_slug}/mensajes', 'Messages@index');
+          Route::get('tablero/{program_slug}/mensajes-archivados', 'Messages@indexStorage');
+          Route::get('tablero/{program_slug}/mensajes/agregar', 'Messages@add');
+          Route::get('tablero/{program_slug}/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
+          Route::post('tablero/{program_slug}/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');
+          Route::post('tablero/{program_slug}/mensajes/save', 'Messages@save');
+          Route::get('tablero/{program_slug}/mensajes/ver/{conversation_id}', 'Messages@view');
+          Route::get('tablero/{program_slug}/mensajes/conversacion/storage/{conversation_id}', 'Messages@storage');
+          /*@Forums Controller */
+          // Rutas foros
+          Route::get('tablero/{program_slug}/foros', 'Forums@all');
+          //foro actividad
+          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/{forum_slug}', 'Forums@index');
+          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/crear', 'Forums@addQuestion');
+          Route::post('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/save', 'Forums@saveQuestion');
+          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/{question_slug}/ver', 'Forums@viewQuestion');
+          //foro estado
+          Route::get('tablero/{program_slug}/foros/{state_name}', 'Forums@stateForum');
+          Route::get('tablero/{program_slug}/foros/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
+          Route::get('tablero/{program_slug}/foros/pregunta/estado/{state_name}/crear', 'Forums@addStateQuestion');
 
-    Route::get('tablero/foros/{program_slug}/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
-    Route::get('tablero/foros/{program_slug}/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
-    Route::post('tablero/foros/{program_slug}/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
-    //ver usuarios en foros
-    Route::get('tablero/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
-    Route::get('tablero/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
-    //fellow participaciones
-    Route::get('tablero/participaciones', 'Forums@participations');
+          Route::get('tablero/{program_slug}/foros/pregunta/{session_slug}/{question_slug}/ver', 'Forums@viewQuestion');
+          Route::get('tablero/{program_slug}/foros/pregunta/{question_slug}/mensajes/agregar', 'Forums@addMessage');
+          Route::post('tablero/{program_slug}/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
+          //ver usuarios en foros
+          Route::get('tablero/{program_slug}/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
+          Route::get('tablero/{program_slug}/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
+          //fellow participaciones
+          Route::get('tablero/{program_slug}/participaciones', 'Forums@participations');
 
-    /*@FellowEvaluations*/
-    // Rutas calificaciones y evaluaciones
-    Route::get('tablero/calificaciones', 'FellowEvaluations@index');
-    Route::get('tablero/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
-    Route::get('tablero/calificaciones/archivos/ver/{activity_slug}', 'FellowEvaluations@getFile');
-    Route::get('tablero/calificaciones/archivo/get/{score_id}', 'FellowEvaluations@download');
-    Route::get('tablero/calificaciones/metodologia', 'FellowEvaluations@methodology');
-    Route::get('tablero/evaluacion/{activity_slug}', 'FellowEvaluations@add');
-    Route::post('tablero/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
-    Route::get('tablero/evaluaciones', 'FellowEvaluations@indexEvaluations');
-    /*@FellowSurveys*/
-    // Rutas encuestas
-    Route::get('tablero/encuestas', 'FellowSurveys@index');
-    Route::get('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@welcome');
-    Route::get('tablero/encuestas/encuesta-satisfaccion/1', 'FellowSurveys@addSurvey');
-    Route::post('tablero/encuestas/encuesta-satisfaccion', 'FellowSurveys@saveSurvey');
-    Route::get('tablero/encuestas/facilitadores-modulos', 'FellowSurveys@indexModules');
-    Route::get('tablero/encuestas/facilitadores/{module_slug}/sesiones', 'FellowSurveys@indexSessions');
-    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}', 'FellowSurveys@indexFacilitator');
-    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}', 'FellowSurveys@surveyFacilitator');
-    Route::post('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}', 'FellowSurveys@saveFacilitatorSurvey');
-    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/w/{name}', 'FellowSurveys@welcomeFacilitator');
-    Route::get('tablero/encuestas/gracias', 'FellowSurveys@thanks');
-    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/{name}/gracias', 'FellowSurveys@thanksFacilitator');
-    Route::get('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@customFacilitator');
-    Route::post('tablero/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');
-    //// noticias
-    Route::get('tablero/noticias', 'NewsEventsFellow@index');
-    Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
-    /*@FellowDiagnostic*/
-    //// diagnostico
-    Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
-    Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
+          /*@FellowEvaluations*/
+          // Rutas calificaciones y evaluaciones
+          Route::get('tablero/{program_slug}/calificaciones', 'FellowEvaluations@index');
+          Route::get('tablero/{program_slug}/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
+          Route::get('tablero/{program_slug}/calificaciones/archivos/ver/{activity_slug}', 'FellowEvaluations@getFile');
+          Route::get('tablero/{program_slug}/calificaciones/archivo/get/{score_id}', 'FellowEvaluations@download');
+          Route::get('tablero/{program_slug}/calificaciones/metodologia', 'FellowEvaluations@methodology');
+          Route::get('tablero/{program_slug}/evaluacion/{activity_slug}', 'FellowEvaluations@add');
+          Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
+          Route::get('tablero/{program_slug}/evaluaciones', 'FellowEvaluations@indexEvaluations');
+          /*@FellowSurveys*/
+          // Rutas encuestas
+          Route::get('tablero/{program_slug}/encuestas', 'FellowSurveys@index');
+          Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@welcome');
+          Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion/1', 'FellowSurveys@addSurvey');
+          Route::post('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@saveSurvey');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-modulos', 'FellowSurveys@indexModules');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores/{module_slug}/sesiones', 'FellowSurveys@indexSessions');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}', 'FellowSurveys@indexFacilitator');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/{name}', 'FellowSurveys@surveyFacilitator');
+          Route::post('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/{name}', 'FellowSurveys@saveFacilitatorSurvey');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/w/{name}', 'FellowSurveys@welcomeFacilitator');
+          Route::get('tablero/{program_slug}/encuestas/gracias', 'FellowSurveys@thanks');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/{name}/gracias', 'FellowSurveys@thanksFacilitator');
+          Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@customFacilitator');
+          Route::post('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');
+          });
+      //// noticias
+      Route::get('tablero/noticias', 'NewsEventsFellow@index');
+      Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
+      /*@FellowDiagnostic*/
+      //// diagnostico
+      Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
+      Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
+
   });
 
   /* R U T A S  UNICAS DEL Facilitador
