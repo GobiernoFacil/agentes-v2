@@ -439,10 +439,10 @@ Route::group(['middleware' => ['auth']], function () {
           // Rutas foros
           Route::get('tablero/{program_slug}/foros', 'Forums@all');
           //foro actividad
-          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/{forum_slug}', 'Forums@index');
-          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/crear', 'Forums@addQuestion');
-          Route::post('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/save', 'Forums@saveQuestion');
-          Route::get('tablero/{program_slug}/foros/{program_slug}/{session_slug}/pregunta/{question_slug}/ver', 'Forums@viewQuestion');
+          Route::get('tablero/{program_slug}/foros/{session_slug}/{forum_slug}', 'Forums@index');
+          Route::get('tablero/{program_slug}/foros/{session_slug}/pregunta/crear', 'Forums@addQuestion');
+          Route::post('tablero/{program_slug}/foros/{session_slug}/pregunta/save', 'Forums@saveQuestion');
+          Route::get('tablero/{program_slug}/foros/{session_slug}/pregunta/{question_slug}/ver', 'Forums@viewQuestion');
           //foro estado
           Route::get('tablero/{program_slug}/foros/{state_name}', 'Forums@stateForum');
           Route::get('tablero/{program_slug}/foros/{state_name}/{question_slug}/ver', 'Forums@viewQuestion');
