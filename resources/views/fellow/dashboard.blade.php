@@ -63,7 +63,7 @@
 	<div class="row">
 		<div class = "col-sm-12">
 			<?php $counter = 0;?>
-			@foreach($program->modules as $module)
+			@foreach($program->fellow_modules as $module)
 			<?php ++$counter;?>
 				@include('fellow.dashboard_layout.dash_module')
 			@endforeach
