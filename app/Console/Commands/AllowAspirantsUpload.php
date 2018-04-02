@@ -39,7 +39,7 @@ class AllowAspirantsUpload extends Command
     public function handle()
     {
         //
-        $notices  = Notice::orderBy('start','asc')->get();
+        $notices  = Notice::where('public',1)->orderBy('start','asc')->get();
         $option   = $this->ask('Which action? '."\n"."1- Enabled"."\n"."2- Disabled");
         if(!(int)$option ||(int)$option > 2  ||(int)$option < 0 ){
           return $this->warn('Select a valid value' );
