@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\MassiveEmail;
 use App\Models\AspirantInstitution;
+use App\User;
 
 class Aspirant extends Model
 {
@@ -83,6 +84,12 @@ class Aspirant extends Model
   function verifyInstitution($institution,$notice){
     return AspirantInstitution::where('institution',$institution)->where('aspirant_id',$this->id)->where('notice_id',$notice->id)->first();
   }
+
+
+  function user(){
+    return User::where('email',$this->email)->first();
+  }
+
 
 
 
