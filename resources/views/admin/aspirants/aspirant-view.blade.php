@@ -122,8 +122,8 @@
 				<tr>
 					@if($eva->grade)
 					<td>{{($eva->institution)}}</td>
-					<td>{{number_format(($eva->experienceGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->essayGrade*10),2).'%'}}</td>
+					<td>{{number_format(($eva->experienceGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->videoGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->grade*10),2).'%'}}</td>
 					@endif
