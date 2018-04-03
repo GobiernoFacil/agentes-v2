@@ -41,10 +41,14 @@
 							<li><span>Valoración exposición de motivos:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
 							<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>
 							<li><span>Tu evaluación:</span> {{number_format(($aspirantEvaluation->grade*10),2).'%'}}</li>
+							@if($aspirant->verifyInstitution($user->institution,$notice))
 							<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+							@endif
 							@else
 								<li class="right"><span><strong>Sin evaluar</strong></span>
-								<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+								@if($aspirant->verifyInstitution($user->institution,$notice))
+									<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+								@endif
 						@endif
 					@else
 						<li class="right"><span><strong>No cuenta con comprobante de domicilio válido</strong></span>

@@ -66,7 +66,9 @@
 																	@endif
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
+																		@if($aspirant->verifyInstitution($user->institution,$notice))
 																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-aplicacion/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+																		@endif
 																	</td>
 													     </tr>
 													    @endforeach
