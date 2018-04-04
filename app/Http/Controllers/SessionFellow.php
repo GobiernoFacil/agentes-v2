@@ -95,7 +95,7 @@ class SessionFellow extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function viewFacilitator($module_slug,$slug,$id)
+    public function viewFacilitator($program_slug,$module_slug,$slug,$id)
     {
       //
       $user    = Auth::user();

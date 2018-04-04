@@ -18,7 +18,7 @@
 					<!-- <a href ="{{ url('dashboard/requerimientos/eliminar' . $facilitator->id) }}"  id ="{{$facilitator->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>-->
 					@endif
 					@if($user->type == "fellow")
-					<a href='{{ url("tablero/aprendizaje/{$session->module->slug}/{$session->slug}/ver/facilitador/{$facilitator->user->id}") }}' class="btn xs view">Ver</a>
+					<a href='{{ url("tablero/{$session->module->program->slug}/aprendizaje/{$session->module->slug}/{$session->slug}/ver/facilitador/{$facilitator->user->id}") }}' class="btn xs view">Ver</a>
 					@endif
 					@if($user->type == "facilitator")
 						@if($user->id !== $facilitator->user->id)

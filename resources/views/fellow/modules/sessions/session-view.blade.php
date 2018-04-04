@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-12">
-		<h4>Información de sesión del <a href="{{ url('tablero/aprendizaje/'.$session->module->slug) }}" class="link">módulo: {{$session->module->title}}</a></h4>
+		<h4>Información de sesión del <a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'.$session->module->slug) }}" class="link">módulo: {{$session->module->title}}</a></h4>
 	</div>
 	<div class="col-sm-12 center">
 		<h4 class="center"></h4>
@@ -20,6 +20,8 @@
 </div>
 
 <!-- header -->
+<?php
+/*
 <div class="row h_tag">
 	<div class="col-sm-3 center">
 		<h4><b class="icon_h time"></b>Duración</h4>
@@ -42,13 +44,14 @@
 	</div>
 </div>
 
+
 <!--- objetivos-->
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
 			<h2 class="title">Objetivo</h2>
 			<p>{{$session->objective}}</p>
-			
+
 				@if($session->topics->count() > 0)
 				<h2 class="title">Objetivos particulares</h2>
 					@include('admin.modules.sessions.sessions-topics-list')
@@ -56,6 +59,7 @@
 		</div>
 	</div>
 </div>
+*/?>
 
  <!--- facilitadores--->
  <div class="box">
@@ -64,7 +68,7 @@
 		<div class="col-sm-9">
 			<h2 class="title">Facilitadores de la sesión</h2>
 		</div>
-		
+
 		<div class="col-sm-12">
 			<div class="divider"></div>
 		</div>
@@ -88,7 +92,7 @@
   		<div class="col-sm-9">
   			<h2 class="title">Actividades</h2>
   		</div>
-		
+
 		<div class="col-sm-12">
 			<div class="divider"></div>
 		</div>
