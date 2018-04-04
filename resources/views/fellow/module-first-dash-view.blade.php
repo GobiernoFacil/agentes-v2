@@ -24,7 +24,8 @@
   <div class="footnote">
     <div class="row">
       <div class="col-sm-2">
-        <p><b class="icon_h time"></b>{{$module->duration_hours() < 1 ? $module->duration_minutes().' min.' : $module->duration_hours().' h'}} </p>
+
+        <p><b class="icon_h time"></b>{{$module->duration_hours() < 1 ? str_replace(".00", "", (string)number_format($module->duration_minutes(), 2, ".", "")).' min.' : str_replace(".00", "", (string)number_format($module->duration_hours(), 2, ".", "")).' h'}} </p>
       </div>
       <div class="col-sm-2">
         <p><b class="icon_h modalidad"></b>{{$module->modality}}</p>
