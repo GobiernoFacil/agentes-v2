@@ -57,7 +57,7 @@ class Fellows extends Controller
       $activity       = null;
       //última actividad
       if($program){
-        $user_log       = $user->log()->where('program_id',$program->id)->orderBy('created_at','desc')->first();
+        $user_log       = $user->log()->where('type','view')->where('program_id',$program->id)->orderBy('created_at','desc')->first();
       }else{
         $user_log   = null;
       }

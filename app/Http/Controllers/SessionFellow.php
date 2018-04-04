@@ -38,6 +38,7 @@ class SessionFellow extends Controller
       $log->session_id = $session->id;
       $log->module_id = null;
       $log->activity_id = null;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.modules.sessions.session-view')->with([
         "user"      => $user,
@@ -69,11 +70,13 @@ class SessionFellow extends Controller
       $log->session_id = null;
       $log->module_id = null;
       $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
       $log->save();
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'activity']);
       $log->session_id = null;
       $log->module_id = null;
       $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.modules.sessions.activity-view')->with([
         "user"      => $user,
@@ -120,6 +123,7 @@ class SessionFellow extends Controller
       $log->session_id = null;
       $log->module_id = null;
       $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.diagnostic.add-diagnostic')->with([
         "user"      => $user,

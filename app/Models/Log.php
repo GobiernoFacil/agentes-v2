@@ -8,7 +8,7 @@ class Log extends Model
 {
     //
     protected $fillable = [
-        'session_id', 'user_id','module_id','type','activity_id'
+        'session_id', 'user_id','module_id','type','activity_id','program_id'
     ];
 
     function fellow(){
