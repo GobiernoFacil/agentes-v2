@@ -76,45 +76,81 @@ class AssignAspirants extends Command
         if($notice){
           $aspirants = $notice->aspirants_approved_proof()->get();
           $users_in  = User::select('institution')->where('type','admin')->where('enabled',1)->distinct('institution')->orderBy('institution','asc')->get();
+          AspirantInstitution::where('notice_id',$notice->id)->delete();
           if($aspirants->count()>0 && $users_in->count()>0){
             $max_number_to_assing = ceil(($aspirants->count()*3)/$users_in->count());
-            $institutions = $users_in->pluck('institution')->toArray();
-            $aspirants_id = $aspirants->pluck('id')->toArray();
-            //ordena aleatoriamente a los aspirantes e instituciones
-            shuffle($institutions);
+            $institutions_t = $users_in->pluck('institution')->toArray();
+            $aspirants_id   = $aspirants->pluck('id')->toArray();
+            //ordena aleatoriamente a los aspirantes
             shuffle($aspirants_id);
-            $single  = array_rand($institutions, 1);
-            if(AspirantInstitution::where('institution',$institutions[$single])->where('notice_id',$notice->id)->count() <=0){
-                for ($i=0; $i < sizeof($aspirants_id); $i++) {
+            for ($i=0; $i < sizeof($aspirants_id); $i++) {
                     $control = 0;
                     //just in case
                     $max_number_of_iterations = 0;
+                    $institutions = $institutions_t;
                     while($control < 3){
-                      $single  = array_rand($institutions, 1);
-                      $check = AspirantInstitution::where('institution',$institutions[$single])->where('aspirant_id',$aspirants_id[$i])->where('notice_id',$notice->id)->first();
-                      $count =  AspirantInstitution::where('institution',$institutions[$single])->where('notice_id',$notice->id)->count();
-                      if(!$check && $count < $max_number_to_assing){
-                        AspirantInstitution::firstOrCreate(['aspirant_id'=>$aspirants_id[$i],'notice_id'=>$notice->id,'institution'=>$institutions[$single]]);
-                        $control++;
+                      if(sizeof($institutions) == 0){
+                        break;
+                      }
+                      $key  = $this->average($institutions,$notice);
+                      if($key){
+                          $check = AspirantInstitution::where('institution',$key)->where('aspirant_id',$aspirants_id[$i])->where('notice_id',$notice->id)->first();
+                          $count =  AspirantInstitution::where('institution',$key)->where('notice_id',$notice->id)->count();
+                          if(!$check && $count < $max_number_to_assing){
+                            AspirantInstitution::firstOrCreate(['aspirant_id'=>$aspirants_id[$i],'notice_id'=>$notice->id,'institution'=>$key]);
+                            if (($key_t = array_search($key, $institutions)) !== false) {
+                                unset($institutions[$key_t]);
+                            }
+                            $control++;
+                          }else{
+                            if (($key_t = array_search($key, $institutions)) !== false) {
+                                unset($institutions[$key_t]);
+                            }
+                          }
+                      }else{
+                        break;
                       }
 
-                      if($max_number_of_iterations == ($max_number_to_assing*($aspirants->count()*9))){
+                      if($max_number_of_iterations == ($max_number_to_assing*($aspirants->count()))){
                         break;
                       }
                       $max_number_of_iterations++;
                     }
-                }
               }
+
 
             //debug on server delete after first notice
             $this->info('Total number of aspirants to assign: '.$aspirants->count());
             $this->info('Max number to assign: '.$max_number_to_assing);
-            foreach ($institutions as $institution) {
+            $total = 0;
+            foreach ($institutions_t as $institution) {
               $count = AspirantInstitution::where('institution',$institution)->where('notice_id',$notice->id)->count();
               $this->info('Institution: '.$institution.' assigned: '.$count);
+              $total = $total +$count;
             }
+
+            $this->info('Total assigned: '. AspirantInstitution::where('notice_id',$notice->id)->count());
+            $this->info('Total to assign: '.$aspirants->count()*3);
 
           }
         }
+
+    }
+
+    function average($institutions, $notice){
+      if(sizeof($institutions)>0){
+        $institutions = array_values($institutions);
+        $temp = [];
+        $count = 0;
+        for ($k=0; $k < sizeof($institutions) ; $k++) {
+          $temp[$institutions[$k]] =  AspirantInstitution::where('institution',$institutions[$k])->where('notice_id',$notice->id)->count();
+        }
+       }
+       $key = array_keys($temp, min($temp));
+       if($key){
+         return $key[0];
+       }else{
+         return false;
+       }
     }
 }

@@ -115,7 +115,7 @@ class Notice extends Model
 
     function aspirants_per_institution_to_evaluate(){
       $user      = Auth::user();
-      $aspirant_already   = $this->aspirants_app_already_evaluated()->pluck('id')->toArray();
+      $aspirant_already   = $this->aspirants_app_already_evaluated_by_institution($user->institution)->pluck('id')->toArray();
       $aspirants = $this->aspirant_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
     }
@@ -123,6 +123,20 @@ class Notice extends Model
     function aspirants_app_already_evaluated(){
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
       $aspirants = AspirantEvaluation::whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
+      $im_aspi   = implode(',', $aspirants);
+      if($im_aspi != ''){
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+      }
+
+
+    }
+
+
+    function aspirants_app_already_evaluated_by_institution($institution){
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantEvaluation::where('institution',$institution)->whereNotNull('grade')->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
       if($im_aspi != ''){
         return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));

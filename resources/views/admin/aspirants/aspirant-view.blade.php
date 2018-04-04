@@ -41,9 +41,14 @@
 							<li><span>Valoración exposición de motivos:</span> {{($aspirantEvaluation->essayGrade*10).'%'}}</li>
 							<li><span>Valoración video:</span> {{($aspirantEvaluation->videoGrade*10).'%'}}</li>
 							<li><span>Tu evaluación:</span> {{number_format(($aspirantEvaluation->grade*10),2).'%'}}</li>
+							@if($aspirant->verifyInstitution($user->institution,$notice))
+							<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+							@endif
 							@else
 								<li class="right"><span><strong>Sin evaluar</strong></span>
-								<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+								@if($aspirant->verifyInstitution($user->institution,$notice))
+									<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+								@endif
 						@endif
 					@else
 						<li class="right"><span><strong>No cuenta con comprobante de domicilio válido</strong></span>
@@ -117,8 +122,8 @@
 				<tr>
 					@if($eva->grade)
 					<td>{{($eva->institution)}}</td>
-					<td>{{number_format(($eva->experienceGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->essayGrade*10),2).'%'}}</td>
+					<td>{{number_format(($eva->experienceGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->videoGrade*10),2).'%'}}</td>
 					<td>{{number_format(($eva->grade*10),2).'%'}}</td>
 					@endif
