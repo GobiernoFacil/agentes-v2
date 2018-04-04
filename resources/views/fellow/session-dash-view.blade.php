@@ -6,7 +6,7 @@
   </div>
   <div class="col-sm-8">
     <h3>Sesión {{$session->order}}</h3>
-    <h2><a href='{{url("tablero/aprendizaje/{$session->module->slug}/$session->slug")}}'>{{$session->name}}</a></h2>
+    <h2><a href='{{url("tablero/{$program->slug}/aprendizaje/{$session->module->slug}/$session->slug")}}'>{{$session->name}}</a></h2>
     <div class="divider"></div>
       <div class="row">
         <div class="col-sm-9">
@@ -19,7 +19,7 @@
     </div>
     <!-- ver sesión-->
     <div class="col-sm-3">
-      <a class="btn view block sessions_l" href='{{url("tablero/aprendizaje/{$session->module->slug}/$session->slug")}}'>Ver sesión</a>
+      <a class="btn view block sessions_l" href='{{url("tablero/{$program->slug}/aprendizaje/{$session->module->slug}/$session->slug")}}'>Ver sesión</a>
     </div>
             <!-- footnote-->
     <div class="footnote">
@@ -46,7 +46,7 @@
           	</span>
           	<span class="col-sm-10">
 
-            {{$facilitator->user->name}} -  {{$facilitator->user->institution}} 
+            {{$facilitator->user->name}} -  {{$facilitator->user->institution}}
           	</span>
           	</li>
           @endforeach

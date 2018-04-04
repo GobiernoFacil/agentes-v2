@@ -7,11 +7,11 @@
 		<!--título-->
 		<div class="col-sm-7">
 			<h2><a href='{{url("tablero/aprendizaje/$module_last->slug")}}'>{{$module_last->title}}</a></h2>
-			 <p>Duración: {{$module_last->number_hours}} hora </p>
+			 <p>Duración: {{$module->duration_hours() < 1 ? str_replace(".00", "", (string)number_format($module->duration_minutes(), 2, ".", "")).' min.' : str_replace(".00", "", (string)number_format($module->duration_hours(), 2, ".", "")).' h'}}  </p>
 		</div>
 		<!-- ir a actividad-->
 		<div class="col-sm-3">
 		 <a class="btn view block sessions_l" href='{{url("tablero/aprendizaje/$module_last->slug")}}'>Continuar última actividad</a>
-		</div>	
+		</div>
 	</div>
 </div>
