@@ -10,8 +10,14 @@
 			 <p>Duración: {{$module->duration_hours() < 1 ? str_replace(".00", "", (string)number_format($module->duration_minutes(), 2, ".", "")).' min.' : str_replace(".00", "", (string)number_format($module->duration_hours(), 2, ".", "")).' h'}}  </p>
 		</div>
 		<!-- ir a actividad-->
+		@if($last_activity)
 		<div class="col-sm-3">
-		 <a class="btn view block sessions_l" href='{{url("tablero/aprendizaje/$module_last->slug")}}'>Continuar última actividad</a>
+		 <a class="btn view block sessions_l" href='{{url("tablero/{$program->slug}/aprendizaje/$module_last->slug/{$last_activity->activity->session->slug}/{$last_activity->activity->slug}")}}'>Continuar última actividad</a>
 		</div>
+		@else
+		<div class="col-sm-3">
+		 <a class="btn view block sessions_l" href='{{url("tablero/{$program->slug}/aprendizaje/$module_last->slug")}}'>Ver</a>
+		</div>
+		@endif
 	</div>
 </div>

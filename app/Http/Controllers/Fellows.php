@@ -107,6 +107,9 @@ class Fellows extends Controller
       $con  = new Conversation();
       $noMessages = $con->get_no_messages($user->id);
 
+      //última actividad
+      $last_activity = Log::where('user_id',$user->id)->where('type','activity')->first();
+
     //////////----------------------------------------------------------- ///////////////////////////////
 
 
@@ -124,7 +127,8 @@ class Fellows extends Controller
         "noForum"       => $noForum,
         'retro'         => $retroFiles,
         'noMessages'    => $noMessages,
-        "program"       => $program
+        "program"       => $program,
+        "last_activity" => $last_activity
       ]);
     }
 

@@ -14,4 +14,8 @@ class Log extends Model
     function fellow(){
       return $this->belongsTo("App\User");
     }
+
+    function activity(){
+      return $this->belongsTo("App\Models\Activity",'activity_id');
+    }
 }
