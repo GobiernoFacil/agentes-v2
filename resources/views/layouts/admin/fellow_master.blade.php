@@ -28,12 +28,12 @@
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<link rel="icon" type="image/png" sizes="32x32" href="{{url('img/favicon_admin.png')}}" />
-	
+
 
 	<!--css-custom-->
-	
+
 	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
 	<link rel="stylesheet" href="{{url('css/fellow_styles.css')}}">
 
@@ -66,6 +66,7 @@
 	else if($user->type == "fellow")
 	{
 		$linkDash = "tablero";
+		$program  = $user->actual_program();
 	}
 	else if($user->type == "facilitator")
 	{
@@ -82,11 +83,11 @@
 ?>
 </head>
 <body class="{{empty($body_class) ? "" : $body_class}}">
-	<div class="apertus_nav">	
+	<div class="apertus_nav">
 		<!--header-->
-		@include('layouts.admin.fellow_header')
+		@include('layouts.admin.a_header')
 	</div>
-	
+
 	<div class="apertus_content">
 		@if ($__env->yieldContent('breadcrumb'))
 		<div class="breadcrumb">
@@ -97,22 +98,22 @@
 				</div>
 		</div>
 		@endif
-		
+
 		<!--profile-->
 		@include('layouts.admin.a_profile_logout')
-		
+
 		<section>
 			<!--content-->
 			<div class="container">
 			@yield('content')
 			</div>
 		</section>
-		
+
 		<!--footer-->
 		@include('layouts.admin.a_footer')
 	</div>
 
 	<!--js content -->
-	@yield('js-content')	
+	@yield('js-content')
 </body>
 </html>
