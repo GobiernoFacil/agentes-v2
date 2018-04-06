@@ -51,9 +51,20 @@ class SessionFellow extends Controller
     {
       //
       $user      = Auth::user();
-      $session   = ModuleSession::where('slug',$session_slug)->first();
-      $activity  = Activity::where('slug',$activity_slug)->first();
+      $session   = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
       $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
+      $pagination = $activity->get_pagination();
+      if($prev_ac = Activity::where('id',$pagination[0])->first()){
+        $prev = $prev_ac->slug;
+      }else{
+        $prev = false;
+      }
+      if($next_ac = Activity::where('id',$pagination[1])->first()){
+        $next = $next_ac->slug;
+      }else{
+        $next = false;
+      }
       $forum    = $activity->forum;
       //forums
       if($activity->forum){
@@ -84,9 +95,11 @@ class SessionFellow extends Controller
         "activity"  => $activity,
         'files'     => $files,
         "score"     => $score,
-        "forums"	=> $forums,
-        "forum"		=> $forum,
-      ]);
+        "forums"	  => $forums,
+        "forum"		  => $forum,
+        "prev"      => $prev,
+        "next"      => $next
+       ]);
     }
 
     /**
