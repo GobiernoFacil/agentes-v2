@@ -208,32 +208,7 @@ class Forums extends Controller
         return redirect("tablero/$program->slug/foros/{$conversation->forum->slug}/ver-pregunta/$conversation->slug")->with('message','Mensaje creado correctamente');
       }
 
-      /**
-       * foro por estado, general o soporte
-       *
-       * @param  \Illuminate\Http\Request  $request
-       * @return \Illuminate\Http\Response
-       */
-      public function stateForum($program_slug,$slug)
-      {
-        $user      = Auth::user();
-        $program   = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
-        $forum     = Forum::where('program_id',$program->id)->where('slug',$slug)->firstOrFail();
-        if($forum->type==='state'){
-            if($user->fellowData->state != $forum->state_name){
-              return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
-            }
-        }elseif($forum->type==='activity'){
-              return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
-        }
-        $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
-         return view('fellow.modules.sessions.forums.forums-list')->with([
-            "user"      => $user,
-            "forum"    => $forum,
-            "forums"    => $forums,
-            "session"   => null
-          ]);
-      }
+
 
       protected function send_to($program_slug,$forum,$conversation,$type){
           if(!$forum->state_name && $type!="create"){
