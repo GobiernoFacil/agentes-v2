@@ -37,6 +37,7 @@ class Forums extends Controller
       $user       = Auth::user();
       $program     = $user->actual_program();
       $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
+
       return view('fellow.modules.sessions.forums.forums-all-list')->with([
         "user"      => $user,
         "forums"    => $forums,
@@ -57,9 +58,8 @@ class Forums extends Controller
       $program  = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
       $forum    = Forum::where('slug',$forum_slug)->firstOrFail();
       if($forum->type === 'activity'){
-        $today = date("Y-m-d");
         $session  = $forum->session;
-        $session  = $program->get_all_sessions()->where('slug',$session->slug)->where('start','<=',$today)->firstOrFail();
+        $session  = $program->get_all_sessions()->where('slug',$session->slug)->firstOrFail();
 
       }elseif($forum->type === 'state'){
         if($user->fellowData->state != $forum->state_name){
@@ -334,12 +334,14 @@ class Forums extends Controller
       {
         //
         $user   = Auth::user();
+        $program = $user->actual_program();
         $today  = date('Y-m-d');
-        $modules = Module::orderBy('start','asc')->where('public',1)->paginate($this->pageSize);
+        $modules = $program->fellow_modules()->paginate();
         return view('fellow.modules.sessions.forums.participation-view')->with([
           "user"      => $user,
           'modules'   =>$modules,
-          'today'     =>$today
+          'today'     =>$today,
+          "program"   =>$program
         ]);
       }
 

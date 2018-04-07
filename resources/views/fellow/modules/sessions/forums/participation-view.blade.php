@@ -40,7 +40,7 @@
 						</div>
 						<!--- título-->
 						<div class="col-sm-4 col-sm-offset-1">
-            			  <p><a href='{{url("tablero/foros/{$session->slug}/{$forum->slug}")}}'class="link lists_ev">{{$forum->topic}}</a></p>
+            			  <p><a href='{{url("tablero/$program->slug/foros/$forum->slug")}}'class="link lists_ev">{{$forum->topic}}</a></p>
             			</div>
             			<!--fecha-->
             			<div class="col-sm-2 col-sm-offset-2">

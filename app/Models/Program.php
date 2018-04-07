@@ -66,7 +66,7 @@ class Program extends Model
     function fellow_forums($user){
 
       $today = date("Y-m-d");
-      $sessions_id = $this->get_all_fellow_sessions()->where('start','<=',$today)->pluck('id');
+      $sessions_id = $this->get_all_fellow_sessions()->pluck('id')->toArray();
       $forums = $this->forums()->pluck('id')->toArray();
       return Forum::where('state_name',$user->fellowData->state)->orWhere(function($query)use($sessions_id){
         $query->whereIn('session_id',$sessions_id);
