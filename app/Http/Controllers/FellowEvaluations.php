@@ -29,10 +29,11 @@ class FellowEvaluations extends Controller
     public function index()
     {
       $user     = Auth::user();
-      $modules  = Module::orderBy('start','asc')->get();
+      $program  = $user->actual_program();
+      $modules  = $program->fellow_modules;
       $fellowScores = FellowScore::where('user_id',$user->id)->get();
       $fileScores = FilesEvaluation::where('fellow_id',$user->id)->get();
-      $total = Activity::where('type','evaluation')->count();
+      $total = $program->get_all_fellow_eva_activities()->count();
       $score  = 0;
       foreach ($fellowScores as $fscore) {
           $score = $score + $fscore->score;
@@ -50,13 +51,14 @@ class FellowEvaluations extends Controller
        [
          'user'=>$user,
          'modules' =>$modules,
-         'average' => $average
+         'average' => $average,
+         "program" => $program
        ]
       );
 
     }
-	
-	
+
+
 	 /**
      * Muestra metodología de calificaciones
      *
