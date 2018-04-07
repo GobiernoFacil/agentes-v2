@@ -127,6 +127,9 @@ class AdminForums extends Controller
       $session = ModuleSession::where('id',$request->session_id)->first();
       $forum->module_id = $session->module->id;
     }
+    if($request->type ==='state'){
+      $forum->state_name = $request->state;
+    }
     $forum->save();
     //forum log
     $log = new ForumLog();

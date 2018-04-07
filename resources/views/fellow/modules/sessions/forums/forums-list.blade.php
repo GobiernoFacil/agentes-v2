@@ -13,27 +13,19 @@
 	</div>
 	<!-- agregar pregunta-->
 	<div class="col-sm-3 center">
-		@if($session)
-		<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
-		@else
-			@if($forum->topic ==='Foro General')
-			<a href='{{ url("tablero/foros/pregunta/estado/{$forum->slug}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
-			@else
-			<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
-			@endif
-		@endif
+		<a href='{{ url("tablero/{$program->slug}/foros/{$forum->slug}/agregar-pregunta") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 	</div>
 	<!-- descripción-->
 	<div class="col-sm-12 forum_list">
 		<div class="divider top"></div>
-		@if($session)
+		@if($forum->type === 'activity')
 		<p><span class="type module_session">{{$forum->session->module->title}} / {{$forum->session->name}}</span></p>
-		@else
-			@if($forum->topic ==='Foro General')
+		@elseif($forum->type ==='general')
 			<p><span class="type general">General</span></p>
-			@else
+		@elseif($forum->type ==='state')
 			<p><span class="type state">Estado</span></p>
-			@endif
+		@else
+			<p><span class="type state">Soporte</span></p>
 		@endif
 		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		<div class="divider top"></div>
@@ -62,18 +54,7 @@
 						@endif
 					</div>
 					<div class="col-sm-9">
-						@if($session)
-						<h2> <a href="{{ url('tablero/foros/pregunta/'.$session->slug.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
-						@else
-								@if($forum->topic ==='Foro General')
-									<h2><a href="{{ url('tablero/foros/'.$forum->slug.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
-								@else
-									<h2><a href="{{ url('tablero/foros/'.$user->FellowData->state.'/'.$conversation->slug.'/ver') }}">{{$conversation->topic}}</a></h2>
-								@endif
-						@endif
-
-
-
+						<h2> <a href='{{ url("tablero/$program->slug/foros/$forum->slug/ver-pregunta/$conversation->slug") }}'>{{$conversation->topic}}</a></h2>
 						<!--fellow data -->
 						<?php
 						if($conversation->user->type=== 'facilitator'){
@@ -84,7 +65,7 @@
 						?>
 						@if($conversation->user->fellowData)
 						<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/{$conversation->user->fellowData->surname}/{$conversation->user->fellowData->lastname}")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$conversation->user->name}/{$conversation->user->fellowData->surname}/{$conversation->user->fellowData->lastname}")}}'>
 							Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}
 						  </a>
 							<span>{{$conversation->created_at->diffForHumans()}}</span>
@@ -92,7 +73,7 @@
 						@elseif($conversation->user->facilitatorData)
 						<!--facilitator data -->
 						<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
 							Por {{$conversation->user->name." ".$conversation->user->facilitatorData->surname." ".$conversation->user->facilitatorData->lastname}}
 						  </a>
 							<span>{{$conversation->created_at->diffForHumans()}}</span>
@@ -100,7 +81,7 @@
 						@else
 						<!--super user data -->
 						<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$conversation->user->name}/$type")}}'>
 							Por {{$conversation->user->name}}
 						  </a>
 							<span>{{$conversation->created_at->diffForHumans()}}</span>
@@ -121,11 +102,7 @@
 			<div class="divider b"></div>
 		</div>
 		<div class="col-sm-8 col-sm-offset-2 center">
-			@if($session)
-			<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
-			@else
-			<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema [<strong>+</strong>]</a>
-			@endif
+			<a href='{{ url("tablero/{$program->slug}/foros/{$forum->slug}/agregar-pregunta") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		</div>
 	</div>
 </div>
@@ -136,15 +113,7 @@
 			<h2>Sin preguntas o temas en el foro</h2>
 		</div>
 		<div class="col-sm-6 col-sm-offset-3">
-			@if($session)
-				<a href='{{ url("tablero/foros/{$session->slug}/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
-			@else
-				@if($forum->topic ==='Foro General')
-					<a href='{{ url("tablero/foros/pregunta/estado/{$forum->slug}/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
-				@else
-					<a href='{{ url("tablero/foros/pregunta/estado/{$user->FellowData->state}/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
-				@endif
-			@endif
+				<a href='{{ url("tablero/{$program->slug}/foros/{$forum->slug}/agregar-pregunta") }}' class="btn gde download">Agregar Pregunta o Tema al foro[<strong>+</strong>]</a>
   		</div>
 	</div>
 </div>

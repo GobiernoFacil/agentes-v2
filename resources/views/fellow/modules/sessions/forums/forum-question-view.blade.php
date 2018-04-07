@@ -10,14 +10,14 @@
 	<!--foro-->
 	<div class="col-sm-12 forum_list">
 		<h3>{{$question->forum->topic}}</h3>
-		@if($question->forum->session)
+		@if($question->forum->type === 'activity')
 		<p><span class="type module_session">{{$question->forum->session->module->title}} / {{$question->forum->session->name}}</span></p>
-		@else
-			@if($question->forum->slug ==='foro-general')
+		@elseif($question->forum->type ==='general')
 			<p><span class="type general">General</span></p>
-			@else
+		@elseif($question->forum->type ==='state')
 			<p><span class="type state">Estado</span></p>
-			@endif
+		@else
+			<p><span class="type state">Soporte Técnico</span></p>
 		@endif
 		<div class="divider b"></div>
 	</div>
@@ -57,7 +57,7 @@
   		</div>
   		<!--enlace a agregar respuesta-->
 	  	<div class="col-sm-3 center">
-	  		<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+	  		<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
 	  	</div>
 	  	<div class="col-sm-12">
 	  		<div class="divider b"></div>
@@ -85,21 +85,21 @@
 	  				<p>{{$message->message}}</p>
 						@if($message->user->type==='fellow')
 						<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/{$message->user->fellowData->surname}/{$message->user->fellowData->lastname}")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/{$message->user->fellowData->surname}/{$message->user->fellowData->lastname}")}}'>
 								Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}}
 						  </a>
 							<span>{{$message->created_at->diffForHumans()}}</span>
 						</p>
 						@elseif($message->user->type==='facilitator')
 						<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/$type")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/$type")}}'>
 							  Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}}
 						  </a>
 							<span>{{$message->created_at->diffForHumans()}}</span>
 						</p>
 						@else
 	  				<p class="author">
-							<a href='{{url("tablero/foros/perfil/ver/{$message->user->name}/$type")}}'>
+							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/$type")}}'>
 								Por {{$message->user->name}}
 							</a>
 							<span>{{$message->created_at->diffForHumans()}}</span></p>
@@ -114,14 +114,14 @@
     </div>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 center">
-        <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+        <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
       </div>
     </div>
   @else
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 center">
       <h2>No existen respuestas.</h2>
-      <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+      <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
     </div>
   </div>
   @endif

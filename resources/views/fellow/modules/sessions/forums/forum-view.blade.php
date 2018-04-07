@@ -11,7 +11,7 @@
     <h1>{{$forum->topic}} </h1>
   </div>
   <div class="col-sm-3 center">
-    <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+    <a href='{{ url("tablero/$program->slug/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
   </div>
 </div>
 <div class="box">

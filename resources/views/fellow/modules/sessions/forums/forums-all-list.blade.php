@@ -34,18 +34,15 @@
 			<h3 class="count_messages">{{ $forum->forum_conversations->count()}}</h3>
 		</div>
 		<div class="col-sm-11 col-xs-10">
+			<h2><a href='{{ url("tablero/$program->slug/foros/$forum->slug") }}'>{{$forum->topic}}</a></h2>
 			@if($forum->type === 'activity')
-			<h2><a href="{{ url('tablero/foros/'.$program->slug.'/'.$forum->session->slug.'/'.$forum->slug) }}">{{$forum->topic}}</a></h2>
 			<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@elseif($forum->type ==='general')
-					<h2><a href='{{url("tablero/foros/$program->slug/{$forum->slug}")}}'>{{$forum->topic}}</a></h2>
 					<p><span class="type general">General</span></p>
 			@elseif($forum->type ==='state')
-				<h2><a href='{{url("tablero/foros/$program->slug/{$forum->slug}")}}'>{{$forum->topic}}</a></h2>
 				<p><span class="type state">Estado</span></p>
 		  @else
-				<h2><a href='{{url("tablero/foros/$program->slug/{$forum->slug}")}}'>{{$forum->topic}}</a></h2>
 				<p><span class="type general">Soporte Técnico</span></p>
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>

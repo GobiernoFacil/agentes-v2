@@ -1,5 +1,5 @@
 @extends('layouts.admin.a_master')
-@section('title',  'Agregar mensaje a ' . $forum->topic)
+@section('title',  'Agregar mensaje a pregunta' . $question->topic)
 @section('description', 'Agregar mensaje a foro')
 @section('body_class', 'fellow foros')
 @section('breadcrumb_type', 'forum add answer')
@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <h1>Agregar respuesta a pregunta o tema <strong>{{$forum->topic}}</strong></h1>
+    <h1>Agregar respuesta a pregunta o tema <strong>{{$question->topic}}</strong></h1>
   </div>
 </div>
 <div class="box">

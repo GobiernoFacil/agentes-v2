@@ -51,104 +51,48 @@ class Forums extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($program_slug,$session_slug,$forum_slug)
+    public function index($program_slug,$forum_slug)
     {
       $user     = Auth::user();
       $program  = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
-      $today = date("Y-m-d");
-      $session  = $program->get_all_sessions()->where('slug',$session_slug)->where('start','<=',$today)->firstOrFail();
       $forum    = Forum::where('slug',$forum_slug)->firstOrFail();
+      if($forum->type === 'activity'){
+        $today = date("Y-m-d");
+        $session  = $forum->session;
+        $session  = $program->get_all_sessions()->where('slug',$session->slug)->where('start','<=',$today)->firstOrFail();
+
+      }elseif($forum->type === 'state'){
+        if($user->fellowData->state != $forum->state_name){
+          return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+        }
+
+      }
       $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.modules.sessions.forums.forums-list')->with([
         "user"      => $user,
         "forums" => $forums,
         "forum"  =>$forum,
-        "session" => $session,
         "program" => $program
       ]);
 
     }
 
-    /**
-    * Muestra foro
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function view($program_slug,$session_slug,$forum_slug)
-    {
-      //
-      $user   = Auth::user();
-      $forum  = Forum::where('slug',$forum_slug)->firstOrFail();
-      return view('fellow.modules.sessions.forums.forum-view')->with([
-        "user"      => $user,
-        "forum"    => $forum
-      ]);
-    }
-
-
-    /**
-     * Agregar foro
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function add($program_slug,$module_slug,$session_slug)
-    {
-        //
-        $user      = Auth::user();
-        $session   = ModuleSession::where('slug',$session_slug)->firstOrFail();
-        return view('fellow.modules.sessions.forums.forums-add')->with([
-          "user"      => $user,
-          "session" => $session
-        ]);
-    }
-
-    /**
-     * Guarda nuevo foro
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function save(SaveForum $request)
-    {
-      $user      = Auth::user();
-      $session   = ModuleSession::where('slug',$request->session_slug)->firstOrFail();
-      $forum     = new Forum($request->only(['topic','description']));
-      $forum->user_id = $user->id;
-      $forum->session_id = $session->id;
-      $forum->slug    = str_slug($request->topic);
-      $forum->save();
-      return redirect("tablero/foros/{$session->module->slug}/{$session->slug}")->with('message','Foro creado correctamente');
-    }
 
     /**
      * Agregar pregunta a foro
      *
      * @return \Illuminate\Http\Response
      */
-    public function addQuestion($program_slug,$session_slug)
+    public function addQuestion($program_slug,$forum_slug)
     {
         //
         $user      = Auth::user();
-        $session   = ModuleSession::where('slug',$session_slug)->firstOrFail();
+        $program   = $user->actual_program();
+        $forum     = Forum::where('slug',$forum_slug)->firstOrFail();
         return view('fellow.modules.sessions.forums.forums-add-question')->with([
           "user"      => $user,
-          "session" => $session
-        ]);
-    }
-
-    /**
-     * Agregar pregunta a foro de estado
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function addStateQuestion($program_slug,$state_name)
-    {
-        //
-        $user      = Auth::user();
-        return view('fellow.modules.sessions.forums.forums-add-question')->with([
-          "user"      => $user,
-          "session" => $state_name
+          "forum"     => $forum,
+          "program"   => $program
         ]);
     }
 
@@ -162,24 +106,12 @@ class Forums extends Controller
     public function saveQuestion(SaveForumConversation $request)
     {
       $user      = Auth::user();
-      $session     = ModuleSession::where('slug',$request->session_slug)->first();
-      if($request->session_slug==='foro-general'){
-        $forum       = Forum::where('state_name','General')->first();
-      }else{
-        $forum       = Forum::where('state_name',$request->session_slug)->first();
-      }
+      $program   = $user->actual_program();
+      $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
-      if($session){
-        //foro con sesión
-        $forumConversation->forum_id = $session->forums->id;
-      }elseif($forum){
-        //foro de estado
-        $forumConversation->forum_id = $forum->id;
-      }else{
-        //foro general
-      }
-      $forumConversation->user_id = $user->id;
-      $forumConversation->slug    = str_slug($request->topic);
+      $forumConversation->forum_id = $forum->id;
+      $forumConversation->user_id  = $user->id;
+      $forumConversation->slug     = str_slug($request->topic);
       $forumConversation->save();
       //forum log
       $log = new ForumLog();
@@ -187,23 +119,18 @@ class Forums extends Controller
       $log->type    = 'fellow';
       $log->action  = 'create-question';
       $log->conversation_id = $forumConversation->id;
-      if($session){
-        $log->forum_id = $session->forums->id;
+      if($forum->type ==='activity'){
+        $log->forum_id = $forum->id;
         $log->save();
-        $this->send_to($session->forums,$forumConversation,'question');
+      //  $this->send_to($session->forums,$forumConversation,'question');
         $fellowAverage = new FellowAverage();
-        $fellowAverage->scoreSession(null,$user->id,$session->id);
-        return redirect("tablero/foros/{$session->slug}/{$session->forums->slug}")->with('message','Pregunta creada correctamente');
+        $fellowAverage->scoreSession(null,$user->id,$forum->session->id);
       }else{
         $log->forum_id = $forum->id;
         $log->save();
-        $this->send_to($forum,$forumConversation,'question');
-        if($request->session_slug==='foro-general'){
-          return redirect("tablero/foros/foro-general")->with('message','Pregunta creada correctamente');
-        }else{
-          return redirect("tablero/foros/{$forum->state_name}")->with('message','Pregunta creada correctamente');
-        }
+      //    $this->send_to($forum,$forumConversation,'question');
       }
+        return redirect("tablero/$program->slug/foros/$forum->slug")->with('message','Pregunta creada correctamente');
     }
 
 
@@ -217,10 +144,12 @@ class Forums extends Controller
     {
       //
       $user   = Auth::user();
+      $program = $user->actual_program();
       $question  = ForumConversation::where('slug',$question_slug)->firstOrFail();
       return view('fellow.modules.sessions.forums.forum-question-view')->with([
         "user"      => $user,
-        "question"    => $question
+        "question"  => $question,
+        "program"   => $program
       ]);
     }
 
@@ -235,10 +164,13 @@ class Forums extends Controller
     {
         //
         $user      = Auth::user();
-        $forum   = ForumConversation::where('slug',$forum_slug)->firstOrFail();
+        $program   = $user->actual_program();
+        $question  = ForumConversation::where('slug',$forum_slug)->firstOrFail();
         return view('fellow.modules.sessions.forums.forum-add-message')->with([
           "user"      => $user,
-          "forum" => $forum
+          "question"  => $question,
+          "program"   => $program,
+          "forum"     => $question
         ]);
     }
 
@@ -252,6 +184,7 @@ class Forums extends Controller
       public function saveMessage(SaveMessageForum $request)
       {
         $user      = Auth::user();
+        $program   = $user->actual_program();
         $conversation   = ForumConversation::where('slug',$request->question_slug)->firstOrFail();
         $message     = new ForumMessage($request->only(['message']));
         $message->user_id = $user->id;
@@ -266,18 +199,13 @@ class Forums extends Controller
         $log->forum_id = $conversation->forum->id;
         $log->message_id = $message->id;
         $log->save();
-        $this->send_to($conversation->forum,$conversation,'message');
+      //  $this->send_to($conversation->forum,$conversation,'message');
         //conversacion perteneciente a foro con sesion
-        if($conversation->forum->session_id){
+        if($conversation->forum->type === 'activity'){
           $fellowAverage = new FellowAverage();
           $fellowAverage->scoreSession(null,$user->id,$conversation->forum->session_id);
-          return redirect("tablero/foros/pregunta/{$conversation->forum->session->slug}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
-        }elseif($conversation->forum->state_name){
-          //conversacion perteneciente a foro con estado
-          return redirect("tablero/foros/{$conversation->forum->state_name}/{$conversation->slug}/ver")->with('message','Mensaje creado correctamente');
-        }else{
-          //conversacion perteneciente a foro general
         }
+        return redirect("tablero/$program->slug/foros/{$conversation->forum->slug}/ver-pregunta/$conversation->slug")->with('message','Mensaje creado correctamente');
       }
 
       /**
@@ -382,7 +310,7 @@ class Forums extends Controller
        * @param  \Illuminate\Http\Request  $request
        * @return \Illuminate\Http\Response
        */
-      public function profileUser($name,$surname,$lastname)
+      public function profileUser($program_slug,$name,$surname,$lastname)
       {
          $user = Auth::user();
           //fellow
@@ -400,7 +328,7 @@ class Forums extends Controller
        * @param  \Illuminate\Http\Request  $request
        * @return \Illuminate\Http\Response
        */
-      public function profileAdminUser($name,$type)
+      public function profileAdminUser($program_slug,$name,$type)
       {
 
         $user = Auth::user();
