@@ -209,8 +209,10 @@ class Fellows extends Controller
      */
     public function viewFiles()
     {
-      $user = Auth::user();
-      $files = FellowFile::where('user_id',$user->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $user    = Auth::user();
+      $program = $user->actual_program();
+      $activities_id = $program->get_all_fellow_activities()->pluck('id')->toArray();
+      $files = FellowFile::where('user_id',$user->id)->whereIn('activity_id',$activities_id)->orderBy('created_at','desc')->paginate($this->pageSize);
       return view('fellow.profile.profile-files')->with([
         "user"      => $user,
         "files"     => $files
@@ -224,16 +226,16 @@ class Fellows extends Controller
     */
     public function download(Request $request){
       $user = Auth::user();
-      $data = FellowFile::where('id',$request->file_id)->where('user_id',$user->id)->firstOrFail();
+      $program = $user->actual_program();
+      $activities_id = $program->get_all_fellow_activities()->pluck('id')->toArray();
+      $data = FellowFile::whereIn('activity_id',$activities_id)->where('id',$request->file_id)->where('user_id',$user->id)->firstOrFail();
       $file = $data->path;
-      $ext  = substr(strrchr($file,'.'),1);
-      $mime = mime_content_type ($file);
+      $fileData = pathinfo($file);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
-
-      $filename = $data->name.".".$ext;
-      return response()->download($file, $filename, $headers);
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
     }
 
 }
