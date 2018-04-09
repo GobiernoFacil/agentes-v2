@@ -66,7 +66,7 @@ search.addEventListener("keydown",function(){
 					atag    = document.createElement('a');
 					atag.setAttribute('class','selected-search');
 					atag.setAttribute('href',view_aspirant_url+'/'+results[i].id);
-					newText = document.createTextNode(results[i].state+" "+results[i].city+" "+results[i].name+" "+results[i].surname+" "+results[i].lastname);
+					newText = document.createTextNode(results[i].state+" "+results[i].city+" "+results[i].name+" "+results[i].surname+" "+results[i].lastname+" "+results[i].email);
 					atag.setAttribute('id',results[i].id);
 					atag.appendChild(newText);
 				/*	atag.addEventListener("click",function(e){
