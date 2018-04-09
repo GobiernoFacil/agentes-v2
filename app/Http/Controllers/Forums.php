@@ -38,7 +38,7 @@ class Forums extends Controller
       $program     = $user->actual_program();
       $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
 
-      return view('fellow.modules.sessions.forums.forums-all-list')->with([
+      return view('fellow.forums.forums-all-list')->with([
         "user"      => $user,
         "forums"    => $forums,
         "program"   => $program
@@ -68,7 +68,7 @@ class Forums extends Controller
 
       }
       $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
-      return view('fellow.modules.sessions.forums.forums-list')->with([
+      return view('fellow.forums.forums-list')->with([
         "user"      => $user,
         "forums" => $forums,
         "forum"  =>$forum,
@@ -89,7 +89,7 @@ class Forums extends Controller
         $user      = Auth::user();
         $program   = $user->actual_program();
         $forum     = Forum::where('slug',$forum_slug)->firstOrFail();
-        return view('fellow.modules.sessions.forums.forums-add-question')->with([
+        return view('fellow.forums.forums-add-question')->with([
           "user"      => $user,
           "forum"     => $forum,
           "program"   => $program
@@ -146,7 +146,7 @@ class Forums extends Controller
       $user   = Auth::user();
       $program = $user->actual_program();
       $question  = ForumConversation::where('slug',$question_slug)->firstOrFail();
-      return view('fellow.modules.sessions.forums.forum-question-view')->with([
+      return view('fellow.forums.forum-question-view')->with([
         "user"      => $user,
         "question"  => $question,
         "program"   => $program
@@ -166,7 +166,7 @@ class Forums extends Controller
         $user      = Auth::user();
         $program   = $user->actual_program();
         $question  = ForumConversation::where('slug',$forum_slug)->firstOrFail();
-        return view('fellow.modules.sessions.forums.forum-add-message')->with([
+        return view('fellow.forums.forum-add-message')->with([
           "user"      => $user,
           "question"  => $question,
           "program"   => $program,
@@ -291,7 +291,7 @@ class Forums extends Controller
           //fellow
           $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
           $userF      = User::find($fellowData->user_id);
-          return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+          return view('fellow.forums.forum-view-profile')->with([
             "user"      => $user,
             "userF"      => $userF,
           ]);
@@ -309,13 +309,13 @@ class Forums extends Controller
         $user = Auth::user();
         if($type==1){
          $userF      = User::where('name',$name)->where('type','admin')->firstOrFail();
-          return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+          return view('fellow.forums.forum-view-profile')->with([
             "user"      => $user,
             "userF"      => $userF,
           ]);
         }elseif($type==2){
           $userF      = User::where('name',$name)->where('type','facilitator')->firstOrFail();
-           return view('fellow.modules.sessions.forums.forum-view-profile')->with([
+           return view('fellow.forums.forum-view-profile')->with([
              "user"      => $user,
              "userF"      => $userF,
            ]);
@@ -337,7 +337,7 @@ class Forums extends Controller
         $program = $user->actual_program();
         $today  = date('Y-m-d');
         $modules = $program->fellow_modules()->paginate();
-        return view('fellow.modules.sessions.forums.participation-view')->with([
+        return view('fellow.forums.participation-view')->with([
           "user"      => $user,
           'modules'   =>$modules,
           'today'     =>$today,
