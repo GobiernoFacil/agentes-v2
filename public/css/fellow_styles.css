@@ -1127,7 +1127,8 @@ li a:link {
   width: 70px;
   height: 100%;
   position: fixed;
-  background: #20a6e7; }
+  background: #20a6e7;
+  z-index: 99; }
   .apertus_nav header {
     padding: 0; }
     .apertus_nav header ul {
@@ -1216,7 +1217,7 @@ li a:link {
   width: 250px;
   height: 100%;
   top: 0px;
-  z-index: 1000; }
+  z-index: 90; }
   .nav_week h2 {
     font-size: 17px;
     padding: 15px; }
@@ -1733,6 +1734,9 @@ b.sessionG {
         top: 49%;
         width: 100%;
         height: 10px; }
+  .ap_week b.face {
+    background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIwIDIwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6IzdBN0I3Qzt9LnN0MXtmaWxsOm5vbmU7c3Ryb2tlOiM3QTdCN0M7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fTwvc3R5bGU+PGc+PGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMTAiIGN5PSI0LjIiIHI9IjAuMyIvPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjEyLjIiIGN5PSI0LjIiIHI9IjAuMyIvPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjcuOCIgY3k9IjQuMiIgcj0iMC4zIi8+PGNpcmNsZSBjbGFzcz0ic3QxIiBjeD0iNSIgY3k9IjExLjQiIHI9IjIuMSIvPjxjaXJjbGUgY2xhc3M9InN0MSIgY3g9IjEwIiBjeT0iMTIuNiIgcj0iMi4xIi8+PGNpcmNsZSBjbGFzcz0ic3QxIiBjeD0iMTUuMSIgY3k9IjExLjQiIHI9IjIuMSIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik02LjEsMThjMC0xLjQsMS0yLjUsMi40LTIuNmMtMC41LTAuOC0xLjMtMS4zLTIuMy0xLjNIMy43Yy0xLjUsMC0yLjcsMS4yLTIuNywyLjd2MS41YzAsMC4xLDAsMC4yLDAsMC4zaDUuMVYxOHoiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTYuMywxNC4xaC0yLjVjLTEsMC0xLjgsMC41LTIuMywxLjNjMS40LDAuMSwyLjQsMS4zLDIuNCwyLjd2MC42aDVjMC0wLjEsMC0wLjIsMC0wLjN2LTEuNUMxOSwxNS4zLDE3LjgsMTQuMSwxNi4zLDE0LjF6Ii8+PHBhdGggY2xhc3M9InN0MSIgZD0iTTEwLDAuMWMtMi43LDAtNC45LDEuOC00LjksNGMwLDEuMiwwLjYsMi4yLDEuNiwyLjlMNi41LDguOGwxLjYtMC45QzguNyw4LjEsOS4zLDguMiwxMCw4LjJjMi43LDAsNC45LTEuOCw0LjktNFMxMi43LDAuMSwxMCwwLjF6Ii8+PHBhdGggY2xhc3M9InN0MSIgZD0iTTE0LDE5LjljMC0wLjEsMC0wLjIsMC0wLjNWMThjMC0xLjUtMS4yLTIuNy0yLjctMi43SDguOGMtMS41LDAtMi43LDEuMi0yLjcsMi43djEuNWMwLDAuMSwwLDAuMiwwLDAuM0gxNHoiLz48L2c+PC9zdmc+") no-repeat;
+    border: 0; }
   .ap_week b.evaluation {
     width: 25px;
     height: 25px;

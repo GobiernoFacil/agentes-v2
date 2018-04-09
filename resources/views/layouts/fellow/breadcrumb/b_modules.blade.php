@@ -1,12 +1,7 @@
 <ul>
 	<li>Estás en:</li>
-	<li><a href="{{url('tablero')}}">Tablero</a></li>
-	@if ($__env->yieldContent('breadcrumb_type') =="module list")
-	<li>Módulos de aprendizaje</li>
-	@endif
-	@if ($__env->yieldContent('breadcrumb_type') =="module view" || $__env->yieldContent('breadcrumb_type') =="session view" || $__env->yieldContent('breadcrumb_type') =="activity view" || $__env->yieldContent('breadcrumb_type') =="module test" || $__env->yieldContent('breadcrumb_type') =="evaluation list")
-	<li><a href="{{url('tablero/aprendizaje')}}">Módulos de aprendizaje</a></li>
-	@endif
+	<li><a href="{{url('tablero')}}">Programa</a></li>
+	
 
 	@if ($__env->yieldContent('breadcrumb_type') =="module view")
 	<!--ver módulo.-->
