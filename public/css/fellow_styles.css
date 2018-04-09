@@ -2180,6 +2180,10 @@ a:hover .icon_f.i_score {
   border-top: 1px solid #999;
   margin: 20px 0 0;
   padding: 0 0 20px; }
+  .divider.bg {
+    border-width: 3px;
+    border-color: #f2f2f2;
+    margin-bottom: 50px; }
 
 .minimum {
   font-size: 12px; }
