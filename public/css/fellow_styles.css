@@ -1127,7 +1127,8 @@ li a:link {
   width: 70px;
   height: 100%;
   position: fixed;
-  background: #20a6e7; }
+  background: #20a6e7;
+  z-index: 99; }
   .apertus_nav header {
     padding: 0; }
     .apertus_nav header ul {
@@ -1216,7 +1217,7 @@ li a:link {
   width: 250px;
   height: 100%;
   top: 0px;
-  z-index: 1000; }
+  z-index: 90; }
   .nav_week h2 {
     font-size: 17px;
     padding: 15px; }
