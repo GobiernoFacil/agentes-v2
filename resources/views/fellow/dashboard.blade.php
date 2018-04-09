@@ -98,13 +98,13 @@
 
 			if(is_hidden){
 				content.style.display = "block";
-				this.classList.remove(close_class);
-				this.classList.add(open_class);
+				this.classList.remove(open_class);
+				this.classList.add(close_class);
 			}
 			else{
 				content.style.display = "none";
-				this.classList.add(close_class);
-				this.classList.remove(open_class);
+				this.classList.add(open_class);
+				this.classList.remove(close_class);
 			}
 		});
 	}
