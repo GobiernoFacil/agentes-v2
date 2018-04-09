@@ -84,7 +84,7 @@
 <script>
 (function(){
 	var open_class = "ap-show",
-	    close_class = "ap-show",
+	    close_class = "ap-close",
 	    buttons = document.querySelectorAll("button"),
 	    i;
 

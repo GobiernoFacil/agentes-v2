@@ -1509,14 +1509,16 @@ b.sessionG {
   width: 16px; }
 
 .ap-advancer,
-.ap-show {
+.ap-show,
+.ap-close {
   margin: 60px 0;
   border: 0;
   background: transparent;
   padding: 0;
   border: 0; }
   .ap-advancer:focus,
-  .ap-show:focus {
+  .ap-show:focus,
+  .ap-close:focus {
     outline: 0; }
 
 .ap-timelineicon {
@@ -1572,12 +1574,17 @@ b.sessionG {
       top: 19px;
       right: -6px; }
 
-.ap-show {
+.ap-show,
+.ap-close {
   margin: 0 0 0 20px;
   display: inline-block; }
-  .ap-show svg {
+  .ap-show svg,
+  .ap-close svg {
     height: 20px;
     transform: rotate(90deg); }
+
+.ap-close svg {
+  transform: rotate(-90deg); }
 
 .ap_facilitator_list {
   display: inline-block;
