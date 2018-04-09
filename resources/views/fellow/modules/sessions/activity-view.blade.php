@@ -22,6 +22,9 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+			case "face":
+				$type = "Presencial";
+				break;
 			default:
 			 $type = "Lectura";
 		}
@@ -49,6 +52,7 @@
 </div>
 
 @if($activity->type == 'video')
+<!-- video -->
 	@if($activity->videos)
 	<div class="row">
 		<div class="col-sm-12">
@@ -63,12 +67,14 @@
 
 
 <div class="row">
+	<!--descripción-->
 	<div class="col-sm-12">
 		<p>{{$activity->description}}</p>
 	</div>
 
 	</div>
 	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
+	<!--si es examen de diagnostico-->
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-1">
 				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
