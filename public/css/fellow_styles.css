@@ -1663,6 +1663,10 @@ b.sessionG {
   .box.session_list.ap_week li a:hover {
     color: #20a6e7;
     text-decoration: underline; }
+  .box.session_list.ap_week li a.continue {
+    width: auto; }
+    .box.session_list.ap_week li a.continue:hover {
+      text-decoration: none; }
 
 .box.session_list.ap_week .notes {
   font-size: 10px; }
@@ -2301,6 +2305,18 @@ a:visited.btn {
     .btn.view.active,
     a:visited.btn.view.active {
       background: #5b5e6d; }
+    a.btn.view.continue,
+    .btn.view.continue,
+    a:visited.btn.view.continue {
+      color: white;
+      display: inline-block;
+      padding-left: 15px;
+      padding-right: 15px;
+      text-align: right; }
+      a.btn.view.continue:hover,
+      .btn.view.continue:hover,
+      a:visited.btn.view.continue:hover {
+        color: white; }
   a.btn.ev,
   .btn.ev,
   a:visited.btn.ev {
