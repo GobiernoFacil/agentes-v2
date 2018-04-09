@@ -50,8 +50,14 @@ class Program extends Model
       $modules  = $this->modules->pluck('id')->toArray();
       $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
       return  Activity::whereIn('session_id',$sessions);
-
     }
+
+    function get_all_fellow_activities(){
+      $modules  = $this->fellow_modules->pluck('id')->toArray();
+      $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions);
+    }
+
     function get_all_eva_activities(){
       $modules  = $this->modules->pluck('id')->toArray();
       $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
@@ -75,7 +81,7 @@ class Program extends Model
       $today = date("Y-m-d");
       $sessions_id = $this->get_all_fellow_sessions()->pluck('id')->toArray();
       $forums = $this->forums()->pluck('id')->toArray();
-      return Forum::where('state_name',$user->fellowData->state)->orWhere(function($query)use($sessions_id){
+      return Forum::where('state_name',$user->fellowData->state)->where('program_id',$this->id)->orWhere(function($query)use($sessions_id){
         $query->whereIn('session_id',$sessions_id);
       })
       ->orWhere(function($query){
