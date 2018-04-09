@@ -59,7 +59,7 @@
 		<img src="{{ url('img/svg/estado.svg') }}" alt="Foro de actividades" width="100px">
 	</div>
 	<div class="col-sm-8">
-		<h1>Foros de tu estado</h1>
+		<h1>Foro de tu estado</h1>
 		<p>En este foro podrás comunicarte con personas de tu mismo estado.</p>
 	</div>
 	<div class="col-sm-2 col-sm-offset-1">
