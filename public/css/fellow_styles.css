@@ -2184,6 +2184,8 @@ a:hover .icon_f.i_score {
     border-width: 3px;
     border-color: #f2f2f2;
     margin-bottom: 50px; }
+    .divider.bg.nm {
+      margin-bottom: 0; }
 
 .minimum {
   font-size: 12px; }
@@ -2690,7 +2692,7 @@ sup {
       color: white; }
 
 .forum_list h2 {
-  font-size: 21px;
+  font-size: 18px !important;
   margin-bottom: 5px; }
   .forum_list h2 a:link,
   .forum_list h2 a:visited {
@@ -2702,25 +2704,29 @@ sup {
       border-bottom: 1px dotted #777; }
 
 .forum_list .count_messages {
-  color: #18b73e;
-  font: 300 31px "overpass", Helvetica, Arial, sans-serif;
-  text-align: right; }
+  position: relative;
+  color: #ccc !important;
+  font: 300 36px "overpass", Helvetica, Arial, sans-serif !important;
+  text-align: right;
+  padding-right: 23px; }
   .forum_list .count_messages:before {
+    position: absolute;
     content: "";
     background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNS4zNDFweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjUuMzQxIDI0IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNS4zNDEgMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiNDRENDQ0MiIGQ9Ik0xOC45NzIsNi4yNzhjMCwwLjcyMS0wLjUyNSwxLjE1OC0wLjkwNiwxLjQ3OWMtMC4xNDYsMC4xMjMtMC40MTYsMC4zNDQtMC40MTUsMC40MjhjMC4wMDQsMC4zMjYtMC4yNTksMC41ODQtMC41ODUsMC41ODRoLTAuMDA1Yy0wLjMyMiwwLTAuNTg3LTAuMjUyLTAuNTg5LTAuNTc0Yy0wLjAwNi0wLjYzOSwwLjQ2MS0xLjAyMSwwLjgzNi0xLjMzNmMwLjI5My0wLjI0NiwwLjQ4Ni0wLjQyLDAuNDg2LTAuNTc4YzAtMC4zMi0wLjI2MS0wLjU4NC0wLjU4My0wLjU4NFMxNi42MjgsNS45NiwxNi42MjgsNi4yOGMwLDAuMzI2LTAuMjY1LDAuNTktMC41OSwwLjU5Yy0wLjMyNiwwLTAuNTktMC4yNjQtMC41OS0wLjU5YzAtMC45NzEsMC43OS0xLjc2MiwxLjc2My0xLjc2MkMxOC4xODMsNC41MTksMTguOTcyLDUuMzA4LDE4Ljk3Miw2LjI3OEwxOC45NzIsNi4yNzh6IE0xNy4wNzYsOS4zMTNjLTAuMzI1LDAtMC41NzUsMC4yNjQtMC41NzUsMC41ODh2MC4wMDZjMCwwLjMyNiwwLjI1LDAuNTg4LDAuNTc1LDAuNTg4YzAuMzI2LDAsMC41OS0wLjI2OCwwLjU5LTAuNTk0QzE3LjY2Niw5LjU3NywxNy40MDMsOS4zMTMsMTcuMDc2LDkuMzEzTDE3LjA3Niw5LjMxM3ogTTUuMTk5LDEzLjQxOWMtMC4zMjYsMC0wLjU5LDAuMjY0LTAuNTksMC41ODhjMCwwLjMyNiwwLjI2NCwwLjU5LDAuNTksMC41OWgwLjA0OWMwLjMyNSwwLDAuNTg5LTAuMjY0LDAuNTg5LTAuNTljMC0wLjMyNC0wLjI2NC0wLjU4OC0wLjU4OS0wLjU4OEg1LjE5OXogTTcuMjQ4LDEzLjQxOWMtMC4zMjYsMC0wLjU4OSwwLjI2NC0wLjU4OSwwLjU4OGMwLDAuMzI2LDAuMjYzLDAuNTksMC41ODksMC41OWgwLjA0OWMwLjMyNSwwLDAuNTg5LTAuMjY0LDAuNTg5LTAuNTljMC0wLjMyNC0wLjI2NC0wLjU4OC0wLjU4OS0wLjU4OEg3LjI0OHogTTI0LjU1NSw0LjAwNXY2LjYzNWMwLDEuNTctMS4yNTksMi44NDQtMi44MjksMi44NDRoLTcuNjQyYy0wLjE0OSwwLTAuMjcyLDAtMC4zNzctMC4wMDJjLTAuMTA2LTAuMDAyLTAuMjI5LTAuMDA0LTAuMjc2LDAuMDAyYy0wLjA0OCwwLjAzMy0wLjE3MSwwLjE0My0wLjI4NiwwLjI1Yy0wLjA0NiwwLjA0My0wLjA5OSwwLjA5LTAuMTU1LDAuMTQxbC0yLjE2MiwxLjk3M2MtMC4xNzQsMC4xNTQtMC40MjgsMC4xOTctMC42NDEsMC4xMDRjLTAuMjE1LTAuMDk0LTAuMzY0LTAuMzA3LTAuMzY0LTAuNTM5VjkuNDU2SDMuNjQ5Yy0wLjkyMiwwLTEuMjg5LDAuNzU0LTEuMjg5LDEuNjc2djYuMzRjMCwwLjkyLDAuNzYzLDEuMjE1LDEuNjg0LDEuMjE1aDguMTQxYzAuMTQ4LDAsMC4yODUsMC4wNjYsMC4zOTUsMC4xNjZsMS43NjIsMS42MjN2LTUuMTdjMC0wLjMyNiwwLjI2My0wLjU5LDAuNTg5LTAuNTlzMC41ODksMC4yNjQsMC41ODksMC41OXY2LjkzNmMwLDAuMjM0LTAuMTMzLDAuNDQxLTAuMzQ2LDAuNTM3Yy0wLjA3OCwwLjAzMS0wLjE1NCwwLjA0Ny0wLjIzNCwwLjA0N2MtMC4xNDQsMC0wLjI4Ny0wLjA2MS0wLjM5OC0wLjE2bC0yLjU4My0yLjM3MUgzLjY0OWMtMS41NywwLTIuODYzLTEuMjUyLTIuODYzLTIuODIydi02LjYzNWMwLTEuNTcsMS4yOTMtMi44NTQsMi44NjMtMi44NTRoNi4xNzNWNC4wMDVjMC0xLjU3LDEuMzA0LTIuODMsMi44NzItMi44M2g5LjAzMUMyMy4yOTYsMS4xNzUsMjQuNTU1LDIuNDM1LDI0LjU1NSw0LjAwNUwyNC41NTUsNC4wMDV6IE0yMi42OTQsNC4xMzZjMC0wLjg1LTAuNjc0LTEuNTI1LTEuNTIzLTEuNTI1aC04LjMzNWMtMC44NTEsMC0xLjU2MywwLjY3Ni0xLjU2MywxLjUyNXY5LjI5MWwxLjA5NC0wLjk4OGMwLjA1My0wLjA0NSwwLjEwOS0wLjA4OCwwLjE1LTAuMTI1YzAuNDk4LTAuNDYxLDAuNjI3LTAuNTMzLDEuMjc3LTAuNTIxYzAuMDksMC4wMDIsMC4xOTUsMC4wMDIsMC4zMjQsMC4wMDJoNy4wNTNjMC44NSwwLDEuNTIzLTAuNjg4LDEuNTIzLTEuNTM3VjQuMTM2eiBNMjMuMzc3LDQuMDA1Ii8+PC9nPjwvc3ZnPg==");
     display: block;
     height: 21px;
     background-size: 23px auto;
-    width: 23px; }
+    width: 23px;
+    right: 0; }
 
 .forum_list p {
   margin-bottom: 9px; }
   .forum_list p span {
-    background: #f2f2f2;
-    color: #777;
-    font-size: 12px;
+    color: #999;
+    font-size: 11px !important;
     display: inline-block;
-    padding: 2px 5px; }
+    padding: 2px 5px;
+    text-transform: uppercase; }
     .forum_list p span.type {
       background: #fbe0ec;
       color: #4d4d4d;
@@ -2735,6 +2741,8 @@ sup {
     color: #555; }
   .forum_list p.author {
     font-size: 14px; }
+    .forum_list p.author a {
+      color: #888; }
 
 .forum_list li {
   list-style: none;
@@ -2745,6 +2753,10 @@ sup {
 .forum_list h5 {
   font-size: 12px;
   display: inline-block; }
+
+.forum_list .divider.b {
+  margin-bottom: 25px;
+  margin-top: 30px; }
 
 .forum_list .type_list {
   display: inline-block;
