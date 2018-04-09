@@ -59,7 +59,7 @@
 				@if($last_activity)
 					@if($last_activity->activity_id == $activity->id)
 					<span class="col-sm-3">
-	    			<a class ="btn xs view" href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">Continuar </a>
+	    			<a class ="btn xs view continue" href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">Continuar </a>
 	    		</span>
 					@endif
 				@endif
