@@ -14,7 +14,7 @@
 <div class="box">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      @include('fellow.modules.sessions.forums.forms.forums-add-question-form')
+      @include('fellow.forums.forms.forums-add-question-form')
     </div>
   </div>
 </div>

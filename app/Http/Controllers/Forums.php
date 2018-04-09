@@ -37,6 +37,25 @@ class Forums extends Controller
       $user       = Auth::user();
       $program     = $user->actual_program();
       $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
+      return view('fellow.forums.forums-dash')->with([
+        "user"      => $user,
+        "forums"    => $forums,
+        "program"   => $program
+      ]);
+
+    }
+    
+    
+     /**
+     * Muestra lista de foros general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allAc()
+    {
+      $user       = Auth::user();
+      $program     = $user->actual_program();
+      $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
 
       return view('fellow.forums.forums-all-list')->with([
         "user"      => $user,

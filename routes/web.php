@@ -438,6 +438,7 @@ Route::group(['middleware' => ['auth']], function () {
           /*@Forums Controller */
           // Rutas foros
           Route::get('tablero/{program_slug}/foros', 'Forums@all');
+          Route::get('tablero/{program_slug}/foros/actividades', 'Forums@allAc');
           Route::get('tablero/{program_slug}/foros/{forum_slug}', 'Forums@index');
           Route::get('tablero/{program_slug}/foros/{forum_slug}/agregar-pregunta', 'Forums@addQuestion');
           Route::post('tablero/{program_slug}/foros/{forum_slug}/save-question', 'Forums@saveQuestion');
