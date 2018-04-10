@@ -46,6 +46,9 @@
 											@else
 											<th>Calificación</th>
 											@endif
+											@if($type_list == 0)
+											<th>Evaluación </th>
+											@endif
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -63,6 +66,9 @@
 																	<td>{{$aspirant->AspirantEvaluation()->where('institution',$user->institution)->whereNotNull('grade')->first() ? number_format($aspirant->AspirantEvaluation()->where('institution',$user->institution)->first()->grade,2) : "Sin calificación"}}</td>
 																	@else
 																	<td>{{$aspirant->global_grade ? number_format($aspirant->global_grade->grade,2) : "Sin calificación"}}</td>
+																	@endif
+																	@if($type_list == 0)
+																	<td>{{$aspirant->AspirantEvaluation()->whereNotNull('grade')->count() < 3 ? 'Sin completar' : 'Completada'}} </td>
 																	@endif
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
