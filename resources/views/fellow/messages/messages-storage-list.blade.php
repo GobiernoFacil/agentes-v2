@@ -3,19 +3,24 @@
 @section('description', 'Lista de mensajes archivados')
 @section('body_class', 'fellow mensajes')
 @section('breadcrumb_type', 'messages list')
+@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Mensajes Privados Archivados</h1>
+		<h1>Mensajes archivados</h1>
 	</div>
-  <div class="col-sm-3 center">
-		<a href="{{ url('tablero/mensajes') }}" class="btn gde"> Mensajes</a>
+	<!--ir a mensajes-->
+	<div class="col-sm-3 center">
+		<a href="{{ url('tablero/' . $program->slug .'/mensajes') }}" class="btn view block sessions_l">&lt; Regresar a mensajes</a>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider bg"></div>
 	</div>
 </div>
 
 @if($user->store_conversations->count()>0)
-<div class="box">
+<div class="box session_list last_activity">
 	<div class="row">
 		<div class="col-sm-12">
 			<table class="table">
