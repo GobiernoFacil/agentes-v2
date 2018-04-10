@@ -32,6 +32,7 @@ class Messages extends Controller
       {
         //
         $user = Auth::user();
+        $program     = $user->actual_program();
         $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
         $conversations = Conversation::where('user_id',$user->id)->whereIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
           $query->where('to_id',$user->id)->whereIn('id',$storage->toArray());
@@ -40,6 +41,7 @@ class Messages extends Controller
         return view('fellow.messages.messages-storage-list')->with([
           'user' => $user,
           'conversations' =>$conversations,
+          'program'		=> $program
         ]);
 
       }
@@ -53,6 +55,7 @@ class Messages extends Controller
     {
       //
       $user = Auth::user();
+      $program     = $user->actual_program();
       $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
       $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
         $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
@@ -61,6 +64,7 @@ class Messages extends Controller
       return view('fellow.messages.messages-list')->with([
         'user' => $user,
         'conversations' =>$conversations,
+        'program'		=> $program
       ]);
 
     }
