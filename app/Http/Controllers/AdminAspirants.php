@@ -331,7 +331,7 @@ class AdminAspirants extends Controller
           $aspirantEvaluation->save();
           //asignar aspirantes a instituciones
           if($notice->aspirants_without_proof_evaluation()->count() ==0){
-            Artisan::queue('command:assign-aspirant-to',['type'=>'2',"notice_id"=>$notice->id]);
+           //  Artisan::queue('command:assign-aspirant-to',['type'=>'2',"notice_id"=>$notice->id]);
           }
          return redirect("dashboard/aspirantes/convocatoria/$notice->id/aspirantes-con-archivo-por-evaluar");
       }
