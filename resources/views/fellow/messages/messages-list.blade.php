@@ -18,7 +18,7 @@
 	</div>
 	<!--escribir mensajes-->
 	<div class="col-sm-3 center">
-		<a href="{{ url('tablero/' . $program->slug .'/mensajes/agregar') }}" class="btn view block sessions_l"><strong>+</strong> Escribir mensaje</a>
+		<a href="{{ url('tablero/' . $program->slug .'/mensajes/agregar') }}" class="btn view block sessions_l"><b class="write_message"></b> Escribir mensaje</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="divider bg"></div>
@@ -89,7 +89,7 @@
 	  		
 		</div>
 		<div class="col-sm-6 col-sm-offset-3">
-			<a href="{{ url('tablero/' . $program->slug .'/mensajes/agregar') }}" class="btn view block sessions_l"><strong>+</strong> Escribe un mensaje</a>
+			<a href="{{ url('tablero/' . $program->slug .'/mensajes/agregar') }}" class="btn view block sessions_l"><b class="write_message"></b> Escribe un mensaje</a>
 		</div>
   </div>
 </div>
