@@ -31,40 +31,37 @@
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
-
     	<h1>{{$question->topic}} </h1>
 		<p class="author">Por {{$question->user->name}} <span>{{$question->created_at->diffForHumans()}}</span></p>
-
 	</div>
-	<!--mensajes-->
+	<!--contador de mensajes-->
 	<div class="col-sm-2 forum_list">
 		<h3 class="count_messages">{{$question->messages->count()}}</h3>
 	</div>
+	<!--- descripción de la pregunta-->
   	<div class="col-sm-12">
+	  	<p class="ap_descriptionq">{{$question->description}}</p>
 	  	<div class="divider b"></div>
-  	</div>
-  	<div class="col-sm-10 col-sm-offset-1">
-	  	<p>{{$question->description}}</p>
   	</div>
 </div>
 
 
-<div class="box">
+
   @if($question->messages->count()>0 )
   	<div class="row">
   		<div class="col-sm-9">
-	  		<h2>{{$question->messages->count() == 1 ? $question->messages->count() . ' respuesta' : $question->messages->count() . ' respuestas' }}</h2>
+	  		<h3>{{$question->messages->count() == 1 ? $question->messages->count() . ' respuesta' : $question->messages->count() . ' respuestas' }}</h3>
   		</div>
   		<!--enlace a agregar respuesta-->
-	  	<div class="col-sm-3 center">
-	  		<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+	  	<div class="col-sm-3">
+	  		<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn view block sessions_l">[<strong>+</strong>] Agregar Respuesta</a>
 	  	</div>
 	  	<div class="col-sm-12">
 	  		<div class="divider b"></div>
   		</div>
   	</div>
   	<div class="row">
-        <div class="col-sm-8 col-sm-offset-2 forum_list">
+        <div class="col-sm-10 col-sm-offset-1 forum_list">
     @foreach($question->messages as $message)
       		<div class="row">
 	      		<div class="col-sm-2">
@@ -82,7 +79,7 @@
 						$type = 1;
 					}
 					?>
-	  				<p>{{$message->message}}</p>
+	  				<p class="ap_message_f">{{$message->message}}</p>
 						@if($message->user->type==='fellow')
 						<p class="author">
 							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/{$message->user->fellowData->surname}/{$message->user->fellowData->lastname}")}}'>
@@ -114,16 +111,16 @@
     </div>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 center">
-        <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+        <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn view block sessions_l">[<strong>+</strong>] Agregar Respuesta</a>
       </div>
     </div>
   @else
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 center">
       <h2>No existen respuestas.</h2>
-      <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+      <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn view block sessions_l">[<strong>+</strong>] Agregar Respuesta </a>
     </div>
   </div>
   @endif
-</div>
+
 @endsection
