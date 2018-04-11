@@ -22,11 +22,11 @@
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 center">
 			@if($userF->type === 'fellow')
-	    		@include('fellow.modules.sessions.forums.forum-view-profile-fellow')
+	    		@include('fellow.forums.forum-view-profile-fellow')
 	    	@elseif($userF->type === 'facilitator')
-	    		@include('fellow.modules.sessions.forums.forum-view-profile-facilitator')
+	    		@include('fellow.forums.forum-view-profile-facilitator')
 	    	@else
-	    		@include('fellow.modules.sessions.forums.forum-view-profile-admin')
+	    		@include('fellow.forums.forum-view-profile-admin')
 	    	@endif
 		</div>
 	</div>

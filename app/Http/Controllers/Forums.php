@@ -34,9 +34,10 @@ class Forums extends Controller
      */
     public function all()
     {
-      $user       = Auth::user();
-      $program     = $user->actual_program();
-      $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
+      $user            = Auth::user();
+      $program         = $user->actual_program();
+      $forums          = $program->fellow_forums($user)->paginate($this->pageSize);
+      $week_forums     = $program->actual_week_forums()->get();
       return view('fellow.forums.forums-dash')->with([
         "user"      => $user,
         "forums"    => $forums,
@@ -44,8 +45,8 @@ class Forums extends Controller
       ]);
 
     }
-    
-    
+
+
      /**
      * Muestra lista de foros general
      *
@@ -55,8 +56,7 @@ class Forums extends Controller
     {
       $user       = Auth::user();
       $program     = $user->actual_program();
-      $forums      = $program->fellow_forums($user)->paginate($this->pageSize);
-
+      $forums      = $program->fellow_act_forums()->paginate($this->pageSize);
       return view('fellow.forums.forums-all-list')->with([
         "user"      => $user,
         "forums"    => $forums,
@@ -306,14 +306,15 @@ class Forums extends Controller
        */
       public function profileUser($program_slug,$name,$surname,$lastname)
       {
-         $user = Auth::user();
-          //fellow
-          $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
-          $userF      = User::find($fellowData->user_id);
-          return view('fellow.forums.forum-view-profile')->with([
-            "user"      => $user,
-            "userF"      => $userF,
-          ]);
+        $user = Auth::user();
+         //fellow
+         $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
+         $userF      = User::find($fellowData->user_id);
+         return view('fellow.forums.forum-view-profile')->with([
+           "user"      => $user,
+           "userF"      => $userF,
+         ]);
+
       }
 
       /**
