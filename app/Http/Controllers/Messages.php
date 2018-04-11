@@ -76,7 +76,8 @@ class Messages extends Controller
     */
     public function add()
     {
-      $user   = Auth::user();
+      $user   	= Auth::user();
+      $program     = $user->actual_program();
       $assign_users = FacilitatorModule::all()->pluck('user_id');
       $users = User::where('type','facilitator')
       ->orwhere(function($query)use($user){
@@ -99,7 +100,8 @@ class Messages extends Controller
 
       return view('fellow.messages.messages-add')->with([
         "user"      => $user,
-        'users' => $names
+        'users' => $names,
+        'program'		=> $program
       ]);
     }
 
@@ -114,6 +116,7 @@ class Messages extends Controller
     {
       //
       $user   = Auth::user();
+      $program     = $user->actual_program();
       $conversation = new Conversation();
       $conversation->user_id = $user->id;
       $conversation->title   = $request->title;
@@ -133,7 +136,7 @@ class Messages extends Controller
       $converLog->save();
       //envía correo
       $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
-      return redirect("tablero/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+      return redirect("tablero/$program->slug/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
     /**
