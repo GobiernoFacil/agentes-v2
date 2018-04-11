@@ -20,45 +20,33 @@
 </div>
 
 @if($user->store_conversations->count()>0)
-<div class="box session_list last_activity">
-	<div class="row">
-		<div class="col-sm-12">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th>Conversación con</th>
-			      <th>Asunto</th>
-			      <th></th>
-			      <th>Acciones</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    @foreach ($conversations as $conversation)
-			    <tr>
-				    <td><strong>
-					@if($conversation->to_id != $user->id)
-			        	{{$conversation->user_to->name}}
-					@else
-						{{$conversation->user->name}}
-					@endif
-					</strong>
-				    </td>
-			        <td><a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a>
-			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
-			        </td>
-					<td>
-				        {{$conversation->last_message->first()->updated_at->diffForHumans()}}
-				    </td>
-					<td>
-			          <a href="{{ url('tablero/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
-				    </td>
-				</tr>
-			    @endforeach
-			  </tbody>
-			</table>
-
-			{{ $conversations->links() }}
-		</div>
+<div class="row">
+	<div class="col-sm-12">
+		@foreach ($conversations as $conversation)
+		<a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . $conversation->id) }}" class="ap_message_link">
+			
+		    <!--mensaje con-->
+		    <span class="col-sm-4">
+		    	<strong>
+				@if($conversation->to_id != $user->id)
+				   	{{$conversation->user_to->name}}
+				@else
+				   {{$conversation->user->name}}
+				@endif
+				</strong>
+		    </span>
+		    <!-- subject-->
+		    <span class="col-sm-5">
+		     	{{$conversation->title}}
+		    </span>
+			 <!-- fechas-->
+			 <span class="col-sm-3 right">
+		        {{$conversation->last_message->first()->updated_at->diffForHumans()}}
+		    </span>
+			<span class="clearfix"></span>
+		</a>
+		@endforeach
+		{{ $conversations->links() }}
 	</div>
 </div>
 @else
