@@ -2636,6 +2636,8 @@ a.ap_message_link {
   border: 1px solid #ccc;
   display: block;
   padding: 10px 0; }
+  a.ap_message_link:hover {
+    background: #e5e5e5; }
 
 .toggle-view li {
   border-top: 1px solid #ccc;
