@@ -306,14 +306,15 @@ class Forums extends Controller
        */
       public function profileUser($program_slug,$name,$surname,$lastname)
       {
-         $user = Auth::user();
-          //fellow
-          $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
-          $userF      = User::find($fellowData->user_id);
-          return view('fellow.forums.forum-view-profile')->with([
-            "user"      => $user,
-            "userF"      => $userF,
-          ]);
+        $user = Auth::user();
+         //fellow
+         $fellowData = FellowData::where('surname',$surname)->where('lastname',$lastname)->firstOrFail();
+         $userF      = User::find($fellowData->user_id);
+         return view('fellow.forums.forum-view-profile')->with([
+           "user"      => $user,
+           "userF"      => $userF,
+         ]);
+
       }
 
       /**
