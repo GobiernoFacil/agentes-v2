@@ -2,7 +2,7 @@
 @section('title', 'Foros' )
 @section('description','Foros del Programa de Gobierno Abierto desde lo local' )
 @section('body_class', 'fellow foros')
-@section('breadcrumb_type', 'forum list')
+@section('breadcrumb_type', 'forum act list')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
@@ -15,7 +15,7 @@
 
 @if($forums->count()>0)
 <div class="box forum_list">
-	
+
 	@foreach ($forums as $forum)
 	@if($forum->type === 'activity' || $forum->type ==='general')
 	<div class="row">
@@ -29,7 +29,7 @@
 			<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
 			@else($forum->type ==='general')
 					<p><span class="type general">General</span></p>
-			
+
 			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
 		</div>
