@@ -24,8 +24,8 @@ if($user->type == "fellow"){
 			@endif
 			@if($user->type == "superAdmin")
 			<!--superadmin-->
-			<li class="{{ $__env->yieldContent('body_class') == 'suAdmin' ? "active" : ''}}"><a href="{{url( $linkDash . '/super-administradores')}}"><b class="icon i_usuarios"></b> Super Admin</a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}"><b class="icon i_usuarios"></b> Administradores</a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'suAdmin' ? "active" : ''}}"><a href="{{url( $linkDash . '/super-administradores')}}" data-title=" Super Admin"><b class="icon i_usuarios"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'users' ? "active" : ''}}"><a href="{{url( $linkDash . '/administradores')}}" data-title="Administradores"><b class="icon i_usuarios"></b></a></li>
 			@endif
 			@if($user->type == "facilitator")
 			<!--facilitador-->
