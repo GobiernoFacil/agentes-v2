@@ -2631,6 +2631,12 @@ sup {
     color: #999;
     font-size: 13px; }
 
+a.ap_message_link {
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  display: block;
+  padding: 10px 0; }
+
 .toggle-view li {
   border-top: 1px solid #ccc;
   padding: 10px 15px 20px;
