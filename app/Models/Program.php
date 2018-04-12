@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Activity;
 use App\Models\Aspirant;
+use App\Models\Conversation;
 use App\Models\Forum;
 use App\Models\Module;
 use App\Models\ModuleSession;
@@ -35,6 +36,13 @@ class Program extends Model
 
     function notice(){
       return $this->hasOne("App\Models\NoticeProgram");
+    }
+
+    function messages($user_id){
+      return Conversation::where('program_id',$this->id)->where('user_id',$user_id)
+      ->orWhere(function($query)use($user_id){
+        $query->where('program_id',$this->id)->where('to_id',$user_id);
+      });
     }
 
     function fellows(){

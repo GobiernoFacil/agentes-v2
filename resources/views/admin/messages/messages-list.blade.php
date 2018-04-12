@@ -11,10 +11,10 @@
 		<h1>Mensajes Privados</h1>
 	</div>
   <div class="col-sm-3 center">
-		<a href="{{ url('dashboard/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->store_conversations->count()}})</a>
+		<a href='{{ url("dashboard/mensajes/programa/$program->id/mensajes-archivados") }}' class="btn gde"> Mensajes Archivados ({{$user->get_storaged_conversations($program)->count()}})</a>
 	</div>
 	<div class="col-sm-3 center">
-		<a href="{{ url('dashboard/mensajes/agregar') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
+		<a href='{{ url("dashboard/mensajes/programa/$program->id/agregar-mensaje") }}' class="btn gde"><strong>+</strong> Crear Mensaje</a>
 	</div>
 </div>
 
@@ -77,7 +77,7 @@
   <div class="col-sm-12">
 	  <div class="box center">
 	  	<h2>Sin mensajes</h2>
-	  	<a href="{{ url('dashboard/mensajes/agregar') }}" class="btn ev"><strong>+</strong> Crear Mensaje</a>
+	  	<a href='{{ url("dashboard/mensajes/programa/$program->id/agregar-mensaje") }}' class="btn ev"><strong>+</strong> Crear Mensaje</a>
 	  </div>
   </div>
 </div>

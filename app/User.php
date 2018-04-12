@@ -211,8 +211,10 @@ class User extends Authenticatable
       return $average;
     }
 
-    function get_conversations(){
-      $program        = $this->actual_program();
+    function get_conversations($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
       $storaged       = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();
       return  Conversation::where('program_id',$program->id)->where('user_id',$this->id)->whereNotIn('id',$storaged)->orWhere(function($query)use($storaged,$program){
         $query->where('program_id',$program->id)->where('to_id',$this->id)->whereNotIn('id',$storaged);
@@ -221,8 +223,10 @@ class User extends Authenticatable
 
     }
 
-    function get_storaged_conversations(){
-      $program       = $this->actual_program();
+    function get_storaged_conversations($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
       $storaged      = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();
       return Conversation::where('program_id',$program->id)->where('user_id',$this->id)->whereIn('id',$storaged)
       ->orWhere(function($query)use($storaged,$program){
@@ -232,8 +236,10 @@ class User extends Authenticatable
 
     }
 
-    function get_all_users_for_messages(){
-      $program      = $this->actual_program();
+    function get_all_users_for_messages($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
       $modules      = $program->fellow_modules()->pluck('id')->toArray();
       $assign_users = FacilitatorModule::whereIn('module_id',$modules)->pluck('user_id')->toArray();
       $disabled     = $this::where('type','fellow')->where('enabled',0)->pluck('id')->toArray();
@@ -255,6 +261,10 @@ class User extends Authenticatable
       $names[null] = "Selecciona una opción";
       return $names;
 
+    }
+
+    function store_conversations(){
+      return $this->hasMany("App\Models\StoreConversation");
     }
 
 }
