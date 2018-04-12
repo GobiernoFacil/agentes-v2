@@ -428,7 +428,7 @@ Route::group(['middleware' => ['auth']], function () {
           /*@Messages Controller */
           // Rutas mensajes
           Route::get('tablero/{program_slug}/mensajes', 'Messages@index');
-          Route::get('tablero/{program_slug}/mensajes-archivados', 'Messages@indexStorage');
+          Route::get('tablero/{program_slug}/mensajes-archivados', 'Messages@indexStoraged');
           Route::get('tablero/{program_slug}/mensajes/agregar', 'Messages@add');
           Route::get('tablero/{program_slug}/mensajes/conversacion/agregar/{conversation_id}', 'Messages@addSingle');
           Route::post('tablero/{program_slug}/mensajes/conversacion/save/{conversation_id}', 'Messages@saveSingle');

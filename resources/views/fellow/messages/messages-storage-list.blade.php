@@ -2,7 +2,7 @@
 @section('title', 'Mensajes')
 @section('description', 'Lista de mensajes archivados')
 @section('body_class', 'fellow mensajes')
-@section('breadcrumb_type', 'messages list')
+@section('breadcrumb_type', 'messages storaged list')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
 
 @section('content')
@@ -19,19 +19,30 @@
 	</div>
 </div>
 
-@if($user->store_conversations->count()>0)
+@if($user->get_storaged_conversations()->count()>0)
 <div class="row">
 	<div class="col-sm-12">
 		@foreach ($conversations as $conversation)
-		<a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . $conversation->id) }}" class="ap_message_link">
-			
+		<a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}" class="ap_message_link">
+
 		    <!--mensaje con-->
 		    <span class="col-sm-4">
+
 		    	<strong>
 				@if($conversation->to_id != $user->id)
-				   	{{$conversation->user_to->name}}
+						@if($conversation->user_to->image)
+						<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' widht="100%">
+						@else
+						<img src='{{url("img/users/default.png")}}' widht="100%">
+						@endif
+				   	{{$conversation->user_to->name}} {{$conversation->user_to->type === 'fellow' ?  $conversation->user_to->surname.' '.$conversation->user_to->lastname : '' }}
 				@else
-				   {{$conversation->user->name}}
+						@if($conversation->user->image)
+						<img src='{{url("img/users/{$conversation->user->image->name}")}}' widht="100%">
+						@else
+						<img src='{{url("img/users/default.png")}}' widht="100%">
+						@endif
+				   {{$conversation->user->name}} {{$conversation->user->type === 'fellow' ?  $conversation->user->surname.' '.$conversation->user->lastname : ''}}
 				@endif
 				</strong>
 		    </span>
