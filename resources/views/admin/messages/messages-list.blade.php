@@ -3,7 +3,7 @@
 @section('description', 'Lista de mensajes')
 @section('body_class', 'admin mensajes')
 @section('breadcrumb_type', 'messages list')
-@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
@@ -60,7 +60,7 @@
 				    </td>
 					<td>
 			          <a href="{{ url('dashboard/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
-			          <a href ='{{ url("dashboard/mensajes/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
+			          <a href ='{{ url("dashboard/mensajes/programa/$program->id/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
 
 				    </td>
 				</tr>

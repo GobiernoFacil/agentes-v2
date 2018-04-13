@@ -3,7 +3,7 @@
 @section('description', 'Lista de programas con mensajes')
 @section('body_class', 'program')
 @section('breadcrumb_type', 'programs list')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_modules')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_messages')
 
 @section('content')
 
@@ -26,8 +26,8 @@
 		    <tr>
 		      <th>Nombre</th>
 		      <th>Fecha Inicio / Fecha Final</th>
-		      <th>Total mensajes</th>
-          <th>Activo</th>
+					<th>Activo</th>
+		      <th>Total conversaciones</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
@@ -36,13 +36,13 @@
 		      <tr>
 		        <td><h4><a href='{{url("dashboard/mensajes/programa/$program->id/ver-mensajes") }}'>{{$program->title}}</a></h4></td>
 		        <td>{{date("d-m-Y", strtotime($program->start))}} <br> <strong>{{date('d-m-Y', strtotime($program->end))}}</strong></td>
-				    <td>{{$program->messages($user->id)->count()}}</td>
             <?php $today  = date('Y-m-d');?>
             @if($program->start <= $today && $program->end >= $today)
               <td>{{$program->public ? "Sí" : "No" }}</td>
             @else
               <td>No</td>
             @endif
+				    <td><a href='{{url("dashboard/mensajes/programa/$program->id/ver-mensajes") }}' >{{$program->messages($user->id)->count()}}</a></td>
 		        <td>
 		          <a href='{{url("dashboard/mensajes/programa/$program->id/ver-mensajes") }}' class="btn xs ev">Ver</a>
             </td>

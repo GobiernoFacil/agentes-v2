@@ -358,8 +358,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/mensajes/programa/{program_id}/save', 'AdminMessages@save');
     Route::get('dashboard/mensajes/programa/{program_id}/ver-mensajes/{conversation_id}', 'AdminMessages@view');
     Route::get('dashboard/mensajes/programa/{program_id}/conversacion/agregar-respuesta/{conversation_id}', 'AdminMessages@addSingle');
-    Route::post('dashboard/mensajes/conversacion/save/{conversation_id}', 'AdminMessages@saveSingle');
-    Route::get('dashboard/mensajes/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
+    Route::post('dashboard/mensajes/programa/{program_id}/conversacion/save/{conversation_id}', 'AdminMessages@saveSingle');
+    Route::get('dashboard/mensajes/programa/{program_id}/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
     Route::get('dashboard/horario', 'Admin@time');
     /*@AdminIndicators Controller */
     // Rutas de indicadores

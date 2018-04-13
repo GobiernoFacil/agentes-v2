@@ -2,7 +2,8 @@
 @section('title', 'Enviar mensaje privado')
 @section('description', 'Enviar mensaje privado')
 @section('body_class', 'admin mensajes')
-
+@section('breadcrumb_type', 'message send')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_messages')
 @section('content')
 <div class="row">
   <div class="col-sm-12">

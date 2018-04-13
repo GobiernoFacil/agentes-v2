@@ -42,18 +42,16 @@ class AdminMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function indexStoraged()
+  public function indexStoraged($program_id)
   {
     //
     $user = Auth::user();
-    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
-    $conversations = Conversation::where('user_id',$user->id)->whereIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
-      $query->where('to_id',$user->id)->whereIn('id',$storage->toArray());
-    })
-    ->orderBy('created_at','desc')->paginate($this->pageSize);
+    $program = Program::where('id',$program_id)->firstOrFail();
+    $conversations = $user->get_storaged_conversations($program)->paginate($this->pageSize);
     return view('admin.messages.messages-storage-list')->with([
       'user' => $user,
       'conversations' =>$conversations,
+      "program"  => $program
     ]);
 
   }
@@ -128,13 +126,13 @@ class AdminMessages extends Controller
     {
       //
       $user   = Auth::user();
-      $program      = Program::where('id',$request->program_id)->firstOrFail();
-      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      $program      = Program::where('id',$program_id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
       if($conversation){
         //determinar dirección de comunicación
         $to_user = $conversation->to_id;
       }else{
-        $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+        $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
         //determinar dirección de comunicación
         $to_user = $conversation->user_id;
       }
@@ -148,9 +146,9 @@ class AdminMessages extends Controller
         }
       }
      return view('admin.messages.messages-conversation')->with([
-        "user"      => $user,
+        "user"            => $user,
         "conversation"    => $conversation,
-        "program"   => $program
+        "program"         => $program
       ]);
     }
 
@@ -159,16 +157,18 @@ class AdminMessages extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function addSingle($conversation_id)
+    public function addSingle($program_id,$conversation_id)
     {
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      $program      = Program::where('id',$program_id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){
-      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
       }
       return view('admin.messages.messages-single-add')->with([
-        "user"      => $user,
-        'conversation' => $conversation
+        "user"         => $user,
+        'conversation' => $conversation,
+        "program"      => $program
       ]);
     }
 
@@ -182,9 +182,10 @@ class AdminMessages extends Controller
     {
       //
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$request->conversation_id)->where('user_id',$user->id)->first();
+      $program      = Program::where('id',$request->program_id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){
-      $conversation = Conversation::where('id',$request->conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('to_id',$user->id)->firstOrFail();
       }
       $message = new Message();
       $message->user_id = $user->id;
@@ -204,8 +205,8 @@ class AdminMessages extends Controller
       $converLog->status =0;
       $converLog->save();
       //envía correo
-      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
-      return redirect("dashboard/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+      //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      return redirect("dashboard/mensajes/programa/$program->id/ver-mensajes/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
     /**
@@ -213,15 +214,16 @@ class AdminMessages extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function storage($conversation_id)
+    public function storage($program_id,$conversation_id)
     {
       $user   = Auth::user();
-      $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+      $program      = Program::where('id',$program_id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){
-      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
       }
       $storage = StoreConversation::firstOrCreate(["user_id"=>$user->id,"conversation_id"=>$conversation_id]);
-      return redirect('dashboard/mensajes')->with("success","Se ha archivado correctamente");
+      return redirect('dashboard/mensajes/programa/'.$program->id.'/ver-mensajes')->with("success","Se ha archivado correctamente");
     }
 
 

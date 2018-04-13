@@ -2,6 +2,8 @@
 @section('title', 'Mensaje privado con ' . $conversation->user_to->name)
 @section('description', 'Mensaje privado con ' . $conversation->user_to->name)
 @section('body_class', 'admin mensajes')
+@section('breadcrumb_type', 'message view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
@@ -28,7 +30,7 @@
 		@endif
   </div>
   <div class="col-sm-3 center">
-    <a href='{{ url("dashboard/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
+    <a href='{{ url("dashboard/mensajes/programa/$program->id/conversacion/agregar-respuesta/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
   </div>
 </div>
 <div class="box">
@@ -74,7 +76,7 @@
 </div>
 <div class="row">
 		<div class="col-sm-8 col-sm-offset-2 center">
-		    <a href='{{ url("dashboard/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
+		    <a href='{{ url("dashboard/mensajes/programa/$program->id/conversacion/agregar-respuesta/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
 		</div>
 	</div>
 @endsection
