@@ -28,7 +28,8 @@
 					<th>Aspirantes</th>
 		      <th>Fellows</th>
 		      <th>Módulos</th>
-			  <th>Publicado</th>
+					<th>Evaluaciones</th>
+			    <th>Publicado</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
@@ -40,6 +41,7 @@
 						<td><h5><a href='{{url("dashboard/aspirantes/convocatoria/{$program->notice->notice_id}/ver")}}'>{{$program->notice->notice_data->all_aspirants_data()->count()}}</a></h5></td>
 						<td><h5><a href='{{url("dashboard/fellows/programa/$program->id")}}'>{{$program->fellows->count()}}</a></h5></td>
 						<td><h5><a href='{{url("dashboard/programas/ver/$program->id")}}'>{{$program->modules->count()}}</a></h5></td>
+						<td><h5><a href='{{url("dashboard/programas/$program->id/ver-evaluaciones")}}'>{{$program->get_all_eva_activities()->count()}}</a></h5></td>
 		        <td>{{$program->public ? "Sí" : "No" }}</td>
 		        <td>
 		          <a href="{{ url('dashboard/programas/ver/' . $program->id) }}" class="btn xs ev">Ver</a>

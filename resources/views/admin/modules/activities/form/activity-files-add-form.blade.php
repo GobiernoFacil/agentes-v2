@@ -27,7 +27,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Archivo</strong></label><br>
-      {{Form::file('file', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF, DOC,DOCX)
+      {{Form::file('file', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF)
       @if($errors->has('file'))
       <strong class="error">{{$errors->first('file')}}</strong>
       @endif

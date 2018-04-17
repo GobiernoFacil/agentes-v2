@@ -22,6 +22,9 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+			case "face":
+				$type = "Presencial";
+				break;
 			default:
 			 $type = "Lectura";
 		}
@@ -42,13 +45,14 @@
 		<!--- activity title-->
 		<div class="divider b"></div>
 		<h1><strong>{{$type}}:</strong> {{$activity->name}} </h1>
-		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} min.</span></p>
+		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></p>
 		<div class="divider"></div>
 
 	</div>
 </div>
 
 @if($activity->type == 'video')
+<!-- video -->
 	@if($activity->videos)
 	<div class="row">
 		<div class="col-sm-12">
@@ -63,12 +67,14 @@
 
 
 <div class="row">
+	<!--descripción-->
 	<div class="col-sm-12">
 		<p>{{$activity->description}}</p>
 	</div>
 
 	</div>
 	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
+	<!--si es examen de diagnostico-->
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-1">
 				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
@@ -94,7 +100,7 @@
 				<div class="box">
 					<div class="row">
 						<div class="col-sm-3 col-sm-offset-1">
-								<a href='{{ url("tablero/evaluacion/$activity->slug") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
+								<a href='{{ url("tablero/{$activity->session->module->program->slug}/evaluacion/$activity->slug") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
 						</div>
 					</div>
 				</div>
@@ -128,7 +134,7 @@
 		@if(!$files)
 			@if($activity->end >= $today )
 					<div class="col-sm-3 col-sm-offset-1">
-							<a href='{{ url("tablero/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
+							<a href='{{ url("tablero/{$activity->session->module->program->slug}/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
 					</div>
 					@else
 					<div class="row">
@@ -175,14 +181,14 @@
 	<div class="row">
 		<div class="col-sm-12">
 			@foreach ($activity->activityFiles as $file)
-			<object data='{{url("tablero/aprendizaje/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
-				<p<a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
+			<object data='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
+				<p<a href='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
 			</object>
-			<h4><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
+			<h4><a href='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></h4>
 			<p></p>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-4">
-					<p><a href='{{url("tablero/aprendizaje/actividades/archivos/descargar/$file->id")}}' class="btn view block sessions_l">Descargar</a></p>
+					<p><a href='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/actividades/archivos/descargar/$file->id")}}' class="btn view block sessions_l">Descargar</a></p>
 				</div>
 			</div>
 			@endforeach
@@ -233,5 +239,5 @@
 	    @endforeach
 </script>
 
-<script src="{{url('js/app-display-week-menu.js')}}"></script> 
+<script src="{{url('js/app-display-week-menu.js')}}"></script>
 @endsection

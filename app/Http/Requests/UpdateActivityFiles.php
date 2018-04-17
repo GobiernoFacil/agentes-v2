@@ -28,7 +28,7 @@ class UpdateActivityFiles extends FormRequest
             //
             'name' => 'required|max:256',
             'description' => 'required',
-            'file' => 'required|file|mimes:doc,docx,pdf|max:25000',
+            'file' => 'required|file|mimes:pdf|max:25000',
         ];
     }
 }

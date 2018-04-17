@@ -26,7 +26,7 @@
 			@if($today )
 			<div class="col-sm-{{ $user->type == 'admin' ? '8' : '9'}}">
 				<p>
-					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
+					<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}}</a>
 					<span class="notes">({{$activity->duration}})</span>
 				</p>
 				@if(!empty($activity->end))
@@ -35,7 +35,7 @@
 			</div>
 			<div class="col-sm-{{ $user->type == 'admin' ? '3' : '2'}}">
 				<p class="links right">
-					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}" class="btn xs ev">Ver</a>
+					<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}"class="btn xs ev">Ver</a>
 				</p>
 				</div>
 				<div class="col-sm-12">
@@ -45,7 +45,7 @@
 			@else
 			<div class="col-sm-{{ $user->type == 'admin' ? '8' : '9'}}">
 				<p>
-					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}">{{$activity->name}}</a>
+					<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}}</a>
 					<span class="notes">({{$activity->duration}})</span>
 				</p>
 				@if(!empty($activity->end))
@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-sm-{{ $user->type == 'admin' ? '3' : '2'}}">
 				<p class="links right">
-					<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->id) }}" class="btn xs ev">Ver</a>
+					<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}" class="btn xs ev">Ver</a>
 				</p>
 				</div>
 				<div class="col-sm-12">

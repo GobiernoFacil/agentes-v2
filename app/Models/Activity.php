@@ -103,6 +103,7 @@ class Activity extends Model
 
   }
 
+
   function reorder_add($request,$session){
     $activities  = $session->activities;
     if($request->order ==='first'){

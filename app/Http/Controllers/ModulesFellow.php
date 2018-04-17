@@ -39,21 +39,23 @@ class ModulesFellow extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function view($slug)
+    public function view($program_slug,$module_slug)
     {
       //
       $user    = Auth::user();
-      $module  = Module::where('slug',$slug)->firstOrFail();
+      $module  = Module::where('slug',$module_slug)->firstOrFail();
       $today = date("Y-m-d");
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
       $log->session_id = null;
       $log->module_id = $module->id;
       $log->activity_id = null;
       $log->save();
+      $last_activity = Log::where('user_id',$user->id)->where('type','activity')->first();
       return view('fellow.modules.module-view')->with([
         "user"      => $user,
         "module"    => $module,
-        "today" =>$today
+        "today" =>$today,
+        "last_activity" => $last_activity
       ]);
     }
 }

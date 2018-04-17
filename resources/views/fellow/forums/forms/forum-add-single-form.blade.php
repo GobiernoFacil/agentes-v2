@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/foros/pregunta/{$forum->slug}/mensajes/save/single"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/$program->slug/foros/pregunta/{$question->slug}/mensajes/save/single"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">

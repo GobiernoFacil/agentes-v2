@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Cache;
 use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
 use App\Models\Aspirant;
+use App\Models\Conversation;
+use App\Models\StoreConversation;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\FellowFile;
+use App\Models\FacilitatorModule;
+use App\Models\FellowProgram;
 use App\Models\FacilitatorSurvey;
 use App\Models\Forum;
 use App\Models\ForumLog;
@@ -79,9 +83,6 @@ class User extends Authenticatable
       return $this->hasMany("App\Models\Conversation");
     }
 
-    function store_conversations(){
-      return $this->hasMany("App\Models\StoreConversation");
-    }
 
     function diagnostic(){
       return $this->hasOne("App\Models\DiagnosticAnswer");
@@ -208,6 +209,62 @@ class User extends Authenticatable
         $average = 0;
       }
       return $average;
+    }
+
+    function get_conversations($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
+      $storaged       = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();
+      return  Conversation::where('program_id',$program->id)->where('user_id',$this->id)->whereNotIn('id',$storaged)->orWhere(function($query)use($storaged,$program){
+        $query->where('program_id',$program->id)->where('to_id',$this->id)->whereNotIn('id',$storaged);
+      })
+      ->orderBy('created_at','desc');
+
+    }
+
+    function get_storaged_conversations($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
+      $storaged      = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();
+      return Conversation::where('program_id',$program->id)->where('user_id',$this->id)->whereIn('id',$storaged)
+      ->orWhere(function($query)use($storaged,$program){
+        $query->where('program_id',$program->id)->where('to_id',$this->id)->whereIn('id',$storaged);
+      })
+      ->orderBy('created_at','desc');
+
+    }
+
+    function get_all_users_for_messages($program=false){
+      if($this->type !='admin'){
+        $program        = $this->actual_program();
+      }
+      $modules      = $program->fellow_modules()->pluck('id')->toArray();
+      $assign_users = FacilitatorModule::whereIn('module_id',$modules)->pluck('user_id')->toArray();
+      $disabled     = $this::where('type','fellow')->where('enabled',0)->pluck('id')->toArray();
+      $fellows      = FellowProgram::where('user_id','!=',$this->id)->where('program_id',$program->id)->whereNotIn('user_id',$disabled)->pluck('user_id')->toArray();
+      $users        = $this::whereIn('id',$fellows)
+      ->orwhere(function($query)use($assign_users){
+        $query->whereIn('id',$assign_users)->where('enabled',1);
+      })->orderBy('name','asc')->get();
+      $names = [];
+      foreach ($users as $p) {
+        if(isset($p->fellowData)){
+          $names[$p->id] = $p->name.' '.$p->fellowData->surname." ".$p->fellowData->lastname;
+        }elseif(isset($p->facilitatorData)){
+            $names[$p->id] = $p->name.' '.$p->facilitatorData->surname." ".$p->facilitatorData->lastname;
+        }else{
+            $names[$p->id] = $p->name;
+        }
+      }
+      $names[null] = "Selecciona una opción";
+      return $names;
+
+    }
+
+    function store_conversations(){
+      return $this->hasMany("App\Models\StoreConversation");
     }
 
 }

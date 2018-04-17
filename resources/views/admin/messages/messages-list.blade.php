@@ -3,7 +3,7 @@
 @section('description', 'Lista de mensajes')
 @section('body_class', 'admin mensajes')
 @section('breadcrumb_type', 'messages list')
-@section('breadcrumb', 'layouts.fellow.breadcrumb.b_messages')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
@@ -11,10 +11,10 @@
 		<h1>Mensajes Privados</h1>
 	</div>
   <div class="col-sm-3 center">
-		<a href="{{ url('dashboard/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->store_conversations->count()}})</a>
+		<a href='{{ url("dashboard/mensajes/programa/$program->id/mensajes-archivados") }}' class="btn gde"> Mensajes Archivados ({{$user->get_storaged_conversations($program)->count()}})</a>
 	</div>
 	<div class="col-sm-3 center">
-		<a href="{{ url('dashboard/mensajes/agregar') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
+		<a href='{{ url("dashboard/mensajes/programa/$program->id/agregar-mensaje") }}' class="btn gde"><strong>+</strong> Crear Mensaje</a>
 	</div>
 </div>
 
@@ -60,7 +60,7 @@
 				    </td>
 					<td>
 			          <a href="{{ url('dashboard/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
-			          <a href ='{{ url("dashboard/mensajes/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
+			          <a href ='{{ url("dashboard/mensajes/programa/$program->id/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
 
 				    </td>
 				</tr>
@@ -77,7 +77,7 @@
   <div class="col-sm-12">
 	  <div class="box center">
 	  	<h2>Sin mensajes</h2>
-	  	<a href="{{ url('dashboard/mensajes/agregar') }}" class="btn ev"><strong>+</strong> Crear Mensaje</a>
+	  	<a href='{{ url("dashboard/mensajes/programa/$program->id/agregar-mensaje") }}' class="btn ev"><strong>+</strong> Crear Mensaje</a>
 	  </div>
   </div>
 </div>

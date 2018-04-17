@@ -121,7 +121,7 @@
 		  	<a href='{{ url("dashboard/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
       		@endif
 		  	@if($user->type == "fellow")
-	  		<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+	  		<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
 	  		@endif
 			@if($user->type == "facilitator")
 			<a href='{{ url("tablero-facilitador/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
@@ -230,7 +230,7 @@
 		  	<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
 		  	@endif
 	    	@if($user->type == "fellow")
-			<a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+			<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}'class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
 			@endif
 			@if($user->type == "facilitator")
 			<a href='{{ url("tablero-facilitador/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
@@ -245,7 +245,7 @@
       <a href='{{ url("dashboard/foros/programa/$program->id/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
       @endif
       @if($user->type == "fellow")
-      <a href='{{ url("tablero/foros/pregunta/$question->slug/mensajes/agregar") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
+      <a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
 	  @endif
       @if($user->type == "facilitator")
 	   <a href='{{ url("tablero-facilitador/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>

@@ -63,7 +63,7 @@
 	<div class="row">
 		<div class = "col-sm-12">
 			<?php $counter = 0;?>
-			@foreach($program->modules as $module)
+			@foreach($program->fellow_modules as $module)
 			<?php ++$counter;?>
 				@include('fellow.dashboard_layout.dash_module')
 			@endforeach
@@ -84,7 +84,7 @@
 <script>
 (function(){
 	var open_class = "ap-show",
-	    close_class = "ap-show",
+	    close_class = "ap-close",
 	    buttons = document.querySelectorAll("button"),
 	    i;
 
@@ -98,13 +98,13 @@
 
 			if(is_hidden){
 				content.style.display = "block";
-				this.classList.remove(close_class);
-				this.classList.add(open_class);
+				this.classList.remove(open_class);
+				this.classList.add(close_class);
 			}
 			else{
 				content.style.display = "none";
-				this.classList.add(close_class);
-				this.classList.remove(open_class);
+				this.classList.add(open_class);
+				this.classList.remove(close_class);
 			}
 		});
 	}

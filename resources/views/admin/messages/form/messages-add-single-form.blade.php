@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("dashboard/mensajes/conversacion/save/{$conversation->id}"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/mensajes/programa/$program->id/conversacion/save/{$conversation->id}"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">

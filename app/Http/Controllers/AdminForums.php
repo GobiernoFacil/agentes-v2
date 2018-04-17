@@ -124,8 +124,15 @@ class AdminForums extends Controller
     $forum->slug    = str_slug($request->topic);
     $forum->program_id = $request->program_id;
     if($request->type ==='activity'){
-      $session = ModuleSession::where('id',$request->session_id)->first();
+      $session  = ModuleSession::where('id',$request->session_id)->first();
+      $activity = Activity::where('id',$request->activity_id)->first();
+      $activity->hasforum = 'Sí';
+      $activity->end = $session->module->end;
+      $activity->save();
       $forum->module_id = $session->module->id;
+    }
+    if($request->type ==='state'){
+      $forum->state_name = $request->state;
     }
     $forum->save();
     //forum log

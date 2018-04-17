@@ -28,7 +28,7 @@ class SessionFellow extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function view($module_slug,$slug)
+    public function view($program_slug,$module_slug,$slug)
     {
       //
       $user    = Auth::user();
@@ -38,6 +38,7 @@ class SessionFellow extends Controller
       $log->session_id = $session->id;
       $log->module_id = null;
       $log->activity_id = null;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.modules.sessions.session-view')->with([
         "user"      => $user,
@@ -46,13 +47,24 @@ class SessionFellow extends Controller
       ]);
     }
 
-    public function activity($module_slug,$slug,$id)
+    public function activity($program_slug,$module_slug,$session_slug,$activity_slug)
     {
       //
       $user      = Auth::user();
-      $session   = ModuleSession::where('slug',$slug)->first();
-      $activity  = Activity::where('id',$id)->first();
+      $session   = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
       $files     = FellowFile::where('user_id',$user->id)->where('activity_id',$activity->id)->count();
+      $pagination = $activity->get_pagination();
+      if($prev_ac = Activity::where('id',$pagination[0])->first()){
+        $prev = $prev_ac->slug;
+      }else{
+        $prev = false;
+      }
+      if($next_ac = Activity::where('id',$pagination[1])->first()){
+        $next = $next_ac->slug;
+      }else{
+        $next = false;
+      }
       $forum    = $activity->forum;
       //forums
       if($activity->forum){
@@ -69,6 +81,13 @@ class SessionFellow extends Controller
       $log->session_id = null;
       $log->module_id = null;
       $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
+      $log->save();
+      $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'activity']);
+      $log->session_id = null;
+      $log->module_id = null;
+      $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.modules.sessions.activity-view')->with([
         "user"      => $user,
@@ -76,9 +95,11 @@ class SessionFellow extends Controller
         "activity"  => $activity,
         'files'     => $files,
         "score"     => $score,
-        "forums"	=> $forums,
-        "forum"		=> $forum,
-      ]);
+        "forums"	  => $forums,
+        "forum"		  => $forum,
+        "prev"      => $prev,
+        "next"      => $next
+       ]);
     }
 
     /**
@@ -87,7 +108,7 @@ class SessionFellow extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function viewFacilitator($module_slug,$slug,$id)
+    public function viewFacilitator($program_slug,$module_slug,$slug,$id)
     {
       //
       $user    = Auth::user();
@@ -115,6 +136,7 @@ class SessionFellow extends Controller
       $log->session_id = null;
       $log->module_id = null;
       $log->activity_id = $activity->id;
+      $log->program_id = $session->module->program->id;
       $log->save();
       return view('fellow.diagnostic.add-diagnostic')->with([
         "user"      => $user,

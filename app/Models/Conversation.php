@@ -9,7 +9,7 @@ class Conversation extends Model
 {
     //
     protected $fillable = [
-        'title', 'user_id'
+        'title', 'user_id','to_id','program_id'
     ];
 
     function user(){

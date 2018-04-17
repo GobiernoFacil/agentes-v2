@@ -16,7 +16,7 @@
   <div class="row">
 
     <div class="col-sm-12">
-	    <p>A continuación se exponen los productos de evaluación categorizados por cada uno de los  módulos con la finalidad de que los participantes puedan visualizar el tipo de actividades y la carga de trabajo aproximada. A manera general la evaluación consta de exámenes en línea, trabajos individuales, participación en los fotos y trabajos por equipo.</p>
+	    <p>A continuación se exponen los productos de evaluación categorizados por cada uno de los  módulos con la finalidad de que los participantes puedan visualizar el tipo de actividades y la carga de trabajo aproximada. A manera general la evaluación consta de exámenes en línea, trabajos individuales, participación en los foros y trabajos por equipo.</p>
 		<table class="table">
 			<thead>
 				<tr>

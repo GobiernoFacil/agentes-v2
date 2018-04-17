@@ -12,7 +12,7 @@
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="fellow")
-		<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("tablero/{$session->module->program->slug}/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 	</div>
 	<!-- descripción-->
@@ -46,7 +46,7 @@
 						<h2><a href='{{ url("tablero-facilitador/foros/pregunta/ver/$conversation->id") }}'>{{$conversation->topic}}</a></h2>
 						@endif
 						@if($user->type =="fellow")
-						<h2><a href='{{ url("tablero/foros/pregunta/$session->slug/$conversation->slug/ver") }}'>{{$conversation->topic}}</a></h2>
+						<h2><a href='{{ url("tablero/{$session->module->program->slug}/foros/pregunta/$session->slug/$conversation->slug/ver") }}'>{{$conversation->topic}}</a></h2>
 						@endif
 						<!--fellow data -->
  						@if($conversation->user->fellowData)
@@ -77,7 +77,7 @@
 		<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		@if($user->type =="fellow")
-		<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+		<a href='{{ url("tablero/{$session->module->program->slug}/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
 		@endif
 		</div>
 
@@ -97,7 +97,7 @@
   			<a href='{{ url("tablero-facilitador/foros/pregunta/crear/$forum->id") }}' class="btn gde">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
   			@endif
   			@if($user->type =="fellow")
-  			<a href='{{ url("tablero/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
+  			<a href='{{ url("tablero/{$session->module->program->slug}/foros/$session->slug/pregunta/crear") }}' class="btn gde download">Agregar Pregunta o Tema al foro [<strong>+</strong>]</a>
   			@endif
   		</div>
 	</div>

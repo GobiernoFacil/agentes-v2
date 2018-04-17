@@ -30,7 +30,7 @@
 		@endif
   </div>
   <div class="col-sm-3 center">
-    <a href='{{ url("tablero/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
+    <a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".encrypt($conversation->id)) }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
   </div>
 </div>
 <div class="box">
@@ -76,7 +76,7 @@
 </div>
 <div class="row">
 		<div class="col-sm-8 col-sm-offset-2 center">
-		    <a href='{{ url("tablero/mensajes/conversacion/agregar/$conversation->id") }}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
+		    <a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".encrypt($conversation->id))}}' class="btn gde"><strong>+</strong> Escribir Mensaje</a>
 		</div>
 	</div>
 @endsection

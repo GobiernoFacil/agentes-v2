@@ -14,6 +14,7 @@ use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\FellowAverage;
+use App\Models\Program;
 use App\Models\RetroLog;
 use App\User;
 //Notifications
@@ -51,13 +52,15 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($program_id)
     {
       $user       = Auth::user();
-      $activities   = Activity::where('type','evaluation')->orderBy('end','asc')->paginate($this->pageSize);
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activities = $program->get_all_eva_activities()->orderBy('end','asc')->paginate($this->pageSize);
       return view('admin.evaluations.activities-list')->with([
-        "user"      => $user,
+        "user"         => $user,
         "activities"   => $activities,
+        "program"      => $program
       ]);
 
     }

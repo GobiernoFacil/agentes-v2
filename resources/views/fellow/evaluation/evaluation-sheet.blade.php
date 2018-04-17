@@ -14,7 +14,7 @@
 	 <p>Promedio general: <span class="score_a block">{{$user->total_average($user->id) ? number_format($user->total_average($user->id)->average,2) : 'Sin promedio'}}</span></p>
   </div>
 	<div class="col-sm-12">
-		<p><a href="{{ url('tablero/calificaciones/metodologia') }}" class="link">Consulta la metodología de las calificaciones ></a></p>
+		<p><a href='{{ url("tablero/$program->slug/calificaciones/metodologia") }}' class="link">Consulta la metodología de las calificaciones ></a></p>
 	</div>
 </div>
 <div class="box score">

@@ -13,7 +13,7 @@
 						@if($user->type == "admin")
 						<a href="{{ url('dashboard/sesiones/actividades/ver/'. $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a>
 						@else
-						<a href="{{ url('tablero/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a>
+						<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $_activity->slug) }}" class="{{$activity->slug == $_activity->slug ? 'current' : ''}}">{{$_activity->name}} </a>
 						@endif
 					</span>
 					<span class="col-sm-3">

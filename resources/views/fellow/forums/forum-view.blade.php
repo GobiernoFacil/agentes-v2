@@ -11,7 +11,7 @@
     <h1>{{$forum->topic}} </h1>
   </div>
   <div class="col-sm-3 center">
-    <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+    <a href='{{ url("tablero/$program->slug/foros/$forum->slug/mensajes/agregar") }}' class="btn view block sessions_l"><strong>+</strong> Agregar Mensaje</a>
   </div>
 </div>
 <div class="box">
@@ -25,7 +25,7 @@
     @endforeach
     <div class="row">
       <div class="col-sm-3 col-sm-offset-2 center">
-        <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn gde"><strong>+</strong> Agregar Mensaje</a>
+        <a href='{{ url("tablero/foros/$forum->slug/mensajes/agregar") }}' class="btn view block sessions_l"><strong>+</strong> Agregar Mensaje</a>
       </div>
     </div>
   @else

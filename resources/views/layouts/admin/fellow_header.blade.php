@@ -29,10 +29,10 @@
 			@endif
 			@if($user->type == "fellow")
 			<!--fellow-->
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/foros')}}" data-title="Foros"><b class="icon i_foros"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow score' ? "active" : ''}}"><a href="{{url( $linkDash . '/calificaciones')}}" data-title="Calificaciones"><b class="icon i_score"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow files' ? "active" : ''}}"><a href="{{url( $linkDash . '/perfil/archivos')}}" data-title="Archivos"><b class="icon i_files"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/'.$user->actual_program()->slug.'/foros')}}" data-title="Foros"><b class="icon i_foros"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$user->actual_program()->slug. '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow score' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$user->actual_program()->slug. '/calificaciones')}}" data-title="Calificaciones"><b class="icon i_score"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow files' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$user->actual_program()->slug. '/perfil/archivos')}}" data-title="Archivos"><b class="icon i_files"></b></a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'news fellow' ? "active" : ''}}"><a href="{{url( $linkDash . '/noticias')}}" data-title="Avisos"><b class="icon i_news"></b></a></li>
 			@endif
 			@if($user->type == "aspirant")

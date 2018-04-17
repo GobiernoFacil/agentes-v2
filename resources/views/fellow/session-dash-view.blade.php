@@ -5,33 +5,38 @@
     <b class="icon_h session list_s"></b>
   </div>
   <div class="col-sm-8">
-    <h3>Sesión {{$session->order}}</h3>
-    <h2><a href='{{url("tablero/aprendizaje/{$session->module->slug}/$session->slug")}}'>{{$session->name}}</a></h2>
+    <h3>Sesión </h3>
+    <h2><a href='{{url("tablero/{$program->slug}/aprendizaje/{$session->module->slug}/$session->slug")}}'>{{$session->name}}</a></h2>
     <div class="divider"></div>
+      <?php /*
       <div class="row">
-        <div class="col-sm-9">
+    <div class="col-sm-9">
           <p>{{$session->objective}}</p>
         </div>
+
         <div class="col-sm-3 notes">
           <p class="right">Fechas:<br>{{date("d-m-Y", strtotime($session->start))}} al {{date('d-m-Y', strtotime($session->end))}}</p>
         </div>
       </div>
+      */?>
     </div>
     <!-- ver sesión-->
     <div class="col-sm-3">
-      <a class="btn view block sessions_l" href='{{url("tablero/aprendizaje/{$session->module->slug}/$session->slug")}}'>Ver sesión</a>
+      <a class="btn view block sessions_l" href='{{url("tablero/{$program->slug}/aprendizaje/{$session->module->slug}/$session->slug")}}'>Ver sesión</a>
     </div>
             <!-- footnote-->
     <div class="footnote">
       <div class="row">
+        <?php /*
         <div class="col-sm-2">
           <p><b class="icon_h time"></b>{{$session->hours}} h </p>
         </div>
         <div class="col-sm-2">
           <p><b class="icon_h modalidad"></b>{{$session->modality}}</p>
         </div>
+        */?>
         @if($session->facilitators->count()>0)
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-sm-offset-2">
           <p><strong>{{$session->facilitators->count() == 1 ? 'Facilitador' : 'Facilitadores' }}:</strong>
 	       <ul class="list-facilitator">
 
@@ -46,7 +51,7 @@
           	</span>
           	<span class="col-sm-10">
 
-            {{$facilitator->user->name}} -  {{$facilitator->user->institution}} 
+            {{$facilitator->user->name}} -  {{$facilitator->user->institution}}
           	</span>
           	</li>
           @endforeach
@@ -60,7 +65,7 @@
         @endif
 
         <div class="col-sm-2">
-          <p class="right">{{$session->activities->count()}} actividades  </p>
+          <p class="right">{{$session->activities->count() > 1 ? $session->activities->count().' actividades' : $session->activities->count().' actividad' }}  </p>
         </div>
       </div>
     </div>

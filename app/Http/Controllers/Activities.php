@@ -150,7 +150,7 @@ class Activities extends Controller
         {
             //
             $user     = Auth::user();
-            $activity = activity::where('id',$id)->firstOrFail();
+            $activity = Activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
             $pagination = $activity->get_pagination();
             $prev     = $pagination[0];

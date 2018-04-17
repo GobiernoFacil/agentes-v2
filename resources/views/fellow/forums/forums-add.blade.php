@@ -13,7 +13,7 @@
 <div class="box">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      @include('fellow.modules.sessions.forums.forms.forums-add-form')
+      @include('fellow.forums.forms.forums-add-form')
     </div>
   </div>
 </div>
