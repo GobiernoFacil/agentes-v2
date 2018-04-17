@@ -355,17 +355,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('dashboard/sesiones/actividades/evaluacion/{activity_id}/update/answer', 'Quiz@updateAnswer');
     /*@AdminMessages Controller */
     // Rutas mensajes
-<<<<<<< HEAD
-    Route::get('dashboard/mensajes', 'AdminMessages@index');
-    Route::get('dashboard/mensajes-archivados', 'AdminMessages@indexStorage');
-    Route::get('dashboard/mensajes/agregar', 'AdminMessages@add');
-    Route::get('dashboard/mensajes/conversacion/agregar/{conversation_id}', 'AdminMessages@addSingle');
-    Route::post('dashboard/mensajes/conversacion/save/{conversation_id}', 'AdminMessages@saveSingle');
-    Route::post('dashboard/mensajes/save', 'AdminMessages@save');
-    Route::get('dashboard/mensajes/ver/{conversation_id}', 'AdminMessages@view');
-    Route::get('dashboard/mensajes/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
-    Route::get('dashboard/horario/{task}', 'Admin@time');
-=======
+
     Route::get('dashboard/mensajes', 'AdminMessages@all');
     Route::get('dashboard/mensajes/programa/{program_id}/ver-mensajes', 'AdminMessages@index');
     Route::get('dashboard/mensajes/programa/{program_id}/mensajes-archivados', 'AdminMessages@indexStoraged');
@@ -375,8 +365,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/mensajes/programa/{program_id}/conversacion/agregar-respuesta/{conversation_id}', 'AdminMessages@addSingle');
     Route::post('dashboard/mensajes/programa/{program_id}/conversacion/save/{conversation_id}', 'AdminMessages@saveSingle');
     Route::get('dashboard/mensajes/programa/{program_id}/conversacion/storage/{conversation_id}', 'AdminMessages@storage');
-    Route::get('dashboard/horario', 'Admin@time');
->>>>>>> 554a256b39a10bcdd6ce1cd19ec1c77837814ff3
+    Route::get('dashboard/horario/{task}', 'Admin@time');
     /*@AdminIndicators Controller */
     // Rutas de indicadores
     Route::get('dashboard/indicadores', 'AdminIndicators@index');
