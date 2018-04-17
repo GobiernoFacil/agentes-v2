@@ -12,6 +12,8 @@ use Mail;
 // models
 use App\User;
 use App\Models\Aspirant;
+use App\Models\AspirantInstitution;
+use App\Models\AspirantEvaluation;
 use App\Models\Image;
 use App\Models\Conversation;
 use App\Models\Module;
@@ -19,6 +21,7 @@ use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\NewsEvent;
 use App\Models\Program;
+
 
 // FormValidators
 use App\Http\Requests\SaveAdmin;
@@ -41,8 +44,8 @@ class Admin extends Controller
         $user 		  = Auth::user();
         $aspirants 	  = Aspirant::where('is_activated',1)->count();
         $testUserId   = User::where('email','andre@fcb.com')->get()->pluck('id');
-    	$fellows	  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
-		$programs 	  = Program::all()->count();
+    	  $fellows	  = User::where('type',"fellow")->where('enabled',1)->whereNotIn('id',$testUserId->toArray())->count();
+		    $programs 	  = Program::all()->count();
     		$modules_count 		  = Module::all()->count();
         $listId = FacilitatorModule::all()->pluck('user_id');
         $adm_count = User::whereIn('id',$listId->toArray())->where('type','!=','facilitator')->where('enabled',1)->count();
@@ -61,7 +64,7 @@ class Admin extends Controller
           $query->where('to_id',$user->id)->whereNotIn('id',$conversation_id->toArray());
         })
         ->count();
-        
+
         $edomex_number = Aspirant::where('is_activated',1)->where('state','México')->count();
         $campeche_number = Aspirant::where('is_activated',1)->where('state','Campeche')->count();
         $durango_number = Aspirant::where('is_activated',1)->where('state','Durango')->count();
@@ -87,12 +90,12 @@ class Admin extends Controller
 		  'campeche_number' 		  => $campeche_number,
 		  'durango_number' 		  => $durango_number,
 		  'guanajuato_number' 		  => $guanajuato_number,
-		  'quintana_number' 		  => $quintana_number,	
+		  'quintana_number' 		  => $quintana_number,
 		  'sanluis_number' 		  => $sanluis_number,
-		  'sinaloa_number' 		  => $sinaloa_number,		  
-		  'tabasco_number' 		  => $tabasco_number,		  
-		  'tlaxcala_number' 		  => $tlaxcala_number,		  
-		  'veracruz_number' 		  => $veracruz_number,		  
+		  'sinaloa_number' 		  => $sinaloa_number,
+		  'tabasco_number' 		  => $tabasco_number,
+		  'tlaxcala_number' 		  => $tlaxcala_number,
+		  'veracruz_number' 		  => $veracruz_number,
          ]);
       }
 
@@ -316,7 +319,20 @@ class Admin extends Controller
         return redirect("dashboard/perfil")->with("message",'Perfil actualizado correctamente');
       }
 
-      public function time(){
-        echo date('Y-m-d H:i:s');
+      //debug function, para ver hora de servidor y desplegar lista de ev por realizar
+
+      public function time($task){
+        if($task ==='1'){
+          $programs 	  = Program::where('notice_id',2)->firstOrfail();
+          $users_in  = User::select('institution')->where('type','admin')->where('enabled',1)->distinct('institution')->orderBy('institution','asc')->get();
+          foreach ($users_in as $institution) {
+              echo 'Evaluaciones totales de '.$institution->institution.': ';
+              echo(AspirantInstitution::where('institution',$institution->institution)->count().' Evaluaciones realizadas: ');
+              echo(AspirantEvaluation::where('institution',$institution->institution)->whereNotNull('grade')->count().'<br>');
+          }
+
+        }else{
+          echo date('Y-m-d H:i:s');
+        }
       }
 }
