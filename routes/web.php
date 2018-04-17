@@ -318,8 +318,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/foros/session', 'AdminForums@session');
     /*@AdminEvaluations Controller */
     // Rutas evaluation
+    Route::get('dashboard/programas/{program_id}/ver-evaluaciones', 'AdminEvaluations@index');
+
+
+
+
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
-    Route::get('dashboard/evaluacion', 'AdminEvaluations@index');
     Route::get('dashboard/evaluacion/actividad/ver/{activity_id}', 'AdminEvaluations@indexActivity');
     Route::get('dashboard/evaluacion/actividad/archivo/get/{file_id}', 'AdminEvaluations@download');
     Route::get('dashboard/evaluacion/actividad/archivo-corregido/get/{file_id}', 'AdminEvaluations@downloadEv');

@@ -130,6 +130,8 @@ class Program extends Model
       return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');
     }
 
+  
+
     function get_available_types(){
       //tipos para foros
       $type   = [];

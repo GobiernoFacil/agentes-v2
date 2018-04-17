@@ -1,5 +1,5 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Lista de actividades que cuentan con evaluación')
+@section('title', 'Lista de actividades que cuentan con evaluación - '.$program->title)
 @section('description', 'Plataforma del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'evaluation')
 @section('breadcrumb_type', 'evaluation list')
@@ -9,7 +9,8 @@
 @if($activities->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Lista de actividades con evaluación</h1>
+		<h1>Evaluaciones</h1>
+		<h2>{{$program->title}}</h2>
 	</div>
 </div>
 <div class="box">
@@ -78,12 +79,13 @@
 <div class="row">
 	<div class="col-sm-9">
 		<h1>Lista de actividades con evaluación</h1>
+		<h2>{{$program->title}}</h2>
 	</div>
 </div>
 <div class="box">
 	<div class="row center">
 		<div class="col-sm-10 col-sm-offset-1">
-		<h2>Sin actividades</h2>
+		<h2>Sin evaluaciones</h2>
 		</div>
 	</div>
 </div>
