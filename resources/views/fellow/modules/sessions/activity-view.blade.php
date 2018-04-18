@@ -128,7 +128,7 @@
 			</div>
 		</div>
 		@endif
-@elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
+@elseif($activity->type ==='evaluation' && $activity->files=== 1 && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
 		@if(!$files)

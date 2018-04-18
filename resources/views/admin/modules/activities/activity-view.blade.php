@@ -78,7 +78,7 @@
 @if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico')
 <!---------------------------------------------------------------------------------- evaluación ------------------------------------>
 	@include('admin.modules.activities.evaluation-view')
-@elseif($activity->type ==='evaluation' && $activity->files==='Sí' && $activity->slug !='examen-diagnostico')
+@elseif($activity->type ==='evaluation' && $activity->files=== 1 && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
 		<div class="col-sm-9">

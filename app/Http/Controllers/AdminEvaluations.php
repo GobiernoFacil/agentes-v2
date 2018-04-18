@@ -75,7 +75,7 @@ class AdminEvaluations extends Controller
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
-      if($activity->files ==='Sí'){
+      if($activity->files){
         //ver fellows con archivos
         $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
         $fellows  = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
@@ -487,7 +487,7 @@ class AdminEvaluations extends Controller
     public function viewEvaluations($activity_id)
     {
       $user       = Auth::user();
-      $activity   = Activity::where('files','Sí')->where('id',$activity_id)->firstOrFail();
+      $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
       //ver fellows con archivos
       $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
       $fellows     = User::where('type','fellow')->where('enabled',1)->whereIn('id',$fellows_ids->toArray())->paginate($this->pageSize);
