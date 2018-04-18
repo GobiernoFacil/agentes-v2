@@ -31,7 +31,7 @@
 			      <tr>
 					<td>
 						<h4>
-						@if($activity->files=='Sí' || $activity->slug==='examen-diagnostico' )
+						@if($activity->files || $activity->slug==='examen-diagnostico' )
 						<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
 						@else
 							@if($activity->slug==='examen-diagnostico')
@@ -50,9 +50,9 @@
 			        <td>{{$activity->session->name}}</td>
 			        <td><strong>{{!empty($activity->end) ? \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans() : 'Sin fecha'}}</strong><br>
 	            				{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</td>
-			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
+			        <td>{{$activity->files ? 'Archivo' : 'Examen'}}</td>
 			        <td>
-						@if($activity->files=='Sí')
+						@if($activity->files)
 							<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}' class="btn xs view">Ver</a>
 						@else
 							@if($activity->slug==='examen-diagnostico')

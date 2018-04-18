@@ -9,6 +9,10 @@
 <div class="row">
   <div class="col-sm-12">
     <h1>Ver calificación: <strong>{{!empty($score->quizInfo->title) ? $score->quizInfo->title : ''}}</strong></h1>
+    <h2>{{$program->title}}</h2>
+		<h3>Módulo: {{$activity->session->module->title}}</h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
+    <h5>Fellow: {{$score->user->name .' '.$score->user->fellowData->surname." ".$score->user->fellowData->lastname}}</h5>
   </div>
 </div>
 

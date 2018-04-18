@@ -78,7 +78,7 @@ class AdminEvaluations extends Controller
       if($activity->files){
         //ver fellows con archivos
         $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
-        $fellows  = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        $fellows    = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
         return view('admin.evaluations.activities-files-list')->with([
           "user"      => $user,
           "activity"   => $activity,
@@ -89,14 +89,37 @@ class AdminEvaluations extends Controller
         if(!$activity->quizInfo){
           return redirect('dashboard');
         }
-        $fellows  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
+        $scores  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
         return view('admin.evaluations.activities-fellows-list')->with([
           "user"      => $user,
-          "activity"   => $activity,
-          "fellows"   =>$fellows
+          "activity"  => $activity,
+          "scores"    => $scores,
+          "program"   => $program
         ]);
       }
 
+
+    }
+
+    /**
+     * Muestra lista de respuestas de diagnostico general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewEvaluation($program_id,$activity_id,$score_id)
+    {
+      $user      = Auth::user();
+      $score     = FellowScore::where('id',$score_id)->firstOrFail();
+      $userf     = User::find($score->user->id);
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activity   = Activity::where('id',$activity_id)->firstOrFail();
+      return view('admin.evaluations.evaluation-view')->with([
+        "user"      => $user,
+        "score"     => $score,
+        "userf"     => $userf,
+        "program"   => $program,
+        "activity"  => $activity
+      ]);
 
     }
 
@@ -381,23 +404,7 @@ class AdminEvaluations extends Controller
 
     }
 
-    /**
-     * Muestra lista de respuestas de diagnostico general
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function viewEvaluation($score_id)
-    {
-      $user      = Auth::user();
-      $score     = FellowScore::where('id',$score_id)->firstOrFail();
-      $userf     = User::find($score->user_id);
-      return view('admin.evaluations.evaluation-view')->with([
-        "user"      => $user,
-        "score"   => $score,
-        "userf"      => $userf,
-      ]);
 
-    }
 
     /**
      * Muestra evaluacion de archivos

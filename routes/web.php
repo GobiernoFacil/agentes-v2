@@ -320,12 +320,12 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas evaluation
     Route::get('dashboard/programas/{program_id}/ver-evaluaciones', 'AdminEvaluations@index');
     Route::get('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}', 'AdminEvaluations@indexActivity');
+    Route::get('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}/resultados/{score_id}', 'AdminEvaluations@viewEvaluation');
 
 
 
 
     Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
-    Route::get('dashboard/evaluacion/actividad/ver/{activity_id}', 'AdminEvaluations@indexActivity');
     Route::get('dashboard/evaluacion/actividad/archivo/get/{file_id}', 'AdminEvaluations@download');
     Route::get('dashboard/evaluacion/actividad/archivo-corregido/get/{file_id}', 'AdminEvaluations@downloadEv');
     Route::get('dashboard/evaluacion/actividad/archivo/evaluar/{file_id}/{eva}', 'AdminEvaluations@fileEvaluation');
@@ -333,7 +333,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/evaluacion/actividad/archivo/agregar/{activity_id}', 'AdminEvaluations@addSingle');
     Route::post('dashboard/evaluacion/actividad/archivo/save/{activity_id}', 'AdminEvaluations@saveSingle');
     Route::get('dashboard/evaluacion/actividad/archivo/evaluados/{activity_id}', 'AdminEvaluations@viewEvaluations');
-    Route::get('dashboard/evaluacion/actividad/resultados/ver/{quiz_id}', 'AdminEvaluations@viewEvaluation');
     Route::get('dashboard/evaluacion/actividad/archivos/resultados/ver/{file_score_id}', 'AdminEvaluations@viewFileEvaluation');
     Route::get('dashboard/evaluacion/diagnostico/ver/{answers_id}', 'AdminEvaluations@view');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');

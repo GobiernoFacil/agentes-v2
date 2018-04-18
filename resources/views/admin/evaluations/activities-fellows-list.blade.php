@@ -6,12 +6,13 @@
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_evaluation')
 
 @section('content')
-@if($fellows->count() > 0)
+@if($scores->count() > 0)
 <div class="row">
 	<div class="col-sm-12">
 		<h1>{{$activity->name}}</h1>
-		<h2>Módulo: {{$activity->session->module->title}}</h2>
-		<h3>Sesión: {{$activity->session->name}}</h3>
+		<h2>{{$program->title}}</h2>
+		<h3>Módulo: {{$activity->session->module->title}}</h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
 	</div>
 </div>
 <div class="box">
@@ -31,22 +32,22 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    @foreach ($fellows as $fellow)
+			    @foreach ($scores as $score)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/resultados/ver/' . $fellow->id) }}">{{$fellow->user->name .' '.$fellow->user->fellowData->surname." ".$fellow->user->fellowData->lastname}}</a></h4>
-			        {{$fellow->user->email}}</td>
-			        <td>{{$fellow->user->fellowData->city}} <br> {{$fellow->user->fellowData->state}}</td>
-			        <td>{{$fellow->user->fellowData->origin}}</td>
-			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->created_at))}}">{{$fellow->created_at->diffForHumans()}}</a> </td>
-							<td>{{$fellow->user->FellowScoreActivity($fellow->user->id,$activity->quizInfo->id) ? number_format($fellow->user->FellowScoreActivity($fellow->user->id,$activity->quizInfo->id)->score,2)  : 'Sin evaluar'}}</td>
+			        <td><h4> <a href='{{url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/resultados/$score->id")}}'>{{$score->user->name .' '.$score->user->fellowData->surname." ".$score->user->fellowData->lastname}}</a></h4>
+			        {{$score->user->email}}</td>
+			        <td>{{$score->user->fellowData->city}} <br> {{$score->user->fellowData->state}}</td>
+			        <td>{{$score->user->fellowData->origin}}</td>
+			        <td><a title="{{date('d-m-Y H:i', strtotime($score->created_at))}}">{{$score->created_at->diffForHumans()}}</a> </td>
+							<td>{{$score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id) ? number_format($score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id)->score,2)  : 'Sin evaluar'}}</td>
 			        <td>
-			          <a href ="{{ url('dashboard/evaluacion/actividad/resultados/ver/' . $fellow->id) }}"   class="btn xs view ev">Ver</a></td>
+			          <a href ='{{url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/resultados/$score->id")}}'   class="btn xs view ev">Ver</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
 			</table>
 
-			{{ $fellows->links() }}
+			{{ $scores->links() }}
 		</div>
 	</div>
 </div>
