@@ -70,9 +70,10 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexActivity($activity_id)
+    public function indexActivity($program_id,$activity_id)
     {
       $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
       if($activity->files ==='Sí'){
         //ver fellows con archivos

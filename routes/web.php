@@ -319,6 +319,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*@AdminEvaluations Controller */
     // Rutas evaluation
     Route::get('dashboard/programas/{program_id}/ver-evaluaciones', 'AdminEvaluations@index');
+    Route::get('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}', 'AdminEvaluations@indexActivity');
 
 
 

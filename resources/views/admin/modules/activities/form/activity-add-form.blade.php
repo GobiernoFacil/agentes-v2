@@ -48,7 +48,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿El usuario contará con carga de archivos?</strong></label>
-      {{Form::select('files',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      {{Form::select('files',[null => "Selecciona una opción", 1 =>'Sí', 0=> 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('files'))
       <strong class="danger">{{$errors->first('files')}}</strong>
       @endif
@@ -73,7 +73,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿Esta actividad cuenta con archivos?</strong></label>
-      {{Form::select('hasfiles',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      {{Form::select('hasfiles',[null => "Selecciona una opción", 1 =>'Sí', 0=> 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('hasfiles'))
       <strong class="danger">{{$errors->first('hasfiles')}}</strong>
       @endif
@@ -85,7 +85,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>¿Esta actividad cuenta con foro?</strong></label>
-      {{Form::select('hasforum',[null => "Selecciona una opción", 'Sí' =>'Sí', 'No'=> 'No'],null, ['class' => 'form-control'])}}
+      {{Form::select('hasforum',[null => "Selecciona una opción", 1 =>'Sí', 0=> 'No'],null, ['class' => 'form-control'])}}
       @if($errors->has('hasforum'))
       <strong class="danger">{{$errors->first('hasforum')}}</strong>
       @endif

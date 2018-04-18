@@ -32,13 +32,13 @@
 					<td>
 						<h4>
 						@if($activity->files=='Sí' || $activity->slug==='examen-diagnostico' )
-						<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+						<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
 						@else
 							@if($activity->slug==='examen-diagnostico')
 							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
 							@else
 									@if($activity->quizInfo)
-									<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}">{{$activity->name}}</a>
+									<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
 									@else
 									 {{$activity->name}}
 									@endif
@@ -53,13 +53,13 @@
 			        <td>{{$activity->files== 'Sí' ? 'Archivo' : 'Examen'}}</td>
 			        <td>
 						@if($activity->files=='Sí')
-							<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+							<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}' class="btn xs view">Ver</a>
 						@else
 							@if($activity->slug==='examen-diagnostico')
 							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
 							@else
 								@if($activity->quizInfo)
-									<a href="{{ url('dashboard/evaluacion/actividad/ver/' . $activity->id) }}" class="btn xs view">Ver</a>
+									<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}' class="btn xs view">Ver</a>
 								@else
 								 Sin examen
 								@endif
@@ -78,7 +78,7 @@
 @else
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Lista de actividades con evaluación</h1>
+		<h1>Evaluaciones</h1>
 		<h2>{{$program->title}}</h2>
 	</div>
 </div>
