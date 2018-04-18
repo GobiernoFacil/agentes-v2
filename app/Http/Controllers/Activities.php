@@ -76,7 +76,7 @@ class Activities extends Controller
             $activity  = new Activity($request->except(['_token','time','start','link','order']));
             $activity->order = $activity->reorder_add($request,$session);
 
-           if($request->files ==='Sí'){
+           if($request->files ===1){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);
@@ -96,7 +96,7 @@ class Activities extends Controller
               $video->save();
             }
 
-            if($activity->hasforum==='Sí'){
+            if($activity->hasforum===1){
               $name   = 'Foro de actividad: '.$request->name;
               $forum  = new Forum();
               $unique = Forum::select('topic')->where('topic',$name)->distinct()->get();
@@ -129,10 +129,10 @@ class Activities extends Controller
 
 
 
-            if($activity->hasfiles==='Sí'){
+            if($activity->hasfiles===1){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
-            }elseif($activity->type==='evaluation' && $activity->files!='Sí'){
+            }elseif($activity->type==='evaluation' && $activity->files!=1){
               //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
            }else{
@@ -211,7 +211,7 @@ class Activities extends Controller
             $data   = $request->except(['_token','start','time','link','link_video']);
 
             $data['slug']    = str_slug($request->name);
-            if($request->files ==='Sí'){
+            if($request->files ===1){
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);
@@ -234,7 +234,7 @@ class Activities extends Controller
             }
 
 
-            if($request->hasforum==='Sí'){
+            if($request->hasforum===1){
               $forum  = Forum::firstOrCreate(['activity_id'=>$request->id]);
               $last_name = $forum->topic;
               $name   = 'Foro de actividad: '.$request->name;
@@ -270,10 +270,10 @@ class Activities extends Controller
               }
             }
 
-          if($request->hasfiles==='Sí' && $last->hasfiles!=$request->hasfiles){
+          if($request->hasfiles===1 && $last->hasfiles!=$request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
-            }elseif($request->type==='evaluation' && $data["files"] != "Sí"){
+            }elseif($request->type==='evaluation' && $data["files"] != 1){
               //Agregar evaluacion
               if($last->quizInfo){
                   return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");

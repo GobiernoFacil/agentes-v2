@@ -89,7 +89,7 @@ class Program extends Model
 
       $today = date("Y-m-d");
       $sessions_id   = $this->get_all_fellow_sessions()->pluck('id')->toArray();
-      $activities_id = Activity::where('end','<=',$today)->where('hasforum','Sí')->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
+      $activities_id = Activity::where('end','<=',$today)->where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
       $forums = $this->forums()->pluck('id')->toArray();
       return Forum::where('state_name',$user->fellowData->state)->where('program_id',$this->id)
       ->orWhere(function($query)use($activities_id){
@@ -104,7 +104,7 @@ class Program extends Model
       $today = date("Y-m-d");
       $modules_id    = Module::where('program_id',$this->id)->where('end','>=',$today)->pluck('id')->toArray();
       $sessions_id   = ModuleSession::whereIn('module_id',$modules_id)->pluck('id')->toArray();
-      $activities_id   = Activity::where('end','>=',$today)->where('hasforum','Sí')->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
+      $activities_id   = Activity::where('end','>=',$today)->where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
       return Forum::where('program_id',$this->id)->whereIn('activity_id',$activities_id)
       ->orWhere(function($query){
         $query->where('program_id',$this->id)->whereIn('type',['general']);
@@ -115,7 +115,7 @@ class Program extends Model
       $today = date("Y-m-d");
       $modules_id    = Module::where('program_id',$this->id)->where('start','<=',$today)->where('end','>=',$today)->pluck('id')->toArray();
       $sessions_id   = ModuleSession::whereIn('module_id',$modules_id)->pluck('id')->toArray();
-      $activities_id   = Activity::where('end','>=',$today)->where('hasforum','Sí')->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
+      $activities_id   = Activity::where('end','>=',$today)->where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
       return Forum::whereIn('activity_id',$activities_id)->where('program_id',$this->id)->where('type','activity');
 
     }
@@ -130,7 +130,7 @@ class Program extends Model
       return ModuleSession::whereIn('module_id',$modules)->orderBy('order','asc');
     }
 
-  
+
 
     function get_available_types(){
       //tipos para foros

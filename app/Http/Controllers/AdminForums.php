@@ -126,7 +126,7 @@ class AdminForums extends Controller
     if($request->type ==='activity'){
       $session  = ModuleSession::where('id',$request->session_id)->first();
       $activity = Activity::where('id',$request->activity_id)->first();
-      $activity->hasforum = 'Sí';
+      $activity->hasforum = 1;
       $activity->end = $session->module->end;
       $activity->save();
       $forum->module_id = $session->module->id;
