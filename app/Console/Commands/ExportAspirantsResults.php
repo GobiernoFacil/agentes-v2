@@ -62,8 +62,10 @@ class ExportAspirantsResults extends Command
         if($notice){
           $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
           $states       = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
-          $headers      = ["Nombre","Apellidos","Correo","Estado","Ciudad","Número de evaluaciones", "Calificación"];
-          Excel::create('aspirants_results', function($excel)use($headers,$notice,$states) {
+          $headers      = ["Nombre","Apellidos","Correo","Estado","Ciudad","Género","Sector","No. evaluaciones","","","Instituciones","","", "Calificación Global"];
+          $headers_2    = ["","","","","","","","","GESOC","GF","INAI","PNUD","PROSOCIEDAD"," "];
+          $institutions = ["Gestión Social Y Cooperación","Gobierno Fácil","Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales","Programa de las Naciones Unidas para el Desarrollo","PROSOCIEDAD"];
+          Excel::create('aspirants_results', function($excel)use($headers,$notice,$states,$institutions,$headers_2) {
             // Set the title
             $excel->setTitle('Resultado de aspirantes - concocatoria "'.$notice->title.'"');
             // Chain the setters
@@ -71,30 +73,66 @@ class ExportAspirantsResults extends Command
                   ->setCompany('Gobierno Fácil');
             // Call them separately
             $excel->setDescription('Resultado de las evaluaciones para los aspirantes de la convocatoria "'.$notice->title.'" general y por estado');
-            $excel->sheet('General', function($sheet)use($notice,$headers){
+            $excel->sheet('General', function($sheet)use($notice,$headers,$headers_2,$institutions){
               $sheet->row(1, $headers);
               $sheet->row(1, function($row) {
                 $row->setBackground('#000000');
                 $row->setFontColor('#ffffff');
               });
+              $sheet->row(2, $headers_2);
+              $sheet->row(2, function($row) {
+                $row->setBackground('#000000');
+                $row->setFontColor('#ffffff');
+              });
               $aspirants = $notice->aspirants_app_already_evaluated()->get();
               foreach ($aspirants as $aspirant) {
-                $arr = [$aspirant->name,$aspirant->surname.' '.$aspirant->lastname,$aspirant->email,$aspirant->state,$aspirant->city,AspirantEvaluation::where('aspirant_id',$aspirant->id)->whereNotNull('grade')->count(),number_format($aspirant->global_grade->grade,2)];
+                $arr = [$aspirant->name,
+                        $aspirant->surname.' '.$aspirant->lastname,
+                        $aspirant->email,
+                        $aspirant->state,
+                        $aspirant->city,
+                        $aspirant->gender=== 'female' ? "Femenino" : "Masculino",
+                        $aspirant->origin,
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->whereNotNull('grade')->count(),
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[0])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[0])->whereNotNull('grade')->first()->grade,2) : " ",
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[1])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[1])->whereNotNull('grade')->first()->grade,2) : " ",
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('grade')->first()->grade,2) : " ",
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('grade')->first()->grade,2) : " ",
+                        AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('grade')->first()->grade,2) : " ",
+                        number_format($aspirant->global_grade->grade,2)];
                 $sheet->appendRow($arr);
               }
 
             });
 
             foreach ($states as $state) {
-              $excel->sheet($state->state, function($sheet)use($notice,$headers,$state){
+              $excel->sheet($state->state, function($sheet)use($notice,$headers,$state,$institutions,$headers_2){
                 $sheet->row(1, $headers);
                 $sheet->row(1, function($row) {
                   $row->setBackground('#000000');
                   $row->setFontColor('#ffffff');
                 });
+                $sheet->row(2, $headers_2);
+                $sheet->row(2, function($row) {
+                  $row->setBackground('#000000');
+                  $row->setFontColor('#ffffff');
+                });
                 $aspirants =  $notice->aspirants_app_already_evaluated_by_state($state->state)->get();
                 foreach ($aspirants as $aspirant) {
-                  $arr = [$aspirant->name,$aspirant->surname.' '.$aspirant->lastname,$aspirant->email,$aspirant->state,$aspirant->city,AspirantEvaluation::where('aspirant_id',$aspirant->id)->whereNotNull('grade')->count(),number_format($aspirant->global_grade->grade,2)];
+                  $arr = [$aspirant->name,
+                          $aspirant->surname.' '.$aspirant->lastname,
+                          $aspirant->email,
+                          $aspirant->state,
+                          $aspirant->city,
+                          $aspirant->gender=== 'female' ? "Femenino" : "Masculino",
+                          $aspirant->origin,
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->whereNotNull('grade')->count(),
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[0])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[0])->whereNotNull('grade')->first()->grade,2) : " ",
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[1])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[1])->whereNotNull('grade')->first()->grade,2) : " ",
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('grade')->first()->grade,2) : " ",
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('grade')->first()->grade,2) : " ",
+                          AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('grade')->first() ?   number_format(AspirantEvaluation::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('grade')->first()->grade,2) : " ",
+                          number_format($aspirant->global_grade->grade,2)];
                   $sheet->appendRow($arr);
                 }
                });
@@ -103,7 +141,7 @@ class ExportAspirantsResults extends Command
           })->store('xlsx','csv');
           $from    = "info@apertus.org.mx";
           $subject = "Conteo de aspirantes - convocatoria".$notice->title;
-          $emails = [  "hugo@gobiernofacil.com",
+          $emails = [ "hugo@gobiernofacil.com",
                        'carlos@gobiernofacil.com'];
           foreach ($emails as $email) {
                 Mail::send('emails.send_results', [], function($message) use ($from, $subject,$email) {
