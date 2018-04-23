@@ -16,11 +16,10 @@ class SendAspirantInterview extends Notification
      *
      * @return void
      */
-    public function __construct($aspirant,$notice)
+    public function __construct($aspirant)
     {
         //
         $this->aspirant = $aspirant;
-        $this->notice   = $notice;
     }
 
     /**
@@ -46,7 +45,7 @@ class SendAspirantInterview extends Notification
       return (new MailMessage)
               ->from('info@apertus.org.mx')
               ->subject('Aviso: Programa de Formación de Agentes Locales de Cambio')
-              ->markdown('vendor.notifications.aspirant_coming_soon_interview', ['url' => $url,'aspirant'=>$this->aspirant,'notice'=>$this->notice]);
+              ->markdown('vendor.notifications.aspirant_coming_soon_interview', ['url' => $url,'aspirant'=>$this->aspirant]);
     }
 
     /**
