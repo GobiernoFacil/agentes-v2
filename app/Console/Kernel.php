@@ -33,7 +33,8 @@ class Kernel extends ConsoleKernel
         Commands\AttachPreDataToProgram::Class,
         Commands\AllowAspirantsUpload::Class,
         Commands\CreateAspirantsCsv::Class,
-        Commands\ExportAspirantsResults::Class
+        Commands\ExportAspirantsResults::Class,
+        Commands\SendAspirantInterviewNotification::Class
     ];
 
     /**
