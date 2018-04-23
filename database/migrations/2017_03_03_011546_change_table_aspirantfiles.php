@@ -13,10 +13,10 @@ class ChangeTableAspirantFiles extends Migration
      */
     public function up()
     {
-        //}
+        //
         Schema::table('aspirantsFiles', function (Blueprint $table) {
-            $table->string('privacy')->nullable();
-            $table->string('proof')->nullable();
+           $table->string('privacy')->nullable();
+           $table->string('proof')->nullable();
         });
     }
 

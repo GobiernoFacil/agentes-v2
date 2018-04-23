@@ -8,8 +8,11 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-8">
-		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
-		
+		<h1>{{$activity->name}}</h1>
+		<h2>{{$program->title}}</h2>
+		<h3>Módulo: {{$activity->session->module->title}}</h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
+
 	</div>
 	<div class="col-sm-4 right">
 		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>

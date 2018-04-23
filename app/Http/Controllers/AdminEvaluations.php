@@ -82,7 +82,8 @@ class AdminEvaluations extends Controller
         return view('admin.evaluations.activities-files-list')->with([
           "user"      => $user,
           "activity"   => $activity,
-          "fellows"   =>$fellows
+          "fellows"   =>$fellows,
+          "program"   => $program
         ]);
       }else{
         //ver fellows con examen automatico
@@ -120,6 +121,27 @@ class AdminEvaluations extends Controller
         "program"   => $program,
         "activity"  => $activity
       ]);
+
+    }
+
+    /**
+     * Muestra lista de fellow evaluados para la actividad tipo trabajo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewEvaluations($program_id,$activity_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
+      //ver fellows con archivos
+      $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+      $fellows     = User::where('type','fellow')->where('enabled',1)->whereIn('id',$fellows_ids->toArray())->paginate($this->pageSize);
+      return view('admin.evaluations.activities-files-done-list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows
+        ]);
 
     }
 
@@ -486,25 +508,7 @@ class AdminEvaluations extends Controller
 
     }
 
-    /**
-     * Muestra lista de fellow evaluados para la actividad tipo trabajo
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function viewEvaluations($activity_id)
-    {
-      $user       = Auth::user();
-      $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
-      //ver fellows con archivos
-      $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
-      $fellows     = User::where('type','fellow')->where('enabled',1)->whereIn('id',$fellows_ids->toArray())->paginate($this->pageSize);
-      return view('admin.evaluations.activities-files-done-list')->with([
-          "user"      => $user,
-          "activity"   => $activity,
-          "fellows"   =>$fellows
-        ]);
 
-    }
 
 
 }

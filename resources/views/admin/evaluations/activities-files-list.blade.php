@@ -8,13 +8,16 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-8">
-		<h1>Evaluación de <strong>{{$activity->name}}</strong></h1>
-		
+		<h1>{{$activity->name}}</h1>
+		<h2>{{$program->title}}</h2>
+		<h3>Módulo: {{$activity->session->module->title}}</h3>
+		<h4>Sesión: {{$activity->session->name}}</h4>
+
 	</div>
 	<div class="col-sm-4 right">
 		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
 	</div>
-	
+
 	<div class="col-sm-12">
 		<div class="divider b"></div>
 	</div>
@@ -23,7 +26,7 @@
 		<h4>Sesión: {{$activity->session->name}}</h4>
 	</div>
 	<div class="col-sm-3 right">
-		<a href='{{ url("dashboard/evaluacion/actividad/archivo/evaluados/{$activity->id}") }}' class="btn gde">Ver evaluaciones</a>
+		<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/archivos-evaluados") }}' class="btn gde">Ver evaluaciones</a>
 	</div>
 </div>
 @if($fellows->count() > 0)
@@ -72,7 +75,7 @@
 			<h2>Sin usuarios con archivos para evaluar</h2>
 		</div>
 		<div class="col-sm-3 col-sm-offset-4 center">
-			<a href='{{ url("dashboard/evaluacion/actividad/archivo/evaluados/{$activity->id}") }}' class="btn gde">Ver evaluaciones</a>
+			<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/archivos-evaluados") }}' class="btn gde">Ver evaluaciones</a>
 		</div>
 	</div>
 </div>
