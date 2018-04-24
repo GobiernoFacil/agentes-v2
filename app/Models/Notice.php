@@ -61,6 +61,10 @@ class Notice extends Model
       return $this->hasMany("App\Models\AspirantInstitution",'notice_id');
     }
 
+    function aspirant_interview_institution(){
+      return $this->hasMany("App\Models\interview",'notice_id');
+    }
+
     //aspirantes que tienen validacion de correo, solo id's
     function aspirants(){
 
@@ -186,6 +190,14 @@ class Notice extends Model
         }
       }
       return Aspirant::where('is_activated',1)->whereIn('id',$temp_array);
+    }
+
+
+    function aspirants_per_institution_to_interview(){
+      $user      = Auth::user();
+      $aspirant_already   =[];// $this->aspirants_app_already_evaluated_by_institution($user->institution)->pluck('id')->toArray();
+      $aspirants = $this->aspirant_interview_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderBy('name','asc');
     }
 
 

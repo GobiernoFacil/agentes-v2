@@ -170,6 +170,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@evaluate');
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/evaluar-comprobante/{aspirant_id}', 'AdminAspirants@saveEvaluate');
 
+    // @AdminInterviews entrevistas
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/entrevistas', 'AdminInterviews@index');
+
 
     /// fellows
     Route::get('dashboard/fellows', 'FellowsAdmin@indexProgram');
