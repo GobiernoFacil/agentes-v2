@@ -192,12 +192,42 @@ class Notice extends Model
       return Aspirant::where('is_activated',1)->whereIn('id',$temp_array);
     }
 
+    function aspirants_interviews(){
+      $aspirants_id  = Interview::where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
+    }
 
     function aspirants_per_institution_to_interview(){
       $user      = Auth::user();
-      $aspirant_already   =[];// $this->aspirants_app_already_evaluated_by_institution($user->institution)->pluck('id')->toArray();
+      $aspirant_already   = $this->aspirants_inter_already_evaluated_by_institution($user->institution)->pluck('id')->toArray();
       $aspirants = $this->aspirant_interview_institution()->where('institution',$user->institution)->whereNotIn('aspirant_id',$aspirant_already)->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderBy('name','asc');
+    }
+
+    function aspirants_inter_already_evaluated(){
+      $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
+      $aspirants = AspirantInterview::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $im_aspi   = implode(',', $aspirants);
+      if($im_aspi != ''){
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+      }
+
+
+    }
+
+    function aspirants_inter_already_evaluated_by_institution($institution){
+      $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
+      $aspirants = AspirantInterview::where('institution',$institution)->whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $im_aspi   = implode(',', $aspirants);
+      if($im_aspi != ''){
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+      }
+
+
     }
 
 
