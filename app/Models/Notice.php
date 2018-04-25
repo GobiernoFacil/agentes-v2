@@ -62,7 +62,7 @@ class Notice extends Model
     }
 
     function aspirant_interview_institution(){
-      return $this->hasMany("App\Models\interview",'notice_id');
+      return $this->hasMany("App\Models\Interview",'notice_id');
     }
 
     //aspirantes que tienen validacion de correo, solo id's
