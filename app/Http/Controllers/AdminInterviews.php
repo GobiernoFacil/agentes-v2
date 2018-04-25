@@ -23,8 +23,8 @@ class AdminInterviews extends Controller
         $aspirants = $notice->all_aspirants_data()->get();
         $list      = $notice->aspirants_per_institution_to_interview()->paginate();
         $asToE_count = $notice->aspirants_per_institution_to_interview()->count();
-        $aAe_count  = $notice->aspirants_app_already_evaluated()->count();
-        $aIaE_count = $notice->aspirants_per_institution_evaluated()->count();
+        $aAe_count  = $notice->aspirants_inter_already_evaluated()->count();
+        $aIaE_count = $notice->aspirants_inter_already_evaluated_by_institution($user->institution)->count();
         $type_list = 1;
         return view('admin.aspirants.interviews.aspirant-list-per-institution')->with([
           'user' =>$user,
