@@ -18,4 +18,7 @@ class InterviewQuestion extends Model
       'max_label',
       'observations'
     ];
+
+
+    
 }

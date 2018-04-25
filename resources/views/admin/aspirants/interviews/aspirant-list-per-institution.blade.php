@@ -42,12 +42,12 @@
 								      <th>Procedencia</th>
 								      <th>Registro</th>
 											@if($type_list != 0)
+											<th>Tipo </th>
+											@endif
+											@if($type_list != 0)
 											<th>Tu calificación</th>
 											@else
 											<th>Calificación</th>
-											@endif
-											@if($type_list == 0)
-											<th>Evaluación </th>
 											@endif
 								      <th>Acciones</th>
 								    </tr>
@@ -62,18 +62,19 @@
 													        <td>{{$aspirant->city}} <br> <strong>{{$aspirant->state}}</strong></td>
 																	<td>{{$aspirant->origin}}</td>
 													        <td>{{ date("d-m-Y", strtotime($aspirant->created_at)) }} <br> {{ date("H:i", strtotime($aspirant->created_at)) }} hrs.</td>
+
+																	@if($type_list != 0)
+																	<td>{{$aspirant->verifyInstitutionInterview($user->institution,$notice)  ? $aspirant->verifyInstitutionInterview($user->institution,$notice)->type === 'face' ? 'Entrevista' : 'Audio' : ''}} </td>
+																	@endif
 																	@if($type_list != 0)
 																	<td>{{$aspirant->AspirantEvaluation()->where('institution',$user->institution)->whereNotNull('grade')->first() ? number_format($aspirant->AspirantEvaluation()->where('institution',$user->institution)->first()->grade,2) : "Sin calificación"}}</td>
 																	@else
 																	<td>{{$aspirant->global_grade ? number_format($aspirant->global_grade->grade,2) : "Sin calificación"}}</td>
 																	@endif
-																	@if($type_list == 0)
-																	<td>{{$aspirant->AspirantEvaluation()->whereNotNull('grade')->count() < 3 ? 'Sin completar' : 'Completada'}} </td>
-																	@endif
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-																		@if($aspirant->verifyInstitution($user->institution,$notice))
-																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/evaluar-aplicacion/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+																		@if($aspirant->verifyInstitutionInterview($user->institution,$notice))
+																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/entrevistas/evaluar-entrevista/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
 																		@endif
 																	</td>
 													     </tr>

@@ -85,6 +85,11 @@ class Aspirant extends Model
     return AspirantInstitution::where('institution',$institution)->where('aspirant_id',$this->id)->where('notice_id',$notice->id)->first();
   }
 
+  function verifyInstitutionInterview($institution,$notice){
+    return Interview::where('institution',$institution)->where('aspirant_id',$this->id)->where('notice_id',$notice->id)->first();
+  }
+
+
 
   function user(){
     return User::where('email',$this->email)->first();

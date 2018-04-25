@@ -11,4 +11,8 @@ class InterviewQuestionnaire extends Model
          'notice_id','title','description'
     ];
 
+    function questions(){
+      return $this->hasMany("App\Models\InterviewQuestion",'interview_questionnaire_id');
+    }
+
 }
