@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Interview;
 use App\Models\Notice;
 class AdminInterviews extends Controller
 {
@@ -35,6 +36,29 @@ class AdminInterviews extends Controller
           'asToE_count' => $asToE_count,
           'aAe_count'  =>$aAe_count,
           'aIaE_count' =>$aIaE_count
+        ]);
+    }
+
+
+    /**
+     * Muestra lista de entrevistas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add($notice_id,$aspirant_id)
+    {
+        //
+        //
+        $user          = Auth::user();
+        $notice        = Notice::where('id',$notice_id)->firstOrFail();
+        $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $questionnaire = $notice->interview_questionnaire;
+
+        return view('admin.aspirants.interviews.aspirant-add-interview-evaluation')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'interview' =>$interview,
+          'questionnaire' =>$questionnaire
         ]);
     }
 }
