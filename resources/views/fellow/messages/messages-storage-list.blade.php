@@ -28,23 +28,21 @@
 		    <!--mensaje con-->
 		    <span class="col-sm-4">
 
-		    	<strong>
 				@if($conversation->to_id != $user->id)
 						@if($conversation->user_to->image)
-						<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' widht="100%">
+						<img src='{{url("img/users/{$conversation->user_to->image->name}")}}'  height="25px">
 						@else
-						<img src='{{url("img/users/default.png")}}' widht="100%">
+						<img src='{{url("img/users/default.png")}}' height="25px">
 						@endif
 				   	{{$conversation->user_to->name}} {{$conversation->user_to->type === 'fellow' ?  $conversation->user_to->surname.' '.$conversation->user_to->lastname : '' }}
 				@else
 						@if($conversation->user->image)
-						<img src='{{url("img/users/{$conversation->user->image->name}")}}' widht="100%">
+						<img src='{{url("img/users/{$conversation->user->image->name}")}}'  height="25px">
 						@else
-						<img src='{{url("img/users/default.png")}}' widht="100%">
+						<img src='{{url("img/users/default.png")}}'  height="25px">
 						@endif
 				   {{$conversation->user->name}} {{$conversation->user->type === 'fellow' ?  $conversation->user->surname.' '.$conversation->user->lastname : ''}}
 				@endif
-				</strong>
 		    </span>
 		    <!-- subject-->
 		    <span class="col-sm-5">
