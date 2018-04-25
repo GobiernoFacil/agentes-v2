@@ -1758,6 +1758,20 @@ section.gray .m_header {
   section.gray .m_header p {
     color: white; }
 
+.ap_single_message .m_content {
+  background: white; }
+
+.ap_single_message .m_header {
+  background: #5b5e6d;
+  color: white; }
+  .ap_single_message .m_header p {
+    color: white; }
+
+.ap_single_message p span.ap_seen {
+  color: #187fad; }
+  .ap_single_message p span.ap_seen.no {
+    color: #999; }
+
 .list_line {
   list-style: none;
   margin: 0; }
@@ -2608,6 +2622,8 @@ sup {
   .message_box.me {
     background: #187fad;
     color: white; }
+    .message_box.me p {
+      color: white; }
     .message_box.me:after {
       content: "";
       width: 0;
