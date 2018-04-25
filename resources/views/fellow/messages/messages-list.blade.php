@@ -27,59 +27,58 @@
 
 @if($conversations->count()>0)
 <!--lista de mensajes-->
-<div class="box">
-	<div class="row">
-		<div class="col-sm-12">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th>Conversación con</th>
-			      <th>Asunto</th>
-			      <th></th>
-			      <th>Acciones</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    @foreach ($conversations as $conversation)
-			    <tr>
-				    <td><strong>
-					@if($conversation->to_id != $user->id)
+<div class="row">
+		@foreach ($conversations as $conversation)
+		<div class="col-sm-11">
+			<a class="btn_message_list" href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}">
+				@if($conversation->to_id != $user->id)
+					<span class="col-sm-1">
 						@if($conversation->user_to->image)
 							<img src='{{url("img/users/{$conversation->user_to->image->name}")}}' height="25px">
 						@else
 							<img src='{{url("img/users/default.png")}}' height="25px">
 						@endif
-			        	{{$conversation->user_to->name}}
-					@else
+					</span>
+					<span class="col-sm-4">
+						{{$conversation->user_to->name}}
+					</span>
+				@else
+					<span class="col-sm-1">
 						@if($conversation->user->image)
 							<img src='{{url("img/users/{$conversation->user->image->name}")}}' height="25px">
 						@else
 							<img src='{{url("img/users/default.png")}}' height="25px">
 						@endif
+					</span>
+					<span class="col-sm-4">
 						{{$conversation->user->name}}
-					@endif
-					</strong>
-				    </td>
-			        <td><a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}">{{$conversation->title}}</a>
-			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
-			        </td>
-					<td>
-				        {{$conversation->updated_at->diffForHumans()}}
-				    </td>
-					<td>
-			          <a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}" class="btn xs view">Ver Conversación</a>
-			          <a href ='{{ url("tablero/$program->slug/mensajes/conversacion/storage/".encrypt($conversation->id))}}'  id ="{{encrypt($conversation->id)}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
-
-				    </td>
-				</tr>
-			    @endforeach
-			  </tbody>
-			</table>
-
-			{{ $conversations->links() }}
+					</span>
+				@endif
+				<span class="col-sm-5">{{$conversation->title}}
+					<span class="count_m inline">({{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }})</span> 
+				</span>
+				<span class="col-sm-2">
+					<span class="ap_date">
+					{{$conversation->updated_at->diffForHumans()}}
+					</span>
+				</span>
+				<span class="clearfix"></span>
+			</a>
 		</div>
+			
+		<div class="col-sm-1">
+			  <a href ='{{ url("tablero/$program->slug/mensajes/conversacion/storage/".encrypt($conversation->id))}}'  id ="{{encrypt($conversation->id)}}" class="btn ev" onclick="return confirm('¿Estás seguro?');">Archivar</a>
+		</div>
+		@endforeach
+	
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		{{ $conversations->links() }}
 	</div>
 </div>
+
 @else
 <div class="row">
 	<div class="box center">

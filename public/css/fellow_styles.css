@@ -1758,6 +1758,20 @@ section.gray .m_header {
   section.gray .m_header p {
     color: white; }
 
+.ap_single_message .m_content {
+  background: white; }
+
+.ap_single_message .m_header {
+  background: #5b5e6d;
+  color: white; }
+  .ap_single_message .m_header p {
+    color: white; }
+
+.ap_single_message p span.ap_seen {
+  color: #187fad; }
+  .ap_single_message p span.ap_seen.no {
+    color: #999; }
+
 .list_line {
   list-style: none;
   margin: 0; }
@@ -2593,6 +2607,9 @@ sup {
   display: block;
   font-size: 12px;
   margin-top: 5px; }
+  .count_m.inline {
+    display: inline-block;
+    margin-top: 0; }
 
 .message_box {
   -webkit-border-radius: 10px;
@@ -2605,6 +2622,8 @@ sup {
   .message_box.me {
     background: #187fad;
     color: white; }
+    .message_box.me p {
+      color: white; }
     .message_box.me:after {
       content: "";
       width: 0;
@@ -2796,6 +2815,21 @@ a.ap_message_link {
 
 .ap_message_f {
   white-space: pre-wrap; }
+
+a.btn_message_list {
+  background: #f2f2f2;
+  font-size: 14px;
+  display: block;
+  border: 1px solid #ccc;
+  padding-bottom: 8px;
+  padding-top: 10px; }
+  a.btn_message_list:hover {
+    background: #ccc; }
+  a.btn_message_list .ap_date {
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: right;
+    display: block; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
