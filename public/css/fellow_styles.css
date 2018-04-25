@@ -1767,8 +1767,12 @@ section.gray .m_header {
   .ap_single_message .m_header p {
     color: white; }
 
+.ap_single_message p span.ap_date {
+  display: inline-block; }
+
 .ap_single_message p span.ap_seen {
-  color: #187fad; }
+  color: #187fad;
+  display: inline-block; }
   .ap_single_message p span.ap_seen.no {
     color: #999; }
 
