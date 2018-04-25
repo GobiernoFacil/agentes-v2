@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\AspirantInterview;
 use App\Models\Interview;
+use App\Models\InterviewAnswer;
+use App\Models\InterviewGlobalScore;
 use App\Models\Notice;
 // FormValidators
 use App\Http\Requests\SaveInterview;
@@ -73,24 +76,27 @@ class AdminInterviews extends Controller
     public function save(SaveInterview $request)
     {
 
-      $user            = Auth::user();
-      $questionnaire   = CustomQuestionnaire::where('type','facilitator')->firstOrFail();
-      $session     = ModuleSession::where('id',$request->session_id)->firstOrFail();
-      $facilitator = User::where('id',$request->facilitator_id)->firstOrFail();
+      $user          = Auth::user();
+      $notice        = Notice::where('id',$request->notice_id)->firstOrFail();
+      $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$request->aspirant_id)->firstOrFail();
+      $questionnaire = $notice->interview_questionnaire;
       $count = 1;
+      $required = 1;
+      $score    = 0;
 
       foreach ($questionnaire->questions as $question) {
         $name   = 'question_'.$count.'_'.$question->id;
         //multiple rows and columns type radio
-        if($question->options_rows_number > 1){
-           foreach ($question->answers as $answer) {
+        if($question->options_rows_number > 1 && $question->type === 'radio'){
+          //not yet
+        /*   foreach ($question->answers as $answer) {
              # code...
              $temp_name = $name.'_'.$answer->id;
              $data = current(array_slice($request->{$temp_name}, 0, 1));
              $answer =
-             CustomFellowAnswer::firstOrCreate([
-             'user_id'=>$user->id,
-             'questionnaire_id'=>$questionnaire->id,
+             InterviewAnswer::firstOrCreate([
+             'aspirant_interview_id'=>$interview->id,
+             'interview_questionnaire_id'=>$questionnaire->id,
              'question_id'=>$question->id,
              'answer_id'=>$answer->id,
              'facilitator_id'=>$request->facilitator_id,
@@ -99,36 +105,61 @@ class AdminInterviews extends Controller
              $answer->answer = $data;
              $answer->save();
            }
+           */
 
-        }elseif($question->options_rows_number === 1){
+        }elseif($question->options_rows_number === 1 && $question->type === 'radio'){
           //one row type radio
           $data = current(array_slice($request->{$name}, 0, 1));
-          $answer = CustomFellowAnswer::firstOrCreate([
-            'user_id'=>$user->id,
-            'questionnaire_id'=>$questionnaire->id,
+          $answer = InterviewAnswer::firstOrCreate([
+            'aspirant_interview_id'=>$interview->id,
+            'interview_questionnaire_id'=>$questionnaire->id,
             'question_id'=>$question->id,
-            'facilitator_id'=>$request->facilitator_id,
-            'session_id' => $request->session_id
           ]);
           $answer->answer = $data;
           $answer->save();
         }else{
           //open question
-            $answer = CustomFellowAnswer::firstOrCreate([
-              'user_id'=>$user->id,
-              'questionnaire_id'=>$questionnaire->id,
+            $answer = InterviewAnswer::firstOrCreate([
+              'aspirant_interview_id'=>$interview->id,
+              'interview_questionnaire_id'=>$questionnaire->id,
               'question_id'=>$question->id,
-              'facilitator_id'=>$request->facilitator_id,
-              'session_id' => $request->session_id
             ]);
             $answer->answer = $request->{$name};
             $answer->save();
         }
 
         $count++;
+          if($question->required && $question->type ==='radio'){
+            $data = current(array_slice($request->{$name}, 0, 1));
+            $score = $score + intval($data);
+            $required++;
+          }
+        //
       }
 
-      return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
+      $score = ceil($score/$required);
+      $interview_score = AspirantInterview::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
+                                                           'notice_id'=>$notice->id,
+                                                           'interview_questionnaire_id'=>$questionnaire->id,
+                                                           'type'=>$interview->type,
+                                                           'institution'=>$user->institution]);
+      $interview_score->user_id = $user->id;
+      $interview_score->score   = $score;
+      $interview_score->save();
+      $this->update_global_score($request->aspirant_id,$notice);
+
+      return redirect("dashboard/aspirantes/convocatoria/$notice->id/entrevistas")->with(['success'=>"Se ha guardado correctamente"]);
+
+    }
+
+
+    function update_global_score($aspirant_id,$notice){
+      $total           =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->count();
+      $interview_score =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->sum('score');
+      $global          =  InterviewGlobalScore::firstOrCreate(['aspirant_id'=>$aspirant_id,'notice_id'=>$notice->id]);
+      $global->score   =  ceil($interview_score/$total);
+      $global->save();
+      return true;
 
     }
 }
