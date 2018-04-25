@@ -29,7 +29,7 @@
 @else
 	<h1>La convocatoria no cuenta con cuestionario para entrevista.</h1>
 	<div class="box">
-		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/evaluar-entrevista/$interview->aspirant->id") }}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
+		<p><a href='{{ url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/evaluar-entrevista/{$interview->aspirant->id}") }}' class="btn">&lt;&lt; Regresar a lista de aspirantes.</a></p>
 	</div>
 @endif
 

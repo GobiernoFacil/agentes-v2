@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/diagnostico/$questionnaire->slug"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/evaluar-entrevista/{$interview->aspirant->id}"), "class" => "form-horizontal"]) !!}
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">{{$questionnaire->title}}</h2>

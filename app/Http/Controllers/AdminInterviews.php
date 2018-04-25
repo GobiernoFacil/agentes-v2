@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Interview;
 use App\Models\Notice;
+// FormValidators
+use App\Http\Requests\SaveInterview;
 class AdminInterviews extends Controller
 {
     //
@@ -60,5 +62,73 @@ class AdminInterviews extends Controller
           'interview' =>$interview,
           'questionnaire' =>$questionnaire
         ]);
+    }
+
+
+    /**
+     * salva entrevista
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function save(SaveInterview $request)
+    {
+
+      $user            = Auth::user();
+      $questionnaire   = CustomQuestionnaire::where('type','facilitator')->firstOrFail();
+      $session     = ModuleSession::where('id',$request->session_id)->firstOrFail();
+      $facilitator = User::where('id',$request->facilitator_id)->firstOrFail();
+      $count = 1;
+
+      foreach ($questionnaire->questions as $question) {
+        $name   = 'question_'.$count.'_'.$question->id;
+        //multiple rows and columns type radio
+        if($question->options_rows_number > 1){
+           foreach ($question->answers as $answer) {
+             # code...
+             $temp_name = $name.'_'.$answer->id;
+             $data = current(array_slice($request->{$temp_name}, 0, 1));
+             $answer =
+             CustomFellowAnswer::firstOrCreate([
+             'user_id'=>$user->id,
+             'questionnaire_id'=>$questionnaire->id,
+             'question_id'=>$question->id,
+             'answer_id'=>$answer->id,
+             'facilitator_id'=>$request->facilitator_id,
+             'session_id' => $request->session_id
+             ]);
+             $answer->answer = $data;
+             $answer->save();
+           }
+
+        }elseif($question->options_rows_number === 1){
+          //one row type radio
+          $data = current(array_slice($request->{$name}, 0, 1));
+          $answer = CustomFellowAnswer::firstOrCreate([
+            'user_id'=>$user->id,
+            'questionnaire_id'=>$questionnaire->id,
+            'question_id'=>$question->id,
+            'facilitator_id'=>$request->facilitator_id,
+            'session_id' => $request->session_id
+          ]);
+          $answer->answer = $data;
+          $answer->save();
+        }else{
+          //open question
+            $answer = CustomFellowAnswer::firstOrCreate([
+              'user_id'=>$user->id,
+              'questionnaire_id'=>$questionnaire->id,
+              'question_id'=>$question->id,
+              'facilitator_id'=>$request->facilitator_id,
+              'session_id' => $request->session_id
+            ]);
+            $answer->answer = $request->{$name};
+            $answer->save();
+        }
+
+        $count++;
+      }
+
+      return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
+
     }
 }
