@@ -34,7 +34,8 @@ class Kernel extends ConsoleKernel
         Commands\AllowAspirantsUpload::Class,
         Commands\CreateAspirantsCsv::Class,
         Commands\ExportAspirantsResults::Class,
-        Commands\SendAspirantInterviewNotification::Class
+        Commands\SendAspirantInterviewNotification::Class,
+        Commands\ExportAspirantInterviews::Class,
     ];
 
     /**
