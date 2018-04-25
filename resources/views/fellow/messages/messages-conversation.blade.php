@@ -70,10 +70,10 @@
 								    	<div class="message_box {{$message->user_id == $user->id ? 'me' : 'not_me'}}">
 											<p>{{$message->message}}</p>
 								    	</div>
-										<p><span>{{$message->updated_at->diffForHumans()}}</span>
+										<p><span class="ap_date">{{$message->updated_at->diffForHumans()}}</span>
 										@if($message->log)
 											@if($message->log->user_id == $user->id)
-											<span {!! $message->log->status == '1' ? 'class="ap_seen"' : 'class="ap_seen no"'  !!}}>{{$message->log->status == '1' ? 'Visto: ' . $message->log->updated_at->diffForHumans()  : 'No visto' }}</span> 
+											<span {!! $message->log->status == '1' ? 'class="ap_seen"' : 'class="ap_seen no"'  !!}>{{$message->log->status == '1' ? '(visto: ' . $message->log->updated_at->diffForHumans() . ')'  : '(no visto)' }}</span> 
 											@endif
 										@endif
 										</p>

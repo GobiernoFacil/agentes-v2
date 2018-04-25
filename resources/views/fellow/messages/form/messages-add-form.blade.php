@@ -1,10 +1,6 @@
 {!! Form::open(['url' => url("tablero/$program->slug/mensajes/save"), "class" => "form-horizontal"]) !!}
-<div class="divider"></div>
-<div class="row">
-  <div class="col-sm-12">
-    <h2 class="sa_title">Información del mensaje</h2>
-  </div>
-</div>
+<div class="divider bg"></div>
+
 <!-- title -->
 <div class="row">
   <div class="col-sm-12">
@@ -17,6 +13,7 @@
     </p>
   </div>
 </div>
+
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -45,10 +42,9 @@
 </div>
 
 
-
 <div class="row">
-  <div class="col-sm-12">
-    <p>{{Form::submit('Enviar', ['class' => 'btn gde'])}}</p>
+  <div class="col-sm-3 col-sm-offset-9">
+    <p>{{Form::submit('Enviar mensaje', ['class' => 'btn view block sessions_l'])}}</p>
   </div>
 </div>
 {!! Form::close() !!}
