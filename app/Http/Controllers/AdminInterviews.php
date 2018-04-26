@@ -211,8 +211,14 @@ class AdminInterviews extends Controller
       $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$request->aspirant_id)->firstOrFail();
       $questionnaire = $notice->interview_questionnaire;
       $count = 1;
-      $required = 1;
+      $required = 0;
       $score    = 0;
+
+      $interview_score = AspirantInterview::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
+                                                           'notice_id'=>$notice->id,
+                                                           'interview_questionnaire_id'=>$questionnaire->id,
+                                                           'type'=>$interview->type,
+                                                           'institution'=>$user->institution]);
 
       foreach ($questionnaire->questions as $question) {
         $name   = 'question_'.$count.'_'.$question->id;
@@ -241,7 +247,7 @@ class AdminInterviews extends Controller
           //one row type radio
           $data = current(array_slice($request->{$name}, 0, 1));
           $answer = InterviewAnswer::firstOrCreate([
-            'aspirant_interview_id'=>$interview->id,
+            'aspirant_interview_id'=>$interview_score->id,
             'interview_questionnaire_id'=>$questionnaire->id,
             'question_id'=>$question->id,
           ]);
@@ -250,7 +256,7 @@ class AdminInterviews extends Controller
         }else{
           //open question
             $answer = InterviewAnswer::firstOrCreate([
-              'aspirant_interview_id'=>$interview->id,
+              'aspirant_interview_id'=>$interview_score->id,
               'interview_questionnaire_id'=>$questionnaire->id,
               'question_id'=>$question->id,
             ]);
@@ -261,18 +267,15 @@ class AdminInterviews extends Controller
         $count++;
           if($question->required && $question->type ==='radio'){
             $data = current(array_slice($request->{$name}, 0, 1));
-            $score = $score + intval($data);
+            $max  = intval($question->options_columns_number);
+            $question_value = 10/$max;
+            $score = $score + (intval($data)*$question_value);
             $required++;
           }
         //
       }
 
       $score = ceil($score/$required);
-      $interview_score = AspirantInterview::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
-                                                           'notice_id'=>$notice->id,
-                                                           'interview_questionnaire_id'=>$questionnaire->id,
-                                                           'type'=>$interview->type,
-                                                           'institution'=>$user->institution]);
       $interview_score->user_id = $user->id;
       $interview_score->score   = $score;
       $interview_score->save();
