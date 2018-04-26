@@ -44,6 +44,36 @@ class AdminInterviews extends Controller
         ]);
     }
 
+    /**
+     * Muestra aspirantes de convocatoria con entrevista por institucion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function interviewed($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $aspirants = $notice->all_aspirants_data()->get();
+        $list      = $notice->aspirants_inter_already_evaluated_by_institution($user->institution)->paginate();
+        $asToE_count = $notice->aspirants_per_institution_to_interview()->count();
+        $aAe_count  = $notice->aspirants_inter_already_evaluated()->count();
+        $aIaE_count = $notice->aspirants_inter_already_evaluated_by_institution($user->institution)->count();
+        $type_list = 2;
+        return view('admin.aspirants.interviews.aspirant-list-per-institution')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'asToE_count' => $asToE_count,
+          'aAe_count'  =>$aAe_count,
+          'aIaE_count' =>$aIaE_count
+        ]);
+
+
+    }
+
 
     /**
      * Muestra lista de entrevistas

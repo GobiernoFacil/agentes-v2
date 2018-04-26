@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-4">
-		<a class="btn view gde {{ $type_list === 1 ? "active" : ''}}"  href='{{url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/aspirantes-por-entrevistar")}}'>Tus aspirantes por entrevistar <strong>({{$asToE_count}})</strong></a>
+		<a class="btn view gde {{ $type_list === 1 ? "active" : ''}}"  href='{{url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas")}}'>Tus aspirantes por entrevistar <strong>({{$asToE_count}})</strong></a>
 	</div>
 	<div class="col-sm-4">
 		<a class="btn view gde {{ $type_list === 2 ? "active" : ''}}"  href='{{url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/aspirantes-entrevistados")}}'>Tus aspirantes entrevistados <strong>({{$aIaE_count}})</strong></a>
