@@ -36,7 +36,7 @@
 							<h3>Evaluación de {{$user->institution}}</h3>
 							<li><span>Tu evaluación:</span> {{number_format(($aspirantInterview->score*10),2).'%'}}</li>
 							@if($aspirant->verifyInstitutionInterview($user->institution,$notice))
-							<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/evaluar-aplicacion/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
+							<a href='{{url("dashboard/aspirantes/convocatoria/$notice->id/entrevistas/evaluar-entrevista/$aspirant->id")}}' class="btn xs view">Evaluar</a></li>
 							@endif
 		</ul>
 		<div class="divider"></div>
