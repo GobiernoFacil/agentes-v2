@@ -267,14 +267,13 @@ class AdminInterviews extends Controller
           if($question->required && $question->type ==='radio'){
             $data = current(array_slice($request->{$name}, 0, 1));
             $max  = intval($question->options_columns_number);
-            $question_value = 10/$max;
+            $question_value = 2.5/$max;
             $score = $score + (intval($data)*$question_value);
             $required++;
           }
         //
       }
 
-      $score = ceil($score/$required);
       $interview_score->user_id = $user->id;
       $interview_score->score   = $score;
       $interview_score->save();
@@ -289,7 +288,7 @@ class AdminInterviews extends Controller
       $total           =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->count();
       $interview_score =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->sum('score');
       $global          =  InterviewGlobalScore::firstOrCreate(['aspirant_id'=>$aspirant_id,'notice_id'=>$notice->id]);
-      $global->score   =  ceil($interview_score/$total);
+      $global->score   =  $interview_score/$total;
       $global->save();
       return true;
 

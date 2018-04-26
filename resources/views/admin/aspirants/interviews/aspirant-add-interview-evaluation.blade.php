@@ -2,8 +2,8 @@
 @section('title', 'Lista de Aspirantes')
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirantes evaluar')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
+@section('breadcrumb_type', 'aspirants interview add')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_interview')
 
 @section('content')
 

@@ -2,9 +2,8 @@
 @section('title', 'Lista de aspirantes ')
 @section('description', 'Lista de Aspirantes a ser entrevistados de convocatoria '.$notice->title)
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirants interview list')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
-
+@section('breadcrumb_type', $type_list != 0  ?  $type_list== 1 ? 'aspirants interview list' : 'aspirants interviewed'  : 'aspirants interview all')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_interview')
 @section('content')
 <div class="row">
 	<div class="col-sm-8">

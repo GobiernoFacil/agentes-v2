@@ -2,8 +2,8 @@
 @section('title', 'Aspirante de ' . $notice->title .': ' . $aspirant->name .' ' . $aspirant->surname.' '.$aspirant->lastname)
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirantes ver')
-@section('breadcrumb', 'layouts.admin.breadcrumb.b_aspirantes')
+@section('breadcrumb_type', 'aspirants interview view')
+@section('breadcrumb', 'layouts.admin.breadcrumb.b_interview')
 
 @section('content')
 <div class="row">
