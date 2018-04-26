@@ -160,7 +160,6 @@ class AdminInterviews extends Controller
         $questionnaire     = $notice->interview_questionnaire;
         $aspirant          = $interview->aspirant;
         $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
-        $proof              = $aspirant->check_address_proof()->first();
         $allEva             = $aspirant->AspirantInterviews;
 
         return view('admin.aspirants.interviews.aspirant-view-interview')->with([
@@ -294,5 +293,30 @@ class AdminInterviews extends Controller
       $global->save();
       return true;
 
+    }
+
+    /**
+     * Muestra lista de entrevistas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($notice_id,$aspirant_id)
+    {
+        //
+        //
+        $user          = Auth::user();
+        $notice        = Notice::where('id',$notice_id)->firstOrFail();
+        $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $aspirant          = $interview->aspirant;
+        $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+        $questionnaire = $notice->interview_questionnaire;
+
+        return view('admin.aspirants.interviews.aspirant-update-interview-evaluation')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'interview' =>$interview,
+          'questionnaire' =>$questionnaire,
+          'aspirantInterview' => $aspirantInterview
+        ]);
     }
 }
