@@ -67,14 +67,16 @@
 																	<td>{{$aspirant->verifyInstitutionInterview($user->institution,$notice)  ? $aspirant->verifyInstitutionInterview($user->institution,$notice)->type === 'face' ? 'Entrevista' : 'Audio' : ''}} </td>
 																	@endif
 																	@if($type_list != 0)
-																	<td>{{$aspirant->AspirantEvaluation()->where('institution',$user->institution)->whereNotNull('grade')->first() ? number_format($aspirant->AspirantEvaluation()->where('institution',$user->institution)->first()->grade,2) : "Sin calificación"}}</td>
+																	<td>{{$aspirant->verifyGrade($user->institution,$notice) ? number_format($aspirant->verifyGrade($user->institution,$notice)->score,2) : "Sin calificación"}}</td>
 																	@else
-																	<td>{{$aspirant->global_grade ? number_format($aspirant->global_grade->grade,2) : "Sin calificación"}}</td>
+																	<td>{{$aspirant->global_interview_grade ? number_format($aspirant->global_interview_grade->score,2) : "Sin calificación"}}</td>
 																	@endif
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
-																		@if($aspirant->verifyInstitutionInterview($user->institution,$notice))
+																		@if($aspirant->verifyInstitutionInterview($user->institution,$notice) && !$aspirant->verifyGrade($user->institution,$notice))
 																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/entrevistas/evaluar-entrevista/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
+																		@elseif($aspirant->verifyInstitutionInterview($user->institution,$notice) && $aspirant->verifyGrade($user->institution,$notice))
+																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/entrevistas/ver-entrevista/' . $aspirant->id) }}" class="btn xs view ev">Ver entrevista</a>
 																		@endif
 																	</td>
 													     </tr>
