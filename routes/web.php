@@ -177,6 +177,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/entrevistas/todos-los-aspirantes-entrevistados', 'AdminInterviews@allInterviewed');
     Route::get('dashboard/aspirantes/convocatoria/{notice_id}/entrevistas/evaluar-entrevista/{aspirant_id}', 'AdminInterviews@add');
     Route::post('dashboard/aspirantes/convocatoria/{notice_id}/entrevistas/evaluar-entrevista/{aspirant_id}', 'AdminInterviews@save');
+    Route::get('dashboard/aspirantes/convocatoria/{notice_id}/entrevistas/ver-entrevista/{aspirant_id}', 'AdminInterviews@view');
 
 
     /// fellows

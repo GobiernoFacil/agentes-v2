@@ -33,6 +33,10 @@ class Aspirant extends Model
     return $this->hasMany("App\Models\AspirantEvaluation");
   }
 
+  function AspirantInterviews(){
+    return $this->hasMany("App\Models\AspirantInterview",'aspirant_id');
+  }
+
   function check_address_proof(){
     return $this->AspirantEvaluation()->where('address_proof','!=',null);
   }

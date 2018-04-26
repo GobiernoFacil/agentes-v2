@@ -145,6 +145,37 @@ class AdminInterviews extends Controller
 
 
     /**
+     * Muestra entrevista
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view($notice_id,$aspirant_id)
+    {
+        //
+        //
+        $user              = Auth::user();
+        $notice            = Notice::where('id',$notice_id)->firstOrFail();
+        $interview         = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $aspirantInterview = AspirantInterview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $questionnaire     = $notice->interview_questionnaire;
+        $aspirant          = $interview->aspirant;
+        $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+        $proof              = $aspirant->check_address_proof()->first();
+        $allEva             = $aspirant->AspirantInterviews;
+
+        return view('admin.aspirants.interviews.aspirant-view-interview')->with([
+          'user'              =>$user,
+          'notice'            => $notice,
+          'interview'         =>$interview,
+          'AspirantInterview' =>$aspirantInterview,
+          'questionnaire'     =>$questionnaire,
+          'aspirant'          => $aspirant,
+          "aspirantInterview" => $aspirantInterview,
+          'allEva'            => $allEva
+        ]);
+    }
+
+    /**
      * Muestra lista de entrevistas
      *
      * @return \Illuminate\Http\Response
