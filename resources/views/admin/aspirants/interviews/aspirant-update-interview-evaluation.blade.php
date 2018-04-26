@@ -2,7 +2,7 @@
 @section('title', 'Lista de Aspirantes')
 @section('description', 'Lista de Aspirantes')
 @section('body_class', 'aspirantes')
-@section('breadcrumb_type', 'aspirants interview add')
+@section('breadcrumb_type', 'aspirants interview update')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_interview')
 
 @section('content')
@@ -10,7 +10,7 @@
 @if($questionnaire)
 	<div class="row">
 		<div class="col-sm-9">
-			<h1>Entrevista a <strong>{{$interview->aspirant->name }} {{ $interview->aspirant->surname }} {{ $interview->aspirant->lastname }}</strong></h1>
+			<h1>Actualizar entrevista de <strong>{{$interview->aspirant->name }} {{ $interview->aspirant->surname }} {{ $interview->aspirant->lastname }}</strong></h1>
       <h2>Tipo de entrevista: <strong>{{$interview->type === 'face' ? 'Personal' : 'Audio' }}</strong></h2>
 		</div>
 		<div class="col-sm-3">
@@ -21,7 +21,7 @@
 	<div class="row">
 		<div class="box">
 			<div class="col-sm-10 col-sm-offset-1">
-			  @include('admin.aspirants.interviews.form.evaluation-form')
+			  @include('admin.aspirants.interviews.form.evaluation-update-form')
 			</div>
 			<div class="clearfix"></div>
 		</div>

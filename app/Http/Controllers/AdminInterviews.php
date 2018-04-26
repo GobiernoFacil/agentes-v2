@@ -160,7 +160,6 @@ class AdminInterviews extends Controller
         $questionnaire     = $notice->interview_questionnaire;
         $aspirant          = $interview->aspirant;
         $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
-        $proof              = $aspirant->check_address_proof()->first();
         $allEva             = $aspirant->AspirantInterviews;
 
         return view('admin.aspirants.interviews.aspirant-view-interview')->with([
@@ -211,8 +210,14 @@ class AdminInterviews extends Controller
       $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$request->aspirant_id)->firstOrFail();
       $questionnaire = $notice->interview_questionnaire;
       $count = 1;
-      $required = 1;
+      $required = 0;
       $score    = 0;
+
+      $interview_score = AspirantInterview::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
+                                                           'notice_id'=>$notice->id,
+                                                           'interview_questionnaire_id'=>$questionnaire->id,
+                                                           'type'=>$interview->type,
+                                                           'institution'=>$user->institution]);
 
       foreach ($questionnaire->questions as $question) {
         $name   = 'question_'.$count.'_'.$question->id;
@@ -241,7 +246,7 @@ class AdminInterviews extends Controller
           //one row type radio
           $data = current(array_slice($request->{$name}, 0, 1));
           $answer = InterviewAnswer::firstOrCreate([
-            'aspirant_interview_id'=>$interview->id,
+            'aspirant_interview_id'=>$interview_score->id,
             'interview_questionnaire_id'=>$questionnaire->id,
             'question_id'=>$question->id,
           ]);
@@ -250,7 +255,7 @@ class AdminInterviews extends Controller
         }else{
           //open question
             $answer = InterviewAnswer::firstOrCreate([
-              'aspirant_interview_id'=>$interview->id,
+              'aspirant_interview_id'=>$interview_score->id,
               'interview_questionnaire_id'=>$questionnaire->id,
               'question_id'=>$question->id,
             ]);
@@ -261,18 +266,14 @@ class AdminInterviews extends Controller
         $count++;
           if($question->required && $question->type ==='radio'){
             $data = current(array_slice($request->{$name}, 0, 1));
-            $score = $score + intval($data);
+            $max  = intval($question->options_columns_number);
+            $question_value = 2.5/$max;
+            $score = $score + (intval($data)*$question_value);
             $required++;
           }
         //
       }
 
-      $score = ceil($score/$required);
-      $interview_score = AspirantInterview::firstOrCreate(['aspirant_id'=>$request->aspirant_id,
-                                                           'notice_id'=>$notice->id,
-                                                           'interview_questionnaire_id'=>$questionnaire->id,
-                                                           'type'=>$interview->type,
-                                                           'institution'=>$user->institution]);
       $interview_score->user_id = $user->id;
       $interview_score->score   = $score;
       $interview_score->save();
@@ -287,9 +288,34 @@ class AdminInterviews extends Controller
       $total           =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->count();
       $interview_score =  AspirantInterview::where('aspirant_id',$aspirant_id)->where('notice_id',$notice->id)->sum('score');
       $global          =  InterviewGlobalScore::firstOrCreate(['aspirant_id'=>$aspirant_id,'notice_id'=>$notice->id]);
-      $global->score   =  ceil($interview_score/$total);
+      $global->score   =  $interview_score/$total;
       $global->save();
       return true;
 
+    }
+
+    /**
+     * Muestra lista de entrevistas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($notice_id,$aspirant_id)
+    {
+        //
+        //
+        $user          = Auth::user();
+        $notice        = Notice::where('id',$notice_id)->firstOrFail();
+        $interview     = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $aspirant          = $interview->aspirant;
+        $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
+        $questionnaire = $notice->interview_questionnaire;
+
+        return view('admin.aspirants.interviews.aspirant-update-interview-evaluation')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'interview' =>$interview,
+          'questionnaire' =>$questionnaire,
+          'aspirantInterview' => $aspirantInterview
+        ]);
     }
 }

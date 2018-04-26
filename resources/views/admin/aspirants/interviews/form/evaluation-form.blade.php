@@ -2,7 +2,6 @@
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">{{$questionnaire->title}}</h2>
-    <p>{{$questionnaire->description}}</p>
   </div>
 </div>
 
