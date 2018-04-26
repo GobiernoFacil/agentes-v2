@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Aspirant;
 use App\Models\AspirantInterview;
 use App\Models\Interview;
 use App\Models\InterviewAnswer;
@@ -69,6 +70,40 @@ class AdminInterviews extends Controller
           'asToE_count' => $asToE_count,
           'aAe_count'  =>$aAe_count,
           'aIaE_count' =>$aIaE_count
+        ]);
+
+
+    }
+
+    /**
+     * Muestra aspirantes de convocatoria con entrevista por institucion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allInterviewed($notice_id)
+    {
+        //
+        $user      = Auth::user();
+        $notice    = Notice::where('id',$notice_id)->firstOrFail();
+        $aspirants = $notice->all_aspirants_data()->get();
+        $list      = $notice->aspirants_inter_already_evaluated()->paginate();
+        $asToE_count = $notice->aspirants_per_institution_to_interview()->count();
+        $aAe_count  = $notice->aspirants_inter_already_evaluated()->count();
+        $aIaE_count = $notice->aspirants_inter_already_evaluated_by_institution($user->institution)->count();
+        $type_list = 0;
+        $aspirants_id = $aspirants->pluck('id');
+        $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
+        $states[null] = "Selecciona un estado";
+        return view('admin.aspirants.interviews.aspirant-list-per-institution')->with([
+          'user' =>$user,
+          'notice' => $notice,
+          'aspirants' =>$aspirants,
+          'list' =>$list,
+          'type_list' => $type_list,
+          'asToE_count' => $asToE_count,
+          'aAe_count'  =>$aAe_count,
+          'aIaE_count' =>$aIaE_count,
+          'states'     => $states
         ]);
 
 
