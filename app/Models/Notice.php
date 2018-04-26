@@ -210,7 +210,7 @@ class Notice extends Model
 
     function aspirants_inter_already_evaluated(){
       $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
-      $aspirants = AspirantInterview::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $aspirants = InterviewGlobalScore::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
       $im_aspi   = implode(',', $aspirants);
       if($im_aspi != ''){
         return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
@@ -231,6 +231,18 @@ class Notice extends Model
         return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
       }
 
+
+    }
+
+    function aspirants_inter_already_evaluated_by_state($state){
+      $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
+      $aspirants = InterviewGlobalScore::where('notice_id',$this->id)->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $im_aspi   = implode(',', $aspirants);
+      if($im_aspi != ''){
+              return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+      }else{
+            return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants);
+      }
 
     }
 
