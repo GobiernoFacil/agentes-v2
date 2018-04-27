@@ -28,6 +28,7 @@
         <p>
           <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong>  <br>
           <p>{{$question->observations ?  $question->observations : ""}}</p></label>
+         
           <div class="row">
           <!--table -->
           @if($question->options_rows_number > 1 )
@@ -83,41 +84,34 @@
                 @endforeach
           </div>
           @else
-
-              <ul class="inline">
-
+		  	
+              <ul class="inline interview">
                 @for($i=1; $i <= $question->options_columns_number; $i++)
                 <li>
+					@if($i===1)
+						<span class="col-sm-9">{{$question->min_label}}</span>
+					@endif                
                     @if($i===1)
                         <label>
-                        	<span class="row">
-                        		<span class="col-sm-9">{{$question->min_label}}</span>
-                        		<span class="col-sm-3">{{$i}}<br>
+                        	<span class="col-sm-3">{{$i}}<br>
 								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-                        		</span>
-                        	</span>
+							</span>
                         </label>
                     @elseif($i===$question->options_columns_number)
       					<label>
-      						<span class="row">
-                        		<span class="col-sm-3">
-                        			{{$i}}<br>
-									{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-								</span>
-								<span class="col-sm-6">
-								{{$question->max_label}}
-								</span>
-      						</span>
-
-      					</label>
-                    @else
-
-                        <label>
-                        	<span class="row">
-                        		<span class="col-sm-3">
+                        	<span class="col-sm-3">
                         		{{$i}}<br>
 								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-                        		</span>
+							</span>
+							<span class="col-sm-6">
+							{{$question->max_label}}
+							</span>
+      					</label>
+                    @else
+                        <label>
+                        	<span class="col-sm-3">
+                        		{{$i}}<br>
+								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
                         	</span>
                        </label>
                     @endif
