@@ -74,7 +74,7 @@
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
 																		@if($aspirant->verifyInstitutionInterview($user->institution,$notice) && !$aspirant->verifyGrade($user->institution,$notice))
 																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/entrevistas/evaluar-entrevista/' . $aspirant->id) }}" class="btn xs view ev">Evaluar</a>
-																		@elseif($aspirant->verifyInstitutionInterview($user->institution,$notice) && $aspirant->verifyGrade($user->institution,$notice))
+																		@elseif(($aspirant->verifyInstitutionInterview($user->institution,$notice) && $aspirant->verifyGrade($user->institution,$notice)) || $type_list == 0 )
 																		<a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/entrevistas/ver-entrevista/' . $aspirant->id) }}" class="btn xs view ev">Ver entrevista</a>
 																		@endif
 																	</td>

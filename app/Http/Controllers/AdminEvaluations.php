@@ -7,9 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Auth;
 use File;
 // models
+use App\Models\Activity;
 use App\Models\DiagnosticAnswer;
 use App\Models\DiagnosticEvaluation;
-use App\Models\Activity;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
