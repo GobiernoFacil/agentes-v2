@@ -155,7 +155,10 @@ class AdminInterviews extends Controller
         //
         $user              = Auth::user();
         $notice            = Notice::where('id',$notice_id)->firstOrFail();
-        $interview         = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $interview         = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->first();
+        if(!$interview){
+          $interview         = Interview::where('notice_id',$notice->id)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        }
         $aspirantInterview = AspirantInterview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->first();
         $questionnaire     = $notice->interview_questionnaire;
         $aspirant          = $interview->aspirant;
