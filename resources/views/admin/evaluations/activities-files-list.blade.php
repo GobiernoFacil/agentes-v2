@@ -10,12 +10,10 @@
 	<div class="col-sm-8">
 		<h1>{{$activity->name}}</h1>
 		<h2>{{$program->title}}</h2>
-		<h3>Módulo: {{$activity->session->module->title}}</h3>
-		<h4>Sesión: {{$activity->session->name}}</h4>
 
 	</div>
 	<div class="col-sm-4 right">
-		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
+		<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/agregar-evaluacion") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
 	</div>
 
 	<div class="col-sm-12">

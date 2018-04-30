@@ -136,11 +136,12 @@ class AdminEvaluations extends Controller
       $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
       //ver fellows con archivos
       $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
-      $fellows     = User::where('type','fellow')->where('enabled',1)->whereIn('id',$fellows_ids->toArray())->paginate($this->pageSize);
+      $fellows     = $program->get_all_fellows()->paginate($this->pageSize);
       return view('admin.evaluations.activities-files-done-list')->with([
           "user"      => $user,
-          "activity"   => $activity,
-          "fellows"   =>$fellows
+          "activity"  => $activity,
+          "fellows"   => $fellows,
+          "program"   => $program
         ]);
 
     }
@@ -320,14 +321,20 @@ class AdminEvaluations extends Controller
       $user = Auth::user();
       $data = FellowFile::find($request->file_id);
       $file = $data->path;
-      $ext  = substr(strrchr($file,'.'),1);
-      $mime = mime_content_type ($file);
+      $fileData = pathinfo($file);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
 
-      $filename = $data->name.".".$ext;
-      return response()->download($file, $filename, $headers);
+      $file = public_path(). "/files/".$name;
+      $fileData = pathinfo($file);
+      $headers = array(
+        'Content-Type: '.$fileData['extension'],
+      );
+      $filename = "comprobante.".$fileData['extension'];
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
     }
 
     /**
@@ -450,13 +457,15 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addSingle($activity_id)
+    public function addSingle($program_id,$activity_id)
     {
       $user      = Auth::user();
-      $activity  = Activity::where('id',$activity_id)->firstOrFail();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
       //usuarios sin archivos
       $fellows_id   = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
-      $fellows   = User::where('enabled',1)->where('type','fellow')->whereNotIn('id',$fellows_id->toArray())->orderBy('name','asc')->get();
+
+      $fellows      = $program->get_all_fellows()->whereNotIn('id',$fellows_id->toArray())->orderBy('name','asc')->get();
       $data = [];
       foreach ($fellows as $fellow) {
         $data[$fellow->id] = $fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname;
@@ -465,8 +474,9 @@ class AdminEvaluations extends Controller
       $fellows[null] = 'Selecciona un fellow';
       return view('admin.evaluations.file-single-evaluation')->with([
         "user"      => $user,
-        "activity"   => $activity,
-        "fellows"   => $fellows
+        "activity"  => $activity,
+        "fellows"   => $fellows,
+        "program"   => $program
       ]);
 
     }
@@ -504,7 +514,7 @@ class AdminEvaluations extends Controller
       $fellow = User::find($request->fellow_id);
       $activity = Activity::find($request->activity_id);
       $fellow->notify(new SendRetroEmail($fellow,$activity));
-      return redirect("dashboard/evaluacion/actividad/ver/{$activity->id}")->with('message','Se ha guarado correctamente');
+      return redirect("dashboard/programas/$program->id/ver-evaluacion/$request->activity_id")->with('message','Se ha guarado correctamente');
 
     }
 

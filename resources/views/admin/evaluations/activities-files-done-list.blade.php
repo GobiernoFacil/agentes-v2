@@ -10,12 +10,9 @@
 	<div class="col-sm-8">
 		<h1>{{$activity->name}}</h1>
 		<h2>{{$program->title}}</h2>
-		<h3>Módulo: {{$activity->session->module->title}}</h3>
-		<h4>Sesión: {{$activity->session->name}}</h4>
-
 	</div>
 	<div class="col-sm-4 right">
-		<a href='{{ url("dashboard/evaluacion/actividad/archivo/agregar/{$activity->id}") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
+		<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/agregar-evaluacion") }}' class="btn gde"><strong>+</strong> Agregar Calificación a Fellow</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="divider b"></div>
@@ -40,22 +37,27 @@
 			  </thead>
 			  <tbody>
 			    @foreach ($fellows as $fellow)
-			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}">{{$fellow->name .' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
-			        {{$fellow->email}}</td>
-			        <td>{{$fellow->fellowData->city}} <br> {{$fellow->fellowData->state}}</td>
-			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->fileFellowScore($fellow->id,$activity->id)->created_at))}}">{{$fellow->fileFellowScore($fellow->id,$activity->id)->created_at->diffForHumans()}}</a> </td>
-							<td>{{$fellow->fileFellowScore($fellow->id,$activity->id) ? $fellow->fileFellowScore($fellow->id,$activity->id)->score : 'Sin evaluar'}}</td>
-			        <td>
-								@if($fellow->fileFellowScore($fellow->id,$activity->id)->path)
-			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
-								@endif
-								@if($fellow->FellowFileUp($fellow->id,$activity->id))
-			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->FellowFileUp($fellow->id,$activity->id)->id) }}/0"   class="btn xs view ev">Evaluar</a></td>
-								@else
-								<a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->fileFellowScore($fellow->id,$activity->id)->id) }}/1"   class="btn xs view ev">Evaluar</a></td>
-								@endif
-			    </tr>
+						@if($fellow->fileFellowScore($fellow->id,$activity->id))
+					      <tr>
+					        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}">{{$fellow->name .' '.$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</a></h4>
+					        {{$fellow->email}}</td>
+					        <td>{{$fellow->fellowData->city}} <br> {{$fellow->fellowData->state}}</td>
+					        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->fileFellowScore($fellow->id,$activity->id)->created_at))}}">{{$fellow->fileFellowScore($fellow->id,$activity->id)->created_at->diffForHumans()}}</a> </td>
+									<td>{{$fellow->fileFellowScore($fellow->id,$activity->id) ? $fellow->fileFellowScore($fellow->id,$activity->id)->score : 'Sin evaluar'}}</td>
+					        <td>
+										<?php /*
+										@if($fellow->fileFellowScore($fellow->id,$activity->id)->path)
+					          <a href='{{url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/get/$fellow->id")}}' class="btn xs view">Descargar</a>
+										@endif
+										*/
+										?>
+										@if($fellow->FellowFileUp($fellow->id,$activity->id))
+					          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->FellowFileUp($fellow->id,$activity->id)->id) }}/0"   class="btn xs view ev">Evaluar</a></td>
+										@else
+										<a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->fileFellowScore($fellow->id,$activity->id)->id) }}/1"   class="btn xs view ev">Evaluar</a></td>
+										@endif
+					    	</tr>
+							@endif
 			    @endforeach
 			  </tbody>
 			</table>

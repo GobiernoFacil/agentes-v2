@@ -1,4 +1,4 @@
-{!! Form::open(['url' => "dashboard/evaluacion/actividad/archivo/save/{$activity->id}", "class" => "form-horizontal", 'files'=>true]) !!}
+{!! Form::open(['url' => "dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/agregar-evaluacion", "class" => "form-horizontal", 'files'=>true]) !!}
 
 <!-- fellow -->
 <div class="row">
@@ -23,6 +23,7 @@
     </p>
   </div>
 </div>
+<?php /*
 <div class="row">
   <div class="col-sm-12">
     <p>
@@ -34,6 +35,8 @@
     </p>
   </div>
 </div>
+*/
+?>
 <div class="row">
   <div class="col-sm-12">
     <p>
