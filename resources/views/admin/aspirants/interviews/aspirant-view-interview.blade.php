@@ -31,6 +31,7 @@
 			<li><span>Fecha de creación</span>{{ date("d-m-Y, H:i", strtotime($aspirant->created_at)) }} hrs.</li>
 		</ul>
 	</div>
+	@if($aspirantInterview)
 	<div class="col-sm-6">
 		<ul class="profile list">
 							<h3>Evaluación de {{$user->institution}}</h3>
@@ -42,6 +43,7 @@
 		<div class="divider"></div>
 
 	</div>
+	@endif
 		<div class="col-sm-6">
 
 		</div>

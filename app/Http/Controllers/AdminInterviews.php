@@ -156,10 +156,9 @@ class AdminInterviews extends Controller
         $user              = Auth::user();
         $notice            = Notice::where('id',$notice_id)->firstOrFail();
         $interview         = Interview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
-        $aspirantInterview = AspirantInterview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->firstOrFail();
+        $aspirantInterview = AspirantInterview::where('notice_id',$notice->id)->where('institution',$user->institution)->where('aspirant_id',$aspirant_id)->first();
         $questionnaire     = $notice->interview_questionnaire;
         $aspirant          = $interview->aspirant;
-        $aspirantInterview = AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$user->institution)->where('notice_id',$notice_id)->first();
         $allEva             = $aspirant->AspirantInterviews;
 
         return view('admin.aspirants.interviews.aspirant-view-interview')->with([
@@ -170,7 +169,7 @@ class AdminInterviews extends Controller
           'questionnaire'     =>$questionnaire,
           'aspirant'          => $aspirant,
           "aspirantInterview" => $aspirantInterview,
-          'allEva'            => $allEva
+          'allEva'            => $allEva,
         ]);
     }
 
