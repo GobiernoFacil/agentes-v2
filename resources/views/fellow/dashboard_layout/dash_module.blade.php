@@ -19,7 +19,7 @@
 			<div class="col-sm-12">
 				<!-- title-->
 				<h3>
-					@if($module->public)
+					@if($module->public && $user->check_progress($module->id,0))
 					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
 					@else
 					{{$module->title}}

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FellowProgress extends Model
 {
     //
+    public $table = 'fellow_progress';
     protected $fillable = [
         'user_id', 'program_id','module_id','session_id','activity_id','status'
     ];

@@ -15,10 +15,12 @@ use App\Models\FellowScore;
 use App\Models\FellowFile;
 use App\Models\FacilitatorModule;
 use App\Models\FellowProgram;
+use App\Models\FellowProgress;
 use App\Models\FacilitatorSurvey;
 use App\Models\Forum;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
+use App\Models\Module;
 use App\Models\Program;
 use App\Models\QuizInfo;
 
@@ -265,6 +267,71 @@ class User extends Authenticatable
 
     function store_conversations(){
       return $this->hasMany("App\Models\StoreConversation");
+    }
+
+    function check_progress($id,$type){
+      //habilita modulos, sesiones y actividades
+      switch ($type) {
+        case 0:
+          // modulo
+          $module  = Module::where('id',$id)->where('public',1)->first();
+          if($module){
+            if($module->parent_id){
+              if(Module::where('id',$module->parent_id)->where('public',1)->first()){
+                if(FellowProgress::where('module_id',$module->parent_id)->where('status',1)->first()){
+                  return true;
+                }else{
+                  return false;
+                }
+
+              }else{
+                return false;
+              }
+
+            }else{
+              return true;
+            }
+
+          }else{
+            return false;
+          }
+
+        break;
+
+        case 1:
+          // session
+          $session  = ModuleSession::where('id',$id)->first();
+          if($session){
+            if($session->parent_id){
+              if(ModuleSession::where('id',$session->parent_id)->first()){
+                if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
+                  return true;
+                }else{
+                  return false;
+                }
+
+              }else{
+                return false;
+              }
+
+            }else{
+              return true;
+            }
+
+          }else{
+            return false;
+          }
+
+        break;
+
+        case 2:
+          // activity
+        break;
+
+        default:
+          return false;
+        break;
+      }
     }
 
 }
