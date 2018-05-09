@@ -40,7 +40,7 @@
 				<div class="row">
 					@if($module->get_all_evaluation_activity()->count()>0)
 						@foreach($module->get_all_evaluation_activity() as $evAct)
-							<div class="col-sm-6 border_l">
+							<div class="col-sm-8 border_l">
 								<h4>Actividad obligatoria</h4>
 								<h5>Evaluación</h5>
 								<ul>
@@ -69,7 +69,7 @@
 
 					<div class="col-sm-3">
 						<a class="btn view block sessions_l"  href='{{ url("dashboard/programas/$program->id/modulos/ver/$module->id") }}'>Ver módulo</a>
-			<a href ='{{ url("dashboard/programas/$program->id/modulos/eliminar/$module->id") }}'  id ="{{$module->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+						<a href ='{{ url("dashboard/programas/$program->id/modulos/eliminar/$module->id") }}'  id ="{{$module->id}}" class="btn gde danger" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
 					</div>
 				</div>
 			</div>
