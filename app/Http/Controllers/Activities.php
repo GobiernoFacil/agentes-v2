@@ -56,9 +56,9 @@ class Activities extends Controller
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
             if($session->module->program->final_evaluation()->first()){
-              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
+              $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
             }else{
-              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
+              $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
             }
             return view('admin.modules.activities.activity-add')->with([
               "user"      => $user,
@@ -141,6 +141,8 @@ class Activities extends Controller
             }elseif($activity->type==='evaluation' && $activity->files!=1){
               //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
+            }elseif($activity->type==='diagnostic' && !$activity->files){
+              return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity->id")->with('success',"Se ha actualizado correctamente");
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
            }
@@ -196,9 +198,9 @@ class Activities extends Controller
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
             if($session->module->program->final_evaluation()->first()){
-              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
+              $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
             }else{
-              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
+              $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
             }
             return view('admin.modules.activities.activity-update')->with([
               "user"      => $user,
@@ -293,6 +295,16 @@ class Activities extends Controller
 
                   return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
               }
+
+            }elseif($request->type==='diagnostic' && !$data["files"]){
+              //Agregar diagnostico
+              if($last->diagnosticQuiz){
+                  return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
+              }else{
+
+                  return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
+              }
+
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
            }
