@@ -406,6 +406,20 @@ Route::group(['middleware' => ['auth']], function () {
      Route::get('dashboard/diagnostico/{custom_id}', 'AdminDiagnostic@getCustom');
      Route::get('dashboard/diagnostico/descargar/{type}/{custom_id}', 'AdminDiagnostic@download');
 
+     //add diagnostic quiz
+     Route::get('dashboard/sesiones/actividades/diagnostico/agregar/{activity_id}/1', 'AdminDiagnostic@add');
+     Route::post('dashboard/sesiones/actividades/diagnostico/save/{activity_id}/1', 'AdminDiagnostic@save');
+     Route::get('dashboard/sesiones/actividades/diagnostico/agregar/{activity_id}/2', 'AdminDiagnostic@addQuestion');
+     Route::get('dashboard/sesiones/actividades/diagnostico/checkAnswers/{quiz_id}/{activity_id}', 'AdminDiagnostic@checkAnswers');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/save/question', 'AdminDiagnostic@saveQuestion');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/remove/question', 'AdminDiagnostic@removeQuestion');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/save/answer', 'AdminDiagnostic@saveAnswer');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/remove/answer', 'AdminDiagnostic@removeAnswer');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/switch/answer', 'AdminDiagnostic@switchAnswer');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/get/questions', 'AdminDiagnostic@getQuestions');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/update/questions', 'AdminDiagnostic@updateQuestions');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/update/answer', 'AdminDiagnostic@updateAnswer');
+
   });
 
   /* R U T A S  UNICAS DEL Fellow
