@@ -34,7 +34,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo de Actividad</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'lecture' =>'Lectura', 'video'=> 'Video','evaluation'=>'Evaluación',],null, ['class' => 'form-control','id'=>'type'])}}
+      {{Form::select('type',$types,null, ['class' => 'form-control','id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
@@ -42,7 +42,7 @@
   </div>
 </div>
 <!-- files -->
-<div class="row" id='user-file' style = "{{ $activity->type=='evaluation' ? '':'display:none;'}}">
+<div class="row" id='user-file' style = "{{ $activity->type=='evaluation' || $activity->type=='final'  ? '':'display:none;'}}">
   <div class="col-sm-12">
     <p>
       <label><strong>¿El usuario contará con carga de archivos?</strong></label>
@@ -54,7 +54,7 @@
   </div>
 </div>
 <!-- cierre -->
-<div class="row" id ="end-file" style ="{{ $activity->type=='evaluation' ? '':'display:none;'}}">
+<div class="row" id ="end-file" style ="{{ $activity->type=='evaluation' || $activity->type=='final' ? '':'display:none;'}}">
 <div class="col-sm-12">
   <p>
     <label><strong>Fecha de cierre</strong> <br>

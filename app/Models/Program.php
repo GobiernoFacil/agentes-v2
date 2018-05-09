@@ -166,4 +166,10 @@ class Program extends Model
       $states[null] = 'Selecciona una opción';
       return $states;
     }
+
+    function final_evaluation(){
+      $modules  = $this->modules->pluck('id')->toArray();
+      $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      return  Activity::where('type','final')->whereIn('session_id',$sessions);
+    }
 }

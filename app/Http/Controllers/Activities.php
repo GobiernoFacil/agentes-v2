@@ -55,10 +55,16 @@ class Activities extends Controller
             $activities =  $session->activities()->orderBy('order','asc')->pluck('name','order')->toArray();
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
+            if($session->module->program->final_evaluation()->first()){
+              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
+            }else{
+              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
+            }
             return view('admin.modules.activities.activity-add')->with([
               "user"      => $user,
               "session"   => $session,
-              "activities" => $activities
+              "activities" => $activities,
+              "types"     => $types
             ]);
         }
 
@@ -189,10 +195,16 @@ class Activities extends Controller
             $activities =  $session->activities()->where('id','!=',$id)->pluck('name','order')->toArray();
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
+            if($session->module->program->final_evaluation()->first()){
+              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
+            }else{
+              $types      = [null => "Selecciona una opción",'evaluation'=>'Evaluación', 'final'=>'Evaluación Final','lecture' =>'Lectura', 'video'=> 'Video'];
+            }
             return view('admin.modules.activities.activity-update')->with([
               "user"      => $user,
               "activity" => $activity,
-              "activities" => $activities
+              "activities" => $activities,
+              "types"    => $types
             ]);
         }
 

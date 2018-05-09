@@ -26,7 +26,7 @@
 <script>
 $( document ).ready(function() {
   $('#type').change(function(){
-    if(this.value==='evaluation'){
+    if(this.value==='evaluation' || this.value==='final'){
       $('#user-file').show();
       $('#video').hide();
       $('#end-file').show();

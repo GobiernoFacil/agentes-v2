@@ -48,35 +48,34 @@
 <div class="box session_list last_activity ap_week">
     @foreach($module->sessions as $session)
     <h2>{{$session->name}}</h2>
-    @if($session->activities->count() > 0)
-    <ul class="ap_list">
-    	@foreach ($session->activities as $activity)
-    	<li class="row">
-    		<span class="col-sm-9">
-    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
-    			<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
-    		</span>
-				@if($last_activity)
-					@if($last_activity->activity_id == $activity->id)
-					<span class="col-sm-3">
-	    			<a class ="btn xs view continue" href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">Continuar </a>
-	    		</span>
-					@endif
-				@endif
+    	@if($session->activities->count() > 0)
+		    <ul class="ap_list">
+		    	@foreach ($session->activities as $activity)
+			    	<li class="row">
+			    		<span class="col-sm-9">
+			    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+			    			<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
+			    		</span>
+								@if($last_activity)
+									@if($last_activity->activity_id == $activity->id)
+									<span class="col-sm-3">
+					    			<a class ="btn xs view continue" href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">Continuar </a>
+					    		</span>
+									@endif
+								@endif
 
-    		@if($activity->type == "evaluation")
-    		<span class="col-sm-3">
-    			<p class="right"> Fecha límite:
-    			 <strong>{{date("d-m-Y", strtotime($activity->end))}}</strong><br>
-    			 <span class="notes">({{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}})</span>
-    			</p>
-    		</span>
-    		@endif
-    	</li>
-    	@endforeach
-    </ul>
-    @endif
-
+				    		@if($activity->type == "evaluation")
+				    		<span class="col-sm-3">
+				    			<p class="right"> Fecha límite:
+				    			 <strong>{{date("d-m-Y", strtotime($activity->end))}}</strong><br>
+				    			 <span class="notes">({{ \Carbon\Carbon::createFromTimeStamp(strtotime($activity->end))->diffForHumans()}})</span>
+				    			</p>
+				    		</span>
+				    		@endif
+			    	</li>
+		    	@endforeach
+		    </ul>
+		   @endif
     @endforeach
 </div>
 @else

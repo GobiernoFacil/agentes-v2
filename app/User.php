@@ -326,6 +326,9 @@ class User extends Authenticatable
 
         case 2:
           // activity
+          $activity = Activity::where('id',$id)->first();
+          $session  = $activity->session;
+          $eva      = $session->activity_eval($session->id);
         break;
 
         default:

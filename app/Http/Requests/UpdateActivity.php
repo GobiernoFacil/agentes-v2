@@ -53,7 +53,7 @@ use MessagesTrait;
               'hasforum'=>'required',
               'order'=> 'required',
           ];
-        }elseif($this->type==='evaluation'){
+        }elseif($this->type==='evaluation' ||$this->type==='final' ){
           return [
               //
               'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
