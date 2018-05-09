@@ -139,12 +139,11 @@ class Modules extends Controller
   {
     //
     $program  = Program::where('id',$request->program_id)->firstOrFail();
-    $module = Module::where('id',$request->module_id)->firstOrFail();
-    $data   = $request->except('_token');
+    $module   = Module::where('id',$request->module_id)->firstOrFail();
+    $data     = $request->except('_token');
     $data['slug']    = str_slug($request->title);
-    Module::where('id',$request->module_id)->update($data);
-    $module = Module::where('id',$request->module_id)->firstOrFail();
-    $this->checkUpdateOrder($module,$request->module_id);
+    $data['program_id'] = $module->program_id;
+    $this->checkUpdateOrder($data,$module);
     return redirect("dashboard/programas/$program->id/modulos/ver/$request->module_id")->with('success',"Se ha actualizado correctamente");
   }
 
@@ -282,45 +281,44 @@ class Modules extends Controller
       * @param  boolean $type  true add false update
       */
 
-      protected function checkUpdateOrder($data,$module_id){
-        $mod = Module::find($module_id);
-        if($data->parent_id!=$mod->parent_id){
+      protected function checkUpdateOrder($data,$module_to){
+        if(intval($data['parent_id']) != $module_to->parent_id){
               //first module
-              if($data->parent_id==='0'){
-                $order        =  1;
-                $data->order  =  $order;
-                $data->parent_id = null;
-                $last_parent_null = Module::where('program_id',$data->program_id)->where('parent_id',null)->first();
-                $numbers = Module::where('program_id',$data->program_id)->whereNotIn('id',[$module_id])->orderBy('order','asc')->get();
-                $new_order = 2;
-                foreach ($numbers as $number) {
-                  if($new_order>3){
-                    $number->order =$new_order;
-                    $number->parent_id = $last_module->id;
-                    $number->save();
-                    $last_module = $number;
-                  }else{
-                    $number->order =$new_order;
-                    $number->save();
-                    $last_module = $number;
-                  }
-                  $new_order++;
-                }
-                Module::where('id',$module_id)->update($data->toArray());
-                if($last_parent_null){
-                  $last_parent_null->parent_id = $module_id;
-                  $last_parent_null->save();
-                }
+              if($data['parent_id'] === '0'){
+                    $order             =  1;
+                    $data['order']     =  $order;
+                    $data['parent_id'] = null;
+                    $last_parent_null  = Module::where('program_id',$data['program_id'])->where('parent_id',null)->first();
+                    $numbers = Module::where('program_id',$data['program_id'])->whereNotIn('id',[$module_to->id])->orderBy('order','asc')->get();
+                    $new_order = 2;
+                    foreach ($numbers as $number) {
+                      if($new_order>3){
+                        $number->order =$new_order;
+                        $number->parent_id = $last_module->id;
+                        $number->save();
+                        $last_module = $number;
+                      }else{
+                        $number->order =$new_order;
+                        $number->save();
+                        $last_module = $number;
+                      }
+                      $new_order++;
+                    }
+                    Module::where('id',$module_to->id)->update($data);
+                    if($last_parent_null){
+                      $last_parent_null->parent_id = $module_to->id;
+                      $last_parent_null->save();
+                    }
               }else{
-                $parent    = Module::find($data->parent_id);
-                $new_order = $parent->order+1;
-                $data->order  =  $new_order;
-                $this->reUpdateOrder($new_order,$data->program_id,$data,$module_id);
-
+                //new parent
+                $parent         = Module::where('id',$data['parent_id'])->first();
+                $new_order      = $parent->order+1;
+                $data['order']  =  $new_order;
+                $this->reUpdateOrder($new_order,$data,$module_to->id);
               }
-            }else{
-              Module::where('id',$module_id)->update($data->toArray());
-            }
+        }else{
+              Module::where('id',$module_to->id)->update($data);
+        }
       }
 
         /**
@@ -332,16 +330,16 @@ class Modules extends Controller
         * @param  boolean $type  true add false update
         */
 
-        protected function reUpdateOrder($order,$program_id,$data,$module_id){
-          $numbers = Module::where('program_id',$program_id)->orderBy('order','asc')->whereNotIn('id',[$module_id])->get();
+        protected function reUpdateOrder($order,$data,$module_id){
+          $numbers = Module::where('program_id',$data['program_id'])->orderBy('order','asc')->whereNotIn('id',[$module_id])->get();
           foreach ($numbers as $number) {
-            if($number->order>=$order){
+            if($number->order >= $order){
               $number->order = $number->order+1;
               $number->save();
             }
           }
-         Module::where('id',$module_id)->update($data->toArray());
-         $numbers = Module::where('program_id',$data->program_id)->orderBy('order','asc')->get();
+         Module::where('id',$module_id)->update($data);
+         $numbers = Module::where('program_id',$data['program_id'])->orderBy('order','asc')->get();
           $new_order = 1;
           foreach ($numbers as $number) {
             if($new_order>1){
