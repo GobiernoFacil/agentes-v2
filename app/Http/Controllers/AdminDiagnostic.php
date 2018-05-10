@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Activity;
 use App\Models\CustomQuestionnaire;
 use App\Models\CustomFellowAnswer;
 class AdminDiagnostic extends Controller
@@ -69,5 +70,21 @@ class AdminDiagnostic extends Controller
               return response()->download($file, $name.'.xlsx', $headers);
             }
 
+        }
+
+        /**
+         * Agregar cuestionario diagnostico
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function add($activity_id)
+        {
+            //
+            $user      = Auth::user();
+            $activity   = Activity::where('id',$activity_id)->firstOrFail();
+            return view('admin.modules.diagnostic.quiz-add')->with([
+              "user"      => $user,
+              "activity" => $activity
+            ]);
         }
 }

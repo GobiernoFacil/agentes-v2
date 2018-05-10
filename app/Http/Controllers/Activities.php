@@ -142,7 +142,7 @@ class Activities extends Controller
               //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
             }elseif($activity->type==='diagnostic' && !$activity->files){
-              return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity->id")->with('success',"Se ha actualizado correctamente");
+              return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity->id/1")->with('success',"Se ha actualizado correctamente");
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
            }
