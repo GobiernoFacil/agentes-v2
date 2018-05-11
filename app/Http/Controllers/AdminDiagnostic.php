@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Activity;
 use App\Models\CustomQuestionnaire;
+use App\Models\CustomQuestion;
 use App\Models\CustomFellowAnswer;
 // FormValidators
 use App\Http\Requests\SaveCustomDiagnostic;
@@ -138,5 +139,20 @@ class AdminDiagnostic extends Controller
             "answers"   => json_encode($answers),
           ]);
 
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveQuestion(Request $request)
+        {
+
+           $question =  CustomQuestion::firstOrCreate(['questionnaire_id'=>$request->idQuiz]);
+           $question->question    = $request->question;
+           $question->type        = $request->type;
+           $question->save();
+           return response()->json($question->toArray());
         }
 }
