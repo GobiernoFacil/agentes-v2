@@ -13,7 +13,8 @@ class CustomQuestionnaire extends Model
       'title',
       'description',
       'slug',
-      'type'
+      'type',
+      'activity_id'
     ];
 
     //modelos relacionados

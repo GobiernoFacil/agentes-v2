@@ -52,6 +52,10 @@ class Activity extends Model
     return $this->hasOne("App\Models\QuizInfo");
   }
 
+  function diagnosticInfo(){
+    return $this->hasOne("App\Models\CustomQuestionnaire");
+  }
+
   function fellowScore($questionInfo_id,$user_id){
     return FellowScore::where('questionInfo_id',$questionInfo_id)->where('user_id',$user_id)->first();
   }

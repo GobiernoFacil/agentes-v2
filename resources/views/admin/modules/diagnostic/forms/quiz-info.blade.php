@@ -1,8 +1,8 @@
-{!! Form::open(['url' => url("dashboard/sesiones/actividades/evaluacion/save/{$activity->id}/1"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("dashboard/sesiones/actividades/diagnostico/save/{$activity->id}/1"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">Información general de la evaluación</h2>
+    <h2 class="sa_title">Información general de la evaluación diagnóstico</h2>
   </div>
 </div>
 <!-- title -->
