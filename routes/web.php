@@ -416,6 +416,7 @@ Route::group(['middleware' => ['auth']], function () {
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/save/answer', 'AdminDiagnostic@saveAnswer');
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/remove/answer', 'AdminDiagnostic@removeAnswer');
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/switch/answer', 'AdminDiagnostic@switchAnswer');
+     Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/switch/required', 'AdminDiagnostic@switchRequired');
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/get/questions', 'AdminDiagnostic@getQuestions');
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/update/questions', 'AdminDiagnostic@updateQuestions');
      Route::post('dashboard/sesiones/actividades/diagnostico/{activity_id}/update/answer', 'AdminDiagnostic@updateAnswer');

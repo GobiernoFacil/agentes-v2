@@ -249,6 +249,26 @@ class AdminDiagnostic extends Controller
 
         }
 
+
+        /**
+         * Cambia  pregunta opcional a obligatoria y viceversa
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function switchRequired(Request $request)
+        {
+          $question = CustomQuestion::find($request->opt['id']);
+          if($question->required){
+            $question->required = 0;
+            $question->save();
+          }else{
+            $question->required = 1;
+            $question->save();
+          }
+          return response()->json(["response"=>"ok"]);
+
+        }
+
         /**
          * Muestra lista de respuestas de diagnostico general
          *

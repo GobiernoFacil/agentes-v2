@@ -27,16 +27,18 @@
 <script id="real-question-template" type="text">
   <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
-  <p><span class="question-type"></span></p>
   <p>En este tipo de pregunta no es necesario agregar una respuesta correcta.</p>
+  <p><span class="question-type"></span><span class="question-required"></span></p>
+  <p><a href="#" class="switch-required btn xs ev">Seleccionar como pregunta obligatoria</a></p>
   <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
 </script>
 
 <script id="question-template-open" type="text">
   <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
-  <p><span class="question-type"></span></p>
   <p>En este tipo de pregunta no es necesario agregar una respuesta.</p>
+  <p><span class="question-type"></span><span class="question-required"></span></p>
+  <p><a href="#" class="switch-required btn xs ev">Seleccionar como pregunta obligatoria</a></p>
 </script>
 
 <script id="answer-template" type="text">

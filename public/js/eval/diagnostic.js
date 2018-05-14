@@ -91,6 +91,7 @@ var GFPNUDApp = {
     REQFunc      = this.removeQuestion.bind(this, li);
     ADOFunc      = this.addOption.bind(this, li, question);
     UQFunc       = this.updateQuestion.bind(this, question);
+    SROFunc      = this.switchRequiredOption.bind(this, li, question);
 
 
     anchor = li.querySelector(".question-name");
@@ -98,6 +99,8 @@ var GFPNUDApp = {
     remove = li.querySelector(".remove-question");
     addOpt = li.querySelector(".add-answer");
     ul     = li.querySelector("ul");
+    required = li.querySelector(".switch-required");
+    requiredSpan = li.querySelector(".question-required");
 
     anchor.innerHTML = question.question;
     if(question.type === 'radio'){
@@ -106,6 +109,14 @@ var GFPNUDApp = {
       type.innerHTML = ' Pregunta abierta';
     }else{
       type.innerHTML = ' Pregunta de opción múltiple';
+    }
+
+    if(question.required){
+      required.innerHTML = 'Seleccionar como pregunta opcional';
+      requiredSpan.innerHTML = ' - Obligatoria';
+    }else{
+      required.innerHTML = 'Seleccionar como pregunta obligatoria';
+      requiredSpan.innerHTML = ' - Opcional';
     }
 
     list.appendChild(li);
@@ -117,6 +128,7 @@ var GFPNUDApp = {
     }
 
     anchor.addEventListener("click", UQFunc);
+    required.addEventListener("click",SROFunc)
 
     _answers.forEach(function(a){
       this.renderAnswer(ul, question, a);
@@ -194,6 +206,7 @@ var GFPNUDApp = {
         REQFunc  = this.removeQuestion.bind(this, li),
         UQFunc   = null,
         ADOFunc  = null;//this.addOption.bind(this, li);
+        SROFunc  = null;
 
     if(!value || !value2 || !value3){
       return;
@@ -208,6 +221,8 @@ var GFPNUDApp = {
 
     anchor = li.querySelector(".question-name");
     type   = li.querySelector(".question-type");
+    required = li.querySelector(".switch-required");
+    requiredSpan = li.querySelector(".question-required");
     remove = li.querySelector(".remove-question");
     if(value2 ==='answers'){
       addOpt = li.querySelector(".add-answer");
@@ -220,6 +235,14 @@ var GFPNUDApp = {
       type.innerHTML = ' Pregunta de opción múltiple';
     }
 
+    if(value3){
+      required.innerHTML = 'Seleccionar como pregunta opcional';
+      requiredSpan.innerHTML = ' - Obligatoria';
+    }else{
+      required.innerHTML = 'Seleccionar como pregunta obligatoria';
+      requiredSpan.innerHTML = ' - Opcional';
+    }
+
     /* SERVER MUMBO YUMBO */
     $.post(saveQuestionUrl, {question : value,type : value2, required : value3,_token:token,idQuiz:idQ}, function(res){
       anchor.innerHTML = res.question;
@@ -228,7 +251,8 @@ var GFPNUDApp = {
       remove.setAttribute("data-id", res.id);
 
       ADOFunc  = that.addOption.bind(that, li, res);
-      UQFunc  = that.updateQuestion.bind(that, res);
+      UQFunc   = that.updateQuestion.bind(that, res);
+      SROFunc  = that.switchRequiredOption.bind(that,li,res);
       if(res.type ==='answers'){
         addOpt.addEventListener("click", ADOFunc);
       }
@@ -458,6 +482,26 @@ var GFPNUDApp = {
     /* SERVER MUMBO YUMBO */
     $.post(switchAnswerUrl, {opt,_token:token}, function(res){
       el.innerHTML = label;
+    }, "json");
+    /**/
+  },
+
+  switchRequiredOption : function(li, opt, e){
+    e.preventDefault();
+
+    var selected = +opt.required,
+        el       = li.querySelector(".switch-required"),
+        span     = li.querySelector(".question-required"),
+        label    = selected ? "Seleccionar como pregunta obligatoria" : "Seleccionar como pregunta opcional",
+        labelSpa = selected ? " - Opcional" : " - Obligatoria" ;
+        console.log(selected);
+
+    opt.required = selected ? 0 : 1;
+
+    /* SERVER MUMBO YUMBO */
+    $.post(switchRequiredUrl, {opt,_token:token}, function(res){
+      el.innerHTML = label;
+      span.innerHTML = labelSpa;
     }, "json");
     /**/
   },

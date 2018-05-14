@@ -69,6 +69,7 @@
       saveAnswerUrl        = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/save/answer")}}',
       removeAnswerUrl      = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/remove/answer")}}',
       switchAnswerUrl      = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/switch/answer")}}',
+			switchRequiredUrl    = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/switch/required")}}',
       getQuestionUrl       = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/get/questions")}}',
       updateQuestionUrl    = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/update/questions")}}',
       updateAnswerUrl      = '{{url("dashboard/sesiones/actividades/diagnostico/$activity->id/update/answer")}}',
