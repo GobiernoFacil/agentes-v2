@@ -12,6 +12,7 @@
 </div>
 
 <div class="row">
+	<!--
 	<div class="col-sm-12">
  				<div class="box">
  					<h2>Aspirantes por Estado</h2>
@@ -29,7 +30,7 @@
  					</ul>
  					<div id="bar"></div>
  				</div>
- 	</div>
+ 	</div>-->
 	<div class="col-sm-6">
 		<div class="module">
 			<div class="m_header">
