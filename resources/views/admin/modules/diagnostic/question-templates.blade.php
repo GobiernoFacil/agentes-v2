@@ -29,6 +29,7 @@
   <ul></ul>
   <p><span class="question-type"></span></p>
   <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
+  <p>En este tipo de pregunta no es necesario agregar una respuesta correcta.</p>
 </script>
 
 <script id="question-template-open" type="text">

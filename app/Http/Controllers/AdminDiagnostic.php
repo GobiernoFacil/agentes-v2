@@ -8,6 +8,7 @@ use App\Models\Activity;
 use App\Models\CustomQuestionnaire;
 use App\Models\CustomQuestion;
 use App\Models\CustomFellowAnswer;
+use App\Models\CustomAnswer;
 // FormValidators
 use App\Http\Requests\SaveCustomDiagnostic;
 class AdminDiagnostic extends Controller
@@ -175,6 +176,56 @@ class AdminDiagnostic extends Controller
           }
           $question->delete();
           return response()->json(["response"=>"ok"]);
+
+        }
+
+
+        /**
+         * Guarda respuesta de pregunta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveAnswer(Request $request)
+        {
+          if($request->question){
+            $answer = CustomAnswer::firstOrCreate(['question_id'=>$request->question,'value'=>$request->value]);
+            $answer->selected    = 0;
+            $answer->save();
+          }
+          return response()->json($answer->toArray());
+
+        }
+
+        /**
+         * Actualiza pregunta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateQuestions(Request $request)
+        {
+           $question = CustomQuestion::find($request->id);
+           if($request->question){
+            $question->question = $request->question;
+            $question->save();
+          }
+           return response()->json($question->toArray());
+
+        }
+
+
+        /**
+         * Actualiza respuesta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateAnswer(Request $request)
+        {
+          $answer = CustomAnswer::find($request->id);
+          if($request->value){
+           $answer->value = $request->value;
+           $answer->save();
+         }
+          return response()->json($answer->toArray());
 
         }
 
