@@ -215,7 +215,7 @@ class ExportAspirantsResults extends Command
           })->store('xlsx','csv');
           $from    = "info@apertus.org.mx";
           $subject = "Conteo de aspirantes - convocatoria".$notice->title;
-          $emails = [ //"hugo@gobiernofacil.com",
+          $emails = [ "hugo@gobiernofacil.com",
                        'carlos@gobiernofacil.com'];
           if(!$type){
               $attach = 'csv/aspirants_results.xlsx';
