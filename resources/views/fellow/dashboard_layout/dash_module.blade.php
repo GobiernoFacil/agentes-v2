@@ -40,36 +40,52 @@
 				</ul>
 			</div>
 			<div class="col-sm-9">
-				<div class="row">
+					<div class="row">
+						<div class="col-sm-6 border_l">
+							<h4>Actividad obligatoria</h4>
+						</div>
+						<div class="col-sm-3">
+								<h4>Calificación</h4>
+						</div>
+						<div class="col-sm-3">
+							<h4>Fecha límite</h4>
+						</div>
+					</div>
 					@if($module->get_all_evaluation_activity()->count()>0)
 						@foreach($module->get_all_evaluation_activity() as $evAct)
+						<div class="row">
 							<div class="col-sm-6 border_l">
-								<h4>Actividad obligatoria</h4>
 								<h5>Evaluación</h5>
 								<ul>
 									<li>{{$evAct->name}}</li>
 								</ul>
 							</div>
 							<div class="col-sm-3">
-								<h4>Fechas</h4>
-								<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
 							</div>
+							<div class="col-sm-3">
+								<p>{{date('d-m-Y', strtotime($evAct->end))}}
+									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end))->diffForHumans()}})</span>									
+								</p>
+							</div>
+						</div>
 						@endforeach
 					@else
-					<div class="col-sm-6 border_l">
-						<h4>Actividad obligatoria</h4>
-						<h5>Evaluación</h5>
-						<ul>
-							<li><strong>Sin actividades obligatorias</strong></li>
-						</ul>
+					<div class="row">
+						<div class="col-sm-6 border_l">
+							<h5>Evaluación</h5>
+							<ul>
+								<li><strong>Sin actividades obligatorias</strong></li>
+							</ul>
+						</div>
+						<div class="col-sm-3">
+							<p>Sin calificación</p>
+						</div>
+						<div class="col-sm-3">
+							<p>Sin fecha</p>
+						</div>
 					</div>
-					<div class="col-sm-3">
-						<h4>Fechas</h4>
-						<p>Sin fecha</p>
-					</div>
-
 					@endif
-				</div>
+				
 			</div>
 
 		</div>
