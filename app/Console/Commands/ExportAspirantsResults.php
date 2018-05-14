@@ -63,15 +63,17 @@ class ExportAspirantsResults extends Command
         if($notice){
           $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
           $states       = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
-          $headers      = ["Nombre","Apellidos","Correo","Estado","Ciudad","Género","Sector","No. evaluaciones","","","Instituciones","","", "Calificación Global"];
-          $headers_2    = ["","","","","","","","","GESOC","GF","INAI","PNUD","PROSOCIEDAD"," "];
-          $institutions = ["Gestión Social Y Cooperación","Gobierno Fácil","Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales","Programa de las Naciones Unidas para el Desarrollo","PROSOCIEDAD"];
           $type         = $this->argument('type');
           if(!$type){
             $name = 'aspirants_results';
+            $headers      = ["Nombre","Apellidos","Correo","Estado","Ciudad","Género","Sector","No. evaluaciones","","","Instituciones","","","Calificación Global"];
+
           }else{
             $name = 'aspirants_interview_results';
+            $headers      = ["Nombre","Apellidos","Correo","Estado","Ciudad","Género","Sector","No. evaluaciones","","","Instituciones","","", "Calificación entrevista","Primera calificación","Calificación Global"];
           }
+          $headers_2    = ["","","","","","","","","GESOC","GF","INAI","PNUD","PROSOCIEDAD"," "];
+          $institutions = ["Gestión Social Y Cooperación","Gobierno Fácil","Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales","Programa de las Naciones Unidas para el Desarrollo","PROSOCIEDAD"];
           Excel::create($name, function($excel)use($headers,$notice,$states,$institutions,$headers_2,$type) {
             // Set the title
             $excel->setTitle('Resultado de aspirantes - concocatoria "'.$notice->title.'"');
@@ -96,7 +98,16 @@ class ExportAspirantsResults extends Command
               }else{
                 $aspirants = $notice->aspirants_inter_already_evaluated()->get();
               }
+
+              $temOrder = [];
+
               foreach ($aspirants as $aspirant) {
+                $temOrder[$aspirant->id] = number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2);
+              }
+              arsort($temOrder);
+
+              foreach ($temOrder as $key => $value) {
+                $aspirant = Aspirant::find($key);
                 if(!$type){
                   $arr = [$aspirant->name,
                           $aspirant->surname.' '.$aspirant->lastname,
@@ -126,7 +137,10 @@ class ExportAspirantsResults extends Command
                           AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('score')->first()->score,2) : " ",
                           AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('score')->first()->score,2) : " ",
                           AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('score')->first()->score,2) : " ",
-                          number_format($aspirant->global_interview_grade->score,2)];
+                          number_format($aspirant->global_interview_grade->score,2),
+                          number_format($aspirant->global_grade->grade,2),
+                          number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2)
+                        ];
                 }
 
                 $sheet->appendRow($arr);
@@ -151,7 +165,14 @@ class ExportAspirantsResults extends Command
                 }else{
                     $aspirants =  $notice->aspirants_inter_already_evaluated_by_state($state->state)->get();
                 }
+                $temOrder = [];
+
                 foreach ($aspirants as $aspirant) {
+                  $temOrder[$aspirant->id] = number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2);
+                }
+                arsort($temOrder);
+                foreach ($temOrder as $key => $value) {
+                  $aspirant = Aspirant::find($key);
                   if(!$type){
                     $arr = [$aspirant->name,
                             $aspirant->surname.' '.$aspirant->lastname,
@@ -181,7 +202,9 @@ class ExportAspirantsResults extends Command
                             AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[2])->whereNotNull('score')->first()->score,2) : " ",
                             AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[3])->whereNotNull('score')->first()->score,2) : " ",
                             AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('score')->first() ?   number_format(AspirantInterview::where('aspirant_id',$aspirant->id)->where('institution',$institutions[4])->whereNotNull('score')->first()->score,2) : " ",
-                            number_format($aspirant->global_interview_grade->score,2)];
+                            number_format($aspirant->global_interview_grade->score,2),
+                            number_format($aspirant->global_grade->grade,2),
+                            number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2)];
                   }
 
                   $sheet->appendRow($arr);
@@ -192,7 +215,7 @@ class ExportAspirantsResults extends Command
           })->store('xlsx','csv');
           $from    = "info@apertus.org.mx";
           $subject = "Conteo de aspirantes - convocatoria".$notice->title;
-          $emails = [ "hugo@gobiernofacil.com",
+          $emails = [ //"hugo@gobiernofacil.com",
                        'carlos@gobiernofacil.com'];
           if(!$type){
               $attach = 'csv/aspirants_results.xlsx';
@@ -200,7 +223,7 @@ class ExportAspirantsResults extends Command
               $attach = 'csv/aspirants_interview_results.xlsx';
           }
           foreach ($emails as $email) {
-                Mail::send('emails.send_results', [], function($message) use ($from, $subject,$email,$attach) {
+               Mail::send('emails.send_results', [], function($message) use ($from, $subject,$email,$attach) {
                                  $message->from($from, 'no-reply');
                                  $message->to($email);
                                  $message->subject($from);
