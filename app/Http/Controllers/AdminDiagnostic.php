@@ -126,8 +126,8 @@ class AdminDiagnostic extends Controller
           $questions = $activity->diagnosticInfo->questions;
           $answers   = [];
           foreach($questions as $question){
-            if($question->answer){
-              foreach($question->answer as $answer){
+            if($question->answers){
+              foreach($question->answers as $answer){
                 $answers[] = $answer->toArray();
               }
             }
@@ -188,7 +188,7 @@ class AdminDiagnostic extends Controller
         public function saveAnswer(Request $request)
         {
           if($request->question){
-            $answer = CustomAnswer::firstOrCreate(['question_id'=>$request->question,'value'=>$request->value]);
+            $answer = CustomAnswer::firstOrCreate(['question_id'=>$request->question,'answer'=>$request->value,'value'=>$request->value]);
             $answer->selected    = 0;
             $answer->save();
           }
@@ -226,6 +226,38 @@ class AdminDiagnostic extends Controller
            $answer->save();
          }
           return response()->json($answer->toArray());
+
+        }
+
+        /**
+         * Cambia de correcta a incorrecta una respuesta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function switchAnswer(Request $request)
+        {
+          $answer = CustomAnswer::find($request->opt['id']);
+          $question = CustomQuestion::find($answer->question_id);
+          if($answer->selected){
+            $answer->selected = 0;
+            $answer->save();
+          }else{
+            $answer->selected = 1;
+            $answer->save();
+          }
+          return response()->json(["response"=>"ok"]);
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function getQuestions(Request $request)
+        {
+          $questions = CustomQuestion::where('questionnaire_id',$request->idQuiz)->get();
+          return response()->json($questions->toArray());
 
         }
 

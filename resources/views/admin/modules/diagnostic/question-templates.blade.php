@@ -28,8 +28,8 @@
   <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
   <p><span class="question-type"></span></p>
-  <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
   <p>En este tipo de pregunta no es necesario agregar una respuesta correcta.</p>
+  <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
 </script>
 
 <script id="question-template-open" type="text">

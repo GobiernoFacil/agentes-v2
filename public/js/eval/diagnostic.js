@@ -373,7 +373,6 @@ var GFPNUDApp = {
   },
 
   updateOption : function(li, option, e){
-    console.log(li, option, e);
 
     var template = document.getElementById(answerTemplate).innerHTML,
         ROFunc  = null,
