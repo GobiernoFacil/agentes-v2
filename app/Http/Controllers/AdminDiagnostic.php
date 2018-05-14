@@ -156,9 +156,26 @@ class AdminDiagnostic extends Controller
              $question->min_label  = 'Menor';
              $question->max_label  = 'Mayor';
              $question->options_columns_number  = 1;
-             $question->options_rows_number      = 5;
+             $question->options_rows_number     = 5;
            }
            $question->save();
            return response()->json($question->toArray());
         }
+
+        /**
+         * Elimina pregunta de cuestionario
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function removeQuestion(Request $request)
+        {
+          $question  = CustomQuestion::find($request->id);
+          foreach($question->answers as $answer){
+            $answer->delete();
+          }
+          $question->delete();
+          return response()->json(["response"=>"ok"]);
+
+        }
+
 }
