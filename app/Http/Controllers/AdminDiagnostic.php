@@ -281,4 +281,29 @@ class AdminDiagnostic extends Controller
 
         }
 
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function checkAnswers($quizId,$activity_id)
+        {
+          $user = Auth::user();
+          $quiz = CustomQuestionnaire::where('id',$quizId)->firstOrFail();
+          if($quiz->questions->count()>0){
+            foreach ($quiz->questions as $question) {
+              if($question->type === 'answers'){
+                if(!$question->answers->count()){
+                  return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity_id/2")->with('error',"La pregunta: '$question->question' no cuenta con respuesta");
+                }
+              }
+            }
+            return redirect("dashboard/sesiones/actividades/ver/$activity_id");
+
+          }else{
+            return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity_id/2")->with('error','No se ha agregado ninguna pregunta');
+          }
+
+        }
+
 }
