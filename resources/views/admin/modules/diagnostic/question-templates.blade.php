@@ -5,11 +5,11 @@
     <div class="col-sm-12">
         <p>
         <label><strong>Selecciona el tipo de pregunta <a class="remove-question" href="#" title="Eliminar pregunta">x</a></strong> <br>
-        {{Form::select('type',[null=>'Selecciona una opción','open'=>'Abierta','answers'=>'Elección Múltiple','radio'=>'Escala'],null, ["class" => "form-control"])}} </label>
+        {{Form::select('type',[null=>'Selecciona una opción','open'=>'Abierta','answers'=>'Elección Múltiple','radio'=>'Escala'],null, ["class" => "form-control",'id'=>'typeSelector'])}} </label>
         </p>
         <p>
         <label><strong>Esta pregunta es </strong> <br>
-        {{Form::select('type',[null=>'Selecciona una opción',0=>'Opcional',1=>'Obligatoria'],null, ["class" => "form-control"])}} </label>
+        {{Form::select('required',[null=>'Selecciona una opción',0=>'Opcional',1=>'Obligatoria'],null, ["class" => "form-control",'id'=>'requiredSelector'])}} </label>
         </p>
         <p>
         <label><strong>Escribe la pregunta </strong> <br>
@@ -27,8 +27,15 @@
 <script id="real-question-template" type="text">
   <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
   <ul></ul>
+  <p><span class="question-type"></span></p>
   <p><a href="#" class="add-answer btn xs view">Agregar respuesta [+]</a></p>
+</script>
 
+<script id="question-template-open" type="text">
+  <p><a href="#" class="question-name"></a></p> <a href="#" class="remove-question" title="Eliminar pregunta">x</a>
+  <ul></ul>
+  <p><span class="question-type"></span></p>
+  <p>En este tipo de pregunta no es necesario agregar una respuesta.</p>
 </script>
 
 <script id="answer-template" type="text">

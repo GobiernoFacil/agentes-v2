@@ -1,14 +1,15 @@
 // var definition
 var Form, Questions, GFPNUDApp, endpoint,
-    titleId              = "title",
-    addQuestionBtn       = "add-question",
-    questionTemplate     = "question-template",
+    titleId                 = "title",
+    addQuestionBtn          = "add-question",
+    questionTemplate        = "question-template",
     updateQuestionTemplate  = "update-question-template",
     updatedQuestionTemplate = "real-question-update-template",
-    realQuestionTemplate = "real-question-template",
-    answerTemplate       = "answer-template",
-    realAnswerTemplate   = "real-answer-template",
-    questionsList        = "questions-list";
+    realQuestionTemplate    = "real-question-template",
+    answerTemplate          = "answer-template",
+    realAnswerTemplate      = "real-answer-template",
+    questionTemplateOpen    = "question-template-open",
+    questionsList           = "questions-list";
 
 // fake data
 /*Form = {
@@ -81,7 +82,11 @@ var GFPNUDApp = {
           return a.question_id == question.id;
         }, this);
 
-    li.innerHTML = template;
+    if(question.type==='answers'){
+        li.innerHTML = template;
+    }else{
+        li.innerHTML = document.getElementById(questionTemplateOpen).innerHTML;
+    }
 
     REQFunc      = this.removeQuestion.bind(this, li);
     ADOFunc      = this.addOption.bind(this, li, question);
@@ -89,18 +94,27 @@ var GFPNUDApp = {
 
 
     anchor = li.querySelector(".question-name");
+    type   = li.querySelector(".question-type");
     remove = li.querySelector(".remove-question");
     addOpt = li.querySelector(".add-answer");
     ul     = li.querySelector("ul");
 
     anchor.innerHTML = question.question;
+    if(question.type === 'radio'){
+      type.innerHTML = ' Pregunta en escala';
+    }else if(question.type === 'open'){
+      type.innerHTML = ' Pregunta abierta';
+    }else{
+      type.innerHTML = ' Pregunta de opción múltiple';
+    }
 
     list.appendChild(li);
 
     remove.addEventListener("click", REQFunc);
     remove.setAttribute("data-id", question.id);
-
-    addOpt.addEventListener("click", ADOFunc);
+    if(question.type==='answers'){
+      addOpt.addEventListener("click", ADOFunc);
+    }
 
     anchor.addEventListener("click", UQFunc);
 
@@ -166,7 +180,11 @@ var GFPNUDApp = {
 
     var form     = e.target,
         input    = form.querySelector("input[type='text']"),
+        input2   = document.getElementById('typeSelector'),
+        input3   = document.getElementById('requiredSelector'),
         value    = input.value,
+        value2   = input2.value,
+        value3   = input3.value,
         li       = form.parentNode,
         template = document.getElementById(realQuestionTemplate).innerHTML,
         anchor   = null,
@@ -177,19 +195,33 @@ var GFPNUDApp = {
         UQFunc   = null,
         ADOFunc  = null;//this.addOption.bind(this, li);
 
-    if(!value){
+    if(!value || !value2 || !value3){
       return;
     }
 
     li.removeChild(form);
-    li.innerHTML = template;
+    if(value2==='answers'){
+      li.innerHTML = template;
+    }else{
+      li.innerHTML = document.getElementById(questionTemplateOpen).innerHTML;
+    }
 
     anchor = li.querySelector(".question-name");
+    type   = li.querySelector(".question-type");
     remove = li.querySelector(".remove-question");
-    addOpt = li.querySelector(".add-answer");
+    if(value2 ==='answers'){
+      addOpt = li.querySelector(".add-answer");
+    }
+    if(value2 === 'radio'){
+      type.innerHTML = ' Pregunta en escala';
+    }else if(value2 === 'open'){
+      type.innerHTML = ' Pregunta abierta';
+    }else{
+      type.innerHTML = ' Pregunta de opción múltiple';
+    }
 
     /* SERVER MUMBO YUMBO */
-    $.post(saveQuestionUrl, {question : value,_token:token,idQuiz:idQ}, function(res){
+    $.post(saveQuestionUrl, {question : value,type : value2, required : value3,_token:token,idQuiz:idQ}, function(res){
       anchor.innerHTML = res.question;
       Questions.push(res);
       remove.addEventListener("click", REQFunc);
@@ -197,7 +229,9 @@ var GFPNUDApp = {
 
       ADOFunc  = that.addOption.bind(that, li, res);
       UQFunc  = that.updateQuestion.bind(that, res);
-      addOpt.addEventListener("click", ADOFunc);
+      if(res.type ==='answers'){
+        addOpt.addEventListener("click", ADOFunc);
+      }
       anchor.addEventListener("click", UQFunc);
     }, "json");
     /**/

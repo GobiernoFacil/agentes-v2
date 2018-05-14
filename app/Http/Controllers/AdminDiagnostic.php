@@ -149,9 +149,15 @@ class AdminDiagnostic extends Controller
         public function saveQuestion(Request $request)
         {
 
-           $question =  CustomQuestion::firstOrCreate(['questionnaire_id'=>$request->idQuiz]);
-           $question->question    = $request->question;
-           $question->type        = $request->type;
+           $question =  CustomQuestion::firstOrCreate(['question'=>$request->question,'questionnaire_id'=>$request->idQuiz]);
+           $question->type            = $request->type;
+           $question->required        = $request->required;
+           if($question->type === 'radio'){
+             $question->min_label  = 'Menor';
+             $question->max_label  = 'Mayor';
+             $question->options_columns_number  = 1;
+             $question->options_rows_number      = 5;
+           }
            $question->save();
            return response()->json($question->toArray());
         }
