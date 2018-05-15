@@ -52,6 +52,9 @@ class Activity extends Model
     return $this->hasOne("App\Models\QuizInfo");
   }
 
+  function diagnostic_info(){
+    return $this->hasOne("App\Models\CustomQuestionnaire");
+  }
   function diagnosticInfo(){
     return $this->hasOne("App\Models\CustomQuestionnaire");
   }

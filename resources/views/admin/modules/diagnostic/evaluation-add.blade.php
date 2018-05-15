@@ -15,7 +15,7 @@
 			<li>Da clic en <strong>Agregar pregunta</strong> para comenzar.</li>
 			<li>Selecciona el tipo de pregunta, escribe la pregunta y guárdala.</li>
 			<li>Agrega respuesta a la pregunta, si es el caso, y guárdala.</li>
-			<li>Si se cuenta con respuestas, selecciona una o varias como correctas.</li>
+			<li>Si se cuenta con respuestas, selecciona una o varias como correctas si es necesario.</li>
 			<li>Puedes editar preguntas y respuestas dando clic sobre ella.</li>
 			<li>Puedes eliminar preguntas y respuestas dando clic en [X].</li>
 			<li>Cuando estén todas las preguntas da clic en finalizar.</li>

@@ -91,6 +91,10 @@
 </div>
 @endif
 
+@if($activity->type === 'diagnostic')
+	@include('admin.modules.activities.diagnostic-test-view')
+@endif
+
 
 @if(!empty($activity->forum))
 <!---------------------------------------------------------------------------------- foro ------------------------------------>
