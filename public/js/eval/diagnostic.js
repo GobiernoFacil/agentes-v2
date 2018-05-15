@@ -104,7 +104,7 @@ var GFPNUDApp = {
 
     anchor.innerHTML = question.question;
     if(question.type === 'radio'){
-      type.innerHTML = ' Pregunta en escala';
+      type.innerHTML = ' Pregunta de escala';
     }else if(question.type === 'open'){
       type.innerHTML = ' Pregunta abierta';
     }else{
@@ -228,7 +228,7 @@ var GFPNUDApp = {
       addOpt = li.querySelector(".add-answer");
     }
     if(value2 === 'radio'){
-      type.innerHTML = ' Pregunta en escala';
+      type.innerHTML = ' Pregunta de escala';
     }else if(value2 === 'open'){
       type.innerHTML = ' Pregunta abierta';
     }else{
