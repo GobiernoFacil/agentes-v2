@@ -48,6 +48,7 @@
 											@else
 											<th>Calificación</th>
 											@endif
+											<th>General</th>
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -70,6 +71,7 @@
 																	@else
 																	<td>{{$aspirant->global_interview_grade ? number_format($aspirant->global_interview_grade->score,2) : "Sin calificación"}}</td>
 																	@endif
+																	<td>{{number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2)}}</td>
 													        <td>
 													          <a href="{{ url('dashboard/aspirantes/convocatoria/'.$notice->id.'/ver-aspirante/' . $aspirant->id) }}" class="btn xs view">Ver</a>
 																		@if($aspirant->verifyInstitutionInterview($user->institution,$notice) && !$aspirant->verifyGrade($user->institution,$notice))

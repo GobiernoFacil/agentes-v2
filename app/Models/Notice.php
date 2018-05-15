@@ -210,12 +210,21 @@ class Notice extends Model
 
     function aspirants_inter_already_evaluated(){
       $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
-      $aspirants = InterviewGlobalScore::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
-      $im_aspi   = implode(',', $aspirants);
+      $aspirants_r = InterviewGlobalScore::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $aspirants = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_r)->get();
+      foreach ($aspirants as $aspirant) {
+        $temOrder[$aspirant->id] = number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2);
+      }
+      arsort($temOrder);
+      $keys = [];
+      foreach ($temOrder as $key => $value) {
+        $keys[] = $key;
+      }
+      $im_aspi   = implode(',', $keys);
       if($im_aspi != ''){
-        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_r)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
       }else{
-        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+        return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_r);
       }
 
 
@@ -236,12 +245,21 @@ class Notice extends Model
 
     function aspirants_inter_already_evaluated_by_state($state){
       $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
-      $aspirants = InterviewGlobalScore::where('notice_id',$this->id)->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
-      $im_aspi   = implode(',', $aspirants);
+      $aspirants_r = InterviewGlobalScore::where('notice_id',$this->id)->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
+      $aspirants = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_r)->get();
+      foreach ($aspirants as $aspirant) {
+        $temOrder[$aspirant->id] = number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2);
+      }
+      arsort($temOrder);
+      $keys = [];
+      foreach ($temOrder as $key => $value) {
+        $keys[] = $key;
+      }
+      $im_aspi   = implode(',', $keys);
       if($im_aspi != ''){
-              return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
+              return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants_r)->orderByRaw(DB::raw("FIELD(id, $im_aspi)"));
       }else{
-            return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants);
+            return Aspirant::where('state',$state)->where('is_activated',1)->whereIn('id',$aspirants_r);
       }
 
     }
