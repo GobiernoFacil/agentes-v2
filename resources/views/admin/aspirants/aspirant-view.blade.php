@@ -16,7 +16,15 @@
 		<p> {{$aspirant->city}}, {{$aspirant->state}}</p>
 	</div>
 	<div class="col-sm-6">
-		<h2 class="right">Evaluación General: <br> {{$aspirant->global_grade ? number_format(($aspirant->global_grade->grade*10),2).'%' : "Sin evaluaciones"}}</h2>
+		@if($aspirant->global_grade && $aspirant->global_interview_grade)
+			<h2 class="right">Evaluación General: <br> {{number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2)*10,2).'%'}}</h2>
+		@elseif($aspirant->global_grade)
+			<h2 class="right">Evaluación General: <br> {{number_format(($aspirant->global_grade->grade)*10,2).'%'}}</h2>
+		@else
+			<h2 class="right">Evaluación General: <br> Sin evaluaciones</h2>
+		@endif
+		<h2 class="right">Evaluación Entrevista: <br> {{$aspirant->global_interview_grade ? number_format(($aspirant->global_interview_grade->score*10),2).'%' : "Sin evaluaciones"}}</h2>
+		<h2 class="right">Evaluación Aplicación: <br> {{$aspirant->global_grade ? number_format(($aspirant->global_grade->grade*10),2).'%' : "Sin evaluaciones"}}</h2>
 	</div>
 	<div class="col-sm-12">
 		<div class="divider"></div>
