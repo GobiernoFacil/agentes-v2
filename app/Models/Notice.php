@@ -212,6 +212,7 @@ class Notice extends Model
       $aspirants = $this->aspirants_interviews()->pluck('id')->toArray();
       $aspirants_r = InterviewGlobalScore::whereNotNull('score')->whereIn('aspirant_id',$aspirants)->orderBy('score','desc')->pluck('aspirant_id')->toArray();
       $aspirants = Aspirant::where('is_activated',1)->whereIn('id',$aspirants_r)->get();
+      $temOrder  = [];
       foreach ($aspirants as $aspirant) {
         $temOrder[$aspirant->id] = number_format((($aspirant->global_grade->grade + $aspirant->global_interview_grade->score)/2),2);
       }
