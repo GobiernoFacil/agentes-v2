@@ -38,6 +38,11 @@ class Notice extends Model
       return $this->hasMany("App\Models\FellowProgram",'notice_id');
     }
 
+    function selected_aspirant_order_by_state(){
+      $aspirants = $this->fellows->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderBy('state','asc');
+    }
+
     function interview_questionnaire(){
       return $this->hasOne("App\Models\InterviewQuestionnaire",'notice_id');
     }
@@ -123,6 +128,11 @@ class Notice extends Model
     function aspirants_approved_proof(){
       $aspirants_id = AspirantEvaluation::where('address_proof',1)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants_id);
+    }
+
+    function aspirants_approved_proof_by_state($state){
+      $aspirants_id = AspirantEvaluation::where('address_proof',1)->where('notice_id',$this->id)->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->where('state',$state)->whereIn('id',$aspirants_id);
     }
 
     function aspirants_per_institution_to_evaluate(){

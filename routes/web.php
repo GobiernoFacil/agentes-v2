@@ -56,6 +56,7 @@ Route::post('convocatoria/aplicar/registro', 'NoticeFront@saveFiles');
 Route::get('convocatoria/registro/fin', 'NoticeFront@end');
 Route::get('convocatoria/aplicar/{notice_slug}/{token}/confirmacion', 'NoticeFront@aspirantActivation');
 Route::get('convocatoria/{notice_slug}/resultados', 'NoticeFront@results');
+Route::get('convocatoria/{notice_slug}/metodologia', 'NoticeFront@methodology');
 
 //Route::get('convocatoria/resultados', 'NoticeFront@resultados');
 Route::get('cities', 'NoticeFront@cities');

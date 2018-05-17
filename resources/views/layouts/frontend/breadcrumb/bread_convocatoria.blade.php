@@ -40,4 +40,11 @@
 	<li>Resultados</li>
 
 	@endif
+	@if ($__env->yieldContent('body_class') =="convocatoria methodology")
+	<li><a href="{{url('convocatoria')}}">Convocatoria</a></li>
+	<li><a href='{{url("convocatoria/cerrada/$notice->slug")}}'>{{$notice->title}}</a></li>
+	<li><a href='{{url("convocatoria/$notice->slug/resultados")}}'>Resultados</a></li>
+	<li>Metodología</li>
+
+	@endif
 </ul>

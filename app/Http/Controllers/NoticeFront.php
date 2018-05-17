@@ -77,6 +77,17 @@ class NoticeFront extends Controller
         ]);
       }
 
+      //convocatoria metodologia
+      public function methodology($notice_slug){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->firstOrFail();
+        $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
+        $states       = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
+        return view('frontend.convocatoria.methodology')->with([
+          'notice'=>$notice,
+          'states'=>$states
+        ]);
+      }
+
       //convocatoria/aplicar
       public function aplicar($notice_slug){
         $today  = date('Y-m-d');
