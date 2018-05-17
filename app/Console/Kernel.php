@@ -37,7 +37,8 @@ class Kernel extends ConsoleKernel
         Commands\SendAspirantInterviewNotification::Class,
         Commands\ExportAspirantInterviews::Class,
         Commands\ImportInterviewQuestionnaire::Class,
-        Commands\ImportSelectedAspirantToProgram::Class
+        Commands\ImportSelectedAspirantToProgram::Class,
+        Commands\SendFinalEmailToAspirants::Class
     ];
 
     /**
