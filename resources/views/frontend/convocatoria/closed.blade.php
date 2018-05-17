@@ -24,9 +24,16 @@
 		  		<div class="col-sm-4">
 	        		<a href='{{url("convocatoria/preguntas-frecuentes")}}' class="btn gde view faqs">Preguntas Frecuentes</a>
           		</div>
+
+        @if($notice->fellows->count() == 0)
 		  		<div class="col-sm-4">
 	        		<a  class="btn gde i_convoca_w">Convocatoria cerrada</a>
           </div>
+        @else
+          <div class="col-sm-4">
+            <p><a href='{{url("convocatoria/$notice->slug/resultados")}}'class="btn gde process">Candidatos Seleccionados</a></p>
+          </div>
+        @endif
 		  		<!-- aspirantes de convocatoria seleccionados
 			  	<div class="col-sm-4">
 			  		<p><a href="{{url('convocatoria/resultados-2017')}}" class="btn gde process">Candidatos Seleccionados</a></p>

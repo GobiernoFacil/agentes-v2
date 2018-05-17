@@ -8,7 +8,7 @@ class FellowProgram extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'program_id'
+        'user_id', 'program_id','notice_id','aspirant_id'
     ];
 
     function user(){

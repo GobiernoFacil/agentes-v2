@@ -34,6 +34,10 @@ class Notice extends Model
       return $this->hasOne("App\Models\Program",'notice_id');
     }
 
+    function fellows(){
+      return $this->hasMany("App\Models\FellowProgram",'notice_id');
+    }
+
     function interview_questionnaire(){
       return $this->hasOne("App\Models\InterviewQuestionnaire",'notice_id');
     }

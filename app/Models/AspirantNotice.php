@@ -21,5 +21,5 @@ class AspirantNotice extends Model
     	return $this->belongsTo("App\Models\Notice");
     }
 
-    
+
 }
