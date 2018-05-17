@@ -68,9 +68,9 @@
     <tr>
       <th>Folio Interno</th>
       <th>Estado</th>
-      <th>CV (30%)</th>
-      <th>Ensayo (35%)</th>
-      <th>Video (35%)</th>
+      <th>CV (33.3%)</th>
+      <th>Ensayo (33.3%)</th>
+      <th>Video (33.3%)</th>
       <th>Total (100%)</th>
     </tr>
   </thead>
@@ -78,7 +78,7 @@
 		@foreach($notice->aspirants_app_already_evaluated_front()->orderBy('state','asc')->get() as $aspirant)
 			<tr>
 				<td>{{$aspirant->id}}</td>
-				<td>{{$aspirant->state == "México" ? 'Estado de México' : $aspirant->state}}</td>
+				<td>{{ strpos( $aspirant->state,"xico")  ? "Estado de México" :   $aspirant->state  }}<br>
 				<td>{{number_format($aspirant->AspirantEvaluation()->whereNotNull('experienceGrade')->sum('experienceGrade')/3,2)}}</td>
 				<td>{{number_format($aspirant->AspirantEvaluation()->whereNotNull('essayGrade')->sum('essayGrade')/3,2)}}</td>
 				<td>{{number_format($aspirant->AspirantEvaluation()->whereNotNull('videoGrade')->sum('videoGrade')/3,2)}}</td>
@@ -100,7 +100,10 @@
   </thead>
   <tbody>
 		@foreach($notice->aspirants_interviews()->orderBy('state','asc')->get() as $aspirant)
-			<tr><td>{{$aspirant->id}}</td><td>{{$aspirant->state == "México" ? 'Estado de México' : $aspirant->state}}</td><td>{{number_format($aspirant->global_grade->grade,2)}}</td></tr>
+			<tr><td>{{$aspirant->id}}</td>
+				<td>{{ strpos( $aspirant->state,"xico")  ? "Estado de México" :   $aspirant->state  }}<br>
+				<td>{{number_format($aspirant->global_grade->grade,2)}}</td>
+			</tr>
 		@endforeach
 	</tbody>
 </table>
@@ -133,7 +136,7 @@
 			<tbody>
 				@foreach($notice->aspirants_interviews()->orderBy('state','asc')->get() as $aspirant)
 					<tr><td>{{$aspirant->id}}</td>
-						  <td>{{$aspirant->state == "México" ? 'Estado de México' : $aspirant->state}}</td>
+						<td>{{ strpos( $aspirant->state,"xico")  ? "Estado de México" :   $aspirant->state  }}<br>
 							<td>{{number_format($aspirant->global_grade->grade,2)}}</td>
 							<td>{{number_format($aspirant->global_interview_grade->score,2)}}</td>
 						</tr>
@@ -154,9 +157,10 @@
 			<tbody>
         @foreach($notice->selected_aspirant_order_by_state()->get() as $aspirant)
           <tr>
-            <td>{{$aspirant->state}}					   </td>
-            <td>{{str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($aspirant->name)))).' '.str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($aspirant->surname)))).' '.str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($aspirant->lastname))))}}</td>
-          </tr>
+            <td>{{ strpos( $aspirant->state,"xico")  ? "Estado de México" :   $aspirant->state  }}<br>
+            </td>
+            <td>{{mb_convert_case($aspirant->name,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($aspirant->surname,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($aspirant->lastname,  MB_CASE_TITLE, 'UTF-8')}}
+	         </tr>
         @endforeach
 			</tbody>
 		</table>
