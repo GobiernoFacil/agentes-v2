@@ -82,6 +82,15 @@ class NoticeFront extends Controller
         $notice = Notice::where('slug',$notice_slug)->where('public',1)->firstOrFail();
         $aspirants_id = $notice->aspirants()->pluck('aspirant_id');
         $states       = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->get();
+        $states       = $states->map(function($item,$key){
+                    if($item->state==='México'){
+                        $item->state ='Estado de México';
+                        return $item;
+                    }else{
+                        return $item;
+
+                    }
+        });
         return view('frontend.convocatoria.methodology')->with([
           'notice'=>$notice,
           'states'=>$states

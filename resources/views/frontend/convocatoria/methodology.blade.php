@@ -38,9 +38,14 @@
         @foreach($states as $state)
           <tr>
   					<td>{{$state->state}}</td>
-  					<td>{{$notice->aspirants_approved_proof_by_state($state->state)->count()}}</td>
+						@if($state->state==='Estado de México')
+							<td>{{$notice->aspirants_approved_proof_by_state('México')->count()}}</td>
+							<?php $count = $notice->aspirants_approved_proof_by_state('México')->count()+$count;?>
+						@else
+  						<td>{{$notice->aspirants_approved_proof_by_state($state->state)->count()}}</td>
+							<?php $count = $notice->aspirants_approved_proof_by_state($state->state)->count()+$count;?>
+						@endif
   				</tr>
-          <?php $count = $notice->aspirants_approved_proof_by_state($state->state)->count()+$count;?>
         @endforeach
 				<tr>
 					<td><strong>Total</strong></td>
