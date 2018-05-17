@@ -155,6 +155,13 @@ class Notice extends Model
 
     }
 
+    function aspirants_app_already_evaluated_front(){
+      $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
+      $aspirants = AspirantGlobalGrade::where('notice_id',$this->id)->whereIn('aspirant_id',$aspirants)->orderBy('grade','desc')->pluck('aspirant_id')->toArray();
+      return Aspirant::where('is_activated',1)->whereIn('id',$aspirants);
+
+    }
+
 
     function aspirants_app_already_evaluated_by_institution($institution){
       $aspirants = $this->aspirants_approved_proof()->pluck('id')->toArray();
