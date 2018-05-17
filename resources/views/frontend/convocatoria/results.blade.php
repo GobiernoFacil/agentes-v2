@@ -15,11 +15,12 @@
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 
-		<ul>
+		<ol>
        @foreach($notice->fellows as $fellow)
-          <li>{{str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($fellow->aspirant->name)))).' '.str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($fellow->aspirant->surname)))).' '.str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($fellow->aspirant->lastname))))}}</li>
+          <li>
+          {{mb_convert_case($fellow->aspirant->name,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($fellow->aspirant->surname,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($fellow->aspirant->lastname,  MB_CASE_TITLE, 'UTF-8')}} </li>
        @endforeach
-		</ul>
+		</ol>
 	</div>
 	<div class="row">
 				<div class="col-sm-6 col-sm-offset-2">
