@@ -69,6 +69,14 @@ class NoticeFront extends Controller
         ]);
       }
 
+      //convocatoria resultados
+      public function results($notice_slug){
+        $notice = Notice::where('slug',$notice_slug)->where('public',1)->firstOrFail();
+        return view('frontend.convocatoria.results')->with([
+          'notice'=>$notice
+        ]);
+      }
+
       //convocatoria/aplicar
       public function aplicar($notice_slug){
         $today  = date('Y-m-d');

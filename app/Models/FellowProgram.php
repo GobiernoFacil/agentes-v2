@@ -18,4 +18,8 @@ class FellowProgram extends Model
     function program_data(){
       return $this->hasOne("App\Models\Program",'program_id');
     }
+
+    function aspirant(){
+      return $this->belongsTo("App\Models\Aspirant");
+    }
 }

@@ -33,4 +33,11 @@
 	@if ($__env->yieldContent('body_class') =="convocatoria faqs")
 	<li>Preguntas Frecuentes</li>
 	@endif
+
+	@if ($__env->yieldContent('body_class') =="convocatoria results")
+	<li><a href="{{url('convocatoria')}}">Convocatoria</a></li>
+	<li><a href='{{url("convocatoria/cerrada/$notice->slug")}}'>{{$notice->title}}</a></li>
+	<li>Resultados</li>
+
+	@endif
 </ul>
