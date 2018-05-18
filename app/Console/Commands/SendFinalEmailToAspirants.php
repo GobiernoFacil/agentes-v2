@@ -68,19 +68,17 @@ class SendFinalEmailToAspirants extends Command
           $count = 1;
           foreach ($allAspirants as $aspirant) {
             $this->info($count.' '.$aspirant->name.' '.$aspirant->surname.' '.$aspirant->lastname);
+            $aspirant->notify(new SendAspirantFinalNotification($aspirant,$notice));
             $count++;
           }
-          $aspirant = User::where('email','carlos@gobiernofacil.com')->first();
-          $aspirant->notify(new SendAspirantFinalNotification($aspirant,$notice));
           $count = 1;
           $this->info('||------------------------------------------------------------------------------------------------------||');
           $this->info('Aspirants selected: ');
           foreach ($acceptedAspirants as $aspirantP) {
             $this->info($count.' '.$aspirantP->aspirant->name.' '.$aspirantP->aspirant->surname.' '.$aspirantP->aspirant->lastname);
+            $aspirantP->aspirant->notify(new SendAcceptedNotification($aspirantP->aspirant,$notice));
             $count++;
           }
-          $aspirant = User::where('email','carlos@gobiernofacil.com')->first();
-          $aspirant->notify(new SendAcceptedNotification($aspirant,$notice));
           $this->info('||------------------------------------------------------------------------------------------------------||');
           $this->info($allAspirants->count().' aspirants notified');
           $this->info($acceptedAspirants->count().' aspirants accepted notified');
