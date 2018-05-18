@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
+use App\Models\Module;
 class SaveModule extends FormRequest
 {
   use MessagesTrait;
@@ -26,13 +27,25 @@ class SaveModule extends FormRequest
     {
        $date = strtotime($this->start);
        $date = strtotime("+8 day", $date);
-        return [
-            //
-            'title'=> 'required|max:256|unique:modules',
-            'modality'=> 'required',
-            'start'=> 'required',
-            'end'=> 'required|before:'.date('Y-m-d',$date),
-            'public'=> 'required',
-        ];
+       if($this->parent_id){
+         $parent_module = Module::find($this->parent_id);
+         return [
+             //
+             'title'=> 'required|max:256|unique:modules',
+             'modality'=> 'required',
+             'start'=> 'required|after:'.$parent_module->end,
+             'end'=> 'required|before:'.date('Y-m-d',$date),
+             'public'=> 'required',
+         ];
+       }else{
+         return [
+             //
+             'title'=> 'required|max:256|unique:modules',
+             'modality'=> 'required',
+             'start'=> 'required',
+             'end'=> 'required|before:'.date('Y-m-d',$date),
+             'public'=> 'required',
+         ];
+       }
     }
 }

@@ -450,8 +450,9 @@ Route::group(['middleware' => ['auth']], function () {
           // Rutas actividades
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/{activity_slug}', 'SessionFellow@activity');
           // Rutas diagnostico
-          Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
-          Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
+            //Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
+            //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
+            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'SessionFellow@diagnostic');
           /*@FellowFiles */
           //Rutas archivos
           Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');

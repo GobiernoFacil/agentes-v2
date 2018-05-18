@@ -54,8 +54,10 @@
 			    	<li class="row">
 			    		<span class="col-sm-9">
 			    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
-			    			<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
-			    		</span>
+
+			    				<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
+
+							</span>
 								@if($last_activity)
 									@if($last_activity->activity_id == $activity->id)
 									<span class="col-sm-3">

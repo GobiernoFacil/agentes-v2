@@ -9,6 +9,7 @@ use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
 use App\Models\Aspirant;
 use App\Models\Conversation;
+use App\Models\CustomFellowAnswer;
 use App\Models\StoreConversation;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
@@ -88,6 +89,10 @@ class User extends Authenticatable
 
     function diagnostic(){
       return $this->hasOne("App\Models\DiagnosticAnswer");
+    }
+
+    function new_diagnostic($quiz_id){
+      return CustomFellowAnswer::where('user_id',$this->id)->where('questionnaire_id',$quiz_id);
     }
 
     function diagnosticEvaluation(){

@@ -75,7 +75,7 @@
 	@include('admin.modules.activities.diagnostic-view')
 @endif
 
-@if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico')
+@if($activity->type ==='evaluation' && !$activity->files && $activity->slug !='examen-diagnostico')
 <!---------------------------------------------------------------------------------- evaluación ------------------------------------>
 	@include('admin.modules.activities.evaluation-view')
 @elseif($activity->type ==='evaluation' && $activity->files=== 1 && $activity->slug !='examen-diagnostico')

@@ -58,7 +58,7 @@ class Modules extends Controller
     $user     = Auth::user();
     $program  = Program::where('id',$program_id)->firstOrFail();
     $list     = Module::where('program_id',$program_id)->orderBy('order','desc')->pluck('title','id')->toArray();
-    $list['0'] = 'Sin módulo predecesor';
+    $list[null] = 'Sin módulo predecesor';
     return view('admin.modules.module-add')->with([
       "user"      => $user,
       "program"   => $program,
@@ -119,7 +119,7 @@ class Modules extends Controller
     $program  = Program::where('id',$program_id)->firstOrFail();
     $module = Module::where('id',$module_id)->firstOrFail();
     $list   =  Module::where('program_id',$program_id)->where('id','!=',$module_id)->orderBy('order','desc')->pluck('title','id')->toArray();
-    $list['0'] = 'Sin módulo predecesor';
+    $list[null] = 'Sin módulo predecesor';
     return view('admin.modules.module-update')->with([
       'user' => $user,
       'module' =>$module,
@@ -284,7 +284,7 @@ class Modules extends Controller
       protected function checkUpdateOrder($data,$module_to){
         if(intval($data['parent_id']) != $module_to->parent_id){
               //first module
-              if($data['parent_id'] === '0'){
+              if(!$data['parent_id']){
                     $order             =  1;
                     $data['order']     =  $order;
                     $data['parent_id'] = null;

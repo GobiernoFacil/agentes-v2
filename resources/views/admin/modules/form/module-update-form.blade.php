@@ -24,7 +24,7 @@
       <label><strong>Fecha inicio</strong> <br>
       {{Form::text('start',$module->start, ["class" => "form-control", 'id'=>'startD'])}} </label>
       @if($errors->has('start'))
-      <strong class="danger">{{$errors->first('start')}}</strong>
+      <strong class="danger">{{str_replace('start','fecha de inicio',$errors->first('start'))}}</strong>
       @endif
     </p>
   </div>

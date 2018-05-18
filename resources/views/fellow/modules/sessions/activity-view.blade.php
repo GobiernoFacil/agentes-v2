@@ -22,6 +22,12 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+			case "diagnostic":
+					$type = "Evaluación diagnóstico";
+			break;
+			case "final":
+					$type = "Evaluación final";
+			break;
 			case "face":
 				$type = "Presencial";
 				break;
@@ -73,28 +79,29 @@
 	</div>
 
 	</div>
-	@if($activity->slug ==='examen-diagnostico' && !$user->diagnostic)
-	<!--si es examen de diagnostico-->
-	<div class="row">
-		<div class="col-sm-3 col-sm-offset-1">
-				<a href='{{ url("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
-		</div>
-	</div>
-	@endif
-	@if($activity->slug ==='examen-diagnostico' && $user->diagnostic)
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<div class="box blue center">
-				<h2>Ya respondiste el examen</h2>
+	@if($activity->type ==='diagnostic' && $activity->diagnosticInfo)
+	   @if($user->new_diagnostic($activity->diagnosticInfo->id)->count() == 0)
+					<!--si es examen de diagnostico-->
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-1">
+								<a href='{{ url("tablero/{$activity->session->module->program->slug}/aprendizaje/diagnostico/$activity->slug/examen/responder") }}' class="btn gde">Comenzar evaluación <strong>&gt;&gt;</strong></a>
+						</div>
+					</div>
+			@else
+			<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="box blue center">
+							<h2>Ya respondiste el examen</h2>
+						</div>
+					</div>
+						<div class="col-sm-12">
+								<div class="divider b"></div>
+						</div>
 			</div>
-		</div>
-		<div class="col-sm-12">
-				<div class="divider b"></div>
-			</div>
-	</div>
+		 @endif
 	@endif
 
-@if($activity->type ==='evaluation' && $activity->files==='No' && $activity->slug !='examen-diagnostico' && $activity->quizInfo)
+@if($activity->type ==='evaluation' && !$activity->files && $activity->slug !='examen-diagnostico' && $activity->quizInfo)
 	@if(!$score)
 			@if($activity->end >= $today )
 				<div class="box">
@@ -128,7 +135,7 @@
 			</div>
 		</div>
 		@endif
-@elseif($activity->type ==='evaluation' && $activity->files=== 1 && $activity->slug !='examen-diagnostico')
+@elseif($activity->type ==='evaluation' && $activity->files && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
 		@if(!$files)
@@ -162,18 +169,6 @@
 </div>
 @endif
 
-@if($activity->activityRequirements->count() > 0)
-	@if($activity->type == 'video')
-	@else
-	<!-- recursos-->
-	<div class="row">
-	  	<div class="col-sm-12">
-		  	<div class="divider"></div>
-	  		@include('admin.modules.activities.activities-requirements-list')
-	  	</div>
-	 </div>
-	 @endif
-@endif
 
 @if($activity->activityFiles->count() > 0)
 <!--archivos-->
