@@ -70,11 +70,14 @@
 		<p>En todos los casos, cada uno de los {{$notice->aspirants_app_already_evaluated()->count()}} postulantes fue evaluado, de forma separada y ciega, por representantes de tres de las organizaciones que integran el Comité Dictaminador (El Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (<strong>INAI</strong>), la Oficina para México del Programa de Naciones Unidas para el Desarrollo (<strong>PNUD-México</strong>), <strong>GESOC</strong>, Agencia para el Desarrollo, A.C., <strong>ProSociedad</strong> Hacer Bien el Bien, A.C., y <strong>Gobierno Fácil</strong>.</p>
 
 		<p>Cada una de las tres organizaciones evaluó, en una escala de cero a diez, cada uno de los insumos proporcionados por los aspirantes; y la calificación final resultó de promediar las tres notas generadas por cada institución. Con base en estos criterios, las calificaciones obtenidas por los {{$notice->aspirants_app_already_evaluated()->count()}} candidatos que avanzaron a esta fase del proceso fueron las siguientes:</p>
+		
+		<p class="note">Solo se incluyen los folios de las personas que pasaron el filtro de la etapa documental.</p>
+		
 		<table id="tabla2" class="table">
   <thead>
     <tr>
       <th>Folio Interno</th>
-      <th>Estado</th>
+      <th>Entidad Federativa</th>
       <th>CV (33.3%)</th>
       <th>Ensayo (33.3%)</th>
       <th>Video (33.3%)</th>
@@ -101,7 +104,7 @@
   <thead>
     <tr>
       <th>Folio interno</th>
-      <th>Estado</th>
+      <th>Entidad Federativa</th>
       <th>Calificación</th>
     </tr>
   </thead>
@@ -135,7 +138,7 @@
 			<thead>
 				<tr>
 					<th>Folio interno			</th>
-					<th>Estado					</th>
+					<th>Entidad Federativa</th>
 					<th>Calificación experiencia</th>
 					<th>Calificación entrevistas</th>
 				</tr>
@@ -168,7 +171,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Estado</th>
+					<th>Entidad Federativa</th>
 					<th>Nombre</th>
 				</tr>
 			</thead>
