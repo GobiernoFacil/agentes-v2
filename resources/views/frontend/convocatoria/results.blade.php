@@ -15,7 +15,7 @@
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 
-		<ol>
+		<ol class="list-view">
        @foreach($notice->fellows as $fellow)
           <li>
           {{mb_convert_case($fellow->aspirant->name,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($fellow->aspirant->surname,  MB_CASE_TITLE, 'UTF-8')}} {{mb_convert_case($fellow->aspirant->lastname,  MB_CASE_TITLE, 'UTF-8')}} </li>
