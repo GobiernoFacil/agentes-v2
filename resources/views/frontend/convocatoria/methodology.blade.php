@@ -12,7 +12,7 @@
 		<h2>Criterios y metodología de selección</h2>
 		<p>El proceso de selección tuvo por objeto elegir 40 integrantes del <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong>, edición {{DateTime::createFromFormat("Y-m-d", $notice->start)->format("Y")}}. Como criterio inicial se buscó seleccionar a 4 candidatos por cada una de las {{$states->count()}} entidades federativas que se incorporaron a esta convocatoria ({{implode(", ", $states->pluck('state')->toArray())}}).</p>
 
-		<p>El proceso de selección se llevó a cabo considerando el total de postulaciones recibidas y con base en los requisitos establecidos en la Convocatoria El proceso de selección se conformó por las siguientes etapas:</p>
+		<p>El proceso de selección se llevó a cabo considerando el total de postulaciones recibidas y con base en los requisitos establecidos en la Convocatoria. El proceso de selección se conformó por las siguientes etapas:</p>
 	</div>
 	<div class="col-sm-8 col-sm-offset-2">
 		<!--Fase 1: Verificación documental-->
