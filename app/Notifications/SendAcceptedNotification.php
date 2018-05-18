@@ -16,10 +16,11 @@ class SendAcceptedNotification extends Notification
      *
      * @return void
      */
-    public function __construct($aspirant)
+    public function __construct($aspirant,$notice)
     {
         //
         $this->aspirant = $aspirant;
+        $this->notice   = $notice;
     }
 
     /**
@@ -41,11 +42,16 @@ class SendAcceptedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-      $url = url("/login");
+      $url_web = url("/");
+      $url_results = url("convocatoria/{$this->notice->slug}/resultados");
       return (new MailMessage)
               ->from('info@apertus.org.mx')
               ->subject('Aviso: Programa de Formación de Agentes Locales de Cambio')
-              ->markdown('vendor.notifications.aspirant_accepted', ['url' => $url,'aspirant'=>$this->aspirant]);
+              ->markdown('vendor.notifications.aspirant_accepted', ['url_web' => $url_web,'aspirant'=>$this->aspirant,'url_results' => $url_results])
+              ->attach('csv/Carta compromiso_Fellows_Edición2018.docx',[
+                   'as' => 'carta_compromiso_edicion_2018.docx',
+                   'mime' => 'application/docx',
+                   ]);;
     }
 
     /**
