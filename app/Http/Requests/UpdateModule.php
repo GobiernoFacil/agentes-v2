@@ -28,6 +28,19 @@ class UpdateModule extends FormRequest
         $module = Module::find($this->route("module_id"));
         $date = strtotime($this->start);
         $date = strtotime("+8 day", $date);
+        if($this->parent_id){
+          $parent_module = Module::find($this->parent_id);
+          return [
+              //
+              'title'=> 'required|max:256'.($module->title != $this->title ? '|unique:modules' : ''),
+              'modality'=> 'required',
+              'start'=> 'required|after:'.$parent_module->end,
+              'end'=> 'required|before:'.date('Y-m-d',$date),
+              'public'=> 'required',
+          ];
+        }else{
+
+
         return [
             //
             'title'=> 'required|max:256'.($module->title != $this->title ? '|unique:modules' : ''),
@@ -36,5 +49,6 @@ class UpdateModule extends FormRequest
             'end'=> 'required|before:'.date('Y-m-d',$date),
             'public'=> 'required',
         ];
+      }
     }
 }
