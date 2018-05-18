@@ -86,4 +86,12 @@ class CustomQuestion extends Model
     function answers_fellows_facilitator($session_id,$facilitator_id){
       return CustomFellowAnswer::where('question_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->get();
     }
+
+    function correct_Answer($question_id){
+      return CustomAnswer::where('question_id',$question_id)->where('selected',1)->first();
+    }
+
+    function count_correct($question_id){
+      return CustomAnswer::where('question_id',$question_id)->where('selected',1)->count();
+    }
 }

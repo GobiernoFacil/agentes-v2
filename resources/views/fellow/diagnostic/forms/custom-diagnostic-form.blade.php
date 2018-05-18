@@ -11,128 +11,38 @@
   @foreach($activity->diagnostic_info->questions as $question)
   <li class="row">
     @if($question->type ==="open")
-    <!-- answer_open -->
-      <div class="col-sm-12">
-        <p>
-          <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong><br>
-            <p>{{$question->observations ?  $question->observations : ""}}</p>
-          {{Form::textarea('question_'.$count.'_'.$question->id,null, ["class" => "form-control"])}} </label>
-          @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
-          @endif
-        </p>
-        <div class="divider"></div>
-    </div>
+      @include('fellow.diagnostic.includes.open_question_template')
     @elseif($question->type ==="radio")
-    <!-- answer_radio -->
-      <div class="col-sm-12">
-        <p>
-          <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong>  <br>
-          <p>{{$question->observations ?  $question->observations : ""}}</p></label>
-          <div class="row">
-          <!--table -->
-          @if($question->options_rows_number > 1 )
-          	<div class="col-sm-8 col-sm-offset-4">
-	          	<div class="row">
-			  	@for($i=1; $i <= $question->options_columns_number; $i++)
-			  		@if($i==1)
-			  		<div class="col-sm-3">
-			  			<span>{{$question->min_label}}</span>
-			  		</div>
-			  		@elseif($i==$question->options_columns_number)
-			  		<div class="col-sm-3">
-			  			<span>{{$question->max_label}}</span><br>
-			  		</div>
-			  		@else
-			  		<div class="col-sm-3">
-				  		@if($i==3)
-			  			<span>Medianamente efectivo</span>
-			  			@endif
-			  			@if($i==2)
-			  			<span>Poco efectivo</span>
-			  			@endif
-			  		</div>
-			  	    @endif
-			  	@endfor
-	          	</div>
-          	</div>
-             	@foreach($question->answers as $answer)
-			 	<div class="row">
-                    @for($i=1; $i <= $question->options_columns_number; $i++)
-                    	@if($i===1)
-						<div class="col-sm-4">
-                        	<span>{{$answer->answer}}</span>
-                        </div>
-						@endif
-                     @endfor
-                     <div class="col-sm-8">
-                     	<div class="row">
-					 	@for($i=1; $i <= $question->options_columns_number; $i++)
-					 		<div class="col-sm-3">
-					 			<label>{{Form::radio('question_'.$count.'_'.$question->id.'_'.$answer->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id.'_'.$answer->id])}}</label>
-					 		</div>
-					 	@endfor
+      @include('fellow.diagnostic.includes.radio_question_templade')
+    @elseif($question->type === "answers")
+        <div class="col-sm-12">
+          <h3 class="title"><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong></h3>
+        </div>
+        <div class="col-sm-12">
+        @if($errors->has('answer_q'.$count))
+        <strong class="danger">{{$errors->first('answer_q'.$count)}}</strong>
+        @endif
+        </div>
+      <div class="col-sm-10 col-sm-offset-1">
+            <?php $countP =0;?>
 
-
-                     	</div>
-                     </div>
-                  </div>
-                  @if($errors->has('question_'.$count.'_'.$question->id.'_'.$answer->id))
-                  <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id.'_'.$answer->id)}}</strong>
-                  @endif
-                  <div class="divider"></div>
-                @endforeach
-          </div>
-          @else
-
-              <ul class="inline">
-
-                @for($i=1; $i <= $question->options_columns_number; $i++)
-                <li>
-                    @if($i===1)
-                        <label>
-                        	<span class="row">
-                        		<span class="col-sm-9">{{$question->min_label}}</span>
-                        		<span class="col-sm-3">{{$i}}<br>
-								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-                        		</span>
-                        	</span>
-                        </label>
-                    @elseif($i===$question->options_columns_number)
-      					<label>
-      						<span class="row">
-                        		<span class="col-sm-3">
-                        			{{$i}}<br>
-									{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-								</span>
-								<span class="col-sm-6">
-								{{$question->max_label}}
-								</span>
-      						</span>
-
-      					</label>
-                    @else
-
-                        <label>
-                        	<span class="row">
-                        		<span class="col-sm-3">
-                        		{{$i}}<br>
-								{{Form::radio('question_'.$count.'_'.$question->id."[$i]",$i, "",['class' => 'form-control '.'question_'.$question->id])}}
-                        		</span>
-                        	</span>
-                       </label>
-                    @endif
-                </li>
-                @endfor
-
-    					</ul>
-          @endif
-          @if($errors->has('question_'.$count.'_'.$question->id))
-          <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
-          @endif
-        </p>
-         <div class="divider"></div>
-    </div>
+            @foreach($question->answers as $answer)
+              <div class="divider b"></div>
+                <p class="row"><label><span class="col-sm-1">{{Form::radio('answer_q'.$count.'['.$countP.']',$answer->id, null,['class' => 'form-control answer_q'.$count,'id'=>'answer_'.$count.'_'.$countP])}}</span><span class="col-sm-11">{{$answer->value}}</span></label>
+                <?php $countP++;?>
+                </p>
+            @endforeach
+            @if($question->count_correct($question->id)>1)
+            <div class="divider b"></div>
+              <p class="right"><a hred="#" class="btn xs danger" id='{{"delete".$countP."_".$count}}'>Borrar respuestas seleccionadas en la pregunta {{$count}}</a></p>
+            <script>
+            $('#delete{{$count}}_{{$countP}}').click(function(event) {
+                event.preventDefault();
+                $('.answer_q{{$count}}').not(this).attr('checked', false);
+             });
+            </script>
+        @endif
+        </div>
     @endif
   </li>
     <?php $count++;?>

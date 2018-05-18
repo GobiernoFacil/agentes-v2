@@ -156,8 +156,8 @@ class AdminDiagnostic extends Controller
            if($question->type === 'radio'){
              $question->min_label  = 'Menor';
              $question->max_label  = 'Mayor';
-             $question->options_columns_number  = 1;
-             $question->options_rows_number     = 5;
+             $question->options_columns_number  = 5;
+             $question->options_rows_number     = 1;
            }
            $question->save();
            return response()->json($question->toArray());
