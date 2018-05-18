@@ -1,14 +1,14 @@
-{!! Form::open(['url' => url("tablero/diagnostico/$questionnaire->slug"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/diagnostico/$activity->diagnostic_info->slug"), "class" => "form-horizontal"]) !!}
 <div class="row">
   <div class="col-sm-12">
-    <h2 class="sa_title">{{$questionnaire->title}}</h2>
-    <p>{{$questionnaire->description}}</p>
+    <h2 class="sa_title">{{$activity->diagnostic_info->title}}</h2>
+    <p>{{$activity->diagnostic_info->description}}</p>
   </div>
 </div>
 
 <?php $count = 1; ?>
 <ol>
-  @foreach($questionnaire->questions as $question)
+  @foreach($activity->diagnostic_info->questions as $question)
   <li class="row">
     @if($question->type ==="open")
     <!-- answer_open -->

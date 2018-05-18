@@ -1,6 +1,6 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Evaluación diagnóstico '. $questionnaire->title)
-@section('description', 'Evaluación diagnóstico '. $questionnaire->title)
+@section('title', 'Evaluación diagnóstico '. $activity->diagnostic_info->title)
+@section('description', 'Evaluación diagnóstico '. $activity->diagnostic_info->title)
 @section('body_class', 'fellow aprendizaje')
 @section('breadcrumb_type', 'custom view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_diagnostic')
@@ -24,7 +24,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function() {
-  @foreach($questionnaire->questions as $question)
+  @foreach($activity->diagnostic_info->questions as $question)
     @if($question->options_rows_number >1)
       @foreach($question->answers as $answer)
       $("{{'.question_'.$question->id.'_'.$answer->id}}").click(function(event) {
