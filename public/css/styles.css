@@ -2304,6 +2304,7 @@ p.ap_icon.i_ods17:after {
 .note {
   background: #f2f2f2;
   color: #777;
+  font-weight: 700;
   padding: 10px;
   font-size: 12px;
   text-align: center;
