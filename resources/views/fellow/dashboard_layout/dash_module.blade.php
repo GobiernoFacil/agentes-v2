@@ -19,7 +19,7 @@
 			<div class="col-sm-12">
 				<!-- title-->
 				<h3>
-					@if($module->public && $user->check_progress($module->id,0))
+					@if((strtotime($module->start) <= strtotime(date('Y-m-d'))) && $module->public && $user->check_progress($module->id,0))
 					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
 					@else
 					{{$module->title}}
@@ -64,7 +64,7 @@
 							</div>
 							<div class="col-sm-3">
 								<p>{{date('d-m-Y', strtotime($evAct->end))}}
-									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end))->diffForHumans()}})</span>									
+									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end))->diffForHumans()}})</span>
 								</p>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 						</div>
 					</div>
 					@endif
-				
+
 			</div>
 
 		</div>
