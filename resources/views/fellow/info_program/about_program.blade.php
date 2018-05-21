@@ -101,11 +101,12 @@
 		<div class="content_box" style="display: none">
 			<div class="row">
 				<div class="col-sm-12">
-					<h2 class="center">Contenido</h2>
-					<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs ev">+ Agregar módulo</a></p>
+					<h2 class="center">Contenido del Programa</h2>
 					@if($program->modules->count() > 0)
 						@foreach ($program->modules as $module)
-							@include('admin.programs.program_layout.module_list')
+							@if($module->public)
+								@include('fellow.info_program.list_program')
+							@endif
 						@endforeach
 					@else
 					<div class="box">
@@ -124,19 +125,49 @@
 		<div class="how_box" style="display: none">
 			<div class="row">
 				<div class="col-sm-12">
-					<h2 class="center">Contenido</h2>
-					<p class="center"><a href='{{url("dashboard/programas/$program->id/modulos/agregar")}}' class="btn xs ev">+ Agregar módulo</a></p>
-					@if($program->modules->count() > 0)
-						@foreach ($program->modules as $module)
-							@include('admin.programs.program_layout.module_list')
-						@endforeach
-					@else
-					<div class="box">
-						<div class="row center">
-							<h2>Sin módulos</h2>
+					<h2 class="center">Cómo funciona</h2>
+					
+					<!---cgenearl-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-6">
+									<h4>General</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<h3>Calificación necesaria para aprobar el programa</h3>
+									<p class="ap_time">Para aprobar el programa es necesario</p>
+								</div>
+							</div>
 						</div>
 					</div>
-					@endif
+					
+					
+					<!---cgenearl-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-6">
+									<h4>Colaboración con fellows de mi estado</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<h3>Calificación necesaria para aprobar el programa</h3>
+									<p class="ap_time">Para aprobar el programa es necesario</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
