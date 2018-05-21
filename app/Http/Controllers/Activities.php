@@ -82,7 +82,7 @@ class Activities extends Controller
             $activity  = new Activity($request->except(['_token','time','start','link','order']));
             $activity->order = $activity->reorder_add($request,$session);
 
-           if($request->files){
+           if($request->files && $request->type != 'video'){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);
@@ -220,12 +220,13 @@ class Activities extends Controller
         public function update(UpdateActivity $request)
         {
 
+
             //
             $user   = Auth::user();
             $data   = $request->except(['_token','start','time','link','link_video']);
 
             $data['slug']    = str_slug($request->name);
-            if($request->files){
+            if($request->files && $request->type != 'video'){
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);
