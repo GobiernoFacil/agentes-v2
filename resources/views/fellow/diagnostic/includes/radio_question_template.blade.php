@@ -1,7 +1,7 @@
 <!-- answer_radio -->
 <div class="col-sm-12">
     <p>
-      <label><strong>{{$question->question}}{{$question->required ? "" : " (opcional)"}}</strong><br>
+      <label><strong>{{$question->question}}{{$question->required ? "*" : " (opcional)"}}</strong><br>
         <p>{{$question->observations ?  $question->observations : ""}}</p>
       </label>
     <div class="row">
