@@ -132,6 +132,24 @@ class Fellows extends Controller
       ]);
     }
 
+	/**
+     * Muestra info del programa para el  fellow
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function viewInfo()
+    {
+      $user = Auth::user();
+      //program
+      $program        = $user->actual_program();
+      return view('fellow.info_program.about_program')->with([
+        "user"      => $user,
+        "program"	=> $program
+      ]);
+    }
+	
+
     /**
      * Muestra perfil del usuario  fellow
      *
