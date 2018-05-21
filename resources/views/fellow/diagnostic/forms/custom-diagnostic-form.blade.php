@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/diagnostico/$activity->diagnostic_info->slug"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/{$activity->session->module->program->slug}/aprendizaje/diagnostico/$activity->slug/examen/responder"), "class" => "form-horizontal"]) !!}
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">{{$activity->diagnostic_info->title}}</h2>
@@ -10,6 +10,7 @@
 <ol>
   @foreach($activity->diagnostic_info->questions as $question)
   <div class="col-sm-12">
+    {{var_dump($errors->toArray())}}
     @if($errors->has('question_'.$count))
       <strong class="danger">{{$errors->first('question_'.$count)}}</strong>
     @endif

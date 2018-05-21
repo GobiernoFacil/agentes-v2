@@ -451,10 +451,11 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
           // Rutas actividades
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/{activity_slug}', 'SessionFellow@activity');
-          // Rutas diagnostico
+          // Rutas nuevo diagnostico
             //Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
             //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
-            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'SessionFellow@diagnostic');
+            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@add');
+            Route::post('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@save');
           /*@FellowFiles */
           //Rutas archivos
           Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');
@@ -521,8 +522,8 @@ Route::group(['middleware' => ['auth']], function () {
       Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
       /*@FellowDiagnostic*/
       //// diagnostico
-      Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
-      Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
+    //  Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
+  //    Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
 
   });
 

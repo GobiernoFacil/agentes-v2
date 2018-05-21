@@ -145,23 +145,7 @@ class SessionFellow extends Controller
     }
 
 
-    public function diagnostic($program_slug,$activity_slug){
-      $user      = Auth::user();
-      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
-      if($user->new_diagnostic($activity->diagnosticInfo->id)->count() > 0){
-        return redirect("tablero/$program_slug/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->slug")->with('error','Ya has contestado la evaluación');
-      }
-      $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'activity']);
-      $log->session_id  = $activity->session->id;
-      $log->module_id   = $activity->session->module->id;
-      $log->activity_id = $activity->id;
-      $log->program_id  = $activity->session->module->program->id;
-      $log->save();
-      return view('fellow.diagnostic.custom-test')->with([
-        "user"      => $user,
-        "activity"  => $activity
-      ]);
-    }
+    
 
     public function saveDiagnostic(SaveDiagnostic $request)
     {
