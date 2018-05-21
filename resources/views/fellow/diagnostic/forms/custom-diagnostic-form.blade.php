@@ -9,6 +9,11 @@
 <?php $count = 1; ?>
 <ol>
   @foreach($activity->diagnostic_info->questions as $question)
+  <div class="col-sm-12">
+    @if($errors->has('question_'.$count))
+      <strong class="danger">{{$errors->first('question_'.$count)}}</strong>
+    @endif
+  </div>
   <li class="row">
     @if($question->type ==="open")
       @include('fellow.diagnostic.includes.open_question_template')

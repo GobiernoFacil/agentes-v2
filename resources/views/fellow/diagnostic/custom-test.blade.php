@@ -5,6 +5,7 @@
 @section('breadcrumb_type', 'custom view')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_diagnostic')
 @section('content')
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <div class="row">
   <div class="col-sm-12">
     <h1>Cuestionario diagnóstico</h1>
@@ -23,7 +24,7 @@
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
-<script>
+<script type="application/javascript">
 
   $(document).ready(function() {
     @foreach($activity->diagnostic_info->questions as $question)
@@ -57,10 +58,8 @@
         <?php $count++;?>
         @endforeach
       @else
-      console.log("delete");
         $('.delete{{$countP}}_{{$count}}').click(function(event) {
             event.preventDefault();
-            console.log('this');
             $('.question_{{$countP}}').not(this).attr('checked', false);
          });
       @endif
