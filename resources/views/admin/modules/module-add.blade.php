@@ -49,7 +49,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
   $('#startD').on('change',function(){
     var date = new Date($('#startD').val());
     $('#startE').datepicker('destroy');
-    date.setDate(date.getDate()+7);
+    date.setDate(date.getDate()+6);
     if(date.getMonth()+1 < 10){
       if(date.getDate()< 10){
         $( "#startE").val(date.getFullYear()+'/0'+(date.getMonth()+1)+'/0'+date.getDate());
