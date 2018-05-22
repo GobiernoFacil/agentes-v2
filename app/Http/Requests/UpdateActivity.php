@@ -66,7 +66,19 @@ use MessagesTrait;
               'end'=>'required',
               'order'=> 'required',
           ];
-        }else{
+        }elseif($this->type==='diagnostic'){
+            return [
+                //
+                'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
+                'duration'=> 'required|numeric',
+                'measure'=> 'required',
+                'description'=> 'required',
+                'type'=>'required',
+                'hasforum'=>'required',
+                'end'=>'required',
+                'order'=> 'required',
+            ];
+          }else{
 
         return [
             //

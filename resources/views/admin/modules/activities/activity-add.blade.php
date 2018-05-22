@@ -27,8 +27,13 @@
 <script>
 $( document ).ready(function() {
   $('#type').change(function(){
-    if(this.value==='evaluation' || this.value==='final'){ 
+    if(this.value==='evaluation' || this.value==='final'){
       $('#user-file').show();
+      $('#end-file').show();
+      $('#video').hide();
+      $('#webinar').hide();
+    }else if(this.value==='diagnostic'){
+      $('#user-file').hide();
       $('#end-file').show();
       $('#video').hide();
       $('#webinar').hide();

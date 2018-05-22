@@ -54,7 +54,7 @@
   </div>
 </div>
 <!-- cierre -->
-<div class="row" id ="end-file" style ="{{ $activity->type=='evaluation' || $activity->type=='final' ? '':'display:none;'}}">
+<div class="row" id ="end-file" style ="{{ $activity->type=='evaluation' || $activity->type=='final' || $activity->type=='diagnostic' || $errors->has('end') ? '':'display:none;'}}">
 <div class="col-sm-12">
   <p>
     <label><strong>Fecha de cierre</strong> <br>

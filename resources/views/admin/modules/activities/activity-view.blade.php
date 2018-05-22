@@ -24,6 +24,12 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+				case "diagnostic":
+					$type = "Evaluación diagnóstico";
+				break;
+				case "final":
+					$type = "Evaluación final";
+				break;
 			default:
 			 $type = "Lectura";
 		}
