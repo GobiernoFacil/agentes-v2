@@ -545,7 +545,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/actividades/ver/{id}', 'FacilitatorActivities@activities_view');
     Route::get('tablero-facilitador/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     // Mensajes Facilitador
-    Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@all');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/ver-mensajes', 'FacilitatorMessages@messages');
+
+
+
+
+
+
     Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
     Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
     Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
@@ -554,6 +561,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
     Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
     Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+
+
+
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');

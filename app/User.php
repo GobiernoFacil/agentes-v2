@@ -219,7 +219,7 @@ class User extends Authenticatable
     }
 
     function get_conversations($program=false){
-      if($this->type !='admin'){
+      if($this->type ==='fellow'){
         $program        = $this->actual_program();
       }
       $storaged       = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();

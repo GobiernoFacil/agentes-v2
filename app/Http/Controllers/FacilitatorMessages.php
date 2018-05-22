@@ -12,11 +12,12 @@ use Mail;
 // models
 use App\User;
 use App\Models\Conversation;
-use App\Models\Message;
-use App\Models\StoreConversation;
-use App\Models\ModuleSession;
-use App\Models\FacilitatorData;
 use App\Models\ConversationLog;
+use App\Models\FacilitatorData;
+use App\Models\ModuleSession;
+use App\Models\Message;
+use App\Models\Program;
+use App\Models\StoreConversation;
 // FormValidators
 use App\Http\Requests\SaveMessage;
 use App\Http\Requests\SaveSingleMessage;
@@ -28,6 +29,21 @@ class FacilitatorMessages extends Controller
   //Paginación
   public $pageSize = 10;
 
+
+  /**
+   * Muestra lista de programas
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function all()
+  {
+    $user     = Auth::user();
+    $programs = Program::orderBy('start','desc')->paginate($this->pageSize);
+    return view('facilitator.messages.messages-program-list')->with([
+      "user"      => $user,
+      "programs"  => $programs
+    ]);
+  }
 
   /**
   * Muestra lista de mensajes-archivados
@@ -55,19 +71,14 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function messages()
+  public function messages($program_slug)
   {
     $user 			  = Auth::user();
-    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
-    $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
-      $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
-    })
-    ->orderBy('created_at','desc')->paginate($this->pageSize);
-
+    $program      = Program::where('slug',$program_slug)->firstOrFail();
+    $conversations = $user->get_conversations($program)->paginate($this->pageSize);
     return view('facilitator.messages.messages-list')->with([
       "user"      		=> $user,
       'conversations' =>$conversations,
-
     ]);
   }
 
