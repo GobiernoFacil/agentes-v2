@@ -15,6 +15,7 @@ use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\Image;
 use App\Models\Activity;
+use App\Models\Program;
 
 
 class FacilitatorActivities extends Controller
@@ -30,13 +31,13 @@ class FacilitatorActivities extends Controller
   public function activities()
   {
     $user 			  = Auth::user();
-    $sessions     = FacilitatorModule::where('user_id',$user->id)->paginate($this->pageSize);
+    $sessions     = $user->facilitator_actual_sessions()->paginate($this->pageSize);
     return view('facilitator.activities.list_activities')->with([
       "user"      		=> $user,
       "sessions"          => $sessions
     ]);
   }
-  
+
   /**
     * Muestra sesión
     *
@@ -47,13 +48,14 @@ class FacilitatorActivities extends Controller
     {
       //
       $user    = Auth::user();
-      $session = ModuleSession::find($id);
+      $facMod  = FacilitatorModule::where('session_id',$id)->firstOrFail();
+      $session = $facMod->session;
       return view('facilitator.activities.session-view')->with([
         "user"      => $user,
         "session"    => $session
       ]);
     }
-   
+
    /**
     * Muestra actividad
     *
@@ -63,13 +65,27 @@ class FacilitatorActivities extends Controller
    public function activities_view($id)
    {
        //
-       $user    = Auth::user();
-       $activity = Activity::find($id);
-       $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+       $user     = Auth::user();
+       $activity = Activity::where('id',$id)->firstOrFail();
+       $session  = $activity->session;
+       $activities = $session->activities()->pluck('id')->toArray();
+       $pagination = $activity->get_pagination();
+       if(Activity::where('id',$pagination[0])->whereIn('id',$activities)->first()){
+         $prev     = $pagination[0];
+       }else{
+         $prev     = null;
+       }
+       if(Activity::where('id',$pagination[1])->whereIn('id',$activities)->first()){
+         $next     = $pagination[1];
+       }else{
+         $next     = null;
+       }
       return view('facilitator.activities.activity-view')->with([
          "user"      	=> $user,
-         "activity"    => $activity,
-         "session"		=> $session
+         "activity"   => $activity,
+         "session"		=> $session,
+         "prev"       => $prev,
+         "next"       => $next
        ]);
    }
 

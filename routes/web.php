@@ -432,6 +432,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Fellows Controller */
     //Dashboard
     Route::get('tablero', 'Fellows@dashboard');
+    //Programa
+	    Route::get('tablero/informacion', 'Fellows@viewInfo');
     // Perfil fellow
     Route::get('tablero/perfil', 'Fellows@viewProfile');
     Route::get('tablero/perfil/editar', 'Fellows@editProfile');
@@ -449,10 +451,11 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
           // Rutas actividades
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/{activity_slug}', 'SessionFellow@activity');
-          // Rutas diagnostico
+          // Rutas nuevo diagnostico
             //Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
             //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
-            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'SessionFellow@diagnostic');
+            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@add');
+            Route::post('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@save');
           /*@FellowFiles */
           //Rutas archivos
           Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');
@@ -519,8 +522,8 @@ Route::group(['middleware' => ['auth']], function () {
       Route::get('tablero/noticias/ver/{news_slug}', 'NewsEventsFellow@view');
       /*@FellowDiagnostic*/
       //// diagnostico
-      Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
-      Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
+    //  Route::get('tablero/diagnostico/{slug}', 'FellowDiagnostic@get_test');
+  //    Route::post('tablero/diagnostico/{slug}', 'FellowDiagnostic@save_test');
 
   });
 
@@ -530,6 +533,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Facilitator Controller */
     //Dashboard
     Route::get('tablero-facilitador', 'Facilitator@dashboard');
+    //Perfiles Facilitadores
+    Route::get('tablero-facilitador/facilitadores/ver/{user_id}', 'Facilitator@viewFacilitator');
     // Perfil  Facilitador
     Route::get('tablero-facilitador/perfil', 'Facilitator@viewProfile');
     Route::get('tablero-facilitador/perfil/editar', 'Facilitator@editProfile');
@@ -540,7 +545,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/actividades/ver/{id}', 'FacilitatorActivities@activities_view');
     Route::get('tablero-facilitador/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
     // Mensajes Facilitador
-    Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@all');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/ver-mensajes', 'FacilitatorMessages@messages');
+
+
+
+
+
+
     Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
     Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
     Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
@@ -549,6 +561,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
     Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
     Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+
+
+
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');

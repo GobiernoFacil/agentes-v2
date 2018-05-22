@@ -5,7 +5,13 @@
 @section('breadcrumb_type', 'activity view')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_activity')
 
+@section('subnav', 1)
+@section('subnav_week', 1)
+
 @section('content')
+
+<?php $today = date("Y-m-d");?>
+<!--- type-->
 <div class="row">
 	<div class="col-sm-12">
 		<?php switch($activity->type) {
@@ -18,51 +24,156 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+			case "final":
+				$type = "Evaluación final";
+				break;
+			case "diagnostic":
+			  $type = "Evalaución diagnóstico";
+				break;
 			default:
 			 $type = "Lectura";
 		}
 		?>
-		<h4>Actividad #{{$activity->order}} de  <a href="{{ url('tablero-facilitador/actividades/sesion/'. $session->id) }}" class="link">sesión {{$session->order}}</a> del módulo: {{$session->module->title}}</h4>
+		@if(Session::has('success'))
+		<div class="message success">
+	      {{ Session::get('success') }}
+	  	</div>
+	  	@endif
+
+			@if(Session::has('error'))
+			<div class="message error">
+		      {{ Session::get('error') }}
+		  	</div>
+		  	@endif
+		<!--- session name-->
+		<h4>{{$session->name}}</h4>
+		<!--- activity title-->
 		<div class="divider b"></div>
-		<h1><b class="icon_h {{$activity->type ? $activity->type  : 'default'}} list_s width_s"></b> {{$type}}: <strong>{{$activity->name}}</strong> <span class="notetime">(<b class="icon_h time"></b>{{$activity->duration}})</span></h1>
+		<h1><strong>{{$type}}:</strong> {{$activity->name}}</h1>
+		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} {{$activity->measure ? ' hrs.' : ' min.'}}</span></p>
+		<div class="divider"></div>
 	</div>
 </div>
+
+
+
+@if($activity->type == 'video')
+<!---------------------------------------------------------------------------------- videos--------------------------------------------->
+	@if($activity->videos)
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="ytVideo"></div>
+		</div>
+	</div>
+	@endif
+@endif
+
+
+<!--- description-->
+<div class="row">
+	<div class="col-sm-12">
+		<p class="ap_textareacontent">{{$activity->description}}</p>
+	</div>
+</div>
+
+@if($activity->type ==='diagnostic')
 <div class="box">
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<ul class="profile list row">
-				<li class="col-sm-12"><span>Descripción:</span>{{$activity->description}}</li>
-				<li class="col-sm-6"><span>Rol Facilitador:</span>{{$activity->facilitator_role}}</li>
-				<li class="col-sm-6"><span>Rol Participantes:</span>{{$activity->competitor_role}}</li>
-			</ul>
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación diagnóstico</h2>
 		</div>
-
+		<div class="col-sm-8 col-sm-offset-2">
+			<a href='{{url("tablero-facilitador/actividad-diagnostico/$activity->id")}}' class="btn xs view">Ver evaluaciones</a>
+		</div>
 	</div>
 </div>
+@endif
 
-@if($activity->activityRequirements->count() > 0)
-<!---Recursos-->
+@if($activity->type ==='evaluation' && !$activity->files)
 <div class="box">
-  <div class="row">
-  	<div class="col-sm-12">
-  		<h2 class="title">Recursos</h2>
-  		@include('admin.modules.activities.activities-requirements-list')
-  	</div>  	
-  </div>
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación</h2>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2">
+			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver evaluaciones</a>
+		</div>
+	</div>
 </div>
+@elseif($activity->type ==='evaluation' && $activity->files)
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación</h2>
+			<h4>Carga de archivo</h4>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2">
+			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver archivos</a>
+		</div>
+	</div>
+</div>
+@endif
+
+@if(!empty($activity->forum))
+<!---------------------------------------------------------------------------------- foro ------------------------------------>
+@include('layouts.forums.list-at-activity')
 @endif
 
 
 @if($activity->activityFiles->count() > 0)
-<!--archivos-->
+<!---------------------------------------------------------------------------------- lecturas con archivos ------------------------------------>
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="title">Archivos</h2>
+			@foreach ($activity->activityFiles as $file)
+			<object data='{{url("tablero-facilitador/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
+				<p<a href='{{url("tablero-facilitador/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
+			</object>
+			@endforeach
 			@include('admin.modules.activities.activities-files-list')
 		</div>
 	</div>
 </div>
 @endif
 
+@if($activity->type == 'video')
+	@if($activity->videos)
+		<script>
+			function getId(url) {
+				var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+				var match = url.match(regExp);
+				if (match && match[2].length == 11) {
+					return match[2];
+				}
+				else {
+					return 'error';
+    			}
+			}
+
+			var ytId = getId('{{$activity->videos->link}}');
+
+			document.getElementById("ytVideo").innerHTML = '<iframe width="100%" height="555" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
+		</script>
+	@endif
+@endif
+
+
+<div class="subnav bottom">
+	<div class="center">
+		<a {{$prev ? 'href='.url("tablero-facilitador/actividades/ver/$prev") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("tablero-facilitador/actividades/ver/$next") : ''}}>Siguiente <strong>&gt;</strong></a>
+	</div>
+</div>
+
+@endsection
+
+@section('js-content')
+<script>
+	var module     = {!! json_encode($activity->session->module) !!},
+	    sessions   = {!! json_encode($activity->session->module->sessions) !!},
+	    activities = [];
+	    activities.push({!! json_encode($session->activities) !!});
+</script>
+
+<script src="{{url('js/app-display-week-menu.js')}}"></script>
 @endsection

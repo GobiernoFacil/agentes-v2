@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/diagnostico/$activity->diagnostic_info->slug"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/{$activity->session->module->program->slug}/aprendizaje/diagnostico/$activity->slug/examen/responder"), "class" => "form-horizontal"]) !!}
 <div class="row">
   <div class="col-sm-12">
     <h2 class="sa_title">{{$activity->diagnostic_info->title}}</h2>
@@ -17,6 +17,11 @@
     @elseif($question->type === "answers")
       @include('fellow.diagnostic.includes.answers_question_template')
     @endif
+    <div class="col-sm-12">
+      @if($errors->has('question_'.$count.'_'.$question->id))
+        <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
+      @endif
+    </div>
   </li>
     <?php $count++;?>
   @endforeach

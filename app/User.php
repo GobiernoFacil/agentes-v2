@@ -219,7 +219,7 @@ class User extends Authenticatable
     }
 
     function get_conversations($program=false){
-      if($this->type !='admin'){
+      if($this->type ==='fellow'){
         $program        = $this->actual_program();
       }
       $storaged       = StoreConversation::where('user_id',$this->id)->pluck('conversation_id')->toArray();
@@ -340,6 +340,17 @@ class User extends Authenticatable
           return false;
         break;
       }
+    }
+
+    function facilitator_actual_sessions(){
+      $today        = date('Y-m-d');
+      $program      = Program::where('public',1)->where('end','>=',$today)->first();
+      if($program){
+        $sessions_ids = $program->get_all_fellow_sessions()->pluck('id')->toArray();
+      }else{
+        $sessions_ids = [];
+      }
+      return  FacilitatorModule::where('user_id',$this->id)->whereIn('session_id',$sessions_ids);
     }
 
 }

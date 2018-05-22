@@ -43,8 +43,8 @@ class Facilitator extends Controller
   {
     $user 		   = Auth::user();
     $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
-    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
-    $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+    $storage        = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+    $conversations  = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
       $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
     })
     ->count();
@@ -311,6 +311,24 @@ class Facilitator extends Controller
 
     return redirect("dashboard/facilitadores")->with("message",'Usuario deshabilitado');
 
+  }
+
+  /**
+  * Muestra usuario
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function viewFacilitator($id)
+  {
+    //
+    $user    = Auth::user();
+    $facilitator = User::where('enabled',1)->where('id',$id)->firstOrFail();
+    $facilitatorData = FacilitatorData::firstOrCreate(['user_id'=>$id]);
+    return view('facilitator.profile.facilitator-view')->with([
+      "user"      => $user,
+      "facilitator"    => $facilitator
+    ]);
   }
 
 }

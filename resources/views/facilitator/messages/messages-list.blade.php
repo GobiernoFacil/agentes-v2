@@ -11,10 +11,10 @@
 		<h1>Mensajes Privados</h1>
 	</div>
 	<div class="col-sm-3 center">
-		<a href="{{ url('tablero-facilitador/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->store_conversations->count()}})</a>
+		<a href="{{ url('tablero-facilitador/mensajes/'.$program->slug.'/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->get_storaged_conversations($program)->count()}})</a>
 	</div>
   <div class="col-sm-3 center">
-		<a href="{{ url('tablero-facilitador/mensajes/agregar') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
+		<a href="{{ url('tablero-facilitador/mensajes/'.$program->slug.'/agregar-mensaje') }}" class="btn gde"><strong>+</strong> Crear Mensaje</a>
 	</div>
 </div>
 @if($conversations->count()>0)
