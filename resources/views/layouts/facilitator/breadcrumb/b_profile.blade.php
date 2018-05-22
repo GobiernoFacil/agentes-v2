@@ -10,5 +10,7 @@
 	@if ($__env->yieldContent('breadcrumb_type') =="profile edit")
 	<li>Editar Perfil</li>
 	@endif
-
+	@if ($__env->yieldContent('breadcrumb_type') =="profile facilitator")
+	<li>Ver perfil de facilitador</li>
+	@endif
 </ul>
