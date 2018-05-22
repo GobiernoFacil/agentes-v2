@@ -226,7 +226,7 @@ class Activities extends Controller
             $data   = $request->except(['_token','start','time','link','link_video']);
 
             $data['slug']    = str_slug($request->name);
-            if($request->files && $request->type != 'video'){
+            if($request->files && $request->type === 'evaluation'){
               $data['type'] = 'files';
             }
             $last    = Activity::find($request->id);

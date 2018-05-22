@@ -64,6 +64,17 @@ class SaveActivity extends FormRequest
           'files'=>'required',
           'order'=> 'required',
         ];
+      }elseif($this->type==='diagnostic'){
+          return [
+          'name'=> 'required|max:256|unique:activities',
+          'duration'=> 'required|numeric',
+          'measure'=> 'required',
+          'description'=> 'required',
+          'type'=>'required',
+          'hasforum'=>'required',
+          'end'=>'required',
+          'order'=> 'required',
+        ];
         }else{
           return [
             //

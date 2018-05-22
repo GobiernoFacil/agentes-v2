@@ -31,6 +31,11 @@ $( document ).ready(function() {
       $('#video').hide();
       $('#end-file').show();
       $('#webinar').hide();
+    }else if(this.value==='diagnostic'){
+      $('#user-file').hide();
+      $('#end-file').show();
+      $('#video').hide();
+      $('#webinar').hide();
     }else if(this.value==='video'){
       $('#user-file').hide();
       $('#video').show();
