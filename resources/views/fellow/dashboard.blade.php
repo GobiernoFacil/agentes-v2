@@ -7,7 +7,7 @@
 @if($program)
 	<div class="row">
 		<div class="col-sm-12">
-			<h1 class="center">Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto y Desarrollo Sostenible</strong>. <span class="minimum">(<a hfref="{{url('tablero/programa')}}">info del curso</a>)</span></h1>
+			<h1 class="center">Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto y Desarrollo Sostenible</strong>. <span class="minimum">(<a href="{{url('tablero/informacion')}}">info del curso</a>)</span></h1>
 		</div>
 
 		@if(Session::has('message'))

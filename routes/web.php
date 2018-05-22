@@ -432,6 +432,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Fellows Controller */
     //Dashboard
     Route::get('tablero', 'Fellows@dashboard');
+    //Programa
+	    Route::get('tablero/informacion', 'Fellows@viewInfo');
     // Perfil fellow
     Route::get('tablero/perfil', 'Fellows@viewProfile');
     Route::get('tablero/perfil/editar', 'Fellows@editProfile');
