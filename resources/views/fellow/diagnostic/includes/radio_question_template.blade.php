@@ -94,10 +94,6 @@
       @endif
 
       </div>
-
-      @if($errors->has('question_'.$count.'_'.$question->id))
-        <strong class="danger">{{$errors->first('question_'.$count.'_'.$question->id)}}</strong>
-      @endif
     </p>
     <div class="divider"></div>
 </div>

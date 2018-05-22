@@ -100,6 +100,7 @@ class FellowDiagnostic extends Controller
 
 
     public function save(SaveCustomTest $request){
+      var_dump($request->toArray());
 
     }
 

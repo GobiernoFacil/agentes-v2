@@ -32,40 +32,68 @@ class SaveCustomTest extends FormRequest
           $questionnaire = $activity->diagnosticInfo;
       }else{
         return [
-          'ushallntpass.required' => 'required'
+          'ushallntpass.required' => 'ushallntpass'
         ];
       }
-
       $countP =1;
       foreach ($questionnaire->questions as $question) {
-         if($question->options_rows_number > 1){
-            foreach ($question->answers as $answer) {
-              if(!$this->{'question_'.$countP.'_'.$question->id.'_'.$answer->id} && $question->required){
+        if($question->type === 'open'){
+            if($question->required){
+              if(!$this->{'question_'.$countP.'_'.$question->id}){
                return [
-                   "question_".$countP."_".$question->id.'_'.$answer->id.".required"=>'Contesta esta pregunta'
-                ];
-              }elseif($countP == $questionnaire->questions->count()){
-                return [
-                  "question_algo.required" => 'hi'
+                   'question_'.$countP.'_'.$question->id.'.required' =>'Contesta esta pregunta'
                 ];
               }
             }
-         }else{
-           if(!$this->{'question_'.$countP.'_'.$question->id}){
-            return [
-                "question_".$countP."_".$question->id.".required"=>'Contesta esta pregunta'
-             ];
-           }elseif($countP == $questionnaire->questions->count()){
+        }elseif($question->type === 'answers'){
+          if($question->required){
+            if(!$this->{'question_'.$countP.'_'.$question->id}){
              return [
-               "question_algo.required" => 'hi'
-             ];
-           }
-         }
+                 'question_'.$countP.'_'.$question->id.'.required'  =>'Contesta esta pregunta'
+              ];
+            }
 
+            if($question->count_correct($question->id)!=1 && count($this->{'question_'.$countP.'_'.$question->id})!= $question->count_correct($question->id) &&$question->count_correct($question->id)>0){
+              return [
+                 'question_'.$countP.'_'.$question->id.'.between'  =>"El número de respuestas seleccionadas no es el indicado"
+              ];
+            }
+          }
 
-         $countP++;
+        }elseif($question->type === 'radio'){
+          if($question->required){
+              if($question->options_rows_number > 1){
+                foreach ($question->answers as $answer) {
+                  if(!$this->{'question_'.$countP.'_'.$question->id.'_'.$answer->id} && $question->required){
+                      return [
+                          'question_'.$countP.'_'.$question->id.'_'.$answer->id.'.required' =>'Contesta esta pregunta'
+                       ];
+                     }
+                   }
+
+                }else{
+                    if(!$this->{'question_'.$countP.'_'.$question->id} && $question->required){
+                     return [
+                         'question_'.$countP.'_'.$question->id.'.required' =>'Contesta esta pregunta'
+                      ];
+                    }
+                  }
+          }
+
+        }else{
+          return [
+            'ushallntpass.required' => 'ushallntpass'
+          ];
+        }
+        $countP++;
+
       }
+      return [
+        'ushallntpass.required' => 'ushallntpass'
+      ];
+
     }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -93,9 +121,9 @@ class SaveCustomTest extends FormRequest
       foreach ($questionnaire->questions as $question) {
         if($question->type === 'open'){
             if($question->required){
-              if(!$this->{'question_'.$countP}){
+              if(!$this->{'question_'.$countP.'_'.$question->id}){
                return [
-                   'question_'.$countP =>'required'
+                   'question_'.$countP.'_'.$question->id =>'required'
                 ];
               }
             }
@@ -123,26 +151,23 @@ class SaveCustomTest extends FormRequest
 
         }elseif($question->type === 'answers'){
           if($question->required){
-            if(!$this->{'question_'.$countP}){
+            if(!$this->{'question_'.$countP.'_'.$question->id}){
              return [
-                 'question_'.$countP =>'required'
+                 'question_'.$countP.'_'.$question->id  =>'required'
               ];
             }
 
-            if($question->count_correct($question->id)!=1 && count($this->{'question_'.$countP})!= $question->count_correct($question->id) &&$question->count_correct($question->id)>0){
+            if($question->count_correct($question->id)!=1 && count($this->{'question_'.$countP.'_'.$question->id})!= $question->count_correct($question->id) &&$question->count_correct($question->id)>0){
               return [
-                 'question_'.$countP =>'array|between:'.$question->count_correct($question->id).','.$question->count_correct($question->id)
+                 'question_'.$countP.'_'.$question->id  =>'array|between:'.$question->count_correct($question->id).','.$question->count_correct($question->id)
               ];
             }
           }
 
-        }else{
-          return [
-
-          ];
         }
          $countP++;
       }
+
       return [
 
       ];
