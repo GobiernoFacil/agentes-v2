@@ -6,141 +6,74 @@
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_activity')
 
 @section('content')
+
+
+<div class="ap_when">
+	<p><b class="danger"></b><strong>Fecha límite</strong>: Los fellows deben cumplir con esta tarea el {{date("d-m-Y", strtotime($session->module->end))}}, 11:59 pm, hora de la Ciudad de México ({{ \Carbon\Carbon::createFromTimeStamp(strtotime($session->module->end))->diffForHumans()}}) </p>
+</div>
+
+<!-- title -->
 <div class="row">
 	<div class="col-sm-12">
-		<h4>Información de sesión del módulo: {{$session->module->title}}</h4>
-	</div>
-	<div class="col-sm-12 center">
-		<h4 class="center"></h4>
-		<div class="divider b"></div>
-		<h2>Sesión {{$session->order}}</h2>
-		<h1 class="center">{{$session->name}}</h1>
-		<div class="divider"></div>
-	</div>
-</div>
-
-<!-- header -->
-<div class="row h_tag">
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h time"></b>Duración</h4>
-		<p>{{$session->hours}} horas</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h i_dates_green"></b> Fecha inicio</h4>
-		<p>{{date("d-m-Y", strtotime($session->start))}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h i_dates_green"></b> Fecha final</h4>
-		<p>{{date('d-m-Y', strtotime($session->end))}}</p>
-	</div>
-	<div class="col-sm-3 center">
-		<h4><b class="icon_h modalidad"></b> Modalidad</h4>
-		<p>{{$session->modality}}</p>
-	</div>
-	<div class="col-sm-12">
+		<h1>{{$session->module->title}}</h1>
 		<div class="divider top"></div>
 	</div>
+	<!-- header -->
+	<div class="row h_tag">
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h time"></b> Duración</h4>
+			<p>{{$session->module->duration_hours() ? $session->module->duration_hours() > 1 ? number_format($session->module->duration_hours(),2).' h':$session->module->duration_minutes().' min' :'No aplica'}}</p>
+		</div>
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h modalidad"></b> Modalidad</h4>
+			<p>{{$session->module->modality}}</p>
+		</div>
+		<div class="col-sm-4 center">
+			<h4><b class="icon_h {{$session->module->public ? 'publicado' : 'no_p'}} "></b>Publicado</h4>
+			<p> <span class="published {{$session->module->public ? 'view' : ''}}">{{$session->module->public ? 'Sí' : 'No'}}</span></p>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<div class="divider"></div>
+		<p class="ap_objective"><strong>Objetivo:</strong> {{$session->module->objective}}</p>
+	</div>
+
+	<!--facilitadores-->
+	<div class="col-sm-3">
+		<p><strong>Facilitadores:</strong></p>
+	</div>
+
+	<div class="col-sm-9">
+		@if($session->module->unique_facilitators->count() > 0)
+			@foreach ($session->module->unique_facilitators as $facilitator)
+				<div class="ap_facilitator_list" data-name="{{$facilitator->user->name}}">
+					<figure>
+						@if($facilitator->user->image)
+						<img src='{{url("img/users/{$facilitator->user->image->name}")}}' height="45px">
+						@else
+						<img src='{{url("img/users/default.png")}}' height="45px">
+						@endif
+					</figure>
+				</div>
+			@endforeach
+		@else
+			<p>Aún no han sido asignados facilitadores</p>
+		@endif
+	</div>
 </div>
 
-<!--- objetivos-->
-<div class="box">
-	<div class="row">
-		<div class="col-sm-12">
-			<h2 class="title">Objetivo</h2>
-			<p>{{$session->objective}}</p>
-			<h2 class="title">Objetivos particulares</h2>
-				@if($session->topics->count() > 0)
-					@include('admin.modules.sessions.sessions-topics-list')
-					<?php /*
-					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar otro objetivo particular de la sesión</a>*/?>
-				@else
-					<p>Sin objetivos particulares</p>
-					<a href='{{url("dashboard/sesiones/tematicas/agregar/$session->id")}}' class="btn xs ev"> + Agregar objetivos particulares de la sesión</a>
-				@endif
-		</div>
-		
+
+<!---------------------------------------------- sesiones--->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="divider"></div>
+		<h2 class="center">Tu sesión del módulo</h2>
 	</div>
 </div>
 
- <!--- facilitadores--->
- <div class="box">
- 	<div class="row">
-		@if($session->facilitators->count() > 0)
-		<div class="col-sm-9">
-			<h2 class="title">Facilitadores de la sesión</h2>
-		</div>
-		<div class="col-sm-3">
-		</div>
-		<div class="col-sm-12">
-			<div class="divider"></div>
-		</div>
-		<div class="col-sm-12">
-				@include('admin.modules.sessions.sessions-facilitators-list')
-		</div>
-		@else
-		<div class="col-sm-12">
-			<h2 class="title">Facilitadores de la sesión</h2>
-			<p>Sin facilitadores asignados</p>
-		</div>
-		@endif
- 	</div>
- </div>
+<div class="box session_list last_activity ap_week admin">
+			@include('facilitator.activities.activities_list_inside')
+</div>
 
-<!---actividades-->
-  <div class="box">
-  	<div class="row">
-	  	@if($session->activities->count() > 0)
-  		<div class="col-sm-9">
-  			<h2 class="title">Actividades</h2>
-  		</div>
-		<div class="col-sm-3">
-		</div>
-		<div class="col-sm-12">
-			<div class="divider"></div>
-		</div>
-  		<div class="col-sm-12">
-	  		@include('admin.modules.sessions.sessions-activities-list')
-	  	</div>
-		@else
-		<div class="col-sm-12">
-  			<h2 class="title">Actividades</h2>
-			<p><span>Sin actividades</span></p>
-		</div>
-		@endif
-	</div>
-  </div>
-
-	<!--
-  <div class="row">
-  	<div class="col-sm-12">
-  		<h1>Requisitos Previos</h1>
-  	</div>
-  </div>
-	@if($session->requirements->count() > 0)
-					@include('admin.modules.sessions.sessions-requirements-list')
-	@else
-  <div class="box">
-  	<div class="row">
-          <span>Sin requisitos previos</span></br>
-          <a href='{{url("dashboard/sesiones/requisitos/agregar/$session->id")}}' class="btn xs view">Agregar</a>
-      </ul>
-    </div>
-  </div>
-	@endif
--->
-
-<!--- mecanismos--->
-  <div class="box">
-  	<div class="row">
-  		<div class="col-sm-12">
-  			<h2 class="title">Mecanismos de Monitoreo y Evaluación</h2>
-  			@if($session->evaluations->count() > 0)
-				@include('admin.modules.sessions.sessions-monitoring-list')
-			@else
-			<p><span>Sin mecanismos</span></p>
-		  	@endif
-  		</div>
-  	</div>
-  </div>
 
 @endsection

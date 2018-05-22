@@ -48,7 +48,8 @@ class FacilitatorActivities extends Controller
     {
       //
       $user    = Auth::user();
-      $session = ModuleSession::find($id);
+      $facMod  = FacilitatorModule::where('session_id',$id)->firstOrFail();
+      $session = $facMod->session;
       return view('facilitator.activities.session-view')->with([
         "user"      => $user,
         "session"    => $session

@@ -533,6 +533,8 @@ Route::group(['middleware' => ['auth']], function () {
     /*@Facilitator Controller */
     //Dashboard
     Route::get('tablero-facilitador', 'Facilitator@dashboard');
+    //Perfiles Facilitadores
+    Route::get('tablero-facilitador/facilitadores/ver/{user_id}', 'Facilitator@viewFacilitator');
     // Perfil  Facilitador
     Route::get('tablero-facilitador/perfil', 'Facilitator@viewProfile');
     Route::get('tablero-facilitador/perfil/editar', 'Facilitator@editProfile');
