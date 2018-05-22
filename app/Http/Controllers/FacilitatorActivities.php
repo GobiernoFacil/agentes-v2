@@ -15,6 +15,7 @@ use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
 use App\Models\Image;
 use App\Models\Activity;
+use App\Models\Program;
 
 
 class FacilitatorActivities extends Controller
@@ -30,13 +31,13 @@ class FacilitatorActivities extends Controller
   public function activities()
   {
     $user 			  = Auth::user();
-    $sessions     = FacilitatorModule::where('user_id',$user->id)->paginate($this->pageSize);
+    $sessions     = $user->facilitator_actual_sessions()->paginate($this->pageSize);
     return view('facilitator.activities.list_activities')->with([
       "user"      		=> $user,
       "sessions"          => $sessions
     ]);
   }
-  
+
   /**
     * Muestra sesión
     *
@@ -53,7 +54,7 @@ class FacilitatorActivities extends Controller
         "session"    => $session
       ]);
     }
-   
+
    /**
     * Muestra actividad
     *

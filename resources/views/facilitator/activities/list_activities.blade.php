@@ -9,6 +9,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Actividades</h1>
+		<h3>Aquí encontrarás tus sesiones activas en la plataforma</h3>
 
 @if($sessions->count() > 0)
 @foreach ($sessions as $session)
@@ -20,16 +21,9 @@
 		</div>
 		<div class="col-sm-9">
 			<h3>Sesión {{$session->session->order}}</h3>
-			<h2>{{$session->session->name}} </h2>
-			<div class="divider"></div>
-			<div class="row">
-				<div class="col-sm-9">
-					<p>{{$session->session->objective}}</p>
-				</div>
-				<div class="col-sm-3 notes">
-					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($session->session->start))}} al {{date('d-m-Y', strtotime($session->session->end))}}</p>
-				</div>
-			</div>
+			<h3>{{$session->session->module->program->title}}</h3>
+			<h2>{{$session->session->module->title}} </h2>
+			<h1>{{$session->session->name}} </h1>
 		</div>
 		<!-- ver sesión-->
 		<div class="col-sm-2">
@@ -39,18 +33,16 @@
 
 		<div class="footnote">
 			<div class="row">
-				<div class="col-sm-2">
-					<p><b class="icon_h time"></b>{{$session->session->hours}} h </p>
+				<div class="col-sm-3">
+					<p class="left">{{$session->session->activities->count() == 1 ? $session->session->activities->count(). " actividad" : $session->session->activities->count(). " actividades"}}  </p>
 				</div>
-				<div class="col-sm-2">
-					<p><b class="icon_h modalidad"></b>{{$session->session->modality}}</p>
-				</div>
-				<div class="col-sm-2">
-					<p class="right">{{$session->session->activities->count() == 1 ? $session->session->activities->count(). " actividad" : $session->session->activities->count(). " actividades"}}  </p>
+				<div class="col-sm-8 notes">
+					<p class="right">Fechas:<br>{{date("d-m-Y", strtotime($session->session->module->start))}} al {{date('d-m-Y', strtotime($session->session->module->end))}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="divider"></div>
 </div>
 @endforeach
 

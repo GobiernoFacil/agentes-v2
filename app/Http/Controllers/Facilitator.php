@@ -43,8 +43,8 @@ class Facilitator extends Controller
   {
     $user 		   = Auth::user();
     $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
-    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
-    $conversations = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
+    $storage        = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
+    $conversations  = Conversation::where('user_id',$user->id)->whereNotIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
       $query->where('to_id',$user->id)->whereNotIn('id',$storage->toArray());
     })
     ->count();
