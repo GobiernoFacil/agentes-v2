@@ -32,11 +32,11 @@
 		<h2>{{$session->name}}</h2>
 		@if($session->activities->count() > 0)
 		<ul class="ap_list">
-			@foreach ($session->activities as $_activity)
+			@foreach ($session->activities()->orderBy('order','desc')->get() as $_activity)
 			<li class="row">
 				<span class="col-sm-9">
 					<b class="{{$_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
-					<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $_activity->slug) }}" class="{{$activity->slug == $_activity->slug ? 'current' : ''}}">{{$_activity->name}} </a>
+					<a href="{{ url('tablero-facilitador/actividades/ver/'. $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a>
 				</span>
 				<span class="col-sm-3">
 					<span class="notes">{{$_activity->duration}} {{$_activity->measure ? ' hrs.' : ' min.'}}</span>

@@ -65,12 +65,21 @@ class FacilitatorActivities extends Controller
    public function activities_view($id)
    {
        //
-       $user    = Auth::user();
-       $activity = Activity::find($id);
-       $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+       $user     = Auth::user();
+       $activity = Activity::where('id',$id)->firstOrFail();
+       $session  = $activity->session;
+       $activities = $session->activities()->pluck('id')->toArray();
        $pagination = $activity->get_pagination();
-       $prev     = $pagination[0];
-       $next     = $pagination[1];
+       if(Activity::where('id',$pagination[0])->whereIn('id',$activities)->first()){
+         $prev     = $pagination[0];
+       }else{
+         $prev     = null;
+       }
+       if(Activity::where('id',$pagination[1])->whereIn('id',$activities)->first()){
+         $next     = $pagination[1];
+       }else{
+         $next     = null;
+       }
       return view('facilitator.activities.activity-view')->with([
          "user"      	=> $user,
          "activity"   => $activity,

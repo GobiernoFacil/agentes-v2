@@ -24,6 +24,12 @@
 			case "evaluation":
 				$type = "Evaluación";
 				break;
+			case "final":
+				$type = "Evaluación final";
+				break;
+			case "diagnostic":
+			  $type = "Evalaución diagnóstico";
+				break;
 			default:
 			 $type = "Lectura";
 		}
@@ -43,7 +49,7 @@
 		<h4>{{$session->name}}</h4>
 		<!--- activity title-->
 		<div class="divider b"></div>
-		<h1><strong>{{$type}}:</strong> {{$activity->name}} <span class="le_link"><a href="{{url('dashboard/sesiones/actividades/editar/' . $activity->id)}}" class="btn view">Editar Actividad</a></span </h1>
+		<h1><strong>{{$type}}:</strong> {{$activity->name}}</h1>
 		<p><span class="notetime"><strong>Duración</strong>: {{$activity->duration}} {{$activity->measure ? ' hrs.' : ' min.'}}</span></p>
 		<div class="divider"></div>
 	</div>
@@ -70,31 +76,43 @@
 	</div>
 </div>
 
-@if($activity->slug ==='examen-diagnostico')
-<!---------------------------------------------------------------------------------- examen de diagnostico ------------------------------------>
-	@include('admin.modules.activities.diagnostic-view')
+@if($activity->type ==='diagnostic')
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación diagnóstico</h2>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2">
+			<a href='{{url("tablero-facilitador/actividad-diagnostico/$activity->id")}}' class="btn xs view">Ver evaluaciones</a>
+		</div>
+	</div>
+</div>
 @endif
 
-@if($activity->type ==='evaluation' && !$activity->files && $activity->slug !='examen-diagnostico')
-<!---------------------------------------------------------------------------------- evaluación ------------------------------------>
-	@include('admin.modules.activities.evaluation-view')
-@elseif($activity->type ==='evaluation' && $activity->files=== 1 && $activity->slug !='examen-diagnostico')
+@if($activity->type ==='evaluation' && !$activity->files)
 <div class="box">
 	<div class="row">
 		<div class="col-sm-9">
 			<h2 class="title">Evaluación</h2>
 		</div>
 		<div class="col-sm-8 col-sm-offset-2">
-			<p>Carga de archivo</p>
+			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver evaluaciones</a>
+		</div>
+	</div>
+</div>
+@elseif($activity->type ==='evaluation' && $activity->files)
+<div class="box">
+	<div class="row">
+		<div class="col-sm-9">
+			<h2 class="title">Evaluación</h2>
+			<h4>Carga de archivo</h4>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2">
+			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver archivos</a>
 		</div>
 	</div>
 </div>
 @endif
-
-@if($activity->type === 'diagnostic')
-	@include('admin.modules.activities.diagnostic-test-view')
-@endif
-
 
 @if(!empty($activity->forum))
 <!---------------------------------------------------------------------------------- foro ------------------------------------>
@@ -108,25 +126,14 @@
 	<div class="row">
 		<div class="col-sm-12">
 			@foreach ($activity->activityFiles as $file)
-			<object data='{{url("dashboard/sesiones/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
-
-
-				<p<a href='{{url("dashboard/sesiones/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
+			<object data='{{url("tablero-facilitador/actividades/archivos/ver-pdf/$file->id")}}' type="application/pdf" width="100%" height="600px">
+				<p<a href='{{url("tablero-facilitador/actividades/archivos/descargar/$file->id")}}'>{{$file->name}}</a></p>
 			</object>
 			@endforeach
-
 			@include('admin.modules.activities.activities-files-list')
 		</div>
 	</div>
 </div>
-@else
-	@if($activity->type == 'lecture')
-
-	<div class="box last_activity">
-		<p>Sin archivo</p>
-		<a href='{{url("dashboard/sesiones/actividades/archivos/agregar/nuevo/$activity->id")}}' class="btn xs view">Agregar archivo</a>
-	</div>
-	@endif
 @endif
 
 @if($activity->type == 'video')
@@ -153,8 +160,8 @@
 
 <div class="subnav bottom">
 	<div class="center">
-		<a {{$prev ? 'href='.url("dashboard/sesiones/actividades/ver/$prev") : ''}}><strong>&lt;</strong> Anterior</a>
-		<a {{$next ? 'href='.url("dashboard/sesiones/actividades/ver/$next") : ''}}>Siguiente <strong>&gt;</strong></a>
+		<a {{$prev ? 'href='.url("tablero-facilitador/actividades/ver/$prev") : ''}}><strong>&lt;</strong> Anterior</a>
+		<a {{$next ? 'href='.url("tablero-facilitador/actividades/ver/$next") : ''}}>Siguiente <strong>&gt;</strong></a>
 	</div>
 </div>
 
@@ -165,10 +172,7 @@
 	var module     = {!! json_encode($activity->session->module) !!},
 	    sessions   = {!! json_encode($activity->session->module->sessions) !!},
 	    activities = [];
-
-	    @foreach($activity->session->module->sessions as $session)
 	    activities.push({!! json_encode($session->activities) !!});
-	    @endforeach
 </script>
 
 <script src="{{url('js/app-display-week-menu.js')}}"></script>
