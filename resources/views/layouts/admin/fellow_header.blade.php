@@ -27,7 +27,7 @@
 			<li class="{{ $__env->yieldContent('body_class') == 'mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}"><b class="icon i_mensajes"></b> Mensajes</a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/foros')}}"><b class="icon i_foros"></b> Foros</a></li>
 			@endif
-			@if($user->type == "fellow")
+			@if($user->type == "fellow" && $user->actual_program())
 			<!--fellow-->
 			<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/'.$user->actual_program()->slug.'/foros')}}" data-title="Foros"><b class="icon i_foros"></b></a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$user->actual_program()->slug. '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>

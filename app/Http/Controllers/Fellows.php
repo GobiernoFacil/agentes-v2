@@ -64,7 +64,11 @@ class Fellows extends Controller
       //noticias y eventos
       $newsEvent      = NewsEvent::where('public',1)->orderBy('created_at','desc')->limit(3)->get();
       //foros
-      $forums_ids     = $program->forums()->pluck('id')->toArray();
+      if(!$program){
+        $forums_ids     = [];
+      }else{
+        $forums_ids     = $program->forums()->pluck('id')->toArray();
+      }
       $forums         = ForumConversation::whereIn('forum_id',$forums_ids)->where('user_id',$user->id)->orderBy('created_at','desc')->get();
       $forums_id      = ForumConversation::whereIn('forum_id',$forums_ids)->where('user_id',$user->id)->orderBy('created_at','desc')->pluck('id');
       //conversaciones
@@ -148,7 +152,7 @@ class Fellows extends Controller
         "program"	=> $program
       ]);
     }
-	
+
 
     /**
      * Muestra perfil del usuario  fellow
