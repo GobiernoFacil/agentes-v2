@@ -35,9 +35,6 @@
 </ul>
 
 <div class="divider bottom"></div>
-@else
-<p class="center">No hay actividades en esta sesión. <br><a href='{{url("dashboard/sesiones/actividades/agregar/$session->id")}}' class="btn xs view">[+] Agregar actividad a {{$session->name}}</a></p>
-<div class="divider bottom"></div>
 @endif
 
 <!--- facilitadores--->

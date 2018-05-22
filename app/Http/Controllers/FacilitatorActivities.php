@@ -68,10 +68,15 @@ class FacilitatorActivities extends Controller
        $user    = Auth::user();
        $activity = Activity::find($id);
        $session = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+       $pagination = $activity->get_pagination();
+       $prev     = $pagination[0];
+       $next     = $pagination[1];
       return view('facilitator.activities.activity-view')->with([
          "user"      	=> $user,
-         "activity"    => $activity,
-         "session"		=> $session
+         "activity"   => $activity,
+         "session"		=> $session,
+         "prev"       => $prev,
+         "next"       => $next
        ]);
    }
 
