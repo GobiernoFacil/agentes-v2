@@ -82,7 +82,7 @@ class Activities extends Controller
             $activity  = new Activity($request->except(['_token','time','start','link','order']));
             $activity->order = $activity->reorder_add($request,$session);
 
-           if($request->files && $request->type != 'video'){
+           if($request->files && $request->type === 'evaluation'){
               $activity->type = 'files';
             }
             $activity->slug          = str_slug($request->name);
