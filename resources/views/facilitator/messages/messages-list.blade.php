@@ -9,6 +9,7 @@
 <div class="row">
 	<div class="col-sm-6">
 		<h1>Mensajes Privados</h1>
+		<h3>{{$program->title}}</h3>
 	</div>
 	<div class="col-sm-3 center">
 		<a href="{{ url('tablero-facilitador/mensajes/'.$program->slug.'/mensajes-archivados') }}" class="btn gde"> Mensajes Archivados ({{$user->get_storaged_conversations($program)->count()}})</a>
@@ -51,15 +52,15 @@
 					@endif
 					</strong>
 				    </td>
-			        <td><a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a>
+			        <td><a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")}}'>{{$conversation->title}}</a>
 			        <span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
 			        </td>
 					<td>
 				        {{$conversation->updated_at->diffForHumans()}}
 				    </td>
 				    <td>
-			          <a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver</a>
-								<a href ='{{ url("tablero-facilitador/mensajes/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
+			          <a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")}}' class="btn xs view">Ver</a>
+								<a href ='{{ url("tablero-facilitador/mensajes/$program->slug/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
 
 				    </td>
 				</tr>
@@ -76,7 +77,7 @@
   <div class="col-sm-12">
 	  <div class="box center">
 	  	<h2>Sin mensajes</h2>
-	  	<a href="{{ url('tablero-facilitador/mensajes/agregar') }}" class="btn ev"><strong>+</strong> Crear Mensaje</a>
+	  	<a href="{{ url('tablero-facilitador/mensajes/'.$program->slug.'/agregar-mensaje') }}" class="btn ev"><strong>+</strong> Crear Mensaje</a>
 	  </div>
   </div>
 </div>

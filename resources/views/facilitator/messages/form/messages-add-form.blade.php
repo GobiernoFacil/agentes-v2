@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero-facilitador/mensajes/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero-facilitador/mensajes/$program->slug/agregar-mensaje"), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
