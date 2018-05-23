@@ -37,6 +37,9 @@
 	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
 	<link rel="stylesheet" href="{{url('css/fellow_styles.css')}}">
 
+	<link rel="stylesheet" href="{{url('css/style.css')}}">
+	<link rel="stylesheet" href="{{url('css/jquerytour.css')}}">
+
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
