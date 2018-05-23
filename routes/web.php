@@ -547,20 +547,21 @@ Route::group(['middleware' => ['auth']], function () {
     // Mensajes Facilitador
     Route::get('tablero-facilitador/mensajes', 'FacilitatorMessages@all');
     Route::get('tablero-facilitador/mensajes/{program_slug}/ver-mensajes', 'FacilitatorMessages@messages');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/agregar-mensaje', 'FacilitatorMessages@add');
+    Route::post('tablero-facilitador/mensajes/{program_slug}/agregar-mensaje', 'FacilitatorMessages@save');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/ver-conversacion/{conversation_id}', 'FacilitatorMessages@viewMessage');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/ver-conversacion/agregar-mensaje/{conversation_id}', 'FacilitatorMessages@addSingle');
+    Route::post('tablero-facilitador/mensajes/{program_slug}/ver-conversacion/agregar-mensaje/{conversation_id}', 'FacilitatorMessages@saveSingle');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+    Route::get('tablero-facilitador/mensajes/{program_slug}/mensajes-archivados', 'FacilitatorMessages@indexStorage');
 
 
 
 
 
 
-    Route::get('tablero-facilitador/mensajes-archivados', 'FacilitatorMessages@indexStorage');
     Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
-    Route::get('tablero-facilitador/mensajes/agregar', 'FacilitatorMessages@add');
-    Route::post('tablero-facilitador/mensajes/save', 'FacilitatorMessages@save');
-    Route::get('tablero-facilitador/mensajes/ver/{conversation_id}', 'FacilitatorMessages@view');
-    Route::get('tablero-facilitador/mensajes/conversacion/agregar/{id}', 'FacilitatorMessages@addSingle');
-    Route::post('tablero-facilitador/mensajes/conversacion/save/{id}', 'FacilitatorMessages@saveSingle');
-    Route::get('tablero-facilitador/mensajes/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
+
 
 
 

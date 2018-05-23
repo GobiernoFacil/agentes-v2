@@ -2,7 +2,7 @@
 @section('title', 'Lista de programas con mensajes')
 @section('description', 'Lista de programas con mensajes')
 @section('body_class', 'program')
-@section('breadcrumb_type', 'messages list')
+@section('breadcrumb_type', 'programs list')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 
 @section('content')

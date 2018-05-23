@@ -2,15 +2,16 @@
 @section('title', 'Mensajes')
 @section('description', 'Lista de mensajes archivados')
 @section('body_class', 'facilitator mensajes')
-@section('breadcrumb_type', 'messages list')
+@section('breadcrumb_type', 'messages storaged list')
+@section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 
 @section('content')
 <div class="row">
 	<div class="col-sm-9">
-		<h1>Mensajes Privados Archivados</h1>
+		<h1>Mensajes privados archivados</h1>
 	</div>
   <div class="col-sm-3 center">
-		<a href="{{ url('tablero-facilitador/mensajes') }}" class="btn gde"> Mensajes</a>
+		<a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-mensajes")}}' class="btn gde"> Mensajes</a>
 	</div>
 </div>
 
@@ -38,14 +39,14 @@
 					@endif
 					</strong>
 				    </td>
-			        <td><a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}">{{$conversation->title}}</a>
+			        <td><a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")}}'>{{$conversation->title}}</a>
 			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
 			        </td>
 					<td>
 				        {{$conversation->last_message->first()->updated_at->diffForHumans()}}
 				    </td>
 					<td>
-			          <a href="{{ url('tablero-facilitador/mensajes/ver/' . $conversation->id) }}" class="btn xs view">Ver Conversación</a>
+			          <a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")}}'class="btn xs view">Ver conversación</a>
 				    </td>
 				</tr>
 			    @endforeach
@@ -61,7 +62,7 @@
   <div class="col-sm-12">
 	  <div class="box center">
 	  	<h2>Sin mensajes archivados</h2>
-	  	<a href="{{ url('tablero-facilitador/mensajes') }}" class="btn ev"> Ir a Mensajes</a>
+	  	<a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-mensajes")}}' class="btn ev"> Ir a Mensajes</a>
 	  </div>
   </div>
 </div>
