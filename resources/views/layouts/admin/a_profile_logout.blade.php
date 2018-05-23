@@ -1,4 +1,4 @@
-<div class="apertus_profile_logout">
+<div class="apertus_profile_logout tour_12">
 	<a class="account" >
 		<img src='{{ $user->image ? url("img/users/" . $user->image->name) : url("img/users/default.png") }}' height="50px">
 	</a>
