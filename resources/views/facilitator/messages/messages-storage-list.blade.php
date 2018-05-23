@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Mensajes')
 @section('description', 'Lista de mensajes archivados')
-@section('body_class', 'facilitator mensajes')
+@section('body_class', 'mensajes')
 @section('breadcrumb_type', 'messages storaged list')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 

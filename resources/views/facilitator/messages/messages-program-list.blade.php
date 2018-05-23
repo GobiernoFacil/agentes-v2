@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de programas con mensajes')
 @section('description', 'Lista de programas con mensajes')
-@section('body_class', 'program')
+@section('body_class', 'mensajes')
 @section('breadcrumb_type', 'programs list')
 @section('breadcrumb', 'layouts.facilitator.breadcrumb.b_messages')
 
