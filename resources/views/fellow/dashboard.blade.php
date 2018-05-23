@@ -18,13 +18,13 @@
 
 
 		<div class="col-sm-1">
-			<button class="ap-advancer" type="button">
+			<button id="ap-back" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
 			</button>
 		</div>
 		<div class="col-sm-10">
 			<div class="timeline_box">
-				<ul class="timeline">
+				<ul class="timeline" style="overflow: hidden;">
 				@foreach($program->fellow_modules as $module)
 				<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
 				@endforeach
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="col-sm-1 right">
-			<button class="ap-advancer" type="button">
+			<button id="ap-next" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 			</button>
 		</div>
@@ -108,6 +108,33 @@
 			}
 		});
 	}
+
+
+	var backBtn   = document.getElementById("ap-back"),
+	    nextBtn   = document.getElementById("ap-next"),
+	    container = document.querySelector(".timeline"),
+	    rail      = document.querySelector(".timeline_box"),
+	    width     = container.offsetWidth,
+	    _width   = rail.offsetWidth,
+	    step      = 150,
+	    current   = 0;
+
+
+
+	backBtn.addEventListener("click", function(e){
+		if(current - step > _width - width - step){
+			$(container).animate({marginLeft :  current - step + "px"});
+			current = current - step;
+		}
+	});
+
+	nextBtn.addEventListener("click", function(e){
+		if(current + step < _width + width + step){
+			$(container).animate({marginLeft :  current + step + "px"});
+			current = current + step;
+		}
+	});
+
 })();
 </script>
 @endsection
