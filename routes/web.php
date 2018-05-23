@@ -555,16 +555,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/mensajes/{program_slug}/conversacion/storage/{conversation_id}', 'FacilitatorMessages@storage');
     Route::get('tablero-facilitador/mensajes/{program_slug}/mensajes-archivados', 'FacilitatorMessages@indexStorage');
 
-
-
-
-
-
-    Route::get('tablero-facilitador/mensajes/ver/{id}', 'FacilitatorMessages@viewMessage');
-
-
-
-
     /*@FacilitatorForums Controller */
     // Rutas foros
     Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
