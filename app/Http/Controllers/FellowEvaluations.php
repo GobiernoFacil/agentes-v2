@@ -12,6 +12,7 @@ use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
 use App\Models\Module;
 use App\Models\ModuleSession;
+use App\Models\Program;
 use App\Models\QuizInfo;
 use App\Models\RetroLog;
 // FormValidators
@@ -20,7 +21,11 @@ class FellowEvaluations extends Controller
 {
     //
     public $pageSize = 10;
-
+    define("MODULE_VALUE", .8);
+    define("FORUM_VALUE", .2);
+    define("All_MODULES",.2);
+    define("ATTENDANCE",.3);
+    define("FINAL_WORK",.5);
     /**
      * Muestra hoja de calificaciones
      *
@@ -145,7 +150,7 @@ class FellowEvaluations extends Controller
         }else{
           $check_answer = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first();
           if($check_answer){
-            return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->id}")->with('message','Ya has contestado la evaluación.');
+            return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")->with('message','Ya has contestado la evaluación.');
           }
         }
 
@@ -174,8 +179,7 @@ class FellowEvaluations extends Controller
       }
       $data     = $request->except('_token');
       $countP = 1;
-      $countQ = $activity->quizInfo->question->count();
-      $question_value = 10/$countQ;
+      $question_value = 10/$activity->quizInfo->question->count();
       $score = 0;
       foreach ($activity->quizInfo->question as $question) {
         if($question->count_correct($question->id)>1){
