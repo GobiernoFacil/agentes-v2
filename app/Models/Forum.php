@@ -40,6 +40,10 @@ class Forum extends Model
       return $this->belongsTo("App\User");
     }
 
+    function forum_log(){
+      return $this->hasMany("App\Models\ForumLog");
+    }
+
     function forum_conversations(){
       return $this->hasMany("App\Models\ForumConversation")->orderBy('created_at','desc');
     }
@@ -50,6 +54,15 @@ class Forum extends Model
       $logs_id  = ForumLog::where('user_id',$fellow_id)->pluck('forum_id');
       $forums   = Forum::whereNull('state_name')->whereIn('session_id',$sessions->toArray())->whereNotIn('id',$logs_id->toArray())->orderBy('created_at','desc')->get();
       return  $forums;
+
+    }
+
+    function check_participation($fellow_id){
+      if(ForumLog::where('forum_id',$this->id)->where('user_id',$fellow_id)->where('type','fellow')->first()){
+        return true;
+      }else{
+        return false;
+      }
 
     }
 
