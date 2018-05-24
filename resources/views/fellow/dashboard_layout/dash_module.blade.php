@@ -19,7 +19,7 @@
 			<div class="col-sm-12">
 				<!-- title-->
 				<h3>
-					@if((strtotime($module->start) <= strtotime(date('Y-m-d'))) && $module->public && $user->check_progress($module->id,0))
+					@if((strtotime($module->start) <= strtotime(date('Y-m-d'))) && $module->public && $user->check_progress($module->slug,0))
 					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
 					@else
 					{{$module->title}}

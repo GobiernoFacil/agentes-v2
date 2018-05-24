@@ -274,12 +274,12 @@ class User extends Authenticatable
       return $this->hasMany("App\Models\StoreConversation");
     }
 
-    function check_progress($id,$type){
+    function check_progress($slug,$type){
       //habilita modulos, sesiones y actividades
       switch ($type) {
         case 0:
           // modulo
-          $module  = Module::where('id',$id)->where('public',1)->first();
+          $module  = Module::where('slug',$slug)->where('public',1)->first();
           if($module){
             if($module->parent_id){
               if(Module::where('id',$module->parent_id)->where('public',1)->first()){

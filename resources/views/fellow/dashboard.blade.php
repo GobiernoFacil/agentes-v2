@@ -16,6 +16,12 @@
 			</div>
 		@endif
 
+		@if(Session::has('error'))
+			<div class="col-sm-12 message error">
+					{{ Session::get('error') }}
+			</div>
+		@endif
+
 
 		<div class="col-sm-1">
 			<button id="ap-back" class="ap-advancer" type="button">
