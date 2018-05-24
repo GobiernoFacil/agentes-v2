@@ -32,7 +32,7 @@
 			<div class="timeline_box">
 				<ul class="timeline" style="overflow: hidden;">
 				@foreach($program->fellow_modules as $module)
-				<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
+				<li class="{{ $user->check_progress($module->slug,0) ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
 				@endforeach
 				</ul>
 			</div>

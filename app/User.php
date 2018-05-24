@@ -275,11 +275,11 @@ class User extends Authenticatable
     }
 
     function check_progress($slug,$type){
+      $today = date('Y-m-d');
       //habilita modulos, sesiones y actividades
       switch ($type) {
         case 0:
-          // modulo
-          $module  = Module::where('slug',$slug)->where('public',1)->first();
+          $module  = Module::where('slug',$slug)->where('start','<=',$today)->where('public',1)->first();
           if($module){
             if($module->parent_id){
               if(Module::where('id',$module->parent_id)->where('public',1)->first()){
