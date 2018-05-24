@@ -282,7 +282,7 @@ class User extends Authenticatable
           $module  = Module::where('slug',$slug)->where('start','<=',$today)->where('public',1)->first();
           if($module){
             if($module->parent_id){
-              if(Module::where('id',$module->parent_id)->where('public',1)->first()){
+              if(Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first()){
                 if(FellowProgress::where('module_id',$module->parent_id)->where('status',1)->first()){
                   return true;
                 }else{
@@ -331,9 +331,11 @@ class User extends Authenticatable
 
         case 2:
           // activity
+          /*
           $activity = Activity::where('id',$id)->first();
           $session  = $activity->session;
-          $eva      = $session->activity_eval($session->id);
+          $eva      = $session->activity_eval($session->id);*/
+          return true;
         break;
 
         default:
