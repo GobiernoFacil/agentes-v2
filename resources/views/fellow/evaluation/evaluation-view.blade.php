@@ -65,7 +65,7 @@
           @endforeach
 
             	</ol>
-              <a href ="{{ url('tablero/calificaciones') }}"   class="btn view">Continuar</a>
+              <a href ='{{url("tablero/$program->slug/calificaciones/{$activity->session->module->slug}")}}'   class="btn view">Continuar</a>
 		    </div>
     @else
     	<div class="col-sm-12">

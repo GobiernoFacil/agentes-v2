@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Activity;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
+use App\Models\FellowAnswer;
 use App\Models\FellowAverages;
 use App\Models\ForumLog;
 use App\Models\Module;
@@ -63,34 +64,25 @@ class FellowAverage extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function get($activity_slug)
+  public function get($program_slug,$activity_slug)
   {
     $user      = Auth::user();
+    $program   = $user->actual_program();
     $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
-    if($activity->slug === 'examen-diagnostico'){
-      return view('fellow.evaluation.evaluation-diagnostic-view')->with(
-       [
-         'user'=>$user,
-       ]);
-    }else{
-      if(!$activity->quizInfo){
+    if(!$activity->quizInfo){
         return redirect('tablero');
-      }
-      $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
-      $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
+    }
+    $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
+    $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
       return view('fellow.evaluation.evaluation-view')->with(
        [
-         'user'=>$user,
-         'answers'=>$answers,
-         'score'  => $score,
-         'activity'=>$activity
+         'user'     => $user,
+         'answers'  => $answers,
+         'score'    => $score,
+         'activity' => $activity,
+         'program'  => $program
        ]);
     }
-  }
-
-
-
-
 
 
 }
