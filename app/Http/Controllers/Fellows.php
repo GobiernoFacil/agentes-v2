@@ -146,7 +146,12 @@ class Fellows extends Controller
     {
       $user = Auth::user();
       //program
-      $program        = $user->actual_program();
+      $program  = $user->actual_program();
+      $log      = Log::firstorCreate([
+        'user_id'     => $user->id,
+        'type'        => 'first',
+        'program_id'  => $program->id
+      ]);
       return view('fellow.info_program.about_program')->with([
         "user"      => $user,
         "program"	=> $program
