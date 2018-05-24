@@ -16,4 +16,6 @@ class ForumLog extends Model
       'type'
     ];
 
+  
+
 }

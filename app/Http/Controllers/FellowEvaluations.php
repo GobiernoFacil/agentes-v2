@@ -9,6 +9,7 @@ use App\Models\Answer;
 use App\Models\FellowAnswer;
 use App\Models\FellowAverage;
 use App\Models\FilesEvaluation;
+use App\Models\FellowProgress;
 use App\Models\FellowScore;
 use App\Models\Module;
 use App\Models\ModuleSession;
@@ -21,11 +22,6 @@ class FellowEvaluations extends Controller
 {
     //
     public $pageSize = 10;
-    define("MODULE_VALUE", .8);
-    define("FORUM_VALUE", .2);
-    define("All_MODULES",.2);
-    define("ATTENDANCE",.3);
-    define("FINAL_WORK",.5);
     /**
      * Muestra hoja de calificaciones
      *
@@ -148,9 +144,8 @@ class FellowEvaluations extends Controller
         if(!$activity->quizInfo){
           return redirect('tablero');
         }else{
-          $check_answer = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first();
-          if($check_answer){
-            return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")->with('message','Ya has contestado la evaluación.');
+          if($activity->fellowScore($user->id)){
+             return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")->with('message','Ya has contestado la evaluación.');
           }
         }
 
@@ -170,8 +165,7 @@ class FellowEvaluations extends Controller
     {
       $user = Auth::user();
       $activity = Activity::where('slug',$request->activity_slug)->firstOrFail();
-      $checkScore = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
-      if($checkScore){
+      if($activity->fellowScore($user->id)){
         return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->id");
       }
       if(!$activity->quizInfo){
@@ -186,11 +180,12 @@ class FellowEvaluations extends Controller
            $multiple_score_question = $question_value/$question->count_correct($question->id);
            foreach($request->{'answer_q'.$countP} as $singleAnswer_id){
                $answer    = Answer::find($singleAnswer_id);
-               $uAnswer   = new FellowAnswer();
-               $uAnswer->user_id = $user->id;
-               $uAnswer->question_id = $question->id;
-               $uAnswer->questionInfo_id = $activity->quizInfo->id;
-               $uAnswer->answer_id = $answer->id;
+               $uAnswer   = FellowAnswer::firstOrCreate([
+                 'user_id'          => $user->id,
+                 'question_id'      => $question->id,
+                 'questionInfo_id'  => $activity->quizInfo->id,
+                 'answer_id'        => $answer->id
+               ]);
                if($answer->selected){
                  $uAnswer->correct = 1;
                  $score  = $score + $multiple_score_question;
@@ -203,11 +198,12 @@ class FellowEvaluations extends Controller
         }else{
           $answer_id = current(array_slice($request->{'answer_q'.$countP}, 0, 1));
           $answer    = Answer::find($answer_id);
-          $uAnswer   = new FellowAnswer();
-          $uAnswer->user_id = $user->id;
-          $uAnswer->question_id = $question->id;
-          $uAnswer->questionInfo_id = $activity->quizInfo->id;
-          $uAnswer->answer_id = $answer->id;
+          $uAnswer   = FellowAnswer::firstOrCreate([
+            'user_id'          => $user->id,
+            'question_id'      => $question->id,
+            'questionInfo_id'  => $activity->quizInfo->id,
+            'answer_id'        => $answer->id
+          ]);
           if($answer->selected){
             $uAnswer->correct = 1;
             $score  = $score + $question_value;
@@ -218,14 +214,31 @@ class FellowEvaluations extends Controller
         }
         $countP++;
       }
-       $uScore = new FellowScore();
-        $uScore->user_id = $user->id;
-        $uScore->questionInfo_id = $activity->quizInfo->id;
+        $uScore = FellowScore::firstOrCreate([
+          'user_id'            =>  $user->id,
+          'questionInfo_id'    =>  $activity->quizInfo->id
+        ]);
         $uScore->score = $score;
         $uScore->save();
-        $fellowAverage = new FellowAverage();
-        $fellowAverage->scoreSession($activity->id,$user->id,null);
-       return redirect("tablero/calificaciones/ver/{$activity->slug}");
+        $fellowAverage = FellowAverage::firstOrCreate([
+          'user_id'    => $user->id,
+          'module_id'  => $activity->session->module->id,
+          'session_id' => $activity->session->id,
+          'type'       => 'session',
+          'program_id' => $activity->session->module->program->id,
+
+        ]);
+        $fellowAverage->scoreSession();
+        $fellowProgress  = FellowProgress::firstOrCreate([
+          'fellow_id'    => $user->id,
+          'module_id'    => $activity->session->module->id,
+          'session_id'   => $activity->session->id,
+          'activity_id'  => $activity->id,
+          'program_id'   => $activity->session->module->program->id,
+        ]);
+        $fellowProgress->status = 1;
+        $fellowProgress->save();
+       return redirect("tablero/{$activity->session->module->program->slug}/calificaciones/ver/{$activity->slug}");
     }
 
     /**

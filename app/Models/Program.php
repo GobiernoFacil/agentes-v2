@@ -172,4 +172,10 @@ class Program extends Model
       $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
       return  Activity::where('type','final')->whereIn('session_id',$sessions);
     }
+
+    function final_fellow_evaluation(){
+      $modules  = $this->fellow_modules->pluck('id')->toArray();
+      $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      return  Activity::where('type','final')->whereIn('session_id',$sessions)->first();
+    }
 }
