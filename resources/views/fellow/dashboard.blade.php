@@ -115,23 +115,29 @@
 	    container = document.querySelector(".timeline"),
 	    rail      = document.querySelector(".timeline_box"),
 	    width     = container.offsetWidth,
-	    _width   = rail.offsetWidth,
-	    step      = 150,
+	    _width    = rail.offsetWidth,
+	    step      = 200,
+	    magicNum  = 100,
 	    current   = 0;
 
 
 
-	backBtn.addEventListener("click", function(e){
-		if(current - step > _width - width - step){
-			$(container).animate({marginLeft :  current - step + "px"});
-			current = current - step;
+	nextBtn.addEventListener("click", function(e){
+		var currentPos = Number(container.style.marginLeft.replace("px", ""));
+		if(width + currentPos - magicNum > _width ){
+			$(container).animate({marginLeft :  currentPos - step + "px"}, 300, function(){
+			});
 		}
+		
 	});
 
-	nextBtn.addEventListener("click", function(e){
-		if(current + step < _width + width + step){
-			$(container).animate({marginLeft :  current + step + "px"});
-			current = current + step;
+	backBtn.addEventListener("click", function(e){
+		var currentPos = Number(container.style.marginLeft.replace("px", ""));
+
+		if( currentPos < 0 ){
+			$(container).animate({marginLeft :  currentPos + step + "px"}, 300, function(){
+			});
+			
 		}
 	});
 
