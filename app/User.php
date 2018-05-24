@@ -136,8 +136,8 @@ class User extends Authenticatable
       return $answer ;
     }
 
-    function fileFellowScore($fellow_id,$activity_id){
-      return FilesEvaluation::where('activity_id',$activity_id)->where('fellow_id',$fellow_id)->first();
+    function fileFellowScore($activity_id){
+      return FilesEvaluation::where('activity_id',$activity_id)->where('fellow_id',$this->id)->first();
     }
     function FellowScoreActivity($user_id,$quizInfo_id){
       return FellowScore::where('questionInfo_id',$quizInfo_id)->where('user_id',$user_id)->first();
@@ -153,7 +153,7 @@ class User extends Authenticatable
     }
 
     function total_average($program_id){
-      return FellowAverage::where('user_id',$this->id)->where('program_id',$program_id)->where('type','total')->first();
+      return FellowAverage::where('user_id',$this->id)->where('program_id',$program_id)->where('type','final')->first();
     }
     function module_average($user_id,$module_id){
       return FellowAverage::where('user_id',$user_id)->where('module_id',$module_id)->first();
@@ -161,9 +161,9 @@ class User extends Authenticatable
     function session_average($user_id,$session_id){
       return FellowAverage::where('user_id',$user_id)->where('session_id',$session_id)->first();
     }
-    function forum_participation($user_id,$session_id){
-      $fellowAverage  = new FellowAverage();
-      return  $fellowAverage->get_forum_participation($session_id,$user_id);
+    function forum_participation(){
+      $forum  = new Forum();
+      return  $forum->check_participation($this->user_id);
 
     }
 

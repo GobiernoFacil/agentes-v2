@@ -490,10 +490,14 @@ Route::group(['middleware' => ['auth']], function () {
           //fellow participaciones
           Route::get('tablero/{program_slug}/participaciones', 'Forums@participations');
 
-          /*@FellowEvaluations*/
+          /*@FellowAverage*/
           // Rutas calificaciones y evaluaciones
-          Route::get('tablero/{program_slug}/calificaciones', 'FellowEvaluations@index');
-          Route::get('tablero/{program_slug}/calificaciones/ver/{activity_slug}', 'FellowEvaluations@get');
+          Route::get('tablero/{program_slug}/calificaciones', 'FellowAverage@index');
+          Route::get('tablero/{program_slug}/calificaciones/{module_slug}', 'FellowAverage@moduleScores');
+          Route::get('tablero/{program_slug}/calificaciones/ver/{activity_slug}', 'FellowAverage@get');
+
+
+
           Route::get('tablero/{program_slug}/calificaciones/archivos/ver/{activity_slug}', 'FellowEvaluations@getFile');
           Route::get('tablero/{program_slug}/calificaciones/archivo/get/{score_id}', 'FellowEvaluations@download');
           Route::get('tablero/{program_slug}/calificaciones/metodologia', 'FellowEvaluations@methodology');

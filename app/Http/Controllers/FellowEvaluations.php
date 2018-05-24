@@ -22,43 +22,6 @@ class FellowEvaluations extends Controller
 {
     //
     public $pageSize = 10;
-    /**
-     * Muestra hoja de calificaciones
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      $user     = Auth::user();
-      $program  = $user->actual_program();
-      $modules  = $program->fellow_modules;
-      $fellowScores = FellowScore::where('user_id',$user->id)->get();
-      $fileScores = FilesEvaluation::where('fellow_id',$user->id)->get();
-      $total = $program->get_all_fellow_eva_activities()->count();
-      $score  = 0;
-      foreach ($fellowScores as $fscore) {
-          $score = $score + $fscore->score;
-      }
-      foreach ($fileScores as $ffscore){
-          $score = $score + $ffscore->score;
-      }
-
-      if($total!= 0){
-        $average = $score/$total;
-      }else{
-        $average = 0;
-      }
-      return view('fellow.evaluation.evaluation-sheet')->with(
-       [
-         'user'=>$user,
-         'modules' =>$modules,
-         'average' => $average,
-         "program" => $program
-       ]
-      );
-
-    }
-
 
 	 /**
      * Muestra metodología de calificaciones
@@ -76,35 +39,7 @@ class FellowEvaluations extends Controller
 
     }
 
-    /**
-     * Muestra evaluacion de actividad
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function get($activity_slug)
-    {
-      $user      = Auth::user();
-      $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
-      if($activity->slug === 'examen-diagnostico'){
-        return view('fellow.evaluation.evaluation-diagnostic-view')->with(
-         [
-           'user'=>$user,
-         ]);
-      }else{
-        if(!$activity->quizInfo){
-          return redirect('tablero');
-        }
-        $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
-        $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
-        return view('fellow.evaluation.evaluation-view')->with(
-         [
-           'user'=>$user,
-           'answers'=>$answers,
-           'score'  => $score,
-           'activity'=>$activity
-         ]);
-      }
-    }
+  
 
 
     /**
@@ -166,7 +101,7 @@ class FellowEvaluations extends Controller
       $user = Auth::user();
       $activity = Activity::where('slug',$request->activity_slug)->firstOrFail();
       if($activity->fellowScore($user->id)){
-        return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->id");
+        return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
       }
       if(!$activity->quizInfo){
         return redirect('tablero');
