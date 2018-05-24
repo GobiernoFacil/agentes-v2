@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="center">Acerca del programa</h2>
-					<p>{{$program->description}}</p>
+					<p class="ap_textareacontent">{{$program->description}}</p>
 					<p>El programa tiene como propósitos el fortalecimiento de capacidades, la vinculación y empoderamiento de una red de Agentes Locales que promuevan la consolidación de acciones orientadas a fortalecer prácticas de transparencia y participación ciudadana a nivel local en México.</p>
 					<p>Al concluir la etapa formativa, se esperaría que los egresados se integren y participen activamente en los trabajos que se realizan en su entidad federativa en el marco de los ejercicios locales de Gobierno Abierto promovidos por el INAI.</p>
 				</div>
