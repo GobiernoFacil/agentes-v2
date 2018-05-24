@@ -8,11 +8,9 @@
 	<span class="col-sm-3 right">
 		Calificación de la sesión: <br>
 		<?php $today = date('Y-m-d');?>
-		@if($session->start <= $today)
-		<strong>{{$user->session_average($user->id,$session->id) ? $user->session_average($user->id,$session->id)->type !='sin' ? number_format($user->session_average($user->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</strong>
-		@else
-		<strong>No aplica</strong>
-		@endif
+		<strong>
+			{{$user->session_average($user->id,$session->id) ? $user->session_average($user->id,$session->id)->type !='sin' ? number_format(($user->session_average($user->id,$session->id)->average)*10,2) : 'No aplica' : 'Sin calificación'}}
+		</strong>
 	</span>
 	<span class="col-sm-11">
 		<div class="divider b"></div>
@@ -31,8 +29,8 @@
 	        </li>
 			@foreach($session->activities as $activity)
 			    @if($activity->type === 'evaluation')
-					@include('fellow.evaluation.evaluation_includes.eval_list_session_activity')
-				@endif
+						@include('fellow.evaluation.evaluation_includes.eval_list_session_activity')
+					@endif
 			@endforeach
             <!--- foros-->
             <li class="row">
@@ -44,7 +42,7 @@
 	        	</span>
 	        	<span class="col-sm-3 right">
 							@if($session->forums)
-	        	 	{{$user->forum_participation($user->id,$session->id) > 0  ? $user->forum_participation($user->id,$session->id) : 'Sin participación' }}
+	        	 	{{$user->forum_participation()  ? $user->forum_participation() : 'Sin participación' }}
 						 @else
 						 	Sin foros
 						 @endif

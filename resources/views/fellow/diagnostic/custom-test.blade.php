@@ -49,7 +49,7 @@
     <?php $countP =1;?>
     @foreach($activity->diagnostic_info->questions as $question)
       <?php $count =0;?>
-      @if($question->count_correct($question->id)==1)
+      @if($question->count_correct($question->id)<=1)
         @foreach($question->answers as $answer)
         $('.question_{{$countP}}').click(function(event) {
            $('.question_{{$countP}}').not(this).attr('checked', false);

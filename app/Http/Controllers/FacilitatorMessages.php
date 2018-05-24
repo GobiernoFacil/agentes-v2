@@ -50,18 +50,16 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function indexStorage()
+  public function indexStorage($program_slug)
   {
     //
     $user = Auth::user();
-    $storage       = StoreConversation::where('user_id',$user->id)->pluck('conversation_id');
-    $conversations = Conversation::where('user_id',$user->id)->whereIn('id',$storage->toArray())->orWhere(function($query)use($storage,$user){
-      $query->where('to_id',$user->id)->whereIn('id',$storage->toArray());
-    })
-    ->orderBy('created_at','desc')->paginate($this->pageSize);
+    $program = Program::where('slug',$program_slug)->firstOrFail();
+    $conversations = $user->get_storaged_conversations($program)->paginate($this->pageSize);
     return view('facilitator.messages.messages-storage-list')->with([
-      'user' => $user,
+      'user'          => $user,
       'conversations' =>$conversations,
+      'program'       => $program
     ]);
 
   }
@@ -78,7 +76,8 @@ class FacilitatorMessages extends Controller
     $conversations = $user->get_conversations($program)->paginate($this->pageSize);
     return view('facilitator.messages.messages-list')->with([
       "user"      		=> $user,
-      'conversations' =>$conversations,
+      'conversations' => $conversations,
+      "program"       => $program
     ]);
   }
 
@@ -87,15 +86,16 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function viewMessage($id)
+  public function viewMessage($program_slug,$conversation_id)
   {
     $user 			  = Auth::user();
-    $conversation = Conversation::where('id',$id)->where('user_id',$user->id)->first();
+    $program      = Program::where('slug',$program_slug)->firstOrFail();
+    $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
     if($conversation){
       //determinar dirección de comunicación
       $to_user = $conversation->to_id;
     }else{
-      $conversation = Conversation::where('id',$id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
       //determinar dirección de comunicación
       $to_user = $conversation->user_id;
     }
@@ -110,7 +110,8 @@ class FacilitatorMessages extends Controller
     }
     return view('facilitator.messages.messages-conversation')->with([
       "user"      		=> $user,
-      "conversation"  => $conversation
+      "conversation"  => $conversation,
+      "program"         => $program
     ]);
   }
 
@@ -120,13 +121,15 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function add()
+  public function add($program_slug)
   {
     $user   = Auth::user();
-    $users = User::where('type','facilitator')->orwhere('type','fellow')->where('enabled',1)->pluck('name','id');
+    $program = Program::where('slug',$program_slug)->firstOrFail();
+    $names   = $user->get_all_users_for_messages($program);
     return view('facilitator.messages.messages-add')->with([
       "user"      => $user,
-      'users' => $users
+      'users'     => $names,
+      'program'   => $program
     ]);
   }
 
@@ -139,27 +142,19 @@ class FacilitatorMessages extends Controller
   public function save(SaveMessage $request)
   {
     //
-    $user   = Auth::user();
-    $conversation = new Conversation();
-    $conversation->user_id = $user->id;
-    $conversation->title   = $request->title;
-    $conversation->to_id   = $request->to_id;
-    $to_user = User::find($request->to_id);
-    $conversation->save();
-    $message = new Message();
-    $message->conversation_id = $conversation->id;
-    $message->user_id = $user->id;
-    $message->to_id   = $request->to_id;
-    $message->message = $request->message;
-    $message->save();
+    $user         = Auth::user();
+    $program      = Program::where('slug',$request->program_slug)->firstOrFail();
+    $conversation = Conversation::firstOrCreate(['user_id'=>$user->id,'title'=>$request->title,'to_id'=>$request->to_id,"program_id"=>$program->id]);
+    $to_user      = User::find($request->to_id);
+    $message      = Message::firstOrCreate(['conversation_id'=>$conversation->id,'user_id'=>$user->id,'to_id'=>$request->to_id,'message'=>$request->message]);
     //Guardar log de ultimo mensaje(ultimo que vio)
     $converLog = ConversationLog::firstOrCreate(['user_id'=>$user->id,'conversation_id'=>$conversation->id]);
     $converLog->message_id = $message->id;
     $converLog->status =0;
     $converLog->save();
     //envía correo
-    $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
-    return redirect("tablero-facilitador/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+      //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+    return redirect("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")->with('success',"Se ha enviado correctamente");
   }
 
   /**
@@ -167,16 +162,18 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function addSingle($conversation_id)
+  public function addSingle($program_slug,$conversation_id)
   {
     $user   = Auth::user();
-    $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+    $program      = Program::where('slug',$program_slug)->firstOrFail();
+    $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
     if(!$conversation){
-      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
     }
     return view('facilitator.messages.messages-single-add')->with([
-      "user"      => $user,
-      'conversation' => $conversation
+      "user"         => $user,
+      'conversation' => $conversation,
+      "program"      => $program
     ]);
   }
 
@@ -190,9 +187,10 @@ class FacilitatorMessages extends Controller
   {
     //
     $user   = Auth::user();
-    $conversation = Conversation::where('id',$request->id)->where('user_id',$user->id)->first();
+    $program      = Program::where('slug',$request->program_slug)->firstOrFail();
+    $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('user_id',$user->id)->first();
     if(!$conversation){
-      $conversation = Conversation::where('id',$request->id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('to_id',$user->id)->firstOrFail();
     }
     $message = new Message();
     $message->user_id = $user->id;
@@ -212,8 +210,8 @@ class FacilitatorMessages extends Controller
     $converLog->status =0;
     $converLog->save();
     //envía correo
-    $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
-    return redirect("tablero-facilitador/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
+    //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+    return redirect("tablero-facilitador/mensajes/$program->slug/ver-conversacion/$conversation->id")->with('success',"Se ha enviado correctamente");
   }
 
   /**
@@ -221,15 +219,16 @@ class FacilitatorMessages extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function storage($conversation_id)
+  public function storage($program_slug,$conversation_id)
   {
     $user   = Auth::user();
-    $conversation = Conversation::where('id',$conversation_id)->where('user_id',$user->id)->first();
+    $program      = Program::where('slug',$program_slug)->firstOrFail();
+    $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
     if(!$conversation){
-      $conversation = Conversation::where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
     }
     $storage = StoreConversation::firstOrCreate(["user_id"=>$user->id,"conversation_id"=>$conversation_id]);
-    return redirect('tablero-facilitador/mensajes')->with("success","Se ha archivado correctamente");
+    return redirect("tablero-facilitador/mensajes/$program->slug/ver-mensajes")->with("success","Se ha archivado correctamente");
   }
 
 }

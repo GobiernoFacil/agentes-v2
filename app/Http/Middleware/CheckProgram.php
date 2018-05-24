@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\User;
+use Auth;
 use App\Models\Program;
 class CheckProgram
 {
@@ -16,18 +17,42 @@ class CheckProgram
      */
     public function handle($request, Closure $next)
     {
-
+      //verifica que el usuario pertenezca al programa
       $program = Program::where('public',1)->where('slug',$request->program_slug)->first();
+      $user    = Auth::user();
       if($program){
         if($request->user()->actual_program()->id === $program->id){
-          return $next($request);
+          if(isset($request->activity_slug)){
+            if($user->check_progress($request->activity_slug,2)){
+              return $next($request);
+            }else{
+              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa actividad']);
+            }
+
+          }elseif(isset($request->module_slug)){
+            if($user->check_progress($request->module_slug,0)){
+              return $next($request);
+            }else{
+              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a ese módulo']);
+            }
+          }elseif(isset($request->session_slug)){
+            if($user->check_progress($request->session_slug,1)){
+              return $next($request);
+            }else{
+              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa sesión']);
+            }
+          }else{
+            return $next($request);
+          }
+
+
         }else{
              return redirect("tablero");
         }
 
 
       }else{
-        return redirect("tablero");
+        return redirect("tablero")->with(['error'=>'No te encuentras inscrito al programa, por favor contacta a soporte técnico.']);
       }
     }
 }

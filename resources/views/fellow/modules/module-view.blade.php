@@ -53,7 +53,7 @@
 		    	@foreach ($session->activities as $activity)
 			    	<li class="row">
 			    		<span class="col-sm-9">
-			    			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+			    			<b class="{{$activity->type === 'diagnostic' ? 'evaluation' : $activity->type  }}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 
 			    				<a href="{{ url('tablero/'.$session->module->program->slug.'/aprendizaje/'. $session->module->slug .'/'. $session->slug .'/' . $activity->slug) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure == 1 ? 'hr' : 'min'}}.</span></a>
 

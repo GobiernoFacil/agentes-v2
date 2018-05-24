@@ -4,7 +4,7 @@
 </div>
 <?php $module = $program->fellow_modules()->orderBy('start','asc')->first(); ?>
 <div class="col-sm-8">
-  <h3>Módulo 1</h3>
+  <h3>Semana 1</h3>
   @if((strtotime($module->start) <= strtotime(date('Y-m-d'))) && $module->public && $user->check_progress($module->id,0))
     <h2><a href='{{url("tablero/{$module->program->slug}/aprendizaje/$module->slug")}}'>{{$module->title}}</a></h2>
   @else

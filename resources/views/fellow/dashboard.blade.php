@@ -16,29 +16,35 @@
 			</div>
 		@endif
 
+		@if(Session::has('error'))
+			<div class="col-sm-12 message error">
+					{{ Session::get('error') }}
+			</div>
+		@endif
+
 
 		<div class="col-sm-1">
-			<button class="ap-advancer" type="button">
+			<button id="ap-back" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
 			</button>
 		</div>
 		<div class="col-sm-10">
 			<div class="timeline_box">
-				<ul class="timeline">
+				<ul class="timeline" style="overflow: hidden;">
 				@foreach($program->fellow_modules as $module)
-				<li class="{{ $module->public && $today >= $module->start ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
+				<li class="{{ $user->check_progress($module->slug,0) ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
 				@endforeach
 				</ul>
 			</div>
 		</div>
 		<div class="col-sm-1 right">
-			<button class="ap-advancer" type="button">
+			<button id="ap-next" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 			</button>
 		</div>
 
 
-		@if($user->log()->where('program_id',$program->id)->count()>0)
+		@if($user->log()->where('program_id',$program->id)->where('type','!=','first')->count()>0)
 			<div class="col-sm-12">
 				@if($session)
 					@include('fellow.session-dash-view')
@@ -52,7 +58,11 @@
 			<div class="box session_list">
 				<div class="row">
 					<div class="col-sm-12">
-						<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+						@if($program->fellow_modules()->first()->start <= date('Y-m-d'))
+							<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+						@else
+							<p><strong>Aún no es tiempo para iniciar tu curso.</strong></p>
+						@endif
 					</div>
 					@include('fellow.module-first-dash-view')
 				</div>
@@ -108,6 +118,39 @@
 			}
 		});
 	}
+
+
+	var backBtn   = document.getElementById("ap-back"),
+	    nextBtn   = document.getElementById("ap-next"),
+	    container = document.querySelector(".timeline"),
+	    rail      = document.querySelector(".timeline_box"),
+	    width     = container.offsetWidth,
+	    _width    = rail.offsetWidth,
+	    step      = 200,
+	    magicNum  = 100,
+	    current   = 0;
+
+
+
+	nextBtn.addEventListener("click", function(e){
+		var currentPos = Number(container.style.marginLeft.replace("px", ""));
+		if(width + currentPos - magicNum > _width ){
+			$(container).animate({marginLeft :  currentPos - step + "px"}, 300, function(){
+			});
+		}
+
+	});
+
+	backBtn.addEventListener("click", function(e){
+		var currentPos = Number(container.style.marginLeft.replace("px", ""));
+
+		if( currentPos < 0 ){
+			$(container).animate({marginLeft :  currentPos + step + "px"}, 300, function(){
+			});
+
+		}
+	});
+
 })();
 </script>
 @endsection
