@@ -38,7 +38,7 @@
 		</div>
 
 
-		@if($user->log()->where('program_id',$program->id)->count()>0)
+		@if($user->log()->where('program_id',$program->id)->where('type','!=','first')->count()>0)
 			<div class="col-sm-12">
 				@if($session)
 					@include('fellow.session-dash-view')
@@ -52,7 +52,11 @@
 			<div class="box session_list">
 				<div class="row">
 					<div class="col-sm-12">
-						<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+						@if($module->start > date('Y-m-d'))
+							<p><strong>Aún no es tiempo para iniciar tu curso.</strong></p>
+						@else
+							<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+						@endif
 					</div>
 					@include('fellow.module-first-dash-view')
 				</div>
@@ -128,7 +132,7 @@
 			$(container).animate({marginLeft :  currentPos - step + "px"}, 300, function(){
 			});
 		}
-		
+
 	});
 
 	backBtn.addEventListener("click", function(e){
@@ -137,7 +141,7 @@
 		if( currentPos < 0 ){
 			$(container).animate({marginLeft :  currentPos + step + "px"}, 300, function(){
 			});
-			
+
 		}
 	});
 
