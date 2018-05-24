@@ -78,10 +78,10 @@
 							</ul>
 						</div>
 						<div class="col-sm-3">
-							<p>Sin calificación</p>
+							<p>No aplica</p>
 						</div>
 						<div class="col-sm-3">
-							<p>Sin fecha</p>
+							<p>No aplica</p>
 						</div>
 					</div>
 					@endif

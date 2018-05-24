@@ -52,10 +52,10 @@
 			<div class="box session_list">
 				<div class="row">
 					<div class="col-sm-12">
-						@if($module->start > date('Y-m-d'))
-							<p><strong>Aún no es tiempo para iniciar tu curso.</strong></p>
-						@else
+						@if($program->fellow_modules()->first()->start <= date('Y-m-d'))
 							<p><strong>Aún no cuentas con actividad, inicia tu curso.</strong></p>
+						@else
+							<p><strong>Aún no es tiempo para iniciar tu curso.</strong></p>
 						@endif
 					</div>
 					@include('fellow.module-first-dash-view')
