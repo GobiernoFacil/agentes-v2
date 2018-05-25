@@ -1,7 +1,9 @@
 <!-- multiple_answers -->
 <div class="col-sm-12">
   <h3 class="title"><strong>{{$question->question}}{{$question->required ? "*" : " (opcional)"}}</strong></h3>
-  <h4> Selecciona {{$question->count_correct($question->id)}} respuestas</h4>
+    @if($question->count_correct($question->id) > 1)
+      <h4> Selecciona {{$question->count_correct($question->id)}} respuestas</h4>
+    @endif
 </div>
 <div class="col-sm-10 col-sm-offset-1">
     <?php $countP =0;?>
@@ -17,7 +19,7 @@
         <?php $countP++;?>
        </p>
     @endforeach
-    @if($question->count_correct($question->id) != 1)
+    @if($question->count_correct($question->id) > 1)
       <div class="divider b"></div>
         <p class="right">
           <a hred="#" class="btn xs danger" id='{{"delete".$count."_".$countP}}'>Borrar respuestas seleccionadas en la pregunta {{$count}}</a>

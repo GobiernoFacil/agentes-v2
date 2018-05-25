@@ -34,8 +34,10 @@
 
 	<!--css-custom-->
 	
-	<link rel="stylesheet" href="{{url($__env->yieldContent('css-custom')) }}">
+	@yield('css-custom')	
 	<link rel="stylesheet" href="{{url('css/fellow_styles.css')}}">
+
+	
 
 <!--
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

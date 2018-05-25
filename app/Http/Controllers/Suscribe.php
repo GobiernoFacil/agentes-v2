@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class Suscribe extends Controller
@@ -17,7 +18,17 @@ class Suscribe extends Controller
       }elseif($usuario->type ==='facilitator'){
         return redirect('tablero-facilitador');
       }elseif($usuario->type ==='fellow'){
-        return redirect('tablero');
+        $program = $usuario->actual_program();
+        if($program){
+          if(Log::where('user_id',$usuario->id)->where('type','first')->where('program_id',$program->id)->first()){
+            return redirect('tablero');
+          }else{
+            return redirect('tablero/informacion');
+          }
+        }else{
+          return redirect('tablero');
+        }
+
       }elseif($usuario->type ==='aspirant'){
         return redirect('tablero-aspirante');
       }else{

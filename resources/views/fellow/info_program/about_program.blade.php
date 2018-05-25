@@ -2,7 +2,10 @@
 @section('title', 'Información acerca del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('description', 'Información acerca del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'info')
-@section('css-custom', 'css/logos.css')
+@section('css-custom')
+<link rel="stylesheet" href="{{url('css/logos.css')}}">
+<link rel="stylesheet" href="{{url('css/jquerytour.css')}}">
+@endsection
 @section('content')
 		<!-- title -->
 		<div class="row">
@@ -29,16 +32,16 @@
 		
 		<ul class="row sub_nav_program">
 			<li class="col-sm-3">
-				<a href="#" class="current" id="about_box_btn">Acerca del programa</a>
+				<a href="#" class="current tour_8" id="about_box_btn">Acerca del programa</a>
 			</li>
 			<li class="col-sm-3">
-				<a href="#" id="content_box_btn">Contenido</a>
+				<a href="#" class="tour_9" id="content_box_btn">Contenido</a>
 			</li>
 			<li class="col-sm-3">
-				<a href="#" id="how_box_btn">Reglamento</a>
+				<a href="#" class="tour_10" id="how_box_btn">Reglamento</a>
 			</li>
 			<li class="col-sm-3">
-				<a href="{{url('tablero')}}" class="btn view">Comenzar Programa</a>
+				<a href="{{url('tablero')}}" class="btn view tour_11">Comenzar Programa</a>
 			</li>
 		</ul>
 	</div><!-- cierra  container del master layout -->
@@ -359,57 +362,9 @@
 @endsection
 
 @section('js-content')
-<script>
-			(function(){
-				var about_box       = "about_box",
-				    content_box     = "content_box",
-				    how_box     	= "how_box",
-				    current         = "current",
-				    about_box_btn   = "about_box_btn",
-				    content_box_btn = "content_box_btn",
-				    how_box_btn 	= "how_box_btn",
-				    about_div       = document.querySelector("." + about_box),
-				    content_div     = document.querySelector("." + content_box),
-				    how_div     	= document.querySelector("." + how_box),
-				    about_btn       = document.getElementById(about_box_btn),
-				    content_btn     = document.getElementById(content_box_btn);
-				    how_btn    		= document.getElementById(how_box_btn);
+<script type="text/javascript" src="{{url('js/jquery-1.4.4.min.js')}}"></script>
+<script src="{{url('js/jquery.easing.1.3.js')}}"></script>
+<script src="{{url('js/cufon-yui.js')}}"></script>
+<script src="{{url('js/modal_fellow/modal.js')}}"></script>
 
-
-				about_btn.addEventListener("click", function(e){
-					e.preventDefault();
-
-					content_div.style.display = "none";
-					how_div.style.display = "none";
-					about_div.style.display = "block";
-					content_btn.classList.remove(current);
-					how_btn.classList.remove(current);
-					if(!about_btn.classList.contains(current)) about_btn.classList.add(current);
-				});
-
-				content_btn.addEventListener("click", function(e){
-					e.preventDefault();
-
-					about_div.style.display = "none";
-					how_div.style.display = "none";
-					content_div.style.display = "block";
-					about_btn.classList.remove(current);
-					how_btn.classList.remove(current);
-					if(!content_btn.classList.contains(current)) content_btn.classList.add(current);
-				});
-				
-				how_btn.addEventListener("click", function(e){
-					e.preventDefault();
-
-					about_div.style.display = "none";
-					content_div.style.display = "none";
-					how_div.style.display = "block";
-					about_btn.classList.remove(current);
-					content_btn.classList.remove(current);
-					if(!how_btn.classList.contains(current)) how_btn.classList.add(current);
-				});
-
-
-			})();
-		</script>
 @endsection

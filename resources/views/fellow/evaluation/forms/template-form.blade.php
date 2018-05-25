@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/evaluacion/{$activity->slug}/save"), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save"), "class" => "form-horizontal"]) !!}
 <div class="row">
 	<div class="col-sm-12">
 		<h2>{{$activity->quizInfo->description}}</h2>

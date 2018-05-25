@@ -51,15 +51,37 @@ protected $fillable = [
    function forums(){
      return $this->hasOne("App\Models\Forum",'session_id');
     }
-    function all_forum(){
-      return $this->hasMany("App\Models\Forum",'session_id')->orderBy('created_at','desc');
-     }
+
+  function all_forum(){
+    return $this->hasMany("App\Models\Forum",'session_id')->orderBy('created_at','desc');
+  }
 
 
-  function activity_eval($session_id){
-    $activities = Activity::where('session_id',$session_id)->where('type','evaluation')->orderBy('end','asc')->get();
+  function activity_eval($session_id=false){
+    $activities = Activity::where('session_id',$this->id)->where('type','evaluation')->orderBy('end','asc')->get();
     return $activities;
   }
+
+  function activity_eval_by_date(){
+    $today      = date('Y-m-d');
+    $activities = Activity::where('session_id',$this->id)->where('end','<=',$today)->where('type','evaluation')->orderBy('end','asc')->get();
+    return $activities;
+  }
+
+  function activity_forum_by_date(){
+    $today      = date('Y-m-d');
+    $module     = $this->module;
+    if($module->end <= $today){
+      return Forum::where('session_id',$this->id)->orderBy('end','asc')->get();
+    }else{
+      //respuesta forzada a cero
+      return Forum::where('type','no-one')->get();
+    }
+  }
+
+
+
+
 
   function check_participation($fellow_id,$forum_id){
     if(ForumLog::where('forum_id',$forum_id)->where('user_id',$fellow_id)->where('type','fellow')->first()){

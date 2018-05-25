@@ -55,12 +55,17 @@ class Activity extends Model
   function diagnostic_info(){
     return $this->hasOne("App\Models\CustomQuestionnaire");
   }
+
+  function fellowFileScore($user_id){
+    return FilesEvaluation::where('activity_id',$this->id)->where('fellow_id',$user_id)->first();
+  }
+
   function diagnosticInfo(){
     return $this->hasOne("App\Models\CustomQuestionnaire");
   }
 
-  function fellowScore($questionInfo_id,$user_id){
-    return FellowScore::where('questionInfo_id',$questionInfo_id)->where('user_id',$user_id)->first();
+  function fellowScore($user_id){
+    return FellowScore::where('questionInfo_id',$this->quizInfo->id)->where('user_id',$user_id)->first();
   }
 
 

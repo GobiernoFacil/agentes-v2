@@ -4,14 +4,14 @@ if($user->type == "fellow"){
 }
 ?>
 <header>
-	<a class="apertus" href="{{url('')}}" title="Ir a sitio público">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
+	<a class="apertus tour_1" href="{{url('')}}" title="Ir a sitio público">Gobierno Abierto desde lo local para el desarrollo sostenible</a>
     <button class="hamburger"><span class="op">&#9776;</span><span class="cl">&#735;</span></button>
 	<nav>
 		<ul>
 			<!--dashboard-->
 			@if($user->type == "aspirant")
 			@else
-			<li class="{{ $__env->yieldContent('body_class') == 'dashboard' || $__env->yieldContent('body_class') == 'dashboard fellow' ? "active" : ''}}"><a href="{{url($linkDash)}}" data-title="Programa"><b class="icon {{ $user->type == 'fellow' ? 'i_modulos' : 'i_tablero' }}"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'dashboard' || $__env->yieldContent('body_class') == 'dashboard fellow' ? "active" : ''}} tour_2"><a href="{{url($linkDash)}}" data-title="Programa"><b class="icon {{ $user->type == 'fellow' ? 'i_modulos' : 'i_tablero' }}"></b></a></li>
 			@endif
 			@if($user->type == "admin")
 			<!--admin-->
@@ -35,13 +35,13 @@ if($user->type == "fellow"){
 			@endif
 			@if($user->type == "fellow" && $user->actual_program())
 			<!--fellow-->
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$program->slug.'/foros')}}" data-title="Foros"><b class="icon i_foros"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$program->slug.'/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow score' ? "active" : ''}}"><a href="{{url( $linkDash .'/'.$program->slug.'/calificaciones')}}" data-title="Calificaciones"><b class="icon i_score"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'fellow files' ? "active" : ''}}"><a href="{{url( $linkDash . '/perfil/archivos')}}" data-title="Archivos"><b class="icon i_files"></b></a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'news fellow' ? "active" : ''}}"><a href="{{url( $linkDash . '/noticias')}}" data-title="Avisos"><b class="icon i_news"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow foros' ? "active" : ''}} tour_3"><a href="{{url( $linkDash .'/'.$program->slug.'/foros')}}" data-title="Foros"><b class="icon i_foros"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow mensajes' ? "active" : ''}} tour_4"><a href="{{url( $linkDash .'/'.$program->slug.'/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow score' ? "active" : ''}} tour_5"><a href="{{url( $linkDash .'/'.$program->slug.'/calificaciones')}}" data-title="Calificaciones"><b class="icon i_score"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'fellow files' ? "active" : ''}} tour_6"><a href="{{url( $linkDash . '/perfil/archivos')}}" data-title="Archivos"><b class="icon i_files"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'news fellow' ? "active" : ''}} tour_7"><a href="{{url( $linkDash . '/noticias')}}" data-title="Avisos"><b class="icon i_news"></b></a></li>
 			@else
-			<li class="{{ $__env->yieldContent('body_class') == 'news fellow' ? "active" : ''}}"><a href="{{url( $linkDash . '/noticias')}}" data-title="Avisos"><b class="icon i_news"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'news fellow' ? "active" : ''}} tour_7"><a href="{{url( $linkDash . '/noticias')}}" data-title="Avisos"><b class="icon i_news"></b></a></li>
 			@endif
 			@if($user->type == "aspirant")
 			<!--aspirant-->
