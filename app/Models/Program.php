@@ -161,7 +161,7 @@ class Program extends Model
       $states = Aspirant::select('state')->whereIn('id',$aspirants_id->toArray())->distinct()->orderBy('state','asc')->pluck('state','state')->toArray();
       $states = array_diff($states,$state_names_already);
       if(!$states){
-        return false;
+        return [];
       }
       $states[null] = 'Selecciona una opción';
       return $states;
