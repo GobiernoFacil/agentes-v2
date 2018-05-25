@@ -1460,6 +1460,8 @@ h3.title {
       .module .m_content p.ap_time,
       .module .m_content li.ap_time {
         color: #5b5e6d; }
+    .module .m_content ol li {
+      list-style: inherit; }
     .module .m_content li {
       list-style: none; }
     .module .m_content .ap-acti {
