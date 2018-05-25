@@ -83,7 +83,7 @@ class Activities extends Controller
             $activity->order = $activity->reorder_add($request,$session);
 
            if($request->files && $request->type === 'evaluation'){
-              $activity->type = 'files';
+              $activity->type = 'evaluation';
             }
             $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
@@ -226,9 +226,11 @@ class Activities extends Controller
             $data   = $request->except(['_token','start','time','link','link_video']);
 
             $data['slug']    = str_slug($request->name);
-            if($request->files && $request->type === 'evaluation'){
-              $data['type'] = 'files';
+
+          if($request->files && $request->type === 'evaluation'){
+              $data['type'] = 'evaluation';
             }
+
             $last    = Activity::find($request->id);
             if($last->order != $request->order){
               $data['order'] = $last->reorder_add($request,$last->session);
@@ -309,6 +311,7 @@ class Activities extends Controller
            }else{
               return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
            }
+
         }
 
         /**
