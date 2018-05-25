@@ -24,6 +24,7 @@
 					@else
 					{{$module->title}}
 					@endif
+					<span class = 'notes'>({{date('d-m-Y', strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}})</span>
 				</h3>
 			</div>
 			<div class="col-sm-3">
@@ -61,6 +62,12 @@
 								</ul>
 							</div>
 							<div class="col-sm-3">
+								@if($evAct->type==='diagnostic')
+								<p>No aplica</p>
+								@else
+								<p>Sin calificación</p>
+								@endif
+
 							</div>
 							<div class="col-sm-3">
 								<p>{{date('d-m-Y', strtotime($evAct->end))}}

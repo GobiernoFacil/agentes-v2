@@ -8,6 +8,7 @@ use File;
 use App\Models\Aspirant;
 use App\Models\FellowProgram;
 use App\Models\Notice;
+use App\User;
 class ImportSelectedAspirantToProgram extends Command
 {
     /**
@@ -50,6 +51,7 @@ class ImportSelectedAspirantToProgram extends Command
               $count = 0;
                   foreach($results as $result){
                     if($aspirant = Aspirant::where('email',$result->emails)->where('is_activated',1)->first()){
+                      $this->info($result->emails);
                         FellowProgram::firstOrCreate([
                           'user_id'     => $aspirant->user()->id,
                           'program_id'  => $aspirant->notice->notice->program->id,
@@ -57,6 +59,10 @@ class ImportSelectedAspirantToProgram extends Command
                           'aspirant_id' => $aspirant->id
                         ]);
                         $count++;
+                        if($user = User::where('id',$aspirant->user()->id)->where('enabled',1)->first()){
+                          $user->type = 'fellow';
+                          $user->save();
+                        }
                     }
                   }
                   $this->info($count." aspirants saved!");

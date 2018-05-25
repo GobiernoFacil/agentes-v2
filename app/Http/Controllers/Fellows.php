@@ -147,6 +147,13 @@ class Fellows extends Controller
       $user = Auth::user();
       //program
       $program  = $user->actual_program();
+      //diagnostic as initial activity
+      $module   = Module::where('program_id',$program->id)->whereNull('parent_id')->where('public',1)->first();
+      if($module){
+        $activity = $module->get_diagnostc_activities()->first();
+      }else{
+        $activity = false;
+      }
       $log      = Log::firstorCreate([
         'user_id'     => $user->id,
         'type'        => 'first',
@@ -154,7 +161,8 @@ class Fellows extends Controller
       ]);
       return view('fellow.info_program.about_program')->with([
         "user"      => $user,
-        "program"	=> $program
+        "program"	  => $program,
+        'activity'  => $activity
       ]);
     }
 

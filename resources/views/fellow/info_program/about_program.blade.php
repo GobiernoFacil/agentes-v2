@@ -13,23 +13,23 @@
 				<h1 class="center">Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y <strong>Desarrollo Sostenible</strong>.</h1>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="allies">
 				<h2>Impartido por:</h2>
 				<div class="row">
-					<a href="https://www.usaid.gov/mexico" class="usaid">USAID</a>				
-					<a href="http://www.mx.undp.org/" class="pnud">PNUD</a>				
-					<a href="http://inicio.ifai.org.mx/SitePages/ifai.aspx" class="inai">INAI</a>				
-					<a href="http://www.gesoc.org.mx/site/" class="gesoc">GESOC</a>				
+					<a href="https://www.usaid.gov/mexico" class="usaid">USAID</a>
+					<a href="http://www.mx.undp.org/" class="pnud">PNUD</a>
+					<a href="http://inicio.ifai.org.mx/SitePages/ifai.aspx" class="inai">INAI</a>
+					<a href="http://www.gesoc.org.mx/site/" class="gesoc">GESOC</a>
 					<a href="https://gobiernofacil.com/" class="gf">Gobierno Fácil</a>
 					<a href="http://www.prosociedad.org/" class="prosociedad">Prosociedad</a>
 				</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<ul class="row sub_nav_program">
 			<li class="col-sm-3">
 				<a href="#" class="current tour_8" id="about_box_btn">Acerca del programa</a>
@@ -41,7 +41,15 @@
 				<a href="#" class="tour_10" id="how_box_btn">Reglamento</a>
 			</li>
 			<li class="col-sm-3">
-				<a href="{{url('tablero')}}" class="btn view tour_11">Comenzar Programa</a>
+			@if($activity)
+				@if($user->new_diagnostic($activity->diagnosticInfo->id)->count() == 0)
+						<a href='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}' class="btn view tour_11">Comenzar Programa</a>
+	       @else
+						<a href="{{url('tablero')}}" class="btn view tour_11">Comenzar Programa</a>
+				@endif
+			@else
+						<a href="{{url('tablero')}}" class="btn view tour_11">Comenzar Programa</a>
+			@endif
 			</li>
 		</ul>
 	</div><!-- cierra  container del master layout -->
@@ -122,14 +130,14 @@
 			</div>
 		</div>
 		<!--ends content_box -->
-		
-		
+
+
 		<!--content_box -->
 		<div class="how_box" style="display: none">
 			<div class="row">
 				<div class="col-sm-12">
 					<h2 class="center">Reglamento</h2>
-					
+
 					<!---Del alcance del reglamento y la terminología-->
 					<div class="module">
 						<div class="m_header">
@@ -144,7 +152,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<p class="ap_time">El presente reglamento es de observancia general, sin excepción, para las y los participantes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible P 2018. Sus disposiciones son de interés formativo y tienen por objeto regular el desempeño y comportamiento de los participantes.</p>
-									<p class="ap_time">Se entiende por “equipo coordinador” al grupo conformado por los actores desarrolladores del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, a saber: el Programa de las Naciones Unidas para el Desarrollo (PNUD), el Instituto Nacional de Transparencia, Acceso a la información y Protección de Datos Personales (INAI), Gestión Social y Cooperación (GESOC), Gobierno Fácil y ProSociedad.</p>	
+									<p class="ap_time">Se entiende por “equipo coordinador” al grupo conformado por los actores desarrolladores del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, a saber: el Programa de las Naciones Unidas para el Desarrollo (PNUD), el Instituto Nacional de Transparencia, Acceso a la información y Protección de Datos Personales (INAI), Gestión Social y Cooperación (GESOC), Gobierno Fácil y ProSociedad.</p>
 									<p class="ap_time">Se entiende por “programa”, “programa de formación” o “fellowship”, al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible.</p>
 									<p class="ap_time">Se entiende por “plataforma” o “plataforma virtual”, a la interfaz que se encuentra en el sitio web http://apertus.org.mx a la cual se accede mediante un usuario y contraseña para visualizar los contenidos y subir archivos.</p>
 									<p class="ap_time">Se entiende por “participantes”, “participante” o “fellows”, a las personas seleccionadas para cursar el programa de formación, quienes realizarán las actividades indicadas en la plataforma, así como las que formen parte de los seminarios presenciales.
@@ -153,8 +161,8 @@
 							</div>
 						</div>
 					</div>
-					
-					
+
+
 					<!---2.-->
 					<div class="module">
 						<div class="m_header">
@@ -180,7 +188,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<?php /*
 					<!---Sobre las sesiones y actividades en la plataforma-->
 					<div class="module">
@@ -204,7 +212,7 @@
 							</div>
 						</div>
 					</div>*/?>
-					
+
 					<!---Sobre la entrega de trabajos y tareas-->
 					<div class="module">
 						<div class="m_header">
@@ -230,7 +238,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<!--- Sobre las mentorías y el monitoreo del desempeño-->
 					<div class="module">
 						<div class="m_header">
@@ -258,7 +266,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<!--- Sobre los seminarios presenciales-->
 					<div class="module">
 						<div class="m_header">
@@ -282,8 +290,8 @@
 							</div>
 						</div>
 					</div>
-					
-					
+
+
 					<!---  Líneas de comunicación-->
 					<div class="module">
 						<div class="m_header">
@@ -305,8 +313,8 @@
 							</div>
 						</div>
 					</div>
-					
-					
+
+
 					<!--- Aclaraciones y dudas-->
 					<div class="module">
 						<div class="m_header">
@@ -329,7 +337,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<!--- Situaciones extracurriculares-->
 					<div class="module">
 						<div class="m_header">
@@ -353,12 +361,12 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
 		<!--ends content_box -->
-		
+
 @endsection
 
 @section('js-content')

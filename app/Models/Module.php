@@ -140,13 +140,22 @@ class Module extends Model
 
     function get_all_evaluation_activity(){
       $sessions  = $this->sessions->pluck('id')->toArray();
-      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->get();
+      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->orWhere(function($query) use($sessions){
+                $query->whereIn('session_id',$sessions)
+                      ->where('type','diagnostic');
+            })->get();
     }
 
     function all_activities(){
       $sessions  = $this->sessions->pluck('id')->toArray();
       return  Activity::whereIn('session_id',$sessions);
 
+    }
+
+
+    function get_diagnostc_activities(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type','diagnostic')->orderBy('end','asc');
     }
 
 
