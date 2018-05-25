@@ -7,6 +7,7 @@ use Excel;
 use File;
 use App\Models\Aspirant;
 use App\Models\FellowProgram;
+use App\Models\FellowData;
 use App\Models\Notice;
 use App\User;
 class ImportSelectedAspirantToProgram extends Command
@@ -58,11 +59,20 @@ class ImportSelectedAspirantToProgram extends Command
                           'notice_id'   => $aspirant->notice->notice_id,
                           'aspirant_id' => $aspirant->id
                         ]);
-                        $count++;
                         if($user = User::where('id',$aspirant->user()->id)->where('enabled',1)->first()){
                           $user->type = 'fellow';
                           $user->save();
+                          $data = FellowData::firstOrCreate(['user_id'=>$user->id]);
+                          $data->surname   = $aspirant->surname;
+                          $data->lastname  = $aspirant->lastname;
+                          $data->state     = $aspirant->state;
+                          $data->city      = $aspirant->city;
+                          $data->degree    = $aspirant->degree;
+                          $data->origin    = $aspirant->origin;
+                          $data->save();
                         }
+
+                      $count++;
                     }
                   }
                   $this->info($count." aspirants saved!");
