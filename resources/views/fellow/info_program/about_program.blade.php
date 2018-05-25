@@ -181,7 +181,42 @@
 										<li class="ap_time">Es derecho del participante el ser informado, por medio de la plataforma virtual, con claridad y tiempo de todas las actividades relativas al programa. </li>
 										<li class="ap_time">Dado que este programa es de orden virtual, es responsabilidad del participante conseguir los medios para poder cumplir en tiempo y forma con las actividades del mismo.</li>
 										<li class="ap_time">De manera general, la evaluación consta de exámenes en línea, trabajos individuales, participación en los foros y trabajos por equipo.</li>
-										<li class="ap_time">Para obtener una calificación final aprobatoria se deberá obtener al menos 70 puntos de 100 posibles, los cuales corresponden al trabajo final (40%), actividades en línea trabajos (30%), y la participación presencial en seminarios (30%).</li>
+										<li class="ap_time">Para obtener una calificación final aprobatoria se deberá obtener al menos 70 puntos de 100 posibles, los cuales corresponden al trabajo final (40%), actividades en línea trabajos (30%), y la participación presencial en seminarios (30%). A continuación, se describe en qué consiste cada concepto:<br><br>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>CONCEPTO</th>
+													<th>DESCRIPCIÓN</th> 
+													<th>VALOR</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><h4>Actividades de aprendizaje en línea</h4></td>
+													<td>Se refieren, por un lado, a los cuestionarios y ejercicios virtuales
+que se deben completar de forma individual durante o al final de
+cada sesión virtual. Los cuestionarios usualmente son de opción múltiple y los ejercicios implican elaborar un producto que deberá
+ser cargado como archivo en la plataforma.
+Por otro lado, se refieren a los foros virtuales que se presentan en
+algunas sesiones, en los cuales se deberá participar activamente.
+Los cuestionarios y ejercicios tienen un valor del 80% y los foros
+del 20% respecto del valor total del concepto.</td>
+													<td>30%</td>
+												</tr>
+												<tr>
+													<td><h4>Participación presencial en seminarios</h4></td>
+													<td>Se refiere a la asistencia a los seminarios presenciales, así como a la realización de las actividades y participación activa durante el mismo.</td>
+													<td>30%</td>
+												</tr>
+												<tr>
+													<td><h4>Trabajo final</h4></td> 
+													<td>Se refiere al producto final que será elaborado en equipo durante todo el programa de formación.</td>
+													<td>40%</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										</li>
 										<li class="ap_time">Al término del programa se otorgará una constancia de participación y cumplimiento de los requisitos del programa a las y los participantes que aprueben el programa.</li>
 									</ol>
 								</div>
@@ -189,7 +224,7 @@
 						</div>
 					</div>
 
-					<?php /*
+					
 					<!---Sobre las sesiones y actividades en la plataforma-->
 					<div class="module">
 						<div class="m_header">
@@ -204,21 +239,23 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<ol>
-										<li class="ap_time">Las fechas para realizar las actividades que componen las sesiones se indicarán en la plataforma.</li>
-										<li class="ap_time">Las situaciones anteriores, así como otras circunstancias puntuales no mencionadas, deberán ser comunicadas por los participantes al equipo coordinador máximo dos días después del cierre de la semana donde ocurrió la situación extraordinaria, ante lo cual el equipo coordinador decidirá la procedencia de la reapertura de las sesiones, así como los ajustes a la evaluación del participante.</li>
+										<li class="ap_time">Las sesiones y actividades por realizar en la plataforma se encuentran organizadas por semana. La apertura de las sesiones dependerá de que se realicen en su totalidad las actividades de las mismas.</li>
+										<li class="ap_time">Existen actividades que contemplan la elaboración de productos que tendrán que subirse a la plataforma, los cuales tendrán una fecha límite para ser revisados por el equipo coordinador.</li>
+										<li class="ap_time">Si existe un retraso en la realización de las actividades que contemplan la elaboración y subida de un producto en la plataforma, las únicas situaciones que se consideran para justificar la entrega extemporánea son por fallas en la plataforma o en los contenidos de la misma, así como situaciones extraordinarias tales como: catástrofes naturales, enfermedades graves, accidentes o tratamientos médicos que interfieran con la realización de las actividades, maternidad o paternidad y riesgo durante el embarazo y la lactancia.</li>
+										<li class="ap_time">Las situaciones anteriores, así como otras circunstancias puntuales no mencionadas, deberán ser comunicadas por los participantes al equipo coordinador máximo dos días después del cierre de la entrega, ante lo cual el equipo coordinador decidirá la procedencia sobre la justificación del retraso, así como los ajustes a la evaluación del participante.</li>
 
 									</ol>
 								</div>
 							</div>
 						</div>
-					</div>*/?>
+					</div>
 
 					<!---Sobre la entrega de trabajos y tareas-->
 					<div class="module">
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>3. Sobre la entrega de trabajos y tareas</h4>
+									<h4>4. Sobre la entrega de trabajos y tareas</h4>
 								</div>
 							</div>
 						</div>
@@ -244,7 +281,7 @@
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>4. Sobre las mentorías y el monitoreo del desempeño</h4>
+									<h4>5. Sobre las mentorías y el monitoreo del desempeño</h4>
 								</div>
 							</div>
 						</div>
@@ -272,7 +309,7 @@
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>5. Sobre los seminarios presenciales</h4>
+									<h4>6. Sobre los seminarios presenciales</h4>
 								</div>
 							</div>
 						</div>
@@ -297,7 +334,7 @@
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>6.  Líneas de comunicación</h4>
+									<h4>7.  Líneas de comunicación</h4>
 								</div>
 							</div>
 						</div>
@@ -320,7 +357,7 @@
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>7. Aclaraciones y dudas</h4>
+									<h4>8. Aclaraciones y dudas</h4>
 								</div>
 							</div>
 						</div>
@@ -343,7 +380,7 @@
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-12">
-									<h4>8. Situaciones extracurriculares</h4>
+									<h4>9. Situaciones extracurriculares</h4>
 								</div>
 							</div>
 						</div>
