@@ -355,6 +355,12 @@ class User extends Authenticatable
 
     }
 
+    function check_activity($activity){
+
+    }
+
+
+
     function facilitator_actual_sessions(){
       $today        = date('Y-m-d');
       $program      = Program::where('public',1)->where('end','>=',$today)->first();
