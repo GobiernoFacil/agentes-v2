@@ -191,9 +191,12 @@ class FellowDiagnostic extends Controller
         'program_id'  => $activity->session->module->program->id,
         'activity_id' => $activity->id,
         'module_id'   => $activity->session->module->id,
-        'session_id'  => $activity->session->id
+        'session_id'  => $activity->session->id,
+        'type'        => 'activity'
       ]);
       $progress->status =1;
+      $progress->save();
+      $user->update_progress($activity->session->module);
       return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$request->activity_slug")->with('success','Se ha guardado correctamente la evaluación');
 
     }

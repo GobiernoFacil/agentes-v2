@@ -9,7 +9,7 @@ class FellowProgress extends Model
     //
     public $table = 'fellow_progress';
     protected $fillable = [
-        'fellow_id', 'program_id','module_id','session_id','activity_id','status'
+        'fellow_id', 'program_id','module_id','session_id','activity_id','status','type'
     ];
 
     function user(){

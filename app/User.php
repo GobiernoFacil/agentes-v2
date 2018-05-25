@@ -16,11 +16,11 @@ use App\Models\FellowScore;
 use App\Models\FellowFile;
 use App\Models\FacilitatorModule;
 use App\Models\FellowProgram;
-use App\Models\FellowProgress;
 use App\Models\FacilitatorSurvey;
 use App\Models\Forum;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
+use App\Models\FellowProgress;
 use App\Models\Module;
 use App\Models\Program;
 use App\Models\QuizInfo;
@@ -281,24 +281,9 @@ class User extends Authenticatable
         case 0:
           $module  = Module::where('slug',$slug)->where('start','<=',$today)->where('public',1)->first();
           if($module){
-            if($module->parent_id){
-              if(Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first()){
-                if(FellowProgress::where('module_id',$module->parent_id)->where('status',1)->first()){
-                  return true;
-                }else{
-                  return false;
-                }
-
-              }else{
-                return false;
-              }
-
-            }else{
-              return true;
-            }
-
+              return $this->check_module($module);
           }else{
-            return false;
+              return false;
           }
 
         break;
@@ -307,22 +292,7 @@ class User extends Authenticatable
           // session
           $session  = ModuleSession::where('id',$id)->first();
           if($session){
-            if($session->parent_id){
-              if(ModuleSession::where('id',$session->parent_id)->first()){
-                if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
-                  return true;
-                }else{
-                  return false;
-                }
-
-              }else{
-                return false;
-              }
-
-            }else{
-              return true;
-            }
-
+            return $this->check_session($session);
           }else{
             return false;
           }
@@ -344,6 +314,47 @@ class User extends Authenticatable
       }
     }
 
+    //Verificar que se pueda accesar al módulo
+    function check_module($module){
+      if($module->parent_id){
+        if(Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first()){
+          //se busca registro de que ha completado el módulo "padre"
+          if(FellowProgress::where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
+            return true;
+          }else{
+            return false;
+          }
+
+        }else{
+          return false;
+        }
+
+      }else{
+        return true;
+      }
+    }
+
+
+    function check_session($session){
+      if($session->parent_id){
+        if(ModuleSession::where('id',$session->parent_id)->first()){
+          //se busca registro de que ha completado la sesión "padre"
+          if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
+            return true;
+          }else{
+            return false;
+          }
+
+        }else{
+          return false;
+        }
+
+      }else{
+        return true;
+      }
+
+    }
+
     function facilitator_actual_sessions(){
       $today        = date('Y-m-d');
       $program      = Program::where('public',1)->where('end','>=',$today)->first();
@@ -353,6 +364,27 @@ class User extends Authenticatable
         $sessions_ids = [];
       }
       return  FacilitatorModule::where('user_id',$this->id)->whereIn('session_id',$sessions_ids);
+    }
+
+    function update_progress($module){
+      $allev  = $module->get_all_evaluation_activity();
+      $allFeP = FellowProgress::where('fellow_id',$this->id)->where('module_id',$module->id)->where('status',1)->whereIn('activity_id',$allev->pluck('id')->toArray())->where('type','activity')->get();
+      var_dump($allFeP->toArray());
+      var_dump($allev->toArray());
+      if($allev->count()== $allFeP->count() && $allev->count() > 0){
+        $fp = FellowProgress::firstOrCreate(
+          ['fellow_id' => $this->id,
+          'program_id' => $module->program->id,
+          'module_id'  => $module->id,
+          'type'       => 'module'
+          ]);
+        $fp->status = 1;
+        $fp->save();
+
+      }
+
+      return true;
+
     }
 
 }
