@@ -24,7 +24,12 @@
 					@else
 					{{$module->title}}
 					@endif
-					<span class = 'notes'>({{date('d-m-Y', strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}})</span>
+					@if($module->modality==='Presencial')
+						<span class = 'notes'>({{date('d-m-Y', strtotime($module->start))}})</span>
+					@else
+						<span class = 'notes'>({{date('d-m-Y', strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}})</span>
+					@endif
+
 				</h3>
 			</div>
 			<div class="col-sm-3">
