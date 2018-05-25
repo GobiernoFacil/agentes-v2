@@ -35,7 +35,7 @@
 				<a href="#" id="content_box_btn">Contenido</a>
 			</li>
 			<li class="col-sm-3">
-				<a href="#" id="how_box_btn">Cómo funciona</a>
+				<a href="#" id="how_box_btn">Reglamento</a>
 			</li>
 			<li class="col-sm-3">
 				<a href="{{url('tablero')}}" class="btn view">Comenzar Programa</a>
@@ -125,14 +125,14 @@
 		<div class="how_box" style="display: none">
 			<div class="row">
 				<div class="col-sm-12">
-					<h2 class="center">Cómo funciona</h2>
+					<h2 class="center">Reglamento</h2>
 					
-					<!---cgenearl-->
+					<!---Del alcance del reglamento y la terminología-->
 					<div class="module">
 						<div class="m_header">
 							<div class="row">
 								<div class="col-sm-6">
-									<h4>General</h4>
+									<h4>1. Del alcance del reglamento y la terminología</h4>
 								</div>
 							</div>
 						</div>
@@ -140,20 +140,24 @@
 						<div class="m_content">
 							<div class="row">
 								<div class="col-sm-12">
-									<h3>Calificación necesaria para aprobar el programa</h3>
-									<p class="ap_time">Para aprobar el programa es necesario</p>
+									<p class="ap_time">El presente reglamento es de observancia general, sin excepción, para las y los participantes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible P 2018. Sus disposiciones son de interés formativo y tienen por objeto regular el desempeño y comportamiento de los participantes.</p>
+									<p class="ap_time">Se entiende por “equipo coordinador” al grupo conformado por los actores desarrolladores del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, a saber: el Programa de las Naciones Unidas para el Desarrollo (PNUD), el Instituto Nacional de Transparencia, Acceso a la información y Protección de Datos Personales (INAI), Gestión Social y Cooperación (GESOC), Gobierno Fácil y ProSociedad.</p>	
+									<p class="ap_time">Se entiende por “programa”, “programa de formación” o “fellowship”, al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible.</p>
+									<p class="ap_time">Se entiende por “plataforma” o “plataforma virtual”, a la interfaz que se encuentra en el sitio web http://apertus.org.mx a la cual se accede mediante un usuario y contraseña para visualizar los contenidos y subir archivos.</p>
+									<p class="ap_time">Se entiende por “participantes”, “participante” o “fellows”, a las personas seleccionadas para cursar el programa de formación, quienes realizarán las actividades indicadas en la plataforma, así como las que formen parte de los seminarios presenciales.
+</p>
 								</div>
 							</div>
 						</div>
 					</div>
 					
 					
-					<!---cgenearl-->
+					<!---2.-->
 					<div class="module">
 						<div class="m_header">
 							<div class="row">
-								<div class="col-sm-6">
-									<h4>Colaboración con fellows de mi estado</h4>
+								<div class="col-sm-12">
+									<h4>2. Sobre el contenido del programa y la metodología de evaluación</h4>
 								</div>
 							</div>
 						</div>
@@ -161,8 +165,187 @@
 						<div class="m_content">
 							<div class="row">
 								<div class="col-sm-12">
-									<h3>Calificación necesaria para aprobar el programa</h3>
-									<p class="ap_time">Para aprobar el programa es necesario</p>
+									<ol>
+										<li class="ap_time">Las y los participantes recibirán una clave de usuario y contraseña para ingresar a la plataforma virtual mediante la cual podrán participar en todas las actividades virtuales y para ser informados sobre las actividades presenciales y por equipo.</li>
+										<li class="ap_time">Es derecho del participante el ser informado, por medio de la plataforma virtual, con claridad y tiempo de todas las actividades relativas al programa. </li>
+										<li class="ap_time">Dado que este programa es de orden virtual, es responsabilidad del participante conseguir los medios para poder cumplir en tiempo y forma con las actividades del mismo.</li>
+										<li class="ap_time">De manera general, la evaluación consta de exámenes en línea, trabajos individuales, participación en los foros y trabajos por equipo.</li>
+										<li class="ap_time">Para obtener una calificación final aprobatoria se deberá obtener al menos 70 puntos de 100 posibles, los cuales corresponden al trabajo final (40%), actividades en línea trabajos (30%), y la participación presencial en seminarios (30%).</li>
+										<li class="ap_time">Al término del programa se otorgará una constancia de participación y cumplimiento de los requisitos del programa a las y los participantes que aprueben el programa.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<?php /*
+					<!---Sobre las sesiones y actividades en la plataforma-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>3. Sobre las sesiones y actividades en la plataforma</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">Las fechas para realizar las actividades que componen las sesiones se indicarán en la plataforma.</li>
+										<li class="ap_time">Las situaciones anteriores, así como otras circunstancias puntuales no mencionadas, deberán ser comunicadas por los participantes al equipo coordinador máximo dos días después del cierre de la semana donde ocurrió la situación extraordinaria, ante lo cual el equipo coordinador decidirá la procedencia de la reapertura de las sesiones, así como los ajustes a la evaluación del participante.</li>
+
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>*/?>
+					
+					<!---Sobre la entrega de trabajos y tareas-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>3. Sobre la entrega de trabajos y tareas</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">Las fechas de entrega de los trabajos y las tareas se indicarán en cada una de las actividades de las sesiones. </li>
+										<li class="ap_time">No habrá prórrogas por entregas con retraso.</li>
+										<li class="ap_time">Las únicas situaciones que se consideran para justificar una prórroga son por fallas en la plataforma o en los contenidos de la misma, así como situaciones extraordinarias tales como: catástrofes naturales, enfermedades graves, accidentes o tratamientos médicos que interfieran con la elaboración de los trabajos, maternidad o paternidad y riesgo durante el embarazo y la lactancia. Las anteriores, así como otras circunstancias puntuales no mencionadas, deberán ser comunicadas por los participantes al equipo coordinador antes de la fecha de entrega de los trabajos, ante lo cual el equipo coordinador decidirá la procedencia de la prórroga, así como los ajustes a la evaluación.</li>
+										<li class="ap_time">Cualquier nivel de plagio o trabajos que se identifiquen como elaborados por terceros ocasionará que éste se anule, además que dejará precedente sobre la deshonestidad del/los participante/s ante el comité directivo, cuyas sanciones, dependiendo del grado, pueden incluir la expulsión del proceso. Cuando ocurra este caso, el equipo coordinador decidirá las sanciones de manera colegiada.</li>
+										<li class="ap_time">El equipo coordinador podrá, previo a la entrega final de trabajos en equipo, solicitar una reunión virtual con las y los participantes para revisar y retroalimentar el trabajo que será presentado ante los Secretarios Técnicos Locales y/o autoridades locales.</li>
+
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--- Sobre las mentorías y el monitoreo del desempeño-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>4. Sobre las mentorías y el monitoreo del desempeño</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">Las mentorías tienen la finalidad de apoyar a los fellows en la realización del proyecto final, por lo que se realizarán de manera grupal.</li>
+										<li class="ap_time">Para las mentorías, cada equipo tendrá un mentor asignado, del cual se les informará durante el primer mes del programa, y en ocasiones habrá un mentor de apoyo especialista de acuerdo con los temas y problemáticas en las que las y los participantes busquen incidir.</li>
+										<li class="ap_time">La mentoría consiste en revisar avances y ayudar a resolver problemas metodológicos y prácticos relacionados con la elaboración del proyecto. </li>
+										<li class="ap_time">Las mentorías podrán llevarse a cabo con una sola persona de cada equipo en caso de que existan dificultades para que todos los integrantes estén presentes. Cuando sea el caso, la mentoría tendrá lugar en estas condiciones previo acuerdo entre los miembros del equipo.</li>
+										<li class="ap_time">La periodicidad de las mentorías por equipo será mensual durante el programa, y podrán considerarse hasta dos o tres mentorías posteriores al programa relacionadas con el trabajo de incidencia del equipo en sus respectivos estados.</li>
+										<li class="ap_time">El monitoreo del desempeño de los fellows consiste en la revisión periódica de su avance durante el programa por parte del equipo coordinador, así como en apoyarlos en situaciones de índole académica que afecten su desempeño en el programa. Se realizará un contacto periódico con cada participante por los medios oficiales de manera mensual. Adicionalmente, cuando el equipo coordinador detecte un bajo rendimiento por parte de algún participante, se le contactará para ayudarle a solventar, en la medida de lo posible, aquello que le impida avanzar en su proceso.</li>
+
+
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--- Sobre los seminarios presenciales-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>5. Sobre los seminarios presenciales</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">La finalidad de los seminarios en modalidad presencial es la de introducir y reforzar los contenidos temáticos del programa de tal modo que se puedan resolver dudas de manera inmediata. De igual manera, pretenden ser un espacio para que los participantes logren interactuar entre ellos, así como con expertos y otros actores clave, con el fin de promover la generación de una Red de Agentes de Cambio.</li>
+										<li class="ap_time">El equipo coordinador será el encargado de realizar los arreglos logísticos necesarios para que todos los participantes asistan a los seminarios presenciales. Esto incluye asegurar y asumir los costos para el traslado, el hospedaje y la alimentación de las y los participantes en los lugares donde se realicen las sesiones presenciales. Para esto, el equipo coordinador contactará con la mayor anticipación posible a cada participante para informarle sobre las fechas, horarios y medios de transporte disponibles para su traslado.</li>
+										<li class="ap_time">Será responsabilidad de los y las participantes presentarse puntualmente en la fecha y hora definidas para el traslado al lugar donde se realizarán los seminarios presenciales. Para el caso de vuelos, es responsabilidad de los participantes adecuarse a las políticas señaladas por la aerolínea en la que viajarán respecto a la anticipación con la que deberán presentarse en la sala de abordar, la documentación de equipaje, etc. En caso de perder algún vuelo por negligencia o causas no imputables al proyecto, el costo del traslado correrá a cuenta del participante.</li>
+										<li class="ap_time">La asistencia de los participantes a los seminarios es obligatoria. La ausencia de los mismos sólo será justificada por situaciones extraordinarias tales como: catástrofes naturales, enfermedades graves, accidentes o tratamientos médicos que impidan el traslado del participante o interfieran con su desempeño durante las sesiones, maternidad o paternidad y riesgo durante el embarazo y la lactancia. Las anteriores, así como otras circunstancias puntuales no mencionadas, deberán ser comunicadas por los participantes al equipo coordinador con anticipación, mínimo una semana ante situaciones no emergentes, a la fecha de inicio de cada seminario, quien decidirá de manera colegiada la procedencia de la ausencia, así como los ajustes a la evaluación del participante. La determinación a la que llegue el equipo coordinador será comunicada al participante por alguna de las líneas de comunicación del programa.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!---  Líneas de comunicación-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>6.  Líneas de comunicación</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">El medio oficial de comunicación oficial será la plataforma del programa.</li>
+										<li class="ap_time">Para avisos especiales, es posible que el equipo coordinador utilice otros medios de contacto además de la plataforma, como lo son el correo electrónico y/o el teléfono.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!--- Aclaraciones y dudas-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>7. Aclaraciones y dudas</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">Para solicitar alguna aclaración o alguna respuesta durante el desarrollo del  programa de formación se podrá contactar al equipo de ProSociedad: <a href="mailto:carlos.bauche@prosociedad.org">carlos.bauche@prosociedad.org</a> y  <a href="mailto:german@prosociedad.org">german@prosociedad.org</a>  </li>
+										<li class="ap_time">Para cualquier pregunta/problema respecto al funcionamiento de la plataforma (acceso, problemas al cargar tareas o ensayos, actividades o evaluaciones que no se acreditan en la plataforma, etc.) el medio de comunicación será con el equipo de Gobierno Fácil a través del foro de soporte técnico. </li>
+										<li class="ap_time">Para cualquier Asunto General del programa, como retroalimentación del desarrollo del programa y contenidos, de la plataforma, dudas/aclaraciones de cualquier otro tema, por favor comunicarse con el equipo de PNUD al mail: <a href="mailto:mariana.garcia@undp.org">mariana.garcia@undp.org</a>     </li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--- Situaciones extracurriculares-->
+					<div class="module">
+						<div class="m_header">
+							<div class="row">
+								<div class="col-sm-12">
+									<h4>8. Situaciones extracurriculares</h4>
+								</div>
+							</div>
+						</div>
+						<!--content-->
+						<div class="m_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<ol>
+										<li class="ap_time">Se prohíbe cualquier tipo de discriminación, acoso, amedrentamiento, abuso, hacia cualquier participante del programa, asesores, personal de soporte o facilitadores, por cualquier medio virtual o físico que se disponga.</li>
+										<li class="ap_time">Queda también prohibido cualquier tipo de propaganda religiosa y/o partidista ajena a los contenidos del curso.    </li>
+										<li class="ap_time">Queda prohibido cualquier tipo de violación a la propiedad intelectual, mediante el plagio o cualquier otro medio. </li>
+</li>
+									</ol>
 								</div>
 							</div>
 						</div>
