@@ -369,8 +369,6 @@ class User extends Authenticatable
     function update_progress($module){
       $allev  = $module->get_all_evaluation_activity();
       $allFeP = FellowProgress::where('fellow_id',$this->id)->where('module_id',$module->id)->where('status',1)->whereIn('activity_id',$allev->pluck('id')->toArray())->where('type','activity')->get();
-      var_dump($allFeP->toArray());
-      var_dump($allev->toArray());
       if($allev->count()== $allFeP->count() && $allev->count() > 0){
         $fp = FellowProgress::firstOrCreate(
           ['fellow_id' => $this->id,
@@ -382,7 +380,6 @@ class User extends Authenticatable
         $fp->save();
 
       }
-
       return true;
 
     }
