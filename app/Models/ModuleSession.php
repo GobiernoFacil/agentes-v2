@@ -58,8 +58,10 @@ protected $fillable = [
 
 
   function activity_eval($session_id=false){
-    $activities = Activity::where('session_id',$this->id)->where('type','evaluation')->orderBy('end','asc')->get();
-    return $activities;
+    return Activity::where('session_id',$this->id)->where('type','evaluation')->orWhere(function($query){
+      $query->where('session_id',$this->id)
+            ->where('type','diagnostic');
+    })->orderBy('end','asc')->get();
   }
 
   function activity_eval_by_date(){

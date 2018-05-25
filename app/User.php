@@ -380,6 +380,23 @@ class User extends Authenticatable
         $fp->save();
 
       }
+
+      foreach ($module->sessions as $session) {
+        $allSev  = $session->activity_eval();
+        $allFeP = FellowProgress::where('fellow_id',$this->id)->where('session_id',$session->id)->where('status',1)->whereIn('activity_id',$allSev->pluck('id')->toArray())->where('type','activity')->get();
+        if($allSev->count()== $allFeP->count() && $allSev->count() > 0){
+          $fp = FellowProgress::firstOrCreate(
+            ['fellow_id' => $this->id,
+            'program_id' => $module->program->id,
+            'module_id'  => $module->id,
+            'session_id' => $session->id,
+            'type'       => 'session'
+            ]);
+          $fp->status = 1;
+          $fp->save();
+        }
+      }
+
       return true;
 
     }
