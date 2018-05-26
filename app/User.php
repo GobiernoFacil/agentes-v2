@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Cache;
 use App\Notifications\MyResetPassword;
 use App\Models\FellowAnswer;
+use App\Models\Activity;
 use App\Models\Aspirant;
 use App\Models\Conversation;
 use App\Models\CustomFellowAnswer;
@@ -22,6 +23,7 @@ use App\Models\ForumLog;
 use App\Models\FellowAverage;
 use App\Models\FellowProgress;
 use App\Models\Module;
+use App\Models\ModuleSession;
 use App\Models\Program;
 use App\Models\QuizInfo;
 
@@ -279,8 +281,7 @@ class User extends Authenticatable
       //habilita modulos, sesiones y actividades
       switch ($type) {
         case 0:
-          $module  = Module::where('slug',$slug)->where('start','<=',$today)->where('public',1)->first();
-          if($module){
+          if($module  = Module::where('slug',$slug)->where('start','<=',$today)->where('public',1)->first()){
               return $this->check_module($module);
           }else{
               return false;
@@ -290,8 +291,7 @@ class User extends Authenticatable
 
         case 1:
           // session
-          $session  = ModuleSession::where('id',$id)->first();
-          if($session){
+          if($session  = ModuleSession::where('slug',$slug)->first()){
             return $this->check_session($session);
           }else{
             return false;
@@ -301,11 +301,11 @@ class User extends Authenticatable
 
         case 2:
           // activity
-          /*
-          $activity = Activity::where('id',$id)->first();
-          $session  = $activity->session;
-          $eva      = $session->activity_eval($session->id);*/
-          return true;
+          if($activity  = Activity::where('slug',$slug)->first()){
+            return $this->check_activity($activity);
+          }else{
+            return false;
+          }
         break;
 
         default:
@@ -316,19 +316,19 @@ class User extends Authenticatable
 
     //Verificar que se pueda accesar al módulo
     function check_module($module){
-      if($module->parent_id){
-        if(Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first()){
-          //se busca registro de que ha completado el módulo "padre"
-          if(FellowProgress::where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
-            return true;
-          }else{
-            return false;
-          }
-
+      $today = date('Y-m-d');
+      $parent = Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first();
+      if($parent){
+        if($parent->get_all_evaluation_activity()->count() > 0){
+            //se busca registro de que ha completado el módulo "padre"
+            if(FellowProgress::where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
+              return true;
+            }else{
+              return false;
+            }
         }else{
-          return false;
+          return true;
         }
-
       }else{
         return true;
       }
@@ -336,27 +336,37 @@ class User extends Authenticatable
 
 
     function check_session($session){
-      if($session->parent_id){
-        if(ModuleSession::where('id',$session->parent_id)->first()){
-          //se busca registro de que ha completado la sesión "padre"
-          if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
-            return true;
-          }else{
-            return false;
-          }
-
+    if($this->check_progress($session->module->slug,0)){
+      $parent = $session->parent;
+      if($parent){
+        if($parent->activity_eval()->count() > 0){
+            //se busca registro de que ha completado la sesión "padre"
+            if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
+              return true;
+            }else{
+              return false;
+            }
         }else{
-          return false;
+          return true;
         }
 
       }else{
         return true;
       }
+    }else{
+      return false;
+    }
 
     }
 
     function check_activity($activity){
+      if($this->check_progress($activity->session->slug,1)){
+        return true;
 
+      }else{
+        return false;
+      }
+      return true;
     }
 
 

@@ -29,17 +29,17 @@ class CheckProgram
               return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa actividad']);
             }
 
-          }elseif(isset($request->module_slug)){
-            if($user->check_progress($request->module_slug,0)){
-              return $next($request);
-            }else{
-              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a ese módulo']);
-            }
           }elseif(isset($request->session_slug)){
             if($user->check_progress($request->session_slug,1)){
               return $next($request);
             }else{
               return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa sesión']);
+            }
+          }elseif(isset($request->module_slug)){
+            if($user->check_progress($request->module_slug,0)){
+              return $next($request);
+            }else{
+              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a ese módulo']);
             }
           }else{
             return $next($request);

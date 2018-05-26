@@ -28,6 +28,10 @@ protected $fillable = [
     return $this->belongsTo("App\Models\Module");
   }
 
+  function parent(){
+    return $this->belongsTo("App\Models\ModuleSession",'parent_id');
+  }
+
   function activities(){
     return $this->hasMany("App\Models\Activity",'session_id')->orderBy('order','asc');
   }
@@ -66,7 +70,11 @@ protected $fillable = [
 
   function activity_eval_by_date(){
     $today      = date('Y-m-d');
-    $activities = Activity::where('session_id',$this->id)->where('end','<=',$today)->where('type','evaluation')->orderBy('end','asc')->get();
+    $activities = Activity::where('session_id',$this->id)->where('end','<=',$today)->where('type','evaluation')->orWhere(function($query)use($today){
+      $query->where('session_id',$this->id)
+            ->where('type','diagnostic')
+            ->where('end','<=',$today);
+    })->orderBy('end','asc')->get();
     return $activities;
   }
 
