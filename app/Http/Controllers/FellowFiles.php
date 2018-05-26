@@ -66,6 +66,6 @@ class FellowFiles extends Controller
           $fellowProgress->save();
           $user->update_progress($activity->session->module);
         }
-        return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->id")->with('success',"Se ha guardado correctamente");
+        return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->slug")->with('success',"Se ha guardado correctamente");
     }
 }

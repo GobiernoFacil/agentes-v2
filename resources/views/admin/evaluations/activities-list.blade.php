@@ -31,19 +31,13 @@
 			      <tr>
 					<td>
 						<h4>
-						@if($activity->files || $activity->slug==='examen-diagnostico' )
-						<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
-						@else
-							@if($activity->slug==='examen-diagnostico')
-							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
+							@if($activity->type==='evaluation' )
+								<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
+							@elseif($activity->type==='diagnostic')
+								<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
 							@else
-									@if($activity->quizInfo)
-									<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}'>{{$activity->name}}</a>
-									@else
-									 {{$activity->name}}
-									@endif
+								{{$activity->name}}
 							@endif
-						@endif
 						</h4>
 						<strong>Módulo:</strong> {{$activity->session->module->title}}
 					</td>
@@ -52,18 +46,18 @@
 	            				{{ !empty($activity->end) ? date("j/m/Y", strtotime($activity->end)) : 'Sin fecha'}}</td>
 			        <td>{{$activity->files ? 'Archivo' : 'Examen'}}</td>
 			        <td>
-						@if($activity->files)
+						@if($activity->files && $activity->type ==='evaluation')
 							<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}' class="btn xs view">Ver</a>
+					  @elseif($activity->files && $activity->type ==='diagnostic')
+						  <a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$activity->id") }}' class="btn xs view">Ver</a>
 						@else
-							@if($activity->slug==='examen-diagnostico')
-							<a href="{{ url('dashboard/evaluacion/diagnostico') }}" class="btn xs view">Ver</a>
-							@else
 								@if($activity->quizInfo)
 									<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id") }}' class="btn xs view">Ver</a>
+								@elseif($activity->diagnostic_info)
+									<a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$activity->id") }}' class="btn xs view">Ver</a>
 								@else
 								 Sin examen
 								@endif
-							@endif
 						@endif
 					</td>
 			    </tr>

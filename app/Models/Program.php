@@ -70,7 +70,10 @@ class Program extends Model
     function get_all_eva_activities(){
       $modules  = $this->modules->pluck('id')->toArray();
       $sessions = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
-      return  Activity::where('type','evaluation')->whereIn('session_id',$sessions);
+      return  Activity::where('type','evaluation')->whereIn('session_id',$sessions)->orWhere(function($query)use($sessions){
+        $query->where('type','diagnostic')
+        ->whereIn('session_id',$sessions);
+      });
 
     }
 
