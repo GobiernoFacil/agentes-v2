@@ -153,6 +153,7 @@ class Forums extends Controller
         ]);
         $fellowProgress->status = 1;
         $fellowProgress->save();
+        $user->update_progress($forum->session->module);
         $fellowAverage   = FellowAverage::firstOrCreate([
           'module_id'    => $forum->session->module->id,
           'session_id'   => $forum->session->id,
@@ -250,6 +251,7 @@ class Forums extends Controller
           ]);
           $fellowProgress->status = 1;
           $fellowProgress->save();
+          $user->update_progress($conversation->forum->session->module);
           $fellowAverage   = FellowAverage::firstOrCreate([
             'module_id'    => $conversation->forum->session->module->id,
             'session_id'   => $conversation->forum->session->id,

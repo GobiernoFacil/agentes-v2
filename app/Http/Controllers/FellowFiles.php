@@ -54,6 +54,17 @@ class FellowFiles extends Controller
           $file->path = $path.'/'.$name;
           $file->user_id = $user->id;
           $file->save();
+          $fellowProgress  = FellowProgress::firstOrCreate([
+            'fellow_id'    => $user->id,
+            'module_id'    => $activity->session->module->id,
+            'session_id'   => $activity->session->id,
+            'activity_id'  => $activity->id,
+            'program_id'   => $activity->session->module->program->id,
+            'type'         => 'activity'
+          ]);
+          $fellowProgress->status = 1;
+          $fellowProgress->save();
+          $user->update_progress($activity->session->module);
         }
         return redirect("tablero/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->id")->with('success',"Se ha guardado correctamente");
     }
