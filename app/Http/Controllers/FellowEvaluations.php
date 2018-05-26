@@ -39,7 +39,7 @@ class FellowEvaluations extends Controller
 
     }
 
-  
+
 
 
     /**
@@ -170,9 +170,11 @@ class FellowEvaluations extends Controller
           'session_id'   => $activity->session->id,
           'activity_id'  => $activity->id,
           'program_id'   => $activity->session->module->program->id,
+          'type'         => 'activity'
         ]);
         $fellowProgress->status = 1;
         $fellowProgress->save();
+        $user->update_progress($activity->session->module);
        return redirect("tablero/{$activity->session->module->program->slug}/calificaciones/ver/{$activity->slug}");
     }
 

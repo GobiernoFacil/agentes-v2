@@ -13,6 +13,7 @@ use App\Models\FellowAverage;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ForumLog;
+use App\Models\FellowProgress;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Program;
@@ -141,9 +142,27 @@ class Forums extends Controller
       if($forum->type ==='activity'){
         $log->forum_id = $forum->id;
         $log->save();
-      //  $this->send_to($session->forums,$forumConversation,'question');
-        $fellowAverage = new FellowAverage();
-        $fellowAverage->scoreSession(null,$user->id,$forum->session->id);
+      /* $this->send_to($session->forums,$forumConversation,'question');*/
+        $fellowProgress  = FellowProgress::firstOrCreate([
+          'fellow_id'    => $user->id,
+          'module_id'    => $forum->session->module->id,
+          'session_id'   => $forum->session->id,
+          'activity_id'  => $forum->activity->id,
+          'program_id'   => $forum->session->module->program->id,
+          'type'         => 'forum'
+        ]);
+        $fellowProgress->status = 1;
+        $fellowProgress->save();
+        $fellowAverage   = FellowAverage::firstOrCreate([
+          'module_id'    => $forum->session->module->id,
+          'session_id'   => $forum->session->id,
+          'activity_id'  => $forum->activity->id,
+          'program_id'   => $forum->session->module->program->id,
+          'type'         => 'session'
+
+        ]);
+       $fellowAverage->scoreSession();
+
       }else{
         $log->forum_id = $forum->id;
         $log->save();
@@ -221,8 +240,25 @@ class Forums extends Controller
       //  $this->send_to($conversation->forum,$conversation,'message');
         //conversacion perteneciente a foro con sesion
         if($conversation->forum->type === 'activity'){
-          $fellowAverage = new FellowAverage();
-          $fellowAverage->scoreSession(null,$user->id,$conversation->forum->session_id);
+          $fellowProgress  = FellowProgress::firstOrCreate([
+            'fellow_id'    => $user->id,
+            'module_id'    => $conversation->forum->session->module->id,
+            'session_id'   => $conversation->forum->session->id,
+            'activity_id'  => $conversation->forum->activity->id,
+            'program_id'   => $conversation->forum->session->module->program->id,
+            'type'         => 'forum'
+          ]);
+          $fellowProgress->status = 1;
+          $fellowProgress->save();
+          $fellowAverage   = FellowAverage::firstOrCreate([
+            'module_id'    => $conversation->forum->session->module->id,
+            'session_id'   => $conversation->forum->session->id,
+            'activity_id'  => $conversation->forum->activity->id,
+            'program_id'   => $conversation->forum->session->module->program->id,
+            'type'         => 'session'
+
+          ]);
+         $fellowAverage->scoreSession();
         }
         return redirect("tablero/$program->slug/foros/{$conversation->forum->slug}/ver-pregunta/$conversation->slug")->with('message','Mensaje creado correctamente');
       }
