@@ -20,7 +20,8 @@ if($user->type == "fellow"){
 			<li class="{{ $__env->yieldContent('body_class') == 'fellows' ? "active" : ''}}"><a href="{{url('dashboard/fellows')}}" data-title="Fellows"><b class="icon i_fellow"></b></a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'aspirantes' ? "active" : ''}}"><a href="{{url('dashboard/aspirantes')}}" data-title="Aspirantes"><b class="icon i_aspirant"></b></a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}" data-title="FACILITADORES"><b class="icon i_facilitador"></b> </a></li>
-			<li class="{{ $__env->yieldContent('body_class') == 'foros' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'foros' ? "active" : ''}}"><a href="{{url('dashboard/foros')}}" data-title="Foros"><b class="icon i_foros"></b> </a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
 			@endif
 			@if($user->type == "superAdmin")
 			<!--superadmin-->
