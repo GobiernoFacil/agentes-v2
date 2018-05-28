@@ -105,9 +105,9 @@ class Program extends Model
 
     function fellow_act_forums(){
       $today = date("Y-m-d");
-      $modules_id    = Module::where('program_id',$this->id)->where('end','>=',$today)->pluck('id')->toArray();
+      $modules_id    = Module::where('program_id',$this->id)->where('start','<=',$today)->pluck('id')->toArray();
       $sessions_id   = ModuleSession::whereIn('module_id',$modules_id)->pluck('id')->toArray();
-      $activities_id   = Activity::where('end','>=',$today)->where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
+      $activities_id = Activity::where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
       return Forum::where('program_id',$this->id)->whereIn('activity_id',$activities_id)
       ->orWhere(function($query){
         $query->where('program_id',$this->id)->whereIn('type',['general']);

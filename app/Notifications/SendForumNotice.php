@@ -16,7 +16,7 @@ class SendForumNotice extends Notification
      *
      * @return void
      */
-    public function __construct($user,$forum,$type,$conversation,$message)
+    public function __construct($program,$user,$forum,$type,$conversation,$message)
     {
         //
         $this->user = $user;
@@ -24,6 +24,7 @@ class SendForumNotice extends Notification
         $this->conversation = $conversation;
         $this->message = $message;
         $this->type = $type;
+        $this->program = $program;
     }
 
     /**
@@ -47,44 +48,28 @@ class SendForumNotice extends Notification
     {
       if($this->type==='create'){
         if($this->user->type=='admin'){
-          $url = url("dashboard/foros/ver/{$this->forum->id}");
+          $url = url("dashboard/foros/programa/{$this->program->id}/ver-foro/{$this->forum->id}");
         }elseif($this->user->type=='facilitator'){
-          $url = url("tablero-facilitador/foros/{$this->forum->id}");
+          $url = url("tablero-facilitador/foros");
         }else{
           //fellow
-            if(!$this->forum->state_name){
-                $url = url("tablero/foros/{$this->forum->session->slug}/{$this->forum->slug}");
-            }else{
-              if($this->forum->state_name!='General'){
-                $url = url("tablero/foros/{$this->forum->state_name}");
-              }else{
-                $url = url("tablero/foros/foro-general");
-              }
-            }
+          $url = url("tablero/{$this->program->slug}/foros/{$this->forum->slug}");
         }
       }elseif($this->type==='question' || $this->type==='message'){
         if($this->user->type=='admin'){
-          $url = url("dashboard/foros/pregunta/ver/{$this->conversation->id}");
+          $url = url("dashboard/foros/programa/{$this->program->id}/foro/{$this->forum->id}/ver-pregunta/{$this->conversation->id}");
         }elseif($this->user->type=='facilitator'){
-          $url = url("tablero-facilitador/foros/pregunta/ver/{$this->conversation->id}");
+          $url = url("tablero-facilitador/foros");
         }else{
           //fellow
-            if(!$this->forum->state_name){
-                $url = url("tablero/foros/pregunta/{$this->forum->session->slug}/{$this->conversation->slug}/ver");
-            }else{
-              if($this->forum->state_name!='General'){
-                $url = url("tablero/foros/{$this->forum->state_name}/{$this->conversation->slug}/ver");
-              }else{
-                $url = url("tablero/foros/foro-general/{$this->conversation->slug}/ver");
-              }
-            }
+          $url = url("tablero/{$this->program->slug}/foros/{$this->forum->slug}/ver-pregunta/{$this->conversation->slug}");
         }
       }else{
         $url = url("/");
       }
         return (new MailMessage)
             ->from('info@apertus.org.mx')
-            ->subject('no-reply')
+            ->subject('no-reply - Aviso: Programa de Formación de Agentes Locales de Cambio')
             ->markdown('vendor.notifications.new_forum_message', ['url' => $url,'user'=>$this->user,'forum'=>$this->forum,'conversation'=>$this->conversation,'type'=>$this->type]);
     }
 
