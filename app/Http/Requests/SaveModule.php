@@ -26,7 +26,7 @@ class SaveModule extends FormRequest
     public function rules()
     {
        $date = strtotime($this->start);
-       $date = strtotime("+8 day", $date);
+       $date = strtotime("+7 day", $date);
        if($this->parent_id){
          $parent_module = Module::find($this->parent_id);
          return [
