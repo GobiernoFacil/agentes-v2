@@ -94,4 +94,8 @@ class CustomQuestion extends Model
     function count_correct($question_id){
       return CustomAnswer::where('question_id',$question_id)->where('selected',1)->count();
     }
+
+    function get_open_fellow_answer($fellow_id){
+       return CustomFellowAnswer::where('user_id',$fellow_id)->where('question_id',$this->id)->first();
+    }
 }

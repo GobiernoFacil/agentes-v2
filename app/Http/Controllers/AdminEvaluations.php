@@ -14,6 +14,7 @@ use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\FellowAverage;
+use App\Models\CustomFellowAnswer;
 use App\Models\Program;
 use App\Models\RetroLog;
 use App\User;
@@ -102,6 +103,47 @@ class AdminEvaluations extends Controller
 
     }
 
+
+    /**
+     * Muestra lista de fellows con archivos para evaluar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexDiagnostic($program_id,$activity_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activity   = Activity::where('type','diagnostic')->where('id',$activity_id)->firstOrFail();
+      if($activity->files){
+        //ver fellows con archivos
+        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
+        $fellows    = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        return view('admin.evaluations.diagnostic-files-list')->with([
+          "user"      => $user,
+          "activity"   => $activity,
+          "fellows"   =>$fellows,
+          "program"   => $program
+        ]);
+      }else{
+        //ver fellows con examen automatico
+        if(!$activity->diagnostic_info){
+          return redirect("dashboard/programas/$program->id/ver-evaluaciones");
+        }
+        $fellowsAnswers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->pluck('user_id')->toArray();
+        $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->paginate(10);
+
+
+        return view('admin.evaluations.diagnostic-fellows-list')->with([
+          "user"      => $user,
+          "activity"  => $activity,
+          "fellows"    => $fellows,
+          "program"   => $program
+        ]);
+      }
+
+
+    }
+
     /**
      * Muestra lista de respuestas de diagnostico general
      *
@@ -118,6 +160,29 @@ class AdminEvaluations extends Controller
         "user"      => $user,
         "score"     => $score,
         "userf"     => $userf,
+        "program"   => $program,
+        "activity"  => $activity
+      ]);
+
+    }
+
+
+    /**
+     * Muestra lista de respuestas de diagnostico general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDiagnostic($program_id,$activity_id,$user_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $activity   = Activity::where('id',$activity_id)->firstOrFail();
+      $fellow     = User::where('id',$user_id)->firstOrFail();
+      $answers    = $fellow->new_diagnostic($activity->diagnostic_info->id)->get();
+      return view('admin.evaluations.diagnostic-fellow-view')->with([
+        "user"      => $user,
+        "answers"   => $answers,
+        "fellow"    => $fellow,
         "program"   => $program,
         "activity"  => $activity
       ]);

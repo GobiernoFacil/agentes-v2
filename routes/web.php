@@ -338,6 +338,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}/archivos/agregar-evaluacion', 'AdminEvaluations@addSingle');
     Route::post('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}/archivos/agregar-evaluacion', 'AdminEvaluations@saveSingle');
     Route::get('dashboard/programas/{program_id}/ver-evaluacion/{activity_id}/archivos/get/{file_id}', 'AdminEvaluations@download');
+    Route::get('dashboard/programas/{program_id}/ver-diagnostico/{activity_id}', 'AdminEvaluations@indexDiagnostic');
+    Route::get('dashboard/programas/{program_id}/ver-diagnostico/{activity_id}/resultados/{user_id}', 'AdminEvaluations@viewDiagnostic');
 
 
 
