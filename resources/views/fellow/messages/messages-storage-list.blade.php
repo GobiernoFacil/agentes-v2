@@ -23,7 +23,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		@foreach ($conversations as $conversation)
-		<a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}" class="ap_message_link">
+		<a href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . $conversation->id) }}" class="ap_message_link">
 
 		    <!--mensaje con-->
 		    <span class="col-sm-4">

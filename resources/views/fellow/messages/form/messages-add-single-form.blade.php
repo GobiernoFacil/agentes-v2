@@ -1,4 +1,4 @@
-{!! Form::open(['url' => url("tablero/$program->slug/mensajes/conversacion/save/".encrypt($conversation->id)), "class" => "form-horizontal"]) !!}
+{!! Form::open(['url' => url("tablero/$program->slug/mensajes/conversacion/save/".$conversation->id), "class" => "form-horizontal"]) !!}
 <div class="divider"></div>
 
 <!-- mensaje  -->

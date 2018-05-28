@@ -19,9 +19,9 @@
 	</div>
 	<!-- btn escribir mensaje--->
 	<div class="col-sm-3 center">
-    	<a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".encrypt($conversation->id)) }}' class="btn view block sessions_l"><b class="write_message"></b>  Escribir Mensaje</a>
+    	<a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".$conversation->id) }}' class="btn view block sessions_l"><b class="write_message"></b>  Escribir Mensaje</a>
 	</div>
-</div>
+</div
 
 <div class="row">
 	<div class="col-sm-12 divider bg"></div>
@@ -48,7 +48,7 @@
 								@endif
 							@endif
 						</div>
-						
+
 					</div>
 				</div>
 				<!--content-->
@@ -73,7 +73,7 @@
 										<p><span class="ap_date">{{$message->updated_at->diffForHumans()}}</span>
 										@if($message->log)
 											@if($message->log->user_id == $user->id)
-											<span {!! $message->log->status == '1' ? 'class="ap_seen"' : 'class="ap_seen no"'  !!}>{{$message->log->status == '1' ? '(visto: ' . $message->log->updated_at->diffForHumans() . ')'  : '(no visto)' }}</span> 
+											<span {!! $message->log->status == '1' ? 'class="ap_seen"' : 'class="ap_seen no"'  !!}>{{$message->log->status == '1' ? '(visto: ' . $message->log->updated_at->diffForHumans() . ')'  : '(no visto)' }}</span>
 											@endif
 										@endif
 										</p>
@@ -98,7 +98,7 @@
 <!--
 <div class="row">
 	<div class="col-sm-8 col-sm-offset-2 center">
-		    <a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".encrypt($conversation->id))}}' class="btn gde"><b class="write_message"></b> Escribir Mensaje</a>
+		    <a href='{{ url("tablero/$program->slug/mensajes/conversacion/agregar/".$conversation->id)}}' class="btn gde"><b class="write_message"></b> Escribir Mensaje</a>
 	</div>
 </div>
 -->

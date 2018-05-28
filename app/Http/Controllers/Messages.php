@@ -113,7 +113,6 @@ class Messages extends Controller
     */
     public function view($program_slug,$conversation_id)
     {
-      $conversation_id = decrypt($conversation_id);
       $user    = Auth::user();
       $program = $user->actual_program();
       $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
@@ -149,7 +148,6 @@ class Messages extends Controller
     public function addSingle($program_slug,$conversation_id)
     {
       $user   = Auth::user();
-      $conversation_id = decrypt($conversation_id);
       $program = $user->actual_program();
       $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){
@@ -172,11 +170,10 @@ class Messages extends Controller
     {
       //
       $user   = Auth::user();
-      $conversation_id = decrypt($request->conversation_id);
       $program = $user->actual_program();
-      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){
-      $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('to_id',$user->id)->firstOrFail();
+      $conversation = Conversation::where('program_id',$program->id)->where('id',$request->conversation_id)->where('to_id',$user->id)->firstOrFail();
       }
       $message = new Message();
       $message->user_id = $user->id;
@@ -197,7 +194,7 @@ class Messages extends Controller
       $converLog->save();
      //envía correo
     //  $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
-      return redirect("tablero/$program->slug/mensajes/ver/".encrypt($conversation->id))->with('success',"Se ha enviado correctamente");
+      return redirect("tablero/$program->slug/mensajes/ver/".$conversation->id)->with('success',"Se ha enviado correctamente");
     }
 
     /**
@@ -208,7 +205,6 @@ class Messages extends Controller
     public function storage($program_slug,$conversation_id)
     {
       $user   = Auth::user();
-      $conversation_id = decrypt($conversation_id);
       $program = $user->actual_program();
       $conversation = Conversation::where('program_id',$program->id)->where('id',$conversation_id)->where('user_id',$user->id)->first();
       if(!$conversation){

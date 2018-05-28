@@ -30,7 +30,7 @@
 <div class="row">
 		@foreach ($conversations as $conversation)
 		<div class="col-sm-11">
-			<a class="btn_message_list" href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' . encrypt($conversation->id)) }}">
+			<a class="btn_message_list" href="{{ url('tablero/' . $program->slug .'/mensajes/ver/' .$conversation->id) }}">
 				@if($conversation->to_id != $user->id)
 					<span class="col-sm-1">
 						@if($conversation->user_to->image)
@@ -55,7 +55,7 @@
 					</span>
 				@endif
 				<span class="col-sm-5">{{$conversation->title}}
-					<span class="count_m inline">({{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }})</span> 
+					<span class="count_m inline">({{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }})</span>
 				</span>
 				<span class="col-sm-2">
 					<span class="ap_date">
@@ -65,12 +65,12 @@
 				<span class="clearfix"></span>
 			</a>
 		</div>
-			
+
 		<div class="col-sm-1">
-			  <a href ='{{ url("tablero/$program->slug/mensajes/conversacion/storage/".encrypt($conversation->id))}}'  id ="{{encrypt($conversation->id)}}" class="btn ev" onclick="return confirm('¿Estás seguro?');">Archivar</a>
+			  <a href ='{{ url("tablero/$program->slug/mensajes/conversacion/storage/".$conversation->id)}}'  id ="{{$conversation->id}}" class="btn ev" onclick="return confirm('¿Estás seguro?');">Archivar</a>
 		</div>
 		@endforeach
-	
+
 </div>
 
 <div class="row">
