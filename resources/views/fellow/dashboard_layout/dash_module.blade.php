@@ -76,7 +76,7 @@
 							</div>
 							<div class="col-sm-3">
 								<p>{{date('d-m-Y', strtotime($evAct->end))}}
-									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end))->diffForHumans()}})</span>
+									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end.'+1 day'))->diffForHumans()}})</span>
 								</p>
 							</div>
 						</div>
