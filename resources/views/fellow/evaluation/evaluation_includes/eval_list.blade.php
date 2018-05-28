@@ -6,10 +6,16 @@
 <!--calificación del módulo-->
 <div class="col-sm-3 right">
 	<p>Calificación del módulo:
+		@if($module->get_all_activities_with_forums()->count() > 0 || $module->get_all_evaluation_activity()->count() > 0)
 		<span class="score_a block">
 			{{$user->module_average($user->id,$module->id) ? $user->module_average($user->id,$module->id)->type !='sin' ? number_format($user->module_average($user->id,$module->id)->average,2) : 'No aplica'  : 'Sin calificación'}}
 		</span>
 		<a href='{{ url("tablero/$program->slug/calificaciones/{$module->slug}") }}' class="btn xs view">Ver módulo</a>
+		@else
+		<span class="score_a block">
+			<strong>No aplica</strong>
+		</span>
+		@endif
 <?php
 /*
 		@if(!$module->check_last_activity($module->id))

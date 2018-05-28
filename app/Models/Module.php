@@ -146,6 +146,11 @@ class Module extends Model
             })->get();
     }
 
+    function get_all_activities_with_forums(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('hasforum',1)->get();
+    }
+
     function get_all_evaluation_activity_by_date(){
       $today     = date('Y-m-d');
       $sessions  = $this->sessions->pluck('id')->toArray();
