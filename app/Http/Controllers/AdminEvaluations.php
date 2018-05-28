@@ -130,7 +130,7 @@ class AdminEvaluations extends Controller
           return redirect("dashboard/programas/$program->id/ver-evaluaciones");
         }
         $fellowsAnswers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->pluck('user_id')->toArray();
-        $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->paginate(10);
+        $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->where('user_id','!=',23)->paginate(10);
 
 
         return view('admin.evaluations.diagnostic-fellows-list')->with([
