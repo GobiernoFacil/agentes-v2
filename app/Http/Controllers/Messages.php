@@ -101,7 +101,7 @@ class Messages extends Controller
       $converLog->status =0;
       $converLog->save();
       //envía correo
-      //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id,$program_slug));
       return redirect("tablero/$program->slug/mensajes/ver/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
@@ -193,7 +193,7 @@ class Messages extends Controller
       $converLog->status =0;
       $converLog->save();
      //envía correo
-    //  $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id,$program_slug));
       return redirect("tablero/$program->slug/mensajes/ver/".$conversation->id)->with('success',"Se ha enviado correctamente");
     }
 

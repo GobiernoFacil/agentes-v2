@@ -16,12 +16,13 @@ class SendNewMessage extends Notification
      *
      * @return void
      */
-    public function __construct($user,$to_user,$conversation_id)
+    public function __construct($user,$to_user,$conversation_id,$program_slug)
     {
         //
         $this->user = $user;
         $this->to_user = $to_user;
         $this->conversation_id = $conversation_id;
+        $this->program_slug    = $program_slug;
     }
 
     /**
@@ -48,7 +49,7 @@ class SendNewMessage extends Notification
       }elseif($this->to_user->type=='facilitator'){
         $url = url("tablero-facilitador/mensajes/ver/{$this->conversation_id}");
       }else{
-        $url = url("tablero/mensajes/ver/{$this->conversation_id}");
+        $url = url("tablero/$this->program_slug/mensajes/ver/{$this->conversation_id}");
       }
         return (new MailMessage)
                 ->from('info@apertus.org.mx')
