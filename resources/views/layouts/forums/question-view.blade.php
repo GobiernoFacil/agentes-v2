@@ -118,7 +118,7 @@
   		<!--enlace a agregar respuesta-->
 	  	<div class="col-sm-3 center">
 		  	@if($user->type == "admin")
-		  	<a href='{{ url("dashboard/foros/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
+		  	<a href='{{ url("dashboard/foros/programa/$program->id/pregunta/mensajes/agregar/$question->id") }}' class="btn gde">Agregar Respuesta [<strong>+</strong>]</a>
       		@endif
 		  	@if($user->type == "fellow")
 	  		<a href='{{ url("tablero/$program->slug/foros/pregunta/$question->slug/agregar-mensaje") }}' class="btn gde download">Agregar Respuesta [<strong>+</strong>]</a>
