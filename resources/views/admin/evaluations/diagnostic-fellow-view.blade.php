@@ -12,7 +12,7 @@
 		<h1>Cuestionario diagnóstico</h1>
     <h2><strong>{{$activity->diagnostic_info->title}}</strong></h2>
     <h3>{{$fellow->name.' '.$fellow->fellowData->username.' '.$fellow->fellowData->lastname}}</h3>
-  <div class="divider top"></div>
+    <div class="divider top"></div>
 	</div>
 <?php /*
 <div class="col-sm-12 right">
@@ -36,7 +36,7 @@
               @elseif($question->type==='answers')
               <ul>
                 @foreach($question->answers as $answer)
-                  @if($ans = $fellow->new_diagnostic($activity->diagnosticInfo->id)->where('question_id',$question->id)->where('answer_id',$answer->id)->first())
+                  @if($fellow->new_diagnostic($activity->diagnosticInfo->id)->where('question_id',$question->id)->where('answer_id',$answer->id)->first())
                   <li>{{$answer->answer}}</li>
                   @endif
                 @endforeach

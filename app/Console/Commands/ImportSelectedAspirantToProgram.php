@@ -63,8 +63,8 @@ class ImportSelectedAspirantToProgram extends Command
                           $user->type = 'fellow';
                           $user->save();
                           $data = FellowData::firstOrCreate(['user_id'=>$user->id]);
-                          $data->surname   = $aspirant->surname;
-                          $data->lastname  = $aspirant->lastname;
+                          $data->surname   = '';
+                          $data->lastname  = '';
                           $data->state     = $aspirant->state;
                           $data->city      = $aspirant->city;
                           $data->degree    = $aspirant->degree;
