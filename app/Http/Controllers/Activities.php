@@ -279,6 +279,7 @@ class Activities extends Controller
               $forum->activity_id = $request->id;
               $forum->user_id     = $user->id;
               $forum->session_id  = $last->session->id;
+              $forum->type = 'activity';
               $forum->save();
             }else{
               $forum  = Forum::where('activity_id',$request->id)->first();

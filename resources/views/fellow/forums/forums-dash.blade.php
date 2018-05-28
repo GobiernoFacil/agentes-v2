@@ -6,7 +6,17 @@
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_forum')
 
 @section('content')
+@if(Session::has('message'))
+	<div class="col-sm-12 message success">
+			{{ Session::get('message') }}
+	</div>
+@endif
 
+@if(Session::has('error'))
+	<div class="col-sm-12 message error">
+			{{ Session::get('error') }}
+	</div>
+@endif
 <div class="row">
 	<div class="col-sm-1">
 		<img src="{{ url('img/svg/foro.svg') }}" alt="Foro de actividades" width="100px">

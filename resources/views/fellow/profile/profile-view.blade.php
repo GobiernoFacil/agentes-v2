@@ -73,7 +73,7 @@
 				<h3 class="right">Participaciones</h3>
 			</div>
 			<div class="col-sm-6 ">
-				<a href="{{ url('tablero/participaciones') }}" class="btn gde view">Ver participaciones</a>
+				<a href='{{ url("tablero/$program->slug/participaciones")}}' class="btn gde view">Ver participaciones</a>
 			</div>
 		</div>
 	</div>

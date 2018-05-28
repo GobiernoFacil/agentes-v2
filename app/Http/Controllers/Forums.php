@@ -77,10 +77,14 @@ class Forums extends Controller
       $user     = Auth::user();
       $program  = Program::where('slug',$program_slug)->where('public',1)->firstOrFail();
       $forum    = Forum::where('slug',$forum_slug)->firstOrFail();
+      if(isset($forum->session->slug)){
+        if(!$user->check_progress($forum->session->slug,1)){
+          return redirect("tablero/$program->slug/foros")->with(['error'=>'Aún no puedes participar en ese foro']);
+        }
+      }
       if($forum->type === 'activity'){
         $session  = $forum->session;
         $session  = $program->get_all_sessions()->where('slug',$session->slug)->firstOrFail();
-
       }elseif($forum->type === 'state'){
         if($user->fellowData->state != $forum->state_name){
           return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
@@ -394,7 +398,7 @@ class Forums extends Controller
         $user   = Auth::user();
         $program = $user->actual_program();
         $today  = date('Y-m-d');
-        $modules = $program->fellow_modules()->paginate();
+        $modules = $program->fellow_modules()->paginate(5);
         return view('fellow.forums.participation-view')->with([
           "user"      => $user,
           'modules'   =>$modules,
