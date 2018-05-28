@@ -21,7 +21,10 @@
 					{{$module->title}}
 					@endif
 					<span class="le_link"><a href='{{ url("dashboard/programas/$program->id/modulos/editar/$module->id") }}' class="btn xs ev">Actualizar módulo</a></span>
+
 				</h3>
+				<p><span class = 'notes '>Del {{date('d-m-Y', strtotime($module->start))}} al {{date('d-m-Y', strtotime($module->end))}}</span></p>
+
 			</div>
 			<div class="col-sm-3">
 				<ul class="ap-acti">
