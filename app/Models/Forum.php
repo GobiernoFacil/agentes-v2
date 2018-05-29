@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\SendForumNotice;
+use App\Models\FacilitatorModule;
+use App\Models\FellowData;
 use App\Models\ForumLog;
 use App\Models\Forum;
 use App\Models\ModuleSession;
+use App\User;
 class Forum extends Model
 {
     //
@@ -65,6 +70,110 @@ class Forum extends Model
       }
 
     }
+
+
+    function send_notification_to($program,$conversation,$type,$message=null){
+              $fellows =   $program->fellows()->pluck('user_id')->toArray();
+              if($this->type ==='activity'){
+                  //usuarios en el foro
+                 $user_ids = ForumLog::where('forum_id',$this->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
+                 $users    = User::whereIn('id',$user_ids)->where('type','fellow')
+                 ->orWhere(function($query)use($user_ids){
+                   $query->where('institution','PROSOCIEDAD')->whereIn('id',$user_ids->toArray());
+                 })
+                 ->where('enabled',1)
+                 ->get();
+                 foreach ($users as $userA) {
+                      $this->send($program,$userA,$this,$conversation,$type,$message);
+                 }
+
+              }elseif($this->type ==='general'){
+                  //a todos los usuarios fellow y facilitator PROSOCIEDAD
+                  $modules_id = $program->fellow_modules()->pluck('id')->toArray();
+                  if($type==='message'){
+                    $assign_f = FacilitatorModule::whereIn('module_id',$modules_id)->pluck('user_id')->toArray();
+                    $user_ids = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
+                    $users    = User::where('type','fellow')->whereIn('id',$user_ids)
+                    ->orWhere(function($query)use($assign_f){
+                      $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f);
+                    })
+                    ->orWhere(function($query){
+                      $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                    })
+                    ->where('enabled',1)->get();
+
+                  }else{
+                    $assign_f = FacilitatorModule::whereIn('module_id',$modules_id)->pluck('user_id')->toArray();
+                    $users = User::where('type','fellow')->whereIn('id',$fellows)
+                    ->orWhere(function($query)use($assign_f){
+                      $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f);
+                    })
+                    ->orWhere(function($query){
+                      $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                    })
+                    ->where('enabled',1)->get();
+                  }
+                   foreach ($users as $userA) {
+                     $this->send($program,$userA,$this,$conversation,$type,$message);
+                   }
+              }elseif($this->type ==='state'){
+                //usuarios del estado
+                if($type==='message'){
+                  $assign_state = FellowData::whereIn('user_id',$fellows)->where('state',$this->state_name)->pluck('user_id');
+                  $user_ids     = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$assign_state)->pluck('user_id')->toArray();
+                  $users        = User::where('type','fellow')->whereIn('id',$user_ids)
+                  ->orWhere(function($query){
+                    $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                  })
+                  ->where('enabled',1)->get();
+
+                }else{
+                  $assign_state = FellowData::whereIn('user_id',$fellows)->where('state',$this->state_name)->pluck('user_id');
+                  $users     = User::where('type','fellow')->whereIn('id',$assign_state)
+                  ->orWhere(function($query){
+                    $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                  })
+                  ->where('enabled',1)->get();
+                }
+                 foreach ($users as $userA) {
+                   $this->send($program,$userA,$this,$conversation,$type,$message);
+                 }
+
+              }elseif($this->type ==='support'){
+                //usuario gf y participantes
+                $support = 'carlos.aosorio89@gmail.com';
+                if($type==='message'){
+                  $user_ids = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
+                  $users    = User::whereIn('id',$user_ids)->where('type','fellow')
+                  ->orWhere(function($query)use($support){
+                    $query->where('type','admin')->where('email',$support)->where('enabled',1);
+                  })
+                  ->where('enabled',1)
+                  ->get();
+                }else{
+                  $users = User::where('type','admin')->where('email',$support)->where('enabled',1)->get();
+                }
+                foreach ($users as $userA) {
+                   $this->send($program,$userA,$this,$conversation,$type,$message);
+                }
+
+                }
+
+              return true;
+
+          }
+
+
+
+    protected function send($program,$userA,$forum,$conversation,$type,$message){
+            if($type==='create'){
+              $userA->notify(new SendForumNotice($program,$userA,$forum,$type,null,null));
+            }else{
+              $userA->notify(new SendForumNotice($program,$userA,$forum,$type,$conversation,$message));
+            }
+
+            return true;
+          }
 
 
 
