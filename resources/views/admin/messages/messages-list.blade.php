@@ -52,14 +52,14 @@
 					@endif
 					</strong>
 				    </td>
-			        <td><a href='{{url("dashboard/mensajes/programa/$program->id/ver/-mensajes/$conversation->id")}}'>{{$conversation->title}}</a>
+			        <td><a href='{{url("dashboard/mensajes/programa/$program->id/ver-mensajes/$conversation->id")}}'>{{$conversation->title}}</a>
 			        	<span class="count_m">{{$conversation->messages->count() == 1 ? $conversation->messages->count() . ' mensaje' : $conversation->messages->count() . ' mensajes' }}</span>
 			        </td>
 					<td>
 				        {{$conversation->updated_at->diffForHumans()}}
 				    </td>
 					<td>
-			          <a href='{{url("dashboard/mensajes/programa/$program->id/ver/-mensajes/$conversation->id")}}' class="btn xs view">Ver Conversación</a>
+			          <a href='{{url("dashboard/mensajes/programa/$program->id/ver-mensajes/$conversation->id")}}' class="btn xs view">Ver Conversación</a>
 			          <a href ='{{ url("dashboard/mensajes/programa/$program->id/conversacion/storage/$conversation->id")}}'  id ="{{$conversation->id}}" class="btn xs danger" onclick="return confirm('¿Estás seguro?');">Archivar</a></td>
 
 				    </td>
