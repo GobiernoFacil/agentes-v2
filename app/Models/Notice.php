@@ -38,6 +38,17 @@ class Notice extends Model
       return $this->hasMany("App\Models\FellowProgram",'notice_id');
     }
 
+    function fellows_front_results(){
+      $ids       = $this->fellows->pluck('aspirant_id')->toArray();
+      $order_id  = Aspirant::where('is_activated',1)->whereIn('id',$ids)->orderBy('name','asc')->pluck('id')->toArray();
+      $im_order  = implode(',', $order_id);
+      if($im_order != ''){
+        return $this->hasMany("App\Models\FellowProgram",'notice_id')->orderByRaw(DB::raw("FIELD(aspirant_id, $im_order)"));
+      }else{
+        return $this->hasMany("App\Models\FellowProgram",'notice_id');
+      }
+    }
+
     function selected_aspirant_order_by_state(){
       $aspirants = $this->fellows->pluck('aspirant_id')->toArray();
       return Aspirant::where('is_activated',1)->whereIn('id',$aspirants)->orderBy('state','asc');
