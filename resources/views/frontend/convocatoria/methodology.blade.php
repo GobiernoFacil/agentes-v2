@@ -167,7 +167,7 @@
 			<li>Todos los estados tienen al menos dos mujeres entre los candidatos seleccionados.</li>
 			<li>En todos los estados se cuenta al menos con un candidato del sector gubernamental.<a href="#nota"><sup>1</sup></a></li>
 		</ol>
-		<p>Los 40 candidatos que fueron seleccionados para formar parte del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, edición 2018 se enlistan a continuación:</p>
+		<p>Los 40 candidatos que fueron seleccionados para formar parte del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, edición 2018 se enlistan a continuación<a href="#nota"><sup>2</sup></a>:</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -193,6 +193,7 @@
 		<a id="nota"></a>
 		<div class="notes">
 			<p><sup>1</sup>  El estado de Tabasco fue la excepción dado el perfil de los aspirantes que pasaron a entrevistas. Ninguno de ellos pertenece al sector gubernamental.</p>
+			<p><sup>2</sup>  En el caso de Campeche una de las candidatas seleccionadas declinó su participación en el Programa. El lugar será ocupado por otro u otra postulante de acuerdo al punto 6. de la Convocatoria <em>"Cualquier situación no prevista en esta convocatoria, será resuelta por el Comité Dictaminador."</em>.</p>
 		</div>
 	</div>
 </div>
