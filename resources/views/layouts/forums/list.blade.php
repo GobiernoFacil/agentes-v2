@@ -47,7 +47,7 @@
 					<div class="col-sm-1">
 						@if($conversation->user->image)
 							@if($conversation->user->fellowData)
-							<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}"><img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%"></a>
+							<a href="{{ url('dashboard/fellows/programa/'.$program->id.'/ver-fellow/'. $conversation->user->id) }}"><img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%"></a>
 							@elseif($conversation->user->facilitatorData)
 							<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}"><img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%"></a>
 							@else
@@ -55,7 +55,7 @@
 							@endif
 						@else
 							@if($conversation->user->fellowData)
-							<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}"><img src='{{url("img/users/default.png")}}' width="100%"></a>
+							<a href="{{ url('dashboard/fellows/programa/'.$program->id.'/ver-fellow/'. $conversation->user->id) }}"><img src='{{url("img/users/default.png")}}' width="100%"></a>
 							@elseif($conversation->user->facilitatorData)
 							<a href="{{url('dashboard/facilitadores/ver/' . $conversation->user->id )}}"><img src='{{url("img/users/default.png")}}' width="100%"></a>
 							@else
@@ -75,7 +75,7 @@
  						<!--fellow data -->
  						<p class="author">Por
 	 						@if($user->type =="admin")
-	 						<a href="{{ url('dashboard/fellows/ver/'. $conversation->user->id) }}">{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}</a>
+	 						<a href="{{ url('dashboard/fellows/programa/'.$program->id.'/ver-fellow/'. $conversation->user->id) }}">{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}</a>
 	 						@endif
 	 						@if($user->type =="facilitator")
 	 						{{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}

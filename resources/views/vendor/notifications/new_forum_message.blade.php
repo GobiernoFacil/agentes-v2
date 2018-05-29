@@ -12,10 +12,17 @@ Se ha creado un nuevo foro <strong>"{{$forum->topic}}"</strong>,<br>
 Para visualizarlo e interactuar, entra a la plataforma.
 @elseif($type==='question')
 El foro <strong>"{{$forum->topic}}"</strong> cuenta con una nueva pregunta:  <br>
+ <br>
 <strong>{{$conversation->topic}}</strong>,<br>
+<p>{{$conversation->description}}</p><br>
+<p>Por: <strong>{{$conversation->user->name}}</strong></p><br>
+ <br>
 Para responder, entra a la plataforma.<br>
 @else
 La pregunta <strong>"{{$conversation->topic}}"</strong> cuenta con una nueva respuesta en el foro <strong>"{{$forum->topic}}"</strong>,<br>
+<br>
+<strong>{{$message->message}}</strong><br>
+<p>Por: <strong>{{$message->user->name}}</strong></p><br>
 Para verla, entra a la plataforma.
 @endif
 

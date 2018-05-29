@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\Program;
 
 class SendNewMessage extends Notification
 {
@@ -45,7 +46,12 @@ class SendNewMessage extends Notification
     public function toMail($notifiable)
     {
       if($this->to_user->type=='admin'){
-        $url = url("dashboard/mensajes/ver/{$this->conversation_id}");
+        $program = Program::where('slug',$this->program_slug)->where('public',1)->first();
+        if($program){
+          $url = url("dashboard/mensajes/programa/$program->id/ver-mensajes/{$this->conversation_id}");
+        }else{
+          $url = url("/");
+        }
       }elseif($this->to_user->type=='facilitator'){
         $url = url("tablero-facilitador/mensajes/ver/{$this->conversation_id}");
       }else{

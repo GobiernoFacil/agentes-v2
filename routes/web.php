@@ -487,6 +487,7 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/foros/pregunta/{question_slug}/agregar-mensaje', 'Forums@addMessage');
           Route::post('tablero/{program_slug}/foros/pregunta/{question_slug}/mensajes/save/single', 'Forums@saveMessage');
           Route::get('tablero/{program_slug}/foros/perfil/ver/{name}/{surname}/{lastname}', 'Forums@profileUser');
+          Route::get('tablero/{program_slug}/foros/perfil/ver/{name}', 'Forums@profileFUser');
           Route::get('tablero/{program_slug}/foros/perfil/ver/{name}/{type}', 'Forums@profileAdminUser');
 
           //fellow participaciones
