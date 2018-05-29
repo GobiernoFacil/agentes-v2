@@ -18,7 +18,7 @@
 			<!--fellow data -->
 				@if($user->type =="admin")
 				<!--si dashboard admin-->
-	 				<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">
+	 				<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$question->user->id}") }}'>
 	 			@endif
 	 			@if($user->type =="facilitator")
 	 			<!--si dashboard facilitador-->
@@ -42,7 +42,7 @@
 			@if($question->user->fellowData)
 				@if($user->type =="admin")
 				<!--si dashboard admin-->
-	 				<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">
+	 				<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$question->user->id}") }}'>
 	 			@endif
 	 			@if($user->type =="facilitator")
 	 			<!--si dashboard facilitador-->
@@ -73,7 +73,7 @@
     	<!--fellow data -->
     		@if($user->type =="admin")
 		  		<!--si dashboard admin-->
-	 			<a href="{{ url('dashboard/fellows/ver/'. $question->user->id) }}">{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}</a>
+	 			<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$question->user->id}") }}'>{{$question->user->name." ".$question->user->fellowData->surname." ".$question->user->fellowData->lastname}}</a>
 	 		@endif
 	 		@if($user->type =="facilitator")
 	 			<!--si dashboard facilitador-->
@@ -141,7 +141,7 @@
 						<!--fellow data -->
 							@if($user->type =="admin")
 		  					<!--si dashboard admin-->
-	 							<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">
+	 							<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$message->user->id}") }}'>
 	 						@endif
 	 						@if($user->type =="facilitator")
 	 						<!--si dashboard facilitador-->
@@ -151,7 +151,7 @@
 						<!--facilitator data -->
 							@if($user->type =="admin")
 		  					<!--si dashboard admin-->
-	 							<a href="{{url('dashboard/facilitadores/ver/' . $message->user->id )}}">
+	 							<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$message->user->id}") }}'>
 	 						@endif
 	 						@if($user->type =="facilitator")
 	 						<!--si dashboard facilitador-->
@@ -165,7 +165,7 @@
 						@if($message->user->fellowData)
 							@if($user->type =="admin")
 		  					<!--si dashboard admin-->
-	 							<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">
+	 							<a href="{{url('dashboard/facilitadores/ver/' . $message->user->id )}}">
 	 						@endif
 	 						@if($user->type =="facilitator")
 	 						<!--si dashboard facilitador-->
@@ -195,7 +195,7 @@
 		  			<!--fellow data -->
 		  				@if($user->type =="admin")
 		  					<!--si dashboard admin-->
-	 						<a href="{{ url('dashboard/fellows/ver/'. $message->user->id) }}">{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}</a>
+	 						<a href='{{url("dashboard/fellows/programa/$program->id/ver-fellow/{$message->user->id}") }}'>{{$message->user->name." ".$message->user->fellowData->surname." ".$message->user->fellowData->lastname}}</a>
 	 					@endif
 	 					@if($user->type =="facilitator")
 	 						<!--si dashboard facilitador-->

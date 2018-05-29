@@ -25,7 +25,7 @@ use App\Http\Requests\SaveMessageForum;
 class AdminForums extends Controller
 {
   //Paginación
-  public $pageSize = 10;
+  public $pageSize = 5;
 
   /**
    * Muestra lista de foros general
