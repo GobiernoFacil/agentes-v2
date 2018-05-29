@@ -141,7 +141,7 @@ class Forum extends Model
 
               }elseif($this->type ==='support'){
                 //usuario gf y participantes
-                $support = 'carlos.aosorio89@gmail.com';
+                $support = 'howdy@gobiernofacil.com';
                 if($type==='message'){
                   $user_ids = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
                   $users    = User::whereIn('id',$user_ids)->where('type','fellow')

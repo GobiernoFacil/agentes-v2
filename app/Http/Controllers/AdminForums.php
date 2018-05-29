@@ -119,6 +119,7 @@ class AdminForums extends Controller
   public function save(SaveAdminForum $request)
   {
     $user      = Auth::user();
+    $program   = Program::where('id',$request->program_id)->firstOrFail();
     $forum     = new Forum($request->only(['topic','description','type','session_id','activity_id']));
     $forum->user_id = $user->id;
     $forum->slug    = str_slug($request->topic);
@@ -142,7 +143,7 @@ class AdminForums extends Controller
     $log->action  = 'create-forum';
     $log->forum_id = $forum->id;
     $log->save();
-  //  $this->send_to($forum,null,'create');
+    $forum->send_notification_to($program,null,'create');
     return redirect("dashboard/foros/programa/$request->program_id/ver-foro/$forum->id")->with('message','Foro creado correctamente');
   }
   /**
@@ -172,6 +173,7 @@ class AdminForums extends Controller
   public function saveMessage(SaveMessageForum $request)
   {
     $user      = Auth::user();
+    $program   = Program::where('id',$request->program_id)->firstOrFail();
     $conversation     = ForumConversation::where('id',$request->question_id)->firstOrFail();
     $message   = new ForumMessage($request->only(['message']));
     $message->user_id = $user->id;
@@ -186,7 +188,7 @@ class AdminForums extends Controller
     $log->forum_id = $conversation->forum->id;
     $log->message_id = $message->id;
     $log->save();
-  //  $this->send_to($conversation->forum,$conversation,'message');
+    $conversation->forum->send_notification_to($program,$conversation,'message',$message);
     return redirect("dashboard/foros/programa/$request->program_id/foro/{$conversation->forum->id}/ver-pregunta/$request->question_id")->with('message','Mensaje creado correctamente');
   }
 
@@ -265,7 +267,7 @@ class AdminForums extends Controller
     $log->conversation_id = $forumConversation->id;
     $log->forum_id = $forum->id;
     $log->save();
-    //$this->send_to($forum,$forumConversation,'question');
+    $forum->send_notification_to($program,$forumConversation,'question');
     return redirect("dashboard/foros/programa/$request->program_id/ver-foro/{$forum->id}")->with('message','Pregunta creada correctamente');
   }
 
