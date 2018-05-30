@@ -11,6 +11,7 @@ use App\Models\Activity;
 use App\Models\Aspirant;
 use App\Models\Conversation;
 use App\Models\CustomFellowAnswer;
+use App\Models\ConversationLog;
 use App\Models\StoreConversation;
 use App\Models\FilesEvaluation;
 use App\Models\FellowScore;
@@ -22,6 +23,7 @@ use App\Models\Forum;
 use App\Models\ForumLog;
 use App\Models\FellowAverage;
 use App\Models\FellowProgress;
+use App\Models\Message;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Program;
@@ -415,6 +417,15 @@ class User extends Authenticatable
 
       return true;
 
+    }
+
+    function unread_messages($program=null){
+      if($this->type==='fellow'){
+        $program = $this->actual_program();
+      }
+      $conversations = Conversation::where('program_id',$program->id)->pluck('id')->toArray();
+      $messages      = Message::where('to_id',$this->id)->whereIn('conversation_id',$conversations)->pluck('id')->toArray();
+      return ConversationLog::where('status',0)->whereIn('message_id',$messages)->get();
     }
 
 }

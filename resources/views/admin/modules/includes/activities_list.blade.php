@@ -24,9 +24,9 @@
 <ul class="ap_list">
 	@foreach ($session->activities as $activity)
 	<li class="row">
-		<span class="{{ $activity->type == 'evaluation' ? 'col-sm-7' : 'col-sm-9' }}">
+		<span class="{{ $activity->type == 'evaluation' || $activity->type == 'diagnostic' ? 'col-sm-7' : 'col-sm-9' }}">
 			<!--tipo de actividad-->
-			<b class="{{$activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+			<b class="{{$activity->type === 'diagnostic' ? 'evaluation' : $activity->type}}"><span class="{{ $activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 			<!-- actividad-->
 			<a href="{{ url('dashboard/sesiones/actividades/ver/'. $activity->id) }}">{{$activity->name}} <span class="notes">{{$activity->duration}} {{$activity->measure ? ' horas':' minutos'}}.</span></a>
 		</span>

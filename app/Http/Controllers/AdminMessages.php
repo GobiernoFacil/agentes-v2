@@ -112,7 +112,7 @@ class AdminMessages extends Controller
       $converLog->status =0;
       $converLog->save();
       //envía correo
-      //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id,$program->slug));
       return redirect("dashboard/mensajes/programa/$program->id/ver-mensajes/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
@@ -205,7 +205,7 @@ class AdminMessages extends Controller
       $converLog->status =0;
       $converLog->save();
       //envía correo
-      //$to_user->notify(new SendNewMessage($user,$to_user,$conversation->id));
+      $to_user->notify(new SendNewMessage($user,$to_user,$conversation->id,$program->slug));
       return redirect("dashboard/mensajes/programa/$program->id/ver-mensajes/$conversation->id")->with('success',"Se ha enviado correctamente");
     }
 
