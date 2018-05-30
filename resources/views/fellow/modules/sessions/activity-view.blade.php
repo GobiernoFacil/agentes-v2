@@ -75,7 +75,7 @@
 <div class="row">
 	<!--descripción-->
 	<div class="col-sm-12">
-		<p>{{$activity->description}}</p>
+		<p class="ap_message_f">{{$activity->description}}</p>
 	</div>
 
 	</div>
