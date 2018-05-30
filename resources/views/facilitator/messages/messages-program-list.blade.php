@@ -26,6 +26,7 @@
 		      <th>Fecha Inicio / Fecha Final</th>
 					<th>Activo</th>
 		      <th>Total conversaciones</th>
+					<th>Sin leer</th>
 		      <th>Acciones</th>
 		    </tr>
 		  </thead>
@@ -41,6 +42,7 @@
               <td>No</td>
             @endif
 				    <td><a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-mensajes") }}' >{{$program->messages($user->id)->count()}}</a></td>
+						<td>{{$user->unread_messages($program)->count()}}</td>
 		        <td>
 		          <a href='{{url("tablero-facilitador/mensajes/$program->slug/ver-mensajes") }}' class="btn xs ev">Ver</a>
             </td>

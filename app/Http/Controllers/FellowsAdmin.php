@@ -53,8 +53,8 @@ class FellowsAdmin extends Controller
 
       $user = Auth::user();
       $program = Program::where('id',$program_id)->firstOrFail();
-      $testUserId = User::where('email','andre@fcb.com')->get()->pluck('id');
-      $fellows    = $program->get_all_fellows()->paginate($this->pageSize);
+      $testUserId = User::where('email','andre@fcb.com')->pluck('id')->toArray();
+      $fellows    = $program->get_all_fellows()->whereNotIn('id',$testUserId)->orderBy('name','asc')->paginate($this->pageSize);
       return view('admin.fellows.fellows-list')->with([
         'user' 		=> $user,
         'fellows' 	=>$fellows,
