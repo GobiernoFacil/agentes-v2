@@ -1,4 +1,4 @@
-<div class="module {{ $module->public && $today >= $module->start ? '' : 'disabled'}}">
+<div class="module  {{ $user->check_progress($module->slug,0) == TRUE ? 'ap_single_message' : '' }}">
 	<div class="m_header">
 		<div class="row">
 			<div class="col-sm-6">
@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<!--content-->
-	<div class="m_content" id="content-{{$module->id}}" {!! $counter == 1 ? '' : 'style="display: none;"' !!}>
+	<div class="m_content" id="content-{{$module->id}}"   {!! $user->check_progress($module->slug,0) == TRUE ? '' : 'style="display: none;"' !!}>
 		<div class="row">
 			<div class="col-sm-12">
 				<!-- title-->
