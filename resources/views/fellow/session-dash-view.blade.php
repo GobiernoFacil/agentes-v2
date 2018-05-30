@@ -1,4 +1,4 @@
-<div class="box session_list">
+<div class="box session_list last_activity">
   <div class="row">
   <!--icono-->
   <div class="col-sm-1 right">

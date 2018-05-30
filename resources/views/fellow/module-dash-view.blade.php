@@ -2,7 +2,7 @@
 	<div class="row">
 		<!--icono-->
 		<div class="col-sm-2">
-			<h3>Semana 1</h3>
+			<h3>Semana:</h3>
 		</div>
 		<!--título-->
 		<div class="col-sm-7">
