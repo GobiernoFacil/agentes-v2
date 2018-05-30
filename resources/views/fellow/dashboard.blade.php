@@ -31,8 +31,16 @@
 		<div class="col-sm-10">
 			<div class="timeline_box">
 				<ul class="timeline" style="overflow: hidden;">
+					<?php $weeK_c= 1?>
 				@foreach($program->fellow_modules as $module)
-				<li class="{{ $user->check_progress($module->slug,0) ? 'active' : 'disabled'}}">{{\Illuminate\Support\Str::words($module->title,2,'…')}}</li>
+				<li class="{{ $user->check_progress($module->slug,0) ? 'active' : 'disabled'}}">
+					@if($user->check_progress($module->slug,0))
+					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}' data-title="{{$module->title}}">Semana {{$weeK_c++}}</a>
+					@else
+					<a data-title="{{$module->title}}">Semana {{$weeK_c++}}</a>
+					@endif
+				
+				</li>
 				@endforeach
 				</ul>
 			</div>
