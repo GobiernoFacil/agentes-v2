@@ -323,7 +323,7 @@ class User extends Authenticatable
       if($parent){
         if($parent->get_all_evaluation_activity()->count() > 0){
             //se busca registro de que ha completado el módulo "padre"
-            if(FellowProgress::where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
+            if(FellowProgress::where('fellow_id',$this->id)->where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
               return true;
             }else{
               return false;
@@ -333,6 +333,7 @@ class User extends Authenticatable
         }
       }else{
         return true;
+
       }
     }
 
@@ -343,7 +344,7 @@ class User extends Authenticatable
       if($parent){
         if($parent->activity_eval()->count() > 0){
             //se busca registro de que ha completado la sesión "padre"
-            if(FellowProgress::where('session_id',$session->parent_id)->where('status',1)->first()){
+            if(FellowProgress::where('fellow_id',$this->id)->where('session_id',$session->parent_id)->where('type','session')->where('status',1)->first()){
               return true;
             }else{
               return false;
@@ -426,6 +427,8 @@ class User extends Authenticatable
       foreach ($modules as $module) {
         if($this->check_progress($module->slug,0)){
           $last_module = $module;
+        }else{
+          break;
         }
       }
 
