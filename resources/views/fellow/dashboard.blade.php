@@ -46,13 +46,15 @@
 
 		@if($user->log()->where('program_id',$program->id)->where('type','!=','first')->count()>0)
 			<div class="col-sm-12">
+				@include('fellow.module-dash-view')
+				<?php /*
 				@if($session)
 					@include('fellow.session-dash-view')
 				@elseif($activity)
 					@include('fellow.activity-dash-view')
 				@elseif($module_last)
 					@include('fellow.module-dash-view')
-				@endif
+				@endif */?>
 			</div>
 		@else
 			<div class="box session_list">
