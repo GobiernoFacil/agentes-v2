@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<!--content-->
-	<div class="m_content" id="content-{{$module->id}}"   {!! $user->check_progress($module->slug,0) == TRUE ? '' : 'style="display: none;"' !!}>
+	<div class="m_content" id="content-{{$module->id}}"   {!! $user->actual_module() ? $user->actual_module()->id== $module->id ? '' : 'style="display: none;"' !!}>
 		<div class="row">
 			<div class="col-sm-12">
 				<!-- title-->
