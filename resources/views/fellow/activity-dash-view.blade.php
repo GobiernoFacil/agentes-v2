@@ -15,6 +15,12 @@
 				case "files":
 					$tipo_a = "Lectura";
 					break;
+				case "video":
+					$tipo_a = "Video";
+					break;
+				case "evaluation":
+					$tipo_a = "Evaluación";
+					break;
 				default:
 					$tipo_a = "";
 			}?>
