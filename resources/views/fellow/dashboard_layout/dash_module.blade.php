@@ -1,4 +1,4 @@
-<div class="module  {{ $user->check_progress($module->slug,0) == TRUE ? 'ap_single_message' : '' }}">
+<div class="module  {{ $user->actual_module() ? $user->actual_module()->id== $module->id ?  'ap_single_message' : '' : ''}}">
 	<div class="m_header">
 		<div class="row">
 			<div class="col-sm-6">

@@ -419,6 +419,21 @@ class User extends Authenticatable
 
     }
 
+    function actual_module(){
+      $program     = $this->actual_program();
+      $modules     = $program->fellow_modules;
+      $last_module = $modules->first();
+      foreach ($modules as $module) {
+        if($this->check_progress($module->slug,0)){
+          $last_module = $module;
+        }
+      }
+
+      return $last_module;
+
+
+    }
+
     function unread_messages($program=null){
       if($this->type==='fellow'){
         $program = $this->actual_program();
