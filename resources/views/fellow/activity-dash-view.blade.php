@@ -21,10 +21,13 @@
 				case "evaluation":
 					$tipo_a = "Evaluación";
 					break;
+					case "diagnostic":
+						$tipo_a = "Evaluación diagnóstico";
+						break;
 				default:
 					$tipo_a = "";
 			}?>
-			
+
 			<h4>{{$tipo_a}}: <a href='{{url("tablero/{$program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/$activity->slug")}}'>{{$activity->name}}</a></h4>
 			<p>Duración: {{$activity->measure == 1 ? str_replace(".00", "", (string)number_format($activity->duration, 2, ".", "")).' h.' : str_replace(".00", "", (string)number_format($activity->duration, 2, ".", "")).' min'}}</p>
 			<?php /*
