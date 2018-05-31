@@ -2884,6 +2884,7 @@ a.btn_message_list {
   -ms-border-radius: 50%;
   border-radius: 50%;
   height: 132px;
+  overflow: hidden;
   width: 132px; }
 
 /* =Gobierno Fácil brand
