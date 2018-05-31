@@ -165,8 +165,10 @@
 						@else
 						<a>
 						@endif
-						
-						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%"></a>
+						<figure class="ap_figure">
+						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
+						</figure>
+						</a>
 					@else
 						@if($message->user->fellowData)
 							@if($user->type =="admin")
@@ -190,7 +192,10 @@
 						@else
 						<a>
 						@endif
-						<img src='{{url("img/users/default.png")}}' width="100%"></a>
+						<figure class="ap_figure">
+						<img src='{{url("img/users/default.png")}}' width="100%">
+						</figure>
+						</a>
 					@endif
 
 				</div>
