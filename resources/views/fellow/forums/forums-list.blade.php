@@ -43,11 +43,13 @@
 			@foreach ($forums as $conversation)
 				<div class="row forum_list">
 					<div class="col-sm-1">
+						<figure class="ap_figure super_xs">
 						@if($conversation->user->image)
 						<img src='{{url("img/users/{$conversation->user->image->name}")}}' width="100%">
 						@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
 						@endif
+						</figure>
 					</div>
 					<div class="col-sm-9">
 						<h2> <a href='{{ url("tablero/$program->slug/foros/$forum->slug/ver-pregunta/$conversation->slug") }}'>{{$conversation->topic}}</a></h2>
