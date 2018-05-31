@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-sm-6">
 				<p class="right">Tiempo estimado: <strong>{{$module->duration_hours() < 1 ? str_replace(".00", "", (string)number_format($module->duration_minutes(), 2, ".", "")).' min.' : str_replace(".00", "", (string)number_format($module->duration_hours(), 2, ".", "")).' h'}} </strong>
-				<button class="{{ $user->check_progress($module->slug,0) == TRUE ? 'ap-close' : 'ap-show' }}" type="button" data-div="content-{{$module->id}}">
+				<button class="{{ $user->actual_module() ? $user->actual_module()->id== $module->id ? 'ap-close' : 'ap-show' : '' }}" type="button" data-div="content-{{$module->id}}">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 				</button>
 				 </p>
