@@ -72,7 +72,6 @@
 	<!--pregunta-->
 	<div class="col-sm-8 forum_list">
     	<h1>{{$question->topic}} </h1>
-			<h2>
     	<p class="author">Por
     	@if($question->user->fellowData)
     	<!--fellow data -->
@@ -137,10 +136,10 @@
   		</div>
   	</div>
   	<div class="row">
-        <div class="col-sm-8 col-sm-offset-2 forum_list">
+        <div class="col-sm-10 col-sm-offset-1 forum_list">
     @foreach($question->messages as $message)
       		<div class="row">
-	      		<div class="col-sm-2">
+	      		<div class="col-sm-3">
 		      		@if($message->user->image)
 						@if($message->user->fellowData)
 						<!--fellow data -->
@@ -199,7 +198,7 @@
 					@endif
 
 				</div>
-				<div class="col-sm-10">
+				<div class="col-sm-9">
 	  				<p class="f-message">{{$message->message}}</p>
 	  				<p class="author">Por
 		  			@if($message->user->fellowData)
