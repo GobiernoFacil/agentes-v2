@@ -23,11 +23,13 @@
 	</div>
 	<!--avatar-->
 	<div class="col-sm-1">
+		<figure class="ap_figure xs">
 		@if($question->user->image)
 		<img src='{{url("img/users/{$question->user->image->name}")}}' widht="100%">
 		@else
 		<img src='{{url("img/users/default.png")}}' widht="100%">
 		@endif
+		</figure>
 	</div>
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
