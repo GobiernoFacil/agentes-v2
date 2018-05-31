@@ -4,6 +4,7 @@
 @section('body_class', 'dashboard fellow')
 
 @section('content')
+
 @if($program)
 	<div class="row">
 		<div class="col-sm-12">
@@ -39,7 +40,7 @@
 					@else
 					<a data-title="{{$module->title}}">Semana {{$weeK_c++}}</a>
 					@endif
-				
+
 				</li>
 				@endforeach
 				</ul>
@@ -54,7 +55,7 @@
 
 		@if($user->log()->where('program_id',$program->id)->where('type','!=','first')->count()>0)
 			<div class="col-sm-12">
-				
+
 				@if($session)
 					@include('fellow.session-dash-view')
 				@elseif($activity)
