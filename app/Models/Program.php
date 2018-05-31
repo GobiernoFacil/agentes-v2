@@ -187,4 +187,10 @@ class Program extends Model
       $ids   = $this->fellow_modules->pluck('id')->toArray();
       return Module::whereIn('id',$ids)->where('start','<=',$today);
     }
+
+    function get_assigned_sessions($user_id){
+      $sessions    = $this->get_all_sessions()->pluck('id')->toArray();
+      return FacilitatorModule::whereIn('session_id',$sessions)->where('user_id',$user_id);
+
+    }
 }

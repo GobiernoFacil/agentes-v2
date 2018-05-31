@@ -528,13 +528,31 @@ class ModuleSessions extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function viewAssign()
+     public function assignedIndex()
      {
        $user 			  = Auth::user();
-       $sessions     = FacilitatorModule::where('user_id',$user->id)->paginate($this->pageSize);
-       return view('admin.modules.sessions.sessions-assign-list')->with([
+       $programs    = Program::orderBy('start','desc')->paginate(10);
+       return view('admin.modules.assigned.assigned-program')->with([
          "user"      		=> $user,
-         "sessions"          => $sessions
+         "programs"          => $programs
+       ]);
+     }
+
+     /**
+      * Muestra sesiones asignadas como facilitador
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function assignedView($program_id)
+     {
+       $user 			  = Auth::user();
+       $program     = Program::where('id',$program_id)->firstOrFail();
+       $sessions    = $program->get_assigned_sessions($user->id)->paginate(10);
+       return view('admin.modules.assigned.assigned-view')->with([
+         "user"      		=> $user,
+         "program"      => $program,
+         "sessions"     => $sessions
        ]);
      }
 
