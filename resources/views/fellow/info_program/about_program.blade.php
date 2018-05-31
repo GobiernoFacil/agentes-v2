@@ -390,9 +390,8 @@ del 20% respecto del valor total del concepto.</td>
 								<div class="col-sm-12">
 									<ol>
 										<li class="ap_time">Se prohíbe cualquier tipo de discriminación, acoso, amedrentamiento, abuso, hacia cualquier participante del programa, asesores, personal de soporte o facilitadores, por cualquier medio virtual o físico que se disponga.</li>
-										<li class="ap_time">Queda también prohibido cualquier tipo de propaganda religiosa y/o partidista ajena a los contenidos del curso.    </li>
-										<li class="ap_time">Queda prohibido cualquier tipo de violación a la propiedad intelectual, mediante el plagio o cualquier otro medio. </li>
-</li>
+										<li class="ap_time">Se prohíbe cualquier tipo de propaganda religiosa y/o partidista ajena a los contenidos del curso.     </li>
+										<li class="ap_time">Se prohíbe cualquier tipo de violación a la propiedad intelectual, mediante el plagio o cualquier otro medio.</li>
 									</ol>
 								</div>
 							</div>
