@@ -65,11 +65,13 @@
     @foreach($question->messages as $message)
       		<div class="row">
 	      		<div class="col-sm-2">
+		      		<figure class="ap_figure">
 		      		@if($message->user->image)
 						<img src='{{url("img/users/{$message->user->image->name}")}}' width="100%">
-						@else
+					@else
 						<img src='{{url("img/users/default.png")}}' width="100%">
-						@endif
+					@endif
+		      		</figure>
 				</div>
 				<div class="col-sm-10">
 					<?php

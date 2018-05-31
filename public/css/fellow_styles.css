@@ -2878,6 +2878,14 @@ a.btn_message_list {
     text-align: right;
     display: block; }
 
+.ap_figure {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  height: 132px;
+  width: 132px; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
