@@ -151,7 +151,7 @@
 						<div class="m_content">
 							<div class="row">
 								<div class="col-sm-12">
-									<p class="ap_time">El presente reglamento es de observancia general, sin excepción, para las y los participantes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible P 2018. Sus disposiciones son de interés formativo y tienen por objeto regular el desempeño y comportamiento de los participantes.</p>
+									<p class="ap_time">El presente reglamento es de observancia general, sin excepción, para las y los participantes del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018. Sus disposiciones son de interés formativo y tienen por objeto regular el desempeño y comportamiento de los participantes.</p>
 									<p class="ap_time">Se entiende por “equipo coordinador” al grupo conformado por los actores desarrolladores del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, a saber: el Programa de las Naciones Unidas para el Desarrollo (PNUD), el Instituto Nacional de Transparencia, Acceso a la información y Protección de Datos Personales (INAI), Gestión Social y Cooperación (GESOC), Gobierno Fácil y ProSociedad.</p>
 									<p class="ap_time">Se entiende por “programa”, “programa de formación” o “fellowship”, al Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible.</p>
 									<p class="ap_time">Se entiende por “plataforma” o “plataforma virtual”, a la interfaz que se encuentra en el sitio web http://apertus.org.mx a la cual se accede mediante un usuario y contraseña para visualizar los contenidos y subir archivos.</p>
