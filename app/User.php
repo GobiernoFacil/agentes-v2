@@ -321,35 +321,11 @@ class User extends Authenticatable
       $today = date('Y-m-d');
       $parent = Module::where('id',$module->parent_id)->where('start','<=',$today)->where('public',1)->first();
       if($parent){
-        if($parent->get_all_evaluation_activity()->count() > 0){
+        if(FellowProgress::where('fellow_id',$this->id)->where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
             //se busca registro de que ha completado el módulo "padre"
-            if(FellowProgress::where('fellow_id',$this->id)->where('type','module')->where('module_id',$module->parent_id)->where('status',1)->first()){
-              return true;
-            }else{
-              return false;
-            }
-        }else{
-          //checar que no existan otros modulos con actividades incompletas
-          $mod_before = Module::where('program_id',$module->program->id)->where('order','<',$module->order)->where('public',1)->get();
-          if($mod_before->count()>0){
-             $progress = FellowProgress::whereIn('module_id',$mod_before->pluck('id')->toArray())->where('fellow_id',$this->id)->get();
-             if($progress->count() != $mod_before->count()){
-                $modules_to_check = $mod_before->diff($progress);
-                foreach ($modules_to_check as $_mod) {
-                    if($_mod->get_all_evaluation_activity()->count() > 0){
-                       return false;
-                    }
-                }
-
-                return true;
-
-             }else{
-               return true;
-             }
-          }else{
             return true;
-          }
-          return true;
+        }else{
+            return false;
         }
       }else{
         //primer modulo
