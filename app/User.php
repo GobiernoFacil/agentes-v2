@@ -441,6 +441,75 @@ class User extends Authenticatable
 
     }
 
+    function update_module_progress($module_slug){
+      if($module = Module::where('slug',$module_slug)->where('public',1)->first()){
+        if($module->get_all_evaluation_activity()->count() > 0){
+          foreach ($module->sessions as $session) {
+              if($session->activity_eval()->count() > 0){
+                 foreach ($session->activity_eval() as $activity) {
+                    if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','activity')->first()){
+                      return false;
+                    }
+                 }
+                 $fp =  FellowProgress::firstOrCreate(
+                     ['fellow_id' => $this->id,
+                      'program_id' => $module->program->id,
+                      'module_id'  => $module->id,
+                      'session_id' => $session->id,
+                      'type'       => 'session'
+                      ]);
+                  $fp->status = 1;
+                  $fp->save();
+
+              }else{
+               $fp =  FellowProgress::firstOrCreate(
+                   ['fellow_id' => $this->id,
+                    'program_id' => $module->program->id,
+                    'module_id'  => $module->id,
+                    'session_id' => $session->id,
+                    'type'       => 'session'
+                    ]);
+                $fp->status = 1;
+                $fp->save();
+              }
+          }
+          $fp = FellowProgress::firstOrCreate(
+            ['fellow_id' => $this->id,
+            'program_id' => $module->program->id,
+            'module_id'  => $module->id,
+            'type'       => 'module'
+            ]);
+          $fp->status = 1;
+          $fp->save();
+          return true;
+        }else{
+            $fp = FellowProgress::firstOrCreate(
+              ['fellow_id' => $this->id,
+              'program_id' => $module->program->id,
+              'module_id'  => $module->id,
+              'type'       => 'module'
+              ]);
+            $fp->status = 1;
+            $fp->save();
+            foreach ($module->sessions as $session) {
+              $fp =  FellowProgress::firstOrCreate(
+                  ['fellow_id' => $this->id,
+                   'program_id' => $module->program->id,
+                   'module_id'  => $module->id,
+                   'session_id' => $session->id,
+                   'type'       => 'session'
+                   ]);
+               $fp->status = 1;
+               $fp->save();
+            }
+        }
+        return true;
+      }else{
+        return false;
+      }
+
+    }
+
     function actual_module(){
       $program     = $this->actual_program();
       $modules     = $program->fellow_modules;

@@ -172,7 +172,7 @@ class SessionFellow extends Controller
       $last       = Activity::where('session_id',$session->id)->orderBy('order','desc')->firstOrFail();
       $prev       = $last->slug;
       $next       = false;
-      $complete   = false;
+      $complete   = $user->update_module_progress($session->module->slug);
       return view('fellow.modules.sessions.session-end')->with([
         "user"      => $user,
         "session"   => $session,
