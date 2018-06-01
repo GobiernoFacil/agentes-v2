@@ -59,7 +59,7 @@ class SendNewMessage extends Notification
       }
         return (new MailMessage)
                 ->from('info@apertus.org.mx')
-                ->subject('no-reply')
+                ->subject('no-reply - Mensaje: Programa de Formación de Agentes Locales de Cambio')
                 ->markdown('vendor.notifications.new_message', ['url' => $url,'user'=>$this->user,'to_user'=>$this->to_user]);
     }
 

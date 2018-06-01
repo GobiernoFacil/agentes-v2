@@ -456,6 +456,8 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/ver/facilitador/{id}', 'SessionFellow@viewFacilitator');
           // Rutas actividades
           Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/{activity_slug}', 'SessionFellow@activity');
+          // Rutas fin modulo
+          Route::get('tablero/{program_slug}/aprendizaje/{module_slug}/{session_slug}/fin-modulo/ver', 'SessionFellow@end');
           // Rutas nuevo diagnostico
             //Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
             //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');

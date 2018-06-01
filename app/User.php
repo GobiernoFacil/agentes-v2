@@ -329,9 +329,30 @@ class User extends Authenticatable
               return false;
             }
         }else{
+          //checar que no existan otros modulos con actividades incompletas
+          $mod_before = Module::where('program_id',$module->program->id)->where('order','<',$module->order)->where('public',1)->get();
+          if($mod_before->count()>0){
+             $progress = FellowProgress::whereIn('module_id',$mod_before->pluck('id')->toArray())->where('fellow_id',$this->id)->get();
+             if($progress->count() != $mod_before->count()){
+                $modules_to_check = $mod_before->diff($progress);
+                foreach ($modules_to_check as $_mod) {
+                    if($_mod->get_all_evaluation_activity()->count() > 0){
+                       return false;
+                    }
+                }
+
+                return true;
+
+             }else{
+               return true;
+             }
+          }else{
+            return true;
+          }
           return true;
         }
       }else{
+        //primer modulo
         return true;
 
       }

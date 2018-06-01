@@ -145,7 +145,7 @@ class SessionFellow extends Controller
     }
 
 
-    
+
 
     public function saveDiagnostic(SaveDiagnostic $request)
     {
@@ -157,5 +157,30 @@ class SessionFellow extends Controller
       $answers->save();
       return redirect("tablero/aprendizaje/examen-diagnostico/examen-diagnostico/$activity->id")->with('success','Se ha guardado correctamente');
     }
+
+    /**
+    * Muestra fin de módulo
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function end($program_slug,$module_slug,$session_slug)
+    {
+      //
+      $user       = Auth::user();
+      $session    = ModuleSession::where('slug',$session_slug)->firstOrFail();
+      $last       = Activity::where('session_id',$session->id)->orderBy('order','desc')->firstOrFail();
+      $prev       = $last->slug;
+      $next       = false;
+      $complete   = false;
+      return view('fellow.modules.sessions.session-end')->with([
+        "user"      => $user,
+        "session"   => $session,
+        "prev"      => $prev,
+        "next"      => $next,
+        "complete"  => $complete
+       ]);
+    }
+
 
 }
