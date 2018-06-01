@@ -2863,6 +2863,17 @@ a.ap_message_link {
 .ap_message_f {
   white-space: pre-wrap; }
 
+.ap_udidit {
+  padding: 120px 0 200px; }
+  .ap_udidit svg {
+    fill: #18b73e;
+    display: block;
+    height: 236px;
+    width: 236px;
+    margin: 0 auto 40px; }
+  .ap_udidit h1 {
+    margin-bottom: 40px; }
+
 a.btn_message_list {
   background: #f2f2f2;
   font-size: 14px;
