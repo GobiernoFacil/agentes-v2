@@ -31,7 +31,18 @@
     </p>
   </div>
 </div>
-
+<!-- programa -->
+<div class="row" style ="{{$errors->has('program_id') || old('program_id') || $content->type==='notice' ? '' : 'display:none;'}}" id = 'program_div'>
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Programa</strong></label>
+      {{Form::select('program_id',$programs,null, ['class' => 'form-control','id'=>'program'])}}
+      @if($errors->has('program_id'))
+      <strong class="danger">{{$errors->first('program_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <div id ="eventData" style='{{$content->type==="event" ? "" : "display:none;"}}'>
 <!-- Fechas -->
 <div class="row">

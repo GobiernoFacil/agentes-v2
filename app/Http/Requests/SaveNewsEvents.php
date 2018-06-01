@@ -25,7 +25,7 @@ class SaveNewsEvents extends FormRequest
     public function rules()
     {
 
-      if($this->type==='news' || $this->type==='notice'){
+      if($this->type==='news'){
         return [
             //
             'title'=> 'required|max:256|unique:news_events',
@@ -33,8 +33,20 @@ class SaveNewsEvents extends FormRequest
             'type'=>'required',
             'public'=>'required',
             'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
-            'brief' => 'required'
+            'brief' => 'required',
         ];
+      }elseif($this->type==='notice'){
+        return [
+            //
+            'title'=> 'required|max:256|unique:news_events',
+            'content'=> 'required',
+            'type'=>'required',
+            'public'=>'required',
+            'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
+            'brief' => 'required',
+            'program_id' => 'required'
+        ];
+
       }else{
         return [
             //
@@ -46,7 +58,7 @@ class SaveNewsEvents extends FormRequest
             'type'=>'required',
             'public'=>'required',
             'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
-            'brief' => 'required'
+            'brief' => 'required',
         ];
       }
     }

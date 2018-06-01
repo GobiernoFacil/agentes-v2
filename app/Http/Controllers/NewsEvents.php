@@ -10,6 +10,7 @@ use App\Notifications\SendNotice;
 // models
 use App\Models\NewsEvent;
 use App\Models\ImagesNew;
+use App\Models\Program;
 use App\User;
 // FormValidators
 use App\Http\Requests\SaveNewsEvents;
@@ -71,9 +72,12 @@ class NewsEvents extends Controller
     */
     public function add()
     {
-      $user   = Auth::user();
+      $user     = Auth::user();
+      $programs = Program::orderBy('start','desc')->pluck('title','id')->toArray();
+      $programs[null] = 'Selecciona una opción';
       return view('admin.newsEvents.newsEvents-add')->with([
         "user"      => $user,
+        "programs"  => $programs,
       ]);
     }
 
@@ -87,11 +91,7 @@ class NewsEvents extends Controller
     {
       //
       $user   = Auth::user();
-      if($request->type==='news'){
-        $data   = $request->except(['start','end','time','_token']);
-      }else{
-        $data   = $request->except('_token');
-      }
+      $data   = $request->except('_token');
       $data['user_id'] = $user->id;
       $data['slug']    = str_slug($request->title);
       $new  = new NewsEvent($data);
@@ -107,12 +107,13 @@ class NewsEvents extends Controller
         $image->type = 'full';
         $image->save();
       }
-
       if($request->type==='notice' && $new->public){
-        $fellows = User::where('type','fellow')->where('enabled',1)->get();
-        foreach ($fellows as $fellow) {
-          //envía correo
-          $fellow->notify(new SendNotice($fellow,$new));
+        if($program = Program::where('id',$request->program_id)->first()){
+          $fellows = $program->fellows;
+          foreach ($fellows as $fellow) {
+            //envía correo
+            $fellow->user->notify(new SendNotice($fellow->user,$new));
+          }
         }
 
       }
@@ -128,9 +129,12 @@ class NewsEvents extends Controller
     {
       $user    = Auth::user();
       $content = NewsEvent::where('id',$id)->firstOrFail();
+      $programs = Program::orderBy('start','desc')->pluck('title','id')->toArray();
+      $programs[null] = 'Selecciona una opción';
       return view('admin.newsEvents.newsEvents-update')->with([
         "user"      => $user,
-        "content"  =>$content
+        "content"   =>$content,
+        "programs"  => $programs
         ]);
     }
 

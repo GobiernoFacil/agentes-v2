@@ -27,7 +27,7 @@ class UpdateNewsEvent extends FormRequest
     public function rules()
     {
       $content = NewsEvent::find($this->route("content_id"));
-      if($this->type==='news'|| $this->type==='notice'){
+      if($this->type==='news'){
         return [
             //
             'title'=> 'required|max:256'.($content->title != $this->title ? '|unique:news_events' : ''),
@@ -36,6 +36,17 @@ class UpdateNewsEvent extends FormRequest
             'public'=>'required',
             'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
             'brief' => 'required'
+        ];
+      }elseif($this->type==='notice'){
+        return [
+            //
+            'title'=> 'required|max:256'.($content->title != $this->title ? '|unique:news_events' : ''),
+            'content'=> 'required',
+            'type'=>'required',
+            'public'=>'required',
+            'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
+            'brief' => 'required',
+            'program_id' =>'required'
         ];
       }else{
         return [

@@ -42,10 +42,10 @@ class SendNotice extends Notification
      */
     public function toMail($notifiable)
     {
-      $url = url("/login");
+      $url = url("tablero/noticias/ver/{$this->notice->slug}");
       return (new MailMessage)
               ->from('info@apertus.org.mx')
-              ->subject('no-reply')
+              ->subject('no-reply, Aviso: Programa de Formación de Agentes Locales de Cambio')
               ->markdown('vendor.notifications.new_notice', ['url' => $url,'user'=>$this->user,'notice'=>$this->notice]);
     }
 
