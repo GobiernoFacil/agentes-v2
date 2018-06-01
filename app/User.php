@@ -337,8 +337,7 @@ class User extends Authenticatable
 
     function check_session($session){
     if($this->check_progress($session->module->slug,0)){
-      $parent = $session->parent;
-      if($parent){
+      if($parent = $session->parent){
         if($parent->activity_eval()->count() > 0){
             //se busca registro de que ha completado la sesión "padre"
             if(FellowProgress::where('fellow_id',$this->id)->where('session_id',$session->parent_id)->where('type','session')->where('status',1)->first()){
@@ -366,7 +365,6 @@ class User extends Authenticatable
       }else{
         return false;
       }
-      return true;
     }
 
 
@@ -418,7 +416,8 @@ class User extends Authenticatable
     }
 
     function update_module_progress($module_slug){
-      if($module = Module::where('slug',$module_slug)->where('public',1)->first()){
+      $today = date('Y-m-d');
+      if($module = Module::where('slug',$module_slug)->where('start','<=',$today)->where('public',1)->first()){
         if($module->get_all_evaluation_activity()->count() > 0){
           foreach ($module->sessions as $session) {
               if($session->activity_eval()->count() > 0){
