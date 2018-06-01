@@ -70,6 +70,9 @@ class Kernel extends ConsoleKernel
                               ->weekly()
                               ->mondays()->at('20:00');
         }
+        $schedule->command('command:update-fellow-progress')
+                        ->dailyAt('01:00')
+                        ->emailOutputTo('carlos@gobiernofacil.com');
       /*
       $schedule->command('command:send-aspirants-reminder')
                           ->weekly()
