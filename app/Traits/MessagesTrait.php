@@ -349,6 +349,7 @@ trait MessagesTrait{
          'videoGrade.between'   => 'Escribe un valor entre 0 y 10',
          'essayGrade.between'   => 'Escribe un valor entre 0 y 10',
          'to_id.required'   => 'Este campo es requerido',
+         'program_id.required'   => 'El programa es requerido',
 
 
       ];

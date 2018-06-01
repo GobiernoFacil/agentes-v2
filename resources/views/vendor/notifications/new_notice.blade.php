@@ -1,5 +1,5 @@
 @component('mail::message')
-Estimado/a {{$user->name." ".$user->fellowData->surname." ".$user->fellowData->lastname}},<br>
+Estimado/a {{$user->name}},<br>
 
 
 Tienes un nuevo aviso,<br>

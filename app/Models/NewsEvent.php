@@ -19,7 +19,8 @@ class NewsEvent extends Model
     'type',
     'public',
     'brief',
-    'image_id'
+    'image_id',
+    'program_id'
     ];
 
     function image(){

@@ -53,8 +53,17 @@ class NewsEventsFellow extends Controller
     public function index()
     {
       //
-      $user = Auth::user();
-      $news = NewsEvent::where('public', 1)->orderBy('created_at','desc')->paginate($this->pageSize);
+      $user    = Auth::user();
+      $back   =  $date = date("m", strtotime(" -2 months"));
+      $program = $user->actual_program();
+      if($program){
+        $news    = NewsEvent::whereMonth('updated_at','>=',$back)->whereYear('updated_at',date('Y'))->where('type','!=','notice')->where('public', 1)->orderBy('created_at','desc')->orWhere(function($query)use($program,$back){
+          $query->whereMonth('updated_at','>=',$back)->whereYear('updated_at',date('Y'))->where('program_id',$program->id)->where('public', 1);
+        })
+        ->paginate($this->pageSize);
+      }else{
+        $news    = NewsEvent::whereMonth('updated_at','>=',$back)->whereYear('updated_at',date('Y'))->where('type','!=','notice')->where('public', 1)->orderBy('created_at','desc')->paginate($this->pageSize);
+      }
       return view('fellow.news.newsEvents-list')->with([
         'user' => $user,
         'news' =>$news,
@@ -62,7 +71,7 @@ class NewsEventsFellow extends Controller
 
     }
 
-    
+
 
 
 

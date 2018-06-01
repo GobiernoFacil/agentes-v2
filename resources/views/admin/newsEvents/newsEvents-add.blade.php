@@ -29,10 +29,16 @@ $( document ).ready(function() {
   $('#type').change(function(){
     if(this.value==='news'){
       $('#eventData').hide();
+      $('#program_div').hide();
     }else if(this.value==='event'){
       $('#eventData').show();
+      $('#program_div').hide();
+    }else if(this.value==='notice'){
+      $('#eventData').hide();
+      $('#program_div').show();
     }else{
       $('#eventData').hide();
+      $('#program_div').hide();
     }
   });
 });
