@@ -15,9 +15,9 @@
 use Illuminate\Http\Request;
 Auth::routes();
 
-/* LA RUTA QUE RESPONDE DE A MENTIRITAS LA RESPUESTA CORRECTA */
+/* LA RUTA QUE RESPONDE DE A MENTIRITAS */
 Route::get('las-respuestas-fake', function(Request $r){
-    return response()->json(["response" => [2], "original" => $r->all()]);
+    return response()->json(["response" => random_int(0, 1), "original" => $r->all()]);
 });
 
 /******** Páginas estáticas y de consulta***************/

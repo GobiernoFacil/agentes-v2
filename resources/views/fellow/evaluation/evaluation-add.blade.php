@@ -37,7 +37,7 @@
           <p style="display: none;" id="GF-PNUD-quiz-bad-response">Tu respuesta es incorrecta</p>
           <p id="GF-PNUD-quiz-eval-btn"><a href="#">Continuar</a></p>
           <p style="display: none" id="GF-PNUD-quiz-next-btn"><a href="#">Continuar</a></p>
-          <p style="display: none;" id="GF-PNUD-quiz-end-btn"><a href="#">Finalizar</a></p>
+          <p style="display: none;" id="GF-PNUD-quiz-end-btn"><a href="{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save")}}">Finalizar</a></p>
         </div>
       </div>
     </div>
@@ -56,13 +56,21 @@
 
 <script src="/js/bower_components/underscore/underscore-min.js"></script>
 <script type="text/text" id="GF-PNUD-quiz-answer-template">
-  <li id="<%=id%>"><label><input type="radio" name="answer"><%=value%></label></li>
+  <li id="<%=id%>">
+    <label>
+      <input data-question="<%=question_id%>" type="radio" name="answer" value="<%=id%>"><%=value%>
+    </label>
+  </li>
 </script>
 <script>
   (function(){
-    var activity  = {!!$activity->quizInfo->toJson()!!},
-        questions = {!!$activity->quizInfo->question->toJson()!!},
-        answers   = [
+    var successClass = "success",
+        errorClass   = "error",
+        evalURL      = "/las-respuestas-fake",
+        endURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save")}}',
+        activity     = {!!$activity->quizInfo->toJson()!!},
+        questions    = {!!$activity->quizInfo->question->toJson()!!},
+        answers      = [
         @foreach($activity->quizInfo->question as $q)
           @foreach($q->answer as $a)
             {!!$a->toJson()!!},
@@ -70,26 +78,26 @@
         @endforeach
         {}],
 
-        startBtn = document.getElementById("GF-PNUD-start-quiz-btn"),
+        startBtn     = document.getElementById("GF-PNUD-start-quiz-btn"),
         currentSlide = 0,
-        render = {},
+        render       = {},
 
         // ui elements
-        uiStart        = document.getElementById("GF-PNUD-start-quiz-btn"),
-        uiTemplate     = document.getElementById("GF-PNUD-quiz-texmplate"),
-        uiCurrent      = document.getElementById("GF-PNUD-quiz-current-question"),
-        uiTotal        = document.getElementById("GF-PNUD-quiz-total-questions"),
-        uiQuestion     = document.getElementById("GF-PNUD-quiz-question"),
-        uiAnswers      = document.getElementById("GF-PNUD-quiz-answers"),
-        uiStatusBar    = document.getElementById("GF-PNUD-quiz-status-bar"),
-        uiGoodResponse = document.getElementById("GF-PNUD-quiz-good-response"),
-        uiBadResponse  = document.getElementById("GF-PNUD-quiz-bad-response"),
-        uiNext         = document.getElementById("GF-PNUD-quiz-next-btn"),
-        uiNextBtn      = uiNext.querySelector("a"),
-        uiEval         = document.getElementById("GF-PNUD-quiz-eval-btn"),
-        uiEvalBtn      = uiEval.querySelector("a"),
-        uiEnd          = document.getElementById("GF-PNUD-quiz-end-btn"),
-        uiEndBtn       = uiEnd.querySelector("a"),
+        uiStart          = document.getElementById("GF-PNUD-start-quiz-btn"),
+        uiTemplate       = document.getElementById("GF-PNUD-quiz-texmplate"),
+        uiCurrent        = document.getElementById("GF-PNUD-quiz-current-question"),
+        uiTotal          = document.getElementById("GF-PNUD-quiz-total-questions"),
+        uiQuestion       = document.getElementById("GF-PNUD-quiz-question"),
+        uiAnswers        = document.getElementById("GF-PNUD-quiz-answers"),
+        uiStatusBar      = document.getElementById("GF-PNUD-quiz-status-bar"),
+        uiGoodResponse   = document.getElementById("GF-PNUD-quiz-good-response"),
+        uiBadResponse    = document.getElementById("GF-PNUD-quiz-bad-response"),
+        uiNext           = document.getElementById("GF-PNUD-quiz-next-btn"),
+        uiNextBtn        = uiNext.querySelector("a"),
+        uiEval           = document.getElementById("GF-PNUD-quiz-eval-btn"),
+        uiEvalBtn        = uiEval.querySelector("a"),
+        uiEnd            = document.getElementById("GF-PNUD-quiz-end-btn"),
+        uiEndBtn         = uiEnd.querySelector("a"),
         uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML;
 
     
@@ -107,7 +115,14 @@
     }
 
     render.renderSlide = function(question){
-      uiQuestion.innerHTML = questions[question].question;
+
+      uiStatusBar.classList.remove(successClass);
+      uiStatusBar.classList.remove(errorClass);
+      uiBadResponse.style.display  = "none";
+      uiGoodResponse.style.display = "none";
+      
+      uiAnswers.innerHTML          = "";
+      uiQuestion.innerHTML         = questions[question].question;
 
       var _answers = answers.filter(function(answer){
                        return answer.question_id == questions[question].id;
@@ -115,12 +130,38 @@
       template = _.template(uiAnswerTemplate);
 
       _answers.forEach(function(answer){
-        console.log(answers, _answers, answer);
         uiAnswers.insertAdjacentHTML('beforeend', template(answer));
       });
     }
 
-    console.log(activity, questions, answers);
+    render.showSuccess = function(){
+      uiStatusBar.classList.add(successClass);
+      uiGoodResponse.style.display = "block";
+      currentSlide += 1;
+      uiEvalBtn.style.display = "none";
+      
+      if(currentSlide == questions.length){
+        uiEnd.style.display = "block";
+      }
+      else{
+        uiNext.style.display = "block";
+      }
+    };
+
+    render.showError = function(){
+      uiStatusBar.classList.add(errorClass);
+      uiBadResponse.style.display = "block";
+      currentSlide += 1;
+      uiEvalBtn.style.display = "none";
+      
+      if(currentSlide  == questions.length){
+        uiEnd.style.display = "block";
+      }
+      else{
+        uiNext.style.display = "block";
+      }
+    };
+
 
     // enable the button stuff
     startBtn.addEventListener("click", function(e){
@@ -128,6 +169,37 @@
       e.preventDefault();
       render.showInterface();
       // render slide
+    });
+
+    uiNextBtn.addEventListener("click", function(e){
+      e.preventDefault();
+      console.log("next");
+      render.updatePagination(currentSlide, questions.length);
+
+      uiEvalBtn.style.display      = "block";
+      uiNextBtn.style.display      = "none";
+
+      render.renderSlide(currentSlide);
+    });
+
+    uiEvalBtn.addEventListener("click", function(e){
+      e.preventDefault();
+
+      var selected = uiAnswers.querySelector("input[name='answer']:checked");
+      if(!selected) return;
+
+      $.get(evalURL, {
+        activity : activity.activity_id, 
+        question : selected.getAttribute("data-question"),
+        answer   : [selected.value]
+      }, function(response){
+        if(response.response){
+          render.showSuccess();
+        }
+        else{
+          render.showError();
+        }
+      }, "json");
     });
 
   })();
@@ -168,7 +240,6 @@ $(document).ready(function() {
       <?php $count++;?>
       @endforeach
     @else
-    console.log("delete");
       $('.delete{{$countP}}_{{$count}}').click(function(event) {
           event.preventDefault();
           console.log('this');
