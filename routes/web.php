@@ -12,8 +12,13 @@
 */
 
 
-
+use Illuminate\Http\Request;
 Auth::routes();
+
+/* LA RUTA QUE RESPONDE DE A MENTIRITAS LA RESPUESTA CORRECTA */
+Route::get('las-respuestas-fake', function(Request $r){
+    return response()->json(["response" => [2], "original" => $r->all()]);
+});
 
 /******** Páginas estáticas y de consulta***************/
 /*@front Controller */
@@ -631,5 +636,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@editFiles');
     Route::post('tablero-aspirante/convocatorias/{notice_slug}/actualizar-archivos', 'AspirantNotices@updateFiles');*/
     Route::get('tablero-aspirante/archivo/download/{name}/{type}', 'AspirantNotices@download');
+
+
   });
 });

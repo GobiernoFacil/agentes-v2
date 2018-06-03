@@ -89,6 +89,7 @@ class SessionFellow extends Controller
       $log->activity_id = $activity->id;
       $log->program_id = $session->module->program->id;
       $log->save();
+
       return view('fellow.modules.sessions.activity-view')->with([
         "user"      => $user,
         "session"   => $session,
