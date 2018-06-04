@@ -9,6 +9,7 @@ use File;
 use App\Models\FacilitatorModule;
 use App\Models\Module;
 use App\Models\ModuleSession;
+use App\Models\Log;
 use App\Models\Program;
 use App\User;
 // FormValidators
@@ -16,8 +17,7 @@ use App\Http\Requests\SaveSession;
 use App\Http\Requests\UpdateSession;
 class ModuleSessions extends Controller
 {
-    //
-    //
+
     //Paginación
     public $pageSize = 10;
 
@@ -82,6 +82,13 @@ class ModuleSessions extends Controller
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
       $session = $this->checkOrder($session);
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'session_id'  => $session->id,
+        'module_id'   => $request->module_id,
+        'program_id'  => $session->module->program->id,
+        'type'        => 'create'
+      ]);
       return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
     }
@@ -227,6 +234,7 @@ class ModuleSessions extends Controller
     public function update(UpdateSession $request)
     {
       //
+      $user = Auth::user();
       $data    = $request->except('_token');
       $program = Program::where('id',$request->program_id)->firstOrFail();
       $module  = $program->modules()->find($request->module_id);
@@ -235,6 +243,13 @@ class ModuleSessions extends Controller
       $data['slug']         = str_slug($request->name);
       $session = new ModuleSession($data);
       $this->checkUpdateOrder($session,$request->session_id);
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'session_id'  => $sess->id,
+        'module_id'   => $request->module_id,
+        'program_id'  => $session->module->program->id,
+        'type'        => 'update'
+      ]);
       return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$sess->id")->with('success',"Se ha actualizado correctamente");
     }
 
@@ -334,6 +349,7 @@ class ModuleSessions extends Controller
     public function delete($program_id,$module_id,$session_id)
     {
       //
+      $user    = Auth::user();
       $program = Program::where('id',$program_id)->firstOrFail();
       $module  = $program->modules()->where('id',$module_id)->firstOrFail();
       $session = $module->sessions()->where('id',$session_id)->firstOrFail();
@@ -357,6 +373,13 @@ class ModuleSessions extends Controller
       $order = $session->order;
       $temp  = $order;
       $last_parent_id = null;
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'session_id'  => $session->id,
+        'module_id'   => $session->module_id,
+        'program_id'  => $session->module->program->id,
+        'type'        => 'delete: '.str_limit($session->name, 150)
+      ]);
       $session->delete();
      foreach ($program->get_all_sessions()->get() as $session) {
           if($order < $session->order){
@@ -487,6 +510,13 @@ class ModuleSessions extends Controller
           ]);
         }
       }
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'session_id'  => $session->id,
+        'module_id'   => $session->module_id,
+        'program_id'  => $session->module->program->id,
+        'type'        => 'assign'
+      ]);
       return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
     }
 

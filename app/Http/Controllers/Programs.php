@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Program;
+use App\Models\Log;
 use App\Models\Notice;
 use App\Models\NoticeProgram;
 use App\User;
@@ -66,6 +67,11 @@ class Programs extends Controller
       $program = new Program($data);
       $program->save();
       $noticeProgram = NoticeProgram::firstOrCreate(['notice_id'=>$request->notice_id,'program_id'=>$program->id]);
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'program_id'  => $program->id,
+        'type'        => 'create'
+      ]);
       return redirect("dashboard/programas/ver/$program->id")->with('success',"Se ha guardado correctamente");
     }
 
@@ -118,9 +124,15 @@ class Programs extends Controller
     public function update(UpdateProgram $request)
     {
       //
+      $user = Auth::user();
       $data   = $request->except('_token');
       $data['slug']    = str_slug($request->title);
       Program::where('id',$request->id)->update($data);
+      $log = Log::firstOrCreate([
+        'user_id'     => $user->id,
+        'program_id'  => $request->id,
+        'type'        => 'update'
+      ]);
       return redirect("dashboard/programas/ver/$request->id")->with('success',"Se ha actualizado correctamente");
     }
 

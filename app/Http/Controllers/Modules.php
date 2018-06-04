@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 // models
 use App\Models\Module;
+use App\Models\Log;
 use App\Models\Program;
 use App\User;
 // FormValidators
@@ -84,6 +85,12 @@ class Modules extends Controller
     $module = new Module($data);
     $module->save();
     $order = $this->checkOrder($module);
+    $log = Log::firstOrCreate([
+      'user_id'     => $user->id,
+      'module_id'   => $module->id,
+      'program_id'  => $program->id,
+      'type'        => 'create'
+    ]);
     return redirect("dashboard/programas/$request->program_id/modulos/ver/$module->id")->with('success',"Se ha guardado correctamente");
   }
 
@@ -138,12 +145,19 @@ class Modules extends Controller
   public function update(UpdateModule $request)
   {
     //
+    $user = Auth::user();
     $program  = Program::where('id',$request->program_id)->firstOrFail();
     $module   = Module::where('id',$request->module_id)->firstOrFail();
     $data     = $request->except('_token');
     $data['slug']    = str_slug($request->title);
     $data['program_id'] = $module->program_id;
     $this->checkUpdateOrder($data,$module);
+    $log = Log::firstOrCreate([
+      'user_id'     => $user->id,
+      'module_id'   => $module->id,
+      'program_id'  => $program->id,
+      'type'        => 'update'
+    ]);
     return redirect("dashboard/programas/$program->id/modulos/ver/$request->module_id")->with('success',"Se ha actualizado correctamente");
   }
 
@@ -157,6 +171,7 @@ class Modules extends Controller
   {
     //
     //
+    $user = Auth::user();
     $program = Program::where('id',$program_id)->firstOrFail();
     $module  = $program->modules()->where('id',$module_id)->firstOrFail();
     $sessions = $module->sessions;
@@ -179,6 +194,12 @@ class Modules extends Controller
     $session->all_forum()->delete();
     $session->delete();
     }
+    $log = Log::firstOrCreate([
+      'user_id'     => $user->id,
+      'module_id'   => $module->id,
+      'program_id'  => $program->id,
+      'type'        => 'delete: '.str_limit($module->title, 150)
+    ]);
     $module->delete();
     return redirect("dashboard/programas/ver/$program->id")->with(['success'=>'Se ha eliminado correctamente']);
   }
