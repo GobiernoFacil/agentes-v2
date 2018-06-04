@@ -2904,6 +2904,64 @@ a.btn_message_list {
     height: 47px;
     width: 47px; }
 
+/* =evaluación
+-------------------------------------------------------------- */
+.ap_modal-bg {
+  padding-top: 100px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #353c59;
+  background-color: rgba(53, 60, 89, 0.7);
+  z-index: 100;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70); }
+  .ap_modal-bg .box {
+    padding: 70px 90px;
+    position: absolute;
+    width: 90%;
+    left: 5%; }
+    .ap_modal-bg .box h2 {
+      margin-bottom: 30px; }
+  .ap_modal-bg .error {
+    background: #f8bab8;
+    padding: 38px 30px; }
+    .ap_modal-bg .error p {
+      color: #bf0404;
+      font-weight: 700; }
+      .ap_modal-bg .error p a.sessions_l {
+        background: #ff0000;
+        border-color: #bf0404; }
+        .ap_modal-bg .error p a.sessions_l:hover {
+          background: #e60000; }
+  .ap_modal-bg .success {
+    background: #d2f9d2;
+    display: block;
+    padding: 38px 30px; }
+    .ap_modal-bg .success p {
+      color: #0f962c;
+      font-weight: 700; }
+
+.ap_test_count {
+  border-bottom: 2px solid #f1f1f1;
+  color: #404040;
+  margin-bottom: 60px;
+  text-align: right;
+  text-transform: uppercase; }
+
+.ap_test_answers {
+  margin-bottom: 80px; }
+  .ap_test_answers li {
+    position: relative;
+    color: #666;
+    font-size: 16px;
+    list-style: none;
+    margin-bottom: 20px; }
+    .ap_test_answers li input {
+      left: -25px;
+      position: absolute; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 .gobiernofacil {
