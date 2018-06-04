@@ -12,7 +12,7 @@
     <p><strong>Instrucciones:</strong> Selecciona las respuestas correctas.</p>
   </div>
 </div>
-<div class="ap_modal-bg">
+<div class="ap_modal-bg" >
 	<div class="box">
 		<div class="row">
 		  <div class="col-sm-12">
@@ -20,25 +20,25 @@
 		    @include('fellow.evaluation.forms.template-form')
 		    */ ?>
 		    <p id="GF-PNUD-start-quiz-btn"><a href="#">El botón que inicia el cuestionario</a></p>
-		
+
 		    <div id="GF-PNUD-quiz-texmplate" style="display: none;">
-		      <p class="ap_test_count">PREGUNTA 
-		        <span id="GF-PNUD-quiz-current-question"></span> de 
+		      <p class="ap_test_count">PREGUNTA
+		        <span id="GF-PNUD-quiz-current-question"></span> de
 		        <span id="GF-PNUD-quiz-total-questions"></span>
 		      </p>
-		
+
 		      <h2 id="GF-PNUD-quiz-question"></h2>
 		      <form>
 		        <ul id="GF-PNUD-quiz-answers" class="ap_test_answers"></ul>
 		      </form>
-		
+
 		      <div id="GF-PNUD-quiz-status-bar">
 		        <p style="display: none;" id="GF-PNUD-quiz-good-response">Tu respuesta es correcta</p>
 		        <p style="display: none;" id="GF-PNUD-quiz-bad-response">Tu respuesta es incorrecta</p>
 		        <div class="row">
 			        <div class="col-sm-2 col-sm-offset-10">
 						<p id="GF-PNUD-quiz-eval-btn"><a href="#" class="btn view block sessions_l">Continuar</a></p>
-			        
+
 						<p style="display: none" id="GF-PNUD-quiz-next-btn"><a class="btn view block sessions_l" href="#">Continuar</a></p>
 						<p style="display: none;" id="GF-PNUD-quiz-end-btn"><a class="btn view block sessions_l" href="{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save")}}">Finalizar</a></p>
 		        	</div>
@@ -72,7 +72,7 @@
   (function(){
     var successClass = "success",
         errorClass   = "error",
-        evalURL      = "/las-respuestas-fake",
+        evalURL      = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
         endURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save")}}',
         activity     = {!!$activity->quizInfo->toJson()!!},
         questions    = {!!$activity->quizInfo->question->toJson()!!},
@@ -106,7 +106,7 @@
         uiEndBtn         = uiEnd.querySelector("a"),
         uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML;
 
-    
+
 
     render.showInterface = function(){
       uiStart.style.display    = "none";
@@ -126,7 +126,7 @@
       uiStatusBar.classList.remove(errorClass);
       uiBadResponse.style.display  = "none";
       uiGoodResponse.style.display = "none";
-      
+
       uiAnswers.innerHTML          = "";
       uiQuestion.innerHTML         = questions[question].question;
 
@@ -145,7 +145,7 @@
       uiGoodResponse.style.display = "block";
       currentSlide += 1;
       uiEval.style.display = "none";
-      
+
       if(currentSlide == questions.length){
         console.log("show ui end");
         uiEnd.style.display = "block";
@@ -161,7 +161,7 @@
       uiBadResponse.style.display = "block";
       currentSlide += 1;
       uiEval.style.display = "none";
-      
+
       if(currentSlide  == questions.length){
         console.log("show ui end");
         uiEnd.style.display = "block";
@@ -199,7 +199,7 @@
       if(!selected) return;
 
       $.get(evalURL, {
-        activity : activity.activity_id, 
+        activity : activity.activity_id,
         question : selected.getAttribute("data-question"),
         answer   : [selected.value]
       }, function(response){

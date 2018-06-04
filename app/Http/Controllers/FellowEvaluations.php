@@ -77,7 +77,7 @@ class FellowEvaluations extends Controller
         $user         = Auth::user();
         $activity     = Activity::where('slug',$activity_slug)->firstOrFail();
         if(!$activity->quizInfo){
-          return redirect('tablero');
+          return redirect('tablero')->with(['error'=>'Ocurrió un problema, por favor contacta a soporte. ']);
         }else{
           if($activity->fellowScore($user->id)){
              return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")->with('message','Ya has contestado la evaluación.');
