@@ -1,11 +1,11 @@
-<div class="ap_modal-bg" style="display:none;" id='ev_modal'> 
+<div class="ap_modal-bg" style="display:none;" id='ev_modal'>
 	<div class="box">
 		<div class="row">
 		  <div class="col-sm-12">
 		    <?php /*
 		    @include('fellow.evaluation.forms.template-form')
-		    */ ?>
-		    <p id="GF-PNUD-start-quiz-btn"><a href="#">El botón que inicia el cuestionario</a></p>
+
+		      <p id="GF-PNUD-start-quiz-btn"><a href="#">El botón que inicia el cuestionario</a></p>*/ ?>
 
 		    <div id="GF-PNUD-quiz-texmplate" style="display: none;">
 		      <p class="ap_test_count">PREGUNTA
