@@ -31,7 +31,7 @@
 	</div>
 	<!-- descripción-->
 	<div class="col-sm-12">
-		<p>{{$forum->description}}</p>
+		<p class="ap_message_f">{{$forum->description}}</p>
 	</div>
 </div>
 
