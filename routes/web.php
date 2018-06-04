@@ -15,11 +15,6 @@
 use Illuminate\Http\Request;
 Auth::routes();
 
-/* LA RUTA QUE RESPONDE DE A MENTIRITAS */
-Route::get('las-respuestas-fake', function(Request $r){
-    return response()->json(["response" => random_int(0, 1), "original" => $r->all()]);
-});
-
 /******** Páginas estáticas y de consulta***************/
 /*@front Controller */
 /*********  INICIO ******** */
@@ -516,6 +511,7 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/calificaciones/metodologia', 'FellowEvaluations@methodology');
           Route::get('tablero/{program_slug}/evaluacion/{activity_slug}', 'FellowEvaluations@add');
           Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
+          Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/evaluar', 'FellowEvaluations@evaluate');
           Route::get('tablero/{program_slug}/evaluaciones', 'FellowEvaluations@indexEvaluations');
           /*@FellowSurveys*/
           // Rutas encuestas

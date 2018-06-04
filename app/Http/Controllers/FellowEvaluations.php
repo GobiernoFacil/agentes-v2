@@ -15,6 +15,7 @@ use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Program;
 use App\Models\QuizInfo;
+use App\Models\Question;
 use App\Models\RetroLog;
 // FormValidators
 use App\Http\Requests\SaveFellowEvaluation;
@@ -219,6 +220,23 @@ class FellowEvaluations extends Controller
            'modules' =>$modules,
            'today' => $today
       ]);
+
+    }
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function evaluate(Request $request){
+       $activity = Activity::find($request->activity);
+       $question = Question::find($request->question);
+       $correct_answers = $question->all_correct_Answer();
+       if($correct_answers->pluck('id')->contains($request->answer)){
+         return response()->json(["response" => 1, "original" => $request->all()]);
+       }else{
+         return response()->json(["response" => 0, "correct" => $correct_answers->pluck('value')->toArray()]);
+       }
 
     }
 

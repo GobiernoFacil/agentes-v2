@@ -239,18 +239,18 @@
   </li>
 </script>
 <script>
-	var module     = {!! json_encode($activity->session->module) !!},
-	    sessions   = {!! json_encode($activity->session->module->sessions) !!},
+	var module     = {!! json_encode($activity->session->module->pluck('title','slug')) !!},
+	    sessions   = {!! json_encode($activity->session->module->sessions->pluck('name','slug')) !!},
 	    activities = [];
 
 	    @foreach($activity->session->module->sessions as $session)
-	    activities.push({!! json_encode($session->activities) !!});
+	    activities.push({!! json_encode($session->activities->pluck('name','slug')) !!});
 	    @endforeach
 			(function(){
 		    var successClass = "success",
 		        errorClass   = "error",
 		        evalURL      = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
-		        endURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/save")}}',
+		        endURL       = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
 		        activity     = {!!$activity->quizInfo->toJson()!!},
 		        questions    = {!!$activity->quizInfo->question->toJson()!!},
 		        answers      = [
@@ -264,6 +264,7 @@
 		        startBtn     = document.getElementById("ev_init"),
 		        currentSlide = 0,
 		        render       = {},
+						_token       = '{{ csrf_token() }}',
 
 		        // ui elements
 		        uiStart          = document.getElementById("ev_init"),
@@ -282,6 +283,7 @@
 		        uiEvalBtn        = uiEval.querySelector("a"),
 		        uiEnd            = document.getElementById("GF-PNUD-quiz-end-btn"),
 		        uiEndBtn         = uiEnd.querySelector("a"),
+						uiCorrectAns     = document.getElementById("GF-PNUD-quiz-correct-answers"),
 		        uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML;
 
 
@@ -334,12 +336,18 @@
 		      }
 		    };
 
-		    render.showError = function(){
+		    render.showError = function(answers){
 		      uiStatusBar.classList.add(errorClass);
 		      uiBadResponse.style.display = "block";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
-
+					uiCorrectAns.innerHTML = '';
+					for (var i = 0; i < answers.length; i++) {
+						var li = document.createElement("li");
+					  li.appendChild(document.createTextNode(answers[i]));
+					  uiCorrectAns.appendChild(li);
+					}
+					uiCorrectAns.style.display = "block";
 		      if(currentSlide  == questions.length){
 		        console.log("show ui end");
 		        uiEnd.style.display = "block";
@@ -362,6 +370,7 @@
 
 		    uiNextBtn.addEventListener("click", function(e){
 		      e.preventDefault();
+					uiCorrectAns.style.display = "none";
 		      console.log("next", currentSlide);
 		      render.updatePagination(currentSlide, questions.length);
 
@@ -376,18 +385,21 @@
 		      console.log("eval", currentSlide);
 		      var selected = uiAnswers.querySelector("input[name='answer']:checked");
 		      if(!selected) return;
-
-		      $.get(evalURL, {
+					console.log(activity.activity_id);
+					console.log(selected.getAttribute("data-question"));
+					console.log(selected.value);
+		      $.post(evalURL, {
+						_token   : _token,
 		        activity : activity.activity_id,
 		        question : selected.getAttribute("data-question"),
-		        answer   : [selected.value]
+		        answer   : selected.value
 		      }, function(response){
-		        console.log("aquí muere");
 		        if(response.response){
 		          render.showSuccess();
 		        }
 		        else{
-		          render.showError();
+		          render.showError(response.correct);
+							console.log(response.correct);
 		        }
 		      }, "json");
 		    });
