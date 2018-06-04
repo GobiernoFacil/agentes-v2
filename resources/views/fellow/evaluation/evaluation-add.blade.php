@@ -144,12 +144,14 @@
       uiStatusBar.classList.add(successClass);
       uiGoodResponse.style.display = "block";
       currentSlide += 1;
-      uiEvalBtn.style.display = "none";
+      uiEval.style.display = "none";
       
       if(currentSlide == questions.length){
+        console.log("show ui end");
         uiEnd.style.display = "block";
       }
       else{
+        console.log("show ui next");
         uiNext.style.display = "block";
       }
     };
@@ -158,12 +160,14 @@
       uiStatusBar.classList.add(errorClass);
       uiBadResponse.style.display = "block";
       currentSlide += 1;
-      uiEvalBtn.style.display = "none";
+      uiEval.style.display = "none";
       
       if(currentSlide  == questions.length){
+        console.log("show ui end");
         uiEnd.style.display = "block";
       }
       else{
+        console.log("show ui next");
         uiNext.style.display = "block";
       }
     };
@@ -179,18 +183,18 @@
 
     uiNextBtn.addEventListener("click", function(e){
       e.preventDefault();
-      console.log("next");
+      console.log("next", currentSlide);
       render.updatePagination(currentSlide, questions.length);
 
-      uiEvalBtn.style.display      = "block";
-      uiNextBtn.style.display      = "none";
+      uiEval.style.display      = "block";
+      uiNext.style.display      = "none";
 
       render.renderSlide(currentSlide);
     });
 
     uiEvalBtn.addEventListener("click", function(e){
       e.preventDefault();
-
+      console.log("eval", currentSlide);
       var selected = uiAnswers.querySelector("input[name='answer']:checked");
       if(!selected) return;
 
@@ -199,6 +203,7 @@
         question : selected.getAttribute("data-question"),
         answer   : [selected.value]
       }, function(response){
+        console.log("aquí muere");
         if(response.response){
           render.showSuccess();
         }
