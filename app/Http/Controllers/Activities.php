@@ -9,6 +9,7 @@ use File;
 use App\Models\Activity;
 use App\Models\ActivityVideo;
 use App\Models\ModuleSession;
+use App\Models\Log;
 use App\Models\Forum;
 use App\Models\ForumConversation;
 
@@ -133,7 +134,14 @@ class Activities extends Controller
               $forum->save();
             }
 
-
+            $log = Log::firstOrCreate([
+              'user_id'     => $user->id,
+              'session_id'  => $session->id,
+              'module_id'   => $session->module_id,
+              'program_id'  => $session->module->program->id,
+              'activity_id' => $activity->id,
+              'type'        => 'create'
+            ]);
 
             if($activity->hasfiles){
               //Agregar archivos
@@ -288,6 +296,15 @@ class Activities extends Controller
               }
             }
 
+            $log = Log::firstOrCreate([
+              'user_id'     => $user->id,
+              'session_id'  => $last->session->id,
+              'module_id'   => $last->session->module_id,
+              'program_id'  => $last->session->module->program->id,
+              'activity_id' => $last->id,
+              'type'        => 'update'
+            ]);
+
           if($request->hasfiles && $last->hasfiles != $request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
@@ -324,6 +341,7 @@ class Activities extends Controller
         public function delete($id)
         {
             //
+            $user   = Auth::user();
             $activity = Activity::where('id',$id)->firstOrFail();
             $session = $activity->session;
             foreach ($activity->activityFiles as $file) {
@@ -350,6 +368,14 @@ class Activities extends Controller
               }
               $activity->quizInfo->delete();
             }
+            $log = Log::firstOrCreate([
+              'user_id'     => $user->id,
+              'session_id'  => $activity->session->id,
+              'module_id'   => $activity->session->module_id,
+              'program_id'  => $activity->session->module->program->id,
+              'activity_id' => $activity->id,
+              'type'        => 'delete: '.str_limit($activity->name, 150)
+            ]);
             $activity->delete();
             return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha eliminado correctamente");
         }
