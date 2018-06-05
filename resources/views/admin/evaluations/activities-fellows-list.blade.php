@@ -39,7 +39,7 @@
 			        <td>{{$score->user->fellowData->city}} <br> {{$score->user->fellowData->state}}</td>
 			        <td>{{$score->user->fellowData->origin}}</td>
 			        <td><a title="{{date('d-m-Y H:i', strtotime($score->created_at))}}">{{$score->created_at->diffForHumans()}}</a> </td>
-							<td>{{$score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id) ? number_format($score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id)->score,2)  : 'Sin evaluar'}}</td>
+							<td>{{$score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id) ? number_format($score->user->FellowScoreActivity($score->user->id,$activity->quizInfo->id)->score,2)*10  : 'Sin evaluar'}}</td>
 			        <td>
 			          <a href ='{{url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/resultados/$score->id")}}'   class="btn xs view ev">Ver</a></td>
 			    </tr>
