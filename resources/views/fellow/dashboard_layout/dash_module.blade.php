@@ -71,11 +71,13 @@
 								<p>No aplica</p>
 								@else
 									@if($evAct->quizInfo)
+										@if(!$evAct->files)
 											@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
-												<p>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</p>
+												<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
 											@else
 												<p>Sin calificación</p>
 											@endif
+										@endif
 									@else
 											  <p>Sin calificación</p>
 									@endif
