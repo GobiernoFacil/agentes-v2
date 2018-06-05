@@ -2935,6 +2935,8 @@ a.btn_message_list {
         border-color: #bf0404; }
         .ap_modal-bg .error p a.sessions_l:hover {
           background: #e60000; }
+    .ap_modal-bg .error #GF-PNUD-quiz-correct-answers li {
+      color: #bf0404; }
   .ap_modal-bg .success {
     background: #d2f9d2;
     display: block;
