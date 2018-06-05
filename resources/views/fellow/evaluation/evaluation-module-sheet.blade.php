@@ -15,9 +15,13 @@
 	 <p>Calificación: <span class="score_a block">{{$user->module_average($module->id) ? number_format($user->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
    </span></p>
   </div>
+  <?php
+  /*
 	<div class="col-sm-12">
 		<p><a href='{{ url("tablero/$program->slug/calificaciones/metodologia") }}' class="link">Consulta la metodología de las calificaciones ></a></p>
 	</div>
+  */
+  ?>
 </div>
 <div class="box score">
   <div class="row">
