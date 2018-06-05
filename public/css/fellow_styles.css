@@ -2924,6 +2924,8 @@ a.btn_message_list {
     left: 5%; }
     .ap_modal-bg .box h2 {
       margin-bottom: 30px; }
+  .ap_modal-bg li.correct {
+    border-bottom: 3px solid #d2f9d2; }
   .ap_modal-bg .error {
     background: #f8bab8;
     padding: 38px 30px; }
