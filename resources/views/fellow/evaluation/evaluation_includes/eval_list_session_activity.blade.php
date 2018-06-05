@@ -35,7 +35,7 @@
         @endif
         </span>
         <span class="col-sm-3 right">
-    			{{$user->fileFellowScore($activity->id) ? number_format($user->fileFellowScore($activity->id)->score,2) : "Sin calificación" }}
+    			{{$user->fileFellowScore($activity->id) ? number_format($user->fileFellowScore($activity->id)->score,2)*10 : "Sin calificación" }}
         </span>
     @else
     	<span class="col-sm-3">
@@ -54,7 +54,7 @@
         <span class="col-sm-3 right">
         @if($activity->quizInfo)
             @if($activity->fellowScore($user->id))
-            	{{$activity->fellowScore($user->id) ? number_format($activity->fellowScore($user->id)->score,2) : "No realizado" }}
+            	{{$activity->fellowScore($user->id) ? number_format($activity->fellowScore($user->id)->score,2)*10 : "No realizado" }}
             @else
             	<span>No realizado</span>
             @endif

@@ -12,7 +12,7 @@
     <h2>{{$module->title}}</h2>
   </div>
  <div class="col-sm-3 right">
-	 <p>Calificación: <span class="score_a block">{{$user->module_average($user->id,$module->id) ? $user->module_average($user->id,$module->id)->type !='sin' ? number_format($user->module_average($user->id,$module->id)->average,2) : 'No aplica'  : 'Sin calificación'}}
+	 <p>Calificación: <span class="score_a block">{{$user->module_average($module->id) ? number_format($user->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
    </span></p>
   </div>
 	<div class="col-sm-12">

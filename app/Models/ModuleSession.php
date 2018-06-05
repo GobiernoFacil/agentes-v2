@@ -81,7 +81,7 @@ protected $fillable = [
 
   function activities_kardex_fellow($user_id){
     $today      = date('Y-m-d');
-    $done       = FellowProgress::where('fellow_id',$user_id)->where('type','activity')->where('program_id',$this->module->program->id)->where('status',1)->pluck('activity_id')->toArray();
+    $done       = FellowProgress::where('session_id',$this->id)->where('fellow_id',$user_id)->where('type','activity')->where('program_id',$this->module->program->id)->where('status',1)->pluck('activity_id')->toArray();
     $activities = Activity::where('session_id',$this->id)->where('end','<=',$today)->where('type','evaluation')
     ->orWhere(function($query)use($done){
       $query->whereIn('id',$done)->where('type','evaluation');
@@ -116,6 +116,16 @@ protected $fillable = [
                                 ->toArray();
       return Forum::whereIn('activity_id',$done)->get();
     }
+  }
+
+  function all_activities_for_kardex($user_id){
+      $activites = $this->activities_kardex_fellow($user_id)->pluck('id')->toArray();
+      $forums    = $this->activity_forum_kardex($user_id)->pluck('activity_id')->toArray();
+      return Activity::whereIn('id',$activites)
+        ->orWhere(function($query)use($forums){
+        $query->whereIn('id',$forums);
+      })
+      ->orderBy('end','asc')->get();
   }
 
 

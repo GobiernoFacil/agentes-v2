@@ -9,7 +9,11 @@
 		Calificación de la sesión: <br>
 		<?php $today = date('Y-m-d');?>
 		<strong>
-			{{$user->session_average($user->id,$session->id) ? $user->session_average($user->id,$session->id)->type !='sin' ? number_format(($user->session_average($user->id,$session->id)->average)*10,2) : 'No aplica' : 'Sin calificación'}}
+			@if($session->all_activities_for_kardex($user->id)->count() > 0)
+				{{$user->session_average($session->id) ?  number_format(($user->session_average($session->id)->average),2)*10 : 'Sin calificación'}}
+			@else
+			 No aplica
+			@endif
 		</strong>
 	</span>
 	<span class="col-sm-11">

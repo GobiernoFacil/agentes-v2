@@ -163,8 +163,8 @@ class User extends Authenticatable
       return FellowAverage::where('user_id',$this->id)->where('module_id',$module_id)->where('type','module')->first();
     }
 
-    function session_average($user_id,$session_id){
-      return FellowAverage::where('user_id',$user_id)->where('session_id',$session_id)->first();
+    function session_average($session_id){
+      return FellowAverage::where('user_id',$this->id)->where('session_id',$session_id)->where('type','session')->first();
     }
     function forum_participation(){
       $forum  = new Forum();

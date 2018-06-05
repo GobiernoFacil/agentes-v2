@@ -148,7 +148,12 @@ class Module extends Model
 
     function get_evaluation_activity_kardex(){
       $sessions  = $this->sessions->pluck('id')->toArray();
-      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->get();
+      $forum_act = $this->get_all_activities_with_forums()->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')
+      ->orWhere(function($query)use($forum_act){
+        $query->whereIn('id',$forum_act);
+      })
+      ->get();
     }
 
     function get_all_activities_with_forums(){
