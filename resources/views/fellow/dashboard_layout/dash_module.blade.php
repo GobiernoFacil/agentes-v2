@@ -70,7 +70,15 @@
 								@if($evAct->type==='diagnostic')
 								<p>No aplica</p>
 								@else
-								<p>Sin calificación</p>
+									@if($evAct->quizInfo)
+											@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
+												<p>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</p>
+											@else
+												<p>Sin calificación</p>
+											@endif
+									@else
+											  <p>Sin calificación</p>
+									@endif
 								@endif
 
 							</div>
