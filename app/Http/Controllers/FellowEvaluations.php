@@ -229,12 +229,24 @@ class FellowEvaluations extends Controller
     * @return \Illuminate\Http\Response
     */
     public function evaluate(Request $request){
+       $user     = Auth::user();
        $activity = Activity::find($request->activity);
        $question = Question::find($request->question);
        $correct_answers = $question->all_correct_Answer();
+       $answer = FellowAnswer::firstOrCreate([
+         'user_id'          => $user->id,
+         'question_id'      => $request->question,
+         'answer_id'        => $request->answer,
+         'questionInfo_id'  => $question->quizInfo->id
+
+       ]);
        if($correct_answers->pluck('id')->contains($request->answer)){
+         $answer->correct  = 1;
+         $answer->save();
          return response()->json(["response" => 1, "original" => $request->all()]);
        }else{
+         $answer->correct  = 0;
+         $answer->save();
          return response()->json(["response" => 0, "correct" => $correct_answers->pluck('value')->toArray()]);
        }
 

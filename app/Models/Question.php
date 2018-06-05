@@ -13,7 +13,7 @@ class Question extends Model
 
     //modelos relacionados
     function quizInfo(){
-      return $this->belongsTo("App\Models\QuizInfo");
+      return $this->belongsTo("App\Models\QuizInfo",'quizInfo_id');
     }
 
     function answer(){
