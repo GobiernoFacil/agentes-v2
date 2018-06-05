@@ -280,6 +280,7 @@
 		        uiGoodResponse   = document.getElementById("GF-PNUD-quiz-good-response"),
 		        uiBadResponse    = document.getElementById("GF-PNUD-quiz-bad-response"),
 		        uiNext           = document.getElementById("GF-PNUD-quiz-next-btn"),
+						uiNull					 = document.getElementById("GF-PNUD-quiz-null-response"),
 		        uiNextBtn        = uiNext.querySelector("a"),
 		        uiEval           = document.getElementById("GF-PNUD-quiz-eval-btn"),
 		        uiEvalBtn        = uiEval.querySelector("a"),
@@ -325,15 +326,14 @@
 		    render.showSuccess = function(){
 		      uiStatusBar.classList.add(successClass);
 		      uiGoodResponse.style.display = "block";
+					uiNull.style.display = "none";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
 
 		      if(currentSlide == questions.length){
-		        console.log("show ui end");
 		        uiEnd.style.display = "block";
 		      }
 		      else{
-		        console.log("show ui next");
 		        uiNext.style.display = "block";
 		      }
 		    };
@@ -343,6 +343,7 @@
 		      uiBadResponse.style.display = "block";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
+					uiNull.style.display = "none";
 					uiCorrectAns.innerHTML = '';
 					for (var i = 0; i < answers.length; i++) {
 						var li = document.createElement("li");
@@ -351,11 +352,8 @@
 					}
 					uiCorrectAns.style.display = "block";
 		      if(currentSlide  == questions.length){
-		        console.log("show ui end");
 		        uiEnd.style.display = "block";
-		      }
-		      else{
-		        console.log("show ui next");
+		      }else{
 		        uiNext.style.display = "block";
 		      }
 		    };
@@ -373,7 +371,6 @@
 		    uiNextBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiCorrectAns.style.display = "none";
-		      console.log("next", currentSlide);
 		      render.updatePagination(currentSlide, questions.length);
 
 		      uiEval.style.display      = "block";
@@ -384,12 +381,12 @@
 
 		    uiEvalBtn.addEventListener("click", function(e){
 		      e.preventDefault();
-		      console.log("eval", currentSlide);
+					uiNull.style.display = "none";
 		      var selected = uiAnswers.querySelector("input[name='answer']:checked");
-		      if(!selected) return;
-					console.log(activity.activity_id);
-					console.log(selected.getAttribute("data-question"));
-					console.log(selected.value);
+		      if(!selected){
+						uiNull.style.display = "block";
+						return
+					}
 		      $.post(evalURL, {
 						_token   : _token,
 		        activity : activity.activity_id,
@@ -401,7 +398,6 @@
 		        }
 		        else{
 		          render.showError(response.correct);
-							console.log(response.correct);
 		        }
 		      }, "json");
 		    });
@@ -423,7 +419,6 @@
 			    @else
 			      $('.delete{{$countP}}_{{$count}}').click(function(event) {
 			          event.preventDefault();
-			          console.log('this');
 			          $('.answer_q{{$countP}}').not(this).attr('checked', false);
 			       });
 			    @endif

@@ -19,19 +19,18 @@
 </div>
 <div class="box score">
   <div class="row">
-
     <div class="col-sm-12">
 	    <div class="divider"></div>
-    @if($modules->count() > 0)
-  		<?php $n = 1;?>
-  		@foreach($modules as $module)
-  				<!-- evaluaciones por módulo-->
-  				@include('fellow.evaluation.evaluation_includes.eval_list')
-  				<?php $n++;?>
-  		@endforeach
-    @else
-       <p><strong>Aún no se cuenta con módulos activos.</strong></p>
-    @endif
+          @if($modules->count() > 0)
+        		<?php $n = 1;?>
+        		@foreach($modules as $module)
+        				<!-- evaluaciones por módulo-->
+        				@include('fellow.evaluation.evaluation_includes.eval_list')
+        				<?php $n++;?>
+        		@endforeach
+          @else
+             <p><strong>Aún no se cuenta con módulos activos.</strong></p>
+          @endif
     </div>
   </div>
 </div>

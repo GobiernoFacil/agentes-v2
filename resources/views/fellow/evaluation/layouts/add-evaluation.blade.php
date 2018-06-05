@@ -23,6 +23,7 @@
             <p style="display: none;" id="GF-PNUD-quiz-bad-response">Tu respuesta es incorrecta, respuestas correctas: </p>
             <ul style="display: none;" id="GF-PNUD-quiz-correct-answers" >
             </ul>
+						<p style="display: none;" id="GF-PNUD-quiz-null-response" >Selecciona una opción</p>
 		        <div class="row">
 			        <div class="col-sm-2 col-sm-offset-10">
 						          <p id="GF-PNUD-quiz-eval-btn"><a href="#" class="btn view block sessions_l">Continuar</a></p>
