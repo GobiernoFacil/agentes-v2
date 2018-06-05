@@ -28,6 +28,7 @@
         				@include('fellow.evaluation.evaluation_includes.eval_list')
         				<?php $n++;?>
         		@endforeach
+            {{$modules->links()}}
           @else
              <p><strong>Aún no se cuenta con módulos activos.</strong></p>
           @endif

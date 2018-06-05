@@ -185,7 +185,7 @@ class Program extends Model
     function get_active_modules(){
       $today = date('Y-m-d');
       $ids   = $this->fellow_modules->pluck('id')->toArray();
-      return Module::whereIn('id',$ids)->where('start','<=',$today);
+      return Module::whereIn('id',$ids)->where('start','<=',$today)->orderBy('start','asc');
     }
 
     function get_assigned_sessions($user_id){

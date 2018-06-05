@@ -27,7 +27,7 @@ class FellowAverage extends Controller
   {
     $user     = Auth::user();
     $program  = $user->actual_program();
-    $modules  = $program->get_active_modules()->get();
+    $modules  = $program->get_active_modules()->paginate(10);
     return view('fellow.evaluation.evaluation-sheet')->with(
      [
        'user'=>$user,
