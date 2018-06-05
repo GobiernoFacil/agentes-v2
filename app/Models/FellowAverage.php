@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Activity;
 use App\Models\FellowScore;
@@ -167,7 +167,7 @@ class FellowAverage extends Model
 
 
     function all_activities_score_by_session($session){
-      $ev_activities = $session->activity_eval_by_date();
+      $ev_activities = $session->activities_kardex_fellow(Auth::user()->id);
       if($ev_activities->count()>0){
         $total_score = 0;
         foreach ($ev_activities as $_activity) {
@@ -191,7 +191,7 @@ class FellowAverage extends Model
     }
 
     function score_all_forums_participation($session){
-      $forums   = $session->activity_forum_by_date();
+      $forums   = $session->activity_forum_kardex(Auth::user()->id);
       if($forums->count()>0){
         $total_score = 0;
         foreach ($forums as $forum){
