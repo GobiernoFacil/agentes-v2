@@ -94,7 +94,7 @@ protected $fillable = [
     $today      = date('Y-m-d');
     $module     = $this->module;
     if($module->end <= $today){
-      return Forum::where('session_id',$this->id)->orderBy('end','asc')->get();
+      return Forum::where('session_id',$this->id)->get();
     }else{
       //respuesta forzada a cero
       return Forum::where('type','no-one')->get();
@@ -105,7 +105,7 @@ protected $fillable = [
     $today      = date('Y-m-d');
     $module     = $this->module;
     if($module->end <= $today){
-      return Forum::where('session_id',$this->id)->orderBy('end','asc')->get();
+      return Forum::where('session_id',$this->id)->get();
     }else{
       //respuesta forzada a cero
       $done     = FellowProgress::where('fellow_id',$user_id)->where('type','forum')
