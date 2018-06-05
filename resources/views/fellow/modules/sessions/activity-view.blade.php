@@ -230,6 +230,7 @@
 
 
 @section('js-content')
+@if($activity->type ==='evaluation' && !$score)
 <script src="/js/bower_components/underscore/underscore-min.js"></script>
 <script type="text/text" id="GF-PNUD-quiz-answer-template">
   <li id="<%=id%>">
@@ -247,13 +248,14 @@
 	    activities.push({!! json_encode($session->activities->pluck('name','slug')) !!});
 	    @endforeach
 			(function(){
-		    var successClass = "success",
-		        errorClass   = "error",
-		        evalURL      = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
-		        endURL       = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
-		        activity     = {!!$activity->quizInfo->select('title','id','description')->first()->toJson()!!},
-		        questions    = {!!$activity->quizInfo->question()->select('question','id')->get()->toJson()!!},
-		        answers      = [
+		    var successClass  = "success",
+		        errorClass    = "error",
+		        evalURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
+		        endURL        = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
+		        activity      = {!!$activity->quizInfo->select('title','id','description')->first()->toJson()!!},
+		        questions     = {!!$fellow_questions->toJson()!!},
+						all_questions = {!!$activity->quizInfo->question()->select('question','id')->get()->toJson()!!},
+		        answers       = [
 		        @foreach($activity->quizInfo->question as $q)
 		          @foreach($q->answer()->select('value','id','question_id')->get() as $a)
 		            {!!$a->toJson()!!},
@@ -429,6 +431,7 @@
 			  @endforeach
 			});
 </script>
+@endif
 
 <script src="{{url('js/app-display-week-menu.js')}}"></script>
 @endsection

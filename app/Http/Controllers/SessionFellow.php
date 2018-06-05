@@ -8,10 +8,10 @@ use Auth;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+use App\Models\FellowAnswer;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\ForumConversation;
-
 use App\Models\Log;
 use App\Models\DiagnosticAnswer;
 use App\User;
@@ -73,9 +73,15 @@ class SessionFellow extends Controller
         $forums   = null;
       }
       if($activity->quizInfo){
-        $score     = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first();
+        if($score  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first()){
+            $fellow_questions = null;
+        }else{
+            $answersAlr = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->pluck('question_id')->toArray();
+            $fellow_questions = $activity->quizInfo->question()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+        }
       }else{
-        $score = null;
+        $score            = null;
+        $fellow_questions = null;
       }
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
       $log->session_id = null;
@@ -90,16 +96,18 @@ class SessionFellow extends Controller
       $log->program_id = $session->module->program->id;
       $log->save();
 
+
       return view('fellow.modules.sessions.activity-view')->with([
-        "user"      => $user,
-        "session"   => $session,
-        "activity"  => $activity,
-        'files'     => $files,
-        "score"     => $score,
-        "forums"	  => $forums,
-        "forum"		  => $forum,
-        "prev"      => $prev,
-        "next"      => $next
+        "user"              => $user,
+        "session"           => $session,
+        "activity"          => $activity,
+        'files'             => $files,
+        "score"             => $score,
+        "forums"	          => $forums,
+        "forum"		          => $forum,
+        "prev"              => $prev,
+        "next"              => $next,
+        "fellow_questions"  =>$fellow_questions
        ]);
     }
 

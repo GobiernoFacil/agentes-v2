@@ -105,7 +105,7 @@ class FellowEvaluations extends Controller
         return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
       }
       if(!$activity->quizInfo){
-        return redirect('tablero');
+        return redirect('tablero')->with(['error'=>'Ocurrió un error, por favor contacta a soporte']);
       }
       $data     = $request->except('_token');
       $countP = 1;
@@ -249,6 +249,53 @@ class FellowEvaluations extends Controller
          $answer->save();
          return response()->json(["response" => 0, "correct" => $correct_answers->pluck('value')->toArray()]);
        }
+
+    }
+
+    /**
+    *Evalua el final de un examen
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function putScore($program_slug,$activity_slug){
+       $user     = Auth::user();
+       $activity = Activity::where('slug',$activity_slug)->firstOrFail();
+       if($activity->fellowScore($user->id)){
+         return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
+       }
+       if(!$activity->quizInfo){
+         return redirect('tablero')->with(['error'=>'Ocurrió un error, por favor contacta a soporte']);
+       }
+       $countP = 1;
+       $question_value = 10/$activity->quizInfo->question->count();
+       $total = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->where('correct',1)->get();
+       $score = $total->count()*$question_value;
+       $uScore = FellowScore::firstOrCreate([
+           'user_id'            =>  $user->id,
+           'questionInfo_id'    =>  $activity->quizInfo->id
+         ]);
+       $uScore->score = $score;
+       $uScore->save();
+       $fellowAverage = FellowAverage::firstOrCreate([
+           'user_id'    => $user->id,
+           'module_id'  => $activity->session->module->id,
+           'session_id' => $activity->session->id,
+           'type'       => 'session',
+           'program_id' => $activity->session->module->program->id,
+       ]);
+       $fellowAverage->scoreSession();
+       $fellowProgress  = FellowProgress::firstOrCreate([
+           'fellow_id'    => $user->id,
+           'module_id'    => $activity->session->module->id,
+           'session_id'   => $activity->session->id,
+           'activity_id'  => $activity->id,
+           'program_id'   => $activity->session->module->program->id,
+           'type'         => 'activity'
+       ]);
+       $fellowProgress->status = 1;
+       $fellowProgress->save();
+       $user->update_progress($activity->session->module);
+       return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
 
     }
 
