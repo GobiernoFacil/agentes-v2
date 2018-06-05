@@ -232,7 +232,7 @@
 						all_questions = {!!$activity->quizInfo->question()->select('question','id')->get()->toJson()!!},
 		        answers       = [
 		        @foreach($activity->quizInfo->question as $q)
-		          @foreach($q->answer()->select('value','id','question_id')->get() as $a)
+		          @foreach($q->answer()->select('value','id','question_id','selected')->get() as $a)
 		            {!!$a->toJson()!!},
 		          @endforeach
 		        @endforeach
@@ -321,9 +321,10 @@
 					uiNull.style.display = "none";
 					uiCorrectAns.innerHTML = '';
 					for (var i = 0; i < answers.length; i++) {
+						var correctAnsId = document.getElementById(answers[i].id);
+						correctAnsId.classList.add(correctClass);
 						var li = document.createElement("li");
-					  li.appendChild(document.createTextNode(answers[i]));
-						li.classList.add(correctClass);
+					  li.appendChild(document.createTextNode(answers[i].value));
 					  uiCorrectAns.appendChild(li);
 					}
 					uiCorrectAns.style.display = "block";

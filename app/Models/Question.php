@@ -31,4 +31,8 @@ class Question extends Model
     function count_correct($question_id){
       return Answer::where('question_id',$question_id)->where('selected',1)->count();
     }
+
+    function get_for_fellow_correct_Answer(){
+      return Answer::select('value','id')->where('question_id',$this->id)->where('selected',1)->get();
+    }
 }

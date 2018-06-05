@@ -232,7 +232,7 @@ class FellowEvaluations extends Controller
        $user     = Auth::user();
        $activity = Activity::find($request->activity);
        $question = Question::find($request->question);
-       $correct_answers = $question->all_correct_Answer();
+       $correct_answers = $question->get_for_fellow_correct_Answer();
        $answer = FellowAnswer::firstOrCreate([
          'user_id'          => $user->id,
          'question_id'      => $request->question,
@@ -247,7 +247,7 @@ class FellowEvaluations extends Controller
        }else{
          $answer->correct  = 0;
          $answer->save();
-         return response()->json(["response" => 0, "correct" => $correct_answers->pluck('value')->toArray()]);
+         return response()->json(["response" => 0, "correct" => $correct_answers->toArray()]);
        }
 
     }
