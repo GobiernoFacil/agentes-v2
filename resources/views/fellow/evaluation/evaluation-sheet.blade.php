@@ -11,7 +11,7 @@
     <h1>Calificaciones</h1>
   </div>
  <div class="col-sm-3 right">
-	 <p>Promedio general: <span class="score_a block">{{$user->total_average($program->id) ? number_format(($user->total_average($program->id)->average)*10,2) : 'Sin promedio'}}</span></p>
+	 <p>Promedio general: <span class="score_a block">{{$user->total_average($program->id) ? number_format(($user->total_average($program->id)->average),2)*10 : 'Sin promedio'}}</span></p>
   </div>
 	<div class="col-sm-12">
 		<p><a href='{{ url("tablero/$program->slug/calificaciones/metodologia") }}' class="link">Consulta la metodología de las calificaciones ></a></p>

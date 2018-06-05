@@ -146,6 +146,11 @@ class Module extends Model
             })->get();
     }
 
+    function get_evaluation_activity_kardex(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')->get();
+    }
+
     function get_all_activities_with_forums(){
       $sessions  = $this->sessions->pluck('id')->toArray();
       return  Activity::whereIn('session_id',$sessions)->where('hasforum',1)->get();
