@@ -2924,6 +2924,8 @@ a.btn_message_list {
     left: 5%; }
     .ap_modal-bg .box h2 {
       margin-bottom: 30px; }
+  .ap_modal-bg li.correct {
+    border-bottom: 3px solid #d2f9d2; }
   .ap_modal-bg .error {
     background: #f8bab8;
     padding: 38px 30px; }
@@ -2935,6 +2937,8 @@ a.btn_message_list {
         border-color: #bf0404; }
         .ap_modal-bg .error p a.sessions_l:hover {
           background: #e60000; }
+    .ap_modal-bg .error #GF-PNUD-quiz-correct-answers li {
+      color: #bf0404; }
   .ap_modal-bg .success {
     background: #d2f9d2;
     display: block;
