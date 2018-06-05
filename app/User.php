@@ -159,9 +159,10 @@ class User extends Authenticatable
     function total_average($program_id){
       return FellowAverage::where('user_id',$this->id)->where('program_id',$program_id)->where('type','final')->first();
     }
-    function module_average($user_id,$module_id){
-      return FellowAverage::where('user_id',$user_id)->where('module_id',$module_id)->first();
+    function module_average($module_id){
+      return FellowAverage::where('user_id',$this->id)->where('module_id',$module_id)->where('type','module')->first();
     }
+
     function session_average($user_id,$session_id){
       return FellowAverage::where('user_id',$user_id)->where('session_id',$session_id)->first();
     }

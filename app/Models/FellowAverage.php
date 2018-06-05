@@ -125,6 +125,8 @@ class FellowAverage extends Model
         $this->scoreAllModules();
       }else{
         //nada que actualizar
+        $module_score->average = 0;
+        $module_score->save();
         return true;
       }
 
