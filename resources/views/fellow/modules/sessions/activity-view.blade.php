@@ -224,6 +224,7 @@
 			(function(){
 		    var successClass  = "success",
 		        errorClass    = "error",
+						correctClass  = "correct",
 		        evalURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
 		        endURL        = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
 		        activity      = {!!$activity->quizInfo->select('title','id','description')->first()->toJson()!!},
@@ -322,6 +323,7 @@
 					for (var i = 0; i < answers.length; i++) {
 						var li = document.createElement("li");
 					  li.appendChild(document.createTextNode(answers[i]));
+						li.classList.add(correctClass);
 					  uiCorrectAns.appendChild(li);
 					}
 					uiCorrectAns.style.display = "block";
