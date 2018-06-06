@@ -392,22 +392,30 @@ class User extends Authenticatable
                 ->where('status',1)
                 ->whereIn('activity_id',$allfr->pluck('id')->toArray())
                 ->where('type','forum')->get();
+     $fp = FellowProgress::firstOrCreate(
+                ['fellow_id' => $this->id,
+                  'program_id' => $module->program->id,
+                  'module_id'  => $module->id,
+                  'type'       => 'module'
+                ]);
 
-      if($allev->count()== $allFeP->count() && $allev->count() > 0 && $allfr->count() > 0 && $allFfP->count()== $allfr->count()){
-        $fp = FellowProgress::firstOrCreate(
-          ['fellow_id' => $this->id,
-          'program_id' => $module->program->id,
-          'module_id'  => $module->id,
-          'type'       => 'module'
-          ]);
-        $fp->status = 1;
-        $fp->save();
+      if($allev->count() > 0){
+        if($allev->count()== $allFeP->count()){
+          $fp->status = 1;
+          $fp->save();
+        }
+      }
+      if($allfr->count() > 0){
+        if($allFfP->count()== $allfr->count()){
+          $fp->status = 1;
+          $fp->save();
+        }
 
       }
 
       foreach ($module->sessions as $session) {
         $allSev  = $session->activity_eval();
-        $allSfr  = $session->all_forum();
+        $allSfr  = $session->all_forum;
         $allFeP = FellowProgress::where('fellow_id',$this->id)
                   ->where('session_id',$session->id)
                   ->where('status',1)
@@ -418,16 +426,25 @@ class User extends Authenticatable
                   ->where('status',1)
                   ->whereIn('activity_id',$allSfr->pluck('id')->toArray())
                   ->where('type','forum')->get();
-        if($allSev->count()== $allFeP->count() && $allSev->count() > 0 && $allSfr->count()== $allFfP->count() && $allSfr->count() > 0){
-          $fp = FellowProgress::firstOrCreate(
-            ['fellow_id' => $this->id,
-            'program_id' => $module->program->id,
-            'module_id'  => $module->id,
-            'session_id' => $session->id,
-            'type'       => 'session'
-            ]);
-          $fp->status = 1;
-          $fp->save();
+        $fp = FellowProgress::firstOrCreate(
+                ['fellow_id' => $this->id,
+                    'program_id' => $module->program->id,
+                    'module_id'  => $module->id,
+                    'session_id' => $session->id,
+                    'type'       => 'session'
+                ]);
+        if($allSev->count() > 0){
+          if($allSev->count()== $allFeP->count()){
+            $fp->status = 1;
+            $fp->save();
+          }
+        }
+
+        if($allSfr->count() > 0){
+          if($allSfr->count()== $allFfP->count()){
+            $fp->status = 1;
+            $fp->save();
+          }
         }
       }
 
