@@ -69,6 +69,18 @@ protected $fillable = [
     })->orderBy('end','asc')->get();
   }
 
+  function activity_eval_and_forum($session_id=false){
+    return Activity::where('session_id',$this->id)->where('type','evaluation')
+    ->orWhere(function($query){
+      $query->where('session_id',$this->id)
+            ->where('type','diagnostic');
+    })
+    ->orWhere(function($query){
+      $query->where('session_id',$this->id)
+            ->where('hasforum',1);
+    })->orderBy('end','asc')->get();
+  }
+
   function activity_eval_by_date(){
     $today      = date('Y-m-d');
     $activities = Activity::where('session_id',$this->id)->where('end','<=',$today)->where('type','evaluation')->orWhere(function($query)use($today){

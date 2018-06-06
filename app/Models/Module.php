@@ -146,6 +146,20 @@ class Module extends Model
             })->get();
     }
 
+    function get_all_evaluation_activity_and_forum(){
+      $sessions  = $this->sessions->pluck('id')->toArray();
+      return  Activity::whereIn('session_id',$sessions)->where('type','evaluation')
+      ->orWhere(function($query) use($sessions){
+                $query->whereIn('session_id',$sessions)
+                      ->where('type','diagnostic');
+      })
+      ->orWhere(function($query) use($sessions){
+                $query->whereIn('session_id',$sessions)
+                      ->where('hasforum',1);
+      })
+      ->get();
+    }
+
     function get_evaluation_activity_kardex(){
       $sessions  = $this->sessions->pluck('id')->toArray();
       $forum_act = $this->get_all_activities_with_forums()->pluck('id')->toArray();
@@ -176,6 +190,8 @@ class Module extends Model
       return  Activity::whereIn('session_id',$sessions);
 
     }
+
+
 
 
     function get_diagnostc_activities(){
