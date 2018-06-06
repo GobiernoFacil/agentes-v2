@@ -32,18 +32,27 @@
 		<div class="col-sm-10">
 			<div class="timeline_box">
 				<ul class="timeline" style="overflow: hidden;">
-					<?php $weeK_c= 1?>
+					<?php $weeK_c= 1; $stop=0;?>
 				@foreach($program->fellow_modules as $module)
 				<li class="{{ $user->check_progress($module->slug,0) ? 'active' : 'disabled'}}">
 					@if($user->check_progress($module->slug,0))
 					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}' data-title="{{$module->title}}">Semana {{$weeK_c++}}</a>
 					@else
 					<a data-title="{{$module->title}}">Semana {{$weeK_c++}}</a>
+					<?php
+					if($module->start <= date('Y-m-d') && !$stop){
+						$show_message = true;
+						$error_module  = $module;
+						$stop=1;
+					}
+
+					?>
 					@endif
 
 				</li>
 				@endforeach
 				</ul>
+
 			</div>
 		</div>
 		<div class="col-sm-1 right">
@@ -51,6 +60,11 @@
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 			</button>
 		</div>
+		@if(isset($show_message))
+			<div class="col-sm-12 message error">
+				<p> {{$error_module->parent_id ? 'Aún cuentas con actividades sin terminar o foros sin participar en el módulo "'.$error_module->parent()->title.'"' : 'No te encuentras al corriente con las actividades evaluación o foros.'}}</p>
+			</div>
+		@endif
 
 
 		@if($user->log()->where('program_id',$program->id)->where('type','!=','first')->count()>0)

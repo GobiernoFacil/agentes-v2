@@ -34,12 +34,17 @@ class Module extends Model
       return $this->hasMany("App\Models\ModuleSession")->orderBy('order','asc');
     }
 
+
     function facilitators(){
       return $this->hasMany("App\Models\FacilitatorModule");
     }
 
     function unique_facilitators(){
       return $this->hasMany("App\Models\FacilitatorModule")->select('user_id')->groupBy('user_id');
+    }
+
+    function parent(){
+      return Module::where('id',$this->parent_id)->first();
     }
 
 
