@@ -62,7 +62,7 @@
 		</div>
 		@if(isset($show_message))
 			<div class="col-sm-12 message error">
-				<p> {{$error_module->parent_id ? 'Aún cuentas con actividades sin terminar o foros sin participar en el módulo "'.$error_module->parent()->title.'"' : 'No te encuentras al corriente con las actividades evaluación o foros.'}}</p>
+				<p> {{$error_module->parent_id ? "Aún cuentas con actividades sin terminar o foros sin participar en el módulo ".$error_module->parent()->title : 'No te encuentras al corriente con las actividades evaluación o foros.'}}</p>
 			</div>
 		@endif
 

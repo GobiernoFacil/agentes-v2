@@ -110,15 +110,15 @@ class FellowAverage extends Model
     function scoreModule()
     {
       $module_score = FellowAverage::firstOrCreate([
-        'user_id'    => $this->user->id,
+        'user_id'    => Auth::user()->id,
         'module_id'  => $this->module->id,
         'type'       => 'module',
         'program_id' => $this->module->program->id
       ]);
 
       $module       = $module_score->module;
-      $scores       = FellowAverage::where('user_id',$this->user->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
-      $total_scores = FellowAverage::where('user_id',$this->user->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
+      $scores       = FellowAverage::where('user_id',Auth::user()->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
+      $total_scores = FellowAverage::where('user_id',Auth::user()->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
       if($total_scores  > 0){
         $module_score->average = $total_scores/$scores->count();
         $module_score->save();
