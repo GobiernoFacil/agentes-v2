@@ -57,11 +57,11 @@
 							<h4>Fecha límite</h4>
 						</div>
 					</div>
-					@if($module->get_all_evaluation_activity()->count()>0)
-						@foreach($module->get_all_evaluation_activity() as $evAct)
+					@if($module->get_all_evaluation_activity_and_forum()->count()>0)
+						@foreach($module->get_all_evaluation_activity_and_forum() as $evAct)
 						<div class="row">
 							<div class="col-sm-6 border_l">
-								<h5>Evaluación</h5>
+								<h5>{{$evAct->forum ? "Foro":"Evaluación"}}</h5>
 								<ul>
 									<li>{{$evAct->name}}</li>
 								</ul>
@@ -69,25 +69,35 @@
 							<div class="col-sm-3">
 								@if($evAct->type==='diagnostic')
 								<p>No aplica</p>
-								@else
-									@if($evAct->quizInfo)
-										@if(!$evAct->files)
-											@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
-												<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
-											@else
-												<p>Sin calificación</p>
+								@elseif(!$evAct->forum)
+										@if($evAct->quizInfo)
+											@if(!$evAct->files)
+												@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
+													<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
+												@else
+													<p>Sin calificación</p>
+												@endif
 											@endif
+										@else
+												  <p>Sin calificación</p>
 										@endif
-									@else
-											  <p>Sin calificación</p>
-									@endif
+								@else
+										@if($evAct->forum->check_participation($user->id))
+											<p>Participaste</p>
+										@else
+										 	<p>Sin participación</p>
+										@endif
 								@endif
 
 							</div>
 							<div class="col-sm-3">
+								@if($evAct->forum)
+								<p>No aplica</p>
+								@else
 								<p>{{date('d-m-Y', strtotime($evAct->end))}}
 									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end.'+1 day'))->diffForHumans()}})</span>
 								</p>
+								@endif
 							</div>
 						</div>
 						@endforeach
