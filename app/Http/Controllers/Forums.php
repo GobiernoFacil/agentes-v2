@@ -178,7 +178,7 @@ class Forums extends Controller
         $log->forum_id = $forum->id;
         $log->save();
       }
-      $forum->send_notification_to($program,$forumConversation,'question');
+    //  $forum->send_notification_to($program,$forumConversation,'question');
       return redirect("tablero/$program->slug/foros/$forum->slug")->with('message','Pregunta creada correctamente');
     }
 
@@ -272,7 +272,7 @@ class Forums extends Controller
          $fellowAverage->scoreSession();
          $user->update_progress($conversation->forum->session->module);
         }
-        $conversation->forum->send_notification_to($program,$conversation,'message',$message);
+        //$conversation->forum->send_notification_to($program,$conversation,'message',$message);
         return redirect("tablero/$program->slug/foros/{$conversation->forum->slug}/ver-pregunta/$conversation->slug")->with('message','Mensaje creado correctamente');
       }
 

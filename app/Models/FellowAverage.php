@@ -53,10 +53,10 @@ class FellowAverage extends Model
      *
      * @return \Illuminate\Http\Response
      */
-    function scoreProgram()
+    function scoreProgram($user_id)
     {
       $total_program_score = FellowAverage::firstOrCreate([
-        'user_id'    => $this->user->id,
+        'user_id'    => $user_id,
         'type'       => 'final',
         'program_id' => $this->module->program->id
       ]);
@@ -66,7 +66,7 @@ class FellowAverage extends Model
         //existe evaluacion final
       }else{
         //la calificacion es el promedio de los modulos
-        if($score   = FellowAverage::where('user_id',$this->user->id)->where('type','total_module')->where('program_id',$program->id)->first()){
+        if($score   = FellowAverage::where('user_id',$user_id)->where('type','total_module')->where('program_id',$program->id)->first()){
             $total_program_score->average = $score->average;
             $total_program_score->save();
         }else{
@@ -82,20 +82,20 @@ class FellowAverage extends Model
      *
      * @return \Illuminate\Http\Response
      */
-    function scoreAllModules()
+    function scoreAllModules($user_id)
     {
       $total_module_score = FellowAverage::firstOrCreate([
-        'user_id'    => $this->user->id,
+        'user_id'    => $user_id,
         'type'       => 'total_module',
         'program_id' => $this->module->program->id
       ]);
       $program       = $total_module_score->program;
-      $scores        = FellowAverage::where('user_id',$this->user->id)->where('type','module')->whereIn('module_id',$program->fellow_modules->pluck('id')->toArray())->where('program_id',$program->id)->get();
-      $total_scores  = FellowAverage::where('user_id',$this->user->id)->where('type','module')->whereIn('module_id',$program->fellow_modules->pluck('id')->toArray())->where('program_id',$program->id)->sum('average');
+      $scores        = FellowAverage::whereNotNull('average')->where('user_id',$user_id)->where('type','module')->whereIn('module_id',$program->fellow_modules->pluck('id')->toArray())->where('program_id',$program->id)->get();
+      $total_scores  = FellowAverage::whereNotNull('average')->where('user_id',$user_id)->where('type','module')->whereIn('module_id',$program->fellow_modules->pluck('id')->toArray())->where('program_id',$program->id)->sum('average');
       if($total_scores  > 0){
         $total_module_score->average = $total_scores/$scores->count();
         $total_module_score->save();
-        $this->scoreProgram();
+        $this->scoreProgram($user_id);
       }else{
         //nada que actualizar
         return true;
@@ -107,25 +107,25 @@ class FellowAverage extends Model
      *
      * @return \Illuminate\Http\Response
      */
-    function scoreModule()
+    function scoreModule($user_id)
     {
       $module_score = FellowAverage::firstOrCreate([
-        'user_id'    => Auth::user()->id,
+        'user_id'    => $user_id,
         'module_id'  => $this->module->id,
         'type'       => 'module',
         'program_id' => $this->module->program->id
       ]);
 
       $module       = $module_score->module;
-      $scores       = FellowAverage::where('user_id',Auth::user()->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
-      $total_scores = FellowAverage::where('user_id',Auth::user()->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
+      $scores       = FellowAverage::where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
+      $total_scores = FellowAverage::where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
       if($total_scores  > 0){
         $module_score->average = $total_scores/$scores->count();
         $module_score->save();
-        $this->scoreAllModules();
+        $this->scoreAllModules($user_id);
       }else{
         //nada que actualizar
-        $module_score->average = 0;
+        $module_score->average = null;
         $module_score->save();
         return true;
       }
@@ -140,10 +140,11 @@ class FellowAverage extends Model
      */
     function scoreSession()
     {
-       $act_score = $this->all_activities_score_by_session($this->session);
+
+       $act_score = $this->all_activities_score_by_session($this->session,$this->user_id);
        $score = 0;
        if($act_score){
-         if($for_score = $this->score_all_forums_participation($this->session)){
+         if($for_score = $this->score_all_forums_participation($this->session,$this->user_id)){
             //existen foros y evaluaciones
             $score_act = $act_score['score']*self::ACT_VALUE;
             $score_for = $for_score['score']*self::FORUM_VALUE;
@@ -154,29 +155,29 @@ class FellowAverage extends Model
            $score = $act_score['score'];
          }
        }else{
-         if($for_score = $this->score_all_forums_participation($this->session)){
+         if($for_score = $this->score_all_forums_participation($this->session,$this->user_id)){
            //solo existen foros
            $score = $for_score['score'];
          }
        }
        $this->average = $score;
        $this->save();
-       $this->scoreModule();
+       $this->scoreModule($this->user_id);
        return true;
     }
 
 
-    function all_activities_score_by_session($session){
-      $ev_activities = $session->activities_kardex_fellow(Auth::user()->id);
+    function all_activities_score_by_session($session,$user_id){
+      $ev_activities = $session->activities_kardex_fellow($user_id);
       if($ev_activities->count()>0){
         $total_score = 0;
         foreach ($ev_activities as $_activity) {
           if($_activity->files){
-            if($score = $_activity->fellowFileScore($this->user->id)){
+            if($score = $_activity->fellowFileScore($user_id)){
                $total_score = $total_score + $score->score;
             }
           }else{
-            if($score = $_activity->fellowScore($this->user->id)){
+            if($score = $_activity->fellowScore($user_id )){
               $total_score = $total_score + $score->score;
             }
 
@@ -190,12 +191,12 @@ class FellowAverage extends Model
       }
     }
 
-    function score_all_forums_participation($session){
-      $forums   = $session->activity_forum_kardex(Auth::user()->id);
+    function score_all_forums_participation($session,$user_id){
+      $forums   = $session->activity_forum_kardex($user_id);
       if($forums->count()>0){
         $total_score = 0;
         foreach ($forums as $forum){
-            if($forum->check_participation($this->user_id)){
+            if($forum->check_participation($user_id)){
               $total_score = $total_score+10;
             }
         }

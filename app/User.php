@@ -475,6 +475,7 @@ class User extends Authenticatable
             ]);
           foreach ($module->sessions as $session) {
               if($session->activity_eval_and_forum()->count() > 0){
+
                  foreach ($session->activity_eval_and_forum() as $activity) {
                    $next = true;
                    $fp =  FellowProgress::firstOrCreate(
@@ -500,6 +501,15 @@ class User extends Authenticatable
                       }
                     }
                     if($next){
+                      $fellowAverage = FellowAverage::firstOrCreate([
+                        'user_id'    => $this->id,
+                        'module_id'  => $session->module->id,
+                        'session_id' => $session->id,
+                        'type'       => 'session',
+                        'program_id' => $session->module->program->id,
+
+                      ]);
+                      $fellowAverage->scoreSession();
                       $fp->status = 1;
                       $fp->save();
                     }
