@@ -1,4 +1,4 @@
-{!! Form::open(['url' => "tablero/{$activity->session->model->program->slug}/archivos/{$activity->slug}/save", "class" => "form-horizontal", 'files'=>true]) !!}
+{!! Form::open(['url' => "tablero/{$activity->session->module->program->slug}/archivos/{$activity->slug}/save", "class" => "form-horizontal", 'files'=>true]) !!}
 
 <div class="row">
   <div class="col-sm-12">
