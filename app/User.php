@@ -166,10 +166,20 @@ class User extends Authenticatable
     function session_average($session_id){
       return FellowAverage::where('user_id',$this->id)->where('session_id',$session_id)->where('type','session')->first();
     }
+
     function forum_participation(){
       $forum  = new Forum();
       return  $forum->check_participation($this->user_id);
 
+    }
+
+    function all_participation_session($session){
+      $progress = FellowProgress::where('session_id',$session->id)->where('type','forum')->where('fellow_id',$this->id)->where('status',1)->get();
+      if($session->all_forum->count() == $progress->count()){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     function fellow_survey(){

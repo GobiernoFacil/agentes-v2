@@ -139,6 +139,7 @@ class Forums extends Controller
       $user      = Auth::user();
       $program   = $user->actual_program();
       $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+      var_dump($forum->toArray());
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
       $forumConversation->forum_id = $forum->id;
       $forumConversation->user_id  = $user->id;
@@ -177,7 +178,7 @@ class Forums extends Controller
         $log->forum_id = $forum->id;
         $log->save();
       }
-      $forum->send_notification_to($program,$forumConversation,'question');
+    //  $forum->send_notification_to($program,$forumConversation,'question');
       return redirect("tablero/$program->slug/foros/$forum->slug")->with('message','Pregunta creada correctamente');
     }
 
@@ -271,7 +272,7 @@ class Forums extends Controller
          $fellowAverage->scoreSession();
          $user->update_progress($conversation->forum->session->module);
         }
-        $conversation->forum->send_notification_to($program,$conversation,'message',$message);
+        //$conversation->forum->send_notification_to($program,$conversation,'message',$message);
         return redirect("tablero/$program->slug/foros/{$conversation->forum->slug}/ver-pregunta/$conversation->slug")->with('message','Mensaje creado correctamente');
       }
 
