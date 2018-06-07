@@ -85,8 +85,16 @@ class Forums extends Controller
         $session  = $forum->session;
         $session  = $program->get_all_sessions()->where('slug',$session->slug)->firstOrFail();
       }elseif($forum->type === 'state'){
-        if($user->fellowData->state != $forum->state_name){
-          return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+        if(strpos($user->fellowData->state,"xico")){
+          if('México' !== $forum->state_name){
+            return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+          }
+
+        }else{
+
+          if($user->fellowData->state !== $forum->state_name){
+            return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+          }
         }
 
       }
