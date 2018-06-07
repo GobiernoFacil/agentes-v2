@@ -75,6 +75,9 @@ class Front extends Controller
       }elseif($type==='guia-tl'){
         $path  = public_path().'/archivos/guiastl.pdf';
         $name = 'guiastl.pdf';
+      }elseif($type==='taller_diagnostico'){
+        $path  = public_path().'/archivos/guiastl.pdf';
+        $name ='taller_1_gesoc_diagnostico.pptx';
       }else{
         return redirect('/');
       }
