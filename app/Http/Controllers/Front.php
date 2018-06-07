@@ -20,7 +20,7 @@ class Front extends Controller
     public function pro17(){
       return view('frontend.programas.2017.que-es');
     }
-    
+
     //testimonios 2017
     public function testimony17(){
       return view('frontend.programas.2017.testimonio');
@@ -69,6 +69,12 @@ class Front extends Controller
       }elseif($type==='seminaro-2'){
           $path  = public_path().'/archivos/Agenda_2ndoSeminario_Internacional.pdf';
           $name  = 'Agenda_2ndoSeminario_Internacional.pdf';
+      }elseif($type==='guia-co'){
+        $path  = public_path().'/archivos/guiacocreaciondecompromisos.pdf';
+        $name = 'guiacocreaciondecompromisos.pdf';
+      }elseif($type==='guia-tl'){
+        $path  = public_path().'/archivos/guiastl.pdf';
+        $name = 'guiastl.pdf';
       }else{
         return redirect('/');
       }
