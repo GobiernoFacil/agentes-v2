@@ -31,7 +31,7 @@ class AdminEvaluations extends Controller
     const UPLOADS = "archivos/fellows";
     const UPLOADSF = "archivos/fellowsEva";
     //Paginación
-    public $pageSize = 10;
+    public $pageSize = 5;
     /**
      * Muestra lista de respuestas de diagnostico general
      *
@@ -57,11 +57,11 @@ class AdminEvaluations extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
-      $activities = $program->get_all_eva_activities()->orderBy('end','asc')->paginate($this->pageSize);
-      return view('admin.evaluations.activities-list')->with([
+      $modules    = $program->get_fellow_modules_with_ev_act()->paginate($this->pageSize);
+      return view('admin.evaluations.module-fellow-list')->with([
         "user"         => $user,
-        "activities"   => $activities,
-        "program"      => $program
+        "program"      => $program,
+        "modules"      => $modules
       ]);
 
     }

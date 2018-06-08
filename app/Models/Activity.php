@@ -152,4 +152,20 @@ class Activity extends Model
     return 0;
   }
 
+  function count_fellow_evaluations(){
+    if($this->quizInfo){
+      return FellowScore::where('user_id','!=',50000)->where('questionInfo_id',$this->quizInfo->id)->whereNotNull('score')->count();
+    }else{
+      return false;
+    }
+  }
+
+  function count_fellow_file_evaluations(){
+    return FellowFile::where('user_id','!=',50000)->where('activity_id',$this->id)->count();
+  }
+
+  function count_fellow_diagnostic(){
+    return CustomFellowAnswer::select('user_id')->where('user_id','!=',50000)->where('questionnaire_id',$this->diagnosticInfo->id)->distinct('user_id')->count('user_id');
+  }
+
 }
