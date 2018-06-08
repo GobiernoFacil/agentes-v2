@@ -69,19 +69,34 @@ class FellowAverage extends Controller
     $user      = Auth::user();
     $program   = $user->actual_program();
     $activity  = Activity::where('slug',$activity_slug)->firstOrFail();
-    if(!$activity->quizInfo){
-        return redirect('tablero');
+    if(!$activity->files){
+      if(!$activity->quizInfo){
+          return redirect('tablero');
+      }
     }
-    $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
-    $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
-      return view('fellow.evaluation.evaluation-view')->with(
-       [
-         'user'     => $user,
-         'answers'  => $answers,
-         'score'    => $score,
-         'activity' => $activity,
-         'program'  => $program
-       ]);
+      if($activity->files){
+        $score   = FilesEvaluation::where('fellow_id',$user->id)->where('activity_id',$activity->id)->first();
+          return view('fellow.evaluation.evaluation-file-view')->with(
+           [
+             'user'     => $user,
+             'score'    => $score,
+             'activity' => $activity,
+             'program'  => $program
+           ]);
+
+      }else{
+
+          $answers = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->get();
+          $score   = FellowScore::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->first();
+            return view('fellow.evaluation.evaluation-view')->with(
+             [
+               'user'     => $user,
+               'answers'  => $answers,
+               'score'    => $score,
+               'activity' => $activity,
+               'program'  => $program
+             ]);
+      }
     }
 
 

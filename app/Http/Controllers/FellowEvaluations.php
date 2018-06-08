@@ -186,16 +186,14 @@ class FellowEvaluations extends Controller
     */
     public function download(Request $request){
       $user = Auth::user();
-      $data = FilesEvaluation::find($request->score_id);
+      $data = FilesEvaluation::where('fellow_id',$user->id)->where('id',$request->score_id)->firstOrFail();
       $file = $data->path;
-      $ext  = substr(strrchr($file,'.'),1);
-      $mime = mime_content_type ($file);
+      $fileData = pathinfo($file);
       $headers = array(
-        'Content-Type: '.$mime,
+        'Content-Type: '.$fileData['extension'],
       );
-
-      $filename = $data->name.".".$ext;
-      return response()->download($file, $filename, $headers);
+      $filename = $data->name;
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
     }
 
 

@@ -29,7 +29,7 @@
 		<!--si tiene archivos-->
         @if($user->fileFellowScore($activity->id))
         	<!--si fue evaluado-->
-					<a href='{{url("tablero/$program->slug/calificaciones/archivos/ver/$activity->slug")}}' class="link_a">Revisión de productos</a>
+					<a href='{{url("tablero/$program->slug/calificaciones/ver/$activity->slug")}}' class="link_a">Revisión de productos</a>
         @else
             Revisión de productos
         @endif

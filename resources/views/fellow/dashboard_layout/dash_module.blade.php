@@ -80,11 +80,15 @@
 												@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
 													<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
 												@else
-													<p>Sin calificación</p>
+														<p>Sin calificación</p>
 												@endif
 											@endif
 										@else
-												  <p>Sin calificación</p>
+											@if($user->fileFellowScore($evAct->id))
+												<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fileFellowScore($evAct->id)->score,2)*10 }}</a></p>
+											@else
+													  <p>Sin calificación</p>
+											@endif
 										@endif
 								@else
 										@if($evAct->forum->check_participation($user->id))

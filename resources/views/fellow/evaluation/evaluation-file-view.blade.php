@@ -20,8 +20,8 @@
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-9 right">
 			<h3>Puntaje total: </h3>
-			<h2>{{$score->score > 0 ? number_format($score->score,2) . '/10' : '0/0'  }}</h2>
-			
+			<h2>{{$score->score > 0 ? number_format($score->score,2)*10 . '/100' : '0/0'  }}</h2>
+
 		</div>
 		<div class="col-sm-12">
 			<div class="divider top"></div>
@@ -31,11 +31,11 @@
 			<p>{{$score->comments}}</p>
 			<div class="divider b"></div>
 			<h3>Url</h3>
-			<p>{{$score->url}}</p>
+			<p>{{$score->url ? $score->url : 'Sin enlace'}}</p>
 			<div class="divider b"></div>
 			@if($score->path)
 			<h3>Descargar archivo corregido</h3>
-			<a href="{{ url('tablero/calificaciones/archivo/get/' . $score->id) }}" class="btn xs view">Descargar</a>
+			<a href='{{url("tablero/$program->slug/calificaciones/archivo/get/$score->id")}}' class="btn xs view">Descargar</a>
 			@endif
 		</div>
   </div>
@@ -43,7 +43,7 @@
 @else
 <div class="row">
 	<div class="col-sm-12">
-    	<h1>Tu ensayo aún no ha sido evaluado por el equipo de Prosociedad.</h1>
+    	<h1>Tu ensayo aún no ha sido evaluado.</h1>
   </div>
 </div>
 
