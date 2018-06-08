@@ -63,7 +63,12 @@
 							<div class="col-sm-6 border_l">
 								<h5>{{$evAct->forum ? "Foro":"Evaluación"}}</h5>
 								<ul>
-									<li>{{$evAct->name}}</li>
+									@if($user->check_progress($evAct->slug,2))
+										<li><a href ='{{url("tablero/{$evAct->session->module->program->slug}/aprendizaje/{$evAct->session->module->slug}/{$evAct->session->slug}/$evAct->slug")}}'>{{$evAct->name}}</a></li>
+									@else
+										<li>{{$evAct->name}}</li>
+									@endif
+
 								</ul>
 							</div>
 							<div class="col-sm-3">

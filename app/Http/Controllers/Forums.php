@@ -85,8 +85,16 @@ class Forums extends Controller
         $session  = $forum->session;
         $session  = $program->get_all_sessions()->where('slug',$session->slug)->firstOrFail();
       }elseif($forum->type === 'state'){
-        if($user->fellowData->state != $forum->state_name){
-          return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+        if(strpos($user->fellowData->state,"xico")){
+          if('México' !== $forum->state_name){
+            return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+          }
+
+        }else{
+
+          if($user->fellowData->state !== $forum->state_name){
+            return redirect('tablero')->with(['success'=>'No puedes ver ese foro.']);
+          }
         }
 
       }
@@ -131,6 +139,7 @@ class Forums extends Controller
       $user      = Auth::user();
       $program   = $user->actual_program();
       $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
+      var_dump($forum->toArray());
       $forumConversation     = new ForumConversation($request->only(['topic','description']));
       $forumConversation->forum_id = $forum->id;
       $forumConversation->user_id  = $user->id;

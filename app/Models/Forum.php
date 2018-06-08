@@ -79,7 +79,7 @@ class Forum extends Model
                  $user_ids = ForumLog::where('forum_id',$this->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
                  $users    = User::whereIn('id',$user_ids)->where('type','fellow')
                  ->orWhere(function($query)use($user_ids){
-                   $query->where('institution','PROSOCIEDAD')->whereIn('id',$user_ids->toArray());
+                   $query->where('institution','PROSOCIEDAD')->whereIn('id',$user_ids);
                  })
                  ->where('enabled',1)
                  ->get();

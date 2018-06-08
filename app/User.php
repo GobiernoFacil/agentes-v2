@@ -166,10 +166,20 @@ class User extends Authenticatable
     function session_average($session_id){
       return FellowAverage::where('user_id',$this->id)->where('session_id',$session_id)->where('type','session')->first();
     }
+
     function forum_participation(){
       $forum  = new Forum();
       return  $forum->check_participation($this->user_id);
 
+    }
+
+    function all_participation_session($session){
+      $progress = FellowProgress::where('session_id',$session->id)->where('type','forum')->where('fellow_id',$this->id)->where('status',1)->get();
+      if($session->all_forum->count() == $progress->count()){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     function fellow_survey(){
@@ -465,6 +475,7 @@ class User extends Authenticatable
             ]);
           foreach ($module->sessions as $session) {
               if($session->activity_eval_and_forum()->count() > 0){
+
                  foreach ($session->activity_eval_and_forum() as $activity) {
                    $next = true;
                    $fp =  FellowProgress::firstOrCreate(
@@ -490,6 +501,15 @@ class User extends Authenticatable
                       }
                     }
                     if($next){
+                      $fellowAverage = FellowAverage::firstOrCreate([
+                        'user_id'    => $this->id,
+                        'module_id'  => $session->module->id,
+                        'session_id' => $session->id,
+                        'type'       => 'session',
+                        'program_id' => $session->module->program->id,
+
+                      ]);
+                      $fellowAverage->scoreSession();
                       $fp->status = 1;
                       $fp->save();
                     }

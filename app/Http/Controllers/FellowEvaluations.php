@@ -260,9 +260,9 @@ class FellowEvaluations extends Controller
     public function putScore($program_slug,$activity_slug){
        $user     = Auth::user();
        $activity = Activity::where('slug',$activity_slug)->firstOrFail();
-  /*     if($activity->fellowScore($user->id)){
+      if($activity->fellowScore($user->id)){
          return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
-       }*/
+       }
        if(!$activity->quizInfo){
          return redirect('tablero')->with(['error'=>'Ocurrió un error, por favor contacta a soporte']);
        }

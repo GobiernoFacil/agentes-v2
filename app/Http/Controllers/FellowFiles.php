@@ -7,6 +7,7 @@ use Auth;
 use File;
 // models
 use App\Models\FellowFile;
+use App\Models\FellowProgress;
 use App\Models\Activity;
 use App\Models\ModuleSession;
 // FormValidators

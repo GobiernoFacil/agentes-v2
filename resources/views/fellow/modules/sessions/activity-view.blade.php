@@ -233,7 +233,7 @@
 
 
 @section('js-content')
-@if($activity->type ==='evaluation' && !$score)
+@if($activity->type ==='evaluation' && !$score && $activity->quizInfo )
 <script src="/js/bower_components/underscore/underscore-min.js"></script>
 <script type="text/text" id="GF-PNUD-quiz-answer-template">
   <li id="<%=id%>">

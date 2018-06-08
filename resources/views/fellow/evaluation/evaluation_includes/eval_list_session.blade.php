@@ -19,7 +19,7 @@
 	<span class="col-sm-11">
 		<div class="divider b"></div>
 	</span>
-
+@if($session->all_activities_for_kardex($user->id)->count() > 0)
     <!--evaluaciones-->
     <span class="col-sm-11">
         <ul>
@@ -36,6 +36,7 @@
 						@include('fellow.evaluation.evaluation_includes.eval_list_session_activity')
 					@endif
 			@endforeach
+			@if($session->forums)
             <!--- foros-->
             <li class="row">
 	        	<span class="col-sm-6">
@@ -45,14 +46,12 @@
 	        	 Participaciones
 	        	</span>
 	        	<span class="col-sm-3 right">
-							@if($session->forums)
-	        	 	{{$user->forum_participation()  ? $user->forum_participation() : 'Sin participación' }}
-						 @else
-						 	Sin foros
-						 @endif
+	        	 		{{$user->all_participation_session($session) ? 'Completado' : 'No completado' }}
 	        	</span>
 	        </li>
+			@endif
         </ul>
     </span>
     <span class="col-sm-12"></span>
+@endif
 </li>
