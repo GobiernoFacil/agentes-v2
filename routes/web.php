@@ -351,7 +351,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
   //  old diagnostic
-  //  Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
+  /*  Route::get('dashboard/evaluacion/diagnostico', 'AdminEvaluations@all');
 
     Route::get('dashboard/evaluacion/actividad/archivo-corregido/get/{file_id}', 'AdminEvaluations@downloadEv');
 
@@ -359,7 +359,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/evaluacion/diagnostico/evaluar/1/{answers_id}', 'AdminEvaluations@evaluateDiagnostic_1');
     Route::post('dashboard/evaluacion/diagnostico/evaluar/1/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_1');
     Route::get('dashboard/evaluacion/diagnostico/evaluar/2/{answers_id}/{evaluation_id}', 'AdminEvaluations@evaluateDiagnostic_2');
-    Route::post('dashboard/evaluacion/diagnostico/evaluar/2/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_2');
+    Route::post('dashboard/evaluacion/diagnostico/evaluar/2/{evaluation_id}/save', 'AdminEvaluations@saveDiagnostic_2');*/
     /*@Quiz Controller */
     //CRUD Quiz
     Route::get('dashboard/sesiones/actividades/evaluacion/agregar/{activity_id}/1', 'Quiz@add');

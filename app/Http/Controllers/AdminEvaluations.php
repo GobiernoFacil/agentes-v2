@@ -291,7 +291,7 @@ class AdminEvaluations extends Controller
       $retro->save();
       $fellow = User::where('id',$file->user_id)->first();
       $fellow->notify(new SendRetroEmail($fellow,$activity));
-      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$file->id")->with('message','Se ha guarado correctamente');
+      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$filesEva->id")->with('message','Se ha guarado correctamente');
 
     }
 
@@ -502,9 +502,8 @@ class AdminEvaluations extends Controller
     {
       $user      = Auth::user();
       $program   = Program::where('id',$program_id)->firstOrFail();
-      $file      = FellowFile::where('id',$file_id)->firstOrFail();
       $activity  = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
-      $score     = FilesEvaluation::where('fellow_id',$file->user_id)->where('activity_id',$activity->id)->firstOrFail();
+      $score     = FilesEvaluation::where('id',$file_id)->where('activity_id',$activity->id)->firstOrFail();
       $userf     = User::find($score->user_id);
       return view('admin.evaluations.evaluation-file-view')->with([
         "user"      => $user,
@@ -550,6 +549,8 @@ class AdminEvaluations extends Controller
     public function saveSingle(AddSingleFileEvaluation $request)
     {
       $user      = Auth::user();
+      $program   = Program::where('id',$request->program_id)->firstOrFail();
+      $activity  = Activity::where('files',1)->where('id',$request->activity_id)->firstOrFail();
       $eva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
       $eva->user_id  = $user->id;
       $eva->url     = $request->url;
@@ -567,15 +568,21 @@ class AdminEvaluations extends Controller
         $eva->path = $path.'/'.$name;
       }
       $eva->save();
-      $fellowAverage = new FellowAverage();
-      $fellowAverage->scoreSession($request->activity_id,$request->fellow_id);
+      $fellowAverage = FellowAverage::firstOrCreate([
+        'user_id'    => $request->fellow_id,
+        'module_id'  => $activity->session->module->id,
+        'session_id' => $activity->session->id,
+        'type'       => 'session',
+        'program_id' => $activity->session->module->program->id,
+
+      ]);
+      $fellowAverage->scoreSession();
       $retro   = RetroLog::firstOrCreate(['user_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
       $retro->status = 0;
       $retro->save();
       $fellow = User::find($request->fellow_id);
-      $activity = Activity::find($request->activity_id);
       $fellow->notify(new SendRetroEmail($fellow,$activity));
-      return redirect("dashboard/programas/$program->id/ver-evaluacion/$request->activity_id")->with('message','Se ha guarado correctamente');
+      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$eva->id")->with('message','Se ha guarado correctamente');
 
     }
 
