@@ -29,7 +29,6 @@ class SaveFellowFileEvaluation extends FormRequest
             //
             'file_e' => 'file|mimes:doc,docx,pdf|max:100000',
             'score' => 'required|numeric|between:0,10',
-            'url'  =>'required'
         ];
     }
 }

@@ -42,7 +42,7 @@ class SendRetroEmail extends Notification
      */
     public function toMail($notifiable)
     {
-      $url = url("tablero/calificaciones/archivos/ver/{$this->activity->slug}");
+      $url = url("tablero/{$this->activity->session->module->program->slug}/calificaciones/archivos/ver/{$this->activity->slug}");
       return (new MailMessage)
           ->from('info@apertus.org.mx')
           ->subject('no-reply')

@@ -200,12 +200,12 @@ class AdminEvaluations extends Controller
       $program    = Program::where('id',$program_id)->firstOrFail();
       $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
       //ver fellows con archivos
-      $fellows_ids = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
-      $fellows     = $program->get_all_fellows()->paginate($this->pageSize);
+      $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+      $files      = FellowFile::where('activity_id',$activity->id)->whereIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
       return view('admin.evaluations.activities-files-done-list')->with([
           "user"      => $user,
           "activity"  => $activity,
-          "fellows"   => $fellows,
+          "files"     => $files,
           "program"   => $program
         ]);
 
@@ -232,22 +232,19 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fileEvaluation($file_id,$eva=null)
+    public function fileEvaluation($program_id,$activity_id,$file_id)
     {
       $user      = Auth::user();
-      if($eva){
-        //file_id es id de FilesEvaluation
-        $data = null;
-        $fellow    = FilesEvaluation::find($file_id);
-        var_dump($fellow->user->toArray());
-      }else{
-        $data      = FellowFile::where('id',$file_id)->first();
-        $fellow    = FilesEvaluation::firstOrCreate(['fellow_id'=>$data->user_id,'activity_id'=>$data->activity_id]);
-      }
+      $program   = Program::where('id',$program_id)->firstOrFail();
+      $file      = FellowFile::where('id',$file_id)->firstOrFail();
+      $activity  = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
+      $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$file->user_id,'activity_id'=>$activity_id]);
      return view('admin.evaluations.file-evaluation')->with([
         "user"      => $user,
-        "data"   => $data,
-        "fellow" => $fellow
+        "file"      => $file,
+        "filesEva"  => $filesEva,
+        "program"   => $program,
+        "activity"  => $activity
       ]);
 
     }
@@ -261,37 +258,41 @@ class AdminEvaluations extends Controller
     {
       $user = Auth::user();
       $path  = public_path(self::UPLOADSF);
-      if($request->eva){
-        //file_id es FilesEvaluation id
-        $eva = FilesEvaluation::where('id',$request->file_id)->firstOrFail();
-        $eva->user_id = $user->id;
-      }else{
-        $data = FellowFile::where('id',$request->file_id)->firstOrFail();
-        $eva  = FilesEvaluation::where('fellow_id',$data->user_id)->where('activity_id',$data->activity_id)->first();
-      }
-      $eva->user_id = $user->id;
-      $eva->url     = $request->url;
-      $eva->score     = $request->score;
-      $eva->comments = $request->comments;
+      $program   = Program::where('id',$request->program_id)->firstOrFail();
+      $file      = FellowFile::where('id',$request->file_id)->firstOrFail();
+      $activity  = Activity::where('files',1)->where('id',$request->activity_id)->firstOrFail();
+      $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$file->user_id,'activity_id'=>$activity->id]);
+      $filesEva->user_id  = $user->id;
+      $filesEva->url      = $request->url;
+      $filesEva->score    = $request->score;
+      $filesEva->comments = $request->comments;
       // [ SAVE THE file ]
       if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
-        if($eva->path){
-          File::delete($eva->path);
+        if($filesEva->path){
+          File::delete($filesEva->path);
         }
         $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
         $request->file('file_e')->move($path, $name);
-        $eva->name = $request->file('file_e')->getClientOriginalName();
-        $eva->path = $path.'/'.$name;
+        $filesEva->name = $request->file('file_e')->getClientOriginalName();
+        $filesEva->path = $path.'/'.$name;
       }
-      $eva->save();
-      $fellowAverage = new FellowAverage();
-      $fellowAverage->scoreSession($eva->activity_id,$eva->fellow_id);
-      $retro   = RetroLog::firstOrCreate(['user_id'=>$eva->fellow_id,'activity_id'=>$eva->activity_id]);
+      $filesEva->save();
+      $fellowAverage = FellowAverage::firstOrCreate([
+        'user_id'    => $file->user_id,
+        'module_id'  => $activity->session->module->id,
+        'session_id' => $activity->session->id,
+        'type'       => 'session',
+        'program_id' => $activity->session->module->program->id,
+
+      ]);
+      $fellowAverage->scoreSession();
+      $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
       $retro->status = 0;
       $retro->save();
-      $fellow = User::find($eva->fellow_id);
-      $fellow->notify(new SendRetroEmail($fellow,$data->activity));
-      return redirect("dashboard/evaluacion/actividad/ver/{$eva->activity_id}")->with('message','Se ha guarado correctamente');
+      $fellow = User::where('id',$file->user_id)->first();
+      $fellow->notify(new SendRetroEmail($fellow,$activity));
+      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$file->id")->with('message','Se ha guarado correctamente');
+
     }
 
     /**
@@ -497,10 +498,13 @@ class AdminEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewFileEvaluation($score_id)
+    public function viewFileEvaluation($program_id,$activity_id,$file_id)
     {
       $user      = Auth::user();
-      $score     = FilesEvaluation::where('id',$score_id)->firstOrFail();
+      $program   = Program::where('id',$program_id)->firstOrFail();
+      $file      = FellowFile::where('id',$file_id)->firstOrFail();
+      $activity  = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
+      $score     = FilesEvaluation::where('fellow_id',$file->user_id)->where('activity_id',$activity->id)->firstOrFail();
       $userf     = User::find($score->user_id);
       return view('admin.evaluations.evaluation-file-view')->with([
         "user"      => $user,

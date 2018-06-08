@@ -13,7 +13,7 @@
   <div class="row">
 	   		<div class="col-sm-3 col-sm-offset-9 right">
 				<h3>Puntaje total: </h3>
-				<h2>{{$score->score > 0 ? number_format($score->score,2) . '/10' : '0/0'  }}</h2>
+				<h2>{{$score->score > 0 ? number_format($score->score,2)*10 . '/100' : '0/0'  }}</h2>
 			</div>
 		    <div class="col-sm-12">
 				<div class="divider top"></div>

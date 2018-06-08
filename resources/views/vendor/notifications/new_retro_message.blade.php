@@ -1,5 +1,5 @@
 @component('mail::message')
-Estimado/a {{$user->name." ".$user->fellowData->surname." ".$user->fellowData->lastname}},<br>
+Estimado/a {{$user->name}},<br>
 
 Usted cuenta con una nueva retroalimentación para el trabajo de la actividad: <br>
 <strong>"{{$activity->name}}"</strong><br>

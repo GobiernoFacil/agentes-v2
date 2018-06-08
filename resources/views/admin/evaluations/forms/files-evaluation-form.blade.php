@@ -1,8 +1,4 @@
-@if($data)
-{!! Form::model($fellow,['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$data->id/0", "class" => "form-horizontal", 'files'=>true]) !!}
-@else
-{!! Form::model($fellow,['url' => "dashboard/evaluacion/actividad/archivo/evaluar/save/$fellow->id/1", "class" => "form-horizontal", 'files'=>true]) !!}
-@endif
+{!! Form::model($filesEva,['url' => "dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/save/$file->id", "class" => "form-horizontal", 'files'=>true]) !!}
 
 <div class="row">
   <div class="col-sm-12">
@@ -40,13 +36,13 @@
 <div class="row">
   <div class="col-sm-12">
     <p>
-      <label><strong>Archivo Corregido</strong></label><br>
+      <label><strong>Archivo corregido</strong></label><br>
       {{Form::file('file_e', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato PDF, DOC,DOCX)
       @if($errors->has('file_e'))
       <strong class="error">{{$errors->first('file_e')}}</strong>
       @endif
-      @if($fellow->path)
-      <a href="{{ url('dashboard/evaluacion/actividad/archivo-corregido/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
+      @if($filesEva->path)
+      <a href="{{ url('dashboard/evaluacion/actividad/archivo-corregido/get/' . $filesEva->id) }}" class="btn xs view">Descargar</a>
       @endif
     </p>
   </div>
