@@ -27,7 +27,7 @@
 		<a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/archivos-evaluados") }}' class="btn gde">Ver evaluaciones</a>
 	</div>
 </div>
-@if($fellows->count() > 0)
+@if($files->count() > 0)
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
@@ -43,23 +43,23 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    @foreach ($fellows as $fellow)
+			    @foreach ($files as $file)
 			      <tr>
-			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}">{{$fellow->user->name .' '.$fellow->user->fellowData->surname." ".$fellow->user->fellowData->lastname}}</a></h4>
-			        {{$fellow->user->email}}</td>
-			        <td>{{$fellow->user->fellowData->city}} <br> {{$fellow->user->fellowData->state}}</td>
-			        <td>{{$fellow->user->fellowData->origin}}</td>
-			        <td><a title="{{date('d-m-Y H:i', strtotime($fellow->created_at))}}">{{$fellow->created_at->diffForHumans()}}</a> </td>
-							<td>{{$fellow->user->fileFellowScore($fellow->user->id,$activity->id) ? $fellow->user->fileFellowScore($fellow->user->id,$activity->id)->score : 'Sin evaluar'}}</td>
+			        <td><h4> <a href="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $file->id) }}">{{$file->user->name .' '.$file->user->fellowData->surname." ".$file->user->fellowData->lastname}}</a></h4>
+			        {{$file->user->email}}</td>
+			        <td>{{$file->user->fellowData->city}} <br> {{$file->user->fellowData->state}}</td>
+			        <td>{{$file->user->fellowData->origin}}</td>
+			        <td><a title="{{date('d-m-Y H:i', strtotime($file->created_at))}}">{{$file->created_at->diffForHumans()}}</a> </td>
+							<td>{{$file->user->fileFellowScore($file->user->id,$activity->id) ? $file->user->fileFellowScore($file->user->id,$activity->id)->score : 'Sin evaluar'}}</td>
 			        <td>
-			          <a href="{{ url('dashboard/evaluacion/actividad/archivo/get/' . $fellow->id) }}" class="btn xs view">Descargar</a>
-			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $fellow->id) }}/0"   class="btn xs view ev">Evaluar</a></td>
+			          <a href='{{url("dashboard/programas/$program->id}/ver-evaluacion/$activity->id/archivos/get/$file->id")}}' class="btn xs view">Descargar</a>
+			          <a href ="{{ url('dashboard/evaluacion/actividad/archivo/evaluar/' . $file->id) }}/0"   class="btn xs view ev">Evaluar</a></td>
 			    </tr>
 			    @endforeach
 			  </tbody>
 			</table>
 
-			{{ $fellows->links() }}
+			{{ $files->links() }}
 		</div>
 	</div>
 </div>

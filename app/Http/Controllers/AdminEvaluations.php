@@ -78,12 +78,12 @@ class AdminEvaluations extends Controller
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
       if($activity->files){
         //ver fellows con archivos
-        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
-        $fellows    = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+        $files      = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
         return view('admin.evaluations.activities-files-list')->with([
           "user"      => $user,
-          "activity"   => $activity,
-          "fellows"   =>$fellows,
+          "activity"  => $activity,
+          "files"     => $files,
           "program"   => $program
         ]);
       }else{
@@ -390,15 +390,7 @@ class AdminEvaluations extends Controller
       $headers = array(
         'Content-Type: '.$fileData['extension'],
       );
-      $filename = $data->name.".".$fileData['extension'];
-      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
-
-      $file = public_path(). "/files/".$name;
-      $fileData = pathinfo($file);
-      $headers = array(
-        'Content-Type: '.$fileData['extension'],
-      );
-      $filename = "comprobante.".$fileData['extension'];
+      $filename = $data->name;
       return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
     }
 
