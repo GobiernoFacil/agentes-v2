@@ -1,3 +1,4 @@
+
 <div class="module  {{ $user->actual_module() ? $user->actual_module()->id== $module->id ?  'ap_single_message' : '' : ''}}">
 	<div class="m_header">
 		<div class="row">
