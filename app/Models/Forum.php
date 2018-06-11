@@ -73,13 +73,15 @@ class Forum extends Model
 
 
     function send_notification_to($program,$conversation,$type,$message=null){
-              $fellows =   $program->fellows()->pluck('user_id')->toArray();
+              $fellows               =   $program->fellows()->pluck('user_id')->toArray();
+              $prosociedad_gen_mails = ['carlos.bauche@prosociedad.org','elena.valencia@prosociedad.org'];
+              $prosociedad_act_mails = ['german@prosociedad.org'];
               if($this->type ==='activity'){
                   //usuarios en el foro
                  $user_ids = ForumLog::where('forum_id',$this->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
                  $users    = User::whereIn('id',$user_ids)->where('type','fellow')
-                 ->orWhere(function($query)use($user_ids){
-                   $query->where('institution','PROSOCIEDAD')->whereIn('id',$user_ids);
+                 ->orWhere(function($query)use($prosociedad_act_mails){
+                   $query->where('institution','PROSOCIEDAD')->whereIn('email',$prosociedad_act_mails);
                  })
                  ->where('enabled',1)
                  ->get();
@@ -94,22 +96,16 @@ class Forum extends Model
                     $assign_f = FacilitatorModule::whereIn('module_id',$modules_id)->pluck('user_id')->toArray();
                     $user_ids = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$fellows)->pluck('user_id')->toArray();
                     $users    = User::where('type','fellow')->whereIn('id',$user_ids)
-                    ->orWhere(function($query)use($assign_f){
-                      $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f);
-                    })
-                    ->orWhere(function($query){
-                      $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                    ->orWhere(function($query)use($prosociedad_gen_mails){
+                      $query->where('institution','PROSOCIEDAD')->whereIn('email',$prosociedad_gen_mails);
                     })
                     ->where('enabled',1)->get();
 
                   }else{
                     $assign_f = FacilitatorModule::whereIn('module_id',$modules_id)->pluck('user_id')->toArray();
                     $users = User::where('type','fellow')->whereIn('id',$fellows)
-                    ->orWhere(function($query)use($assign_f){
-                      $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f);
-                    })
-                    ->orWhere(function($query){
-                      $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                    ->orWhere(function($query)use($prosociedad_gen_mails){
+                      $query->where('institution','PROSOCIEDAD')->whereIn('email',$prosociedad_gen_mails);
                     })
                     ->where('enabled',1)->get();
                   }
@@ -122,16 +118,16 @@ class Forum extends Model
                   $assign_state = FellowData::whereIn('user_id',$fellows)->where('state',$this->state_name)->pluck('user_id');
                   $user_ids     = ForumLog::where('conversation_id',$message->conversation->id)->whereIn('user_id',$assign_state)->pluck('user_id')->toArray();
                   $users        = User::where('type','fellow')->whereIn('id',$user_ids)
-                  ->orWhere(function($query){
-                    $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                  ->orWhere(function($query)use($prosociedad_gen_mails){
+                    $query->whereIn('email',$prosociedad_gen_mails)->where('institution','PROSOCIEDAD');
                   })
                   ->where('enabled',1)->get();
 
                 }else{
                   $assign_state = FellowData::whereIn('user_id',$fellows)->where('state',$this->state_name)->pluck('user_id');
                   $users     = User::where('type','fellow')->whereIn('id',$assign_state)
-                  ->orWhere(function($query){
-                    $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
+                  ->orWhere(function($query)use($prosociedad_gen_mails){
+                    $query->whereIn('email',$prosociedad_gen_mails)->where('institution','PROSOCIEDAD');
                   })
                   ->where('enabled',1)->get();
                 }

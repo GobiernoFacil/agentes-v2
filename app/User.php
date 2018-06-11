@@ -370,9 +370,13 @@ class User extends Authenticatable
     }
 
     function check_activity($activity){
-      if($this->check_progress($activity->session->slug,1)){
-        return true;
+      if($activity->session){
+          if($this->check_progress($activity->session->slug,1)){
+            return true;
 
+          }else{
+            return false;
+          }
       }else{
         return false;
       }
