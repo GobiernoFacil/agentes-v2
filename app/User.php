@@ -458,10 +458,6 @@ class User extends Authenticatable
                   $fp->save();
             }
         }
-        var_dump($session->name);
-        var_dump($allSfr->count());
-        var_dump($allFfP->count());
-        var_dump($fp->status);
         if($allSfr->count() > 0 && $fp->status){
             if($allSfr->count() != $allFfP->count()){
               $fp->status = 0;
