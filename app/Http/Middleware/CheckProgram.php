@@ -26,7 +26,7 @@ class CheckProgram
             if($user->check_progress($request->activity_slug,2)){
               return $next($request);
             }else{
-              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa actividad']);
+              return back()->with(['error'=>'Aún no puedes accesar a esa actividad']);
             }
 
           }elseif(isset($request->session_slug)){
