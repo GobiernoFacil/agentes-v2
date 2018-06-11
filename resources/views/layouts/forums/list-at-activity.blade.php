@@ -18,7 +18,7 @@
 	<!-- descripción-->
 	<div class="col-sm-12 forum_list">
 
-		<p class="author"><span>Creado {{$forum->created_at->diffForHumans()}}</span></p>
+		<p class="author"><span>Creado <a title=" {{ date_format($forum->created_at, 'F j, Y, g:i a') }}">{{$forum->created_at->diffForHumans()}}</a></span></p>
 		<div class="divider top"></div>
 	</div>
 

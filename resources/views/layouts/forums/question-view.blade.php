@@ -98,7 +98,7 @@
 		<!--super user data -->
 		{{$question->user->name}}
 		@endif
-		<span>{{$question->created_at->diffForHumans()}}</span></p>
+		<span><a title="{{ date_format($question->created_at, 'F j, Y, g:i a') }}">{{$question->created_at->diffForHumans()}}</a></span></p>
 	</div>
 	<!--mensajes-->
 	<div class="col-sm-2 forum_list">
@@ -225,7 +225,7 @@
 		  			<!--super user data -->
 		  			{{$message->user->name}}
 		  			@endif
-		  			<span>{{$message->created_at->diffForHumans()}}</span></p>
+		  			<span><a title="{{ date_format($message->created_at, 'F j, Y, g:i a') }}">{{$message->created_at->diffForHumans()}}</a></span></p>
 				</div>
 				<div class="col-sm-12">
 	  			<div class="divider b"></div>
