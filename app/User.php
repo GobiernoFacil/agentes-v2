@@ -413,15 +413,17 @@ class User extends Authenticatable
                   'type'       => 'module'
                 ]);
 
+      $fp->status = 1;
+      $fp->save();
       if($allev->count() > 0){
-        if($allev->count()== $allFeP->count()){
-          $fp->status = 1;
+        if($allev->count() != $allFeP->count()){
+          $fp->status = 0;
           $fp->save();
         }
       }
-      if($allfr->count() > 0){
-        if($allFfP->count()== $allfr->count()){
-          $fp->status = 1;
+      if($allfr->count() > 0 && $fp->status){
+        if($allFfP->count() != $allfr->count()){
+          $fp->status = 0;
           $fp->save();
         }
 
@@ -447,18 +449,20 @@ class User extends Authenticatable
                     'session_id' => $session->id,
                     'type'       => 'session'
                 ]);
-        if($allSev->count() > 0){
-          if($allSev->count()== $allFeP->count()){
-            $fp->status = 1;
-            $fp->save();
-          }
-        }
 
-        if($allSfr->count() > 0){
-          if($allSfr->count()== $allFfP->count()){
-            $fp->status = 1;
-            $fp->save();
-          }
+        $fp->status = 1;
+        $fp->save();
+        if($allSev->count() > 0){
+            if($allSev->count() != $allFeP->count()){
+                $fp->status = 0;
+                  $fp->save();
+            }
+        }
+        if($allSfr->count() > 0 && $fp->status){
+            if($allSfr->count() != $allFfP->count()){
+              $fp->status = 0;
+                $fp->save();
+              }
         }
       }
 

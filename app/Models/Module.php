@@ -161,7 +161,7 @@ class Module extends Model
       ->orWhere(function($query) use($sessions){
                 $query->whereIn('session_id',$sessions)
                       ->where('hasforum',1);
-      })
+      })->orderBy('order','asc')
       ->get();
     }
 
