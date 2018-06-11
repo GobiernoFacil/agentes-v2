@@ -34,7 +34,7 @@
 	<!--pregunta-->
 	<div class="col-sm-9 forum_list">
     	<h1>{{$question->topic}} </h1>
-		<p class="author">Por {{$question->user->name}} <span>{{$question->created_at->diffForHumans()}}</span></p>
+		<p class="author">Por {{$question->user->name}} <span><a title="{{ date_format($question->created_at, 'F j, Y, g:i a') }}">{{$question->created_at->diffForHumans()}}</a></span></p>
 	</div>
 	<!--contador de mensajes-->
 	<div class="col-sm-2 forum_list">
@@ -89,21 +89,21 @@
 							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/{$message->user->fellowData->surname}/{$message->user->fellowData->lastname}")}}'>
 								Por {{$message->user->name.' '.$message->user->fellowData->surname.' '.$message->user->fellowData->lastname}}
 						  </a>
-							<span>{{$message->created_at->diffForHumans()}}</span>
+							<span><a title="{{ date_format($message->created_at, 'F j, Y, g:i a') }}">{{$message->created_at->diffForHumans()}}</a></span>
 						</p>
 						@elseif($message->user->type==='facilitator')
 						<p class="author">
 							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/$type")}}'>
 							  Por {{$message->user->name.' '.$message->user->facilitatorData->surname.' '.$message->user->facilitatorData->lastname}}
 						  </a>
-							<span>{{$message->created_at->diffForHumans()}}</span>
+							<span><a title="{{ date_format($message->created_at, 'F j, Y, g:i a') }}">{{$message->created_at->diffForHumans()}}</a></span>
 						</p>
 						@else
 	  				<p class="author">
 							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$message->user->name}/$type")}}'>
 								Por {{$message->user->name}}
 							</a>
-							<span>{{$message->created_at->diffForHumans()}}</span></p>
+							<span><a title="{{ date_format($message->created_at, 'F j, Y, g:i a') }}">{{$message->created_at->diffForHumans()}}</a></span></p>
 						@endif
 				</div>
 				<div class="col-sm-12">

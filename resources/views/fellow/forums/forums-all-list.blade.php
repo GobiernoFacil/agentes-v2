@@ -31,7 +31,7 @@
 					<p><span class="type general">General</span></p>
 
 			@endif
-			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
+			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span><a title="{{ date_format($forum->created_at, 'F j, Y, g:i a') }}">{{$forum->created_at->diffForHumans()}}</a></span></p>
 		</div>
 		<div class="col-sm-12 col-xs-12">
 			<div class="divider"></div>

@@ -26,7 +26,7 @@
 		@else
 			<p><span class="type state">Soporte</span></p>
 		@endif
-		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span>{{$forum->created_at->diffForHumans()}}</span></p>
+		<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span><a title="{{ date_format($forum->created_at, 'F j, Y, g:i a') }}">{{$forum->created_at->diffForHumans()}}</a></span></p>
 		<div class="divider bg nm"></div>
 	</div>
 	<!-- descripción-->
@@ -66,7 +66,7 @@
 							<a href='{{url("tablero/$program->slug/foros/perfil/ver/{$conversation->user->name}/{$conversation->user->fellowData->surname}/{$conversation->user->fellowData->lastname}")}}'>
 							Por {{$conversation->user->name." ".$conversation->user->fellowData->surname." ".$conversation->user->fellowData->lastname}}
 						  </a>
-							 <span> | {{$conversation->created_at->diffForHumans()}}</span>
+							 <span> | <a title="{{ date_format($conversation->created_at, 'F j, Y, g:i a') }}">{{$conversation->created_at->diffForHumans()}}</a></span>
 						</p>
 						@elseif($conversation->user->facilitatorData)
 						<!--facilitator data -->
