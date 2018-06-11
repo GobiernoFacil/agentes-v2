@@ -42,6 +42,17 @@
 		@endif
 	</div>
 </div>
+@if(Session::has('success'))
+<div class="message success">
+		{{ Session::get('success') }}
+	</div>
+	@endif
+
+	@if(Session::has('error'))
+	<div class="message error">
+			{{ Session::get('error') }}
+		</div>
+		@endif
 
 <!-- lista de sesiones-->
 @if($module->sessions->count() > 0)
