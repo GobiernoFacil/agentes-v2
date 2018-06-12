@@ -34,6 +34,10 @@ class Program extends Model
       return $this->hasMany("App\Models\Module")->where('public',1)->orderBy('order','asc');
     }
 
+    function surveys(){
+      return $this->hasMany("App\Models\CustomQuestionnaire")->where('type','survey')->orderBy('created_at','desc');
+    }
+
     function get_modules_with_forums(){
       $modules = $this->fellow_modules->pluck('id')->toArray();
       $module_ids = Forum::whereIn('module_id',$modules)->pluck('module_id')->toArray();

@@ -10,12 +10,28 @@ use App\Models\FellowSurvey;
 use App\Models\FacilitatorSurvey;
 use App\Models\CustomQuestionnaire;
 use App\Models\ModuleSession;
+use App\Models\Program;
 use App\User;
 class AdminSurveys extends Controller
 {
     //
     //Paginación
     public $pageSize = 10;
+    /**
+     * Muestra lista para ver resultado de encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexProgram()
+    {
+      $user       = Auth::user();
+      $programs   = Program::orderBy('start','desc')->paginate($this->pageSize);
+      return view('admin.surveys.survey-program-list')->with([
+        "user"         => $user,
+        "programs"    => $programs
+      ]);
+
+    }
 
     /**
      * Muestra lista para ver resultado de encuestas
