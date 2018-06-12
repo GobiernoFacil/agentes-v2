@@ -3053,12 +3053,14 @@ footer {
       position: absolute;
       top: 64px;
       width: 100%;
-      z-index: 99; }
+      z-index: 99;
+      background: #20a6e7; }
   .apertus_content {
     margin-left: 0; }
   .apertus_profile_logout {
     right: 7px;
-    top: 7px; }
+    top: 7px;
+    z-index: 100; }
   .hamburger {
     display: inline-block; }
   a.apertus, a:visited.apertus {
