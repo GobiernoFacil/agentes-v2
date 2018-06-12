@@ -588,7 +588,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tablero-facilitador/evaluacion/diagnostico/ver/{id}', 'FacilitatorEvaluations@view');
 
     //// noticias
-    Route::get('tablero-facilitador/noticias', 'NewsEventsFacilitator@index');
+    Route::get('tablero-facilitador/noticias-eventos', 'NewsEventsFacilitator@index');
     Route::get('tablero-facilitador/noticias/ver/{news_slug}', 'NewsEventsFacilitator@view');
 
     //// diagnostico
