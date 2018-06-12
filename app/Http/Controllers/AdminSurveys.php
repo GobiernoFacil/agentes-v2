@@ -38,13 +38,15 @@ class AdminSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($program_id)
     {
       $user       = Auth::user();
-      $custom     = CustomQuestionnaire::whereNull('type')->get();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $surveys    = CustomQuestionnaire::where('type','survey')->where('program_id',$program_id)->get();
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
-        "custom"    => $custom
+        "surveys"   => $surveys,
+        "program"   => $program
       ]);
 
     }
@@ -61,6 +63,21 @@ class AdminSurveys extends Controller
       return view('admin.surveys.survey-satisfaction-list-fellows')->with([
         "user"      => $user,
         "fellows"   => $fellows
+      ]);
+    }
+
+    /**
+     * Muestra formulario para agregar encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add($program_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      return view('admin.surveys.survey-add')->with([
+        "user"      => $user,
+        "program"   => $program
       ]);
     }
 

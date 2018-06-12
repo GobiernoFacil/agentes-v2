@@ -404,7 +404,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@indexProgram');
     Route::get('dashboard/encuestas/programa/{program_id}', 'AdminSurveys@index');
-
+    Route::get('dashboard/encuestas/programa/{program_id}/agregar', 'AdminSurveys@add');
 
     Route::get('dashboard/encuestas/diagnostico/{survey_id}', 'AdminSurveys@customSurvey');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');
