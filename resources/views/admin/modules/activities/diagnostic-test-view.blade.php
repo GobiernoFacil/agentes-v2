@@ -14,7 +14,13 @@
         <?php $count  = 1;?>
         @foreach($activity->diagnostic_info->questions as $question)
         <li><h4>Pregunta {{$count}} {{$question->required ? '(Obligatoria)' : ''}}</h4>
-          <h5 class = "small">{{$question->type === 'radio' ? 'Pregunta de escala' : $question->type ==='open' ? 'Pregunta abierta' : 'Pregunta de opción múltiple'}}</h5>
+          @if($question->type === 'radio')
+            <h5 class = "small">Pregunta en escala</h5>
+          @elseif($question->type ==='open')
+            <h5 class = "small">Pregunta abierta</h5>
+          @else
+            <h5 class = "small">Pregunta de opción múltiple</h5>
+          @endif
           {{$question->question}}
           @if($question->type ==='answers')
             <ul>
