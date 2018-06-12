@@ -460,7 +460,7 @@ class ModuleSessions extends Controller
     {
       //
       $user = Auth::user();
-      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','desc')->get();
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('institution','desc')->get();
       $session       = ModuleSession::where('id',$session_id)->firstOrFail();
       return view('admin.modules.facilitator-assign')->with([
         'user' => $user,

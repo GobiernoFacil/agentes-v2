@@ -20,7 +20,7 @@
 			<b class="icon_h session list_s"></b>
 		</div>
 		<div class="col-sm-9">
-			<h3>Sesión {{$session->session->order}}</h3>
+			<h3>Sesión </h3>
 			<h3>{{$session->session->module->program->title}}</h3>
 			<h2>{{$session->session->module->title}} </h2>
 			<h1>{{$session->session->name}} </h1>
