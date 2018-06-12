@@ -13,6 +13,7 @@ use App\Models\ModuleSession;
 use App\Models\ForumLog;
 use App\User;
 use App\Models\FacilitatorModule;
+use App\Models\Program;
 use App\Notifications\SendForumNotice;
 // FormValidators
 use App\Http\Requests\SaveForum;
@@ -32,10 +33,17 @@ class FacilitatorForums extends Controller
     public function all()
     {
       $user     = Auth::user();
-      $forums   = Forum::orderBy('created_at','desc')->paginate($this->pageSize);
+      $program  = $user->fac_program();
+      if($program){
+        $forums   = $program->forums()->paginate($this->pageSize);
+      }else{
+        $forums   = Forum::where('program_id',null)->orderBy('created_at','desc')->paginate($this->pageSize);
+        $program   = new Program();
+      }
       return view('facilitator.forums.forums-all-list')->with([
         "user"      => $user,
-        "forums" => $forums,
+        "forums"    => $forums,
+        "program"   => $program
       ]);
 
     }
@@ -115,7 +123,7 @@ class FacilitatorForums extends Controller
       $log->forum_id = $conversation->forum->id;
       $log->message_id = $message->id;
       $log->save();
-      $this->send_to($conversation->forum,$conversation,'message');
+      $conversation->forum->send_notification_to($conversation->forum->program,$conversation,'message',$message);
       return redirect("tablero-facilitador/foros/pregunta/ver/{$conversation->id}")->with('message','Mensaje creado correctamente');
     }
 
@@ -158,7 +166,7 @@ class FacilitatorForums extends Controller
       $log->conversation_id = $forumConversation->id;
       $log->forum_id = $forum->id;
       $log->save();
-      $this->send_to($forumConversation->forum,$forumConversation,'question');
+      $forum->send_notification_to($forum->program,$forumConversation,'question');
       return redirect("tablero-facilitador/foros/{$forum->id}")->with('message','Pregunta creada correctamente');
     }
 
@@ -179,73 +187,7 @@ class FacilitatorForums extends Controller
       ]);
     }
 
-    protected function send_to($forum,$conversation,$type){
-        if(!$forum->state_name && $type!="create"){
-          //usuarios en el foro
-          $user_ids = ForumLog::where('forum_id',$forum->id)->pluck('user_id');
-          $users    = User::whereIn('id',$user_ids->toArray())->where('type','fellow')
-          ->orWhere(function($query)use($user_ids){
-            $query->where('institution','PROSOCIEDAD')->whereIn('id',$user_ids->toArray());
-          })
-          ->where('enabled',1)
-          ->get();
-          foreach ($users as $userA) {
-            $this->send($userA,$forum,$conversation,$type);
-          }
-        }elseif(!$forum->state_name && $type==="create"){
-         //a todos los usuarios fellow y facilitator PROSOCIEDAD
-         $assign_f = FacilitatorModule::all()->pluck('user_id');
-         $users = User::where('type','fellow')
-         ->orWhere(function($query)use($assign_f){
-           $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f->toArray());
-         })
-         ->orWhere(function($query){
-           $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
-         })
-         ->where('enabled',1)->get();
-          foreach ($users as $userA) {
-            $this->send($userA,$forum,$conversation,$type);
-          }
 
-        }else{
-          if($forum->state_name==='General'){
-            //a todos los usuarios fellow y facilitator
-            $assign_f = FacilitatorModule::all()->pluck('user_id');
-            $users = User::where('type','fellow')
-            ->orWhere(function($query)use($assign_f){
-              $query->where('institution','PROSOCIEDAD')->whereIn('id',$assign_f->toArray());
-            })
-            ->orWhere(function($query){
-              $query->where('type','facilitator')->where('institution','PROSOCIEDAD');
-            })
-            ->where('enabled',1)->get();
-             foreach ($users as $userA) {
-               $this->send($userA,$forum,$conversation,$type);
-             }
-          }else{
-            //usuarios del estado y facilitator
-            $assign_f = FacilitatorModule::all()->pluck('user_id');
-            $assign_state = FellowData::where('state',$forum->state_name)->pluck('user_id');
-            $users = User::where('institution','PROSOCIEDAD')->whereIn('id',$assign_f->toArray())
-            ->orWhere(function($query)use($assign_state){
-              $query->where('type','fellow')->whereIn('id',$assign_state->toArray());
-            })
-            ->where('enabled',1)->get();
-             foreach ($users as $userA) {
-               $this->send($userA,$forum,$conversation,$type);
-             }
-          }
-        }
-    }
-
-
-    protected function send($userA,$forum,$conversation,$type){
-      if($type==='create'){
-        $userA->notify(new SendForumNotice($userA,$forum,$type,null,null));
-      }else{
-        $userA->notify(new SendForumNotice($userA,$forum,$type,$conversation,null));
-      }
-    }
 
 
 }

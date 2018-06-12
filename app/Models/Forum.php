@@ -32,6 +32,9 @@ class Forum extends Model
     function session(){
       return $this->belongsTo("App\Models\ModuleSession");
     }
+    function program(){
+      return $this->belongsTo("App\Models\Program");
+    }
 
     function forum_messages(){
       return $this->hasMany("App\Models\ForumMessage");

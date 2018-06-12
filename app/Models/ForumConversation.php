@@ -13,8 +13,10 @@ class ForumConversation extends Model
         'forum_id', 'topic','user_id','description','slug'
     ];
 
+  
+
     function forum(){
-      return $this->belongsTo("App\Models\Forum");
+      return $this->belongsTo("App\Models\Forum",'forum_id');
     }
 
     function messages(){

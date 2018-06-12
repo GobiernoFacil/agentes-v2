@@ -13,11 +13,8 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-	  @if(isset($forum->session))
-    <h1>Agregar tema o nueva pregunta a <strong>{{$forum->topic}}</strong></h1>
-    @else
-    <h1>Agregar tema o nueva pregunta a <strong>foro del estado de {{$forum->session}}</strong></h1>
-    @endif
+    <h1>Agregar nueva pregunta o tema a <strong>{{$forum->topic}}</strong></h1>
+    <h2>{{$forum->program->title}}</h2>
   </div>
 </div>
 <div class="box">
