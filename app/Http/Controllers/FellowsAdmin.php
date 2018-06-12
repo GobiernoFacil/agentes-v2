@@ -75,12 +75,10 @@ class FellowsAdmin extends Controller
         $program = Program::where('id',$program_id)->firstOrFail();
         $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
         $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
-        $average = $fellow->get_total_score($program->id);
 
         return view('admin.fellows.fellow-view')->with([
           'user' 	=> $user,
           'fellow' 	=> $fellow,
-          'average' => $average,
           'program' => $program
         ]);
     }
@@ -123,11 +121,34 @@ class FellowsAdmin extends Controller
          $program = Program::where('id',$program_id)->firstOrFail();
          $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
          $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
-         $modules  = $program->modules;
-         return view('admin.fellows.evaluation-sheet')->with(
+         $modules  = $program->modules()->paginate(5);
+         return view('admin.fellows.evaluation-module-sheet')->with(
           [
             'user'=>$user,
             'modules' =>$modules,
+            'fellow'  => $fellow,
+            'program' => $program
+          ]
+         );
+     }
+
+     /**
+      * Display the evaluations sheet
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function viewModule($program_id,$module_id,$fellow_id)
+     {
+         $user     = Auth::user();
+         $program  = Program::where('id',$program_id)->firstOrFail();
+         $module   = Module::where('id',$module_id)->firstOrFail();
+         $fellow   = $program->fellows()->where('user_id',$fellow_id)->first();
+         $fellow   = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
+         return view('admin.fellows.fellow-module-view')->with(
+          [
+            'user'=>$user,
+            'module' =>$module,
             'fellow'  => $fellow,
             'program' => $program
           ]

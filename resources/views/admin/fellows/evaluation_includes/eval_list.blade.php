@@ -1,29 +1,26 @@
 <!--título del módulo-->
 <div class="col-sm-9">
-	<h4>Módulo {{$n}}</h4>
+	<h4>Módulo</h4>
 	<h2 class ="title">{{$module->title}}</h2>
 </div>
 <!--calificación del módulo-->
 <div class="col-sm-3 right">
 	<p>Calificación del módulo:
-		<span class="score_a block">{{$fellow->module_average($fellow->id,$module->id) ? $fellow->module_average($fellow->id,$module->id)->type !='sin' ? number_format($fellow->module_average($fellow->id,$module->id)->average,2) : 'No aplica'  : 'Sin calificación'}}</span>
-		@if(!$module->check_last_activity($module->id))
-		<strong>No se toma en consideración</strong>
+		@if($module->get_all_activities_with_forums()->count() > 0 || $module->get_evaluation_activity_kardex()->count() > 0)
+		<span class="score_a block">
+			{{$fellow->module_average($module->id) ? number_format($fellow->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
+		</span>
+		<a href='{{ url("dashboard/fellows/programa/$program->id/ver-calificaciones/$module->id/$fellow->id") }}' class="btn xs view">Ver módulo</a>
+		@else
+		<span class="score_a block">
+			<strong>No aplica</strong>
+		</span>
 		@endif
+
 	</p>
 </div>
-<!--divider-->
-<div class="col-sm-12">
-	<div class="divider b"></div>
-</div>
-<!--lista-->
-<div class="col-sm-12">
-	<ul class="list line">
-		@foreach($module->sessions as $session)
-			@include('admin.fellows.evaluation_includes.eval_list_session')
-        @endforeach
-    </ul>
-</div>
+
+
 <!--divider-->
 <div class="col-sm-12">
 	<div class="divider"></div>

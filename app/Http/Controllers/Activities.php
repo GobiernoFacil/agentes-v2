@@ -349,9 +349,6 @@ class Activities extends Controller
               $file->delete();
             }
 
-            foreach ($activity->activityRequirements as $requirement) {
-              $requirement->delete();
-            }
             if($activity->videos){
               $activity->videos->delete();
             }

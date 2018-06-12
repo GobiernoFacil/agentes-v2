@@ -52,7 +52,7 @@
 		        </td>
 		        <td>{{$fellow->fellowData->city}} <br> <strong>{{$fellow->fellowData->state}}</strong></td>
 				<td>
-					<a href='{{url("dashboard/fellows/programa/$program->id/ver-calificaciones/$fellow->id")}}'><span class="score_a block">{{$fellow->total_average($program->id) ? number_format($fellow->total_average($program->id)->average,2) : 'Sin promedio'}}</span></a>
+					<a href='{{url("dashboard/fellows/programa/$program->id/ver-calificaciones/$fellow->id")}}'><span class="score_a block">{{$fellow->total_average($program->id) ? number_format($fellow->total_average($program->id)->average,2)*10 : 'Sin promedio'}}</span></a>
 				</td>
 
 		        <td>

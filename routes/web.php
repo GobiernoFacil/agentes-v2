@@ -189,6 +189,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/fellows/programa/{program_id}', 'FellowsAdmin@index');
     Route::get('dashboard/fellows/programa/{program_id}/ver-fellow/{fellow_id}', 'FellowsAdmin@view');
     Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{fellow_id}', 'FellowsAdmin@viewSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{module_id}/{fellow_id}', 'FellowsAdmin@viewModule');
     Route::get('dashboard/fellows/programa/{program_id}/ver-participaciones/{fellow_id}', 'FellowsAdmin@participationSheet');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador

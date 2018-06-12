@@ -16,13 +16,7 @@
 			<strong>No aplica</strong>
 		</span>
 		@endif
-<?php
-/*
-		@if(!$module->check_last_activity($module->id))
-		<strong>No se toma en consideración</strong>
-		@endif
-*/
-?>
+
 	</p>
 </div>
 

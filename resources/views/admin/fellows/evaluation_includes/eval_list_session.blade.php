@@ -8,16 +8,18 @@
 	<span class="col-sm-3 right">
 		Calificación de la sesión: <br>
 		<?php $today = date('Y-m-d');?>
-		@if($session->start <= $today)
-		<strong>{{$fellow->session_average($fellow->id,$session->id) ? $fellow->session_average($fellow->id,$session->id)->type !='sin' ? number_format($fellow->session_average($fellow->id,$session->id)->average,2) : 'No aplica' : 'Sin calificación'}}</strong>
-		@else
-		<strong>No aplica</strong>
-		@endif
+		<strong>
+			@if($session->all_activities_for_kardex($fellow->id)->count() > 0)
+				{{$fellow->session_average($session->id) ?  number_format(($fellow->session_average($session->id)->average),2)*10 : 'Sin calificación'}}
+			@else
+			 No aplica
+			@endif
+		</strong>
 	</span>
 	<span class="col-sm-11">
 		<div class="divider b"></div>
 	</span>
-
+@if($session->all_activities_for_kardex($fellow->id)->count() > 0)
     <!--evaluaciones-->
     <span class="col-sm-11">
         <ul>
@@ -31,9 +33,11 @@
 	        </li>
 			@foreach($session->activities as $activity)
 			    @if($activity->type === 'evaluation')
-					@include('admin.fellows.evaluation_includes.eval_list_session_activity')
-				@endif
+						@include('admin.fellows.evaluation_includes.eval_list_session_activity')
+					@endif
 			@endforeach
+
+			@if($session->forums)
             <!--- foros-->
             <li class="row">
 	        	<span class="col-sm-6">
@@ -43,14 +47,12 @@
 	        	 Participaciones
 	        	</span>
 	        	<span class="col-sm-3 right">
-							@if($session->forums)
-	        	 	{{$fellow->forum_participation($fellow->id,$session->id) > 0  ? $fellow->forum_participation($fellow->id,$session->id) : 'Sin participación' }}
-						 @else
-						 	Sin foros
-						 @endif
+	        	 		{{$fellow->all_participation_session($session) ? 'Completado' : 'No completado' }}
 	        	</span>
 	        </li>
+			@endif
         </ul>
     </span>
     <span class="col-sm-12"></span>
+@endif
 </li>
