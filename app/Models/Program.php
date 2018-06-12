@@ -34,6 +34,13 @@ class Program extends Model
       return $this->hasMany("App\Models\Module")->where('public',1)->orderBy('order','asc');
     }
 
+    function get_modules_with_forums(){
+      $modules = $this->fellow_modules->pluck('id')->toArray();
+      $module_ids = Forum::whereIn('module_id',$modules)->pluck('module_id')->toArray();
+      return   Module::whereIn('id',$module_ids)->where('public',1)->where('program_id',$this->id)->orderBy('order','asc');
+
+    }
+
     function get_fellow_modules_with_ev_act(){
       $sessions_id = Activity::where('type','evaluation')
       ->orWhere(function($query){

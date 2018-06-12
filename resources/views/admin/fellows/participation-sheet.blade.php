@@ -9,29 +9,29 @@
 	<div class="col-sm-12">
 		<h1>Participaciones de {{$fellow->name.' '.$fellow->fellowdata->surname.' '.$fellow->fellowdata->lastname}}</h1>
 		<h2>Programa {{$program->title}}</h2>
-		{{ $modules->links() }}
 		<?php $count_modules = 1; ?>
 		@foreach ($modules as $module)
 		<div class="box">
-			<h1 class="center">Módulo {{$count_modules}}: <strong>{{$module->title}}</strong></h1>
-			<div class="row table_t">
-				<div class="col-sm-offset-7 col-sm-2">
-				  <p>Fecha límite</p>
-				</div>
-				<div class="col-sm-3">
-				  <p>Estatus</p>
-				</div>
-			</div><!--row ends-->
+			<h1 class="center">Módulo  <strong>{{$module->title}}</strong></h1>
+
 			<div class="col-sm-12">
 				<div class="divider"></div>
 			</div>
 			@foreach($module->sessions as $session)
-			<div class="col-sm-5">
-				<h3 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h3>
-			</div>
-			<!--lista evaluaciones-->
-			<div class="session_list">
 				@if($session->all_forum->count() > 0)
+					<div class="col-sm-5">
+						<h3 class="title">Sesión {{$session->order}}: <strong>{{$session->name}}</strong></h3>
+					</div>
+					<div class="row table_t">
+						<div class="col-sm-offset-7 col-sm-2">
+							<p>Fecha creación</p>
+						</div>
+						<div class="col-sm-3">
+							<p>Estatus</p>
+						</div>
+					</div><!--row ends-->
+					<!--lista evaluaciones-->
+					<div class="session_list">
 					@foreach($session->all_forum as $forum)
 					<div class="row">
 						<!--divider-->
@@ -57,24 +57,17 @@
 						</div>
 
 					</div><!--row ends-->
+
+	        </div><!--lista ends-->
 					@endforeach
-				@else
-					<div class="row">
-						<!--divider-->
-						<div class="col-sm-11 col-sm-offset-1">
-						  <div class="divider"></div>
-						</div>
-						<!--- título-->
-						<div class="col-sm-3 col-sm-offset-5">
-            			  <p>Sin foros</p>
-            			</div>
-					</div>
 				@endif
-            </div><!--lista ends-->
 			@endforeach
 			<?php $count_modules++;?>
+
 		</div><!-- box ends-->
 		@endforeach
+
+			{{ $modules->links() }}
    </div>
 </div>
 @else

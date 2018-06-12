@@ -167,7 +167,7 @@ class FellowsAdmin extends Controller
        $program = Program::where('id',$program_id)->firstOrFail();
        $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
        $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
-       $modules = $program->modules()->paginate($this->pageSize);
+       $modules = $program->get_modules_with_forums()->paginate(5);
          return view('admin.fellows.participation-sheet')->with(
           [
             'user'=>$user,
