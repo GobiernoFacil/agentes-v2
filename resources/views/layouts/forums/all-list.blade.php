@@ -41,6 +41,17 @@
 				<p><span class="type state">Estado</span></p>
 				@endif
 			@endif
+			@if($user->type == "facilitator")
+				<h2><a href="{{ url('tablero-facilitador/foros/' .$forum->id) }}">{{$forum->topic}}</a></h2>
+				@if($forum->type ==='activity')
+				<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
+				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>
+				@elseif($forum->type ==='general')
+				<p><span class="type general">General</span></p>
+				@elseif($forum->type ==='state')
+				<p><span class="type state">Estado</span></p>
+				@endif
+			@endif
 			<p class="author">Creado por <strong>{{!empty($forum->user->institution) ? $forum->user->institution : ''}}</strong> <span><a title="{{ date_format($forum->created_at, 'F j, Y, g:i a') }}">{{$forum->created_at->diffForHumans()}}</a></span></p>
 		</div>
 		<div class="col-sm-12 col-xs-12">

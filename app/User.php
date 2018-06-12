@@ -211,6 +211,10 @@ class User extends Authenticatable
       return Program::where('public',1)->whereIn('id',$programs->toArray())->orderBy('start','asc')->first();
     }
 
+    function fac_program(){
+      return Program::where('public',1)->orderBy('start','desc')->first();
+    }
+
     function get_total_score($program_id){
       $program      = Program::where('id',$program_id)->first();
       $activities   = $program->get_all_eva_activities()->pluck('id')->toArray();

@@ -95,9 +95,12 @@
 		<div class="col-sm-9">
 			<h2 class="title">Evaluación</h2>
 		</div>
+			<?php /*
 		<div class="col-sm-8 col-sm-offset-2">
 			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver evaluaciones</a>
 		</div>
+		*/
+		?>
 	</div>
 </div>
 @elseif($activity->type ==='evaluation' && $activity->files)
@@ -107,9 +110,12 @@
 			<h2 class="title">Evaluación</h2>
 			<h4>Carga de archivo</h4>
 		</div>
+		<?php /*
 		<div class="col-sm-8 col-sm-offset-2">
 			<a href='{{url("tablero-facilitador/actividad-evaluacion/$activity->id")}}' class="btn xs view">Ver archivos</a>
 		</div>
+		*/
+		?>
 	</div>
 </div>
 @endif
