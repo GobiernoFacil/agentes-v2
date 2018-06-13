@@ -12,6 +12,8 @@ use App\Models\CustomQuestionnaire;
 use App\Models\ModuleSession;
 use App\Models\Program;
 use App\User;
+
+use App\Http\Requests\SaveGeneralSurvey;
 class AdminSurveys extends Controller
 {
     //
@@ -42,7 +44,11 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
-      $surveys    = CustomQuestionnaire::where('type','survey')->where('program_id',$program_id)->get();
+      $surveys    = CustomQuestionnaire::where('type','general')->where('program_id',$program_id)
+      ->orWhere(function($query)use($program_id){
+        $query->where('type','facilitator')->where('program_id',$program_id);
+      })
+      ->get();
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
         "surveys"   => $surveys,
@@ -78,6 +84,54 @@ class AdminSurveys extends Controller
       return view('admin.surveys.survey-add')->with([
         "user"      => $user,
         "program"   => $program
+      ]);
+    }
+
+    /**
+     * Muestra formulario para agregar encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function save(SaveGeneralSurvey $request)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$request->program_id)->firstOrFail();
+      $quiz = CustomQuestionnaire::firstOrCreate([
+        'user_id'     => $user->id,
+        'title'       => $request->title,
+        'description' => $request->description,
+        'slug'        => str_slug($request->title),
+        'type'        => $request->type,
+        'program_id'  => $request->program_id
+      ]);
+      return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$quiz->id")->with(['success'=>'Se ha guardado correctamente']);
+    }
+
+    /**
+     * Muestra formulario para agregar encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addQuestions($program_id,$quiz_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $quiz       = CustomQuestionnaire::where('id',$quiz_id)->firstOrFail();
+      $questions  = $quiz->questions;
+      $answers   = [];
+      foreach($questions as $question){
+        if($question->answers){
+          foreach($question->answers as $answer){
+            $answers[] = $answer->toArray();
+          }
+        }
+      }
+      return view('admin.surveys.survey-add-questions')->with([
+        "user"      => $user,
+        "program"   => $program,
+        "quiz"      => $quiz,
+        "answers"   => json_encode($answers),
+        "questions" => json_encode($questions->toArray())
       ]);
     }
 

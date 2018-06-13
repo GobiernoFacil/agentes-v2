@@ -18,6 +18,20 @@
   </div>
 </div>
 
+<!-- title -->
+<div class="row">
+  <div class="col-sm-12">
+    <p>
+      <label><strong>Tipo de encuesta</strong> <br>
+      {{Form::select('type',[null=>'Selecciona una opción','facilitator'=>'Facilitadores','general'=>'General',],null, ["class" => "form-control"])}} </label>
+      @if($errors->has('type'))
+      <strong class="danger">{{$errors->first('type')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
+
 <!-- descripción  -->
 <div class="row">
   <div class="col-sm-12">
