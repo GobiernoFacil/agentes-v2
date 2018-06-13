@@ -50,6 +50,7 @@
                       </div>
                   	</div>
         						@foreach($module->get_all_evaluation_activity() as $evAct)
+										@if($evAct->id != 431)
                     <div class="row">
         							<div class="col-sm-4">
         								<h5>{{$evAct->type ==='evaluation' ? $evAct->files ? 'Archivo' : 'Evaluación' : 'Diagnóstico'}}</h5>
@@ -86,6 +87,7 @@
           							@endif
         							</div>
                     </div>
+										@endif
         						@endforeach
         					@endif
         			</div>
