@@ -538,9 +538,11 @@ Route::group(['middleware' => ['auth']], function () {
           /*@FellowSurveys*/
           // Rutas encuestas
           Route::get('tablero/{program_slug}/encuestas', 'FellowSurveys@index');
+          Route::get('tablero/{program_slug}/encuestas/{survey_slug}', 'FellowSurveys@welcome');
 
         /*
           Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@welcome');
+          
           Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion/1', 'FellowSurveys@addSurvey');
           Route::post('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@saveSurvey');
           Route::get('tablero/{program_slug}/encuestas/facilitadores-modulos', 'FellowSurveys@indexModules');

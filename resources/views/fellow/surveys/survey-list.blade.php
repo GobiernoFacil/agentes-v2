@@ -9,6 +9,16 @@
 <div class="row">
 	<div class="col-sm-12 ">
 		<h1>Encuestas</h1>
+		@if(Session::has('error'))
+		<div class="message error">
+				{{ Session::get('error') }}
+		</div>
+		@endif
+		@if(Session::has('success'))
+		<div class="message success">
+				{{ Session::get('success') }}
+		</div>
+		@endif
 	</div>
 </div>
 

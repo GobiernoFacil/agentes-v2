@@ -53,15 +53,23 @@ class FellowSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function welcome()
+    public function welcome($program_slug,$survey_slug)
     {
       $user     = Auth::user();
-      $survey   = FellowSurvey::where('user_id',$user->id)->first();
-      if($survey){
-        return redirect('tablero/encuestas')->with('error',"Ya has contestado la encuesta");
+      $program  = Program::where('slug',$program_slug)->firstOrFail();
+      $survey   = CustomQuestionnaire::where('slug',$survey_slug)->where('program_id',$program->id)->firstOrFail();
+      if($user->fellow_survey($survey->id)->count() == $survey->questions->count()){
+        return redirect("tablero/$program->slug/encuestas")->with('error',"Ya has contestado la encuesta");
       }
+      $answersAlr = $user->fellow_survey($survey->id)->pluck('question_id')->toArray();
+      $fellow_questions = $survey->questions()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+
+
       return view('fellow.surveys.survey-welcome')->with([
-        'user'=>$user,
+        'user'              => $user,
+        'survey'            => $survey,
+        'program'           => $program,
+        'fellow_questions' => $fellow_questions
       ]);
 
     }
