@@ -13,9 +13,9 @@
 		<p>Instrucciones:</p>
 		<ol>
 			<li>Da clic en <strong>Agregar pregunta</strong> para comenzar.</li>
-			<li>Escribe la pregunta y guárdala.</li>
-			<li>Agrega respuesta a la pregunta y guárdala.</li>
-			<li>Selecciona una respuesta como la correcta.</li>
+			<li>Selecciona el tipo de pregunta, escribe la pregunta y guárdala.</li>
+			<li>Agrega respuesta a la pregunta, si es el caso, y guárdala.</li>
+			<li>Si se cuenta con respuestas, selecciona una o varias como correctas si es necesario.</li>
 			<li>Puedes editar preguntas y respuestas dando clic sobre ella.</li>
 			<li>Puedes eliminar preguntas y respuestas dando clic en [X].</li>
 			<li>Cuando estén todas las preguntas da clic en finalizar.</li>
@@ -41,7 +41,7 @@
         	 	<ol id="questions-list"></ol>
 			 	<!-- agregar pregunta-->
 			 	<div class="divider b"></div>
-        	 	<h3><a href="#" id="add-question" class ="btn  ev">Agregar pregunta a evaluación [+]</a></h3>
+        	 	<h3><a href="#" id="add-question" class ="btn  ev">Agregar pregunta a encuesta [+]</a></h3>
         	</div>
 
         </div>
@@ -58,7 +58,7 @@
 
 @section('js-content')
   <!-- THE CODE-->
-  @include('admin.modules.quiz.question-templates')
+  @include('admin.modules.diagnostic.question-templates')
 
   <script src="{{url('js/eval/jquery.js')}}"></script>
   <script src="{{url('js/eval/sortable.js')}}"></script>
@@ -72,6 +72,7 @@
       getQuestionUrl       = '{{url("dashboard/encuestas/programa/$program->id/get/questions/$quiz->id")}}',
       updateQuestionUrl    = '{{url("dashboard/encuestas/programa/$program->id/update/questions/$quiz->id")}}',
       updateAnswerUrl      = '{{url("dashboard/encuestas/programa/$program->id/update/answer/$quiz->id")}}',
+			switchRequiredUrl    = '{{url("dashboard/encuestas/programa/$program->id/switch/required/$quiz->id")}}',
       token                = document.querySelector('input[name="_token"]').value;
       idQ                  = document.getElementById('quizInfoId').value;
       Questions            = <?php echo $questions; ?>;
@@ -79,5 +80,5 @@
 
 
   </script>
-  <script src="{{url('js/eval/main.js')}}"></script>
+  <script src="{{url('js/eval/diagnostic.js')}}"></script>
 @endsection

@@ -4,10 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\MessagesTrait;
-class SaveGeneralSurvey extends FormRequest
+use App\Models\CustomQuestionnaire;
+class UpdateGeneralSurvey extends FormRequest
 {
 
-use MessagesTrait;
+  use MessagesTrait;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,11 +26,12 @@ use MessagesTrait;
      */
     public function rules()
     {
-        return [
-            //
-            'description'=> 'required',
-            'type'=> 'required',
-            'title'=> 'required|max:256|unique:custom_questionnaires',
-        ];
+      $quiz = CustomQuestionnaire::find($this->route("quiz_id"));
+      return [
+          //
+          'description'=> 'required',
+          'type'=> 'required',
+          'title'=> 'required|max:256'.($quiz->title != $this->title ? '|unique:custom_questionnaires' : ''),
+      ];
     }
 }

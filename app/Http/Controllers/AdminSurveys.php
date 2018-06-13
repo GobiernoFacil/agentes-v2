@@ -9,11 +9,14 @@ use App\Models\FacilitatorModule;
 use App\Models\FellowSurvey;
 use App\Models\FacilitatorSurvey;
 use App\Models\CustomQuestionnaire;
+use App\Models\CustomQuestion;
+use App\Models\CustomAnswer;
 use App\Models\ModuleSession;
 use App\Models\Program;
 use App\User;
 
 use App\Http\Requests\SaveGeneralSurvey;
+use App\Http\Requests\UpdateGeneralSurvey;
 class AdminSurveys extends Controller
 {
     //
@@ -96,7 +99,7 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$request->program_id)->firstOrFail();
-      $quiz = CustomQuestionnaire::firstOrCreate([
+      $quiz       = CustomQuestionnaire::firstOrCreate([
         'user_id'     => $user->id,
         'title'       => $request->title,
         'description' => $request->description,
@@ -105,6 +108,36 @@ class AdminSurveys extends Controller
         'program_id'  => $request->program_id
       ]);
       return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$quiz->id")->with(['success'=>'Se ha guardado correctamente']);
+    }
+
+    /**
+     * Muestra formulario para agregar encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($program_id,$quiz_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $quiz       = CustomQuestionnaire::where('id',$quiz_id)->firstOrFail();
+      return view('admin.surveys.survey-update')->with([
+        "user"      => $user,
+        "program"   => $program,
+        "quiz"      => $quiz
+      ]);
+    }
+
+    /**
+     * Muestra formulario para agregar encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateGeneralSurvey $request)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$request->program_id)->firstOrFail();
+      CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type'));
+      return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$request->quiz_id")->with(['success'=>'Se ha guardado correctamente']);
     }
 
     /**
@@ -248,5 +281,169 @@ class AdminSurveys extends Controller
             'facilitatorData' => $facilitatorData,
             'session'         => $session
           ]);
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveQuestion(Request $request)
+        {
+
+           $question =  CustomQuestion::firstOrCreate(['question'=>$request->question,'questionnaire_id'=>$request->idQuiz]);
+           $question->type            = $request->type;
+           $question->required        = $request->required;
+           if($question->type === 'radio'){
+             $question->min_label  = 'Menor';
+             $question->max_label  = 'Mayor';
+             $question->options_columns_number  = 5;
+             $question->options_rows_number     = 1;
+           }
+           $question->save();
+           return response()->json($question->toArray());
+        }
+
+        /**
+         * Elimina pregunta de cuestionario
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function removeQuestion(Request $request)
+        {
+          $question  = CustomQuestion::find($request->id);
+          foreach($question->answers as $answer){
+            $answer->delete();
+          }
+          $question->delete();
+          return response()->json(["response"=>"ok"]);
+
+        }
+
+
+        /**
+         * Guarda respuesta de pregunta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function saveAnswer(Request $request)
+        {
+          if($request->question){
+            $answer = CustomAnswer::firstOrCreate(['question_id'=>$request->question,'answer'=>$request->value,'value'=>$request->value]);
+            $answer->selected    = 0;
+            $answer->save();
+          }
+          return response()->json($answer->toArray());
+
+        }
+
+        /**
+         * Actualiza pregunta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateQuestions(Request $request)
+        {
+           $question = CustomQuestion::find($request->id);
+           if($request->question){
+            $question->question = $request->question;
+            $question->save();
+          }
+           return response()->json($question->toArray());
+
+        }
+
+
+        /**
+         * Actualiza respuesta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function updateAnswer(Request $request)
+        {
+          $answer = CustomAnswer::find($request->id);
+          if($request->value){
+           $answer->value = $request->value;
+           $answer->save();
+         }
+          return response()->json($answer->toArray());
+
+        }
+
+        /**
+         * Cambia de correcta a incorrecta una respuesta
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function switchAnswer(Request $request)
+        {
+          $answer = CustomAnswer::find($request->opt['id']);
+          $question = CustomQuestion::find($answer->question_id);
+          if($answer->selected){
+            $answer->selected = 0;
+            $answer->save();
+          }else{
+            $answer->selected = 1;
+            $answer->save();
+          }
+          return response()->json(["response"=>"ok"]);
+
+        }
+
+
+        /**
+         * Cambia  pregunta opcional a obligatoria y viceversa
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function switchRequired(Request $request)
+        {
+          $question = CustomQuestion::find($request->opt['id']);
+          if($question->required){
+            $question->required = 0;
+            $question->save();
+          }else{
+            $question->required = 1;
+            $question->save();
+          }
+          return response()->json(["response"=>"ok"]);
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function getQuestions(Request $request)
+        {
+          $questions = CustomQuestion::where('questionnaire_id',$request->idQuiz)->get();
+          return response()->json($questions->toArray());
+
+        }
+
+        /**
+         * Muestra lista de respuestas de diagnostico general
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function checkAnswers($program_id,$quiz_id)
+        {
+          $user = Auth::user();
+          $quiz = CustomQuestionnaire::where('id',$quiz_id)->firstOrFail();
+          if($quiz->questions->count()>0){
+            foreach ($quiz->questions as $question) {
+              if($question->type === 'answers'){
+                if(!$question->answers->count()){
+                  return redirect("dashboard/encuestas/programa/$program_id/agregar-preguntas/$quiz_id")->with('error',"La pregunta: '$question->question' no cuenta con respuesta");
+                }
+              }
+            }
+            return redirect("dashboard/encuestas/programa/$program_id/")->with(['success'=>'Se ha guardado correctamente']);
+
+          }else{
+            return redirect("dashboard/encuestas/programa/$program_id/agregar-preguntas/$quiz_id")->with('error','No se ha agregado ninguna pregunta');
+          }
+
         }
 }

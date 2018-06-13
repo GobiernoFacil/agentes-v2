@@ -404,9 +404,22 @@ Route::group(['middleware' => ['auth']], function () {
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@indexProgram');
     Route::get('dashboard/encuestas/programa/{program_id}', 'AdminSurveys@index');
+    Route::get('dashboard/encuestas/programa/{program_id}/ver-resultados/{survey_id}', 'AdminSurveys@view');
     Route::get('dashboard/encuestas/programa/{program_id}/agregar', 'AdminSurveys@add');
+    Route::get('dashboard/encuestas/programa/{program_id}/actualizar/{quiz_id}', 'AdminSurveys@edit');
+    Route::post('dashboard/encuestas/programa/{program_id}/update/{quiz_id}', 'AdminSurveys@update');
     Route::post('dashboard/encuestas/programa/{program_id}/save', 'AdminSurveys@save');
     Route::get('dashboard/encuestas/programa/{program_id}/agregar-preguntas/{quiz_id}', 'AdminSurveys@addQuestions');
+    Route::get('dashboard/encuestas/programa/{program_id}/checkAnswers/{quiz_id}', 'AdminSurveys@checkAnswers');
+    Route::post('dashboard/encuestas/programa/{program_id}/save/question/{quiz_id}', 'AdminSurveys@saveQuestion');
+    Route::post('dashboard/encuestas/programa/{program_id}/remove/question/{quiz_id}', 'AdminSurveys@removeQuestion');
+    Route::post('dashboard/encuestas/programa/{program_id}/save/answer/{quiz_id}', 'AdminSurveys@saveAnswer');
+    Route::post('dashboard/encuestas/programa/{program_id}/remove/answer/{quiz_id}', 'AdminSurveys@removeAnswer');
+    Route::post('dashboard/encuestas/programa/{program_id}/switch/answer/{quiz_id}', 'AdminSurveys@switchAnswer');
+    Route::post('dashboard/encuestas/programa/{program_id}/get/questions/{quiz_id}', 'AdminSurveys@getQuestions');
+    Route::post('dashboard/encuestas/programa/{program_id}/update/questions/{quiz_id}', 'AdminSurveys@updateQuestions');
+    Route::post('dashboard/encuestas/programa/{program_id}/update/answer/{quiz_id}', 'AdminSurveys@updateAnswer');
+    Route::post('dashboard/encuestas/programa/{program_id}/switch/required/{quiz_id}', 'AdminSurveys@switchRequired');
 
     Route::get('dashboard/encuestas/diagnostico/{survey_id}', 'AdminSurveys@customSurvey');
     Route::get('dashboard/encuestas/encuesta-satisfaccion/fellows', 'AdminSurveys@indexFellows');

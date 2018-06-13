@@ -9,6 +9,16 @@
 	<div class="col-sm-12 ">
 		<h1>Encuestas</h1>
 		<p>{{$program->title}}</p>
+		@if(Session::has('error'))
+		<div class="message error">
+				{{ Session::get('error') }}
+		</div>
+		@endif
+		@if(Session::has('success'))
+		<div class="message success">
+				{{ Session::get('success') }}
+		</div>
+		@endif
 	</div>
 </div>
 
@@ -22,10 +32,12 @@
 					    	<tr>
 								<th>Encuesta</th>
 								<th>Descripción</th>
+								<th>Tipo</th>
 								<th>Acciones</th>
 					    	</tr>
 						</thead>
 						<tbody>
+							@if($program->title === 'Programa 2017')
 					    	<tr>
 								<td><h4><a href='{{url("dashboard/encuestas/encuesta-satisfaccion/fellows")}}'>Encuesta de satisfacción</a></h4></td>
 								<td>Encuesta de satisfacción Plataforma Apertus</td>
@@ -40,13 +52,16 @@
 									<a href="{{ url('dashboard/encuestas/facilitadores-modulos') }}" class="btn xs view">Ver</a>
 								</td>
 							</tr>
+							@endif
 
-							@foreach($custom as $questionnaire)
+							@foreach($surveys as $questionnaire)
 								<tr>
-									<td><h4><a href='{{url("dashboard/encuestas/diagnostico/{$questionnaire->id}")}}'>{{$questionnaire->title}}</a></h4></td>
-									<td>{{$questionnaire->description}}</td>
+									<td><h4><a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/{$questionnaire->id}")}}'>{{$questionnaire->title}}</a></h4></td>
+									<td>{{str_limit($questionnaire->description, 150, '...')}}</td>
+									<td>{{$questionnaire->type === 'general' ? 'Encuesta' : 'Facilitadores'}}</td>
 									<td>
-										<a href='{{ url("dashboard/encuestas/diagnostico/{$questionnaire->id}") }}' class="btn xs view">Ver</a>
+										<a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/$questionnaire->id")}}' class="btn xs view">Ver</a>
+										<a href='{{ url("dashboard/encuestas/programa/$program->id/actualizar/$questionnaire->id") }}' class="btn xs ev">Actualizar</a>
 									</td>
 								</tr>
 							@endforeach
