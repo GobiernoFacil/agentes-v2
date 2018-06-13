@@ -28,10 +28,16 @@ use App\Http\Requests\SaveFellowFileEvaluation;
 class AdminEvaluations extends Controller
 {
     //
-    const UPLOADS = "archivos/fellows";
-    const UPLOADSF = "archivos/fellowsEva";
+    const UPLOADS   = "archivos/fellows";
+    const DEBUG     = FALSE;
+    const UPLOADSF  = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 5;
+    public function __construct()
+    {
+      $this->user_test_apertus = User::where('email','andre@fcb.com')->first();
+    }
+
     /**
      * Muestra lista de respuestas de diagnostico general
      *
@@ -78,8 +84,13 @@ class AdminEvaluations extends Controller
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
       if($activity->files){
         //ver fellows con archivos
-        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+
+      $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+      if(self::DEBUG){
         $files      = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+      }else{
+        $files      = FellowFile::where('activity_id',$activity->id)->where('user_id','!=',$this->user_test_apertus->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+      }
         return view('admin.evaluations.activities-files-list')->with([
           "user"      => $user,
           "activity"  => $activity,
@@ -91,7 +102,11 @@ class AdminEvaluations extends Controller
         if(!$activity->quizInfo){
           return redirect('dashboard');
         }
-        $scores  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
+        if(self::DEBUG){
+          $scores  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->paginate($this->pageSize);
+        }else{
+          $scores  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id','!=',$this->user_test_apertus->id)->paginate($this->pageSize);
+        }
         return view('admin.evaluations.activities-fellows-list')->with([
           "user"      => $user,
           "activity"  => $activity,
@@ -116,8 +131,13 @@ class AdminEvaluations extends Controller
       $activity   = Activity::where('type','diagnostic')->where('id',$activity_id)->firstOrFail();
       if($activity->files){
         //ver fellows con archivos
-        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
-        $fellows    = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        if(self::DEBUG){
+          $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
+          $fellows    = FellowFile::where('activity_id',$activity->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        }else{
+          $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->pluck('fellow_id');
+          $fellows    = FellowFile::where('activity_id',$activity->id)->where('user_id','!=',$this->user_test_apertus->id)->whereNotIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+        }
         return view('admin.evaluations.diagnostic-files-list')->with([
           "user"      => $user,
           "activity"   => $activity,
@@ -129,8 +149,13 @@ class AdminEvaluations extends Controller
         if(!$activity->diagnostic_info){
           return redirect("dashboard/programas/$program->id/ver-evaluaciones");
         }
-        $fellowsAnswers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->pluck('user_id')->toArray();
-        $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->where('user_id','!=',23)->paginate(10);
+        if(self::DEBUG){
+          $fellowsAnswers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->pluck('user_id')->toArray();
+          $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->paginate(10);
+        }else{
+          $fellowsAnswers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->pluck('user_id')->toArray();
+          $fellows  = $program->fellows()->whereIn('user_id',$fellowsAnswers)->where('user_id','!=',$this->user_test_apertus->id)->paginate(10);
+        }
 
 
         return view('admin.evaluations.diagnostic-fellows-list')->with([
@@ -200,8 +225,14 @@ class AdminEvaluations extends Controller
       $program    = Program::where('id',$program_id)->firstOrFail();
       $activity   = Activity::where('files',1)->where('id',$activity_id)->firstOrFail();
       //ver fellows con archivos
-      $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
-      $files      = FellowFile::where('activity_id',$activity->id)->whereIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+      if(self::DEBUG){
+        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+        $files      = FellowFile::where('activity_id',$activity->id)->whereIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+      }else{
+        $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
+        $files      = FellowFile::where('activity_id',$activity->id)->where('user_id','!=',$this->user_test_apertus->id)->whereIn('user_id',$fellowsIds->toArray())->paginate($this->pageSize);
+      }
+
       return view('admin.evaluations.activities-files-done-list')->with([
           "user"      => $user,
           "activity"  => $activity,
