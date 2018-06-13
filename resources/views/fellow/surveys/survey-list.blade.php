@@ -15,6 +15,7 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
+			@if($surveys->count() > 0 || $program->title === 'Programa 2017')
 			<table class="table">
 				<thead>
 			    	<tr>
@@ -25,6 +26,7 @@
 			    	</tr>
 				</thead>
 				<tbody>
+					@if($program->title === 'Programa 2017')
 			    	<tr>
 						<td><h4><a href='{{url("tablero/encuestas/encuesta-satisfaccion")}}'>Encuesta de satisfacción</a></h4></td>
 						<td>Encuesta de satisfacción Plataforma Apertus</td>
@@ -45,9 +47,26 @@
 							<a href="{{ url('tablero/encuestas/facilitadores-modulos') }}" class="btn xs view">Ver</a>
 						</td>
 					</tr>
-				
+				 @endif
+				 @foreach($surveys as $survey)
+						 <tr>
+							 <td><h4><a href='{{url("tablero/$program->slug/encuestas/$survey->slug")}}'>{{$survey->title}}</a></h4></td>
+							 <td>{{str_limit($survey->description,150,'...')}}</td>
+							 <td>{{$user->fellow_survey($survey->id)->count() > 0 ? 'Completada' : 'Sin contestar'}}</td>
+							 <td>
+								 @if($user->fellow_survey($survey->id)->count() > 0 )
+								 Completada
+								 @else
+								 <a href='{{url("tablero/$program->slug/encuestas/$survey->slug")}}' class="btn xs view">Ver</a>
+								 @endif
+							 </td>
+						 </tr>
+				 @endforeach
 				</tbody>
 			</table>
+		@else
+		<p><strong>Sin encuestas</strong></p>
+		@endif
 		</div>
 	</div>
 </div>

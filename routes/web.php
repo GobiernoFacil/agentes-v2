@@ -538,6 +538,8 @@ Route::group(['middleware' => ['auth']], function () {
           /*@FellowSurveys*/
           // Rutas encuestas
           Route::get('tablero/{program_slug}/encuestas', 'FellowSurveys@index');
+
+        /*
           Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@welcome');
           Route::get('tablero/{program_slug}/encuestas/encuesta-satisfaccion/1', 'FellowSurveys@addSurvey');
           Route::post('tablero/{program_slug}/encuestas/encuesta-satisfaccion', 'FellowSurveys@saveSurvey');
@@ -550,7 +552,7 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/encuestas/gracias', 'FellowSurveys@thanks');
           Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/{name}/gracias', 'FellowSurveys@thanksFacilitator');
           Route::get('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@customFacilitator');
-          Route::post('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');
+          Route::post('tablero/{program_slug}/encuestas/facilitadores-sesiones/{session_slug}/c/{name}', 'FellowSurveys@saveCustomFacilitator');*/
           });
       //// noticias
       Route::get('tablero/noticias', 'NewsEventsFellow@index');

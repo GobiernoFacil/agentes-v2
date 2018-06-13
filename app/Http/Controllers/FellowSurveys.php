@@ -13,6 +13,7 @@ use App\Models\ModuleSession;
 use App\Models\FacilitatorModule;
 use App\Models\CustomQuestionnaire;
 use App\Models\CustomFellowAnswer;
+use App\Models\Program;
 // FormValidators
 use App\Http\Requests\SaveSatisfactionSurvey;
 use App\Http\Requests\SaveFacilitatorSurvey;
@@ -29,11 +30,20 @@ class FellowSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($program_slug)
     {
       $user     = Auth::user();
+      $program  = $user->actual_program();
+      $surveys  = CustomQuestionnaire::where('type','general')->where('program_id',$program->id)
+      ->orWhere(function($query)use($program){
+        $query->where('type','facilitator')->where('program_id',$program->id);
+      })
+      ->orderBy('created_at','desc')
+      ->get();
       return view('fellow.surveys.survey-list')->with([
-        'user'=>$user,
+        'user'    => $user,
+        'program' => $program,
+        'surveys' => $surveys
       ]);
 
     }

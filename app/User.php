@@ -182,8 +182,8 @@ class User extends Authenticatable
       }
     }
 
-    function fellow_survey(){
-      return $this->hasOne("App\Models\FellowSurvey");
+    function fellow_survey($quiz_id){
+      return CustomFellowAnswer::where('user_id',$this->id)->where('questionnaire_id',$quiz_id)->get();
     }
 
     function facilitator_survey($session_id,$user_id,$facilitator_id){
