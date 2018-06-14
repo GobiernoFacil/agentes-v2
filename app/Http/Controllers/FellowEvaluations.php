@@ -264,6 +264,10 @@ class FellowEvaluations extends Controller
        if(!$activity->quizInfo){
          return redirect('tablero')->with(['error'=>'Ocurrió un error, por favor contacta a soporte']);
        }
+       if(FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->count() != $activity->quizInfo->question->count()){
+         return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")
+         ->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);
+       }
        $countP = 1;
        $question_value = 10/$activity->quizInfo->question->count();
        $total = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->where('correct',1)->get();
