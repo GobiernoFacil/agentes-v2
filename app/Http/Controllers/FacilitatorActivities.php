@@ -13,6 +13,7 @@ use App\User;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorData;
 use App\Models\FacilitatorModule;
+use App\Models\ForumConversation;
 use App\Models\Image;
 use App\Models\Activity;
 use App\Models\Program;
@@ -80,12 +81,20 @@ class FacilitatorActivities extends Controller
        }else{
          $next     = null;
        }
+       $forum      = $activity->forum;
+       if($activity->forum){
+         $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);
+       }else{
+         $forums   = null;
+       }
       return view('facilitator.activities.activity-view')->with([
          "user"      	=> $user,
          "activity"   => $activity,
          "session"		=> $session,
          "prev"       => $prev,
-         "next"       => $next
+         "next"       => $next,
+         "forum"      => $forum,
+         "forums"     => $forums
        ]);
    }
 
