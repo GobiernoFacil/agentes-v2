@@ -121,7 +121,7 @@ class FellowsAdmin extends Controller
          $program = Program::where('id',$program_id)->firstOrFail();
          $fellow  = $program->fellows()->where('user_id',$fellow_id)->first();
          $fellow  = User::where('id',$fellow->user_id)->where('type','fellow')->where('enabled',1)->firstOrFail();
-         $modules  = $program->modules()->paginate(5);
+         $modules  = $program->fellow_modules()->paginate(5);
          return view('admin.fellows.evaluation-module-sheet')->with(
           [
             'user'=>$user,

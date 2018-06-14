@@ -19,7 +19,7 @@
 	<span class="col-sm-11">
 		<div class="divider b"></div>
 	</span>
-@if($session->all_activities_for_kardex($fellow->id)->count() > 0)
+@if($session->all_activities_for_kardex_admin($fellow->id)->count() > 0)
     <!--evaluaciones-->
     <span class="col-sm-11">
         <ul>
@@ -31,7 +31,7 @@
 					<span class="sub_tab">Calificación</span>
 				</span>
 	        </li>
-			@foreach($session->activities as $activity)
+			@foreach($session->all_activities_for_kardex_admin($fellow->id) as $activity)
 			    @if($activity->type === 'evaluation')
 						@include('admin.fellows.evaluation_includes.eval_list_session_activity')
 					@endif
