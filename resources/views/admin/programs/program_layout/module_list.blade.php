@@ -42,17 +42,25 @@
 			<div class="col-sm-9">
 				<div class="row">
 					@if($module->get_all_evaluation_activity()->count()>0)
-						@foreach($module->get_all_evaluation_activity() as $evAct)
+						@foreach($module->get_all_evaluation_activity_and_forum() as $evAct)
 							<div class="col-sm-8 border_l">
 								<h4>Actividad obligatoria</h4>
-								<h5>Evaluación</h5>
+								@if($evAct->hasforum)
+									<h5>Foro</h5>
+								@else
+									<h5>{{$evAct->files ? 'Evaluación' : 'Carga de archivo'}}</h5>
+								@endif
 								<ul>
 									<li>{{$evAct->name}}</li>
 								</ul>
 							</div>
 							<div class="col-sm-3">
 								<h4>Fechas</h4>
-								<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
+								@if($evAct->hasforum)
+									<p>No aplica</p>
+								@else
+									<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
+								@endif
 							</div>
 						@endforeach
 					@else
