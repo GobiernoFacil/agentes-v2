@@ -419,19 +419,23 @@ class User extends Authenticatable
 
       $fp->status = 1;
       $fp->save();
-      if($allev->count() > 0){
-        if($allev->count() != $allFeP->count()){
+
+      if($allev->count() > 0 || $allfr->count() > 0 ){
+        if($allev->count() != $allFeP->count() && $allev->count() > 0){
           $fp->status = 0;
           $fp->save();
-        }
-      }
-      if($allfr->count() > 0 && $fp->status){
-        if($allFfP->count() != $allfr->count()){
-          $fp->status = 0;
-          $fp->save();
+
         }
 
+        if($allfr->count() > 0 ){
+          if($allFfP->count() != $allfr->count() && $allfr->count() > 0 ){
+            $fp->status = 0;
+            $fp->save();
+          }
       }
+    }
+
+
 
       foreach ($module->sessions as $session) {
         $allSev  = $session->activity_eval();
@@ -446,7 +450,7 @@ class User extends Authenticatable
                   ->where('status',1)
                   ->whereIn('activity_id',$allSfr->pluck('activity_id')->toArray())
                   ->where('type','forum')->get();
-        $fp = FellowProgress::firstOrCreate(
+        $fp_s = FellowProgress::firstOrCreate(
                 ['fellow_id' => $this->id,
                     'program_id' => $module->program->id,
                     'module_id'  => $module->id,
@@ -454,21 +458,19 @@ class User extends Authenticatable
                     'type'       => 'session'
                 ]);
 
-        $fp->status = 1;
-        $fp->save();
-        if($allSev->count() > 0){
-            if($allSev->count() != $allFeP->count()){
-                $fp->status = 0;
-                  $fp->save();
+        $fp_s->status = 1;
+        $fp_s->save();
+        if($allSev->count() > 0 || $allSfr->count() > 0 ){
+            if($allSev->count() != $allFeP->count() && $allSev->count() > 0){
+                $fp_s->status = 0;
+                $fp_s->save();
             }
-        }
-        if($allSfr->count() > 0 && $fp->status){
-            if($allSfr->count() != $allFfP->count()){
-              $fp->status = 0;
-              $fp->save();
+
+            if($allSfr->count() != $allFfP->count() && $allSfr->count() > 0){
+              $fp_s->status = 0;
+              $fp_s->save();
               }
         }
-
       }
       return true;
 
