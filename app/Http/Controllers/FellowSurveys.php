@@ -12,6 +12,7 @@ use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\FacilitatorModule;
 use App\Models\CustomQuestionnaire;
+use App\Models\CustomQuestion;
 use App\Models\CustomFellowAnswer;
 use App\Models\Program;
 // FormValidators
@@ -63,7 +64,6 @@ class FellowSurveys extends Controller
       }
       $answersAlr = $user->fellow_survey($survey->id)->pluck('question_id')->toArray();
       $fellow_questions = $survey->questions()->select('question','id','type', 'required')->whereNotIn('id',$answersAlr)->get();
-
 
       return view('fellow.surveys.survey-welcome')->with([
         'user'              => $user,
@@ -123,13 +123,20 @@ class FellowSurveys extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function thanks()
+    public function thanks($program_slug,$survey_slug)
     {
-      $user     = Auth::user();
-      return view('fellow.surveys.survey-thanks')->with([
-        'user'=>$user,
-      ]);
+         $user     = Auth::user();
+         $program  = Program::where('slug',$program_slug)->firstOrFail();
+         $survey   = CustomQuestionnaire::where('slug',$survey_slug)->firstOrFail();
 
+         if(CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$survey->id)->count() != $survey->questions->count()){
+           return redirect("tablero/{$program->slug}/encuestas/{$survey->slug}")
+           ->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);
+         }
+         return view('fellow.surveys.survey-thanks')->with([
+           'user'    => $user,
+           'program' => $program
+         ]);
     }
 
     /**
@@ -432,6 +439,49 @@ class FellowSurveys extends Controller
           }
 
           return redirect("tablero/encuestas/facilitadores-sesiones/$session->slug/$facilitator->name/gracias")->with(['success'=>"Se ha guardado correctamente",'fac_survey' =>true]);
+
+        }
+
+
+        /**
+        *
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function saveAnswer(Request $request){
+           $user     = Auth::user();
+           $question = CustomQuestion::find($request->question_id);
+           $cool     = true;
+           if($question->type === 'open'){
+             $answer = CustomFellowAnswer::firstOrCreate([
+               'user_id'          => $user->id,
+               'question_id'      => $request->question_id,
+               'answer'           => $request->answer,
+               'questionnaire_id' => $question->questionnaire_id
+
+             ]);
+           }elseif($question->type === 'answers'){
+             $answer = CustomFellowAnswer::firstOrCreate([
+               'user_id'          => $user->id,
+               'question_id'      => $request->question_id,
+               'answer_id'        => $request->answer,
+               'questionnaire_id' => $question->questionnaire_id
+
+             ]);
+           }elseif($question->type === 'radio'){
+             $answer = CustomFellowAnswer::firstOrCreate([
+               'user_id'          => $user->id,
+               'question_id'      => $request->question_id,
+               'answer'           => $request->answer,
+               'questionnaire_id' => $question->questionnaire_id
+
+             ]);
+           }else{
+             $cool     = false;
+           }
+
+           return response()->json(["response" => $cool]);
+
 
         }
 

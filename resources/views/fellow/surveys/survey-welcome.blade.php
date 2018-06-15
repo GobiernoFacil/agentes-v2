@@ -41,7 +41,7 @@
 <script type="text/text" id="GF-PNUD-quiz-open-template">
   <li id="<%=id%>">
     <label>
-      <textarea data-question="<%=id%>"  name="open" value="<%=id%>"></textarea>
+      <textarea data-question="<%=id%>"  name="open" id = 'openText' value="<%=id%>"></textarea>
     </label>
   </li>
 </script>
@@ -53,7 +53,7 @@
         <span class="row">
           <span class="col-sm-9">Menor</span>
           <span class="col-sm-3">{{$i}}<br>
-              <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+              <input data-question="<%=id%>" type="radio" name="radio" value="{{$i}}" class = "GF-scale">
           </span>
         </span>
       </label>
@@ -61,7 +61,7 @@
     <label>
       <span class="row">
             <span class="col-sm-3">{{$i}}<br>
-                 <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+                 <input data-question="<%=id%>" type="radio" name="radio" value="{{$i}}" class = "GF-scale">
             </span>
       <span class="col-sm-6">Mayor</span>
       </span>
@@ -71,7 +71,7 @@
       <span class="row">
         <span class="col-sm-3">
           {{$i}}<br>
-            <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+            <input data-question="<%=id%>" type="radio" name="radio" value="{{$i}}" class = "GF-scale">
         </span>
       </span>
    </label>
@@ -87,8 +87,9 @@
 		    var successClass  = "success",
 		        errorClass    = "error",
 						correctClass  = "correct",
-		        evalURL       = '{{url("tablero/{$program->slug}/encuestas/{$survey->slug}/evaluar/pregunta")}}',
-		        endURL        = '{{url("tablero/{$program->slug}/encuestas/")}}',
+            openClassCtr  = "#openText",
+		        evalURL       = '{{url("tablero/{$program->slug}/encuestas/{$survey->slug}/guardar-respuesta")}}',
+		        endURL        = '{{url("tablero/{$program->slug}/encuestas/{$survey->slug}/gracias")}}',
 		        activity      = {!!$survey->select('title','id','description')->get()->toJson()!!},
 		        questions     = {!!$fellow_questions->toJson()!!},
 						all_questions = {!!$survey->questions()->select('question','id')->get()->toJson()!!},
@@ -123,6 +124,8 @@
 		        uiBadResponse    = document.getElementById("GF-PNUD-quiz-bad-response"),
 		        uiNext           = document.getElementById("GF-PNUD-quiz-next-btn"),
 						uiNull					 = document.getElementById("GF-PNUD-quiz-null-response"),
+            uiTextNull       = document.getElementById("GF-PNUD-quiz-null-text-response"),
+            uiError          = document.getElementById("GF-PNUD-quiz-error-response"),
 		        uiNextBtn        = uiNext.querySelector("a"),
 		        uiEval           = document.getElementById("GF-PNUD-quiz-eval-btn"),
 		        uiEvalBtn        = uiEval.querySelector("a"),
@@ -155,12 +158,12 @@
 		      uiGoodResponse.style.display = "none";
 
 		      uiAnswers.innerHTML          = "";
+          uiQuestion.setAttribute('data-question', questions[question].id);
           if(questions[question].required){
             uiQuestion.innerHTML         = questions[question].question+"<span id = 'requiredQuestion'>*</span>";
           }else{
             uiQuestion.innerHTML         = questions[question].question;
           }
-
           console.log(questions[question]);
           if(questions[question].type=== 'open'){
             uiOpenQuestion.style.display  = "block";
@@ -168,12 +171,14 @@
             uiOpen.insertAdjacentHTML('beforeend',template(questions[question]));
           }else if(questions[question].type=== 'radio'){
             uiRadioQuestion.style.display  = "block";
+            template = _.template(uiRadioTemplate);
+            uiRadio.insertAdjacentHTML('beforeend',template(questions[question]));
           }else if(questions[question].type=== 'answers'){
+            uiMulQuestion.style.display  = "block";
             var _answers = answers.filter(function(answer){
                             return answer.question_id == questions[question].id;
                           }),
            template = _.template(uiAnswerTemplate);
-           console.log(template)
            _answers.forEach(function(answer){
              uiAnswers.insertAdjacentHTML('beforeend', template(answer));
            });
@@ -185,6 +190,7 @@
 		      uiStatusBar.classList.add(successClass);
 		      uiGoodResponse.style.display = "block";
 					uiNull.style.display = "none";
+          uiTextNull.style.display = "none";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
 
@@ -198,24 +204,11 @@
 
 		    render.showError = function(answers){
 		      uiStatusBar.classList.add(errorClass);
-		      uiBadResponse.style.display = "block";
-		      currentSlide += 1;
 		      uiEval.style.display = "none";
 					uiNull.style.display = "none";
-					uiCorrectAns.innerHTML = '';
-					for (var i = 0; i < answers.length; i++) {
-						var correctAnsId = document.getElementById(answers[i].id);
-						correctAnsId.classList.add(correctClass);
-						var li = document.createElement("li");
-					  li.appendChild(document.createTextNode(answers[i].value));
-					  uiCorrectAns.appendChild(li);
-					}
+          uiTextNull.style.display = "none";
 					uiCorrectAns.style.display = "block";
-		      if(currentSlide  == questions.length){
-		        uiEnd.style.display = "block";
-		      }else{
-		        uiNext.style.display = "block";
-		      }
+          uiError.style.display = "block";
 		    };
 
 
@@ -235,30 +228,55 @@
 
 		      uiEval.style.display      = "block";
 		      uiNext.style.display      = "none";
-
+          uiOpen.style.display      = "none";
+          uiAnswers.style.display   = "none";
+          uiRadio.style.display     = "none";
 		      render.renderSlide(currentSlide);
 		    });
 
 		    uiEvalBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiNull.style.display = "none";
-          console.log(question);
-		      var selected = uiAnswers.querySelector("input[name='answer']:checked");
-		      if(!selected){
-						uiNull.style.display = "block";
-						return
-					}
+          uiTextNull.style.display = "none";
+          var qId      = uiQuestion.getAttribute('data-question');
+          var question = questions.filter(function(q){
+            return parseInt(q.id,10) == parseInt(qId,10);
+          });
+          if(question[0].type ==='open'){
+            var selected = uiOpen.querySelector(openClassCtr);
+            if(!selected.value && question[0].required){
+              uiTextNull.style.display = "block";
+              return
+            }
+
+          }else if(question[0].type ==='answers'){
+            var selected = uiAnswers.querySelector("input[name='answer']:checked");
+            if(!selected && question[0].required){
+              uiNull.style.display = "block";
+              return
+            }
+          }else if(question[0].type === 'radio'){
+            var selected = uiRadio.querySelector("input[name='radio']:checked");
+            if(!selected && question[0].required){
+              uiNull.style.display = "block";
+              return
+            }
+          }
+
+
+
 		      $.post(evalURL, {
 						_token   : _token,
-		        activity : activity.activity_id,
-		        question : selected.getAttribute("data-question"),
+		        // question : selected.getAttribute("data-question"),
+            question_id : question[0].id,
 		        answer   : selected.value
 		      }, function(response){
+            console.log(response);
 		        if(response.response){
 		          render.showSuccess();
 		        }
 		        else{
-		          render.showError(response.correct);
+		          render.showError(response);
 		        }
 		      }, "json");
 		    });

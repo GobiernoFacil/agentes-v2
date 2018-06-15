@@ -12,7 +12,7 @@
       <h1>¡Gracias por contestar la encuesta!</h1>
     </div>
     <div class="col-sm-4 col-sm-offset-4 center">
-      <a href='{{ url("tablero/encuestas") }}' class="btn gde">Finalizar</a>
+      <a href='{{ url("tablero/$program->slug/encuestas") }}' class="btn gde">Finalizar</a>
     </div>
 
   </div>
