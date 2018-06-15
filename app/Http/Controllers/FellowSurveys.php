@@ -62,7 +62,7 @@ class FellowSurveys extends Controller
         return redirect("tablero/$program->slug/encuestas")->with('error',"Ya has contestado la encuesta");
       }
       $answersAlr = $user->fellow_survey($survey->id)->pluck('question_id')->toArray();
-      $fellow_questions = $survey->questions()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+      $fellow_questions = $survey->questions()->select('question','id','type', 'required')->whereNotIn('id',$answersAlr)->get();
 
 
       return view('fellow.surveys.survey-welcome')->with([

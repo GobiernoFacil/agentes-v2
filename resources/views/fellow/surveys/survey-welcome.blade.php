@@ -38,6 +38,49 @@
     </label>
   </li>
 </script>
+<script type="text/text" id="GF-PNUD-quiz-open-template">
+  <li id="<%=id%>">
+    <label>
+      <textarea data-question="<%=id%>"  name="open" value="<%=id%>"></textarea>
+    </label>
+  </li>
+</script>
+<script type="text/text" id="GF-PNUD-quiz-radio-template">
+  <?php for($i=1; $i <= 5; $i++){ ?>
+    <li id="<%=id%>">
+  <?php  if($i==1){ ?>
+      <label>
+        <span class="row">
+          <span class="col-sm-9">Menor</span>
+          <span class="col-sm-3">{{$i}}<br>
+              <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+          </span>
+        </span>
+      </label>
+  <?php  }else if($i ==5){ ?>
+    <label>
+      <span class="row">
+            <span class="col-sm-3">{{$i}}<br>
+                 <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+            </span>
+      <span class="col-sm-6">Mayor</span>
+      </span>
+    </label>
+  <?php  }else{ ?>
+    <label>
+      <span class="row">
+        <span class="col-sm-3">
+          {{$i}}<br>
+            <input data-question="<%=id%>" type="radio" name="answer" value="{{$i}}" class = "GF-scale">
+        </span>
+      </span>
+   </label>
+<?php     } ?>
+    </li>
+<?php   } ?>
+</script>
+
+
 <script>
 
 			(function(){
@@ -69,7 +112,12 @@
 		        uiCurrent        = document.getElementById("GF-PNUD-quiz-current-question"),
 		        uiTotal          = document.getElementById("GF-PNUD-quiz-total-questions"),
 		        uiQuestion       = document.getElementById("GF-PNUD-quiz-question"),
+            uiOpenQuestion   = document.getElementById("GF-open"),
+            uiRadioQuestion  = document.getElementById("GF-scale"),
+            uiMulQuestion    = document.getElementById("GF-multiple"),
 		        uiAnswers        = document.getElementById("GF-PNUD-quiz-answers"),
+            uiOpen           = document.getElementById("GF-PNUD-quiz-open"),
+            uiRadio          = document.getElementById("GF-PNUD-quiz-radio"),
 		        uiStatusBar      = document.getElementById("GF-PNUD-quiz-status-bar"),
 		        uiGoodResponse   = document.getElementById("GF-PNUD-quiz-good-response"),
 		        uiBadResponse    = document.getElementById("GF-PNUD-quiz-bad-response"),
@@ -81,7 +129,9 @@
 		        uiEnd            = document.getElementById("GF-PNUD-quiz-end-btn"),
 		        uiEndBtn         = uiEnd.querySelector("a"),
 						uiCorrectAns     = document.getElementById("GF-PNUD-quiz-correct-answers"),
-		        uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML;
+		        uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML,
+            uiRadioTemplate  = document.getElementById("GF-PNUD-quiz-radio-template").innerHTML,
+            uiOpenTemplate   = document.getElementById("GF-PNUD-quiz-open-template").innerHTML;
 
 
 
@@ -105,16 +155,30 @@
 		      uiGoodResponse.style.display = "none";
 
 		      uiAnswers.innerHTML          = "";
-		      uiQuestion.innerHTML         = questions[question].question;
+          if(questions[question].required){
+            uiQuestion.innerHTML         = questions[question].question+"<span id = 'requiredQuestion'>*</span>";
+          }else{
+            uiQuestion.innerHTML         = questions[question].question;
+          }
 
-		      var _answers = answers.filter(function(answer){
-		                       return answer.question_id == questions[question].id;
-		                     }),
-		      template = _.template(uiAnswerTemplate);
+          console.log(questions[question]);
+          if(questions[question].type=== 'open'){
+            uiOpenQuestion.style.display  = "block";
+            template = _.template(uiOpenTemplate);
+            uiOpen.insertAdjacentHTML('beforeend',template(questions[question]));
+          }else if(questions[question].type=== 'radio'){
+            uiRadioQuestion.style.display  = "block";
+          }else if(questions[question].type=== 'answers'){
+            var _answers = answers.filter(function(answer){
+                            return answer.question_id == questions[question].id;
+                          }),
+           template = _.template(uiAnswerTemplate);
+           console.log(template)
+           _answers.forEach(function(answer){
+             uiAnswers.insertAdjacentHTML('beforeend', template(answer));
+           });
+          }
 
-		      _answers.forEach(function(answer){
-		        uiAnswers.insertAdjacentHTML('beforeend', template(answer));
-		      });
 		    }
 
 		    render.showSuccess = function(){
@@ -178,6 +242,7 @@
 		    uiEvalBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiNull.style.display = "none";
+          console.log(question);
 		      var selected = uiAnswers.querySelector("input[name='answer']:checked");
 		      if(!selected){
 						uiNull.style.display = "block";
