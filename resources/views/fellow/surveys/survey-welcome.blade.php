@@ -6,7 +6,21 @@
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_survey')
 
 @section('content')
+
 <div class="box">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 ">
+  @if(Session::has('error'))
+  <div class="message error">
+      {{ Session::get('error') }}
+  </div>
+  @endif
+  @if(Session::has('success'))
+  <div class="message success">
+      {{ Session::get('success') }}
+  </div>
+  @endif
+</div>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 center">
       <h1>{{$survey->title}}</h1>
@@ -158,6 +172,8 @@
 		      uiGoodResponse.style.display = "none";
 
 		      uiAnswers.innerHTML          = "";
+          uiOpen.innerHTML             = "";
+          uiRadio.innerHTML            = "";
           uiQuestion.setAttribute('data-question', questions[question].id);
           if(questions[question].required){
             uiQuestion.innerHTML         = questions[question].question+"<span id = 'requiredQuestion'>*</span>";
@@ -187,8 +203,8 @@
 		    }
 
 		    render.showSuccess = function(){
-		      uiStatusBar.classList.add(successClass);
-		      uiGoodResponse.style.display = "block";
+		      //uiStatusBar.classList.add(successClass);
+		      //uiGoodResponse.style.display = "block";
 					uiNull.style.display = "none";
           uiTextNull.style.display = "none";
 		      currentSlide += 1;
@@ -198,8 +214,18 @@
 		        uiEnd.style.display = "block";
 		      }
 		      else{
-		        uiNext.style.display = "block";
+		        uiEval.style.display = "block";
 		      }
+          uiCorrectAns.style.display      = "none";
+          uiOpenQuestion.style.display    = "none";
+          uiMulQuestion.style.display     = "none";
+          uiRadioQuestion.style.display   = "none";
+          render.updatePagination(currentSlide, questions.length);
+
+          // uiEval.style.display      = "block";
+          //uiNext.style.display      = "block";
+          render.renderSlide(currentSlide);
+          console.log(this);
 		    };
 
 		    render.showError = function(answers){
@@ -224,13 +250,13 @@
 		    uiNextBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiCorrectAns.style.display = "none";
+          uiOpenQuestion.style.display      = "none";
+          uiMulQuestion.style.display   = "none";
+          uiRadioQuestion.style.display     = "none";
 		      render.updatePagination(currentSlide, questions.length);
 
 		      uiEval.style.display      = "block";
 		      uiNext.style.display      = "none";
-          uiOpen.style.display      = "none";
-          uiAnswers.style.display   = "none";
-          uiRadio.style.display     = "none";
 		      render.renderSlide(currentSlide);
 		    });
 
@@ -263,9 +289,10 @@
             }
           }
 
+          render.showSuccess();
 
 
-		      $.post(evalURL, {
+		  /*    $.post(evalURL, {
 						_token   : _token,
 		        // question : selected.getAttribute("data-question"),
             question_id : question[0].id,
@@ -278,7 +305,7 @@
 		        else{
 		          render.showError(response);
 		        }
-		      }, "json");
+		      }, "json");*/
 		    });
 
 		  })();
