@@ -400,6 +400,7 @@ class User extends Authenticatable
     }
 
     function update_progress($module){
+      $this->update_forum_progress($module->id);
       $allev  = $module->get_all_evaluation_activity();
       $allfr  = $module->get_all_activities_with_forums();
       $allFeP = FellowProgress::where('fellow_id',$this->id)->where('module_id',$module->id)
@@ -604,6 +605,27 @@ class User extends Authenticatable
       $conversations = Conversation::where('program_id',$program->id)->pluck('id')->toArray();
       $messages      = Message::where('to_id',$this->id)->whereIn('conversation_id',$conversations)->pluck('id')->toArray();
       return ConversationLog::where('status',0)->whereIn('message_id',$messages)->get();
+    }
+
+    function update_forum_progress($module_id){
+      $module = Module::find($module_id);
+      if($module){
+        foreach ($module->get_all_activities_with_forums() as $act) {
+            if($act->hasforum){
+              if($act->forum->check_participation($this->id)){
+                $fellowProgress  = FellowProgress::firstOrCreate([
+                  'fellow_id'    => $this->id,
+                  'module_id'    => $act->forum->session->module->id,
+                  'session_id'   => $act->forum->session->id,
+                  'activity_id'  => $act->id,
+                  'program_id'   => $act->forum->session->module->program->id,
+                  'type'         => 'forum'
+                ]);
+              }
+            }
+        }
+      }
+      return true;
     }
 
 }
