@@ -400,7 +400,7 @@ class User extends Authenticatable
     }
 
     function update_progress($module){
-      $this->update_forum_progress($module->id);
+      //$this->update_forum_progress($module->id);
       $allev  = $module->get_all_evaluation_activity();
       $allfr  = $module->get_all_activities_with_forums();
       $allFeP = FellowProgress::where('fellow_id',$this->id)->where('module_id',$module->id)
