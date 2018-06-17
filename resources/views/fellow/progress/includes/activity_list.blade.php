@@ -7,7 +7,7 @@
 	@if($activity->files)
 		<span class="col-sm-3">  Revisión de productos</span>
     <span class="col-sm-3 right">
-    			{{$user->fileFellowScore($activity->id) ? "Completado" : "No realizado" }}
+    			{{$user->fellowFiles()->where('activity_id',$activity->id)->where('user_id',$user->id)->first() ? "Completado" : "No realizado" }}
     </span>
     @else
     	<span class="col-sm-3">
