@@ -190,7 +190,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/fellows/programa/{program_id}/ver-fellow/{fellow_id}', 'FellowsAdmin@view');
     Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{fellow_id}', 'FellowsAdmin@viewSheet');
     Route::get('dashboard/fellows/programa/{program_id}/ver-calificaciones/{module_id}/{fellow_id}', 'FellowsAdmin@viewModule');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-progreso/{module_id}/{fellow_id}', 'FellowsAdmin@viewModuleProgress');
     Route::get('dashboard/fellows/programa/{program_id}/ver-participaciones/{fellow_id}', 'FellowsAdmin@participationSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/ver-progreso/{fellow_id}', 'FellowsAdmin@progressSheet');
+    Route::get('dashboard/fellows/programa/{program_id}/evaluacion/{activity_id}/finalizar/{fellow_id}', 'FellowsAdmin@putScore');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');

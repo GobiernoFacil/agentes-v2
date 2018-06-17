@@ -628,4 +628,33 @@ class User extends Authenticatable
       return true;
     }
 
+    function complete_modules($program_id){
+      return FellowProgress::where('status',1)->where('type','module')->where('fellow_id',$this->id)->where('program_id',$program_id)->get();
+    }
+
+    function complete_module($module_id){
+      return FellowProgress::where('status',1)->where('type','module')->where('fellow_id',$this->id)->where('module_id',$module_id)->first();
+    }
+
+    function complete_session($session_id){
+     return FellowProgress::where('status',1)->where('type','session')->where('fellow_id',$this->id)->where('session_id',$session_id)->first();
+    }
+
+    function check_diagnostic($activity_id){
+     $activity  = Activity::find($activity_id);
+     if($activity->diagnostic_info){
+       $answers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->where('user_id',$this->id)->count();
+       if($answers== $activity->diagnostic_info->questions->count()){
+         return true;
+       }else{
+         return false;
+       }
+
+     }else{
+       return false;
+     }
+    }
+
+
+
 }

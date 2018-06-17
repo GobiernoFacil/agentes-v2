@@ -75,5 +75,25 @@
 		 </div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Progreso en el "{{$program->title}}"</h1>
+	</div>
+</div>
+<div class="box session_list">
+	<div class="row">
+		<div class="col-sm-6  center">
+			<h3 class="title">Módulos completados</h3>
+			<h2><span class="score_a block">{{$fellow->complete_modules($program->id)->count()}}</span></h2>
+	   </div>
+		 <!-- ver sesión-->
+		 <div class="col-sm-6">
+			 <a class="btn view block sessions_l"  href='{{url("dashboard/fellows/programa/$program->id/ver-progreso/$fellow->id")}}'>Ir a progreso</a>
+		 </div>
+		 <div class="col-sm-12">
+			 <div class="divider b"></div>
+		 </div>
+	</div>
+</div>
 
 @endsection
