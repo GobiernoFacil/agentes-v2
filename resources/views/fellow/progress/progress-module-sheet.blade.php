@@ -1,8 +1,8 @@
 @extends('layouts.admin.a_master')
-@section('title', 'Calificaciones')
-@section('description', 'Calificaciones')
+@section('title', 'Progreso')
+@section('description', 'Progreso')
 @section('body_class', 'fellow')
-@section('breadcrumb_type', 'score list')
+@section('breadcrumb_type', '')
 @section('breadcrumb', 'layouts.fellow.breadcrumb.b_score')
 
 @section('content')
