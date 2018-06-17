@@ -50,7 +50,7 @@
 
 	@if(Session::has('error'))
 	<div class="message error">
-			{{ Session::get('error') }}
+			{!! Session::get('error') !!}
 		</div>
 		@endif
 

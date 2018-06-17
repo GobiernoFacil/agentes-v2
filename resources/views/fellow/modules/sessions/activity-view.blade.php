@@ -43,7 +43,7 @@
 
 			@if(Session::has('error'))
 			<div class="message error">
-		      {{ Session::get('error') }}
+		      {!! Session::get('error') !!}
 		  	</div>
 		  	@endif
 		<!--- session name-->
@@ -149,7 +149,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 		@endif
 @elseif($activity->type ==='evaluation' && $activity->files && $activity->slug !='examen-diagnostico')
 <div class="box">
