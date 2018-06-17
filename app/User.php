@@ -506,6 +506,7 @@ class User extends Authenticatable
                         $fp->save();
                         $next = false;
                         $save_module = false;
+                        break;
                       }
                     }else{
                       if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','activity')->first()){
@@ -513,6 +514,7 @@ class User extends Authenticatable
                         $fp->save();
                         $next = false;
                         $save_module = false;
+                        break;
                       }
                     }
                     if($next){
