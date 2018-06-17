@@ -36,6 +36,9 @@ class CheckProgram
               return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa sesión']);
             }
           }elseif(isset($request->module_slug)){
+            if($request->url()=== url("tablero/$program->slug/progreso/$request->module_slug")){
+                return $next($request);
+            }
             if($user->check_progress($request->module_slug,0)){
               return $next($request);
             }else{

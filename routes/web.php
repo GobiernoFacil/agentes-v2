@@ -520,6 +520,13 @@ Route::group(['middleware' => ['auth']], function () {
           Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/evaluar', 'FellowEvaluations@evaluate');
           Route::get('tablero/{program_slug}/evaluacion/{activity_slug}/finalizar', 'FellowEvaluations@putScore');
           Route::get('tablero/{program_slug}/evaluaciones', 'FellowEvaluations@indexEvaluations');
+
+          /*@FellowProgresses*/
+          // Rutas calificaciones y evaluaciones
+          Route::get('tablero/{program_slug}/progreso', 'FellowProgresses@index');
+          Route::get('tablero/{program_slug}/progreso/{module_slug}', 'FellowProgresses@module');
+
+
           /*@FellowSurveys*/
           // Rutas encuestas
           Route::get('tablero/{program_slug}/encuestas', 'FellowSurveys@index');
