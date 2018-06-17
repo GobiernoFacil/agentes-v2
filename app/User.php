@@ -501,6 +501,15 @@ class User extends Authenticatable
                         'type'       => 'session'
                         ]);
                     if($activity->hasforum){
+                      if($activity->type=== 'evaluation'){
+                        if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','activity')->first()){
+                          $fp->status = 0;
+                          $fp->save();
+                          $next = false;
+                          $save_module = false;
+                          break;
+                        }
+                      }
                       if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','forum')->first()){
                         $fp->status = 0;
                         $fp->save();

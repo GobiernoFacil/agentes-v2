@@ -283,10 +283,12 @@ class Activities extends Controller
                   $forum->slug  = str_slug($name);
                 }
               }
-              $forum->description = $request->description;
-              $forum->activity_id = $request->id;
-              $forum->user_id     = $user->id;
-              $forum->session_id  = $last->session->id;
+              $forum->description  = $request->description;
+              $forum->activity_id  = $request->id;
+              $forum->user_id      = $user->id;
+              $forum->session_id   = $last->session->id;
+              $forum->module_id    = $last->session->module->id;
+              $forum->program_id   = $last->session->module->program->id;
               $forum->type = 'activity';
               $forum->save();
             }else{
