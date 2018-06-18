@@ -22,6 +22,7 @@ if($user->type == "fellow"){
 			<li class="{{ $__env->yieldContent('body_class') == 'facilitadores' ? "active" : ''}}"><a href="{{url('dashboard/facilitadores')}}" data-title="FACILITADORES"><b class="icon i_facilitador"></b> </a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'foros' ? "active" : ''}}"><a href="{{url('dashboard/foros')}}" data-title="Foros"><b class="icon i_foros"></b> </a></li>
 			<li class="{{ $__env->yieldContent('body_class') == 'mensajes' ? "active" : ''}}"><a href="{{url( $linkDash . '/mensajes')}}" data-title="Mensajes"><b class="icon i_mensajes"></b></a></li>
+			<li class="{{ $__env->yieldContent('body_class') == 'survey' ? "active" : ''}}"><a href="{{url( $linkDash . '/encuestas')}}" data-title="Encuestas"><b class="icon i_survey"></b></a></li>
 			@endif
 			@if($user->type == "superAdmin")
 			<!--superadmin-->

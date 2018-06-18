@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Lista de Fellows con encuesta')
 @section('description', 'Lista de Fellows con encuesta de satisfacción')
-@section('body_class', '')
+@section('body_class', 'survey')
 @section('breadcrumb_type', 'survey fellow list')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 @section('content')
