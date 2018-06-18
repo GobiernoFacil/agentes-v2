@@ -56,30 +56,13 @@ class UpdateFellowProgress extends Command
               }
             }
 
-            foreach ($program->fellow_modules()->where('start','<=',$today) as $module) {
-              if($module->get_all_evaluation_activity_and_forum()->count() > 0){
-                foreach ($module->sessions as $session) {
-                    if($session->activity_eval_and_forum()->count() > 0){
-                        $fellowAverage = FellowAverage::firstOrCreate([
-                                    'user_id'    => $fellow->user->id,
-                                    'module_id'  => $session->module->id,
-                                    'session_id' => $session->id,
-                                    'type'       => 'session',
-                                    'program_id' => $session->module->program->id
-                                  ]);
-                        $fellowAverage->scoreSession();
-                    }
-                }
-
-              }
-            }
 
 
             $this->info($fellow->user->name.' '.$count.' modules updated');
-            foreach ($program->fellow_modules()->where('start','<=',$today)->get() as $module) {
-              // code...
-              $uset->update_forum_progress($module->id);
-            }
+          }
+          foreach ($program->fellow_modules()->where('start','<=',$today)->get() as $module) {
+            // code...
+            $uset->update_forum_progress($module->id);
           }
 
         }else{

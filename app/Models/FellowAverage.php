@@ -117,8 +117,9 @@ class FellowAverage extends Model
       ]);
 
       $module       = $module_score->module;
-      $scores       = FellowAverage::where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
-      $total_scores = FellowAverage::where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
+      $sessions_with_diagnostic =$module->get_diagnostc_activities()->pluck('session_id')->toArray();
+      $scores       = FellowAverage::whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
+      $total_scores = FellowAverage::whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
       if($total_scores  > 0){
         $module_score->average = $total_scores/$scores->count();
         $module_score->save();
