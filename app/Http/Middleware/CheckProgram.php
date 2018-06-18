@@ -22,9 +22,7 @@ class CheckProgram
       $user    = Auth::user();
       if($program){
         if($request->user()->actual_program()->id === $program->id){
-          if($user->id == 23){
-            return $next($request);
-          }
+          
           if(isset($request->activity_slug)){
             if($user->check_progress($request->activity_slug,2)){
               return $next($request);
