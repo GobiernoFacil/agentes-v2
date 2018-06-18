@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Program;
+use App\User;
 class UpdateFellowProgress extends Command
 {
     /**
@@ -41,6 +42,7 @@ class UpdateFellowProgress extends Command
         $today = date('Y-m-d');
         if($program = Program::where('start','<=',$today)->orderBy('start','desc')->where('public',1)->first()){
           $this->info($program->title);
+          $uset  = User::where('email','andre@fcb.com')->first();
           foreach($program->fellows as $fellow){
             $count = 0;
             foreach ($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
@@ -53,7 +55,10 @@ class UpdateFellowProgress extends Command
               }
             }
             $this->info($fellow->user->name.' '.$count.' modules updated');
-
+            foreach ($program->fellow_modules()->where('start','<=',$today)->get() as $module) {
+              // code...
+              $uset->update_forum_progress($module->id);
+            }
           }
 
         }else{

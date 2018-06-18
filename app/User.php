@@ -631,8 +631,9 @@ class User extends Authenticatable
                   'activity_id'  => $act->id,
                   'program_id'   => $act->forum->session->module->program->id,
                   'type'         => 'forum',
-                  'status'       => 1
                 ]);
+                $fellowProgress->status = 1;
+                $fellowProgress->save();
               }
             }
         }
