@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Resultados de encuesta '.$survey->title)
 @section('description', 'Resultados de encuesta '.$survey->title)
-@section('body_class', '')
+@section('body_class', 'survey')
 @section('breadcrumb_type', 'survey  view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 
@@ -16,21 +16,21 @@
 <div class="box">
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="divider top"></div>
+			<div class="divider bg"></div>
 				<ol class="list line">
-          @foreach($survey->questions as $question)
+				@foreach($survey->questions as $question)
   					<li class="row">
-              @if($question->type === 'open')
-                @include('admin.surveys.includes.open_result_template')
-              @elseif($question->type === 'answers')
-                @include('admin.surveys.includes.multiple_result_template')
-              @else
-                @include('admin.surveys.includes.radio_result_template')
-              @endif
+  					@if($question->type === 'open')
+  					  @include('admin.surveys.includes.open_result_template')
+  					@elseif($question->type === 'answers')
+  					  @include('admin.surveys.includes.multiple_result_template')
+  					@else
+  					  @include('admin.surveys.includes.radio_result_template')
+  					@endif
   					</li>
-          @endforeach
+  				@endforeach
 				</ol>
-				<div class="divider"></div>
+				<div class="divider bg"></div>
 		</div>
 	</div>
 </div>
