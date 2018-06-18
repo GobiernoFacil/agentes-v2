@@ -492,7 +492,6 @@ class User extends Authenticatable
               if($session->activity_eval_and_forum()->count() > 0){
 
                  foreach ($session->activity_eval_and_forum() as $activity) {
-                   $fellowAverage->scoreSession();
                    $next = true;
                    $fp =  FellowProgress::firstOrCreate(
                        ['fellow_id' => $this->id,
