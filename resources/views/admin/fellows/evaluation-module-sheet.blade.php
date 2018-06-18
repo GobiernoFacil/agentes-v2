@@ -2,7 +2,7 @@
 @section('title', 'Calificaciones de ' . $fellow->name.' '.$fellow->fellowData->surname.' '.$fellow->fellowData->lastname)
 @section('description', 'Calificaciones')
 @section('body_class', 'fellows')
-@section('breadcrumb_type', 'fellow ver calificaciones')
+@section('breadcrumb_type', 'fellow')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_fellows')
 
 @section('content')

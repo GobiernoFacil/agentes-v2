@@ -94,7 +94,8 @@ protected $fillable = [
   function activities_kardex_fellow($user_id){
     $today      = date('Y-m-d');
     $done       = FellowProgress::where('session_id',$this->id)
-                  ->where('fellow_id',$user_id)->where('type','activity')
+                  ->where('fellow_id',$user_id)
+                  ->where('type','activity')
                   ->where('program_id',$this->module->program->id)
                   ->where('status',1)
                   ->pluck('activity_id')->toArray();
