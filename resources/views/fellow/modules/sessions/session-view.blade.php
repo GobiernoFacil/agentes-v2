@@ -14,7 +14,7 @@
 		<h4 class="center"></h4>
 		<div class="divider b"></div>
 		<h2>Sesión {{$session->order}}</h2>
-		<h1 class="center">{{$session->name}}</h1>
+		<h1 class="center">{$session->name}}</h1>
 		<div class="divider"></div>
 	</div>
 </div>

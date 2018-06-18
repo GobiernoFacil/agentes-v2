@@ -400,6 +400,7 @@ class User extends Authenticatable
     }
 
     function update_progress($module){
+      //$this->update_forum_progress($module->id);
       $allev  = $module->get_all_evaluation_activity();
       $allfr  = $module->get_all_activities_with_forums();
       $allFeP = FellowProgress::where('fellow_id',$this->id)->where('module_id',$module->id)
@@ -419,19 +420,23 @@ class User extends Authenticatable
 
       $fp->status = 1;
       $fp->save();
-      if($allev->count() > 0){
-        if($allev->count() != $allFeP->count()){
+
+      if($allev->count() > 0 || $allfr->count() > 0 ){
+        if($allev->count() != $allFeP->count() && $allev->count() > 0){
           $fp->status = 0;
           $fp->save();
-        }
-      }
-      if($allfr->count() > 0 && $fp->status){
-        if($allFfP->count() != $allfr->count()){
-          $fp->status = 0;
-          $fp->save();
+
         }
 
+        if($allfr->count() > 0 ){
+          if($allFfP->count() != $allfr->count() && $allfr->count() > 0 ){
+            $fp->status = 0;
+            $fp->save();
+          }
       }
+    }
+
+
 
       foreach ($module->sessions as $session) {
         $allSev  = $session->activity_eval();
@@ -446,7 +451,7 @@ class User extends Authenticatable
                   ->where('status',1)
                   ->whereIn('activity_id',$allSfr->pluck('activity_id')->toArray())
                   ->where('type','forum')->get();
-        $fp = FellowProgress::firstOrCreate(
+        $fp_s = FellowProgress::firstOrCreate(
                 ['fellow_id' => $this->id,
                     'program_id' => $module->program->id,
                     'module_id'  => $module->id,
@@ -454,21 +459,19 @@ class User extends Authenticatable
                     'type'       => 'session'
                 ]);
 
-        $fp->status = 1;
-        $fp->save();
-        if($allSev->count() > 0){
-            if($allSev->count() != $allFeP->count()){
-                $fp->status = 0;
-                  $fp->save();
+        $fp_s->status = 1;
+        $fp_s->save();
+        if($allSev->count() > 0 || $allSfr->count() > 0 ){
+            if($allSev->count() != $allFeP->count() && $allSev->count() > 0){
+                $fp_s->status = 0;
+                $fp_s->save();
             }
-        }
-        if($allSfr->count() > 0 && $fp->status){
-            if($allSfr->count() != $allFfP->count()){
-              $fp->status = 0;
-              $fp->save();
+
+            if($allSfr->count() != $allFfP->count() && $allSfr->count() > 0){
+              $fp_s->status = 0;
+              $fp_s->save();
               }
         }
-
       }
       return true;
 
@@ -498,11 +501,21 @@ class User extends Authenticatable
                         'type'       => 'session'
                         ]);
                     if($activity->hasforum){
+                      if($activity->type=== 'evaluation'){
+                        if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','activity')->first()){
+                          $fp->status = 0;
+                          $fp->save();
+                          $next = false;
+                          $save_module = false;
+                          break;
+                        }
+                      }
                       if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','forum')->first()){
                         $fp->status = 0;
                         $fp->save();
                         $next = false;
                         $save_module = false;
+                        break;
                       }
                     }else{
                       if(!FellowProgress::where('fellow_id',$this->id)->where('activity_id',$activity->id)->where('status',1)->where('type','activity')->first()){
@@ -510,6 +523,7 @@ class User extends Authenticatable
                         $fp->save();
                         $next = false;
                         $save_module = false;
+                        break;
                       }
                     }
                     if($next){
@@ -603,5 +617,55 @@ class User extends Authenticatable
       $messages      = Message::where('to_id',$this->id)->whereIn('conversation_id',$conversations)->pluck('id')->toArray();
       return ConversationLog::where('status',0)->whereIn('message_id',$messages)->get();
     }
+
+    function update_forum_progress($module_id){
+      $module = Module::find($module_id);
+      if($module){
+        foreach ($module->get_all_activities_with_forums() as $act) {
+            if($act->hasforum){
+              if($act->forum->check_participation($this->id)){
+                $fellowProgress  = FellowProgress::firstOrCreate([
+                  'fellow_id'    => $this->id,
+                  'module_id'    => $act->forum->session->module->id,
+                  'session_id'   => $act->forum->session->id,
+                  'activity_id'  => $act->id,
+                  'program_id'   => $act->forum->session->module->program->id,
+                  'type'         => 'forum'
+                ]);
+              }
+            }
+        }
+      }
+      return true;
+    }
+
+    function complete_modules($program_id){
+      return FellowProgress::where('status',1)->where('type','module')->where('fellow_id',$this->id)->where('program_id',$program_id)->get();
+    }
+
+    function complete_module($module_id){
+      return FellowProgress::where('status',1)->where('type','module')->where('fellow_id',$this->id)->where('module_id',$module_id)->first();
+    }
+
+    function complete_session($session_id){
+     return FellowProgress::where('status',1)->where('type','session')->where('fellow_id',$this->id)->where('session_id',$session_id)->first();
+    }
+
+    function check_diagnostic($activity_id){
+     $activity  = Activity::find($activity_id);
+     if($activity->diagnostic_info){
+       $answers = CustomFellowAnswer::where('questionnaire_id',$activity->diagnostic_info->id)->where('user_id',$this->id)->count();
+       if($answers== $activity->diagnostic_info->questions->count()){
+         return true;
+       }else{
+         return false;
+       }
+
+     }else{
+       return false;
+     }
+    }
+
+
 
 }

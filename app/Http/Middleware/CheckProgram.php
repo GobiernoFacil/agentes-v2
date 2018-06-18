@@ -26,20 +26,23 @@ class CheckProgram
             if($user->check_progress($request->activity_slug,2)){
               return $next($request);
             }else{
-              return back()->with(['error'=>'Aún no puedes accesar a esa actividad']);
+              return back()->with(['error'=>"Aún no puedes accesar a esa actividad, visualiza tu progreso en <a href='".url("tablero/$program->slug/progreso")."'>Ir a progreso</a>"]);
             }
 
           }elseif(isset($request->session_slug)){
             if($user->check_progress($request->session_slug,1)){
               return $next($request);
             }else{
-              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a esa sesión']);
+              return redirect("tablero")->with(['error'=>"Aún no puedes accesar a esa sesión, visualiza tu progreso en <a href='".url("tablero/$program->slug/progreso")."'>Ir a progreso</a>"]);
             }
           }elseif(isset($request->module_slug)){
+            if($request->url()=== url("tablero/$program->slug/progreso/$request->module_slug")){
+                return $next($request);
+            }
             if($user->check_progress($request->module_slug,0)){
               return $next($request);
             }else{
-              return redirect("tablero")->with(['error'=>'Aún no puedes accesar a ese módulo']);
+              return redirect("tablero")->with(['error'=>"Aún no puedes accesar a ese módulo, visualiza tu progreso en <a href='".url("tablero/$program->slug/progreso")."'>Ir a progreso</a>"]);
             }
           }else{
             return $next($request);

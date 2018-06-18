@@ -19,7 +19,7 @@
 
 		@if(Session::has('error'))
 			<div class="col-sm-12 message error">
-					{{ Session::get('error') }}
+					{!! Session::get('error') !!}
 			</div>
 		@endif
 
