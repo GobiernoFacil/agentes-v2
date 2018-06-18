@@ -76,6 +76,23 @@ class AdminSurveys extends Controller
     }
 
     /**
+     * Muestra view de encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view($program_id,$survey_id)
+    {
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $survey     = CustomQuestionnaire::where('id',$survey_id)->firstOrFail();
+      return view('admin.surveys.survey-view')->with([
+        "user"      => $user,
+        "program"   => $program,
+        "survey"    => $survey
+      ]);
+    }
+
+    /**
      * Muestra formulario para agregar encuestas
      *
      * @return \Illuminate\Http\Response
