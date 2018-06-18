@@ -241,10 +241,45 @@ class FellowEvaluations extends Controller
        if($correct_answers->pluck('id')->contains($request->answer)){
          $answer->correct  = 1;
          $answer->save();
-         return response()->json(["response" => 1, "original" => $request->all()]);
        }else{
          $answer->correct  = 0;
          $answer->save();
+       }
+
+      if(FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$question->quizInfo->id)->count() == $question->quizInfo->question->count()){
+        $countP = 1;
+        $question_value = 10/$question->quizInfo->question->count();
+        $total = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$question->quizInfo->id)->where('correct',1)->get();
+        $score = $total->count()*$question_value;
+        $uScore = FellowScore::firstOrCreate([
+            'user_id'            =>  $user->id,
+            'questionInfo_id'    =>  $question->quizInfo->id
+          ]);
+        $uScore->score = $score;
+        $uScore->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+            'user_id'    => $user->id,
+            'module_id'  => $question->quizInfo->activity->session->module->id,
+            'session_id' => $question->quizInfo->activity->session->id,
+            'type'       => 'session',
+            'program_id' => $question->quizInfo->activity->session->module->program->id,
+        ]);
+        $fellowAverage->scoreSession();
+        $fellowProgress  = FellowProgress::firstOrCreate([
+            'fellow_id'    => $user->id,
+            'module_id'    => $question->quizInfo->activity->session->module->id,
+            'session_id'   => $question->quizInfo->activity->session->id,
+            'activity_id'  => $question->quizInfo->activity->id,
+            'program_id'   => $question->quizInfo->activity->session->module->program->id,
+            'type'         => 'activity'
+        ]);
+        $fellowProgress->status = 1;
+        $fellowProgress->save();
+        $user->update_progress($question->quizInfo->activity->session->module);
+      }
+       if($correct_answers->pluck('id')->contains($request->answer)){
+         return response()->json(["response" => 1, "original" => $request->all()]);
+       }else{
          return response()->json(["response" => 0, "correct" => $correct_answers->toArray()]);
        }
 
@@ -268,7 +303,7 @@ class FellowEvaluations extends Controller
          return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")
          ->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);
        }
-       $countP = 1;
+      /* $countP = 1;
        $question_value = 10/$activity->quizInfo->question->count();
        $total = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->where('correct',1)->get();
        $score = $total->count()*$question_value;
@@ -296,7 +331,7 @@ class FellowEvaluations extends Controller
        ]);
        $fellowProgress->status = 1;
        $fellowProgress->save();
-       $user->update_progress($activity->session->module);
+       $user->update_progress($activity->session->module);*/
        return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
 
     }

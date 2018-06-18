@@ -16,4 +16,8 @@ class QuizInfo extends Model
   function question(){
     return $this->hasMany("App\Models\Question",'quizInfo_id');
   }
+
+  function activity(){
+    return $this->belongsTo("App\Models\Activity",'activity_id');
+  }
 }
