@@ -154,6 +154,7 @@
 			<p></p>
 			<a href="{{ url('dashboard/evaluacion') }}" class="btn gde">Ir a Evaluaciones</a>
 		</div>-->
+	<!--
 		<div class="box">
 			<h3>Encuestas</h3>
 			<p></p>
@@ -164,6 +165,7 @@
 			<p></p>
 			<a href="{{ url('dashboard/indicadores') }}" class="btn gde">Ir a Indicadores</a>
 		</div>
+-->
 	</div>
 	<div class="col-sm-9">
 			<!--módulos
