@@ -261,6 +261,6 @@ var answers       = 0;
 	        clearInterval(interval);
 					document.getElementById('general_div').style.display = "block" ;
 	    }
-	}, 7000);
+	}, 100);
 </script>
 @endsection
