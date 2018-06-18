@@ -630,7 +630,8 @@ class User extends Authenticatable
                   'session_id'   => $act->forum->session->id,
                   'activity_id'  => $act->id,
                   'program_id'   => $act->forum->session->module->program->id,
-                  'type'         => 'forum'
+                  'type'         => 'forum',
+                  'status'       => 1
                 ]);
               }
             }
