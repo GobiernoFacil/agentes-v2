@@ -1,7 +1,7 @@
 @extends('layouts.admin.a_master')
 @section('title', 'Respuestas de encuesta de satisfacción de ')
 @section('description', 'Respuestas de encuesta de satisfacción de ' )
-@section('body_class', '')
+@section('body_class', 'survey')
 @section('breadcrumb_type', 'survey  view')
 @section('breadcrumb', 'layouts.admin.breadcrumb.b_survey')
 
