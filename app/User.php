@@ -528,13 +528,12 @@ class User extends Authenticatable
                     }
                     if($next){
                       $fellowAverage = FellowAverage::firstOrCreate([
-                        'user_id'    => $this->id,
-                        'module_id'  => $session->module->id,
-                        'session_id' => $session->id,
-                        'type'       => 'session',
-                        'program_id' => $session->module->program->id,
-
-                      ]);
+                                  'user_id'    => $this->id,
+                                  'module_id'  => $session->module->id,
+                                  'session_id' => $session->id,
+                                  'type'       => 'session',
+                                  'program_id' => $session->module->program->id
+                                ]);
                       $fellowAverage->scoreSession();
                       $fp->status = 1;
                       $fp->save();
@@ -631,8 +630,9 @@ class User extends Authenticatable
                   'activity_id'  => $act->id,
                   'program_id'   => $act->forum->session->module->program->id,
                   'type'         => 'forum',
-                  'status'       => 1
                 ]);
+                $fellowProgress->status = 1;
+                $fellowProgress->save();
               }
             }
         }
