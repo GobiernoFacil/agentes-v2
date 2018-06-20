@@ -40,7 +40,7 @@
 				</div>
 				<div class="col-sm-8">
 					<h1>Foro técnico</h1>
-					<p>Si tienes algún problema, duda o comentario con respecto al funcionamiento de la plataforma, agrega tus preguntas en este foro.</p>
+					<p>Si tienes algún problema, duda o comentario con respecto al funcionamiento de la plataforma, agrega tus preguntas en este foro. <br>Los mensajes son respondidos de lunes a viernes de 9 a 18 horas por <strong>Argentina Velasco</strong> y <strong>Boris Cuapio</strong> de Gobierno Fácil. Los fines de semana las respuestas serán limitadas salvo casos excepcionales relacionados con fallas en la plataforma.</p>
 				</div>
 				<div class="col-sm-2 col-sm-offset-1">
 					<a href='{{ url("tablero/$program->slug/foros/$forum->slug") }}' class="btn view block sessions_l">Ir a foro</a>
