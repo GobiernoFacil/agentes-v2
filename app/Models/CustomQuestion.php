@@ -28,13 +28,13 @@ class CustomQuestion extends Model
       return $this->hasMany("App\Models\CustomAnswer",'question_id');
     }
     function answers_fellows(){
-      return $this->hasMany("App\Models\CustomFellowAnswer",'question_id');
+      return $this->hasMany("App\Models\CustomFellowAnswer",'question_id')->where('user_id','!=',23);
     }
 
     function data_to_graph(){
       $temp = [];
       for ($i=1; $i <= $this->options_columns_number ; $i++) {
-        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('answer',$i)->count();
+        $value  = CustomFellowAnswer::where('question_id',$this->id)->where('user_id','!=',23)->where('answer',$i)->count();
         $temp[] = [
             'options' => $i,
             'values'  => $value
