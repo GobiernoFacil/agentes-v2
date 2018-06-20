@@ -412,6 +412,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/encuestas/programa/{program_id}/actualizar/{quiz_id}', 'AdminSurveys@edit');
     Route::post('dashboard/encuestas/programa/{program_id}/update/{quiz_id}', 'AdminSurveys@update');
     Route::post('dashboard/encuestas/programa/{program_id}/save', 'AdminSurveys@save');
+    Route::get('dashboard/encuestas/programa/{program_id}/descargar/{quiz_id}', 'AdminSurveys@download');
     Route::get('dashboard/encuestas/programa/{program_id}/agregar-preguntas/{quiz_id}', 'AdminSurveys@addQuestions');
     Route::get('dashboard/encuestas/programa/{program_id}/checkAnswers/{quiz_id}', 'AdminSurveys@checkAnswers');
     Route::post('dashboard/encuestas/programa/{program_id}/save/question/{quiz_id}', 'AdminSurveys@saveQuestion');
