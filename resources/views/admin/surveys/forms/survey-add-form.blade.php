@@ -23,13 +23,27 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo de encuesta</strong> <br>
-      {{Form::select('type',[null=>'Selecciona una opción','facilitator'=>'Facilitadores','general'=>'General',],null, ["class" => "form-control"])}} </label>
+      {{Form::select('type',[null=>'Selecciona una opción','facilitator'=>'Facilitadores','general'=>'General',],null, ["class" => "form-control", "id"=>"type"])}} </label>
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
     </p>
   </div>
 </div>
+
+<!-- facilitator -->
+<div class="row">
+  <div class="col-sm-12" id = "facilitator_name" style = "{{old('type') === 'facilitator' ? "" : 'display:none;'}}">
+    <p>
+      <label><strong>Facilitador</strong> <br>
+      {{Form::select('facilitator_id',$facilitators,null, ["class" => "form-control","id"=>'facilitator'])}} </label>
+      @if($errors->has('facilitator_id'))
+      <strong class="danger">{{$errors->first('facilitator_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
+
 
 
 <!-- descripción  -->

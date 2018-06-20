@@ -15,7 +15,8 @@ class CustomQuestionnaire extends Model
       'slug',
       'type',
       'activity_id',
-      'program_id'
+      'program_id',
+      'facilitator_id'
     ];
 
     //modelos relacionados

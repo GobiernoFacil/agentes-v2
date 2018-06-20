@@ -25,11 +25,22 @@ use MessagesTrait;
      */
     public function rules()
     {
+      if($this->type === "facilitator"){
+        return [
+            //
+            'description'=> 'required',
+            'type'=> 'required',
+            'title'=> 'required|max:256|unique:custom_questionnaires',
+            'facilitator_id' => 'required'
+        ];
+      }else{
         return [
             //
             'description'=> 'required',
             'type'=> 'required',
             'title'=> 'required|max:256|unique:custom_questionnaires',
         ];
+      }
+
     }
 }

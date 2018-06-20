@@ -56,7 +56,8 @@ class AdminSurveys extends Controller
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
         "surveys"   => $surveys,
-        "program"   => $program
+        "program"   => $program,
+
       ]);
 
     }
@@ -102,9 +103,13 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
+
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','asc')->pluck('name','id')->toArray();
+      $facilitators[null] = 'Selecciona una opción';
       return view('admin.surveys.survey-add')->with([
         "user"      => $user,
-        "program"   => $program
+        "program"   => $program,
+        "facilitators" => $facilitators
       ]);
     }
 
@@ -117,14 +122,27 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$request->program_id)->firstOrFail();
-      $quiz       = CustomQuestionnaire::firstOrCreate([
-        'user_id'     => $user->id,
-        'title'       => $request->title,
-        'description' => $request->description,
-        'slug'        => str_slug($request->title),
-        'type'        => $request->type,
-        'program_id'  => $request->program_id
-      ]);
+      if($request->type==='facilitator'){
+        $quiz       = CustomQuestionnaire::firstOrCreate([
+          'user_id'     => $user->id,
+          'title'       => $request->title,
+          'description' => $request->description,
+          'slug'        => str_slug($request->title),
+          'type'        => $request->type,
+          'program_id'  => $request->program_id,
+          'facilitator_id' => $request->facilitator_id
+        ]);
+      }else{
+        $quiz       = CustomQuestionnaire::firstOrCreate([
+          'user_id'     => $user->id,
+          'title'       => $request->title,
+          'description' => $request->description,
+          'slug'        => str_slug($request->title),
+          'type'        => $request->type,
+          'program_id'  => $request->program_id
+        ]);
+      }
+
       return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$quiz->id")->with(['success'=>'Se ha guardado correctamente']);
     }
 
@@ -138,10 +156,13 @@ class AdminSurveys extends Controller
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
       $quiz       = CustomQuestionnaire::where('id',$quiz_id)->firstOrFail();
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','asc')->pluck('name','id')->toArray();
+      $facilitators[null] = 'Selecciona una opción';
       return view('admin.surveys.survey-update')->with([
         "user"      => $user,
         "program"   => $program,
-        "quiz"      => $quiz
+        "quiz"      => $quiz,
+        "facilitators" => $facilitators
       ]);
     }
 
@@ -154,7 +175,12 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$request->program_id)->firstOrFail();
-      CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type'));
+      if($request->type === 'facilitator'){
+        CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type','facilitator_id'));
+      }else{
+        CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type'));
+      }
+
       return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$request->quiz_id")->with(['success'=>'Se ha guardado correctamente']);
     }
 
