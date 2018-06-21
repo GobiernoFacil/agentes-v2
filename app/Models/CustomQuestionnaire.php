@@ -15,7 +15,8 @@ class CustomQuestionnaire extends Model
       'slug',
       'type',
       'activity_id',
-      'program_id'
+      'program_id',
+      'facilitator_id'
     ];
 
     //modelos relacionados
@@ -36,5 +37,9 @@ class CustomQuestionnaire extends Model
     function admin_facilitator_survey($session_id,$facilitator_id){
       return CustomFellowAnswer::where('questionnaire_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
 
+    }
+
+    function facilitator(){
+      return $this->belongsTo("App\User",'facilitator_id');
     }
 }

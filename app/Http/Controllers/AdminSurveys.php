@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Excel;
 use App\Models\Module;
 use App\Models\FacilitatorModule;
 use App\Models\FellowSurvey;
@@ -55,7 +56,8 @@ class AdminSurveys extends Controller
       return view('admin.surveys.survey-list')->with([
         "user"      => $user,
         "surveys"   => $surveys,
-        "program"   => $program
+        "program"   => $program,
+
       ]);
 
     }
@@ -101,9 +103,13 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
+
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','asc')->pluck('name','id')->toArray();
+      $facilitators[null] = 'Selecciona una opción';
       return view('admin.surveys.survey-add')->with([
         "user"      => $user,
-        "program"   => $program
+        "program"   => $program,
+        "facilitators" => $facilitators
       ]);
     }
 
@@ -116,14 +122,27 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$request->program_id)->firstOrFail();
-      $quiz       = CustomQuestionnaire::firstOrCreate([
-        'user_id'     => $user->id,
-        'title'       => $request->title,
-        'description' => $request->description,
-        'slug'        => str_slug($request->title),
-        'type'        => $request->type,
-        'program_id'  => $request->program_id
-      ]);
+      if($request->type==='facilitator'){
+        $quiz       = CustomQuestionnaire::firstOrCreate([
+          'user_id'     => $user->id,
+          'title'       => $request->title,
+          'description' => $request->description,
+          'slug'        => str_slug($request->title),
+          'type'        => $request->type,
+          'program_id'  => $request->program_id,
+          'facilitator_id' => $request->facilitator_id
+        ]);
+      }else{
+        $quiz       = CustomQuestionnaire::firstOrCreate([
+          'user_id'     => $user->id,
+          'title'       => $request->title,
+          'description' => $request->description,
+          'slug'        => str_slug($request->title),
+          'type'        => $request->type,
+          'program_id'  => $request->program_id
+        ]);
+      }
+
       return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$quiz->id")->with(['success'=>'Se ha guardado correctamente']);
     }
 
@@ -137,10 +156,13 @@ class AdminSurveys extends Controller
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
       $quiz       = CustomQuestionnaire::where('id',$quiz_id)->firstOrFail();
+      $facilitators = User::where('type','facilitator')->orWhere('type','admin')->where('enabled',1)->orderBy('name','asc')->pluck('name','id')->toArray();
+      $facilitators[null] = 'Selecciona una opción';
       return view('admin.surveys.survey-update')->with([
         "user"      => $user,
         "program"   => $program,
-        "quiz"      => $quiz
+        "quiz"      => $quiz,
+        "facilitators" => $facilitators
       ]);
     }
 
@@ -153,7 +175,12 @@ class AdminSurveys extends Controller
     {
       $user       = Auth::user();
       $program    = Program::where('id',$request->program_id)->firstOrFail();
-      CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type'));
+      if($request->type === 'facilitator'){
+        CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type','facilitator_id'));
+      }else{
+        CustomQuestionnaire::where('id',$request->quiz_id)->update($request->only('title','description','type'));
+      }
+
       return redirect("dashboard/encuestas/programa/$program->id/agregar-preguntas/$request->quiz_id")->with(['success'=>'Se ha guardado correctamente']);
     }
 
@@ -461,6 +488,52 @@ class AdminSurveys extends Controller
           }else{
             return redirect("dashboard/encuestas/programa/$program_id/agregar-preguntas/$quiz_id")->with('error','No se ha agregado ninguna pregunta');
           }
+
+        }
+
+
+        /**
+         * descargar xlsx
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function download($program_id,$survey_id)
+        {
+          $headers = ["Pregunta","Comentarios"];
+          $survey  = CustomQuestionnaire::where('id',$survey_id)->firstOrFail();
+          Excel::create("encuesta_".$survey->title, function($excel)use($headers,$survey) {
+            // Set the title
+            $excel->setTitle('Resultados de encuesta');
+            // Chain the setters
+            $excel->setCreator('Gobierno Fácil')
+                  ->setCompany('Gobierno Fácil');
+            // Call them separately
+            $excel->setDescription('Comentarios encuesta '.$survey->title);
+            $excel->sheet('Comentarios', function($sheet)use($headers,$survey){
+              $sheet->setTitle('Comentarios');
+              $sheet->row(1, ["Comentarios de encuesta",$survey->title]);
+              $sheet->row(2, $headers);
+              $sheet->row(1, function($row) {
+                $row->setBackground('#000000');
+                $row->setFontColor('#ffffff');
+              });
+              $sheet->row(2, function($row) {
+                $row->setBackground('#000000');
+                $row->setFontColor('#ffffff');
+              });
+              foreach ($survey->questions as $question) {
+                if($question->type === 'open'){
+
+                  $values = [];
+                  $values[]= $question->question;
+                  $sheet->appendRow($values);
+                  foreach ($question->answers_fellows as $answer) {
+                      $sheet->appendRow([" ",$answer->answer]);
+                  }
+                }
+              }
+            });
+          })->download('xlsx');
 
         }
 }

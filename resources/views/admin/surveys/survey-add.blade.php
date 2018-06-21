@@ -20,3 +20,18 @@
   </div>
 </div>
 @endsection
+
+@section('js-content')
+<script>
+  $( document ).ready(function() {
+    $('#type').change(function(){
+      if(this.value==='facilitator'){
+        $('#facilitator_name').show();
+      }else{
+        $('#facilitator_name').hide();
+        $('#facilitator_name').val("0");
+      }
+    });
+  });
+</script>
+@endsection

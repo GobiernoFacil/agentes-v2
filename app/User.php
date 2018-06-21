@@ -186,6 +186,10 @@ class User extends Authenticatable
       return CustomFellowAnswer::where('user_id',$this->id)->where('questionnaire_id',$quiz_id)->get();
     }
 
+    function fellow_survey_custom($quiz_id){
+      return CustomFellowAnswer::where('user_id',$this->id)->where('questionnaire_id',$quiz_id);
+    }
+
     function facilitator_survey($session_id,$user_id,$facilitator_id){
       $survey = FacilitatorSurvey::where('user_id', $user_id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
       return $survey;

@@ -238,7 +238,7 @@
 <script type="text/text" id="GF-PNUD-quiz-answer-template">
   <li id="<%=id%>">
     <label>
-      <input data-question="<%=question_id%>" type="radio" name="answer" value="<%=id%>"><%=value%>
+      <input class = "radio_select" data-question="<%=question_id%>" type="radio" name="answer" value="<%=id%>"><%=value%>
     </label>
   </li>
 </script>
@@ -392,6 +392,12 @@
 		      if(!selected){
 						uiNull.style.display = "block";
 						return
+					}
+
+					var x = document.getElementsByClassName("radio_select");
+					var i;
+					for (i = 0; i < x.length; i++) {
+					    x[i].disabled = true;
 					}
 		      $.post(evalURL, {
 						_token   : _token,

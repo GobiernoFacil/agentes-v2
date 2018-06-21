@@ -61,6 +61,7 @@
 								<td>Encuesta</td>
 								<td>
 									<a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/9")}}' class="btn xs view">Ver</a>
+									<a href='{{ url("dashboard/encuestas/programa/$program->id/descargar/9")}}' class="btn xs ev">Descargar</a>
 								</td>
 							</tr>
 <?php /*

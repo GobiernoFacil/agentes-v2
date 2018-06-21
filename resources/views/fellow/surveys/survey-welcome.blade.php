@@ -29,8 +29,16 @@
     <div class="col-sm-12">
       <div class="divider b"></div>
     </div>
+    @if($survey->type === 'facilitator')
+    <div class="col-sm-12 center">
+      <p>Facilitador a evaluar <strong>{{$survey->facilitator->name}}</strong></p>
+    </div>
+    @endif
     <div class="col-sm-12 center">
       <p><strong>Esta encuesta es anónima</strong></p>
+    </div>
+    <div class="col-sm-12 center">
+      <p>{{$survey->description}}</p>
     </div>
     <div class="col-sm-4 col-sm-offset-4 center">
       <a href='{{ url("tablero/encuestas/encuesta-satisfaccion/1") }}' class="btn gde" id="ev_init">Comenzar</a>
@@ -180,7 +188,7 @@
           }else{
             uiQuestion.innerHTML         = questions[question].question;
           }
-          console.log(questions[question]);
+
           if(questions[question].type=== 'open'){
             uiOpenQuestion.style.display  = "block";
             template = _.template(uiOpenTemplate);
@@ -209,8 +217,7 @@
           uiTextNull.style.display = "none";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
-
-		      if(currentSlide == questions.length){
+		      if(currentSlide == (questions.length-1)){
 		        uiEnd.style.display = "block";
 		      }
 		      else{
@@ -225,7 +232,6 @@
           // uiEval.style.display      = "block";
           //uiNext.style.display      = "block";
           render.renderSlide(currentSlide);
-          console.log(this);
 		    };
 
 		    render.showError = function(answers){
@@ -260,6 +266,51 @@
 		      render.renderSlide(currentSlide);
 		    });
 
+        uiEndBtn.addEventListener("click", function(e){
+		      e.preventDefault();
+          uiNull.style.display = "none";
+          uiTextNull.style.display = "none";
+          var qId      = uiQuestion.getAttribute('data-question');
+          var question = questions.filter(function(q){
+            return parseInt(q.id,10) == parseInt(qId,10);
+          });
+          if(question[0].type ==='open'){
+            var selected = uiOpen.querySelector(openClassCtr);
+            if(!selected.value && question[0].required){
+              uiTextNull.style.display = "block";
+              return
+            }
+
+          }else if(question[0].type ==='answers'){
+            var selected = uiAnswers.querySelector("input[name='answer']:checked");
+            if(!selected && question[0].required){
+              uiNull.style.display = "block";
+              return
+            }
+          }else if(question[0].type === 'radio'){
+            var selected = uiRadio.querySelector("input[name='radio']:checked");
+            if(!selected && question[0].required){
+              uiNull.style.display = "block";
+              return
+            }
+          }
+
+          $.post(evalURL, {
+     						_token   : _token,
+     		        // question : selected.getAttribute("data-question"),
+                 question_id : question[0].id,
+     		        answer   : selected.value
+     		      }, function(response){
+     		        if(response.response){
+     		          window.location.href = endURL;
+     		        }
+     		        else{
+     		          render.showError(response);
+     		        }
+     		      }, "json");
+
+		    });
+
 		    uiEvalBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiNull.style.display = "none";
@@ -289,23 +340,21 @@
             }
           }
 
-          render.showSuccess();
 
 
-		  /*    $.post(evalURL, {
+		      $.post(evalURL, {
 						_token   : _token,
 		        // question : selected.getAttribute("data-question"),
             question_id : question[0].id,
 		        answer   : selected.value
 		      }, function(response){
-            console.log(response);
 		        if(response.response){
 		          render.showSuccess();
 		        }
 		        else{
 		          render.showError(response);
 		        }
-		      }, "json");*/
+		      }, "json");
 		    });
 
 		  })();

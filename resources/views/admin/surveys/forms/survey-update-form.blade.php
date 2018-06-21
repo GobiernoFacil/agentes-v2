@@ -31,7 +31,18 @@
   </div>
 </div>
 
-
+<!-- facilitator -->
+<div class="row">
+  <div class="col-sm-12" id = "facilitator_name" style = "{{old('type') === 'facilitator' || $quiz->type==='facilitator' ? "" : 'display:none;'}}">
+    <p>
+      <label><strong>Facilitador</strong> <br>
+      {{Form::select('facilitator_id',$facilitators,null, ["class" => "form-control","id"=>'facilitator'])}} </label>
+      @if($errors->has('facilitator_id'))
+      <strong class="danger">{{$errors->first('facilitator_id')}}</strong>
+      @endif
+    </p>
+  </div>
+</div>
 <!-- descripción  -->
 <div class="row">
   <div class="col-sm-12">

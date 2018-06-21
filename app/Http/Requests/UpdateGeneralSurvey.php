@@ -27,11 +27,22 @@ class UpdateGeneralSurvey extends FormRequest
     public function rules()
     {
       $quiz = CustomQuestionnaire::find($this->route("quiz_id"));
-      return [
-          //
-          'description'=> 'required',
-          'type'=> 'required',
-          'title'=> 'required|max:256'.($quiz->title != $this->title ? '|unique:custom_questionnaires' : ''),
-      ];
+      if($this->type === 'facilitator'){
+        return [
+            //
+            'description'=> 'required',
+            'type'=> 'required',
+            'title'=> 'required|max:256'.($quiz->title != $this->title ? '|unique:custom_questionnaires' : ''),
+            'facilitator_id'=>'required'
+        ];
+      }else{
+        return [
+            //
+            'description'=> 'required',
+            'type'=> 'required',
+            'title'=> 'required|max:256'.($quiz->title != $this->title ? '|unique:custom_questionnaires' : ''),
+        ];
+      }
+
     }
 }
