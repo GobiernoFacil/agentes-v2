@@ -4,9 +4,6 @@
       <strong>{{$activity->name}}</strong>
   </span>
 	<!--evaluation type--->
- <span class="col-sm-3 right">
-    			{{$fellow->check_diagnostic($activity->id) ? "Completado" : "No realizado" }}
-  </span>
     	<span class="col-sm-3">
         @if($activity->diagnostic_info)
         	<!--si es evaluación-->
@@ -23,4 +20,7 @@
         <span class="col-sm-3 right">
 
 		</span>
+		<span class="col-sm-3 right">
+	     			{{$fellow->check_diagnostic($activity->id) ? "Completado" : "No realizado" }}
+	   </span>
 </li>
