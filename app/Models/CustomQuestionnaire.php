@@ -38,4 +38,8 @@ class CustomQuestionnaire extends Model
       return CustomFellowAnswer::where('questionnaire_id',$this->id)->where('session_id',$session_id)->where('facilitator_id',$facilitator_id)->first();
 
     }
+
+    function facilitator(){
+      return $this->belongsTo("App\User",'facilitator_id');
+    }
 }

@@ -29,8 +29,16 @@
     <div class="col-sm-12">
       <div class="divider b"></div>
     </div>
+    @if($survey->type === 'facilitator')
+    <div class="col-sm-12 center">
+      <p>Facilitador a evaluar <strong>{{$survey->facilitator->name}}</strong></p>
+    </div>
+    @endif
     <div class="col-sm-12 center">
       <p><strong>Esta encuesta es anónima</strong></p>
+    </div>
+    <div class="col-sm-12 center">
+      <p>{{$survey->description}}</p>
     </div>
     <div class="col-sm-4 col-sm-offset-4 center">
       <a href='{{ url("tablero/encuestas/encuesta-satisfaccion/1") }}' class="btn gde" id="ev_init">Comenzar</a>
