@@ -59,7 +59,9 @@ class FellowSurveys extends Controller
       $user     = Auth::user();
       $program  = Program::where('slug',$program_slug)->firstOrFail();
       $survey   = CustomQuestionnaire::where('slug',$survey_slug)->where('program_id',$program->id)->firstOrFail();
-      if($user->fellow_survey($survey->id)->count() == $survey->questions->count()){
+      $required = $survey->questions->where('required',1)->pluck('id')->toArray();
+      $ans_user = $user->fellow_survey_custom($survey->id)->whereIn('question_id',$required)->count();
+      if($ans_user ==  $survey->questions->where('required',1)->count()){
         return redirect("tablero/$program->slug/encuestas")->with('error',"Ya has contestado la encuesta");
       }
       $answersAlr = $user->fellow_survey($survey->id)->pluck('question_id')->toArray();
@@ -128,10 +130,10 @@ class FellowSurveys extends Controller
          $user     = Auth::user();
          $program  = Program::where('slug',$program_slug)->firstOrFail();
          $survey   = CustomQuestionnaire::where('slug',$survey_slug)->firstOrFail();
-
-         if(CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$survey->id)->count() != $survey->questions->count()){
-           return redirect("tablero/{$program->slug}/encuestas/{$survey->slug}")
-           ->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);
+         $required = $survey->questions->where('required',1)->pluck('id')->toArray();
+         $ans_user = $user->fellow_survey_custom($survey->id)->whereIn('question_id',$required)->count();
+         if($ans_user !=  $survey->questions->where('required',1)->count()){
+           return redirect("tablero/$program->slug/encuestas")->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);;
          }
          return view('fellow.surveys.survey-thanks')->with([
            'user'    => $user,
