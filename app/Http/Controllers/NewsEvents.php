@@ -107,7 +107,7 @@ class NewsEvents extends Controller
         $image->type = 'full';
         $image->save();
       }
-  /*    if($request->type==='notice' && $new->public){
+      if($request->type==='notice' && $new->public){
         if($program = Program::where('id',$request->program_id)->first()){
           $fellows = $program->fellows;
           foreach ($fellows as $fellow) {
@@ -116,7 +116,7 @@ class NewsEvents extends Controller
           }
         }
 
-      }*/
+      }
       return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
     }
 

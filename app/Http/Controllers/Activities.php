@@ -10,6 +10,7 @@ use App\Models\Activity;
 use App\Models\ActivityVideo;
 use App\Models\ModuleSession;
 use App\Models\Log;
+use App\Models\ForumLog;
 use App\Models\Forum;
 use App\Models\ForumConversation;
 
@@ -375,6 +376,28 @@ class Activities extends Controller
               'activity_id' => $activity->id,
               'type'        => 'delete: '.str_limit($activity->name, 150)
             ]);
+            if($activity->hasforum){
+              $forum     = $activity->forum;
+              foreach ($forum->forum_messages as $message) {
+                # code...
+                $message->delete();
+              }
+              foreach ($forum->forum_conversations as $message) {
+                # code...
+                foreach ($message->messages as $mes) {
+                  $mes->delete();
+                }
+                $message->delete();
+              }
+              //forum log
+              $log = new ForumLog();
+              $log->user_id = $user->id;
+              $log->type    = 'admin';
+              $log->action  = 'delete-forum';
+              $log->forum_id = $forum->id;
+              $log->save();
+              $forum->delete();
+            }
             $activity->delete();
             return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha eliminado correctamente");
         }
