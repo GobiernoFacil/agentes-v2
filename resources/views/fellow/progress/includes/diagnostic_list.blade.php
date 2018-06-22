@@ -1,11 +1,12 @@
 <div class="row">
 	<!--activity name--->
-	<span class="col-sm-6 activity">
-      <strong>{{$activity->name}}</strong>
-  </span>
+	<div class="col-sm-6 activity">
+       <p><a href ='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}' class="ap_link_module">{{$activity->name}}</a></p>
+  </div>
 	<!--evaluation type--->
 
-    	<span class="col-sm-3">
+    	<div class="col-sm-4">
+	    	<p>
         @if($activity->diagnostic_info)
         	<!--si es evaluación-->
             @if($user->check_diagnostic($activity->id))
@@ -17,11 +18,16 @@
         @else
             Examen en línea
         @endif
-        </span>
-        <span class="col-sm-3 right">
+	    	</p>
+        </div>
 
-		</span>
-		<span class="col-sm-3 right">
-						 {{$user->check_diagnostic($activity->id) ? "Completado" : "No realizado" }}
-		 </span>
+		<div class="col-sm-2">
+			<p>
+				@if($user->check_diagnostic($activity->id))
+				<span class="ap_success">Completado</span>
+				@else
+				<span class="ap_error">No realizado</span>
+				@endif
+			</p>
+		 </div>
 </div>
