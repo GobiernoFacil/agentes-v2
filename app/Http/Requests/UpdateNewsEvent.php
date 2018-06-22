@@ -37,7 +37,7 @@ class UpdateNewsEvent extends FormRequest
             'image'    => 'file|mimes:jpg,png,jpeg|max:2500',
             'brief' => 'required'
         ];
-      }elseif($this->type==='notice'){
+      }elseif($this->type==='notice' || $this->type==='fellow'){
         return [
             //
             'title'=> 'required|max:256'.($content->title != $this->title ? '|unique:news_events' : ''),

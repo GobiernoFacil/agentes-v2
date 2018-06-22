@@ -24,7 +24,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción",'notice'=>"Aviso",,'fellow'=>'Blog de Fellows','event'=>'Evento','news' =>'Noticia'],null, ['class' => 'form-control','id'=>'type'])}}
+      {{Form::select('type',[null => "Selecciona una opción",'notice'=>"Aviso",'fellow'=>'Blog de Fellows','event'=>'Evento','news' =>'Noticia'],null, ['class' => 'form-control','id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif
@@ -125,7 +125,7 @@
     <p>
       <label><strong>Foto</strong></label><br>
       @if($content->image)
-      <img src='{{url("img/newsEvent/{$content->image->name}")}}'>
+      <img src="{!!url('img/newsEvent/'.$content->image->name)!!}">
       @endif
       {{Form::file('image', ['class' => ''])}} (documento no mayor a 2.5 Mb, formato .jpg, .png)
       @if($errors->has('image'))

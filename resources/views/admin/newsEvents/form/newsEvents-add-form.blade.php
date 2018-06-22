@@ -1,4 +1,5 @@
 {!! Form::open(['url' => url("dashboard/noticias-eventos/save"), "class" => "form-horizontal",'files'=>true]) !!}
+
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
