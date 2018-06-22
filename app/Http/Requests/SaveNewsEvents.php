@@ -25,7 +25,7 @@ class SaveNewsEvents extends FormRequest
     public function rules()
     {
 
-      if($this->type==='news'){
+      if($this->type==='news' || $this->type==='fellow'){
         return [
             //
             'title'=> 'required|max:256|unique:news_events',

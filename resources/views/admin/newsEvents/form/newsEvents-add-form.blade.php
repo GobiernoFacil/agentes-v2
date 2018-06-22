@@ -1,4 +1,5 @@
 {!! Form::open(['url' => url("dashboard/noticias-eventos/save"), "class" => "form-horizontal",'files'=>true]) !!}
+
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-12">
@@ -24,7 +25,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Tipo</strong></label>
-      {{Form::select('type',[null => "Selecciona una opción", 'news' =>'Noticia', 'event'=>'Evento','notice'=>"Aviso"],null, ['class' => 'form-control','id'=>'type'])}}
+      {{Form::select('type',[null => "Selecciona una opción",'notice'=>"Aviso",'fellow'=>'Blog de Fellows','event'=>'Evento','news' =>'Noticia'],null, ['class' => 'form-control','id'=>'type'])}}
       @if($errors->has('type'))
       <strong class="danger">{{$errors->first('type')}}</strong>
       @endif

@@ -107,7 +107,7 @@ class NewsEvents extends Controller
         $image->type = 'full';
         $image->save();
       }
-      if($request->type==='notice' && $new->public){
+  /*    if($request->type==='notice' && $new->public){
         if($program = Program::where('id',$request->program_id)->first()){
           $fellows = $program->fellows;
           foreach ($fellows as $fellow) {
@@ -116,7 +116,7 @@ class NewsEvents extends Controller
           }
         }
 
-      }
+      }*/
       return redirect("dashboard/noticias-eventos/ver/$new->id")->with('success',"Se ha guardado correctamente");
     }
 
@@ -188,7 +188,7 @@ class NewsEvents extends Controller
         $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
         $request->file('file')->move($path, $name);
         return response()->JSON([
-          'location' => url("/img/NewsEvent/$name")
+          'location' => url("/img/newsEvent/$name")
         ]);
       }
     }
