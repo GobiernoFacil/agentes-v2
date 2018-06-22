@@ -21,7 +21,7 @@
 				<!-- title-->
 				<h3>
 					@if($user->check_progress($module->slug,0))
-					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}'>{{$module->title}}</a>
+					<a href='{{ url("tablero/{$module->program->slug}/aprendizaje/{$module->slug}") }}' class="ap_link_module">{{$module->title}}</a>
 					@else
 					{{$module->title}}
 					@endif
@@ -65,7 +65,7 @@
 								<h5>{{$evAct->forum ? "Foro":"Evaluación"}}</h5>
 								<ul>
 									@if($user->check_progress($evAct->slug,2))
-										<li><a href ='{{url("tablero/{$evAct->session->module->program->slug}/aprendizaje/{$evAct->session->module->slug}/{$evAct->session->slug}/$evAct->slug")}}'>{{$evAct->name}}</a></li>
+										<li><a href ='{{url("tablero/{$evAct->session->module->program->slug}/aprendizaje/{$evAct->session->module->slug}/{$evAct->session->slug}/$evAct->slug")}}' class="ap_link_module">{{$evAct->name}}</a></li>
 									@else
 										<li>{{$evAct->name}}</li>
 									@endif
@@ -79,30 +79,30 @@
 										@if($evAct->quizInfo)
 											@if(!$evAct->files)
 												@if($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first())
-													<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
+													<p class="ap_success"><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fellowScore()->where('user_id',$user->id)->where('questionInfo_id',$evAct->quizInfo->id)->first()->score,2)*10 }}</a></p>
 												@else
-														<p>Sin calificación</p>
+														<p class="ap_error">Sin calificación</p>
 												@endif
 											@endif
 										@else
 											@if($user->fileFellowScore($evAct->id))
-												<p><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fileFellowScore($evAct->id)->score,2)*10 }}</a></p>
+												<p class="ap_success"><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fileFellowScore($evAct->id)->score,2)*10 }}</a></p>
 											@else
-													  <p>Sin calificación</p>
+													  <p class="ap_error">Sin calificación</p>
 											@endif
 										@endif
 								@else
 										@if($evAct->forum->check_participation($user->id))
 											<p>Participaste</p>
 										@else
-										 	<p>Sin participación</p>
+										 	<p class="ap_error">Sin participación</p>
 										@endif
 								@endif
 
 							</div>
 							<div class="col-sm-3">
 								@if($evAct->forum)
-								<p>No aplica</p>
+								<p class="ap_noaplica">No aplica</p>
 								@else
 								<p>{{date('d-m-Y', strtotime($evAct->end))}}
 									<span>({{ \Carbon\Carbon::createFromTimeStamp(strtotime($evAct->end.'+1 day'))->diffForHumans()}})</span>
