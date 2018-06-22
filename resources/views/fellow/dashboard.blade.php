@@ -23,12 +23,14 @@
 			</div>
 		@endif
 
-
+		
+		<!--flecha izq-->
 		<div class="col-sm-1">
 			<button id="ap-back" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M445.44 38.183L-2.53 512l447.97 473.817 85.857-81.173-409.6-433.23v81.172l409.6-433.23L445.44 38.18z"/></svg>
 			</button>
 		</div>
+		<!-- timeline--->
 		<div class="col-sm-10">
 			<div class="timeline_box">
 				<ul class="timeline" style="overflow: hidden;">
@@ -45,24 +47,34 @@
 						$error_module  = $module;
 						$stop=1;
 					}
-
 					?>
 					@endif
-
 				</li>
 				@endforeach
 				</ul>
-
 			</div>
 		</div>
+		<!--flecha derecha-->
 		<div class="col-sm-1 right">
 			<button id="ap-next" class="ap-advancer" type="button">
 				<svg class="ap-timelineicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551 1024"><path d="M105.56 985.817L553.53 512 105.56 38.183l-85.857 81.173 409.6 433.23v-81.172l-409.6 433.23 85.856 81.174z"/></svg>
 			</button>
 		</div>
+		
+		<!--consultar progreso-->
+		<div class="col-sm-3 col-sm-offset-3">
+			<p><a href="{{url('tablero/programa-2018/progreso')}}" class="btn view block sessions_l">Consultar mi progreso</a></p>
+		</div>
+		<div class="col-sm-3">
+			<p><a href="{{url('tablero/informacion')}}" class="btn ev block about_program">Información del programa</a></p>
+		</div>
+		
 		@if(isset($show_message))
-			<div class="col-sm-12 message error">
+		<!-- errores-->
+			<div class="col-sm-10 col-sm-offset-1 ">
+				<div class="message error">
 				<p> {{$error_module->parent_id ? "Aún cuentas con actividades sin terminar o foros sin participar en el módulo ".$error_module->parent()->title : 'No te encuentras al corriente con las actividades evaluación o foros.'}}</p>
+				</div>
 			</div>
 		@endif
 

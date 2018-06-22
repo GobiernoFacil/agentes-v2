@@ -2501,6 +2501,15 @@ a:visited.btn {
     font-weight: 700;
     line-height: 1.5;
     text-align: center; }
+  a.btn.about_program,
+  .btn.about_program,
+  a:visited.btn.about_program {
+    font-family: "overpass", Helvetica, Arial, sans-serif;
+    border-bottom: 4px solid #106791;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center; }
 
 .links {
   font-size: 13px; }
