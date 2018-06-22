@@ -1,7 +1,8 @@
 <div class="row">
 	<!--activity name--->
 	<div class="col-sm-6">
-      <p><strong>{{$activity->name}}</strong></p>
+      <p><a href ='{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}' class="ap_link_module">{{$activity->name}}</a>
+      </p>
   	</div>
 	<!--evaluation type--->
 	@if($activity->files)

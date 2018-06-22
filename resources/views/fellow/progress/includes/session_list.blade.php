@@ -65,7 +65,7 @@
 				<!--- foros-->
 				<div class="row">
 					<div class="col-sm-6">
-					 <p><strong>{{$forum->topic}}</strong></p>
+					 <p><a href ='{{url("tablero/{$forum->activity->session->module->program->slug}/aprendizaje/{$forum->activity->session->module->slug}/{$forum->activity->session->slug}/{$forum->activity->slug}")}}' class="ap_link_module">{{$forum->topic}}</a></p>
 					</div>
 					<div class="col-sm-4">
 						<p>Foro</p>
