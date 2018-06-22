@@ -1,6 +1,6 @@
 <!--título del módulo-->
 <div class="col-sm-9">
-	<h4>Módulo</h4>
+	<h4>Semana {{$n}}</h4>
 	<h2 class ="title">{{$module->title}}</h2>
 </div>
 <!--calificación del módulo-->
