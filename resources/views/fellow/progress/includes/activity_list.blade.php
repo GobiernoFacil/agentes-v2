@@ -1,16 +1,25 @@
-<li class="row">
+<div class="row">
 	<!--activity name--->
-	<span class="col-sm-6 activity">
-      <strong>{{$activity->name}}</strong>
-  </span>
+	<div class="col-sm-6">
+      <p><strong>{{$activity->name}}</strong></p>
+  	</div>
 	<!--evaluation type--->
 	@if($activity->files)
-		<span class="col-sm-3">  Revisión de productos</span>
-    <span class="col-sm-3 right">
-    			{{$user->fellowFiles()->where('activity_id',$activity->id)->where('user_id',$user->id)->first() ? "Completado" : "No realizado" }}
-    </span>
+		<div class="col-sm-4">  
+			<p>Revisión de productos</p>
+		</div>
+		<div class="col-sm-2">
+    		<p>
+	    		@if($user->fellowFiles()->where('activity_id',$activity->id)->where('user_id',$user->id)->first())
+	    		<span class="ap_success">Completado</span>
+	    		@else
+	    		<span class="ap_error">No realizado</span>
+	    		@endif
+	    	</p>
+		</div>
     @else
-    	<span class="col-sm-3">
+    	<div class="col-sm-4">
+	    	<p>
         @if($activity->quizInfo)
         	<!--si es evaluación-->
             @if($activity->fellowScore($user->id))
@@ -22,17 +31,25 @@
         @else
             Examen en línea
         @endif
-        </span>
-        <span class="col-sm-3 right">
-        @if($activity->quizInfo)
-            @if($activity->fellowScore($user->id))
-            	{{$activity->fellowScore($user->id) ? "Completado" : "No realizado" }}
-            @else
-            	<span>No realizado</span>
-            @endif
-        @else
-            <span class="">Sin examen</span>
-        @endif
-		</span>
+	    	</p>
+        </div>
+        <div class="col-sm-2">
+	        <p>
+			@if($activity->quizInfo)
+			    @if($activity->fellowScore($user->id))
+			    	<span class="ap_success">Completado</span>
+			    @else
+			    	<span class="ap_error">No realizado</span>
+			    @endif
+			@else
+			    <span class="ap_noaplica">Sin examen</span>
+			@endif
+	        </p>
+		</div>
 	@endif
-</li>
+	@if($r > $f)
+	<div class="col-sm-12">
+		<div class="divider nm"></div>
+	</div>
+	@endif
+</div>

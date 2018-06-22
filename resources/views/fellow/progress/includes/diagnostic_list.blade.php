@@ -1,4 +1,4 @@
-<li class="row">
+<div class="row">
 	<!--activity name--->
 	<span class="col-sm-6 activity">
       <strong>{{$activity->name}}</strong>
@@ -24,4 +24,4 @@
 		<span class="col-sm-3 right">
 						 {{$user->check_diagnostic($activity->id) ? "Completado" : "No realizado" }}
 		 </span>
-</li>
+</div>
