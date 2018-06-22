@@ -39,7 +39,8 @@ class Kernel extends ConsoleKernel
         Commands\ImportInterviewQuestionnaire::Class,
         Commands\ImportSelectedAspirantToProgram::Class,
         Commands\SendFinalEmailToAspirants::Class,
-        Commands\UpdateFellowProgress::Class
+        Commands\UpdateFellowProgress::Class,
+        Commands\ExportFellowProgress::Class
     ];
 
     /**
