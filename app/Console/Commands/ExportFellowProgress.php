@@ -62,7 +62,7 @@ class ExportFellowProgress extends Command
                 $row->setFontColor('#ffffff');
               });
               foreach($program->fellows as $fellow){
-                if($uset->id != $fellow->id){
+                if($uset->id != $fellow->user->id){
                   $arr = [$fellow->user->name,
                           $fellow->user->email,
                           $fellow->user->complete_modules($program->id)->count(),
