@@ -1986,6 +1986,10 @@ sup {
   font-size: 21px;
   font-weight: 300; }
 
+.news_list img,
+.news_view img {
+  height: auto; }
+
 .news_view li {
   border-bottom: 0; }
 
