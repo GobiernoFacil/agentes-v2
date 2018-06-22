@@ -22,6 +22,9 @@
 			<span class="ap_noaplica ap_small">{{ $user->check_progress($session->slug,1) ?  "Con acceso" : "Sin acesso" }}</span>
 		</p>
 	</div>
+	<div class="col-sm-12">
+		<div class="divider nm"></div>
+	</div>
 	@if($session->activity_eval_and_forum()->count() > 0)
     <!--evaluaciones-->
     <div class="col-sm-11 col-sm-offset-1">
