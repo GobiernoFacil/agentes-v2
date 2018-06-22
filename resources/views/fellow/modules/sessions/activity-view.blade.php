@@ -145,7 +145,7 @@
 </g>
 </svg>
 						<h3>Puntaje total: </h3>
-		<h2>{{$score->score > 0 ? number_format($score->score,2)*10 . '/100' : '0/0'  }}</h2>
+		<h2>{{$score->score > 0 ? number_format($score->score,2)*10 . '/100' : '0/100'  }}</h2>
 				</div>
 			</div>
 		</div>
