@@ -188,7 +188,7 @@ class NewsEvents extends Controller
         $name = uniqid() . '.' . $request->file('file')->getClientOriginalExtension();
         $request->file('file')->move($path, $name);
         return response()->JSON([
-          'location' => url("/img/NewsEvent/$name")
+          'location' => url("/img/newsEvent/$name")
         ]);
       }
     }
