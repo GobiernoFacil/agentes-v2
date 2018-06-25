@@ -69,7 +69,7 @@ class SendForumNotice extends Notification
       }
         return (new MailMessage)
             ->from('info@apertus.org.mx')
-            ->subject('no-reply - Foro: Programa de Formación de Agentes Locales de Cambio')
+            ->subject('no-reply - Foro: '.$this->forum->topic)
             ->markdown('vendor.notifications.new_forum_message', ['url' => $url,'user'=>$this->user,'forum'=>$this->forum,'conversation'=>$this->conversation,'type'=>$this->type,'message'=>$this->message]);
     }
 
