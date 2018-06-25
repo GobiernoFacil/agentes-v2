@@ -32,7 +32,7 @@ class AdminEvaluations extends Controller
     const DEBUG     = FALSE;
     const UPLOADSF  = "archivos/fellowsEva";
     //Paginación
-    public $pageSize = 5;
+    public $pageSize = 10;
     public function __construct()
     {
       $this->user_test_apertus = User::where('email','andre@fcb.com')->first();

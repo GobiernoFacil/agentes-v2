@@ -66,7 +66,7 @@ class Program extends Model
     }
 
     function fellows(){
-      return $this->hasMany("App\Models\FellowProgram");
+      return $this->hasMany("App\Models\FellowProgram")->where('user_id','!=',23);
     }
 
     function get_all_fellows(){
