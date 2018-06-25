@@ -118,8 +118,8 @@ class FellowAverage extends Model
 
       $module       = $module_score->module;
       $sessions_with_diagnostic =$module->get_diagnostc_activities()->pluck('session_id')->toArray();
-      $scores       = FellowAverage::whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
-      $total_scores = FellowAverage::whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
+      $scores       = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
+      $total_scores = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
       if($total_scores  > 0){
         $module_score->average = $total_scores/$scores->count();
         $module_score->save();
@@ -161,8 +161,14 @@ class FellowAverage extends Model
            $score = $for_score['score'];
          }
        }
-       $this->average = $score;
-       $this->save();
+       if(!$act_score && !$for_score){
+         $this->average = null;
+         $this->save();
+       }else{
+         $this->average = $score;
+         $this->save();
+       }
+
        $this->scoreModule($this->user_id);
        return true;
     }
@@ -172,20 +178,34 @@ class FellowAverage extends Model
       $ev_activities = $session->activities_kardex_fellow($user_id);
       if($ev_activities->count()>0){
         $total_score = 0;
+        $act_count   = 0;
         foreach ($ev_activities as $_activity) {
           if($_activity->files){
-            if($score = $_activity->fellowFileScore($user_id)){
-               $total_score = $total_score + $score->score;
+            if($this->user->fellowFiles()->where('activity_id',$_activity->id)){
+              if($score = $_activity->fellowFileScore($user_id)){
+                 $total_score = $total_score + $score->score;
+                 $act_count++;
+              }
+            }else{
+                $act_count++;
             }
+
+
           }else{
             if($score = $_activity->fellowScore($user_id )){
               $total_score = $total_score + $score->score;
             }
+            $act_count++;
 
           }
         }
 
-        return array('act_number' => $ev_activities->count(), 'score'=>$total_score/$ev_activities->count());
+        if($act_count == 0){
+          return false;
+        }else{
+          return array('act_number' => $ev_activities->count(), 'score'=>$total_score/$act_count);
+        }
+
 
       }else{
         return false;

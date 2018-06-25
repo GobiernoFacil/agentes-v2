@@ -45,6 +45,9 @@ class UpdateFellowProgress extends Command
           $this->info($program->title);
           $uset  = User::where('email','andre@fcb.com')->first();
           foreach($program->fellows as $fellow){
+
+
+
             $count = 0;
             foreach ($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
               // code...
@@ -55,6 +58,7 @@ class UpdateFellowProgress extends Command
                 break;
               }
             }
+
 
 
 
