@@ -1,6 +1,6 @@
 <ul>
 	<li>Estás en:</li>
-	<li><a href="{{url('tablero-facilitador')}}">Tablero</a></li>
+	<li><a href="{{url('dashboard')}}">Tablero</a></li>
 	@if ($__env->yieldContent('breadcrumb_type') =="forums list")
 	<li>Foros</li>
 	@endif
@@ -13,7 +13,7 @@
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="forum add question")
-	<li><a href="{{url('dashboard/foros/ver/' . $forum->id)}}">{{$forum->topic}}</a></li>
+	<li><a href="{{url('dashboard/foros/programa/' .$forum->program_id . '/ver-foro/' . $forum->id)}}">{{$forum->topic}}</a></li>
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="forum add question" )
@@ -25,7 +25,7 @@
 	@endif
 	
 	@if ($__env->yieldContent('breadcrumb_type') =="forum question view" )
-	<li><a href="{{url('dashboard/foros/ver/' . $question->forum->id)}}">{{$question->forum->topic}}</a></li>
+	<li><a href="{{url('dashboard/foros/programa/' .$question->forum->program_id . '/ver-foro/' . $question->forum->id)}}">{{$question->forum->topic}}</a></li>
 	<li>{{$question->topic}}</li>
 	@endif
 </ul>
