@@ -102,6 +102,18 @@
 							</li>
 						</ul>
 					</div>
+					<div class="col-sm-12">
+						<object data='{{url("archivos/plan-de-formacion-2018.pdf")}}' type="application/pdf" width="100%" height="600px">
+				<p<a href='{{url("archivos/plan-de-formacion-2018.pdf")}}'>Plan de formación 2018</a></p>
+			</object>
+			<h4><a href='{{url("archivos/plan-de-formacion-2018.pdf")}}'>Plan de formación 2018</a></h4>
+			<p></p>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<p><a href='{{url("archivos/plan-de-formacion-2018.pdf")}}' class="btn view block sessions_l">Descargar</a></p>
+				</div>
+			</div>
+					</div>
 				</div>
 			</div>
 		</div>
