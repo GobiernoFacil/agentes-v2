@@ -15,6 +15,7 @@ use App\Models\ForumLog;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ModuleSession;
+use App\Models\Module;
 use App\Models\Program;
 use App\User;
 use App\Notifications\SendForumNotice;
@@ -25,7 +26,7 @@ use App\Http\Requests\SaveMessageForum;
 class AdminForums extends Controller
 {
   //Paginación
-  public $pageSize = 5;
+  public $pageSize = 10;
 
   /**
    * Muestra lista de foros general
@@ -44,7 +45,6 @@ class AdminForums extends Controller
 
   }
 
-
   /**
    * Muestra lista de foros
    *
@@ -58,10 +58,72 @@ class AdminForums extends Controller
 
   /*   $forum    = Forum::find($id);
     $forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
-    return view('admin.forums.forums-all-list')->with([
+    return view('admin.forums.forum-dash')->with([
       "user"      => $user,
       "forums"    => $forums,
       "program"   => $program
+    ]);
+
+  }
+
+  /**
+   * Muestra lista de foros por módulo
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function indexMo($program_id)
+  {
+    $user     = Auth::user();
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $modules  = $program->get_admin_modules_with_forums()->paginate($this->pageSize);
+    $general  = Forum::where('program_id',$program->id)->where('type','general')->first();
+
+    return view('admin.forums.forum-module-list')->with([
+      "user"      => $user,
+      "modules"   => $modules,
+      "program"   => $program,
+      "general"   => $general
+    ]);
+
+  }
+
+
+  /**
+   * Muestra lista de foros
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function indexAc($program_id,$module_id)
+  {
+    $user     = Auth::user();
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $module   = Module::where('id',$module_id)->firstOrFail();
+    $forums   = $module->fellow_act_forums()->paginate($this->pageSize);
+
+    return view('admin.forums.forums-all-list')->with([
+      "user"      => $user,
+      "forums"    => $forums,
+      "program"   => $program,
+      "module"    => $module
+    ]);
+
+  }
+
+  /**
+   * Muestra lista de foros
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function indexSt($program_id)
+  {
+    $user     = Auth::user();
+    $program  = Program::where('id',$program_id)->firstOrFail();
+    $forums   = Forum::where('type','state')->where('program_id',$program->id)->paginate($this->pageSize);
+
+    return view('admin.forums.forums-all-list')->with([
+      "user"      => $user,
+      "forums"    => $forums,
+      "program"   => $program,
     ]);
 
   }

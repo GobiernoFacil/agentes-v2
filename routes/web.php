@@ -326,6 +326,11 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas CRUD forums
     Route::get('dashboard/foros', 'AdminForums@all');
     Route::get('dashboard/foros/programa/{program_id}/ver-foros', 'AdminForums@index');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/actividades', 'AdminForums@indexMo');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/estados', 'AdminForums@indexSt');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/actividades/{module_id}', 'AdminForums@indexAc');
+
+
     Route::get('dashboard/foros/programa/{program_id}/ver-foro/{forum_id}', 'AdminForums@view');
     Route::get('dashboard/foros/programa/{program_id}/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/programa/{program_id}/save', 'AdminForums@save');

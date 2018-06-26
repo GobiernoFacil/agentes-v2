@@ -45,6 +45,13 @@ class Program extends Model
 
     }
 
+    function get_admin_modules_with_forums(){
+      $modules = $this->modules->pluck('id')->toArray();
+      $module_ids = Forum::whereIn('module_id',$modules)->pluck('module_id')->toArray();
+      return   Module::whereIn('id',$module_ids)->where('public',1)->where('program_id',$this->id)->orderBy('order','asc');
+
+    }
+
     function get_fellow_modules_with_ev_act(){
       $sessions_id = Activity::where('type','evaluation')
       ->orWhere(function($query){
@@ -216,6 +223,8 @@ class Program extends Model
       return Module::whereIn('id',$modules_ids)->orderBy('start','desc');
 
     }
+
+
 
     function get_assigned_sessions($user_id){
       $sessions    = $this->get_all_sessions()->pluck('id')->toArray();
