@@ -47,23 +47,44 @@ class Forums extends Controller
 
 
      /**
-     * Muestra lista de foros general
+     * Muestra lista de módulos con foros
      *
      * @return \Illuminate\Http\Response
      */
-    public function allAc()
+    public function allMo()
     {
       $user       = Auth::user();
-      $program     = $user->actual_program();
-      $forums      = $program->fellow_act_forums()->paginate($this->pageSize);
-      return view('fellow.forums.forums-all-list')->with([
+      $program    = $user->actual_program();
+      $modules    = $program->get_active_modules_with_forums()->paginate($this->pageSize);
+      $general    = Forum::where('program_id',$program->id)->where('type','general')->first();
+      return view('fellow.forums.forums-module-list')->with([
         "user"      => $user,
-        "forums"    => $forums,
-        "program"   => $program
+        "modules"   => $modules,
+        "program"   => $program,
+        "general"   => $general
       ]);
 
 
     }
+
+    /**
+    * Muestra lista de foros general
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function allAc($program_slug,$module_slug)
+   {
+     $user       = Auth::user();
+     $program    = $user->actual_program();
+     $module     = Module::where('slug',$module_slug)->where('public',1)->firstOrFail();
+     $forums     = $module->fellow_act_forums()->paginate($this->pageSize);
+     return view('fellow.forums.forums-all-list')->with([
+       "user"      => $user,
+       "forums"    => $forums,
+       "program"   => $program,
+       "module"    => $module
+     ]);
+   }
 
 
     /**

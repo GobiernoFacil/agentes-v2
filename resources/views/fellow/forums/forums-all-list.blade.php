@@ -9,6 +9,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Foros de actividades</h1>
+		<h2>Módulo {{$module->title}}</h2>
 	</div>
 </div>
 

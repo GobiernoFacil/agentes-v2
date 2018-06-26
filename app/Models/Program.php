@@ -208,6 +208,15 @@ class Program extends Model
       return Module::whereIn('id',$ids)->where('start','<=',$today)->orderBy('start','asc');
     }
 
+    function get_active_modules_with_forums(){
+      $modules          = $this->get_active_modules()->pluck('id')->toArray();
+      $sessions         = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      $sess_with_forums = Activity::whereIn('session_id',$sessions)->where('hasforum',1)->pluck('session_id')->toArray();
+      $modules_ids      = ModuleSession::whereIn('id',$sess_with_forums)->pluck('module_id')->toArray();
+      return Module::whereIn('id',$modules_ids)->orderBy('start','desc');
+
+    }
+
     function get_assigned_sessions($user_id){
       $sessions    = $this->get_all_sessions()->pluck('id')->toArray();
       return FacilitatorModule::whereIn('session_id',$sessions)->where('user_id',$user_id);
