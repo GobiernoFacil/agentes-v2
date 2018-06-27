@@ -12,6 +12,7 @@ class ForumMessage extends Model
     'user_id',
     'message_id',
     'message',
+    'conversation_id'
   ];
 
 

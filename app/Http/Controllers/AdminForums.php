@@ -182,10 +182,16 @@ class AdminForums extends Controller
   {
     $user      = Auth::user();
     $program   = Program::where('id',$request->program_id)->firstOrFail();
-    $forum     = new Forum($request->only(['topic','description','type','session_id','activity_id']));
-    $forum->user_id = $user->id;
+    $forum     = Forum::firstOrCreate([
+      'topic'       => $request->topic,
+      'description' => $request->description,
+      'type'        => $request->type,
+      'session_id'  => $request->session_id,
+      'activity_id' => $request->activity_id,
+      'program_id'  => $request->program_id,
+      'user_id'     => $user->id
+    ]);
     $forum->slug    = str_slug($request->topic);
-    $forum->program_id = $request->program_id;
     if($request->type ==='activity'){
       $session  = ModuleSession::where('id',$request->session_id)->first();
       $activity = Activity::where('id',$request->activity_id)->first();
@@ -199,12 +205,12 @@ class AdminForums extends Controller
     }
     $forum->save();
     //forum log
-    $log = new ForumLog();
-    $log->user_id = $user->id;
-    $log->type    = 'admin';
-    $log->action  = 'create-forum';
-    $log->forum_id = $forum->id;
-    $log->save();
+    $log =  ForumLog::firstOrCreate([
+      'user_id'  => $user->id,
+      'type'     => 'admin',
+      'action'   => 'create-forum',
+      'forum_id' => $forum->id,
+    ]);
     $forum->send_notification_to($program,null,'create');
     return redirect("dashboard/foros/programa/$request->program_id/ver-foro/$forum->id")->with('message','Foro creado correctamente');
   }
@@ -234,22 +240,24 @@ class AdminForums extends Controller
    */
   public function saveMessage(SaveMessageForum $request)
   {
-    $user      = Auth::user();
+   $user      = Auth::user();
     $program   = Program::where('id',$request->program_id)->firstOrFail();
     $conversation     = ForumConversation::where('id',$request->question_id)->firstOrFail();
-    $message   = new ForumMessage($request->only(['message']));
-    $message->user_id = $user->id;
-    $message->conversation_id = $conversation->id;
-    $message->save();
+    $message   =  ForumMessage::firstOrCreate([
+      'message'=>$request->message,
+      'user_id'=>$user->id,
+      'conversation_id'=>$conversation->id
+    ]);
     //forum log
-    $log = new ForumLog();
-    $log->user_id = $user->id;
-    $log->type    = 'admin';
-    $log->action  = 'add-message';
-    $log->conversation_id = $conversation->id;
-    $log->forum_id = $conversation->forum->id;
-    $log->message_id = $message->id;
-    $log->save();
+    $log =  ForumLog::firstOrCreate([
+      'user_id'  => $user->id,
+      'type'     => 'admin',
+      'action'   => 'add-message',
+      'conversation_id' => $conversation->id,
+      'forum_id' => $conversation->forum->id,
+      'message_id'  => $message->id
+    ]);
+
     $conversation->forum->send_notification_to($program,$conversation,'message',$message);
     return redirect("dashboard/foros/programa/$request->program_id/foro/{$conversation->forum->id}/ver-pregunta/$request->question_id")->with('message','Mensaje creado correctamente');
   }
@@ -316,19 +324,21 @@ class AdminForums extends Controller
     $user      = Auth::user();
     $program   = Program::where('id',$request->program_id)->firstOrFail();
     $forum     = $program->forums()->where('id',$request->forum_id)->firstOrFail();
-    $forumConversation     = new ForumConversation($request->only(['topic','description']));
-    $forumConversation->forum_id = $request->forum_id;
-    $forumConversation->user_id = $user->id;
-    $forumConversation->slug    = str_slug($request->topic);
-    $forumConversation->save();
+    $forumConversation  = ForumConversation::firstOrCreate([
+      'topic'       => $request->topic,
+      'description' => $request->description,
+      'forum_id'    => $request->forum_id,
+      'user_id'     => $user->id,
+      'slug'        => str_slug($request->topic)
+    ]);
     //forum log
-    $log = new ForumLog();
-    $log->user_id = $user->id;
-    $log->type    = 'admin';
-    $log->action  = 'create-question';
-    $log->conversation_id = $forumConversation->id;
-    $log->forum_id = $forum->id;
-    $log->save();
+    $log =  ForumLog::firstOrCreate([
+      'user_id'  => $user->id,
+      'type'     => 'admin',
+      'action'   => 'create-question',
+      'conversation_id' => $forumConversation->id,
+      'forum_id' => $forum->id,
+    ]);
     $forum->send_notification_to($program,$forumConversation,'question');
     return redirect("dashboard/foros/programa/$request->program_id/ver-foro/{$forum->id}")->with('message','Pregunta creada correctamente');
   }

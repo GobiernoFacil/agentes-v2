@@ -24,7 +24,6 @@ class Forum extends Model
       'slug',
       'type',
       'program_id',
-      'session_id',
       'activity_id',
       'module_id'
     ];
