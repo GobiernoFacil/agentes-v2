@@ -615,8 +615,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     /*@FacilitatorForums Controller */
     // Rutas foros
-    Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
-    Route::get('tablero-facilitador/foros/{id}', 'FacilitatorForums@index');
+    Route::get('tablero-facilitador/foros', 'FacilitatorForums@dashboard');
+    Route::get('tablero-facilitador/foros/ver-foros/actividades', 'FacilitatorForums@indexMo');
+    Route::get('tablero-facilitador/foros/ver-foros/estados', 'FacilitatorForums@indexSt');
+    Route::get('tablero-facilitador/foros/ver-foros/actividades/{module_id}', 'FacilitatorForums@indexAc');
+  //  Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
+    Route::get('tablero-facilitador/foros/ver-foro/{id}', 'FacilitatorForums@index');
   //  Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
     Route::get('tablero-facilitador/foros/pregunta/crear/{id}', 'FacilitatorForums@addQuestion');
     Route::post('tablero-facilitador/foros/pregunta/save/{id}', 'FacilitatorForums@saveQuestion');

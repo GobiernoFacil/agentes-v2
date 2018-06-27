@@ -42,7 +42,7 @@
 				@endif
 			@endif
 			@if($user->type == "facilitator")
-				<h2><a href="{{ url('tablero-facilitador/foros/' .$forum->id) }}">{{$forum->topic}}</a></h2>
+				<h2><a href="{{ url('tablero-facilitador/foros/ver-foro/' .$forum->id) }}">{{$forum->topic}}</a></h2>
 				@if($forum->type ==='activity')
 				<!--<p>{{str_limit($forum->description, $limit = 50, $end = '...')}}</p>-->
 				<p><span class="type module_session">{{$forum->session->module->title}} > {{$forum->session->name}}</span></p>

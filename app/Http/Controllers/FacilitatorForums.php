@@ -10,6 +10,7 @@ use App\Models\FellowData;
 use App\Models\ForumMessage;
 use App\Models\ForumConversation;
 use App\Models\ModuleSession;
+use App\Models\Module;
 use App\Models\ForumLog;
 use App\User;
 use App\Models\FacilitatorModule;
@@ -24,13 +25,12 @@ class FacilitatorForums extends Controller
     //
     //Paginación
     public $pageSize = 10;
-
     /**
-     * Muestra lista de foros general
+     * Muestra dashboard  de foros
      *
      * @return \Illuminate\Http\Response
      */
-    public function all()
+    public function dashboard()
     {
       $user     = Auth::user();
       $program  = $user->fac_program();
@@ -40,13 +40,15 @@ class FacilitatorForums extends Controller
         $forums   = Forum::where('program_id',null)->orderBy('created_at','desc')->paginate($this->pageSize);
         $program   = new Program();
       }
-      return view('facilitator.forums.forums-all-list')->with([
+      return view('facilitator.forums.forum-dashboard')->with([
         "user"      => $user,
         "forums"    => $forums,
         "program"   => $program
       ]);
 
     }
+
+
 
 
     /**
@@ -66,7 +68,74 @@ class FacilitatorForums extends Controller
       ]);
 
     }
+    /**
+     * Muestra lista de foros por módulo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexMo()
+    {
+      $user     = Auth::user();
+      $program  = $user->fac_program();
+      if($program){
+        $modules  = $program->get_admin_modules_with_forums()->paginate($this->pageSize);
+        $general  = Forum::where('program_id',$program->id)->where('type','general')->first();
 
+        return view('facilitator.forums.forum-module-list')->with([
+          "user"      => $user,
+          "modules"   => $modules,
+          "program"   => $program,
+          "general"   => $general
+        ]);
+      }else{
+        return redirect('tablero-facilitador/foros');
+      }
+
+    }
+
+    /**
+     * Muestra lista de foros general
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexAc($module_id)
+    {
+      $user     = Auth::user();
+      $program  = $user->fac_program();
+      if($program){
+        $module   = Module::where('id',$module_id)->firstOrFail();
+        $forums   = $module->fellow_act_forums()->paginate($this->pageSize);
+        return view('facilitator.forums.forums-all-list')->with([
+          "user"      => $user,
+          "forums"    => $forums,
+          "program"   => $program
+        ]);
+      }else{
+          return redirect('tablero-facilitador/foros');
+      }
+
+    }
+
+    /**
+     * Muestra lista de foros
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSt()
+    {
+      $user     = Auth::user();
+      $program  = $user->fac_program();
+      if($program){
+        $forums   = Forum::where('type','state')->where('program_id',$program->id)->paginate($this->pageSize);
+        return view('facilitator.forums.forums-all-list')->with([
+          "user"      => $user,
+          "forums"    => $forums,
+          "program"   => $program
+        ]);
+      }else{
+          return redirect('tablero-facilitador/foros');
+      }
+    }
     /**
     * Muestra foro
     *
