@@ -179,19 +179,20 @@ class FacilitatorForums extends Controller
     {
       $user      = Auth::user();
       $conversation     = ForumConversation::where('id',$request->id)->firstOrFail();
-      $message   = new ForumMessage($request->only(['message']));
-      $message->user_id = $user->id;
-      $message->conversation_id = $conversation->id;
-      $message->save();
+      $message   =  ForumMessage::firstOrCreate([
+        'message'=>$request->message,
+        'user_id'=>$user->id,
+        'conversation_id'=>$conversation->id
+      ]);
       //forum log
-      $log = new ForumLog();
-      $log->user_id = $user->id;
-      $log->type    = 'facilitator';
-      $log->action  = 'add-message';
-      $log->conversation_id = $conversation->id;
-      $log->forum_id = $conversation->forum->id;
-      $log->message_id = $message->id;
-      $log->save();
+      $log =  ForumLog::firstOrCreate([
+        'user_id'  => $user->id,
+        'type'     => 'facilitator',
+        'action'   => 'add-message',
+        'conversation_id' => $conversation->id,
+        'forum_id' => $conversation->forum->id,
+        'message_id'  => $message->id
+      ]);
       $conversation->forum->send_notification_to($conversation->forum->program,$conversation,'message',$message);
       return redirect("tablero-facilitador/foros/pregunta/ver/{$conversation->id}")->with('message','Mensaje creado correctamente');
     }
@@ -222,21 +223,23 @@ class FacilitatorForums extends Controller
     {
       $user      = Auth::user();
       $forum       = Forum::where('id',$request->id)->first();
-      $forumConversation     = new ForumConversation($request->only(['topic','description']));
-      $forumConversation->forum_id = $request->id;
-      $forumConversation->user_id = $user->id;
-      $forumConversation->slug    = str_slug($request->topic);
-      $forumConversation->save();
+      $forumConversation  = ForumConversation::firstOrCreate([
+        'topic'       => $request->topic,
+        'description' => $request->description,
+        'forum_id'    => $forum->id,
+        'user_id'     => $user->id,
+        'slug'        => str_slug($request->topic)
+      ]);
       //forum log
-      $log = new ForumLog();
-      $log->user_id = $user->id;
-      $log->type    = 'facilitator';
-      $log->action  = 'create-question';
-      $log->conversation_id = $forumConversation->id;
-      $log->forum_id = $forum->id;
-      $log->save();
+      $log =  ForumLog::firstOrCreate([
+        'user_id'  => $user->id,
+        'type'     => 'facilitator',
+        'action'   => 'create-question',
+        'conversation_id' => $forumConversation->id,
+        'forum_id' => $forum->id,
+      ]);
       $forum->send_notification_to($forum->program,$forumConversation,'question');
-      return redirect("tablero-facilitador/foros/{$forum->id}")->with('message','Pregunta creada correctamente');
+      return redirect("tablero-facilitador/foros/ver-foro/{$forum->id}")->with('message','Pregunta creada correctamente');
     }
 
     /**
