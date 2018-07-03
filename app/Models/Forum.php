@@ -76,7 +76,7 @@ class Forum extends Model
 
     function send_notification_to($program,$conversation,$type,$message=null){
               $fellows               =   $program->fellows()->pluck('user_id')->toArray();
-              $prosociedad_gen_mails = ['carlos.bauche@prosociedad.org','elena.valencia@prosociedad.org'];
+              $prosociedad_gen_mails = ['carlos.bauche@prosociedad.org'];
               $prosociedad_act_mails = ['german@prosociedad.org'];
               if($this->type ==='activity'){
                   //usuarios en el foro
