@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class Front extends Controller
@@ -29,6 +29,17 @@ class Front extends Controller
     //programa 2018
     public function pro18(){
       return view('frontend.programas.2018.que-es');
+    }
+
+    //programa 2018
+    public function program($program_slug){
+      if($program_slug === '2017'){
+        return view('frontend.programas.2017.que-es');
+      }
+      $program = Program::where('slug',$program_slug)->firstOrFail();
+      return view('frontend.programas.program-info')->with([
+        'program' => $program
+      ]);
     }
 
     //objetivos

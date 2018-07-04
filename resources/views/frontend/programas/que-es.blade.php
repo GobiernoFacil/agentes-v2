@@ -13,19 +13,19 @@
 
 		<p>Este programa ofrecerá una plataforma única para el aprendizaje, la reflexión, el intercambio de ideas y experiencias, así como para la realización de proyectos que puedan ponerse en marcha en el corto plazo, y que utilicen las perspectivas de gobierno abierto y desarrollo sostenible para transformar alguna realidad de su localidad o región.</p>
 		<p>Al concluir la etapa formativa, se esperaría que los egresados se integren y participen activamente en los trabajos que se realizan en su entidad federativa en el marco de los ejercicios locales de Gobierno Abierto promovidos por el INAI.</p>
-		
-		
+
+
 		<div class="divider"></div>
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 center">
-				<a href="{{url('programa-gobierno-abierto/2018')}}" class="btn blue">Programa 2018</a>
+				<a href="{{url('programa-gobierno-abierto/programa-2018')}}" class="btn blue">Programa 2018</a>
 				<a href="{{url('programa-gobierno-abierto/2017')}}" class="btn blue">Programa 2017</a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="divider"></div>
-			
-			
+
+
 			<div class="col-sm-3">
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
 			</div>

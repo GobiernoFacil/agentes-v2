@@ -63,14 +63,19 @@ Route::get('cities', 'NoticeFront@cities');
 /*@RangeFront Controller */
 /*********  Enlaces programa ******** */
 /*********  programa 2017 ******** */
-Route::get('programa-gobierno-abierto/2017', 'Front@pro17');
+//Route::get('programa-gobierno-abierto/2017', 'Front@pro17');
 Route::get('programa-gobierno-abierto/2017/testimonios', 'Front@testimony17');
+
+
+
 /*********  programa 2018 ******** */
-Route::get('programa-gobierno-abierto/2018', 'Front@pro18');
+//Route::get('programa-gobierno-abierto/2018', 'Front@pro18');
 Route::get('programa-gobierno-abierto/antecedentes', 'Front@antecedentes');
 Route::get('programa-gobierno-abierto/aliados', 'Front@aliados');
 Route::get('programa-gobierno-abierto/alcance', 'RangeFront@alcance');
 Route::get('programa-gobierno-abierto/alcance/{state}', 'RangeFront@descripcion');
+/*********  programs front  ******** */
+Route::get('programa-gobierno-abierto/{program_slug}', 'Front@program');
 /*
 Route::get('programa-gobierno-abierto/alcance/{state}/quienes-conforman-el-ejercicio', 'RangeFront@conforman');
 Route::get('programa-gobierno-abierto/alcance/{state}/contexto', 'RangeFront@contexto');
