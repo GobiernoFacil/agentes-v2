@@ -182,6 +182,11 @@ class User extends Authenticatable
       }
     }
 
+    function fellow_perception(){
+      return $this->hasOne("App\Models\FellowSurvey");
+    }
+
+
     function fellow_survey($quiz_id){
       return CustomFellowAnswer::where('user_id',$this->id)->where('questionnaire_id',$quiz_id)->get();
     }

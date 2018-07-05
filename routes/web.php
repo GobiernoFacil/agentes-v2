@@ -403,7 +403,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/horario/{task}', 'Admin@time');
     /*@AdminIndicators Controller */
     // Rutas de indicadores
-    Route::get('dashboard/indicadores', 'AdminIndicators@index');
+    Route::get('dashboard/indicadores', 'AdminIndicators@indexProgram');
+    Route::get('dashboard/indicadores/programa/{program_id}', 'AdminIndicators@index');
+
+
+
     Route::get('dashboard/indicadores/fellows/descargar', 'AdminIndicators@downloadFellows');
     Route::get('dashboard/indicadores/fellows/descargar/xlsx', 'AdminIndicators@downloadFellowsXLSX');
     Route::get('dashboard/indicadores/facilitadores-modulos', 'AdminIndicators@indexModules');
@@ -413,6 +417,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/indicadores/satisfaccion', 'AdminIndicators@surveySatisfaction');
     Route::get('dashboard/indicadores/percepcion-positiva', 'AdminIndicators@perception');
     Route::get('dashboard/indicadores/agentes-aprobados', 'AdminIndicators@fellowsApproved');
+
+
+
     /*@AdminSurveys Controller */
     //Rutas de encuestas
     Route::get('dashboard/encuestas', 'AdminSurveys@indexProgram');

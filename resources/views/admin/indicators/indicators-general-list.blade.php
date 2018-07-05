@@ -10,6 +10,7 @@
 <div class="row">
 	<div class="col-sm-9">
 		<h1>Lista de indicadores</h1>
+		<h2>{{$program->title}}</h2>
 	</div>
 </div>
 <div class="box">
@@ -28,33 +29,16 @@
 							<td><h4><a>Porcentaje de agentes de cambio aprobados</a></h4></td>
 							<td>Proporción de agentes de cambio que aprobaron el programa</td>
 							<td>
-								<a href="{{ url('dashboard/indicadores/agentes-aprobados') }}" class="btn xs view">Ver</a>
+								<a href='{{ url("dashboard/indicadores/programa/$program->id/agentes-aprobados")}}' class="btn xs view">Ver</a>
 							</td>
 						</tr>
 			      <tr>
 			        <td><h4><a>Percepción de facilitadores</a></h4></td>
 			        <td>Proporción de facilitadores evaluados favorablemete por parte de los agentes de cambio</td>
 			        <td>
-								<a href="{{ url('dashboard/indicadores/facilitadores-modulos') }}" class="btn xs view">Ver</a>
-			         <!-- <a href="{{ url('dashboard/indicadores/facilitadores/descargar') }}" class="btn xs view">Descargar</a>-->
+								<a href='{{ url("dashboard/indicadores/programa/$program->id/facilitadores-modulos")}}' class="btn xs view">Ver</a>
               </td>
-			    </tr>
-					<tr>
-						<td><h4>Percepción de fellows</h4></td>
-						<td>Porcentaje de agentes de cambio que tienen una percepción positiva de la plataforma web</td>
-						<td>
-							<a href="{{ url('dashboard/indicadores/percepcion-positiva') }}" class="btn xs view">Ver</a>
-						</td>
-				</tr>
-          <tr>
-            <td><h4>Encuesta de satisfacción</h4></td>
-            <td>Resultados de encuesta de satisfacción</td>
-            <td>
-              <a href="{{ url('dashboard/indicadores/satisfaccion') }}" class="btn xs view">Ver</a>
-              <a href="{{ url('dashboard/indicadores/fellows/descargar') }}" class="btn xs view">Descargar PDF</a>
-							 <a href="{{ url('dashboard/indicadores/fellows/descargar/xlsx') }}" class="btn xs view">Descargar XLSX</a>
-            </td>
-        </tr>
+			     </tr>
 			  </tbody>
 			</table>
 		</div>

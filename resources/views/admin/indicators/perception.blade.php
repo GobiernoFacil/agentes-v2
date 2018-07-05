@@ -25,10 +25,10 @@ $index = [
                      'sur_11',
                    ];
   foreach($male as $m){
-    if($m->user->fellow_survey){
+    if($m->user->fellow_perception){
       $count = 0;
       foreach ($index as $i) {
-          $count = $count + $m->user->fellow_survey->{$i};
+          $count = $count + $m->user->fellow_perception->{$i};
       }
       if(($count/15)>=8){
         $total_male = $total_male+1;
@@ -38,10 +38,10 @@ $index = [
   }
 
   foreach($female as $f){
-    if($f->user->fellow_survey){
+    if($f->user->fellow_perception){
       $count = 0;
       foreach ($index as $i) {
-          $count = $count + $m->user->fellow_survey->{$i};
+          $count = $count + $m->user->fellow_perception->{$i};
       }
       if(($count/15)>=8){
         $total_female = $total_female+1;
@@ -120,10 +120,10 @@ $index = [
             'sur_16_4'
                      ];
     foreach($male as $m){
-      if($m->user->fellow_survey){
+      if($m->user->fellow_perception){
         $count = 0;
         foreach ($index as $i) {
-            $count = $count + $m->user->fellow_survey->{$i};
+            $count = $count + $m->user->fellow_perception->{$i};
         }
         if(($count/16)>=8){
           $total_male_content = $total_male_content+1;
@@ -133,10 +133,10 @@ $index = [
     }
 
     foreach($female as $f){
-      if($f->user->fellow_survey){
+      if($f->user->fellow_perception){
         $count = 0;
         foreach ($index as $i) {
-            $count = $count + $m->user->fellow_survey->{$i};
+            $count = $count + $m->user->fellow_perception->{$i};
         }
         if(($count/16)>=8){
           $total_female_content = $total_female_content+1;

@@ -12,30 +12,51 @@ use App\Models\FellowSurvey;
 use App\Models\ModuleSession;
 use App\Models\FellowData;
 use App\Models\FellowAverage;
+use App\Models\Program;
 use App\User;
 use PDF;
 class AdminIndicators extends Controller
 {
-    //
+  //Paginación
+  public $pageSize = 10;
+
+    /**
+     * Muestra lista para ver resultado de encuestas
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexProgram()
+    {
+      $user       = Auth::user();
+      $programs   = Program::orderBy('start','desc')->paginate($this->pageSize);
+      return view('admin.indicators.indicator-program-list')->with([
+        "user"         => $user,
+        "programs"    => $programs
+      ]);
+
+    }
 
     /**
      * Muestra lista para descargar indicadores
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($program_id)
     {
       $user       = Auth::user();
-      $modules    = Module::where('start','>=','2017-07-01')->where('modality','En línea')->orderBy('start','asc')->get();
-    /*  return view('admin.indicators.indicators-board')->with([
-        "user"      => $user,
-        "modules"   => $modules
-      ]);*/
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      if($program->title === 'Programa 2017'){
 
-      return view('admin.indicators.indicators-list')->with([
-         "user"      => $user,
-         "modules"   => $modules
-       ]);
+        return view('admin.indicators.indicators-old-list')->with([
+           "user"      => $user,
+           "program"   => $program
+         ]);
+      }else{
+        return view('admin.indicators.indicators-general-list')->with([
+           "user"      => $user,
+           "program"   => $program
+         ]);
+      }
 
     }
 
