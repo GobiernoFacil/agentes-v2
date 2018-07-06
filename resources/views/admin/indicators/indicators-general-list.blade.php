@@ -32,6 +32,7 @@
 								<a href='{{ url("dashboard/indicadores/programa/$program->id/agentes-aprobados")}}' class="btn xs view">Ver</a>
 							</td>
 						</tr>
+						<?php /*
 			      <tr>
 			        <td><h4><a>Percepción de facilitadores</a></h4></td>
 			        <td>Proporción de facilitadores evaluados favorablemete por parte de los agentes de cambio</td>
@@ -39,6 +40,7 @@
 								<a href='{{ url("dashboard/indicadores/programa/$program->id/facilitadores-modulos")}}' class="btn xs view">Ver</a>
               </td>
 			     </tr>
+					 */?>
 			  </tbody>
 			</table>
 		</div>
