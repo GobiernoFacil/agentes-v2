@@ -54,26 +54,30 @@ class CreateFellows extends Command
         $reader->each(function($row){
             if(!empty($row->email)){
               $aspirant = Aspirant::where('email',$row->email)->first();
+              $this->info($aspirant->email);
               if($aspirant){
-                $new_user   = new User();
-                $new_user->name  = $aspirant->name;
-                $new_user->email = $aspirant->email;
+                $new_user   = User::firstOrCreate([
+                  'email'    => $aspirant->email,
+                  'type'     => 'fellow',
+                  'enabled'  => 1
+                ]);
                 $password        = str_random(8);
+                $new_user->name  = $aspirant->name;
                 $new_user->password = Hash::make($password);
-                $new_user->type = 'fellow';
-                $new_user->enabled = 1;
                 $new_user->save();
-                $fellowData = new FellowData();
+                $fellowData = FellowData::firstOrCreate([
+                    'user_id'  => $new_user->id
+                ]);
                 $fellowData->surname  = $aspirant->surname;
                 $fellowData->lastname = $aspirant->lastname;
                 $fellowData->state    = $aspirant->state;
                 $fellowData->city     = $aspirant->city;
                 $fellowData->degree   = $aspirant->degree;
                 $fellowData->origin   = $aspirant->origin;
-                $fellowData->user_id  = $new_user->id;
+                $fellowData->gender   = $aspirant->gender;
                 $fellowData->save();
-                $this->info($aspirant->email.': Created!');
-                $new_user->notify(new FellowEmail($new_user,$password));
+                $this->info($aspirant->gender.': Created!');
+              //  $new_user->notify(new FellowEmail($new_user,$password));
               }
             }
         });

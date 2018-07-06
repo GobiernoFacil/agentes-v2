@@ -8,12 +8,14 @@
   <div class="row">
   	<div class="col-sm-9">
   		<h1>Agentes de cambio aprobados</h1>
-      <p>Porcentaje de agentes de cambio que aprobaron el programa</p>
+      <p>Porcentaje de agentes de cambio que aprobaron el programa "{{$program->title}}"</p>
   	</div>
   </div>
   <div class="box">
   	<div class="row">
   		<div class="col-sm-12">
+        <?php $today =  date('Y-m-d');?>
+        @if($program->end <= $today)
   			<table class="table">
   			  <thead>
   			    <tr>
@@ -47,6 +49,9 @@
 
   			  </tbody>
   			</table>
+        @else
+        <p><strong>El programa aún no termina.</strong></p>
+        @endif
   		</div>
   	</div>
   </div>

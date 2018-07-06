@@ -198,16 +198,31 @@ class AdminIndicators extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function fellowsApproved()
+    public function fellowsApproved($program_id)
     {
-      $user            = Auth::user();
-      $enabled         = User::where('email','!=','andre@fcb.com')->where('type','fellow')->where('enabled',1)->pluck('id');
+      $user       = Auth::user();
+      $program    = Program::where('id',$program_id)->firstOrFail();
+      $test       = User::where('email','andre@fcb.com')->first();
+      $enabled    = $program->fellows()->where('user_id','!=',$test->id)->pluck('user_id');
       $male            = FellowData::where('gender','Male')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
       $female          = FellowData::where('gender','Female')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
-      $total_male      = FellowAverage::whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','total')->count();
-      $total_female    = FellowAverage::whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','total')->count();
-      $score_male      = ceil(($total_male*100)/$male->count());
-      $score_female    = ceil(($total_female*100)/$female->count());
+      if($program->title === 'Programa 2017'){
+        $total_male      = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','total')->count();
+        $total_female    = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','total')->count();
+      }else{
+        $total_male      = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','final')->count();
+        $total_female    = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','final')->count();
+      }
+      if($male->count()>0){
+        $score_male      = ceil(($total_male*100)/$male->count());
+      }else{
+        $score_male      = 0;
+      }
+      if($female->count()>0){
+        $score_female    = ceil(($total_female*100)/$female->count());
+      }else{
+        $score_female      = 0;
+      }
       return view('admin.indicators.approved-fellows')->with([
         "user"      => $user,
         "male"      => $male,
@@ -215,7 +230,8 @@ class AdminIndicators extends Controller
         "total_male" => $total_male,
         "total_female" => $total_female,
         "score_male"=> $score_male,
-        "score_female"=>$score_female
+        "score_female"=>$score_female,
+        "program" => $program
       ]);
     }
 

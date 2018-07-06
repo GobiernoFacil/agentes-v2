@@ -16,6 +16,7 @@ class FellowData extends Model
     'city',
     'surname',
     'lastname',
+    'gender'
     ];
 
     function user(){

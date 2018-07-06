@@ -29,7 +29,7 @@
 							<td><h4><a>Porcentaje de agentes de cambio aprobados</a></h4></td>
 							<td>Proporción de agentes de cambio que aprobaron el programa</td>
 							<td>
-								<a href="{{ url('dashboard/indicadores/agentes-aprobados') }}" class="btn xs view">Ver</a>
+								<a href='{{ url("dashboard/indicadores/programa/$program->id/agentes-aprobados")}}' class="btn xs view">Ver</a>
 							</td>
 						</tr>
 			      <tr>
