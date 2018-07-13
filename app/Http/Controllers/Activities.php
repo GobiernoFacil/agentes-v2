@@ -8,11 +8,11 @@ use File;
 // models
 use App\Models\Activity;
 use App\Models\ActivityVideo;
-use App\Models\ModuleSession;
-use App\Models\Log;
-use App\Models\ForumLog;
 use App\Models\Forum;
 use App\Models\ForumConversation;
+use App\Models\ForumLog;
+use App\Models\ModuleSession;
+use App\Models\Log;
 
 // FormValidators
 use App\Http\Requests\SaveActivity;
@@ -24,25 +24,7 @@ class Activities extends Controller
   // En esta carpeta se guardan las imágenes de los usuarios
   const UPLOADS = "archivos/actividades";
 
-        /**
-         * Búsqueda de actividad
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function search()
-        {
-            //
-        }
 
-        /**
-         * Muestra lista de actividades
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function index()
-        {
-            //
-        }
 
         /**
          * Agregar actividad
@@ -51,12 +33,14 @@ class Activities extends Controller
          */
         public function add($session_id)
         {
-            //
             $user       = Auth::user();
+            //sesion de la actividad
             $session    = ModuleSession::where('id',$session_id)->firstOrFail();
+            //actividades pertenecientes a la actividad
             $activities =  $session->activities()->orderBy('order','asc')->pluck('name','order')->toArray();
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
+            //verificar que no exista actividad final
             if($session->module->program->final_evaluation()->first()){
               $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
             }else{
@@ -80,8 +64,10 @@ class Activities extends Controller
         {
             //
             $user      = Auth::user();
+            //sesion de la actividad
             $session   = ModuleSession::where('id',$request->session_id)->firstOrFail();
             $activity  = new Activity($request->except(['_token','time','start','link','order']));
+            //re-ordenar actividades
             $activity->order = $activity->reorder_add($request,$session);
 
            if($request->files && $request->type === 'evaluation'){
@@ -97,15 +83,16 @@ class Activities extends Controller
               $video->activity_id = $activity->id;
               $video->save();
             }
-
+            //webinar type - not used
             if($activity->type==='webinar'){
               $video  = new ActivityVideo($request->only(['start','link','time']));
               $video->activity_id = $activity->id;
               $video->save();
             }
-
+            //actividad cuenta con foro
             if($activity->hasforum){
               $name   = 'Foro de actividad: '.$request->name;
+              //agregar numero al final del titulo si se repite nombre del foro en db
               $forum  = new Forum();
               $unique = Forum::select('topic')->where('topic',$name)->distinct()->get();
               if($unique->count()>0){
@@ -134,7 +121,7 @@ class Activities extends Controller
               $forum->description = $activity->description;
               $forum->save();
             }
-
+            //user log
             $log = Log::firstOrCreate([
               'user_id'     => $user->id,
               'session_id'  => $session->id,
@@ -143,7 +130,7 @@ class Activities extends Controller
               'activity_id' => $activity->id,
               'type'        => 'create'
             ]);
-
+            //re-direccionamiento dependiendo del tipo de actividad
             if($activity->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$activity->id")->with('success',"Se ha guardado correctamente");
@@ -151,8 +138,10 @@ class Activities extends Controller
               //Agregar evaluacion
               return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$activity->id/1")->with('success',"Se ha guardado correctamente");
             }elseif($activity->type==='diagnostic' && !$activity->files){
+              //Agregar diagnostico
               return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$activity->id/1")->with('success',"Se ha actualizado correctamente");
            }else{
+             //regresar a ver actividad
               return redirect("dashboard/sesiones/actividades/ver/$activity->id")->with('success',"Se ha actualizado correctamente");
            }
         }
@@ -165,10 +154,11 @@ class Activities extends Controller
          */
         public function view($id)
         {
-            //
+            //informacion basica
             $user     = Auth::user();
             $activity = Activity::where('id',$id)->firstOrFail();
       			$session  = ModuleSession::where('id',$activity->session_id)->firstOrFail();
+            //paginacion de actividades
             $pagination = $activity->get_pagination();
             $prev     = $pagination[0];
             $next     = $pagination[1];
@@ -178,8 +168,6 @@ class Activities extends Controller
             }else{
               $forums   = null;
             }
-      		/*	$forum    = Forum::where('activity_id',$activity->id)->firstOrFail();
-      			$forums   = ForumConversation::where('forum_id',$forum->id)->orderBy('created_at','desc')->paginate($this->pageSize);*/
              return view('admin.modules.activities.activity-view')->with([
               "user"      	=> $user,
               "activity"    => $activity,
@@ -199,13 +187,13 @@ class Activities extends Controller
          */
         public function edit($id)
         {
-            //
             $user      = Auth::user();
             $activity  = Activity::where('id',$id)->firstOrFail();
             $session   = $activity->session;
             $activities =  $session->activities()->where('id','!=',$id)->pluck('name','order')->toArray();
             $activities['first'] = 'Primera actividad';
             $activities['last'] = 'Última actividad';
+            //verificar que no exista actividad final
             if($session->module->program->final_evaluation()->first()){
               $types      = [null => "Selecciona una opción","diagnostic"=>'Diagnóstico','evaluation'=>'Evaluación', 'lecture' =>'Lectura', 'video'=> 'Video'];
             }else{
@@ -229,17 +217,13 @@ class Activities extends Controller
         public function update(UpdateActivity $request)
         {
 
-
-            //
             $user   = Auth::user();
             $data   = $request->except(['_token','start','time','link','link_video']);
-
             $data['slug']    = str_slug($request->name);
-
-          if($request->files && $request->type === 'evaluation'){
-              $data['type'] = 'evaluation';
-            }
-
+            if($request->files && $request->type === 'evaluation'){
+                $data['type'] = 'evaluation';
+              }
+            //actividad sin actualizar
             $last    = Activity::find($request->id);
             if($last->order != $request->order){
               $data['order'] = $last->reorder_add($request,$last->session);
@@ -251,6 +235,7 @@ class Activities extends Controller
               $video->link = $request->link_video;
               $video->save();
             }
+            //webinar - not used
             if($request->type==='webinar'){
               $video  = ActivityVideo::firstOrCreate(['activity_id'=>$request->id]);
               $video->link = $request->link;
@@ -258,10 +243,10 @@ class Activities extends Controller
               $video->time = $request->time;
               $video->save();
             }
-
-
+            //actividad cuenta con foro
             if($request->hasforum){
               $forum  = Forum::firstOrCreate(['activity_id'=>$request->id]);
+              //agregar numero al final del titulo si se repite nombre del foro en db
               $last_name = $forum->topic;
               $name   = 'Foro de actividad: '.$request->name;
               if($name != $last_name){
@@ -298,7 +283,7 @@ class Activities extends Controller
                 $forum->delete();
               }
             }
-
+            //user log
             $log = Log::firstOrCreate([
               'user_id'     => $user->id,
               'session_id'  => $last->session->id,
@@ -307,7 +292,7 @@ class Activities extends Controller
               'activity_id' => $last->id,
               'type'        => 'update'
             ]);
-
+          //re-direccionamiento dependiendo del tipo de actividad
           if($request->hasfiles && $last->hasfiles != $request->hasfiles){
               //Agregar archivos
               return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
@@ -316,51 +301,46 @@ class Activities extends Controller
               if($last->quizInfo){
                   return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
               }else{
-
                   return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
               }
-
             }elseif($request->type==='diagnostic' && !$data["files"]){
               //Agregar diagnostico
               if($last->diagnosticQuiz){
                   return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
               }else{
-
                   return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
               }
-
            }else{
+             //ver actividad
               return redirect("dashboard/sesiones/actividades/ver/$request->id")->with('success',"Se ha actualizado correctamente");
            }
-
         }
 
         /**
-         * Deshabilita actividad
+         * Elimina actividad
          *
          * @param  int  $id
          * @return \Illuminate\Http\Response
          */
         public function delete($id)
         {
-            //
             $user   = Auth::user();
             $activity = Activity::where('id',$id)->firstOrFail();
             $session = $activity->session;
+            //eliminar archivos de la actividad
             foreach ($activity->activityFiles as $file) {
               File::delete($file->path."/".$file->identifier);
               $file->delete();
             }
-
+            //eliminar video de la actividad
             if($activity->videos){
               $activity->videos->delete();
             }
+            //eliminar examenes de la actividad
             if($activity->quizInfo){
               foreach ($activity->quizInfo->question as $question) {
-                # code...
                 if($question->answer){
                   foreach ($question->answer as $answer) {
-                    # code...
                     $answer->delete();
                   }
                 }
@@ -368,6 +348,7 @@ class Activities extends Controller
               }
               $activity->quizInfo->delete();
             }
+            //user log
             $log = Log::firstOrCreate([
               'user_id'     => $user->id,
               'session_id'  => $activity->session->id,
@@ -376,14 +357,13 @@ class Activities extends Controller
               'activity_id' => $activity->id,
               'type'        => 'delete: '.str_limit($activity->name, 150)
             ]);
+            //eliminar foro
             if($activity->hasforum){
               $forum     = $activity->forum;
               foreach ($forum->forum_messages as $message) {
-                # code...
                 $message->delete();
               }
               foreach ($forum->forum_conversations as $message) {
-                # code...
                 foreach ($message->messages as $mes) {
                   $mes->delete();
                 }
@@ -397,6 +377,18 @@ class Activities extends Controller
               $log->forum_id = $forum->id;
               $log->save();
               $forum->delete();
+            }
+            //eliminar diagnostico de la actividad
+            if($activity->diagnostic_info){
+              foreach ($activity->diagnostic_info->questions as $question) {
+                if($question->answers){
+                  foreach ($question->answers as $answer) {
+                    $answer->delete();
+                  }
+                }
+                $question->delete();
+              }
+              $activity->diagnostic_info->delete();
             }
             $activity->delete();
             return redirect("dashboard/programas/{$session->module->program->id}/modulos/{$session->module->id}/sesiones/ver/$session->id")->with('success',"Se ha eliminado correctamente");
