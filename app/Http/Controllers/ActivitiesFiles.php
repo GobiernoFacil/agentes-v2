@@ -37,7 +37,7 @@ class ActivitiesFiles extends Controller
         ]);
     }
     /**
-     * Agregar archivo a actividad
+     * ver agregar archivo a actividad
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +55,7 @@ class ActivitiesFiles extends Controller
     }
 
     /**
-     * Agregar archivo a actividad
+     * ver agregar un archivo a actividad
      *
      * @return \Illuminate\Http\Response
      */
@@ -96,7 +96,7 @@ class ActivitiesFiles extends Controller
           $file->path = $path;
           $file->save();
         }
-        if($activity->type==='evaluation' && $activity->files != 'Sí'){
+        if($activity->type==='evaluation' && !$activity->files){
           //cargar evaluacion
         //  return redirect("dashboard/sesiones/actividades/evaluacion/agregar/$request->activity_id/1")->with('success',"Se ha guardado correctamente");
         if($activity->quizInfo){
@@ -145,13 +145,10 @@ class ActivitiesFiles extends Controller
      */
     public function edit($file_id)
     {
-        //
         $user      = Auth::user();
         $file      = ActivitiesFile::where('id',$file_id)->firstOrFail();
-
         $activity  = Activity::where('id',$file->activity_id)->firstOrFail();
         $session   = ModuleSession::where('id',$activity->session_id)->firstOrFail();
-
         return view('admin.modules.activities.activity-files-update')->with([
           "user"    => $user,
           "file" 	=> $file,
@@ -203,9 +200,6 @@ class ActivitiesFiles extends Controller
       $filename = $data->name.".".$fileData['extension'];
       return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename, $headers);
     }
-
-
-
 
     /**
     *descargar archivo
