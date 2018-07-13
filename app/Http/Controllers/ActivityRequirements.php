@@ -13,28 +13,49 @@ use App\Http\Requests\SaveActivityRequirement;
 use App\Http\Requests\UpdateActivityRequirement;
 class ActivityRequirements extends Controller
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
+    *
+    *
+    *
+      CONTROLLER NOT USED
+    *
+    *
+    *
+    *
+  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Paginación
   public $pageSize = 10;
-
-        /**
-         * Búsqueda de requerimiento
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function search()
-        {
-            //
-        }
-
-        /**
-         * Muestra lista de requerimientos
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function index()
-        {
-            //
-        }
 
         /**
          * Agregar requerimiento
