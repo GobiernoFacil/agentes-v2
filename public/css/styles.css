@@ -1893,6 +1893,7 @@ sup {
   border-top: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
   margin-bottom: 30px;
+  min-height: 598px;
   padding-top: 20px;
   padding-bottom: 10px; }
   .news_list li h2,
@@ -1913,6 +1914,7 @@ sup {
   .news_view li:first-child {
     border-bottom: 0;
     border-top: 0;
+    min-height: 10px;
     padding: 0; }
     .news_list li:first-child a.img_f,
     .news_view li:first-child a.img_f {
