@@ -77,6 +77,10 @@ protected $fillable = [
     })
     ->orWhere(function($query){
       $query->where('session_id',$this->id)
+            ->where('type','final');
+    })
+    ->orWhere(function($query){
+      $query->where('session_id',$this->id)
             ->where('hasforum',1);
     })->orderBy('end','asc')->get();
   }

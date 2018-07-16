@@ -11,7 +11,7 @@
 							@foreach ($session->activities as $_activity)
 							<li class="row">
 								<span class="col-sm-9">
-									<b class="{{$_activity->type === 'diagnostic' ? 'evaluation' : $_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+									<b class="{{$_activity->type === 'diagnostic' || $_activity->type === 'final'  ? 'evaluation' : $_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 									@if($user->type == "admin")
 									<a href="{{ url('dashboard/sesiones/actividades/ver/'. $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a>
 									@else
@@ -40,7 +40,7 @@
 					@foreach ($session->activities as $_activity)
 					<li class="row">
 						<span class="col-sm-9">
-							<b class="{{$_activity->type === 'diagnostic' ? 'evaluation' : $_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
+							<b class="{{$_activity->type === 'diagnostic' || $_activity->type === 'final' ? 'evaluation' : $_activity->type}}"><span class="{{ $_activity->type == "video" ? 'arrow-right' : '' }}"></span></b>
 							@if($user->type == "admin")
 							<a href="{{ url('dashboard/sesiones/actividades/ver/'. $_activity->id) }}" class="{{$activity->id == $_activity->id ? 'current' : ''}}">{{$_activity->name}} </a>
 							@else

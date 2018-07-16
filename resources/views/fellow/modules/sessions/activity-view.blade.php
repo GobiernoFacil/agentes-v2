@@ -151,10 +151,10 @@
 		</div>
 
 		@endif
-@elseif($activity->type ==='evaluation' && $activity->files && $activity->slug !='examen-diagnostico')
+@elseif(($activity->type ==='evaluation' || $activity->type ==='final') && $activity->files && $activity->slug !='examen-diagnostico')
 <div class="box">
 	<div class="row">
-		@if(!$files)
+		@if(!$files && !$user->fileFellowScore($activity->id))
 					<div class="col-sm-3 col-sm-offset-1">
 							<a href='{{ url("tablero/{$activity->session->module->program->slug}/archivos/$activity->slug/agregar") }}' class="btn gde"><strong>+</strong> Subir archivo</a>
 					</div>

@@ -48,7 +48,7 @@
 				@endforeach
 				<?php $f=0;?>
 			@foreach($session->activity_eval_and_forum() as $activity)
-			    @if($activity->type === 'evaluation')
+			    @if($activity->type === 'evaluation' || $activity->type === 'final')
 					@include('fellow.progress.includes.activity_list')
 				@elseif($activity->type === 'diagnostic')
 					@include('fellow.progress.includes.diagnostic_list')
@@ -84,14 +84,14 @@
 					</div>
 					@endif
 				</div>
-				
-				
+
+
 				@endforeach
 			</div>
 			@endif
         </div>
     </div>
-   
+
 @endif
  <div class="col-sm-12">
 	    <div class="divider bg"></div>

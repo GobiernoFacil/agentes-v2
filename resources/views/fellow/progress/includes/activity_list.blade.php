@@ -6,12 +6,12 @@
   	</div>
 	<!--evaluation type--->
 	@if($activity->files)
-		<div class="col-sm-4">  
+		<div class="col-sm-4">
 			<p>Revisión de productos</p>
 		</div>
 		<div class="col-sm-2">
     		<p>
-	    		@if($user->fellowFiles()->where('activity_id',$activity->id)->where('user_id',$user->id)->first())
+	    		@if($user->fellowFiles()->where('activity_id',$activity->id)->where('user_id',$user->id)->first() || $user->fileFellowScore($activity->id))
 	    		<span class="ap_success">Completado</span>
 	    		@else
 	    		<span class="ap_error">No realizado</span>
