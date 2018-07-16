@@ -73,6 +73,9 @@ class Activities extends Controller
            if($request->files && $request->type === 'evaluation'){
               $activity->type = 'evaluation';
             }
+            if($request->type === 'final'){
+               $activity->files = 1;
+             }
             $activity->slug          = str_slug($request->name);
             $activity->session_id    = $session->id;
             $activity->save();
@@ -228,6 +231,9 @@ class Activities extends Controller
             if($last->order != $request->order){
               $data['order'] = $last->reorder_add($request,$last->session);
             }
+            if($request->type==='final'){
+              $data['files']  = 1;
+            }
             Activity::where('id',$request->id)->update($data);
             //activity video data
             if($request->type==='video'){
@@ -235,6 +241,7 @@ class Activities extends Controller
               $video->link = $request->link_video;
               $video->save();
             }
+
             //webinar - not used
             if($request->type==='webinar'){
               $video  = ActivityVideo::firstOrCreate(['activity_id'=>$request->id]);

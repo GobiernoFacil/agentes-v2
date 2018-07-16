@@ -26,10 +26,15 @@
 <script>
 $( document ).ready(function() {
   $('#type').change(function(){
-    if(this.value==='evaluation' || this.value==='final'){
+    if(this.value==='evaluation'){
       $('#user-file').show();
       $('#video').hide();
       $('#end-file').show();
+      $('#webinar').hide();
+    }else if(this.value==='final'){
+      $('#user-file').hide();
+      $('#end-file').show();
+      $('#video').hide();
       $('#webinar').hide();
     }else if(this.value==='diagnostic'){
       $('#user-file').hide();

@@ -64,7 +64,7 @@
                 @endforeach
 							</tbody>
 						</table>
-
+<?php /*
 						<table class="table">
 							<thead>
 								<tr><th><h3>TEMAS TRANSVERSALES</h3></th></tr>
@@ -133,8 +133,11 @@
 						<p>A quienes acrediten el 70% de los puntos a evaluar serán acreedores a un reconocimiento que avale su participación en el programa.</p>
 						</div>
 					</li>
+					*/
+					?>
 				</ul>
 			</div>
+
 			<div class="col-sm-3">
 				<h2></h2>
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>

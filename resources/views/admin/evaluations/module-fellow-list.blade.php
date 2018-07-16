@@ -50,44 +50,61 @@
                       </div>
                   	</div>
         						@foreach($module->get_all_evaluation_activity() as $evAct)
-										@if($evAct->id != 431)
-                    <div class="row">
-        							<div class="col-sm-4">
-        								<h5>{{$evAct->type ==='evaluation' ? $evAct->files ? 'Archivo' : 'Evaluación' : 'Diagnóstico'}}</h5>
-                        @if($evAct->type==='evaluation' )
-          								<p><a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$evAct->id") }}'>{{$evAct->name}}</a></p>
-          							@elseif($evAct->type==='diagnostic')
-          								<p><a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$evAct->id") }}'>{{$evAct->name}}</a></p>
-          							@endif
-        							</div>
-        							<div class="col-sm-3">
-                        @if($module->start)
-        								<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
-                        @else
-                        <p>Sin fechas</p>
-                        @endif
-        							</div>
+											@if($evAct->id != 431)
+		                    <div class="row">
+			        							<div class="col-sm-4">
+															@if($evAct->type==='evaluation' )
+															  @if($evAct->files)
+																<h5>Archivo</h5>
+																@else
+																<h5>Evaluación</h5>
+																@endif
+															@elseif($evAct->type==='diagnostic')
+																<h5>Diagnóstico</h5>
+															@elseif($evAct->type==='final')
+																<h5>Evaluación Final</h5>
+															@endif
 
-                      <div class="col-sm-2">
-                        @if($evAct->type==='evaluation' )
-                          @if($evAct->files)
-                            <p>{{$evAct->count_fellow_file_evaluations()}}</p>
-                          @else
-                            <p>{{$evAct->count_fellow_evaluations() ? $evAct->count_fellow_evaluations()  : 0 }}</p>
-                          @endif
-                        @elseif($evAct->type==='diagnostic')
-                          <p>{{$evAct->count_fellow_diagnostic()}}</p>
-                        @endif
-        							</div>
-                      <div class="col-sm-3">
-                        @if($evAct->type==='evaluation' )
-          								<p><a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$evAct->id") }}' class ="btn xs view">Ver</a></p>
-          							@elseif($evAct->type==='diagnostic')
-          								<p><a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$evAct->id") }}' class ="btn xs view">Ver</a></p>
-          							@endif
-        							</div>
-                    </div>
-										@endif
+			                        @if($evAct->type==='evaluation' || $evAct->type==='final' )
+			          								<p><a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$evAct->id") }}'>{{$evAct->name}}</a></p>
+			          							@elseif($evAct->type==='diagnostic')
+			          								<p><a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$evAct->id") }}'>{{$evAct->name}}</a></p>
+			          							@endif
+			        							</div>
+			        							<div class="col-sm-3">
+			                        @if($module->start)
+			        								<p>{{date("d-m-Y", strtotime($module->start))}} al <br>{{date('d-m-Y', strtotime($evAct->end))}}</p>
+			                        @else
+			                        <p>Sin fechas</p>
+			                        @endif
+			        							</div>
+
+			                      <div class="col-sm-2">
+			                        @if($evAct->type==='evaluation' )
+			                          @if($evAct->files)
+			                            <p>{{$evAct->count_fellow_file_evaluations()}}</p>
+			                          @else
+			                            <p>{{$evAct->count_fellow_evaluations() ? $evAct->count_fellow_evaluations()  : 0 }}</p>
+			                          @endif
+															@elseif($evAct->type==='final' )
+																 @if($evAct->files)
+																	 <p>{{$evAct->count_fellow_file_evaluations()}}</p>
+																 @else
+																	 <p>0</p>
+																 @endif
+			                        @elseif($evAct->type==='diagnostic')
+			                          <p>{{$evAct->count_fellow_diagnostic()}}</p>
+			                        @endif
+			        							</div>
+			                      <div class="col-sm-3">
+			                        @if($evAct->type==='evaluation' || $evAct->type==='final' )
+			          								<p><a href='{{ url("dashboard/programas/$program->id/ver-evaluacion/$evAct->id") }}' class ="btn xs view">Ver</a></p>
+			          							@elseif($evAct->type==='diagnostic')
+			          								<p><a href='{{ url("dashboard/programas/$program->id/ver-diagnostico/$evAct->id") }}' class ="btn xs view">Ver</a></p>
+			          							@endif
+			        							</div>
+		                     </div>
+											@endif
         						@endforeach
         					@endif
         			</div>

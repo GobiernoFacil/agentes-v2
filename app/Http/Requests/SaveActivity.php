@@ -52,7 +52,7 @@ class SaveActivity extends FormRequest
               'order'=> 'required',
           ];
 
-        }elseif($this->type==='evaluation' || $this->type==='final'){
+        }elseif($this->type==='evaluation'){
           return [
           'name'=> 'required|max:256|unique:activities',
           'duration'=> 'required|numeric',
@@ -62,6 +62,17 @@ class SaveActivity extends FormRequest
           'hasforum'=>'required',
           'end'=>'required',
           'files'=>'required',
+          'order'=> 'required',
+        ];
+      }elseif($this->type==='final'){
+          return [
+          'name'=> 'required|max:256|unique:activities',
+          'duration'=> 'required|numeric',
+          'measure'=> 'required',
+          'description'=> 'required',
+          'type'=>'required',
+          'hasforum'=>'required',
+          'end'=>'required',
           'order'=> 'required',
         ];
       }elseif($this->type==='diagnostic'){

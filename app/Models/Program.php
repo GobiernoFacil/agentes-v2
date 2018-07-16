@@ -35,7 +35,7 @@ class Program extends Model
     }
 
     function surveys(){
-      return $this->hasMany("App\Models\CustomQuestionnaire")->where('type','survey')->orderBy('created_at','desc');
+      return $this->hasMany("App\Models\CustomQuestionnaire")->where('type','general')->orderBy('created_at','desc');
     }
 
     function get_modules_with_forums(){
@@ -56,6 +56,9 @@ class Program extends Model
       $sessions_id = Activity::where('type','evaluation')
       ->orWhere(function($query){
         $query->where('type','diagnostic');
+      })
+      ->orWhere(function($query){
+        $query->where('type','final');
       })->pluck('session_id')->toArray();
       $modules_id = ModuleSession::whereIn('id',$sessions_id)->pluck('module_id')->toArray();
       return  Module::whereIn('id',$modules_id)->where('public',1)->where('program_id',$this->id)->orderBy('order','asc');

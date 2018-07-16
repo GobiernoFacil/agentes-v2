@@ -53,7 +53,7 @@ use MessagesTrait;
               'hasforum'=>'required',
               'order'=> 'required',
           ];
-        }elseif($this->type==='evaluation' ||$this->type==='final' ){
+        }elseif($this->type==='evaluation' ){
           return [
               //
               'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
@@ -63,6 +63,18 @@ use MessagesTrait;
               'type'=>'required',
               'hasforum'=>'required',
               'files'=>'required',
+              'end'=>'required',
+              'order'=> 'required',
+          ];
+        }elseif($this->type==='final' ){
+          return [
+              //
+              'name'=> 'required|max:256'.($activity->name != $this->name ? '|unique:activities' : ''),
+              'duration'=> 'required|numeric',
+              'measure'=> 'required',
+              'description'=> 'required',
+              'type'=>'required',
+              'hasforum'=>'required',
               'end'=>'required',
               'order'=> 'required',
           ];
