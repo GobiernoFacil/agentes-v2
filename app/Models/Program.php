@@ -45,6 +45,13 @@ class Program extends Model
 
     }
 
+    function get_admin_modules_with_forums(){
+      $modules = $this->modules->pluck('id')->toArray();
+      $module_ids = Forum::whereIn('module_id',$modules)->pluck('module_id')->toArray();
+      return   Module::whereIn('id',$module_ids)->where('public',1)->where('program_id',$this->id)->orderBy('order','asc');
+
+    }
+
     function get_fellow_modules_with_ev_act(){
       $sessions_id = Activity::where('type','evaluation')
       ->orWhere(function($query){
@@ -207,6 +214,17 @@ class Program extends Model
       $ids   = $this->fellow_modules->pluck('id')->toArray();
       return Module::whereIn('id',$ids)->where('start','<=',$today)->orderBy('start','asc');
     }
+
+    function get_active_modules_with_forums(){
+      $modules          = $this->get_active_modules()->pluck('id')->toArray();
+      $sessions         = ModuleSession::whereIn('module_id',$modules)->pluck('id')->toArray();
+      $sess_with_forums = Activity::whereIn('session_id',$sessions)->where('hasforum',1)->pluck('session_id')->toArray();
+      $modules_ids      = ModuleSession::whereIn('id',$sess_with_forums)->pluck('module_id')->toArray();
+      return Module::whereIn('id',$modules_ids)->orderBy('start','desc');
+
+    }
+
+
 
     function get_assigned_sessions($user_id){
       $sessions    = $this->get_all_sessions()->pluck('id')->toArray();

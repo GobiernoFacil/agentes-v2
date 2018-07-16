@@ -204,5 +204,11 @@ class Module extends Model
       return  Activity::whereIn('session_id',$sessions)->where('type','diagnostic')->orderBy('end','asc');
     }
 
+    function fellow_act_forums(){
+      $sessions_id   = ModuleSession::where('module_id',$this->id)->pluck('id')->toArray();
+      $activities_id = Activity::where('hasforum',1)->whereIn('session_id',$sessions_id)->pluck('id')->toArray();
+      return Forum::where('program_id',$this->program->id)->whereIn('activity_id',$activities_id);
+    }
+
 
 }

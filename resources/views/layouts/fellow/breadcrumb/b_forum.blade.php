@@ -6,6 +6,7 @@
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="forum view"
 	|| $__env->yieldContent('breadcrumb_type') =="forum act list"
+	|| $__env->yieldContent('breadcrumb_type') =="forum module list"
 	 || $__env->yieldContent('breadcrumb_type') =="forum add message"
 	 || $__env->yieldContent('breadcrumb_type') =="forum add question"
 	 || $__env->yieldContent('breadcrumb_type') =="forum view question"
@@ -16,6 +17,10 @@
 	<li><a href='{{url("tablero/$program->slug/foros/actividades")}}'>Foros de actividades</a></li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="forum act list")
+	<li><a href='{{url("tablero/$program->slug/foros/actividades")}}'>{{$module->title}}</a></li>
+	<li>Foros de actividades</li>
+	@endif
+	@if ($__env->yieldContent('breadcrumb_type') =="forum module list")
 	<li>Foros de actividades</li>
 	@endif
 	@if ($__env->yieldContent('breadcrumb_type') =="forum view")

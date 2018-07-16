@@ -47,23 +47,44 @@ class Forums extends Controller
 
 
      /**
-     * Muestra lista de foros general
+     * Muestra lista de módulos con foros
      *
      * @return \Illuminate\Http\Response
      */
-    public function allAc()
+    public function allMo()
     {
       $user       = Auth::user();
-      $program     = $user->actual_program();
-      $forums      = $program->fellow_act_forums()->paginate($this->pageSize);
-      return view('fellow.forums.forums-all-list')->with([
+      $program    = $user->actual_program();
+      $modules    = $program->get_active_modules_with_forums()->paginate($this->pageSize);
+      $general    = Forum::where('program_id',$program->id)->where('type','general')->first();
+      return view('fellow.forums.forums-module-list')->with([
         "user"      => $user,
-        "forums"    => $forums,
-        "program"   => $program
+        "modules"   => $modules,
+        "program"   => $program,
+        "general"   => $general
       ]);
 
 
     }
+
+    /**
+    * Muestra lista de foros general
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function allAc($program_slug,$module_slug)
+   {
+     $user       = Auth::user();
+     $program    = $user->actual_program();
+     $module     = Module::where('slug',$module_slug)->where('public',1)->firstOrFail();
+     $forums     = $module->fellow_act_forums()->paginate($this->pageSize);
+     return view('fellow.forums.forums-all-list')->with([
+       "user"      => $user,
+       "forums"    => $forums,
+       "program"   => $program,
+       "module"    => $module
+     ]);
+   }
 
 
     /**
@@ -139,21 +160,22 @@ class Forums extends Controller
       $user      = Auth::user();
       $program   = $user->actual_program();
       $forum     = Forum::where('slug',$request->forum_slug)->firstOrFail();
-      var_dump($forum->toArray());
-      $forumConversation     = new ForumConversation($request->only(['topic','description']));
-      $forumConversation->forum_id = $forum->id;
-      $forumConversation->user_id  = $user->id;
-      $forumConversation->slug     = str_slug($request->topic);
-      $forumConversation->save();
+      $forumConversation  = ForumConversation::firstOrCreate([
+        'topic'       => $request->topic,
+        'description' => $request->description,
+        'forum_id'    => $forum->id,
+        'user_id'     => $user->id,
+        'slug'        => str_slug($request->topic)
+      ]);
       //forum log
-      $log = new ForumLog();
-      $log->user_id = $user->id;
-      $log->type    = 'fellow';
-      $log->action  = 'create-question';
-      $log->conversation_id = $forumConversation->id;
+      $log =  ForumLog::firstOrCreate([
+        'user_id'  => $user->id,
+        'type'     => 'fellow',
+        'action'   => 'create-question',
+        'conversation_id' => $forumConversation->id,
+        'forum_id' => $forum->id,
+      ]);
       if($forum->type ==='activity'){
-        $log->forum_id = $forum->id;
-        $log->save();
         $fellowProgress  = FellowProgress::firstOrCreate([
           'fellow_id'    => $user->id,
           'module_id'    => $forum->session->module->id,
@@ -174,9 +196,6 @@ class Forums extends Controller
         ]);
        $fellowAverage->scoreSession();
        $user->update_progress($forum->session->module);
-      }else{
-        $log->forum_id = $forum->id;
-        $log->save();
       }
       $forum->send_notification_to($program,$forumConversation,'question');
       return redirect("tablero/$program->slug/foros/$forum->slug")->with('message','Pregunta creada correctamente');
@@ -235,19 +254,20 @@ class Forums extends Controller
         $user      = Auth::user();
         $program   = $user->actual_program();
         $conversation   = ForumConversation::where('slug',$request->question_slug)->firstOrFail();
-        $message     = new ForumMessage($request->only(['message']));
-        $message->user_id = $user->id;
-        $message->conversation_id = $conversation->id;
-        $message->save();
+        $message   =  ForumMessage::firstOrCreate([
+          'message'=>$request->message,
+          'user_id'=>$user->id,
+          'conversation_id'=>$conversation->id
+        ]);
         //forum log
-        $log = new ForumLog();
-        $log->user_id = $user->id;
-        $log->type    = 'fellow';
-        $log->action  = 'add-message';
-        $log->conversation_id = $conversation->id;
-        $log->forum_id = $conversation->forum->id;
-        $log->message_id = $message->id;
-        $log->save();
+        $log =  ForumLog::firstOrCreate([
+          'user_id'  => $user->id,
+          'type'     => 'fellow',
+          'action'   => 'add-message',
+          'conversation_id' => $conversation->id,
+          'forum_id' => $conversation->forum->id,
+          'message_id' => $message->id
+        ]);
         //conversacion perteneciente a foro con sesion
         if($conversation->forum->type === 'activity'){
           $fellowProgress  = FellowProgress::firstOrCreate([

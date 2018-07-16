@@ -9,6 +9,9 @@
 <div class="row">
 	<div class="col-sm-9">
 		<h1>Foros del programa "{{$program->title}}"</h1>
+		@if(isset($module))
+		<h2>Módulo "{{$module->title}}"</h2>
+		@endif
 	</div>
 	<div class="col-sm-3">
 		<p class="right"><a href='{{ url("dashboard/foros/programa/$program->id/agregar") }}' class="btn ev">[+] Agregar foro</a></p>

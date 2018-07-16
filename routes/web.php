@@ -326,6 +326,11 @@ Route::group(['middleware' => ['auth']], function () {
     // Rutas CRUD forums
     Route::get('dashboard/foros', 'AdminForums@all');
     Route::get('dashboard/foros/programa/{program_id}/ver-foros', 'AdminForums@index');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/actividades', 'AdminForums@indexMo');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/estados', 'AdminForums@indexSt');
+    Route::get('dashboard/foros/programa/{program_id}/ver-foros/actividades/{module_id}', 'AdminForums@indexAc');
+
+
     Route::get('dashboard/foros/programa/{program_id}/ver-foro/{forum_id}', 'AdminForums@view');
     Route::get('dashboard/foros/programa/{program_id}/agregar', 'AdminForums@add');
     Route::post('dashboard/foros/programa/{program_id}/save', 'AdminForums@save');
@@ -509,7 +514,8 @@ Route::group(['middleware' => ['auth']], function () {
           /*@Forums Controller */
           // Rutas foros
           Route::get('tablero/{program_slug}/foros', 'Forums@all');
-          Route::get('tablero/{program_slug}/foros/actividades', 'Forums@allAc');
+          Route::get('tablero/{program_slug}/foros/actividades', 'Forums@allMo');
+          Route::get('tablero/{program_slug}/foros/actividades/{module_slug}', 'Forums@allAc');
           Route::get('tablero/{program_slug}/foros/{forum_slug}', 'Forums@index');
           Route::get('tablero/{program_slug}/foros/{forum_slug}/agregar-pregunta', 'Forums@addQuestion');
           Route::post('tablero/{program_slug}/foros/{forum_slug}/save-question', 'Forums@saveQuestion');
@@ -609,8 +615,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     /*@FacilitatorForums Controller */
     // Rutas foros
-    Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
-    Route::get('tablero-facilitador/foros/{id}', 'FacilitatorForums@index');
+    Route::get('tablero-facilitador/foros', 'FacilitatorForums@dashboard');
+    Route::get('tablero-facilitador/foros/ver-foros/actividades', 'FacilitatorForums@indexMo');
+    Route::get('tablero-facilitador/foros/ver-foros/estados', 'FacilitatorForums@indexSt');
+    Route::get('tablero-facilitador/foros/ver-foros/actividades/{module_id}', 'FacilitatorForums@indexAc');
+  //  Route::get('tablero-facilitador/foros', 'FacilitatorForums@all');
+    Route::get('tablero-facilitador/foros/ver-foro/{id}', 'FacilitatorForums@index');
   //  Route::get('tablero-facilitador/foros/ver/{id}', 'FacilitatorForums@view');
     Route::get('tablero-facilitador/foros/pregunta/crear/{id}', 'FacilitatorForums@addQuestion');
     Route::post('tablero-facilitador/foros/pregunta/save/{id}', 'FacilitatorForums@saveQuestion');
