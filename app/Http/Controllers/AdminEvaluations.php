@@ -29,7 +29,7 @@ class AdminEvaluations extends Controller
 {
     //
     const UPLOADS   = "archivos/fellows";
-    const DEBUG     = TRUE;
+    const DEBUG     = FALSE;
     const UPLOADSF  = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 10;

@@ -503,8 +503,8 @@ Route::group(['middleware' => ['auth']], function () {
           // Rutas nuevo diagnostico
             //Route::get('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar', 'SessionFellow@diagnostic');
             //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
-            Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@add');
-            Route::post('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@save');
+        /*    Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@add');
+            Route::post('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@save');*/
           /*@FellowFiles */
           //Rutas archivos
           Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');
@@ -557,7 +557,8 @@ Route::group(['middleware' => ['auth']], function () {
           Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/evaluar', 'FellowEvaluations@evaluate');
           Route::get('tablero/{program_slug}/evaluacion/{activity_slug}/finalizar', 'FellowEvaluations@putScore');
           Route::get('tablero/{program_slug}/evaluaciones', 'FellowEvaluations@indexEvaluations');
-
+          /* diagnostico*/
+          Route::post('tablero/{program_slug}/diagnostico/{activity_slug}/guardar-respuesta', 'FellowEvaluations@saveDiagnosticAnswer');
           /*@FellowProgresses*/
           // Rutas calificaciones y evaluaciones
           Route::get('tablero/{program_slug}/progreso', 'FellowProgresses@index');

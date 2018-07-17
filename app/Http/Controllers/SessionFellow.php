@@ -83,7 +83,7 @@ class SessionFellow extends Controller
       }elseif($activity->diagnosticInfo){
           $score            = null;
           $answersAlr = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$activity->diagnosticInfo->id)->pluck('question_id')->toArray();
-          $fellow_questions = $activity->diagnosticInfo->questions()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+          $fellow_questions = $activity->diagnosticInfo->questions()->select('question','id','type', 'required')->whereNotIn('id',$answersAlr)->get();
 
       }else{
         $score            = null;

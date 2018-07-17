@@ -80,7 +80,7 @@
 
 	</div>
 	@if($activity->type ==='diagnostic' && $activity->diagnosticInfo)
-	   @if($user->new_diagnostic($activity->diagnosticInfo->id)->count() == 0)
+	   @if($user->new_diagnostic($activity->diagnosticInfo->id)->count() != $activity->diagnosticInfo->questions()->where('required',1)->count() )
 					<!--si es examen de diagnostico-->
 					<div class="row">
 						<div class="col-sm-3 col-sm-offset-1">
@@ -498,8 +498,8 @@
 		        errorClass    = "error",
 						correctClass  = "correct",
             openClassCtr  = "#openText",
-		        evalURL       = '{{url("tablero/{$activity->session->module->program->slug}/encuestas/{$activity->slug}/guardar-respuesta")}}',
-		        endURL        = '{{url("tablero/{$activity->session->module->program->slug}/encuestas/{$activity->slug}/gracias")}}',
+		        evalURL       = '{{url("tablero/{$activity->session->module->program->slug}/diagnostico/{$activity->slug}/guardar-respuesta")}}',
+		        endURL        = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
 		        activity      = {!!$activity->diagnosticInfo->select('title','id','description')->get()->toJson()!!},
 		        questions     = {!!$fellow_questions->toJson()!!},
 						all_questions = {!!$activity->diagnosticInfo->questions()->select('question','id')->get()->toJson()!!},

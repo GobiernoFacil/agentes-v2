@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Activity;
 use App\Models\Answer;
+use App\Models\CustomQuestion;
+use App\Models\CustomFellowAnswer;
 use App\Models\FellowAnswer;
 use App\Models\FellowAverage;
 use App\Models\FilesEvaluation;
@@ -335,6 +337,52 @@ class FellowEvaluations extends Controller
        return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}");
 
     }
+
+
+    /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function saveDiagnosticAnswer(Request $request){
+       $user     = Auth::user();
+       $question = CustomQuestion::find($request->question_id);
+       $cool     = true;
+       if($question->type === 'open'){
+         $answer = CustomFellowAnswer::firstOrCreate([
+           'user_id'          => $user->id,
+           'question_id'      => $request->question_id,
+           'answer'           => $request->answer,
+           'questionnaire_id' => $question->questionnaire_id
+
+         ]);
+       }elseif($question->type === 'answers'){
+         $answer = CustomFellowAnswer::firstOrCreate([
+           'user_id'          => $user->id,
+           'question_id'      => $request->question_id,
+           'answer_id'        => $request->answer,
+           'questionnaire_id' => $question->questionnaire_id
+
+         ]);
+       }elseif($question->type === 'radio'){
+         $answer = CustomFellowAnswer::firstOrCreate([
+           'user_id'          => $user->id,
+           'question_id'      => $request->question_id,
+           'answer'           => $request->answer,
+           'questionnaire_id' => $question->questionnaire_id
+
+         ]);
+       }else{
+         $cool     = false;
+       }
+
+       return response()->json(["response" => $cool]);
+
+
+    }
+
+
+
 
 
 }
