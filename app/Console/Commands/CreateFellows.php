@@ -77,7 +77,7 @@ class CreateFellows extends Command
                 $fellowData->gender   = $aspirant->gender;
                 $fellowData->save();
                 $this->info($aspirant->gender.': Created!');
-              //  $new_user->notify(new FellowEmail($new_user,$password));
+                $new_user->notify(new FellowEmail($new_user,$password));
               }
             }
         });
