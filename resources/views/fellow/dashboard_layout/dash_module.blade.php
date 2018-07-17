@@ -86,7 +86,12 @@
 											@endif
 										@else
 											@if($user->fileFellowScore($evAct->id))
-												<p class="ap_success"><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fileFellowScore($evAct->id)->score,2)*10 }}</a></p>
+											  @if(!is_null($user->fileFellowScore($evAct->id)->score))
+													<p class="ap_success"><a href='{{url("tablero/$program->slug/calificaciones/ver/$evAct->slug")}}'>{{number_format($user->fileFellowScore($evAct->id)->score,2)*10 }}</a></p>
+												@else
+													<p class="ap_error">Sin calificación</p>
+												@endif
+
 											@else
 													  <p class="ap_error">Sin calificación</p>
 											@endif

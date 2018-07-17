@@ -55,20 +55,61 @@ class FellowAverage extends Model
      */
     function scoreProgram($user_id)
     {
-      $total_program_score = FellowAverage::firstOrCreate([
-        'user_id'    => $user_id,
-        'type'       => 'final',
-        'program_id' => $this->module->program->id
-      ]);
+      if($this->type != 'final'){
+        $total_program_score = FellowAverage::firstOrCreate([
+          'user_id'    => $user_id,
+          'type'       => 'final',
+          'program_id' => $this->module->program->id
+        ]);
+        $program       = $total_program_score->program;
+      }else{
+        $program       = $this->program;
+      }
 
-      $program       = $total_program_score->program;
       if($final = $program->final_fellow_evaluation()){
         //existe evaluacion final
+        $today = date('Y-m-d');
+        if($final->end <= $today){
+            $score_modules   = FellowAverage::where('user_id',$user_id)->where('type','total_module')->where('program_id',$program->id)->first();
+            if($score_modules->average){
+              $score_modules = $score_modules->average*self::All_MODULES;
+            }else{
+              $score_modules = 0;
+            }
+            $score_attendace = 10*self::ATTENDANCE;
+            if($this->type != 'final'){
+              $total_program_score->average     = $this->user->fileFellowScore($final->id)->score*self::FINAL_WORK + $score_modules + $score_attendace;
+              $total_program_score->save();
+            }elseif($this->type === 'final'){
+              $this->average      = $this->user->fileFellowScore($final->id)->score*self::FINAL_WORK + $score_modules + $score_attendace;
+              $this->save();
+            }
+        }else{
+          if($score   = FellowAverage::where('user_id',$user_id)->where('type','total_module')->where('program_id',$program->id)->first()){
+            if($this->type != 'final'){
+              $total_program_score->average = $score->average;
+              $total_program_score->save();
+              return true;
+            }else{
+              $this->average  = $score->average;
+              $this->save();
+              return true;
+            }
+          }else{
+            return true;
+          }
+        }
       }else{
         //la calificacion es el promedio de los modulos
         if($score   = FellowAverage::where('user_id',$user_id)->where('type','total_module')->where('program_id',$program->id)->first()){
+          if($this->type != 'final'){
             $total_program_score->average = $score->average;
             $total_program_score->save();
+          }else{
+            $this->average  = $score->average;
+            $this->save();
+            return true;
+          }
         }else{
           return true;
         }

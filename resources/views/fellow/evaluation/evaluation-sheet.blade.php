@@ -22,6 +22,11 @@
 </div>
 <div class="box score">
   <div class="row">
+    @if($final = $program->final_fellow_evaluation())
+      <div class="col-sm-12">
+          @include('fellow.evaluation.evaluation_includes.final_activity_info')
+      </div>
+    @endif
     <div class="col-sm-12">
 	    <div class="divider"></div>
           @if($modules->count() > 0)

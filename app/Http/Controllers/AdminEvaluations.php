@@ -14,6 +14,7 @@ use App\Models\FellowFile;
 use App\Models\FellowScore;
 use App\Models\FilesEvaluation;
 use App\Models\FellowAverage;
+use App\Models\FellowData;
 use App\Models\CustomFellowAnswer;
 use App\Models\Program;
 use App\Models\RetroLog;
@@ -29,7 +30,7 @@ class AdminEvaluations extends Controller
 {
     //
     const UPLOADS   = "archivos/fellows";
-    const DEBUG     = FALSE;
+    const DEBUG     = TRUE;
     const UPLOADSF  = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 10;
@@ -291,36 +292,94 @@ class AdminEvaluations extends Controller
       $program   = Program::where('id',$request->program_id)->firstOrFail();
       $file      = FellowFile::where('id',$request->file_id)->firstOrFail();
       $activity  = Activity::where('files',1)->where('id',$request->activity_id)->firstOrFail();
-      $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$file->user_id,'activity_id'=>$activity->id]);
-      $filesEva->user_id  = $user->id;
-      $filesEva->url      = $request->url;
-      $filesEva->score    = $request->score;
-      $filesEva->comments = $request->comments;
-      // [ SAVE THE file ]
-      if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
-        if($filesEva->path){
-          File::delete($filesEva->path);
+      if($activity->type != 'final'){
+        $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$file->user_id,'activity_id'=>$activity->id]);
+        $filesEva->user_id  = $user->id;
+        $filesEva->url      = $request->url;
+        $filesEva->score    = $request->score;
+        $filesEva->comments = $request->comments;
+        // [ SAVE THE file ]
+        if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+          if($filesEva->path){
+            File::delete($filesEva->path);
+          }
+          $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+          $request->file('file_e')->move($path, $name);
+          $filesEva->name = $request->file('file_e')->getClientOriginalName();
+          $filesEva->path = $path.'/'.$name;
         }
-        $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
-        $request->file('file_e')->move($path, $name);
-        $filesEva->name = $request->file('file_e')->getClientOriginalName();
-        $filesEva->path = $path.'/'.$name;
-      }
-      $filesEva->save();
-      $fellowAverage = FellowAverage::firstOrCreate([
-        'user_id'    => $file->user_id,
-        'module_id'  => $activity->session->module->id,
-        'session_id' => $activity->session->id,
-        'type'       => 'session',
-        'program_id' => $activity->session->module->program->id,
+        $filesEva->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+          'user_id'    => $file->user_id,
+          'module_id'  => $activity->session->module->id,
+          'session_id' => $activity->session->id,
+          'type'       => 'session',
+          'program_id' => $activity->session->module->program->id,
 
-      ]);
-      $fellowAverage->scoreSession();
-      $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
-      $retro->status = 0;
-      $retro->save();
-      $fellow = User::where('id',$file->user_id)->first();
-      $fellow->notify(new SendRetroEmail($fellow,$activity));
+        ]);
+        $fellowAverage->scoreSession();
+        $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
+        $retro->status = 0;
+        $retro->save();
+        $fellow = User::where('id',$file->user_id)->first();
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
+      }else{
+        $fellows = FellowData::where('state',$file->user->fellowData->state)->where('user_id','!=',$file->user_id)->get();
+        //usuario inicial
+        $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$file->user_id,'activity_id'=>$activity->id]);
+        $filesEva->user_id  = $user->id;
+        $filesEva->url      = $request->url;
+        $filesEva->score    = $request->score;
+        $filesEva->comments = $request->comments;
+        // [ SAVE THE file ]
+        if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+          if($filesEva->path){
+            File::delete($filesEva->path);
+          }
+          $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+          $request->file('file_e')->move($path, $name);
+          $filesEva->name = $request->file('file_e')->getClientOriginalName();
+          $filesEva->path = $path.'/'.$name;
+        }
+        $filesEva->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+          'user_id'    => $file->user_id,
+          'type'       => 'final',
+          'program_id' => $activity->session->module->program->id,
+
+        ]);
+        $fellowAverage->scoreProgram($file->user_id);
+        $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
+        $retro->status = 0;
+        $retro->save();
+        $fellow = User::where('id',$file->user_id)->first();
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
+        foreach ($fellows as  $f) {
+          // code...
+          $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$f->user_id,'activity_id'=>$activity->id]);
+          $filesEva->user_id  = $user->id;
+          $filesEva->url      = $request->url;
+          $filesEva->score    = $request->score;
+          $filesEva->comments = $request->comments;
+          if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+            $filesEva->name     = $request->file('file_e')->getClientOriginalName();
+            $filesEva->path     = $path.'/'.$name;
+          }
+          $filesEva->save();
+          $fellowAverage = FellowAverage::firstOrCreate([
+            'user_id'    => $f->user_id,
+            'type'       => 'final',
+            'program_id' => $activity->session->module->program->id,
+          ]);
+          $fellowAverage->scoreProgram($f->user_id);
+          $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
+          $retro->status = 0;
+          $retro->save();
+          $fellow = User::where('id',$f->user_id)->first();
+          $fellow->notify(new SendRetroEmail($fellow,$activity));
+        }
+
+      }
       return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$filesEva->id")->with('message','Se ha guarado correctamente');
 
     }
@@ -502,38 +561,96 @@ class AdminEvaluations extends Controller
       $user      = Auth::user();
       $program   = Program::where('id',$request->program_id)->firstOrFail();
       $activity  = Activity::where('files',1)->where('id',$request->activity_id)->firstOrFail();
-      $eva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
-      $eva->user_id  = $user->id;
-      $eva->url     = $request->url;
-      $eva->score     = $request->score;
-      $eva->comments = $request->comments;
-      $path  = public_path(self::UPLOADSF);
-      // [ SAVE THE file ]
-      if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
-        if($eva->path){
-          File::delete($eva->path);
+      if($activity->type != 'final'){
+        $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
+        $filesEva->user_id  = $user->id;
+        $filesEva->url     = $request->url;
+        $filesEva->score     = $request->score;
+        $filesEva->comments = $request->comments;
+        $path  = public_path(self::UPLOADSF);
+        // [ SAVE THE file ]
+        if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+          if($filesEva->path){
+            File::delete($filesEva->path);
+          }
+          $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+          $request->file('file_e')->move($path, $name);
+          $filesEva->name = $request->file('file_e')->getClientOriginalName();
+          $filesEva->path = $path.'/'.$name;
         }
-        $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
-        $request->file('file_e')->move($path, $name);
-        $eva->name = $request->file('file_e')->getClientOriginalName();
-        $eva->path = $path.'/'.$name;
-      }
-      $eva->save();
-      $fellowAverage = FellowAverage::firstOrCreate([
-        'user_id'    => $request->fellow_id,
-        'module_id'  => $activity->session->module->id,
-        'session_id' => $activity->session->id,
-        'type'       => 'session',
-        'program_id' => $activity->session->module->program->id,
+        $filesEva->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+          'user_id'    => $request->fellow_id,
+          'module_id'  => $activity->session->module->id,
+          'session_id' => $activity->session->id,
+          'type'       => 'session',
+          'program_id' => $activity->session->module->program->id,
 
-      ]);
-      $fellowAverage->scoreSession();
-      $retro   = RetroLog::firstOrCreate(['user_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
-      $retro->status = 0;
-      $retro->save();
-      $fellow = User::find($request->fellow_id);
-      $fellow->notify(new SendRetroEmail($fellow,$activity));
-      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$eva->id")->with('message','Se ha guarado correctamente');
+        ]);
+        $fellowAverage->scoreSession();
+        $retro   = RetroLog::firstOrCreate(['user_id'=>$request->fellow_id,'activity_id'=>$request->activity_id]);
+        $retro->status = 0;
+        $retro->save();
+        $fellow = User::find($request->fellow_id);
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
+      }else{
+        $userS   = User::where('id',$request->fellow_id)->first();
+        $fellows = FellowData::where('state',$userS->fellowData->state)->where('user_id','!=',$userS->id)->get();
+        //usuario inicial
+        $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$userS->id,'activity_id'=>$activity->id]);
+        $filesEva->user_id  = $user->id;
+        $filesEva->url      = $request->url;
+        $filesEva->score    = $request->score;
+        $filesEva->comments = $request->comments;
+        // [ SAVE THE file ]
+        if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+          if($filesEva->path){
+            File::delete($filesEva->path);
+          }
+          $name = uniqid() . '.' . $request->file('file_e')->getClientOriginalExtension();
+          $request->file('file_e')->move($path, $name);
+          $filesEva->name = $request->file('file_e')->getClientOriginalName();
+          $filesEva->path = $path.'/'.$name;
+        }
+        $filesEva->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+          'user_id'    => $userS->id,
+          'type'       => 'final',
+          'program_id' => $activity->session->module->program->id,
+
+        ]);
+        $fellowAverage->scoreProgram($userS->id);
+        $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
+        $retro->status = 0;
+        $retro->save();
+        $fellow->notify(new SendRetroEmail($userS,$activity));
+        foreach ($fellows as  $f) {
+          // code...
+          $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$f->user_id,'activity_id'=>$activity->id]);
+          $filesEva->user_id  = $user->id;
+          $filesEva->url      = $request->url;
+          $filesEva->score    = $request->score;
+          $filesEva->comments = $request->comments;
+          if($request->hasFile('file_e') && $request->file('file_e')->isValid()){
+            $filesEva->name     = $request->file('file_e')->getClientOriginalName();
+            $filesEva->path     = $path.'/'.$name;
+          }
+          $filesEva->save();
+          $fellowAverage = FellowAverage::firstOrCreate([
+            'user_id'    => $f->user_id,
+            'type'       => 'final',
+            'program_id' => $activity->session->module->program->id,
+          ]);
+          $fellowAverage->scoreProgram($f->user_id);
+          $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
+          $retro->status = 0;
+          $retro->save();
+          $fellow = User::where('id',$f->user_id)->first();
+          $fellow->notify(new SendRetroEmail($fellow,$activity));
+        }
+      }
+
+      return redirect("dashboard/programas/$program->id/ver-evaluacion/$activity->id/archivos/ver-resultado/$filesEva->id")->with('message','Se ha guarado correctamente');
 
     }
 
