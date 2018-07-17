@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Module;
 use App\Models\ModuleSession;
 use App\Models\Activity;
+use App\Models\CustomFellowAnswer;
 use App\Models\FellowAnswer;
 use App\Models\FellowFile;
 use App\Models\FellowScore;
@@ -79,6 +80,11 @@ class SessionFellow extends Controller
             $answersAlr = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->pluck('question_id')->toArray();
             $fellow_questions = $activity->quizInfo->question()->select('question','id')->whereNotIn('id',$answersAlr)->get();
         }
+      }elseif($activity->diagnosticInfo){
+          $score            = null;
+          $answersAlr = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$activity->diagnosticInfo->id)->pluck('question_id')->toArray();
+          $fellow_questions = $activity->diagnosticInfo->questions()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+
       }else{
         $score            = null;
         $fellow_questions = null;
