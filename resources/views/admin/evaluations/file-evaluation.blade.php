@@ -11,6 +11,9 @@
     <h1>Evaluación de archivo de: <strong>{{ $filesEva->user->name }} {{ $filesEva->user->fellowData->surname }} {{ $filesEva->user->fellowData->lastname }}</strong></h1>
     <h2>Actividad:  {{$filesEva->activity->name}}</h2>
 	<div class="divider"></div>
+  @if($activity->type ==='final')
+  <p><strong>Esta es una actividad de evaluación final, por lo que automáticamente se asigna la misma calificación a todos los fellows que pertenezcan al estado de {{$filesEva->user->fellowData->state}}.</strong></p>
+  @endif
   </div>
   <!--info fellow-->
 	<div class="col-sm-1 center">

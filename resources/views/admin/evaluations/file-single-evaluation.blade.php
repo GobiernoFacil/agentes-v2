@@ -12,7 +12,7 @@
     <h2>Actividad:  {{$activity->name}}</h2>
 	<div class="divider"></div>
   @if($activity->type ==='final')
-  <p><strong>Al asignar una calificación en este tipo de actividad, automáticamente se asigna la misma calificación a todos los fellows que pertenezcan al mismo estado.</strong></p>
+  <p><strong>Esta es una actividad de evaluación final, por lo que automáticamente se asigna la misma calificación a todos los fellows que pertenezcan al estado de procedencia del fellow seleccionado.</strong></p>
   @endif
   </div>
 </div>

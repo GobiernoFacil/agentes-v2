@@ -29,7 +29,7 @@ class AdminEvaluations extends Controller
 {
     //
     const UPLOADS   = "archivos/fellows";
-    const DEBUG     = FALSE;
+    const DEBUG     = TRUE;
     const UPLOADSF  = "archivos/fellowsEva";
     //Paginación
     public $pageSize = 10;
@@ -443,85 +443,6 @@ class AdminEvaluations extends Controller
       $filename = $data->name.".".$ext;
       return response()->download($file, $filename, $headers);
     }
-
-
-    protected function evaluateDiagnosticP1($evaluation){
-      $answer_1_ponderation = 0;
-      $value_q_1 = 20/3;
-      $answer_2_ponderation = 0;
-      $value_q_2 = 20/2;
-      $answer_3_ponderation = 0;
-      $value_q_3 = (20/4);
-      //evaluate q1
-      if($evaluation->answer_q1_1){
-        $answer_1_ponderation = $answer_1_ponderation+$value_q_1;
-      }
-      if($evaluation->answer_q1_2){
-        $answer_1_ponderation = $answer_1_ponderation+$value_q_1;
-      }
-      if($evaluation->answer_q1_3){
-        $answer_1_ponderation = $answer_1_ponderation+$value_q_1;
-      }
-      $evaluation->answer_ponderation_1 = $answer_1_ponderation;
-      //evaluate q2
-      if($evaluation->answer_q2_1){
-        $answer_2_ponderation = $answer_2_ponderation+$value_q_2;
-      }
-      if($evaluation->answer_q2_2){
-        $answer_2_ponderation = $answer_2_ponderation+$value_q_2;
-      }
-      $evaluation->answer_ponderation_2 = $answer_2_ponderation;
-      //evaluate q2
-      if($evaluation->answer_q3_1){
-        $answer_3_ponderation = $answer_3_ponderation+$value_q_3;
-      }
-      if($evaluation->answer_q3_2){
-        $answer_3_ponderation = $answer_3_ponderation+$value_q_3;
-      }
-      if($evaluation->answer_q3_3){
-        $answer_3_ponderation = $answer_3_ponderation+$value_q_3;
-      }
-      if($evaluation->answer_q3_4){
-        $answer_3_ponderation = $answer_3_ponderation+$value_q_3;
-      }
-      $evaluation->answer_ponderation_3 = $answer_3_ponderation;
-      $evaluation->total_score =  $answer_1_ponderation+$answer_2_ponderation+$answer_3_ponderation;
-      $evaluation->save();
-      return true;
-
-    }
-
-    protected function evaluateDiagnosticP2($evaluation){
-      $answer_4_ponderation = 0;
-      $value_q_4 = 20/2;
-      $answer_5_ponderation = 0;
-      $value_q_5 = 20/3;
-      //evaluate q5
-      if($evaluation->answer_q5_1){
-        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
-      }
-      if($evaluation->answer_q5_2){
-        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
-      }
-      if($evaluation->answer_q5_3){
-        $answer_5_ponderation = $answer_5_ponderation+$value_q_5;
-      }
-      $evaluation->answer_ponderation_5 = $answer_5_ponderation;
-      //evaluate q4
-      if($evaluation->answer_q4_1){
-        $answer_4_ponderation = $answer_4_ponderation+$value_q_4;
-      }
-      if($evaluation->answer_q4_2){
-        $answer_4_ponderation = $answer_4_ponderation+$value_q_4;
-      }
-      $evaluation->answer_ponderation_4 = $answer_4_ponderation;
-      $evaluation->total_score = $evaluation->total_score + $answer_4_ponderation+$answer_5_ponderation;
-      $evaluation->save();
-      return true;
-
-    }
-
-
 
     /**
      * Muestra evaluacion de archivos
