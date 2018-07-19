@@ -1,14 +1,14 @@
 @extends('layouts.frontend.master')
 @section('title', 'Noticias y Eventos')
 @section('description', 'Noticias y Eventos')
-@section('body_class', 'noticias')
-@section('canonical', url('noticias-eventos') )
+@section('body_class', 'noticias blog')
+@section('canonical', url('noticias-eventos/blog-fellow') )
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_news')
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1>Noticias y Eventos</h1>
-		<a href="{{url('noticias-eventos/blog-fellow')}}" class="btn blue center">Blog Fellow</a>
+		<h1>Blog Fellow</h1>
+		<a href="{{url('noticias-eventos')}}" class="btn blue center">Noticias y eventos</a>
 		@if($all->count() > 0)
 		<div class="row">
 			<div class="box">
@@ -19,12 +19,7 @@
 					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}}">
 
 						@if($article->image)
-						@if($article->type==='fellow')
-							<a href="{{url('noticias-eventos/blog-fellow/ver/' . $article->slug)}}" class="img_f">
-						@else
-							<a href="{{url('noticias-eventos/ver/' . $article->slug)}}" class="img_f">
-						@endif
-
+						<a href="{{url('noticias-eventos/blog-fellow/ver/' . $article->slug)}}" class="img_f">
 						<figure>
 						<img src='{{url("img/newsEvent/{$article->image->name}")}}'>
 						</figure>
@@ -38,11 +33,8 @@
 						@elseif($article->type==='news')
 						<h4 class="type_n {{$article->type}}">Noticia</h4>
 						@endif
-						@if($article->type==='fellow')
-							<h2><a href="{{url('noticias-eventos/blog-fellow/ver/' . $article->slug)}}">{{$article->title}}</a></h2>
-						@else
-							<h2><a href="{{url('noticias-eventos/ver/' . $article->slug)}}">{{$article->title}}</a></h2>
-						@endif
+
+						<h2><a href="{{url('noticias-eventos/blog-fellow/ver/' . $article->slug)}}">{{$article->title}}</a></h2>
 						<p class="author">Por {{$article->user->name}} <span>{{$article->created_at->diffForHumans()}}</span></p>
 						</span>
 					</li>

@@ -93,8 +93,9 @@ Route::get('gobierno-abierto/recursos/modelo-gobierno-abierto', 'GovernmentFront
 /*@NewsEventFront Controller */
 /*********  Noticias y eventos ******** */
 Route::get('noticias-eventos', 'NewsEventFront@index');
-Route::get('noticias-eventos/{slug}', 'NewsEventFront@get');
-
+Route::get('noticias-eventos/ver/{slug}', 'NewsEventFront@get');
+Route::get('noticias-eventos/blog-fellow/', 'NewsEventFront@fellowIndex');
+Route::get('noticias-eventos/blog-fellow/ver/{slug}', 'NewsEventFront@getFellow');
 /****************** USUARIOS REGISTRADOS ***************/
 Route::group(['middleware' => ['auth']], function () {
   /*@Suscribe Controller */

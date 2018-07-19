@@ -9,4 +9,13 @@
 	<li>{{$content->title}}</li>
 	@endif
 
+	@if ($__env->yieldContent('body_class') =="noticias blog")
+	<li><a href="{{url('noticias-eventos')}}">Noticias</a></li>
+	<li>Blog Fellow</li>
+	@endif
+
+	@if ($__env->yieldContent('body_class') =="noticias blog view")
+	<li><a href="{{url('noticias-eventos/blog-fellow')}}">Blog Fellow</a></li>
+	<li>{{$content->title}}</li>
+	@endif
 </ul>

@@ -37,4 +37,32 @@ class NewsEventFront extends Controller
         "content"    => $content
       ]);
     }
+
+    /**
+    * Muestra noticia o evento
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function getFellow($slug)
+    {
+      $content = NewsEvent::where('slug',$slug)->where('public',1)->firstOrFail();
+      return view('frontend.newsEvents.newsEvents-fellow-view')->with([
+        "content"    => $content
+      ]);
+    }
+
+    /**
+    * Muestra lista de noticias y eventos
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function fellowIndex()
+    {
+      $all = NewsEvent::where('public',1)->where('type','fellow')->orderBy('created_at','desc')->paginate($this->pageSize);
+      return view('frontend.newsEvents.blog-list')->with([
+        'all' =>$all,
+      ]);
+
+    }
 }

@@ -10,7 +10,7 @@
 		<h1>Noticias y eventos</h1>
 	</div>
 	<div class="col-sm-3">
-		<a href="{{url('dashboard/noticias-eventos/agregar')}}" class="btn view gde">Agregar Noticia o evento [+]</a>
+		<a href="{{url('dashboard/noticias-eventos/agregar')}}" class="btn view gde">Agregar contenido [+]</a>
 	</div>
 </div>
 

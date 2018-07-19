@@ -5,13 +5,15 @@
 		 	<h4 class="type_n {{$article->type}}">Evento</h4>
 		 	@elseif($article->type==='news')
 		 	<h4 class="type_n {{$article->type}}">Noticia</h4>
-		 	@else
+		 	@elseif($article->type==='fellow')
+			<h4 class="type_n {{$article->type}}">Fellow</h4>
+			@else
 		 	<h4 class="type_n {{$article->type}}">Aviso</h4>
 		 	@endif
 		</div>
 		<div class="col-sm-3 right">
 			@if($user->type == "admin")
-			<p class="author">{!! $article->public == 1 ? '<span class="published_ s">Publicado</span>' : '<span class="published_ n">Sin publicar</span>' !!} <a href="{{url('dashboard/noticias-eventos/editar/' . $article->id)}}" class="btn view">Editar {{$article->type==='event' ? "evento" : "noticia"}}</a></p>
+			<p class="author">{!! $article->public == 1 ? '<span class="published_ s">Publicado</span>' : '<span class="published_ n">Sin publicar</span>' !!} <a href="{{url('dashboard/noticias-eventos/editar/' . $article->id)}}" class="btn view">Editar {{$article->type==='event' ? "evento" : $article->type==='notice' ? "aviso" : "noticia"}}</a></p>
 			@endif
 		</div>
 	</div>
