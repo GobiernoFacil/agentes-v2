@@ -42,6 +42,16 @@ class Front extends Controller
       ]);
     }
 
+    //ver generacion
+    public function generation($program_slug){
+      $program = Program::where('slug',$program_slug)->firstOrFail();
+      $fellows = $program->get_all_fellows()->get();
+      return view('frontend.programas.program-generation')->with([
+        'program' => $program,
+        'fellows' => $fellows
+      ]);
+    }
+
     //objetivos
     public function antecedentes(){
       return view('frontend.programas.antecedentes');
