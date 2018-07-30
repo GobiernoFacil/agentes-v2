@@ -109,8 +109,8 @@ class ModuleSessions extends Controller
          $data->order  =  $order;
          $data->parent_id = null;
          $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-         $this->reOrder($order,$data->module_id,$data);
          $data->save();
+         $this->reOrder($order,$data->module_id,$data);
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
            $last_parent_null->save();
@@ -120,10 +120,12 @@ class ModuleSessions extends Controller
         $parent  = ModuleSession::find($data->parent_id);
         $order   = $parent->order+1;
         $data->order = $order;
+        $data->save();
+        $this->reOrder($order,$data->module_id,$data);
       }
-      $this->reOrder($order,$data->module_id,$data);
-      return $data;
+     return $data;
     }
+
 
     /**
     * reorder sessions
@@ -132,7 +134,7 @@ class ModuleSessions extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    protected function reOrder($order,$module_id,$data){
+    protected function reOrder($actual_position,$module_id,$session){
       $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
       $index   = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
       if(isset($numbers[$order])){
@@ -179,7 +181,7 @@ class ModuleSessions extends Controller
         //ultima de la lista no se hace nada
           return true;
       }
-      $data->save();
+
     }
 
 
