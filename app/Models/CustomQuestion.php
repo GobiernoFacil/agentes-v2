@@ -21,7 +21,7 @@ class CustomQuestion extends Model
 
     //modelos relacionados
     function questionnaire(){
-      return $this->belongsTo("App\Models\CustomQuestionnarie",'questionnaire_id');
+      return $this->belongsTo("App\Models\CustomQuestionnaire",'questionnaire_id');
     }
 
     function answers(){

@@ -45,9 +45,6 @@ class UpdateFellowProgress extends Command
           $this->info($program->title);
           $uset  = User::where('email','andre@fcb.com')->first();
           foreach($program->fellows as $fellow){
-
-
-
             $count = 0;
             foreach ($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
               // code...
@@ -59,11 +56,24 @@ class UpdateFellowProgress extends Command
               }
             }
 
+              $this->info($fellow->user->name.' '.$count.' modules updated');
 
-
-
-            $this->info($fellow->user->name.' '.$count.' modules updated');
           }
+
+            $count = 0;
+            foreach($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
+              // code...
+              $uset->update_forum_progress($module->id);
+              if($uset->update_module_progress($module->slug)){
+                $count++;
+              }else{
+                break;
+              }
+            }
+
+              $this->info($uset->name.' '.$count.' modules updated');
+
+
           foreach ($program->fellow_modules()->where('start','<=',$today)->get() as $module) {
             // code...
             $uset->update_forum_progress($module->id);

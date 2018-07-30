@@ -8,6 +8,7 @@ use App\Models\Activity;
 use App\Models\Answer;
 use App\Models\CustomQuestion;
 use App\Models\CustomFellowAnswer;
+use App\Models\CustomQuestionnarie;
 use App\Models\FellowAnswer;
 use App\Models\FellowAverage;
 use App\Models\FilesEvaluation;
@@ -375,6 +376,20 @@ class FellowEvaluations extends Controller
        }else{
          $cool     = false;
        }
+
+       if(CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$question->questionnaire_id)->count()===$question->questionnaire->questions->count()){
+           $fellowProgress  = FellowProgress::firstOrCreate([
+             'fellow_id'    => $user->id,
+             'module_id'    => $question->questionnaire->activity->session->module->id,
+             'session_id'   => $question->questionnaire->activity->session->id,
+             'activity_id'  => $question->questionnaire->activity->id,
+             'program_id'   => $question->questionnaire->activity->session->module->program->id,
+             'type'         => 'activity'
+           ]);
+           $fellowProgress->status = 1;
+           $fellowProgress->save();
+           $user->update_progress($question->questionnaire->activity->session->module);
+      }
 
        return response()->json(["response" => $cool]);
 
