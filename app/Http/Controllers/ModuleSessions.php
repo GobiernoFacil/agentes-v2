@@ -89,7 +89,7 @@ class ModuleSessions extends Controller
         'program_id'  => $session->module->program->id,
         'type'        => 'create'
       ]);
-    //  return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
+      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
     }
 
