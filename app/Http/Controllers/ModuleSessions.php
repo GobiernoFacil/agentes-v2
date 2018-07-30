@@ -113,6 +113,7 @@ class ModuleSessions extends Controller
          $data->save();
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
+           $last_parent_null->order     = 2;
            $last_parent_null->save();
          }
          return $data;

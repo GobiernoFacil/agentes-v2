@@ -60,6 +60,7 @@ class UpdateFellowProgress extends Command
 
           }
 
+
             $count = 0;
             foreach($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
               // code...
