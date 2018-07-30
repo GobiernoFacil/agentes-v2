@@ -89,7 +89,7 @@ class ModuleSessions extends Controller
         'program_id'  => $session->module->program->id,
         'type'        => 'create'
       ]);
-      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
+    //  return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$session->id")->with('success',"Se ha guardado correctamente");
 
     }
 
@@ -113,18 +113,16 @@ class ModuleSessions extends Controller
          $data->save();
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
-           $last_parent_null->order     = 2;
            $last_parent_null->save();
          }
-         return $data;
       }else{
         //new session
         $parent  = ModuleSession::find($data->parent_id);
         $order   = $parent->order+1;
         $data->order = $order;
-        $this->reOrder($order,$data->module_id,$data);
-        return $data;
       }
+      $this->reOrder($order,$data->module_id,$data);
+      return $data;
     }
 
     /**
@@ -181,6 +179,7 @@ class ModuleSessions extends Controller
         //ultima de la lista no se hace nada
           return true;
       }
+      $data->save();
     }
 
 

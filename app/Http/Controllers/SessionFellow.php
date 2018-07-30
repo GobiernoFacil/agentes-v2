@@ -75,11 +75,16 @@ class SessionFellow extends Controller
       }
 
       if($activity->type==='evaluation'){
-        if($score  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first()){
-            $fellow_questions = null;
+        if($activity->quizInfo){
+          if($score  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first()){
+              $fellow_questions = null;
+          }else{
+              $answersAlr = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->pluck('question_id')->toArray();
+              $fellow_questions = $activity->quizInfo->question()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+          }
         }else{
-            $answersAlr = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->pluck('question_id')->toArray();
-            $fellow_questions = $activity->quizInfo->question()->select('question','id')->whereNotIn('id',$answersAlr)->get();
+          $score            = null;
+          $fellow_questions = null;
         }
       }elseif($activity->type==='diagnostic'){
           $score            = null;
