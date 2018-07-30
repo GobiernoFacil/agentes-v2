@@ -134,7 +134,7 @@ class ModuleSessions extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    protected function reOrder($actual_position,$module_id,$session){
+    protected function reOrder($order,$module_id,$data){
       $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
       $index   = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
       if(isset($numbers[$order])){
