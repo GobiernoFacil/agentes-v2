@@ -595,6 +595,10 @@
              uiAnswers.insertAdjacentHTML('beforeend', template(answer));
            });
           }
+					if(currentSlide == (questions.length-1)){
+					 uiEnd.style.display  = "block";
+					 uiEval.style.display = "none";
+					 }
 
 		    }
 

@@ -73,14 +73,15 @@ class SessionFellow extends Controller
       }else{
         $forums   = null;
       }
-      if($activity->quizInfo){
+
+      if($activity->type==='evaluation'){
         if($score  = FellowScore::where('questionInfo_id',$activity->quizInfo->id)->where('user_id',$user->id)->first()){
             $fellow_questions = null;
         }else{
             $answersAlr = FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->pluck('question_id')->toArray();
             $fellow_questions = $activity->quizInfo->question()->select('question','id')->whereNotIn('id',$answersAlr)->get();
         }
-      }elseif($activity->diagnosticInfo){
+      }elseif($activity->type==='diagnostic'){
           $score            = null;
           $answersAlr = CustomFellowAnswer::where('user_id',$user->id)->where('questionnaire_id',$activity->diagnosticInfo->id)->pluck('question_id')->toArray();
           $fellow_questions = $activity->diagnosticInfo->questions()->select('question','id','type', 'required')->whereNotIn('id',$answersAlr)->get();
@@ -89,6 +90,7 @@ class SessionFellow extends Controller
         $score            = null;
         $fellow_questions = null;
       }
+
       $log     = Log::firstOrCreate(['user_id'=>$user->id,'type'=>'view']);
       $log->session_id = null;
       $log->module_id = null;
@@ -101,7 +103,6 @@ class SessionFellow extends Controller
       $log->activity_id = $activity->id;
       $log->program_id = $session->module->program->id;
       $log->save();
-
 
       return view('fellow.modules.sessions.activity-view')->with([
         "user"              => $user,
