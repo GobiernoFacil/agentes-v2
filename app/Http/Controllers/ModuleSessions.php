@@ -109,7 +109,6 @@ class ModuleSessions extends Controller
          $data->order  =  $order;
          $data->parent_id = null;
          $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-         $data->save();
          $this->reOrder($order,$data->module_id,$data);
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
