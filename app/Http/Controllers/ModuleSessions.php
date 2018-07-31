@@ -109,10 +109,15 @@ class ModuleSessions extends Controller
          $data->order  =  $order;
          $data->parent_id = null;
          $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-         $this->reOrder($order,$data->module_id,$data);
+         $data->save();
          if($last_parent_null){
            $last_parent_null->parent_id = $data->id;
            $last_parent_null->save();
+         }
+         $sessions = ModuleSession::where('module_id',$data->module_id)->whereNotNull('parent_id')->where('id','!=',$data->id)->orderBy('order','asc')->get();
+         foreach ($sessions as $s) {
+           $s->order = $s->order+1;
+           $s->save();
          }
       }else{
         //new session
@@ -120,68 +125,22 @@ class ModuleSessions extends Controller
         $order   = $parent->order+1;
         $data->order = $order;
         $data->save();
-        $this->reOrder($order,$data->module_id,$data);
+        $session_with_same_order = ModuleSession::where('module_id',$data->module_id)->whereNotNull('parent_id')->where('id','!=',$data->id)->where('order','>=',$order)->orderBy('order','asc')->first();
+        if($session_with_same_order){
+          var_dump($session_with_same_order->toArray());
+          $session_with_same_order->order      = $order+1;
+          $session_with_same_order->parent_id  = $data->id;
+          $session_with_same_order->save();
+          $sessions = ModuleSession::where('module_id',$data->module_id)->whereNotNull('parent_id')->whereNotIn('id',[$data->id,$session_with_same_order->id])->where('order','>=',$order)->orderBy('order','asc')->get();
+          foreach ($sessions as $s) {
+            $s->order = $s->order+1;
+            $s->save();
+          }
+        }
       }
      return $data;
     }
 
-
-    /**
-    * reorder sessions
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-
-    protected function reOrder($order,$module_id,$data){
-      $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('id','order')->toArray();
-      $index   = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->pluck('order','id')->toArray();
-      if(isset($numbers[$order])){
-          $data->save();
-          $session_with_same_order = ModuleSession::where('module_id',$module_id)->where('order',$order)->first();
-          $session_with_same_order->parent_id = $data->id;
-          $session_with_same_order->save();
-        $flag = 0;
-        $temp_ids = [];
-        $temp2 = [];
-        //llenar arreglo con las sesiones que se re-ordenaran
-        foreach ($index as $number) {
-          if($order==$number){
-            $flag =1;
-          }
-          if($flag){
-            $idsr    = $numbers[$number];
-            array_push($temp_ids,$idsr);
-
-          }
-        }
-        $flag = 0;
-        foreach ($temp_ids as $id) {
-          # reordenar sesiones
-          $session = ModuleSession::find($id);
-          if($flag>0){
-            if(($session->order - $temp_s)< 2){
-              $temp_s  = $session->order;
-              $session->order = $session->order+1;
-              $session->parent_id = $temp_parent_id;
-              $temp_parent_id    = $session->id;
-            }
-          }else{
-            $temp_s  = $session->order;
-            $temp_parent_id = $session->id;
-            $session->order = $session->order+1;
-          }
-          $session->save();
-          $flag++;
-        }
-        return true;
-      }else{
-          $data->save();
-        //ultima de la lista no se hace nada
-          return true;
-      }
-
-    }
 
 
     /**
