@@ -83,7 +83,7 @@ class AdminEvaluations extends Controller
       $user       = Auth::user();
       $program    = Program::where('id',$program_id)->firstOrFail();
       $activity   = Activity::where('id',$activity_id)->firstOrFail();
-      if($activity->files || $activity->type != 'final'){
+      if($activity->files || $activity->type != 'final' && !$activity->quizInfo){
         //ver fellows con archivos
       $fellowsIds = FilesEvaluation::where('activity_id',$activity_id)->whereNotNull('score')->pluck('fellow_id');
       if(self::DEBUG){
