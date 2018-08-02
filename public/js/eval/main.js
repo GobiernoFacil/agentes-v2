@@ -1,3 +1,4 @@
+
 // var definition
 var Form, Questions, GFPNUDApp, endpoint,
     titleId              = "title",
@@ -141,8 +142,11 @@ var GFPNUDApp = {
 
     ul.appendChild(li);
   },
+
   addQuestion : function(e){
     e.preventDefault();
+
+    
 
     var template = document.getElementById(questionTemplate).innerHTML,
         list     = document.getElementById(questionsList),
@@ -163,6 +167,9 @@ var GFPNUDApp = {
 
   saveQuestion : function(e){
     e.preventDefault();
+
+    // esto quiebra el botón después de usarse una vez
+    e.target.removeEventListener("click", GFPNUDApp.saveQuestion);
 
     var form     = e.target,
         input    = form.querySelector("input[type='text']"),
@@ -189,6 +196,7 @@ var GFPNUDApp = {
     addOpt = li.querySelector(".add-answer");
 
     /* SERVER MUMBO YUMBO */
+
     $.post(saveQuestionUrl, {question : value,_token:token,idQuiz:idQ}, function(res){
       anchor.innerHTML = res.question;
       Questions.push(res);
@@ -199,6 +207,7 @@ var GFPNUDApp = {
       UQFunc  = that.updateQuestion.bind(that, res);
       addOpt.addEventListener("click", ADOFunc);
       anchor.addEventListener("click", UQFunc);
+
     }, "json");
     /**/
   },
@@ -287,11 +296,13 @@ var GFPNUDApp = {
     form.addEventListener("submit", SOFunc);
     remove.addEventListener("click", REOFunc);
 
-    //console.log(list, e);
   },
 
   saveOption : function(li, question, e){
     e.preventDefault();
+
+
+    e.target.removeEventListener("click", GFPNUDApp.saveOption);
 
     var value = li.querySelector("form").querySelector("input[type='text']").value,
         answer = {
@@ -339,7 +350,6 @@ var GFPNUDApp = {
   },
 
   updateOption : function(li, option, e){
-    console.log(li, option, e);
 
     var template = document.getElementById(answerTemplate).innerHTML,
         ROFunc  = null,
@@ -408,7 +418,6 @@ var GFPNUDApp = {
 
 
   removeEmptyOption : function(list, li, e){
-    console.log(list, li, e);
 
     list.removeChild(li);
   },
