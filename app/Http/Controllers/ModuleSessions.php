@@ -127,7 +127,6 @@ class ModuleSessions extends Controller
         $data->save();
         $session_with_same_order = ModuleSession::where('module_id',$data->module_id)->whereNotNull('parent_id')->where('id','!=',$data->id)->where('order','>=',$order)->orderBy('order','asc')->first();
         if($session_with_same_order){
-          var_dump($session_with_same_order->toArray());
           $session_with_same_order->order      = $order+1;
           $session_with_same_order->parent_id  = $data->id;
           $session_with_same_order->save();
@@ -194,23 +193,62 @@ class ModuleSessions extends Controller
     public function update(UpdateSession $request)
     {
       //
-      $user = Auth::user();
-      $data    = $request->except('_token');
-      $program = Program::where('id',$request->program_id)->firstOrFail();
-      $module  = $program->modules()->find($request->module_id);
-      $sess    = $module->sessions()->find($request->session_id);
-      $data['module_id']    = $sess->module_id;
+      $user      = Auth::user();
+      $data      = $request->except('_token');
+      $program   = Program::where('id',$request->program_id)->firstOrFail();
+      $module    = $program->modules()->find($request->module_id);
+      $old_sess  = $module->sessions()->find($request->session_id);
+      $data['module_id']    = $old_sess->module_id;
       $data['slug']         = str_slug($request->name);
-      $session = new ModuleSession($data);
-      $this->checkUpdateOrder($session,$request->session_id);
+      if($data['parent_id']==='0'){
+        $data['parent_id'] = null;
+        $new_parent      = false;
+      }else{
+        $new_parent        = ModuleSession::find($data['parent_id']);
+      }
+      $this->checkUpdateOrder($data,$old_sess,$new_parent);
       $log = Log::firstOrCreate([
         'user_id'     => $user->id,
-        'session_id'  => $sess->id,
+        'session_id'  => $request->session_id,
         'module_id'   => $request->module_id,
-        'program_id'  => $session->module->program->id,
+        'program_id'  => $program->id,
         'type'        => 'update'
       ]);
-      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$sess->id")->with('success',"Se ha actualizado correctamente");
+      return redirect("dashboard/programas/$request->program_id/modulos/$request->module_id/sesiones/ver/$old_sess->id")->with('success',"Se ha actualizado correctamente");
+    }
+
+
+    protected function parent_child($session_id,$count){
+      $session = ModuleSession::where('id',$session_id)->first();
+      if($session){
+        $session->order = $count;
+        $session->save();
+        if($session->parent_id){
+            $count++;
+            $this->parent_child($session->parent_id,$count);
+        }else{
+          return $session;
+        }
+      }else{
+        return false;
+      }
+
+    }
+
+    protected function child_deep($session_id,$count){
+      $session = ModuleSession::where('id',$session_id)->first();
+      if($session){
+        $session->order = $count;
+        $session->save();
+        if($child = ModuleSession::where('module_id',$session->module_id)->where('parent_id',$session->id)->first()){
+            $count++;
+            $this->child_deep($child->id,$count);
+        }else{
+          return $session;
+        }
+      }else{
+        return false;
+      }
     }
 
 
@@ -223,45 +261,40 @@ class ModuleSessions extends Controller
     * @param  boolean $type  true add false update
     */
 
-    protected function checkUpdateOrder($data,$session_id){
-      $sess = ModuleSession::find($session_id);
-      if($data->parent_id!=$sess->parent_id){
-            //first session
-            if($data->parent_id==='0'){
-              $order        =  1;
-              $data->order  =  $order;
-              $data->parent_id = null;
-              $last_parent_null = ModuleSession::where('module_id',$data->module_id)->where('parent_id',null)->first();
-              $numbers = ModuleSession::where('module_id',$data->module_id)->whereNotIn('id',[$session_id])->orderBy('order','asc')->get();
-              $new_order = 2;
-              foreach ($numbers as $number) {
-                if($new_order>3){
-                  $number->order =$new_order;
-                  $number->parent_id = $last_session->id;
-                  $number->save();
-                  $last_session = $number;
-                }else{
-                  $number->order =$new_order;
-                  $number->save();
-                  $last_session = $number;
-                }
-                $new_order++;
-              }
-              ModuleSession::where('id',$session_id)->update($data->toArray());
-              if($last_parent_null){
-                $last_parent_null->parent_id = $session_id;
-                $last_parent_null->save();
-              }
-            }else{
-              $parent    = ModuleSession::find($data->parent_id);
-              $new_order = $parent->order+1;
-              $data->order  =  $new_order;
-              $this->reUpdateOrder($new_order,$data->module_id,$data,$session_id);
-
-            }
+    protected function checkUpdateOrder($data,$old_sess,$new_parent){
+      if($new_parent){
+          $new_parent_old_child = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$new_parent->id)->first();
+          $old_parent           = ModuleSession::where('module_id',$old_sess->module_id)->where('id',$old_sess->parent_id)->first();
+          $old_child            = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$old_sess->id)->first();
+          if($new_parent_old_child){
+            $old_child->parent_id = $old_parent->id;
+            $old_child->save();
+            $new_parent_old_child->parent_id = $old_sess->id;
+            $new_parent_old_child->save();
           }else{
-            ModuleSession::where('id',$session_id)->update($data->toArray());
+            //last session
+            $old_child->parent_id = $old_parent->id;
+            $old_child->save();
           }
+          ModuleSession::where('id',$old_sess->id)->update($data);
+          $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+          $this->child_deep($start->id,1);
+      }else{
+        $old_parent           = ModuleSession::where('module_id',$old_sess->module_id)->where('id',$old_sess->parent_id)->first();
+        $old_child            = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$old_sess->id)->first();
+        $first_old_session    = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+        $first_old_session->parent_id = $old_sess->id;
+        $first_old_session->save();
+        $old_child->parent_id = $old_parent->id;
+        $old_child->save();
+
+        ModuleSession::where('id',$old_sess->id)->update($data);
+        $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+        $this->child_deep($start->id,1);
+      }
+      
+      return true;
+
     }
 
     /**
