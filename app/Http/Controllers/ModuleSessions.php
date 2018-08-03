@@ -292,46 +292,11 @@ class ModuleSessions extends Controller
         $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
         $this->child_deep($start->id,1);
       }
-      
+
       return true;
 
     }
 
-    /**
-    * check order session
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  object  $data request data
-    * @param  object  $data  data to save
-    * @param  boolean $type  true add false update
-    */
-
-    protected function reUpdateOrder($order,$module_id,$data,$session_id){
-      $numbers = ModuleSession::where('module_id',$module_id)->orderBy('order','asc')->whereNotIn('id',[$session_id])->get();
-      foreach ($numbers as $number) {
-        if($number->order>=$order){
-          $number->order = $number->order+1;
-          $number->save();
-        }
-      }
-     ModuleSession::where('id',$session_id)->update($data->toArray());
-     $numbers = ModuleSession::where('module_id',$data->module_id)->orderBy('order','asc')->get();
-      $new_order = 1;
-      foreach ($numbers as $number) {
-        if($new_order>1){
-          $number->order =$new_order;
-          $number->parent_id = $last_session->id;
-          $number->save();
-          $last_session = $number;
-        }else{
-          $number->order =$new_order;
-          $number->save();
-          $last_session = $number;
-        }
-        $new_order++;
-      }
-      return true;
-    }
 
     /**
     * Deshabilita sesión
@@ -363,9 +328,6 @@ class ModuleSessions extends Controller
       $session->facilitators()->delete();
       //delete forum
       $session->all_forum()->delete();
-      $order = $session->order;
-      $temp  = $order;
-      $last_parent_id = null;
       $log = Log::firstOrCreate([
         'user_id'     => $user->id,
         'session_id'  => $session->id,
@@ -373,22 +335,45 @@ class ModuleSessions extends Controller
         'program_id'  => $session->module->program->id,
         'type'        => 'delete: '.str_limit($session->name, 150)
       ]);
-      $session->delete();
-     foreach ($program->get_all_sessions()->get() as $session) {
-          if($order < $session->order){
-            $session->order = $temp;
-            $session->parent_id = $last_parent_id;
-            $temp++;
-            $session->save();
-            $last_parent_id = $session->id;
-          }
-        if($order != $session->order){
-            $last_parent_id = $session->id;
-        }
-      }
-
-       return redirect("dashboard/programas/$program->id/modulos/ver/$module_id")->with('success',"Se ha eliminado correctamente");
+      $this->checkDeleteOrder($session);
+      return redirect("dashboard/programas/$program->id/modulos/ver/$module_id")->with('success',"Se ha eliminado correctamente");
     }
+
+
+
+    /**
+    * check order session
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  object  $data request data
+    * @param  object  $data  data to save
+    * @param  boolean $type  true add false update
+    */
+
+    protected function checkDeleteOrder($old_sess){
+      if($old_sess->parent_id){
+          $old_parent           = ModuleSession::where('module_id',$old_sess->module_id)->where('id',$old_sess->parent_id)->first();
+          $old_child            = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$old_sess->id)->first();
+          if($old_child){
+            $old_child->parent_id = $old_parent->id;
+            $old_child->save();
+          }
+          $old_sess->delete();
+          $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+          $this->child_deep($start->id,1);
+      }else{
+        //first session deleted
+        $old_child            = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$old_sess->id)->first();
+        $old_child->parent_id = null;
+        $old_child->save();
+        $old_sess->delete();
+        $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+        $this->child_deep($start->id,1);
+      }
+      return true;
+
+    }
+
     /**
     * Actualiza orden de sesiones
     *
