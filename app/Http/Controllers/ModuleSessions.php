@@ -287,7 +287,7 @@ class ModuleSessions extends Controller
         $first_old_session->parent_id = $old_sess->id;
         $first_old_session->save();
         }
-        if($old_child){
+        if($old_child && $old_parent){
           $old_child->parent_id = $old_parent->id;
           $old_child->save();
         }
