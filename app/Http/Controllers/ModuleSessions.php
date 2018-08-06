@@ -283,10 +283,14 @@ class ModuleSessions extends Controller
         $old_parent           = ModuleSession::where('module_id',$old_sess->module_id)->where('id',$old_sess->parent_id)->first();
         $old_child            = ModuleSession::where('module_id',$old_sess->module_id)->where('parent_id',$old_sess->id)->first();
         $first_old_session    = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
+        if($first_old_session){
         $first_old_session->parent_id = $old_sess->id;
         $first_old_session->save();
-        $old_child->parent_id = $old_parent->id;
-        $old_child->save();
+        }
+        if($old_child){
+          $old_child->parent_id = $old_parent->id;
+          $old_child->save();
+        }
 
         ModuleSession::where('id',$old_sess->id)->update($data);
         $start        = ModuleSession::where('module_id',$old_sess->module_id)->whereNull('parent_id')->first();
