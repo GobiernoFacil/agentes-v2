@@ -82,10 +82,11 @@
   <?php  }else if($i ==5){ ?>
     <label>
       <span class="row">
+     	 <span class="col-sm-9">Mayor</span>
             <span class="col-sm-3">{{$i}}<br>
                  <input data-question="<%=id%>" type="radio" name="radio" value="{{$i}}" class = "GF-scale">
             </span>
-      <span class="col-sm-6">Mayor</span>
+      
       </span>
     </label>
   <?php  }else{ ?>

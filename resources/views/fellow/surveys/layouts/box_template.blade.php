@@ -20,7 +20,7 @@
 		      </form>
 
 					<form id = "GF-scale" style ="display:none;">
-		        <ul id="GF-PNUD-quiz-radio" class="ap_test_answers inline"></ul>
+		        <ul id="GF-PNUD-quiz-radio" class=" inline"></ul>
 		      </form>
 
 		      <div id="GF-PNUD-quiz-status-bar">
