@@ -26,8 +26,7 @@
 	<div class="row">
 			<div class="col-sm-12">
 			<p class="right"><a href='{{ url("dashboard/encuestas/programa/$program->id/agregar") }}' class="btn ev">[+] Agregar encuesta</a></p>
-		<?php /*	@if($surveys->count() > 0)*/ ?>
-		@if(TRUE)
+	@if($surveys->count() > 0)
 					<table class="table">
 						<thead>
 					    	<tr>
@@ -54,17 +53,6 @@
 								</td>
 							</tr>
 							@endif
-							<? /* DELETE ASAP */ ?>
-							<tr>
-								<td><h4><a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/9")}}'>Evaluación del Primer Seminario Presencial en Gobierno Abierto y Desarrollo Sostenible</a></h4></td>
-								<td>Evaluación del Primer Seminario Presencial de Agentes Locales de Cambio en Gobierno Abierto para el Desarrollo Sostenible - celebrado en Mazatlán Sinaloa del 6 al 8 de junio</td>
-								<td>Encuesta</td>
-								<td>
-									<a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/9")}}' class="btn xs view">Ver</a>
-									<a href='{{ url("dashboard/encuestas/programa/$program->id/descargar/9")}}' class="btn xs ev">Descargar</a>
-								</td>
-							</tr>
-<?php /*
 							@foreach($surveys as $questionnaire)
 								<tr>
 									<td><h4><a href='{{url("dashboard/encuestas/programa/$program->id/ver-resultados/{$questionnaire->id}")}}'>{{$questionnaire->title}}</a></h4></td>
@@ -76,12 +64,8 @@
 									</td>
 								</tr>
 							@endforeach
-*/
-?>
-
 						</tbody>
 					</table>
-
 				@else
 				<h2><strong>Sin encuestas</strong></h2>
 
