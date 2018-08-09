@@ -7,6 +7,7 @@ use App\Models\Activity;
 use App\Models\Aspirant;
 use App\Models\Conversation;
 use App\Models\Forum;
+use App\Models\FellowData;
 use App\Models\Module;
 use App\Models\ModuleSession;
 
@@ -233,5 +234,12 @@ class Program extends Model
       $sessions    = $this->get_all_sessions()->pluck('id')->toArray();
       return FacilitatorModule::whereIn('session_id',$sessions)->where('user_id',$user_id);
 
+    }
+
+
+    function get_fellows_by_state($state){
+      $fellows = $this->get_all_fellows()->pluck('id')->toArray();
+      $fellow_data = FellowData::whereIn('user_id',$fellows)->where('state',$state)->pluck('user_id')->toArray();
+      return User::whereIn('id',$fellow_data)->orderby('name','asc')->get();
     }
 }

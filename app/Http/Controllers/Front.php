@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Program;
+use App\Models\FellowData;
+use App\User;
 use Illuminate\Http\Request;
 
 class Front extends Controller
@@ -46,11 +48,25 @@ class Front extends Controller
     public function generation($program_slug){
       $program = Program::where('slug',$program_slug)->firstOrFail();
       $fellows = $program->get_all_fellows()->get();
+      $states  = FellowData::select('state')->whereIn('user_id',$fellows->pluck('id')->toArray())->orderBy('state','asc')->distinct('state')->get();
       return view('frontend.programas.program-generation')->with([
         'program' => $program,
-        'fellows' => $fellows
+        'fellows' => $fellows,
+        'states'  => $states
       ]);
     }
+
+   //ver fellow
+   public function viewFellow($program_slug,$fellow_slug){
+     $program = Program::where('slug',$program_slug)->firstOrFail();
+     $name    = ucwords(str_replace('-', ' ', $fellow_slug));
+     $fellow  = User::where('name',$name)->firstOrFail();
+     return view('frontend.programas.program-view-fellow')->with([
+       'program' => $program,
+       'fellow'  => $fellow,
+       'slug'    => $fellow_slug
+     ]);
+   }
 
     //objetivos
     public function antecedentes(){

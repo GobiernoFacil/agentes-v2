@@ -2,48 +2,38 @@
 @section('title', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
 @section('description', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
 @section('body_class', 'programa 2018')
-@section('canonical', url('programa-gobierno-abierto/'.$program->slug))
+@section('canonical', url("programa-gobierno-abierto/$program->slug/ver-generacion/ver-fellow/$slug"))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
 @section('content')
+
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
     <?php $date = new DateTime($program->start);?>
 		<h1>Edición {{$date->format('Y')}} - PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE<a href="#nota"><sup>1</sup></a></h1>
-		<h2>Generación</h2>
+		<h2>Ver fellow</h2>
     <div class="row">
-			<div class="col-sm-9">
-			@foreach($states as $state)
-				<ul class="toggle-view">
-					<!---fellows-->
-				<li>
-					<span></span>
-					<h3>{{ strpos( $state->state,"xico")  ? "Estado de México" : $state->state }}</h3>
-					<div class="panel">
-					<ol>
-						@foreach($program->get_fellows_by_state($state->state) as $fellow)
-							<li>
-								<?php $slug =str_slug($fellow->name);  ?>
-								<a href = '{{url("programa-gobierno-abierto/$program->slug/ver-generacion/ver-fellow/{$slug}")}}'>
-									@if($fellow->image)
-										<img src='{{url("img/users/{$fellow->image->name}")}}' height="25px">
-									@else
-										<img src='{{url("img/users/default.png")}}' height="25px">
-									@endif
+			<div class="col-sm-10">
+        <p class="">
+          @if($fellow->image)
+          <img src='{{url("img/users/{$fellow->image->name}")}}' height="150px">
+          @else
+          <img src='{{url("img/users/default.png")}}' height="150px">
+          @endif
+        </p>
+        <h2>{{$fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname}}</h2>
+        <h3>Procedencia: <strong>{{$fellow->fellowData->origin ? $fellow->fellowData->origin : "Sin información"}}</strong></h3>
+        <div class="divider"></div>
+        <ul>
+          <li class="col-sm-4"><span>Nivel de estudios</span> {{$fellow->fellowData->degree}}</li>
+          <li class="col-sm-4"><span>Email</span> {{$fellow->email}}</li>
+          <li class="col-sm-4"><span>Ciudad, Estado</span> {{$fellow->fellowData->city}}, {{$fellow->fellowData->state}}</li>
 
-									{{mb_convert_case($fellow->name,  MB_CASE_TITLE, 'UTF-8')}}
-								</a>
-						</li>
-						@endforeach
-						</ol>
-					</div>
-				</li>
-
-				</ul>
-			@endforeach
+        </ul>
+        <p>{{$fellow->fellowData->semblance}}</p>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<h2></h2>
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
 				<a href="{{url('programa-gobierno-abierto/aliados')}}" class="icon i_aliados">CONOCE A LOS ALIADOS</a>
