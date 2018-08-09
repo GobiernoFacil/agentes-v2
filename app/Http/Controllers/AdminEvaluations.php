@@ -322,7 +322,7 @@ class AdminEvaluations extends Controller
         $retro->status = 0;
         $retro->save();
         $fellow = User::where('id',$file->user_id)->first();
-      //  $fellow->notify(new SendRetroEmail($fellow,$activity));
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
       }else{
         $fellows = FellowData::where('state',$file->user->fellowData->state)->where('user_id','!=',$file->user_id)->get();
         //usuario inicial
@@ -353,7 +353,7 @@ class AdminEvaluations extends Controller
         $retro->status = 0;
         $retro->save();
         $fellow = User::where('id',$file->user_id)->first();
-      //  $fellow->notify(new SendRetroEmail($fellow,$activity));
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
         foreach ($fellows as  $f) {
           // code...
           $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$f->user_id,'activity_id'=>$activity->id]);
@@ -376,7 +376,7 @@ class AdminEvaluations extends Controller
           $retro->status = 0;
           $retro->save();
           $fellow = User::where('id',$f->user_id)->first();
-        //  $fellow->notify(new SendRetroEmail($fellow,$activity));
+          $fellow->notify(new SendRetroEmail($fellow,$activity));
         }
 
       }
@@ -592,7 +592,7 @@ class AdminEvaluations extends Controller
         $retro->status = 0;
         $retro->save();
         $fellow = User::find($request->fellow_id);
-        //$fellow->notify(new SendRetroEmail($fellow,$activity));
+        $fellow->notify(new SendRetroEmail($fellow,$activity));
       }else{
         $userS   = User::where('id',$request->fellow_id)->first();
         $fellows = FellowData::where('state',$userS->fellowData->state)->where('user_id','!=',$userS->id)->get();
@@ -623,7 +623,7 @@ class AdminEvaluations extends Controller
         $retro   = RetroLog::firstOrCreate(['user_id'=>$filesEva->fellow_id,'activity_id'=>$activity->id]);
         $retro->status = 0;
         $retro->save();
-      //  $fellow->notify(new SendRetroEmail($userS,$activity));
+        $fellow->notify(new SendRetroEmail($userS,$activity));
         foreach ($fellows as  $f) {
           // code...
           $filesEva  = FilesEvaluation::firstOrCreate(['fellow_id'=>$f->user_id,'activity_id'=>$activity->id]);
@@ -646,7 +646,7 @@ class AdminEvaluations extends Controller
           $retro->status = 0;
           $retro->save();
           $fellow = User::where('id',$f->user_id)->first();
-      //    $fellow->notify(new SendRetroEmail($fellow,$activity));
+          $fellow->notify(new SendRetroEmail($fellow,$activity));
         }
       }
 
