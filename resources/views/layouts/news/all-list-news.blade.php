@@ -6,7 +6,7 @@
 		 	@elseif($article->type==='news')
 		 	<h4 class="type_n {{$article->type}}">Noticia</h4>
 		 	@elseif($article->type==='fellow')
-			<h4 class="type_n {{$article->type}}">Fellow</h4>
+			<h4 class="type_n {{$article->type}}">Blog en Gobierno Abierto y Desarrollo Sostenible</h4>
 			@else
 		 	<h4 class="type_n {{$article->type}}">Aviso</h4>
 		 	@endif

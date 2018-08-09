@@ -1,6 +1,6 @@
 @extends('layouts.frontend.master')
 @section('title', $content->title)
-@section('description', 'Blog Fellow')
+@section('description', 'Blog en Gobierno Abierto y Desarrollo Sostenible')
 @section('body_class', 'noticias blog view')
 @section('canonical', url('noticias-eventos/blog-fellow/ver/' . $content->slug ) )
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_news')
@@ -11,13 +11,13 @@
 		<div class="col-sm-12">
 			<h4 class="type_n {{$content->type}}">
 			@if($content->type==='event')
-			Evento
+				Evento
 			@elseif($content->type==='news')
-			Noticia
+				Noticia
 			@elseif($content->type==='fellow')
-			Blog Fellow
+				Blog en Gobierno Abierto y Desarrollo Sostenible
 			@else
-			Aviso
+				Aviso
 			@endif
 			</h4>
 			<h1>{{$content->title}}</h1>

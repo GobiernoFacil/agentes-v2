@@ -15,7 +15,7 @@
 			@elseif($content->type==='news')
 			Noticia
 			@elseif($content->type==='fellow')
-			Blog Fellow
+				Blog en Gobierno Abierto y Desarrollo Sostenible
 			@else
 			Aviso
 			@endif

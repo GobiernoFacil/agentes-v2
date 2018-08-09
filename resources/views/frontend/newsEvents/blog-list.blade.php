@@ -7,7 +7,7 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1>Blog Fellow</h1>
+		<h1>Blog en Gobierno Abierto y Desarrollo Sostenible</h1>
 		<a href="{{url('noticias-eventos')}}" class="btn blue center">Noticias y eventos</a>
 		@if($all->count() > 0)
 		<div class="row">
@@ -29,7 +29,7 @@
 						@if($article->type==='event')
 						<h4 class="type_n {{$article->type}}">Evento</h4>
 						@elseif($article->type==='fellow')
-						<h4 class="type_n {{$article->type}}">Blog Fellow</h4>
+						<h4 class="type_n {{$article->type}}">Blog en Gobierno Abierto y Desarrollo Sostenible</h4>
 						@elseif($article->type==='news')
 						<h4 class="type_n {{$article->type}}">Noticia</h4>
 						@endif
