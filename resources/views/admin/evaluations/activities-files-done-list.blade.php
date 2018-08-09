@@ -68,7 +68,7 @@
 			<h2>Sin usuarios con archivos evaluados</h2>
 		</div>
 		<div class="col-sm-3 col-sm-offset-4 center">
-			<a href='{{ url("dashboard/evaluacion/actividad/ver/{$activity->id}") }}' class="btn gde">Ver usuarios con archivos</a>
+			<a href='{{ url("dashboard/programas/{$program->id}/ver-evaluacion/{$activity->id}") }}' class="btn gde">Ver usuarios con archivos</a>
 		</div>
 	</div>
 </div>
