@@ -21,6 +21,7 @@
 			      <th>Nombre</th>
 			      <th>Actividad</th>
 					  <th>Fecha de creación</th>
+						<th>Calificación</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
@@ -30,8 +31,13 @@
 			        <td><h4> <a href="{{ url('tablero/perfil/archivos/descargar/' . $file->id) }}">{{$file->name}}</a></h4></td>
 			        <td>{{$file->activity->name}}</td>
 			        <td><a title="{{date('d-m-Y H:i', strtotime($file->created_at))}}">{{$file->created_at->diffForHumans()}}</a> </td>
+							<td>{{$user->fileFellowScore($file->activity_id) ? number_format($user->fileFellowScore($file->activity_id)->score,2)*10 : "Sin calificación" }}</td>
 			        <td>
-			          <a href="{{ url('tablero/perfil/archivos/descargar/' . $file->id) }}" class="btn xs view">Descargar</a></td>
+			          <a href="{{ url('tablero/perfil/archivos/descargar/' . $file->id) }}" class="btn xs view">Descargar</a>
+								@if($user->fileFellowScore($file->activity_id))
+									<a href='{{url("tablero/{$file->activity->session->module->program->slug}/calificaciones/ver/{$file->activity->slug}")}}' class="btn xs ev">Ver calificación</a>
+								@endif
+							</td>
 			    </tr>
 			    @endforeach
 			  </tbody>

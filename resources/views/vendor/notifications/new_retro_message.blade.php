@@ -8,7 +8,7 @@ Para visualizarla, entra a la plataforma.<br>
 Saludos
 
 @component('mail::button', ['url' => $url])
-Ir a la plataforma
+Ver retroalimentación
 @endcomponent
 
 ¡Saludos!,<br>

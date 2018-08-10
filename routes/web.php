@@ -490,6 +490,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tablero/perfil/save', 'Fellows@saveProfile');
     Route::get('tablero/perfil/archivos', 'Fellows@viewFiles');
     Route::get('tablero/perfil/archivos/descargar/{file_id}', 'Fellows@download');
+
+
     Route::group(['middleware' => 'program'], function(){
           /*@ModulesFellow Controller */
           // Rutas módulos
@@ -508,10 +510,12 @@ Route::group(['middleware' => ['auth']], function () {
             //Route::post('tablero/{program_slug}/aprendizaje/examen-diagnostico/examen-diagnostico/examen/evaluar/save', 'SessionFellow@saveDiagnostic');
         /*    Route::get('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@add');
             Route::post('tablero/{program_slug}/aprendizaje/diagnostico/{activity_slug}/examen/responder', 'FellowDiagnostic@save');*/
+
           /*@FellowFiles */
           //Rutas archivos
           Route::get('tablero/{program_slug}/archivos/{activity_slug}/agregar', 'FellowFiles@add');
           Route::post('tablero/{program_slug}/archivos/{activity_slug}/save', 'FellowFiles@save');
+
       	//Descargar archivo en actividades
           Route::get('tablero/{program_slug}/aprendizaje/actividades/archivos/descargar/{id}', 'ActivitiesFiles@download');
           //ver pdf
