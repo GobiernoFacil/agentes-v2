@@ -313,7 +313,12 @@ class Activities extends Controller
             }elseif($request->type==='diagnostic' && !$data["files"]){
               //Agregar diagnostico
               if($last->diagnosticInfo){
-                  return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
+                  if(!$last->hasfiles && $request->hasfiles){
+                      return redirect("dashboard/sesiones/actividades/archivos/agregar/$request->id")->with('success',"Se ha guardado correctamente");
+                  }else{
+                      return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/2")->with('success',"Se ha guardado correctamente");
+                  }
+
               }else{
                   return redirect("dashboard/sesiones/actividades/diagnostico/agregar/$last->id/1")->with('success',"Se ha guardado correctamente");
               }
