@@ -158,7 +158,7 @@ class FellowAverage extends Model
       ]);
 
       $module       = $module_score->module;
-      $sessions_with_diagnostic =$module->get_diagnostc_activities()->pluck('session_id')->toArray();
+      $sessions_with_diagnostic = [];
       $scores       = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
       $total_scores = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$user_id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
       if($total_scores  > 0){

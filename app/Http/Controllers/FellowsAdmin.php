@@ -278,4 +278,10 @@ class FellowsAdmin extends Controller
 
      }
 
+
+     public function scoreUpdate($fellow_id,$module_id){
+       $fellow = User::where('id',$fellow_id)->where('enabled',1)->firstOrFail();
+       $fellow->update_module_score($module_id);
+     }
+
 }

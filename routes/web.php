@@ -203,6 +203,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard/fellows/programa/{program_id}/ver-progreso/{fellow_id}', 'FellowsAdmin@progressSheet');
     Route::get('dashboard/fellows/programa/{program_id}/evaluacion/{activity_id}/finalizar/{fellow_id}', 'FellowsAdmin@putScore');
     Route::post('dashboard/fellows/buscar', 'FellowsAdmin@search');
+    Route::get('dashboard/fellow/{fellow_id}/{module_id}', 'FellowsAdmin@scoreUpdate');
+
+
+
     // Perfil  administrador
     Route::get('dashboard/perfil', 'Admin@viewProfile');
     Route::get('dashboard/perfil/editar', 'Admin@editProfile');

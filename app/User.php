@@ -676,6 +676,37 @@ class User extends Authenticatable
      }
     }
 
+    function update_module_score($module_id){
+      $module = Module::where('id',$module_id)->first();
+      if($module){
+        foreach ($module->sessions  as $session) {
+          // code...
+        }
+        $module_score = FellowAverage::firstOrCreate([
+          'user_id'    => $this->id,
+          'module_id'  => $module->id,
+          'type'       => 'module',
+          'program_id' => $module->program->id
+        ]);
+        $sessions_with_diagnostic = $module->get_diagnostc_activities()->pluck('session_id')->toArray();
+        var_dump($sessions_with_diagnostic);
+        $scores       = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$this->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
+        $total_scores = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$this->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
+
+        var_dump($total_scores);
+        if($total_scores  > 0){
+          $module_score->average = $total_scores/$scores->count();
+          $module_score->save();
+          $module_score->scoreAllModules($this->id);
+        }else{
+          //nada que actualizar
+          $module_score->average = null;
+          $module_score->save();
+          return true;
+        }
+      }
+    }
+
 
 
 }
