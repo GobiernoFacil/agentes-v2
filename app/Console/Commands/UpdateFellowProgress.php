@@ -49,6 +49,7 @@ class UpdateFellowProgress extends Command
             foreach ($program->fellow_modules()->where('end','<=',$today)->get() as $module) {
               // code...
               $fellow->user->update_forum_progress($module->id);
+              $fellow->user->update_module_score($module->id);
               if($fellow->user->update_module_progress($module->slug)){
                 $count++;
               }else{

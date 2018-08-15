@@ -681,6 +681,11 @@ class User extends Authenticatable
       if($module){
         foreach ($module->sessions  as $session) {
           // code...
+          $aver_sess = FellowAverage::where('session_id',$session->id)->where('type','session')->where('user_id',$this->id)->first();
+          if($aver_sess){
+            $aver_sess->scoreSession();
+          }
+
         }
         $module_score = FellowAverage::firstOrCreate([
           'user_id'    => $this->id,
@@ -688,12 +693,11 @@ class User extends Authenticatable
           'type'       => 'module',
           'program_id' => $module->program->id
         ]);
-        $sessions_with_diagnostic = $module->get_diagnostc_activities()->pluck('session_id')->toArray();
-        var_dump($sessions_with_diagnostic);
+        $sessions_with_diagnostic = [];
         $scores       = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$this->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->get();
         $total_scores = FellowAverage::whereNotNull('average')->whereNotIn('session_id',$sessions_with_diagnostic)->where('user_id',$this->id)->where('type','session')->whereIn('session_id',$module->sessions->pluck('id')->toArray())->where('program_id',$module->program->id)->sum('average');
 
-        var_dump($total_scores);
+
         if($total_scores  > 0){
           $module_score->average = $total_scores/$scores->count();
           $module_score->save();

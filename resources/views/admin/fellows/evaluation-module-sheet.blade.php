@@ -26,7 +26,9 @@
         				@include('admin.fellows.evaluation_includes.eval_list')
         				<?php $n++;?>
         		@endforeach
-            {{$modules->links()}}
+            <div class="col-sm-12">
+              {{$modules->links()}}
+            </div>
           @else
              <p><strong>Aún no se cuenta con módulos activos.</strong></p>
           @endif
