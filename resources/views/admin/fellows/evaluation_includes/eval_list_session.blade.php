@@ -10,7 +10,11 @@
 		<?php $today = date('Y-m-d');?>
 		<strong>
 			@if($session->all_activities_for_kardex($fellow->id)->count() > 0)
-				{{$fellow->session_average($session->id) ?  number_format(($fellow->session_average($session->id)->average),2)*10 : 'Sin calificación'}}
+			  @if($fellow->session_average($session->id))
+					{{$fellow->session_average($session->id)->average ?  number_format(($fellow->session_average($session->id)->average),2)*10 : 'En revisión'}}
+				@else
+					Sin calificación
+				@endif
 			@else
 			 No aplica
 			@endif

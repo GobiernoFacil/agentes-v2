@@ -51,8 +51,12 @@ class UpdateFellowProgress extends Command
               $fellow->user->update_forum_progress($module->id);
               $fellow->user->update_module_score($module->id);
               if($fellow->user->update_module_progress($module->slug)){
+                $fellow->user->update_module_score($module->id);
                 $count++;
               }else{
+                $actual = $fellow->user->actual_module();
+                $this->info($actual->title);
+                $fellow->user->update_module_score($actual->id);
                 break;
               }
             }
@@ -67,8 +71,11 @@ class UpdateFellowProgress extends Command
               // code...
               $uset->update_forum_progress($module->id);
               if($uset->update_module_progress($module->slug)){
+                $uset->update_module_score($module->id);
                 $count++;
               }else{
+                $actual = $uset->actual_module();
+                $uset->update_module_score($actual->id);
                 break;
               }
             }

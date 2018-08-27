@@ -8,7 +8,11 @@
 	<p>Calificación del módulo:
 		@if($module->get_all_activities_with_forums()->count() > 0 || $module->get_evaluation_activity_kardex()->count() > 0)
 		<span class="score_a block">
-			{{$user->module_average($module->id) ? number_format($user->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
+			@if($user->module_average($module->id))
+				{{!is_null($user->module_average($module->id)->average) ? number_format($user->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
+			@else
+				Sin calificación
+			@endif
 		</span>
 		<a href='{{ url("tablero/$program->slug/calificaciones/{$module->slug}") }}' class="btn xs view">Ver módulo</a>
 		@else

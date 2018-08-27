@@ -12,7 +12,13 @@
     <h2>{{$module->title}}</h2>
   </div>
  <div class="col-sm-3 right">
-	 <p>Calificación: <span class="score_a block">{{$fellow->module_average($module->id) ? number_format($fellow->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
+	 <p>Calificación: <span class="score_a block">
+     @if($fellow->module_average($module->id))
+      {{$fellow->module_average($module->id)->average ? number_format($fellow->module_average($module->id)->average,2)*10 : 'Sin calificación'}}
+     @else
+      Sin calificación
+     @endif
+
    </span></p>
   </div>
   <?php
