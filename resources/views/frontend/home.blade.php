@@ -211,14 +211,14 @@
 							</tr>
 						</tbody>
 					</table>
-					
-					
+
+
 				</div>
 
 			</div>
 		</div>
-	
-	
+
+
 	
 		<div class="row">
 			<div class="col-sm-4 col-xs-4">
@@ -233,7 +233,7 @@
 			</div>
 			<div class="col-sm-4 col-xs-4">
 				<a href="{{url('/programa-gobierno-abierto/alcance')}}" class="icon i_alcance">
-					<span>AlCANCE</span>
+					<span>ALCANCE</span>
 				</a>
 			</div>
 		</div>
