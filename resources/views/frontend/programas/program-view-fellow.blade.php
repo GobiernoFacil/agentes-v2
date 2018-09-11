@@ -31,6 +31,7 @@
 
         </ul>
         <p>{{$fellow->fellowData->semblance}}</p>
+        <p>{{$fellow->fellowData}}</p>
 			</div>
 
 			<div class="col-sm-2">
