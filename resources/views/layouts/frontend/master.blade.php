@@ -119,7 +119,7 @@
 			@if($body_class == "home")
 				<div class="bgdimg">
 					<figure>
-						<img src="{{url('img/home_apertus_2018.jpeg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
+						<img src="{{url('img/apertus_2018.jpg')}}" alt="Gobierno Abierto desde lo local para el desarrollo sostenible">
 					</figure>
 					<div class="container">
 						<div class="cta">
