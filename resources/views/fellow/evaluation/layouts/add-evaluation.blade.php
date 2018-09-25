@@ -20,10 +20,13 @@
 
 		      <div id="GF-PNUD-quiz-status-bar">
 		        <p style="display: none;" id="GF-PNUD-quiz-good-response">Tu respuesta es correcta</p>
-            <p style="display: none;" id="GF-PNUD-quiz-bad-response">Tu respuesta es incorrecta, respuestas correctas: </p>
+            <p style="display: none;" id="GF-PNUD-quiz-bad-response">Tu respuesta es incorrecta, respuesta correcta: </p>
+						<p style="display: none;" id="GF-PNUD-quiz-multi-bad-response">Tus respuestas son incorrectas, respuestas correctas: </p>
             <ul style="display: none;" id="GF-PNUD-quiz-correct-answers" >
             </ul>
 						<p style="display: none;" id="GF-PNUD-quiz-null-response" >Selecciona una opción</p>
+						<p style="display: none;" id="GF-PNUD-quiz-max-response" >Seleccionaste más opciones de las indicadas</p>
+						<p style="display: none;" id="GF-PNUD-quiz-min-response" >No has seleccionado todas las opciones</p>
 		        <div class="row">
 			        <div class="col-sm-2 col-sm-offset-10">
 						          <p id="GF-PNUD-quiz-eval-btn"><a href="#" class="btn view block sessions_l">Continuar</a></p>

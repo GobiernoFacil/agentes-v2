@@ -242,6 +242,13 @@
     </label>
   </li>
 </script>
+<script type="text/text" id="GF-PNUD-quiz-multi-answer-template">
+  <li id="<%=id%>">
+    <label>
+      <input class = "radio_select" data-question="<%=question_id%>" type="checkbox" name="answer" value="<%=id%>"><%=value%>
+    </label>
+  </li>
+</script>
 <script>
 	var module     = {!! json_encode($activity->session->module->pluck('title','slug')) !!},
 	    sessions   = {!! json_encode($activity->session->module->sessions->pluck('name','slug')) !!},
@@ -255,6 +262,7 @@
 		        errorClass    = "error",
 						correctClass  = "correct",
 		        evalURL       = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/evaluar")}}',
+						evalMURL      = '{{url("tablero/{$activity->session->module->program->slug}/evaluacion/{$activity->slug}/multi-evaluar")}}',
 		        endURL        = '{{url("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")}}',
 		        activity      = {!!$activity->quizInfo->select('title','id','description')->first()->toJson()!!},
 		        questions     = {!!$fellow_questions->toJson()!!},
@@ -264,6 +272,11 @@
 		          @foreach($q->answer()->select('value','id','question_id','selected')->get() as $a)
 		            {!!$a->toJson()!!},
 		          @endforeach
+		        @endforeach
+		        {}],
+						all_crr_ans       = [
+		        @foreach($activity->quizInfo->question as $q)
+							{'id': {!!$q->id!!},'count':{!!$q->all_correct_Answer()->count()!!}},
 		        @endforeach
 		        {}],
 
@@ -283,8 +296,11 @@
 		        uiStatusBar      = document.getElementById("GF-PNUD-quiz-status-bar"),
 		        uiGoodResponse   = document.getElementById("GF-PNUD-quiz-good-response"),
 		        uiBadResponse    = document.getElementById("GF-PNUD-quiz-bad-response"),
+						uiMBadResponse   = document.getElementById("GF-PNUD-quiz-multi-bad-response"),
 		        uiNext           = document.getElementById("GF-PNUD-quiz-next-btn"),
 						uiNull					 = document.getElementById("GF-PNUD-quiz-null-response"),
+						uiMaxM				   = document.getElementById("GF-PNUD-quiz-max-response"),
+						uiMinM				   = document.getElementById("GF-PNUD-quiz-min-response"),
 		        uiNextBtn        = uiNext.querySelector("a"),
 		        uiEval           = document.getElementById("GF-PNUD-quiz-eval-btn"),
 		        uiEvalBtn        = uiEval.querySelector("a"),
@@ -292,7 +308,8 @@
 		        uiEndBtn         = uiEnd.querySelector("a"),
 						uiCorrectAns     = document.getElementById("GF-PNUD-quiz-correct-answers"),
 		        uiAnswerTemplate = document.getElementById("GF-PNUD-quiz-answer-template").innerHTML;
-
+						uiMultiAnswerTemplate = document.getElementById("GF-PNUD-quiz-multi-answer-template").innerHTML;
+						uiMax						= [{'id':0,'count':1}];
 
 
 		    render.showInterface = function(){
@@ -319,8 +336,16 @@
 
 		      var _answers = answers.filter(function(answer){
 		                       return answer.question_id == questions[question].id;
-		                     }),
-		      template = _.template(uiAnswerTemplate);
+		                     });
+
+					uiMax 		 = all_crr_ans.filter(function(all_crr_ans){
+														return all_crr_ans.id == questions[question].id;
+													});
+					if(uiMax[0].count > 1){
+			      var template = _.template(uiMultiAnswerTemplate);
+					}else{
+			      var template = _.template(uiAnswerTemplate);
+					}
 
 		      _answers.forEach(function(answer){
 		        uiAnswers.insertAdjacentHTML('beforeend', template(answer));
@@ -331,6 +356,8 @@
 		      uiStatusBar.classList.add(successClass);
 		      uiGoodResponse.style.display = "block";
 					uiNull.style.display = "none";
+					uiMaxM.style.display = "none";
+					uiMinM.style.display = "none";
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
 
@@ -344,10 +371,16 @@
 
 		    render.showError = function(answers){
 		      uiStatusBar.classList.add(errorClass);
-		      uiBadResponse.style.display = "block";
+					if(answers.length > 1){
+						uiMBadResponse.style.display = "block";
+					}else{
+						uiBadResponse.style.display = "block";
+					}
 		      currentSlide += 1;
 		      uiEval.style.display = "none";
 					uiNull.style.display = "none";
+					uiMaxM.style.display = "none";
+					uiMinM.style.display = "none";
 					uiCorrectAns.innerHTML = '';
 					for (var i = 0; i < answers.length; i++) {
 						var correctAnsId = document.getElementById(answers[i].id);
@@ -388,55 +421,77 @@
 		    uiEvalBtn.addEventListener("click", function(e){
 		      e.preventDefault();
 					uiNull.style.display = "none";
-		      var selected = uiAnswers.querySelector("input[name='answer']:checked");
-		      if(!selected){
+					uiMaxM.style.display = "none";
+					uiMinM.style.display = "none";
+					var selected = uiAnswers.querySelector("input[name='answer']:checked");
+					if(!selected){
 						uiNull.style.display = "block";
 						return
 					}
 
-					var x = document.getElementsByClassName("radio_select");
-					var i;
-					for (i = 0; i < x.length; i++) {
-					    x[i].disabled = true;
+					if(uiMax[0].count > 1 ){
+						uiNull.style.display = "none";
+						uiMaxM.style.display = "none";
+						uiMinM.style.display = "none";
+						var selected = uiAnswers.querySelectorAll("input[name='answer']:checked");
+						if(selected.length > uiMax[0].count){
+							uiMaxM.style.display = "block";
+							return
+						}else if(selected.length < uiMax[0].count){
+							uiMinM.style.display = "block";
+							return
+						}
+						var x = document.getElementsByClassName("radio_select");
+						var i;
+						for (i = 0; i < x.length; i++) {
+								x[i].disabled = true;
+						}
+						var loc_answers =	[];
+						selected.forEach(
+							function(currentValue, currentIndex, listObj){
+								loc_answers[currentIndex] = currentValue.value;
+							}
+						);
+						$.post(evalMURL, {
+							_token   : _token,
+							activity : activity.activity_id,
+							question : selected[0].getAttribute("data-question"),
+							answers  : loc_answers
+						}, function(response){
+
+							if(response.response){
+								render.showSuccess();
+							}
+							else{
+								render.showError(response.correct);
+							}
+						}, "json");
+
+					}else{
+							var x = document.getElementsByClassName("radio_select");
+							var i;
+							for (i = 0; i < x.length; i++) {
+							    x[i].disabled = true;
+							}
+
+				      $.post(evalURL, {
+								_token   : _token,
+				        activity : activity.activity_id,
+				        question : selected.getAttribute("data-question"),
+				        answer   : selected.value
+				      }, function(response){
+				        if(response.response){
+				          render.showSuccess();
+				        }
+				        else{
+				          render.showError(response.correct);
+				        }
+				      }, "json");
 					}
-		      $.post(evalURL, {
-						_token   : _token,
-		        activity : activity.activity_id,
-		        question : selected.getAttribute("data-question"),
-		        answer   : selected.value
-		      }, function(response){
-		        if(response.response){
-		          render.showSuccess();
-		        }
-		        else{
-		          render.showError(response.correct);
-		        }
-		      }, "json");
 		    });
 
 		  })();
 
-			$(document).ready(function() {
-			  <?php $countP =1;?>
-			  @foreach($activity->quizInfo->question as $question)
-			    <?php $count =0;?>
-			    @if($question->count_correct($question->id)==1)
-			      @foreach($question->answer as $answer)
-			      $('.answer_q{{$countP}}').click(function(event) {
-			         $('.answer_q{{$countP}}').not(this).attr('checked', false);
-			         $(this).attr('checked', true);
-			       });
-			      <?php $count++;?>
-			      @endforeach
-			    @else
-			      $('.delete{{$countP}}_{{$count}}').click(function(event) {
-			          event.preventDefault();
-			          $('.answer_q{{$countP}}').not(this).attr('checked', false);
-			       });
-			    @endif
-			    <?php $countP++;?>
-			  @endforeach
-			});
 </script>
 @elseif($activity->type === 'diagnostic' && $activity->diagnosticInfo)
 @include('fellow.surveys.layouts.box_template')
