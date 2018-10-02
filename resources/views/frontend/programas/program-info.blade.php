@@ -64,22 +64,67 @@
                 @endforeach
 							</tbody>
 						</table>
-<?php /*
-						<table class="table">
-							<thead>
-								<tr><th><h3>TEMAS TRANSVERSALES</h3></th></tr>
-							</thead>
-							<tbody>
-								<tr><td><h4>Enfoque de género</h4></td></tr>
-								<tr><td><h4>Enfoque territorial</h4></td></tr>
-								<tr><td><h4>Enfoque de derechos</h4></td></tr>
-								<tr><td><h4><em>Leave no one behind</em> – No dejar a nadie atrás</h4></td></tr>
-								<tr><td><h4>Desarrollo de Capacidad Local</h4></td></tr>
-							</tbody>
-						</table>
 
+						
 						</div>
 					</li>
+					<!--Evaluación-->
+					<li>
+						<h3>Evaluación</h3>
+						<span></span>
+						<div class="panel">
+							<ol>
+										<li class="ap_time">Las y los participantes recibirán una clave de usuario y contraseña para ingresar a la plataforma virtual mediante la cual podrán participar en todas las actividades virtuales y para ser informados sobre las actividades presenciales y por equipo.</li>
+										<li class="ap_time">Es derecho del participante el ser informado, por medio de la plataforma virtual, con claridad y tiempo de todas las actividades relativas al programa. </li>
+										<li class="ap_time">Dado que este programa es de orden virtual, es responsabilidad del participante conseguir los medios para poder cumplir en tiempo y forma con las actividades del mismo.</li>
+										<li class="ap_time">De manera general, la evaluación consta de exámenes en línea, trabajos individuales, participación en los foros y trabajos por equipo.</li>
+										<li class="ap_time">Para obtener una calificación final aprobatoria se deberá obtener al menos 70 puntos de 100 posibles, los cuales corresponden al trabajo final (40%), actividades en línea trabajos (30%), y la participación presencial en seminarios (30%). A continuación, se describe en qué consiste cada concepto:<br><br>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>CONCEPTO</th>
+													<th>DESCRIPCIÓN</th> 
+													<th>VALOR</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><h4>Actividades de aprendizaje en línea</h4></td>
+													<td>Se refieren, por un lado, a los cuestionarios y ejercicios virtuales
+que se deben completar de forma individual durante o al final de
+cada sesión virtual. Los cuestionarios usualmente son de opción múltiple y los ejercicios implican elaborar un producto que deberá
+ser cargado como archivo en la plataforma.
+Por otro lado, se refieren a los foros virtuales que se presentan en
+algunas sesiones, en los cuales se deberá participar activamente.
+Los cuestionarios y ejercicios tienen un valor del 80% y los foros
+del 20% respecto del valor total del concepto.</td>
+													<td>30%</td>
+												</tr>
+												<tr>
+													<td><h4>Participación presencial en seminarios</h4></td>
+													<td>Se refiere a la asistencia a los seminarios presenciales, así como a la realización de las actividades y participación activa durante el mismo.</td>
+													<td>30%</td>
+												</tr>
+												<tr>
+													<td><h4>Trabajo final</h4></td> 
+													<td>Se refiere al producto final que será elaborado en equipo durante todo el programa de formación.</td>
+													<td>40%</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										</li>
+										<li class="ap_time">Al término del programa se otorgará una constancia de participación y cumplimiento de los requisitos del programa a las y los participantes que aprueben el programa.</li>
+									</ol>
+						</div>
+					</li>
+					<li>
+						<h3><a href="{{url('/archivos/Programa-Fellowship_Mazatlan_junio2018.pdf')}}" download>Primer seminario presencial del programa de formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, del 6 al 8 de junio de 2018 en la ciudad de Mazatlán, Sinaloa.</a></h3>
+					</li>
+					<li>
+						<h3><a href="{{url('/archivos/ProgramaSegundoSeminario14sep2018.pdf')}}" download>Segundo seminario presencial del programa de formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible, del 19 al 21 de septiembre de 2018 en la ciudad de México.</a></h3>
+					</li>
+					<?php /*
 					<!-- coordinandores-->
 					<li>
 						<h3>Coordinadores Académicos</h3>
@@ -118,21 +163,7 @@
 							<p>Como parte del programa contaremos con la participación de ponentes expertos en las materias y temáticas a abordar. En Seminarios, Charlas y Webinars contaremos con la participación de ponentes de miembros de organizaciones de referencia: INAI, PNUD y el Sistema de Naciones Unidas, UNAM, CIDE, Tec de Monterrey, el COLMEX, entre otros.</p>
 						</div>
 					</li>
-					<!--Evaluación-->
-					<li>
-						<h3>Evaluación y Reconocimiento</h3>
-						<span></span>
-						<div class="panel">
-						<p>El curso se desarrollará con la guía de los Coordinadores y mentores por medio de la Plataforma de Formación. Semanalmente se presentarán actividades y cuestionarios que serán calificados. Así mismo, el participante al cierre del curso presentará un proyecto en equipo, concreto y factible que, a través del uso de las herramientas adquiridas durante el programa, enfrente un reto local de desarrollo por medio de la realización de acciones que promuevan la transparencia, la participación, la rendición de cuentas, y la innovación cívica y tecnológica.</p>
-						<p>La evaluación final se integrará de la siguiente manera:</p>
-						<ul>
-							<li>Actividades y ensayos 30%</li>
-							<li>Cuestionarios de conocimientos 20%</li>
-							<li>Proyecto final 50%</li>
-						</ul>
-						<p>A quienes acrediten el 70% de los puntos a evaluar serán acreedores a un reconocimiento que avale su participación en el programa.</p>
-						</div>
-					</li>
+					
 					*/
 					?>
 				</ul>
