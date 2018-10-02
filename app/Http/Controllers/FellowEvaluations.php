@@ -289,6 +289,84 @@ class FellowEvaluations extends Controller
     }
 
     /**
+    *
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function multiEvaluate(Request $request){
+      $user     = Auth::user();
+      $activity = Activity::find($request->activity);
+      $question = Question::find($request->question);
+      $correct_answers = $question->get_for_fellow_correct_Answer();
+      $correct = [];
+      $count   = 0;
+      foreach ($request->answers as $answer) {
+        $answerT = FellowAnswer::firstOrCreate([
+          'user_id'          => $user->id,
+          'question_id'      => $question->id,
+          'answer_id'        => $answer,
+          'questionInfo_id'  => $question->quizInfo->id
+
+        ]);
+        if($correct_answers->pluck('id')->contains($answer)){
+          $answerT->correct  = 1;
+          $answerT->save();
+          $count++;
+        }else{
+          $answerT->correct  = 0;
+          $answerT->save();
+        }
+
+      }
+      if(FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$question->quizInfo->id)->count() == $question->quizInfo->answers()->count()){
+        $questions = $question->quizInfo->question;
+        $single_v  = 10/$questions->count();
+        $score     = 0;
+        foreach ($questions as $q) {
+          $total_c = FellowAnswer::where('user_id',$user->id)->where('question_id',$q->id)->where('questionInfo_id',$q->quizInfo->id)->where('correct',1)->count();
+          $total_q = $q->all_correct_Answer()->count();
+          if($total_q){
+            $q_v = $single_v/$total_q;
+          }else{
+            $q_v = $single_v;
+          }
+          $score = ($q_v*$total_c)+$score;
+        }
+        $uScore = FellowScore::firstOrCreate([
+            'user_id'            =>  $user->id,
+            'questionInfo_id'    =>  $question->quizInfo->id
+          ]);
+        $uScore->score = $score;
+        $uScore->save();
+        $fellowAverage = FellowAverage::firstOrCreate([
+            'user_id'    => $user->id,
+            'module_id'  => $question->quizInfo->activity->session->module->id,
+            'session_id' => $question->quizInfo->activity->session->id,
+            'type'       => 'session',
+            'program_id' => $question->quizInfo->activity->session->module->program->id,
+        ]);
+        $fellowAverage->scoreSession();
+        $fellowProgress  = FellowProgress::firstOrCreate([
+            'fellow_id'    => $user->id,
+            'module_id'    => $question->quizInfo->activity->session->module->id,
+            'session_id'   => $question->quizInfo->activity->session->id,
+            'activity_id'  => $question->quizInfo->activity->id,
+            'program_id'   => $question->quizInfo->activity->session->module->program->id,
+            'type'         => 'activity'
+        ]);
+        $fellowProgress->status = 1;
+        $fellowProgress->save();
+        $user->update_progress($question->quizInfo->activity->session->module);
+      }
+
+      if($correct_answers->count() == $count){
+        return response()->json(["response" => 1, "original" => $request->all()]);
+      }else{
+        return response()->json(["response" => 0, "correct" => array_values($question->get_for_fellow_correct_Answer()->whereNotIn('id',$request->answers)->toArray())]);
+      }
+    }
+
+    /**
     *Evalua el final de un examen
     *
     * @return \Illuminate\Http\Response
@@ -302,7 +380,7 @@ class FellowEvaluations extends Controller
        if(!$activity->quizInfo){
          return redirect('tablero')->with(['error'=>'Ocurrió un error, por favor contacta a soporte']);
        }
-       if(FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->count() != $activity->quizInfo->question->count()){
+       if(FellowAnswer::where('user_id',$user->id)->where('questionInfo_id',$activity->quizInfo->id)->count() != $activity->quizInfo->answers()->count()){
          return redirect("tablero/{$activity->session->module->program->slug}/aprendizaje/{$activity->session->module->slug}/{$activity->session->slug}/{$activity->slug}")
          ->with(['error'=>'Ocurrió un error, por favor intentalo nuevamente o contacta a soporte']);
        }

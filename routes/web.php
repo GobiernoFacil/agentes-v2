@@ -566,6 +566,7 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('tablero/{program_slug}/evaluacion/{activity_slug}', 'FellowEvaluations@add');
           Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/save', 'FellowEvaluations@save');
           Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/evaluar', 'FellowEvaluations@evaluate');
+          Route::post('tablero/{program_slug}/evaluacion/{activity_slug}/multi-evaluar', 'FellowEvaluations@multiEvaluate');
           Route::get('tablero/{program_slug}/evaluacion/{activity_slug}/finalizar', 'FellowEvaluations@putScore');
           Route::get('tablero/{program_slug}/evaluaciones', 'FellowEvaluations@indexEvaluations');
           /* diagnostico*/
