@@ -28,7 +28,7 @@
 				<p class="center">{{$fellow->fellowData->city}}, {{$fellow->fellowData->state}}</p>
 				<p class="center">
 				@if($fellow->fellowData->twitter)
-				<a href="{{$fellow->fellowData->twitter}}" class="facilitador_i tw"></a>
+				<a href="https://twitter.com/{{$fellow->fellowData->twitter}}" class="facilitador_i tw"></a>
 				@endif
 				@if($fellow->fellowData->facebook)
 				<a href="{{$fellow->fellowData->facebook}}" class="facilitador_i fb"></a>
@@ -37,7 +37,7 @@
 				<a href="{{$fellow->fellowData->linkedin}}" class="facilitador_i lk"></a>
 				@endif
 				@if($fellow->fellowData->other)
-				<a href="{{$fellow->fellowData->other}}">{{$fellow->fellowData->other}}</a>
+				<a href="{{$fellow->fellowData->other}}" class="facilitador_i other"></a>
 				@endif
 				</p>
 				
