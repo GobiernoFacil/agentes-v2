@@ -1,6 +1,6 @@
 @extends('layouts.frontend.master')
-@section('title', $fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname . 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
-@section('description', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
+@section('title', $fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname . ' fellow del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
+@section('description', $fellow->name." ".$fellow->fellowData->surname." ".$fellow->fellowData->lastname . ' fellow del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
 @section('body_class', 'programa 2018 perfil fellow')
 @section('canonical', url("programa-gobierno-abierto/$program->slug/ver-generacion/ver-fellow/$slug"))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
