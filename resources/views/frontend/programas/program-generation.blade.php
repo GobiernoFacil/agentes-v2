@@ -1,7 +1,7 @@
 @extends('layouts.frontend.master')
-@section('title', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
-@section('description', 'Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
-@section('body_class', 'programa 2018')
+@section('title', 'Conoce a los fellows del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
+@section('description', 'Conoce a los fellows del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible 2018')
+@section('body_class', 'programa 2018 generacion')
 @section('canonical', url('programa-gobierno-abierto/'.$program->slug))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
@@ -10,7 +10,7 @@
 	<div class="col-sm-10 col-sm-offset-1">
     <?php $date = new DateTime($program->start);?>
 		<h1>Edición {{$date->format('Y')}} - PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE<a href="#nota"><sup>1</sup></a></h1>
-		<h2>Generación</h2>
+		<h2>Conoce a los fellows</h2>
     <div class="row">
 			<div class="col-sm-9">
 			@foreach($states as $state)
@@ -25,13 +25,14 @@
 							<li>
 								<?php $slug =str_slug($fellow->name);  ?>
 								<a href = '{{url("programa-gobierno-abierto/$program->slug/ver-generacion/ver-fellow/{$slug}")}}'>
+									<figure class="ap_figure xs">
 									@if($fellow->image)
-										<img src='{{url("img/users/{$fellow->image->name}")}}' height="25px">
+										<img src='{{url("img/users/{$fellow->image->name}")}}' height="100%">
 									@else
-										<img src='{{url("img/users/default.png")}}' height="25px">
+										<img src='{{url("img/users/default.png")}}' height="100%">
 									@endif
-
-									{{mb_convert_case($fellow->name,  MB_CASE_TITLE, 'UTF-8')}}
+									</figure>
+									<strong class="ap_generation_name">{{mb_convert_case($fellow->name,  MB_CASE_TITLE, 'UTF-8')}}</strong>
 								</a>
 						</li>
 						@endforeach
