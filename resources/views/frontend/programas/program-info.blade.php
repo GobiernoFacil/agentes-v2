@@ -173,6 +173,7 @@ del 20% respecto del valor total del concepto.</td>
 				<h2></h2>
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
 				<a href="{{url('programa-gobierno-abierto/aliados')}}" class="icon i_aliados">CONOCE A LOS ALIADOS</a>
+				<a href="{{url('programa-gobierno-abierto/programa-2018/ver-generacion')}}" class="icon i_cfellows"><span>CONOCE A LOS FELLOWS</span></a>
 				<a href="{{url('convocatoria')}}" class="icon i_convocatoria"><span>CONVOCATORIA</span></a>
 				<a href="{{url('programa-gobierno-abierto/antecedentes')}}" class="icon i_antecedentes">ANTECEDENTES</a>
 			</div>
