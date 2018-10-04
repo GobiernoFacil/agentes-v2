@@ -11,6 +11,9 @@ class Suscribe extends Controller
   // Redireccionar al dashboard correspondiente después de acceder correctamente
   public function redirectToDashboard(){
     $usuario = Auth::user();
+    if(!$usuario->enabled){
+      Auth::logout();
+    }
       if($usuario->type ==='superAdmin'){
         return redirect('sa/dashboard');
       }elseif($usuario->type ==='admin'){
