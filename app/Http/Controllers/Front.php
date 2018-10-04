@@ -47,6 +47,9 @@ class Front extends Controller
     //ver generacion
     public function generation($program_slug){
       $program = Program::where('slug',$program_slug)->firstOrFail();
+      if(date_format(date_create($program->start),'Y')=='2017'){
+        return redirect('programa-gobierno-abierto/2017');
+      }
       $fellows = $program->get_all_fellows()->get();
       $states  = FellowData::select('state')->whereIn('user_id',$fellows->pluck('id')->toArray())->orderBy('state','asc')->distinct('state')->get();
       return view('frontend.programas.program-generation')->with([
@@ -59,6 +62,9 @@ class Front extends Controller
    //ver fellow
    public function viewFellow($program_slug,$fellow_slug){
      $program = Program::where('slug',$program_slug)->firstOrFail();
+     if(date_format(date_create($program->start),'Y')=='2017'){
+       return redirect('programa-gobierno-abierto/2017');
+     }
      $name    = ucwords(str_replace('-', ' ', $fellow_slug));
      $fellow  = User::where('name',$name)->firstOrFail();
      return view('frontend.programas.program-view-fellow')->with([
