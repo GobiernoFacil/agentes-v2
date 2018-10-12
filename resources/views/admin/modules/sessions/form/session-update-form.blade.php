@@ -24,7 +24,7 @@
   <div class="col-sm-12">
     <p>
       <label><strong>Sesión predecesora</strong></label>
-      {{Form::select('parent_id',$list,'0', ['class' => 'form-control'])}}
+      {{Form::select('parent_id',$list,null, ['class' => 'form-control'])}}
       @if($errors->has('parent_id'))
       <strong class="danger">{{$errors->first('parent_id')}}</strong>
       @endif
