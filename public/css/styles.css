@@ -2090,6 +2090,25 @@ sup {
   .divider.b {
     border-color: #ddd; }
 
+.pagination {
+  margin-left: 0; }
+  .pagination li {
+    list-style: none;
+    display: inline-block; }
+    .pagination li.active {
+      background: black;
+      color: white;
+      padding: 2px 5px; }
+    .pagination li.disabled {
+      color: #999; }
+    .pagination li a {
+      background: #18b73e;
+      color: white;
+      display: block;
+      padding: 2px 5px; }
+      .pagination li a:hover {
+        background: #128a2f; }
+
 /* =aliados
 -------------------------------------------------------------- */
 .aliados h2 a {
