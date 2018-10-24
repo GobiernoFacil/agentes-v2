@@ -48,6 +48,7 @@
 					</li>
 					@endforeach
 				</ul>
+				{{$all->links()}}
 			</div>
 		</div>
 		@else

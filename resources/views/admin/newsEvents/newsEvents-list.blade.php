@@ -22,6 +22,7 @@
 			@include('layouts.news.all-list-news')
 		@endforeach
 		</ul>
+			{{$news->links() }}
 	</div>
 </div>
 @else
