@@ -89,6 +89,7 @@ Route::get('gobierno-abierto/contenido-teorico-del-modelo', 'GovernmentFront@con
 //Route::get('gobierno-abierto/recursos', 'GovernmentFront@recursos');
 Route::get('gobierno-abierto/recursos/videos', 'GovernmentFront@videos');
 Route::get('gobierno-abierto/recursos/lecturas', 'GovernmentFront@lecturas');
+Route::get('gobierno-abierto/recursos/secretariado-tecnico-local', 'GovernmentFront@stl');
 Route::get('gobierno-abierto/ejercicios-locales', 'GovernmentFront@ejercicios');
 Route::get('gobierno-abierto/recursos/modelo-gobierno-abierto', 'GovernmentFront@model');
 
