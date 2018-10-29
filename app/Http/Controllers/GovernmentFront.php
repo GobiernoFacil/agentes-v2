@@ -24,6 +24,10 @@ class GovernmentFront extends Controller
       public function videos(){
         return view('welcome');
       }
+      //stl
+      public function stl(){
+        return view('frontend.opengovernment.stl');
+      }
       //lecturas
       public function lecturas(){
         return view('frontend.opengovernment.recursos');
