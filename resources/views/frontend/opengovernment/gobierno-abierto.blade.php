@@ -28,6 +28,9 @@
 	</div>
 		<div class="col-sm-4">
 			<h2 class="center">Recursos</h2>
+				<a href="{{url('gobierno-abierto/recursos/secretariado-tecnico-local')}}" class="icon i_crecursos">
+					<span>RECURSOS PARA STL</span>
+				</a>
 				<a href="{{url('gobierno-abierto/recursos/lecturas')}}" class="icon i_lectura">
 					<span>LECTURAS</span>
 				</a>
