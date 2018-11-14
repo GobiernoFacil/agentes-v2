@@ -16,7 +16,7 @@
 					<?php $count_a = 0?>
 					@foreach($all as $article)
 					<?php $count_a++?>
-					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}}">
+					<li class="{{ $count_a == 1 ? 'col-sm-12' : 'col-sm-6'}} ap_single_nw">
 
 						@if($article->image)
 						<a href="{{url('noticias-eventos/blog-fellow/ver/' . $article->slug)}}" class="img_f">
