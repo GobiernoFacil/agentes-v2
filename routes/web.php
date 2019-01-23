@@ -65,7 +65,7 @@ Route::get('cities', 'NoticeFront@cities');
 /*********  programa 2017 ******** */
 //Route::get('programa-gobierno-abierto/2017', 'Front@pro17');
 Route::get('programa-gobierno-abierto/2017/testimonios', 'Front@testimony17');
-
+Route::get('programa-gobierno-abierto/2018/testimonios', 'Front@testimony18');
 
 
 /*********  programa 2018 ******** */

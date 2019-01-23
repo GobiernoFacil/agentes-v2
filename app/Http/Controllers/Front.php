@@ -28,6 +28,11 @@ class Front extends Controller
       return view('frontend.programas.2017.testimonio');
     }
 
+    //testimonios 2017
+    public function testimony18(){
+      return view('frontend.programas.2018.testimonio');
+    }
+
     //programa 2018
     public function pro18(){
       return view('frontend.programas.2018.que-es');
