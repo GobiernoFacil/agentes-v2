@@ -17,7 +17,7 @@
 			<p>Los ToolKits abarcan una serie de temáticas que van desde la construcción de compromisos de Gobierno Abierto, pasando por la elaboración de planes estratégicos, hasta la construcción de indicadores con un enfoque de Desarrollo Sostenible.</p>
 			</li>
 
-			<li><h2><a href="{{ url('archivos/KIT-01_PNUD-ST_Conocer_mas_sobre_GA.pdf') }}">Kit 1. Conocer más sobre el Gobierno Abierto y su importancia para la gobernanza democrática</a> </h2>
+			<li><h2><a href="{{ url('archivos/kits-gobierno-abierto/KIT-01_PNUD-ST_Conocer_mas_sobre_GA.pdf') }}">Kit 1. Conocer más sobre el Gobierno Abierto y su importancia para la gobernanza democrática</a> </h2>
 			<p>Tiene la intención de proporcionar conocimientos básicos sobre el Gobierno Abierto y para la comprensión de su papel en el logro de sociedades más democráticas. En este sentido, con este kit se pretende, por un lado, que los miembros de un STL estén familiarizados con los conceptos básicos de esta agenda y, por otro, que cuentan con un documento de base para sensibilizar a otros actores sobre el tema.</p>
 			</li>
 
