@@ -27,8 +27,8 @@ var appPNUD = {
     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	//openstreemap
-	osmapURL: 'http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', 
-	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	osmapURL: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
   },
   // el CSS para cada estado
