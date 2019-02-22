@@ -34,10 +34,10 @@
 		<div class="col-sm-12">
 			<h2><a href="{{url('programa-gobierno-abierto/aliados')}}">Aliados</a></h2>
 			<div class="row">
-				<a href="https://www.usaid.gov/mexico" class="usaid">USAID</a>				
-				<a href="http://www.mx.undp.org/" class="pnud">PNUD</a>				
-				<a href="http://inicio.ifai.org.mx/SitePages/ifai.aspx" class="inai">INAI</a>				
-				<a href="http://www.gesoc.org.mx/site/" class="gesoc">GESOC</a>				
+				<a href="https://www.usaid.gov/mexico" class="usaid">USAID</a>
+				<a href="http://www.mx.undp.org/" class="pnud">PNUD</a>
+				<a href="http://inicio.ifai.org.mx/SitePages/ifai.aspx" class="inai">INAI</a>
+				<a href="http://www.gesoc.org.mx/site/" class="gesoc">GESOC</a>
 				<a href="https://gobiernofacil.com/" class="gf">Gobierno Fácil</a>
 				<a href="http://www.prosociedad.org/" class="prosociedad">Prosociedad</a>
 			</div>
@@ -50,7 +50,8 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<p>® 2017-2020 Gobierno Abierto desde lo local para el Desarrollo Sostenible.<br>
-					<a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a></p>
+					<a href="{{url('aviso-privacidad')}}">Aviso de Privacidad</a>
+					<a href="{{url('aviso-privacidad-red')}}">Aviso de privacidad de Red</a></p>
 				</div>
 				<div class="col-sm-6 right">
 					<p>Forjado Artesanalmente por:<br>
@@ -69,8 +70,8 @@
   ga('send', 'pageview');
 
 </script>
-<script src="{{url('js/app.js')}}"></script> 
-<script src="{{url('js/main.js')}}"></script> 
+<script src="{{url('js/app.js')}}"></script>
+<script src="{{url('js/main.js')}}"></script>
 @if ($__env->yieldContent('body_class') == 'home' || $__env->yieldContent('body_class') == 'programa alcance')
 <script src="{{url('js/bower_components/d3/d3.js')}}"></script>
 <script src="{{url('js/bower_components/leaflet/dist/leaflet.js')}}"></script>
