@@ -99,7 +99,7 @@ class Front extends Controller
       return view('frontend.privacidad');
     }
 
-  
+
     //politicas-de-privacidad
     public function privacidadAgentes(){
       return view('frontend.privacidad-red');
