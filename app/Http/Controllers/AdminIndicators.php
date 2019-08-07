@@ -204,12 +204,15 @@ class AdminIndicators extends Controller
       $program    = Program::where('id',$program_id)->firstOrFail();
       $test       = User::where('email','andre@fcb.com')->first();
       $enabled    = $program->fellows()->where('user_id','!=',$test->id)->pluck('user_id');
+      dd($enabled);
       $male            = FellowData::where('gender','Male')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
+      dd($male);
       $female          = FellowData::where('gender','Female')->whereIn('user_id',$enabled->toArray())->pluck('user_id');
       if($program->title === 'Programa 2017'){
         $total_male      = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','total')->count();
         $total_female    = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','total')->count();
       }else{
+        /*Nunca se tomo en cuenta el género como campo obligatorio, por eso, este cálculo no se generan o no esta completo  */
         $total_male      = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$male->toArray())->where('average','>=',7)->where('type','final')->count();
         $total_female    = FellowAverage::where('program_id',$program->id)->whereIn('user_id',$female->toArray())->where('average','>=',7)->where('type','final')->count();
       }
