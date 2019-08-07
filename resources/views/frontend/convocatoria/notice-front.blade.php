@@ -135,6 +135,10 @@
 	  	<div class="col-sm-8 col-sm-offset-2">
 	    	<h3>Convocatorias anteriores</h3>
 			<ul>
+
+            @foreach($closed as $notice_closed)
+              <li><a href='{{url("convocatoria/cerrada/$notice_closed->slug")}}'>{{$notice_closed->title}}</a></li>
+            @endforeach
 		    	<li><a href="{{ url('convocatoria/2017') }}">Convocatoria 2017</a></li>
 	    	</ul>
     	</div>

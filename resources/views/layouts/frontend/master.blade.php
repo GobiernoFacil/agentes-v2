@@ -126,6 +126,9 @@
 							<div class="row">
 								<div class="col-sm-8 col-xs-10 col-sm-offset-2 col-xs-offset-1">
 									<h1>Programa de Formación de <strong>Agentes Locales de Cambio</strong> en <strong>Gobierno Abierto</strong> y Desarrollo Sostenible</h1>
+									@if($notice)
+										<a href="{{url('convocatoria')}}" class="btn blue i_convoca_w">{{$notice->title}}</a>
+									@endif
 									<a href="{{url('programa-gobierno-abierto/2018/testimonios')}}" class="btn">Testimonios del Programa de Formación 2018</a>
 									<a href="{{url('programa-gobierno-abierto/2017/testimonios')}}" class="btn">Testimonios del Programa de Formación 2017</a>
 								</div>

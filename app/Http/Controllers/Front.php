@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Program;
 use App\Models\FellowData;
+use App\Models\Notice;
 use App\User;
 use App\Models\ActivitiesFile;
 use Illuminate\Http\Request;
@@ -11,7 +12,11 @@ class Front extends Controller
 {
     //página de inicio
     public function index(){
-      return view('frontend.home');
+      $today  = date('Y-m-d');
+      $notice = Notice::where('start','<=',$today)->where('end','>=',$today)->where('public',1)->first();
+      return view('frontend.home')->with([
+        'notice' => $notice
+      ]);
     }
 
     //descripcion
