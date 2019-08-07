@@ -43,7 +43,11 @@
             <td><h4>Total</h4></td>
             <td>{{$female->count() + $male->count() }}</td>
             <td>{{$total_male + $total_female}}</td>
-            <td>{{round((($total_male + $total_female)*100)/($male->count()+$female->count()))}}%</td>
+            @if($male->count()+$female->count() > 0)
+              <td>{{round((($total_male + $total_female)*100)/($male->count()+$female->count()))}}%</td>
+            @else
+              <td>0%</td>
+            @endif
         </tr>
 
 
