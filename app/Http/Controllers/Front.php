@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use App\Models\FellowData;
 use App\User;
+use App\Models\ActivitiesFile;
 use Illuminate\Http\Request;
 
 class Front extends Controller
@@ -64,6 +65,20 @@ class Front extends Controller
       ]);
     }
 
+    //Ver contenido
+    public function content($program_slug){
+      $program = Program::where('slug',$program_slug)->firstOrFail();
+      if(date_format(date_create($program->start),'Y')=='2017'){
+        return redirect('programa-gobierno-abierto/2017');
+      }
+      $fellows = $program->get_all_fellows()->get();
+      $states  = FellowData::select('state')->whereIn('user_id',$fellows->pluck('id')->toArray())->orderBy('state','asc')->distinct('state')->get();
+
+      return view('frontend.programas.program-content')->with([
+        'program' => $program,
+        'states'  => $states
+      ]);
+    }
    //ver fellow
    public function viewFellow($program_slug,$fellow_slug){
      $program = Program::where('slug',$program_slug)->firstOrFail();
@@ -143,6 +158,22 @@ class Front extends Controller
         'Content-Type: '.$fileData['extension'],
       );
       return response()->download($fileData['dirname'].'/'.$fileData['basename'], $name, $headers);
+    }
+
+    /**
+    *descargar archivo
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function watchFile(Request $request){
+      $data = ActivitiesFile::where('identifier',$request->identifier)->firstOrFail();
+      $file = $data->path.'/'.$data->identifier;
+      $fileData = pathinfo($file);
+      $headers = array(
+        'Content-Type: '.$fileData['extension'],
+      );
+      $filename = $data->name.".".$fileData['extension'];
+      return response()->file($fileData['dirname'].'/'.$fileData['basename'], $headers);
     }
 
 }

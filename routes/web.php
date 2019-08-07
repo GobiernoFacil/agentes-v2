@@ -79,6 +79,9 @@ Route::get('programa-gobierno-abierto/alcance/{state}', 'RangeFront@descripcion'
 Route::get('programa-gobierno-abierto/{program_slug}', 'Front@program');
 Route::get('programa-gobierno-abierto/{program_slug}/ver-generacion', 'Front@generation');
 Route::get('programa-gobierno-abierto/{program_slug}/ver-generacion/ver-fellow/{fellow_slug}', 'Front@viewFellow');
+Route::get('programa-gobierno-abierto/{program_slug}/ver-contenido', 'Front@content');
+Route::get('programa-gobierno-abierto/{program_slug}/ver-archivo/{identifier}', 'Front@watchFile');
+
 /*
 Route::get('programa-gobierno-abierto/alcance/{state}/quienes-conforman-el-ejercicio', 'RangeFront@conforman');
 Route::get('programa-gobierno-abierto/alcance/{state}/contexto', 'RangeFront@contexto');
