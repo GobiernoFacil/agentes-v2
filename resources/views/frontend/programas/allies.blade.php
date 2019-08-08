@@ -50,6 +50,7 @@
 			<div class="col-sm-3">
 				<h2></h2>
 				<a href="{{url('programa-gobierno-abierto')}}" class="icon i_programa">PROGRAMA</a>
+				<a href="{{url('programa-gobierno-abierto/programa-2018/ver-contenido')}}" class="icon i_contenido"><span>CONTENIDO DEL PROGRAMA</span></a>
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
 				<a href="{{url('convocatoria')}}" class="icon i_convocatoria"><span>CONVOCATORIA</span></a>
 			</div>

@@ -2,7 +2,7 @@
 @extends('layouts.frontend.master')
 @section('title', 'Conoce el contenido del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible '.$date->format('Y'))
 @section('description', 'Conoce el contenido del Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible '.$date->format('Y'))
-@section('body_class', 'program content')
+@section('body_class', 'program_content')
 @section('canonical', url('programa-gobierno-abierto/'.$program->slug.'/ver-contenido'))
 @section('breadcrumb', 'layouts.frontend.breadcrumb.bread_programa')
 
