@@ -32,9 +32,30 @@
                             </li>
                           @endforeach
                         @else
+                        
+                        @if($activity->videos)
+                       
                           <li>
-                            <a target="_blank" href ={{$activity->videos->link}}>Video</a>
+                         	 <div id="ytVideo-{{$activity->videos->id}}"></div>
+                          <!--  <a target="_blank" href ={{$activity->videos->link}}>Video</a>-->
                           </li>
+                           <script>
+			function getId(url) {
+				var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+				var match = url.match(regExp);
+				if (match && match[2].length == 11) {
+					return match[2];
+				}
+				else {
+					return 'error';
+    			}
+			}
+
+			var ytId = getId('{{$activity->videos->link}}');
+
+			document.getElementById("ytVideo-{{$activity->videos->id}}").innerHTML = '<iframe width="100%" height="313" src="//www.youtube.com/embed/' + ytId + '" frameborder="0" allowfullscreen></iframe>';
+		</script>
+                          @endif
                         @endif
                     </ul>
 
