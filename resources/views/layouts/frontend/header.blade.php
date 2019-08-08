@@ -16,6 +16,7 @@
 	<ul>
 		<li><a href="{{url('')}}" class="btn_home {{ $__env->yieldContent('body_class') == 'home' ? 'active' : ''}}"><span>Inicio</span></a></li>
 		<li><a href="{{url('programa-gobierno-abierto')}}" class="{{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Programa</span></a></li>
+		<li><a href="{{url('programa-gobierno-abierto/programa-2018/ver-contenido')}}" class="{{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Contenido Programa 2018</span></a></li>
 		<li><a href="{{url('programa-gobierno-abierto/programa-2018/ver-generacion')}}" class="btn_cfellow {{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Conoce a los Fellows</span></a></li>
 		<li><a href="{{url('gobierno-abierto')}}" class="btn_abierto {{ $__env->yieldContent('body_class') == 'abierto' ? 'active' : ''}}"><span>Gobierno Abierto</span></a></li>
 		<li><a href="{{url('noticias-eventos')}}" class="btn_noticias {{ $__env->yieldContent('body_class') == 'noticias' ? 'active' : ''}}"><span>Noticias</span></a></li>
