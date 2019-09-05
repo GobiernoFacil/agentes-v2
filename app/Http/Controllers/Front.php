@@ -125,6 +125,18 @@ class Front extends Controller
       return view('frontend.privacidad-red');
     }
 
+    //proyectos
+    public function projects(){
+      $states = ['Campeche','Chihuahua','Oaxaca','Quintana Roo','Tlaxcala','Veracruz'];
+      return view('frontend.projects')->with(['states'=>$states]);
+    }
+
+    public function projectsState($slug){
+      $state = ucwords(str_replace('-', ' ', $slug));
+      $slug_n  = str_replace('-','_',$slug);
+      return view('frontend.projects-state')->with(['state'=>$state,'slug'=>$slug,'slug_n'=>$slug_n ]);
+    }
+
 
 
     //redes-sociales

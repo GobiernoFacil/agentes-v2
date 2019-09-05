@@ -25,6 +25,8 @@ Route::get('contacto', 'Front@contacto');
 Route::get('aviso-privacidad', 'Front@politicas');
 Route::get('aviso-privacidad-red', 'Front@privacidadAgentes');
 Route::get('redes-sociales', 'Front@redes');
+Route::get('proyectos', 'Front@projects');
+Route::get('proyectos/{state}', 'Front@projectsState');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');
