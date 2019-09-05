@@ -60,8 +60,8 @@ class Kernel extends ConsoleKernel
         $today   = date('Y-m-d');
         if($today <= '2018-03-25'){
           $schedule->command('command:send-aspirants-reminder')
-                              ->dailyAt('07:00')
-                              ->emailOutputTo('carlos@gobiernofacil.com');
+                              ->dailyAt('07:00');
+                    //          ->emailOutputTo('carlos@gobiernofacil.com');
           $schedule->command('command:aspirant-count 0')
                               ->dailyAt('20:00');
           $schedule->command('command:aspirant-count 1')
@@ -72,8 +72,8 @@ class Kernel extends ConsoleKernel
                               ->mondays()->at('20:00');
         }
         $schedule->command('command:update-fellow-progress')
-                        ->dailyAt('01:00')
-                        ->emailOutputTo('carlos@gobiernofacil.com');
+                        ->dailyAt('01:00');
+                      //  ->emailOutputTo('carlos@gobiernofacil.com');
       /*
       $schedule->command('command:send-aspirants-reminder')
                           ->weekly()
