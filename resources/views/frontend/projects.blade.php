@@ -18,7 +18,7 @@
         $slug_n  = str_replace('-','_',str_slug($state));
         $info_name = 'infografia_'.$slug_n.'.jpg';
         ?>
-				<img src="/archivos/estados/{{ucwords(str_replace(' ','-',$state))}}/{{$info_name}}">
+				<img src="/archivos/estados/{{strtolower(ucwords(str_replace(' ','-',$state)))}}/{{$info_name}}">
         </a></span>
       </h2>
 			@endforeach
