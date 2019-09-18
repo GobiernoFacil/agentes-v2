@@ -22,23 +22,24 @@
 					<h3>{{$module->title}}</h3>
 					<div class="panel">
 					<ol>
-              @foreach($module->get_all_activities_with_content() as $activity)
-      						<li>{{$activity->name}}
-                    <ul>
-                        @if($activity->type==='lecture')
-                          @foreach($activity->activityFiles as $file)
-                            <li>
-                              <a target="_blank" href ='{{url("programa-gobierno-abierto/{$program->slug}/ver-archivo/{$file->identifier}")}}'>{{$file->name}}</a>
-                            </li>
-                          @endforeach
-                        @else
-                          <li>
-                           <a target="_blank" href ={{$activity->videos->link}}>Video</a>
-                          </li>
-                        @endif
-                    </ul>
-
-                  </li>
+              @foreach($module->sessions as $session)
+							   @foreach($session->activities as $activity)
+	      						<li>{{$activity->name}}
+	                    <ul>
+	                        @if($activity->type==='lecture')
+	                          @foreach($activity->activityFiles as $file)
+	                            <li>
+	                              <a target="_blank" href ='{{url("programa-gobierno-abierto/{$program->slug}/ver-archivo/{$file->identifier}")}}'>{{$file->name}}</a>
+	                            </li>
+	                          @endforeach
+	                        @elseif($activity->type==='video')
+	                          <li>
+	                           <a target="_blank" href ={{$activity->videos->link}}>Video</a>
+	                          </li>
+	                        @endif
+	                    </ul>
+	                  </li>
+									@endforeach
               @endforeach
 					</ol>
 					</div>
