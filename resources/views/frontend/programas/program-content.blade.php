@@ -24,21 +24,27 @@
 					<ol>
               @foreach($module->sessions as $session)
 							   @foreach($session->activities as $activity)
-	      						<li>{{$activity->name}}
-	                    <ul>
-	                        @if($activity->type==='lecture')
-	                          @foreach($activity->activityFiles as $file)
-	                            <li>
-	                              <a target="_blank" href ='{{url("programa-gobierno-abierto/{$program->slug}/ver-archivo/{$file->identifier}")}}'>{{$file->name}}</a>
-	                            </li>
-	                          @endforeach
-	                        @elseif($activity->type==='video')
-	                          <li>
-	                           <a target="_blank" href ={{$activity->videos->link}}>Video</a>
-	                          </li>
-	                        @endif
-	                    </ul>
-	                  </li>
+									 @if($activity->type==='lecture' || $activity->type==='video' )
+			                        @if($activity->type==='lecture' && $activity->activityFiles->count() > 0 )
+															<li>{{$activity->name}}
+																<ul>
+			                          @foreach($activity->activityFiles as $file)
+			                            <li>
+			                              <a target="_blank" href ='{{url("programa-gobierno-abierto/{$program->slug}/ver-archivo/{$file->identifier}")}}'>{{$file->name}}</a>
+			                            </li>
+			                          @endforeach
+						                    </ul>
+						                  </li>
+			                        @elseif($activity->type==='video' && $activity->videos->link)
+																<li>{{$activity->name}}
+																	<ul>
+				                          <li>
+				                           <a target="_blank" href ={{$activity->videos->link}}>Video</a>
+				                          </li>
+																</ul>
+															</li>
+			                        @endif
+											@endif
 									@endforeach
               @endforeach
 					</ol>
