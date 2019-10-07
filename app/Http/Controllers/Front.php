@@ -137,6 +137,32 @@ class Front extends Controller
       return view('frontend.projects-state')->with(['state'=>$state,'slug'=>$slug,'slug_n'=>$slug_n ]);
     }
 
+    public function projectDownload($slug){
+      $state   = ucwords(str_replace('-', ' ', $slug));
+      $slug_n  = str_replace('-','_',$slug);
+      $file    = public_path().'/archivos/estados/'.$slug.'/'.$slug_n.'.zip';
+      $fileData = pathinfo($file);
+      $filename = $slug_n.'_descargables.zip';
+      $headers = array(
+        'Content-Type: '.$fileData['extension']
+      );
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'],$filename, $headers);
+    }
+
+    //red
+    public function network(){
+      return view('frontend.network');
+    }
+
+    public function networkDownload($name){
+      $file    = public_path().'/archivos/red/'.$name.'.pdf';
+      $fileData = pathinfo($file);
+      $filename = $name.'.pdf';
+      $headers = array(
+        'Content-Type: '.$fileData['extension']
+      );
+      return response()->download($fileData['dirname'].'/'.$fileData['basename'], $filename,$headers);
+    }
 
 
     //redes-sociales

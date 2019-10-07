@@ -25,8 +25,11 @@ Route::get('contacto', 'Front@contacto');
 Route::get('aviso-privacidad', 'Front@politicas');
 Route::get('aviso-privacidad-red', 'Front@privacidadAgentes');
 Route::get('redes-sociales', 'Front@redes');
-Route::get('proyectos', 'Front@projects');
-Route::get('proyectos/{state}', 'Front@projectsState');
+Route::get('proyectos-de-aceleracion-y-red-de-ga-y-ds', 'Front@projects');
+Route::get('proyectos-de-aceleracion-y-red-de-ga-y-ds/{state}', 'Front@projectsState');
+Route::get('proyectos-de-aceleracion/{state}/archivos', 'Front@projectDownload');
+Route::get('red-de-gobierno-abierto-desarrollo-sostenible-de-las-americas', 'Front@network');
+Route::get('red-de-gobierno-abierto-desarrollo-sostenible-de-las-americas/{file}', 'Front@networkDownload');
 /*@NoticeFront Controller */
 /*********  Enlaces convocatoria ******** */
 Route::get('convocatoria', 'NoticeFront@convocatoria');

@@ -68,6 +68,11 @@
 		<div class="notes">
 		<p><sup>1</sup> El <strong>Programa de Formación de Agentes Locales de Cambio en Gobierno Abierto y Desarrollo Sostenible</strong> es promovido por el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI), la Oficina para México del Programa de Naciones Unidas para el Desarrollo (PNUD-México), GESOC, Agencia para el Desarrollo, A.C., ProSociedad Hacer Bien el Bien, A.C., y Gobierno Fácil – con el apoyo de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID) en el marco del proyecto: “Local Capacities in Open Government (OG) for the Achievement of the Sustainable Development Goals (SGDs) in Mexico /Programa de fortalecimiento de capacidades en gobierno abierto para el cumplimiento de los objetivos de desarrollo sostenible en lo local.”</p>
 		</div>
+		<div class="notes">
+			<p> Derechos Reservados © 2019 Programa de las Naciones Unidas para el Desarrollo (PNUD)</p>
+			<p> Este programa de formación fue posible gracias al apoyo del pueblo de los Estados Unidos, a través de la Agencia de los Estados Unidos para el Desarrollo Internacional (USAID). El contenido de este programa de formación es responsabilidad del proyecto “Apoyando el cumplimiento de los Objetivos de Desarrollo Sostenible en México por medio de prácticas de gobierno abierto, participación ciudadana y el fortalecimiento de la transparencia” y no necesariamente refleja el punto de vista de USAID o del gobierno de los Estados Unidos; ni del Programa de las Naciones Unidas para el Desarrollo, de su Junta Directiva, ni de sus Estados Miembros.</p>
+			<p>El contenido de este material se produjo en coordinación con el Grupo de Trabajo (GT) del Proyecto, sin embargo, no refleja necesariamente las opiniones institucionales de los integrantes del GT (PNUD, INAI, GESOC A.C., Gobierno Fácil, ProSociedad).</p>
+		</div>
 	</div>
 </div>
 @endsection
