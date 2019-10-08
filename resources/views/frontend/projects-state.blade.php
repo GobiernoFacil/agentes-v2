@@ -7,22 +7,22 @@
 @section('content')
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
-		<h1>PROGRAMA DE FORMACIÓN DE <strong>AGENTES LOCALES DE CAMBIO</strong> EN <strong>GOBIERNO ABIERTO</strong> Y DESARROLLO SOSTENIBLE</h1>
-		<h2>Proyectos de aceleración y Red de GA y DS del estado de {{$state}}</h2>
+		<h1>Proyecto de aceleración y Red de Gobierno Abierto y Desarrollo Sostenible del estado de <strong>{{$state}}</strong></h1>
+		<h2></h2>
     <div class="row">
 			<div class="col-sm-9">
 				<?php $info_name = 'SpreadS_'.$slug_n.'_CRVS.jpg'; ?>
 				<img src="/archivos/estados/{{$slug}}/{{$info_name}}">
 				<?php $info_name = 'SpreadS_'.$slug_n.'_CRVS_2.jpg'; ?>
 				<img src="/archivos/estados/{{$slug}}/{{$info_name}}">
+				<div class="divider"></div>
 			</div>
 
 			<div class="col-sm-3">
-				<h2></h2>
+				<a href="{{url('red-de-gobierno-abierto-desarrollo-sostenible-de-las-americas')}}" class="icon i_antecedentes">Red de Gobierno Abierto y Desarrollo Sostenible de las Américas</a>
 				<a href="{{url('programa-gobierno-abierto/alcance')}}" class="icon i_alcance"><span>ALCANCE DEL PROGRAMA</span></a>
 				<a href="{{url('programa-gobierno-abierto/aliados')}}" class="icon i_aliados">CONOCE A LOS ALIADOS</a>
 				<a href="{{url('programa-gobierno-abierto/antecedentes')}}" class="icon i_antecedentes">ANTECEDENTES</a>
-				<a href="{{url('red-de-gobierno-abierto-desarrollo-sostenible-de-las-americas')}}" class="icon i_antecedentes">Red de Gobierno Abierto y Desarrollo Sostenible de las Américas</a>
 			</div>
 
 		</div>

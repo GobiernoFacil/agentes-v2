@@ -15,9 +15,9 @@
 
 	<ul>
 		<li><a href="{{url('')}}" class="btn_home {{ $__env->yieldContent('body_class') == 'home' ? 'active' : ''}}"><span>Inicio</span></a></li>
-		<li><a href="{{url('programa-gobierno-abierto')}}" class="{{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Programa</span></a></li>
+	<!--<li><a href="{{url('programa-gobierno-abierto')}}" class="{{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Programa</span></a></li>-->
 		<li><a href="{{url('programa-gobierno-abierto/programa-2018/ver-contenido')}}" class="btn_contenido {{ $__env->yieldContent('body_class') == 'program_content' ? 'active' : ''}}"><span>Programa de Formación</span></a></li>
-		<li><a href="{{url('proyectos')}}" class="{{ $__env->yieldContent('body_class') == 'projects' ? 'active' : ''}}"><span>Proyectos</span></a></li>
+		<li><a href="{{url('proyectos-de-aceleracion-y-red-de-ga-y-ds')}}" class="{{ $__env->yieldContent('body_class') == 'projects' ? 'active' : ''}}"><span>Proyectos de aceleración y Red de GA y DS</span></a></li>
 		<li><a href="{{url('programa-gobierno-abierto/programa-2018/ver-generacion')}}" class="btn_cfellow {{ $__env->yieldContent('body_class') == 'programa' ? 'active' : ''}}"><span>Conoce a los Fellows</span></a></li>
 		<li><a href="{{url('gobierno-abierto')}}" class="btn_abierto {{ $__env->yieldContent('body_class') == 'abierto' ? 'active' : ''}}"><span>Gobierno Abierto</span></a></li>
 		<li><a href="{{url('noticias-eventos')}}" class="btn_noticias {{ $__env->yieldContent('body_class') == 'noticias' ? 'active' : ''}}"><span>Noticias</span></a></li>
